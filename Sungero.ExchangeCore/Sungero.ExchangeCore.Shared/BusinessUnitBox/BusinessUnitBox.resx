@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExchangeServiceNotFound" xml:space="preserve">
+    <value>Specify exchange service.</value>
+  </data>
+  <data name="ExchangeServiceNotSupported" xml:space="preserve">
+    <value>{0} exchange service is not supported.</value>
+  </data>
+  <data name="CounterpartyNotFound" xml:space="preserve">
+    <value>Counterparty {0} was not found in {1} exchange service.</value>
+  </data>
+  <data name="NoticeSubject" xml:space="preserve">
+    <value>Results of counterparties sync for {0} with {1} exchange service ({2})</value>
+  </data>
+  <data name="NoticeActiveSection" xml:space="preserve">
+    <value>Exchange allowed with counterparties:</value>
+  </data>
+  <data name="NoticeApprovingByUsSection" xml:space="preserve">
+    <value>Exchange invitations received from counterparties:</value>
+  </data>
+  <data name="NoticeClosedSection" xml:space="preserve">
+    <value>Exchange blocked with counterparties:</value>
+  </data>
+  <data name="NoticeApprovingByCASection" xml:space="preserve">
+    <value>Exchange invitation sent to counterparties:</value>
+  </data>
+  <data name="NoticeLine" xml:space="preserve">
+    <value>{0}, TIN/TRRC : {1}/{2}</value>
+  </data>
+  <data name="BoxError" xml:space="preserve">
+    <value>Exchange box sync error {0}.</value>
+  </data>
+  <data name="TINNote" xml:space="preserve">
+    <value>An incorrect TIN was received while syncing data with exchange service: {0}.</value>
+  </data>
+  <data name="LoginActionTitle" xml:space="preserve">
+    <value>Enter Password</value>
+  </data>
+  <data name="ConnectionEstablished" xml:space="preserve">
+    <value>Connected.</value>
+  </data>
+  <data name="OrganizationFailed" xml:space="preserve">
+    <value>Business unit TIN and/or TRRC must match those specified in the exchange service.</value>
+  </data>
+  <data name="DuplicateServiceExists" xml:space="preserve">
+    <value>The selected business unit already has exchange box for the specified exchange service</value>
+  </data>
+  <data name="CertificateNotFound" xml:space="preserve">
+    <value>Configure exchange service certificate for the responsible employee to work properly.</value>
+  </data>
+  <data name="LoginChangedToOtherOrganization" xml:space="preserve">
+    <value>Username must belong to the same business unit as the one specified before.</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone {0}</value>
+  </data>
+  <data name="FaxNumber" xml:space="preserve">
+    <value>Fax {0}</value>
+  </data>
+  <data name="EnterPasswordToCheckConnection" xml:space="preserve">
+    <value>To check connection, set a password</value>
+  </data>
+  <data name="ExchangeServiceConnectionError" xml:space="preserve">
+    <value>An error occurred while connecting to the service.</value>
+  </data>
+  <data name="NeedProcessSyncronizationConflict" xml:space="preserve">
+    <value>Resolve conflicts that occurred while syncing counterparties</value>
+  </data>
+  <data name="SyncronizationConflictProcessed" xml:space="preserve">
+    <value>Sync conflicts resolved</value>
+  </data>
+  <data name="ConnectorNoLicense" xml:space="preserve">
+    <value>Cannot connect to {0} exchange service. License to connector is required.</value>
+  </data>
+  <data name="LoginIsAlreadyInUse" xml:space="preserve">
+    <value>Exchange box with the same username already exists for the selected exchange service.</value>
+  </data>
+  <data name="BusinessUnitBoxNotActive" xml:space="preserve">
+    <value>You can work with exchange service by using only active exchange boxes.</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Authentication error. Make sure the password and username are correct.</value>
+  </data>
+  <data name="ExchangeServiceName" xml:space="preserve">
+    <value>{0} service subscriber</value>
+  </data>
+  <data name="IsMainCounterpartyBox" xml:space="preserve">
+    <value>Main ({0})</value>
+  </data>
+  <data name="IsRoamingCounterpartyBox" xml:space="preserve">
+    <value>Roaming ({0})</value>
+  </data>
+  <data name="NoticeThreadSubject" xml:space="preserve">
+    <value>Counterparty sync results</value>
+  </data>
+  <data name="CertificateValidationError" xml:space="preserve">
+    <value>Certificate validation error</value>
+  </data>
+  <data name="FindDocumentDialogTitle" xml:space="preserve">
+    <value>Search for Documents from Exchange Service</value>
+  </data>
+  <data name="FindDocumentDialogHyperlink" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="FindDocumentDialogInvalidHyperlink" xml:space="preserve">
+    <value>Specify the correct link.</value>
+  </data>
+  <data name="FindDocumentDialogInvalidExchangeProvider" xml:space="preserve">
+    <value>You can search only for the documents from the Diadoc or SBIS exchange services.</value>
+  </data>
+  <data name="DocumentFullInfoDialogTitle" xml:space="preserve">
+    <value>Search for Documents from Exchange Service</value>
+  </data>
+  <data name="DocumentFullInfoDialogForbiddenDocuments" xml:space="preserve">
+    <value>You don't have access right to the found documents. Contact the system administrator.</value>
+  </data>
+  <data name="DocumentFullInfoDialogDocuments" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="DocumentFullInfoDialogDocumentInfos" xml:space="preserve">
+    <value>Information on exchange documents</value>
+  </data>
+  <data name="DocumentFullInfoDialogMessages" xml:space="preserve">
+    <value>Processing Messages</value>
+  </data>
+  <data name="DocumentFullInfoDialogNoResult" xml:space="preserve">
+    <value>No results</value>
+  </data>
+  <data name="DocumentFullInfoDialogAllDocumentsCount" xml:space="preserve">
+    <value>Found documents - {0}</value>
+  </data>
+  <data name="DocumentFullInfoDialogForbiddenDocumentsCount" xml:space="preserve">
+    <value>{0}-Without access rights - {1}</value>
+  </data>
+  <data name="FindDocumentDialogNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="FindDocumentDialogCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="FindDocumentDialogExecuteOnlyAdministratorOrAdvisor" xml:space="preserve">
+    <value>Only administrators and auditors can search for documents from exchange services.</value>
+  </data>
+</root>

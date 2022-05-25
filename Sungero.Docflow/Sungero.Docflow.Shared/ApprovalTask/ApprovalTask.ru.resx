@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbortApproving" xml:space="preserve">
+    <value>Прекращено.</value>
+  </data>
+  <data name="AbortNoticeSubject" xml:space="preserve">
+    <value>Прекращено согласование</value>
+  </data>
+  <data name="Endorsed" xml:space="preserve">
+    <value>Согласовано.</value>
+  </data>
+  <data name="ApproversAsgSubject" xml:space="preserve">
+    <value>Согласуйте: {0}</value>
+  </data>
+  <data name="DeniedToSignDocument" xml:space="preserve">
+    <value>Отказано в подписании документа.</value>
+  </data>
+  <data name="DocumentPrinted" xml:space="preserve">
+    <value>Документ распечатан.</value>
+  </data>
+  <data name="DocumentRegisteredFromNumberInDocumentRegister" xml:space="preserve">
+    <value>Документ зарегистрирован под номером {0} в журнале «{1}».</value>
+  </data>
+  <data name="DocumentSigned" xml:space="preserve">
+    <value>Документ подписан.</value>
+  </data>
+  <data name="ForReapproving" xml:space="preserve">
+    <value>Отправлено на повторное согласование.</value>
+  </data>
+  <data name="ForRework" xml:space="preserve">
+    <value>На доработку.</value>
+  </data>
+  <data name="PrintAsgSubject" xml:space="preserve">
+    <value>распечатайте</value>
+  </data>
+  <data name="RegistrationAsgSubject" xml:space="preserve">
+    <value>зарегистрируйте</value>
+  </data>
+  <data name="NeedToRework" xml:space="preserve">
+    <value>Доработайте: {0}</value>
+  </data>
+  <data name="RejectedToSign" xml:space="preserve">
+    <value>Отказано в подписании: {0}</value>
+  </data>
+  <data name="SignAsgSubject" xml:space="preserve">
+    <value>подпишите</value>
+  </data>
+  <data name="SignedNoticeSubject" xml:space="preserve">
+    <value>Подписан документ</value>
+  </data>
+  <data name="TaskSubject" xml:space="preserve">
+    <value>Согласование: {0}</value>
+  </data>
+  <data name="ToPerformNeedRegisterDocument" xml:space="preserve">
+    <value>Для выполнения задания нужно зарегистрировать документ.</value>
+  </data>
+  <data name="DetermineRegistrarCurrentRuleError" xml:space="preserve">
+    <value>Определить регистратора из текущего правила нельзя. Обратитесь к администратору системы.</value>
+  </data>
+  <data name="CertificateNeeded" xml:space="preserve">
+    <value>Для согласования документа требуется цифровой сертификат. Обратитесь к администратору.</value>
+  </data>
+  <data name="NeedTextForRework" xml:space="preserve">
+    <value>Оставьте комментарий в тексте задания, прежде чем отправить документ на доработку. </value>
+  </data>
+  <data name="NeedTextForAbort" xml:space="preserve">
+    <value>Для отказа в подписании напишите комментарий в тексте задания.</value>
+  </data>
+  <data name="ToPerformNeedSignDocument" xml:space="preserve">
+    <value>Для выполнения задания нужно подписать документ.</value>
+  </data>
+  <data name="CantSendDocumentsWithoutUpdateRights" xml:space="preserve">
+    <value>Для отправки документа на согласование необходимо иметь права на его изменение.</value>
+  </data>
+  <data name="ToStartNeedSignDocument" xml:space="preserve">
+    <value>Для старта задачи нужно подписать документ.</value>
+  </data>
+  <data name="CertificateNeededToSign" xml:space="preserve">
+    <value>Для подписания документа требуется цифровой сертификат. Обратитесь к администратору.</value>
+  </data>
+  <data name="ControlReturnAsgSubject" xml:space="preserve">
+    <value>Проконтролируйте возврат: {0}</value>
+  </data>
+  <data name="AdditionalTaskToAuthorSubject" xml:space="preserve">
+    <value>Документ не подписан контрагентом</value>
+  </data>
+  <data name="ControlReturnExecutedAnotherUser" xml:space="preserve">
+    <value>Контроль возврата был выполнен сотрудником: {0}</value>
+  </data>
+  <data name="SendToCounterparty" xml:space="preserve">
+    <value>отправьте контрагенту</value>
+  </data>
+  <data name="PrintAndTransferAsgSubject" xml:space="preserve">
+    <value>распечатайте и передайте на подпись</value>
+  </data>
+  <data name="DocumentSended" xml:space="preserve">
+    <value>Документ отправлен контрагенту.</value>
+  </data>
+  <data name="CommentOnEndorsement" xml:space="preserve">
+    <value>На согласовании у контрагента</value>
+  </data>
+  <data name="CommentSigned" xml:space="preserve">
+    <value>Экземпляр контрагента</value>
+  </data>
+  <data name="NeedViewActualDocumentVersionBeforeAgree" xml:space="preserve">
+    <value>Документ изменился с момента последнего просмотра Вами.</value>
+  </data>
+  <data name="ToSendDocumentApprovalSpecifyRule" xml:space="preserve">
+    <value>Для документа не настроен регламент согласования.</value>
+  </data>
+  <data name="AreYouSureYouWantSignAndSendDocumentForApproval" xml:space="preserve">
+    <value>Подписать и отправить документ на согласование?</value>
+  </data>
+  <data name="AreYouSureYouWantSendDocumentForApproval" xml:space="preserve">
+    <value>Отправить документ на согласование?</value>
+  </data>
+  <data name="OnBehalfOf" xml:space="preserve">
+    <value>за</value>
+  </data>
+  <data name="ControlReturnExecutedAnotherUserWithOnBehalfOf" xml:space="preserve">
+    <value>Контроль возврата был выполнен сотрудником: {0} за {1}</value>
+  </data>
+  <data name="RuleOrDocumentHasBeenChanged" xml:space="preserve">
+    <value>Согласуемый документ или регламент были изменены. Выберите актуальный  регламент.</value>
+  </data>
+  <data name="ApprovalText" xml:space="preserve">
+    <value>Прошу согласовать документ.</value>
+  </data>
+  <data name="DocumentSigningConfirmed" xml:space="preserve">
+    <value>Подписание документа подтверждено.</value>
+  </data>
+  <data name="ConfirmSigningSubject" xml:space="preserve">
+    <value>подтвердите подписание</value>
+  </data>
+  <data name="EmptyNextWorkingCalendar" xml:space="preserve">
+    <value>Не заполнен календарь рабочего времени на период согласования.</value>
+  </data>
+  <data name="AbortedSigning" xml:space="preserve">
+    <value>Отказано в подписании.</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Подтверждение</value>
+  </data>
+  <data name="StateViewAborted" xml:space="preserve">
+    <value>Прекращено</value>
+  </data>
+  <data name="StateViewEndorsed" xml:space="preserve">
+    <value>Согласовано</value>
+  </data>
+  <data name="StateViewNotApproved" xml:space="preserve">
+    <value>Не согласовано</value>
+  </data>
+  <data name="StateViewDocumentSentForApproval" xml:space="preserve">
+    <value>Документ отправлен на согласование.</value>
+  </data>
+  <data name="StateViewDocumentSentForReApproval" xml:space="preserve">
+    <value>Документ отправлен на повторное согласование.</value>
+  </data>
+  <data name="StateViewInProcess" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="StateViewDocumentSentAfterRestart" xml:space="preserve">
+    <value>Документ отправлен на согласование после рестарта.</value>
+  </data>
+  <data name="StateViewCompleted" xml:space="preserve">
+    <value>Завершено</value>
+  </data>
+  <data name="StateViewSuspended" xml:space="preserve">
+    <value>Приостановлено</value>
+  </data>
+  <data name="StateViewApprovalRound" xml:space="preserve">
+    <value>Круг согласования</value>
+  </data>
+  <data name="StateViewWaitForCheckReturn" xml:space="preserve">
+    <value>Ожидание начала контроля возврата</value>
+  </data>
+  <data name="StateViewAssignmentCreationTerms" xml:space="preserve">
+    <value>Срок создания задания</value>
+  </data>
+  <data name="Approval" xml:space="preserve">
+    <value>Согласование по регламенту</value>
+  </data>
+  <data name="StateViewApprovalStage" xml:space="preserve">
+    <value>Этап согласования</value>
+  </data>
+  <data name="StateViewApprovalRule" xml:space="preserve">
+    <value>Регламент: </value>
+  </data>
+  <data name="StateViewApprovalProcess" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="StateViewApprovedConfirmation" xml:space="preserve">
+    <value>Подтверждение подписания</value>
+  </data>
+  <data name="StateViewSigning" xml:space="preserve">
+    <value>Подписание</value>
+  </data>
+  <data name="StateViewRegistration" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="StateViewCheckReturn" xml:space="preserve">
+    <value>Контроль возврата от контрагента</value>
+  </data>
+  <data name="StateViewAbortApprovalAssignment" xml:space="preserve">
+    <value>Задание на прекращение согласования</value>
+  </data>
+  <data name="StateViewDocumentRework" xml:space="preserve">
+    <value>Доработка документа</value>
+  </data>
+  <data name="StateViewPrintDocument" xml:space="preserve">
+    <value>Печать документа</value>
+  </data>
+  <data name="StateViewSendToCounterParty" xml:space="preserve">
+    <value>Отправка контрагенту</value>
+  </data>
+  <data name="StateViewDone" xml:space="preserve">
+    <value>Выполнено</value>
+  </data>
+  <data name="StateViewApproved" xml:space="preserve">
+    <value>Утверждено</value>
+  </data>
+  <data name="SigningRefused" xml:space="preserve">
+    <value>Отказано в подписании</value>
+  </data>
+  <data name="StateViewSignedByCounterparty" xml:space="preserve">
+    <value>Подписано контрагентом</value>
+  </data>
+  <data name="StateViewNotSignedByCounterparty" xml:space="preserve">
+    <value>Не подписано контрагентом</value>
+  </data>
+  <data name="ReviewDocument" xml:space="preserve">
+    <value>Рассмотрите: {0}</value>
+  </data>
+  <data name="StateViewReview" xml:space="preserve">
+    <value>Рассмотрение</value>
+  </data>
+  <data name="CreateActionItem" xml:space="preserve">
+    <value>Создайте поручение: {0}</value>
+  </data>
+  <data name="StateViewExecution" xml:space="preserve">
+    <value>Создание поручений по документу</value>
+  </data>
+  <data name="ReviewAsgSubject" xml:space="preserve">
+    <value>рассмотрите</value>
+  </data>
+  <data name="ExecutionAsgSubject" xml:space="preserve">
+    <value>создайте поручения</value>
+  </data>
+  <data name="ReworkReasonSubject" xml:space="preserve">
+    <value>Задача отправлена на доработку: {0}</value>
+  </data>
+  <data name="StateViewResultSubmission" xml:space="preserve">
+    <value>Обработка резолюции</value>
+  </data>
+  <data name="SpecifyReviewingResultAsgSubject" xml:space="preserve">
+    <value>обработайте резолюцию</value>
+  </data>
+  <data name="ResolutionPassed" xml:space="preserve">
+    <value>Вынесена резолюция.</value>
+  </data>
+  <data name="PassedResolutionEntered" xml:space="preserve">
+    <value>Резолюция обработана</value>
+  </data>
+  <data name="SentForExecution" xml:space="preserve">
+    <value>Отправлено на исполнение.</value>
+  </data>
+  <data name="Informed" xml:space="preserve">
+    <value>Принято к сведению.</value>
+  </data>
+  <data name="InformedResultEntered" xml:space="preserve">
+    <value>Документ принят к сведению адресатом.</value>
+  </data>
+  <data name="DeniedToReviewDocument" xml:space="preserve">
+    <value>Отказано.</value>
+  </data>
+  <data name="StateViewUnRead" xml:space="preserve">
+    <value>Не прочитано</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Выполнено.</value>
+  </data>
+  <data name="StateViewResolution" xml:space="preserve">
+    <value>Резолюция</value>
+  </data>
+  <data name="IncorrectSignatory" xml:space="preserve">
+    <value>Указанный сотрудник не имеет права подписи.</value>
+  </data>
+  <data name="NoExecutionAssignee" xml:space="preserve">
+    <value>Исполнитель этапа создания поручений по документу отсутствует. Обратитесь к администратору системы.</value>
+  </data>
+  <data name="StateViewAuthor" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="PrintAndTransferToReviewAsgSubject" xml:space="preserve">
+    <value>распечатайте и передайте на рассмотрение</value>
+  </data>
+  <data name="RejectedToReview" xml:space="preserve">
+    <value>Отказано: {0}</value>
+  </data>
+  <data name="RejectedToExternalSing" xml:space="preserve">
+    <value>Отказано в подписании контрагентом: {0}</value>
+  </data>
+  <data name="StateViewDocumentReworkAfterExternalAbort" xml:space="preserve">
+    <value>Обработка отказа в подписании контрагентом</value>
+  </data>
+  <data name="ApprovalFormApproved" xml:space="preserve">
+    <value>Утверждено</value>
+  </data>
+  <data name="ApprovalFormEndorsed" xml:space="preserve">
+    <value>Согласовано</value>
+  </data>
+  <data name="ApprovalFormNotEndorsed" xml:space="preserve">
+    <value>Не согласовано</value>
+  </data>
+  <data name="DocumentMustHaveProject" xml:space="preserve">
+    <value>Укажите проект для документа.</value>
+  </data>
+  <data name="AreYouSureYouWantSignAndSendDocumentAndAddendaForApproval" xml:space="preserve">
+    <value>Подписать и отправить документ и его приложения на согласование?</value>
+  </data>
+  <data name="ExchangeDeliveryExist" xml:space="preserve">
+    <value>Данный документ можно отправить контрагенту через сервис обмена</value>
+  </data>
+  <data name="StateViewTaskDrawCreated" xml:space="preserve">
+    <value>Создан черновик задачи</value>
+  </data>
+  <data name="StateViewDraft" xml:space="preserve">
+    <value>Черновик</value>
+  </data>
+  <data name="DeliveryMethodByExchange" xml:space="preserve">
+    <value>Документ необходимо отправить контрагенту в электронном виде через сервис обмена {0}</value>
+  </data>
+  <data name="DeliveryMethodNotByExchange" xml:space="preserve">
+    <value>Документ необходимо отправить контрагенту, способ доставки "{0}"</value>
+  </data>
+  <data name="ReworkReasonWhenAssigneeNotFound" xml:space="preserve">
+    <value>Необходимо корректно указать исполнителя в этапе {0} или обратиться к администратору системы.</value>
+  </data>
+  <data name="DeliveryByExchangeNotAllowed" xml:space="preserve">
+    <value>Способ доставки "Сервис эл. обмена" доступен только для контрагентов, с которыми установлен обмен документами в электронном виде.</value>
+  </data>
+  <data name="RevokedByUs" xml:space="preserve">
+    <value>Отозван нашей организацией: {0}</value>
+  </data>
+  <data name="NewDeadline" xml:space="preserve">
+    <value>Новый срок</value>
+  </data>
+  <data name="DesiredDeadlineIsNotCorrect" xml:space="preserve">
+    <value>Новый срок должен быть позже текущего.</value>
+  </data>
+  <data name="DeadlineExtension" xml:space="preserve">
+    <value>Продление срока задания</value>
+  </data>
+  <data name="DeadlineExtensionButton" xml:space="preserve">
+    <value>Продлить</value>
+  </data>
+  <data name="StateViewExpectedDeadline" xml:space="preserve">
+    <value>Ожидаемый срок</value>
+  </data>
+  <data name="NeedViewDocumentBeforeAgreeAtLeastOnceBeforeSigning" xml:space="preserve">
+    <value>Ознакомьтесь с документом перед подписанием.</value>
+  </data>
+  <data name="StateViewForwarded" xml:space="preserve">
+    <value>Переадресовано</value>
+  </data>
+  <data name="TaskWillBeSended" xml:space="preserve">
+    <value>Документ будет отправлен на согласование {0} после выполнения текущего задания.</value>
+  </data>
+  <data name="DeliveryMethodToManyAddressees" xml:space="preserve">
+    <value>Документ необходимо отправить контрагентам согласно списку рассылки.</value>
+  </data>
+  <data name="NeedViewDocumentBeforeAgreeAtLeastOnceBeforeApproving" xml:space="preserve">
+    <value>Ознакомьтесь с документом перед согласованием.</value>
+  </data>
+  <data name="EmptyAbortingReason" xml:space="preserve">
+    <value>Заполните причину прекращения задачи.</value>
+  </data>
+  <data name="NoRightsToDocument" xml:space="preserve">
+    <value>Отсутствует документ, или у вас недостаточно прав на него. Обратитесь к администратору системы.</value>
+  </data>
+  <data name="InvoiceAmendmentRequest" xml:space="preserve">
+    <value>Контрагентом запрошено уточнение: {0}</value>
+  </data>
+  <data name="StateViewMaxDeadline" xml:space="preserve">
+    <value>Ожидаемый срок</value>
+  </data>
+  <data name="ApprovalManagerAssignmentThreadSubject" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="ConfirmSigningThreadSubject" xml:space="preserve">
+    <value>Подтверждение подписания</value>
+  </data>
+  <data name="SpecifyReviewingResultAsgThreadSubject" xml:space="preserve">
+    <value>Обработка резолюции</value>
+  </data>
+  <data name="StateViewReworkForwarded" xml:space="preserve">
+    <value>Переадресовано</value>
+  </data>
+  <data name="RejectNoticeSubject" xml:space="preserve">
+    <value>Отправлен отказ: {0}</value>
+  </data>
+  <data name="CantSendForReworkWithoutPerformer" xml:space="preserve">
+    <value>Для отправки на доработку укажите сотрудника, который будет дорабатывать документ.</value>
+  </data>
+  <data name="DocumentStateWillBeUpdatedLater" xml:space="preserve">
+    <value>Жизненный цикл документа обновится в ближайшее время.</value>
+  </data>
+  <data name="DocumentStateAndAccessRightsWillBeUpdatedLater" xml:space="preserve">
+    <value>Жизненный цикл и права доступа на документ обновятся в ближайшее время.</value>
+  </data>
+  <data name="DocumentAccessRightsWillBeUpdatedLater" xml:space="preserve">
+    <value>Права доступа на документ обновятся в ближайшее время.</value>
+  </data>
+  <data name="Ellipsis_RegisterName" xml:space="preserve">
+    <value>{0}…</value>
+  </data>
+  <data name="CantUpdateTask" xml:space="preserve">
+    <value>Задача была изменена. Закройте окно подтверждения и прекратите задачу повторно.</value>
+  </data>
+</root>

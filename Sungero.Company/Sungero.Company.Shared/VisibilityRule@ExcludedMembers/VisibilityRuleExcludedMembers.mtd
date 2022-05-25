@@ -1,0 +1,67 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "b7dd2935-25a9-4dd2-802b-711cf4549df2",
+  "Name": "VisibilityRuleExcludedMembers",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "RuleExcldMembs",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d75da501-4a56-4364-b722-b45bbf1a25ed",
+      "Name": "VisibilityRule",
+      "CanBeSearch": false,
+      "Code": "VisibRule",
+      "EntityGuid": "023eab79-c456-46bb-97b5-fbc764be9308",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false,
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6d21953f-1c11-4ce2-9b63-f59286effae0",
+      "Name": "Recipient",
+      "CanBeSearch": false,
+      "Code": "Recipient",
+      "EntityGuid": "c612fc41-44a3-428b-a97c-433c333d78e9",
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "d75da501-4a56-4364-b722-b45bbf1a25ed",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "d783ebc2-c071-4bf8-9b6a-98ecfdbefe99",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "37f3df24-83dd-4282-bff8-ee4c44beb992",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    }
+  ]
+}

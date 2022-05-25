@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ManyAdditionallyApp" xml:space="preserve">
+    <value>В одной ветке правила должно быть не более одного этапа с дополнительными согласующими.</value>
+  </data>
+  <data name="ManyManager" xml:space="preserve">
+    <value>В одной ветке правила должно быть не более одного этапа согласования с руководителем.</value>
+  </data>
+  <data name="ManySign" xml:space="preserve">
+    <value>В одной ветке правила должно быть не более одного этапа подписания.</value>
+  </data>
+  <data name="ManyRegister" xml:space="preserve">
+    <value>В одной ветке правила должно быть не более одного этапа регистрации документа.</value>
+  </data>
+  <data name="ApproveBeforeSign" xml:space="preserve">
+    <value>Этапы согласования должны идти до этапов подписания.</value>
+  </data>
+  <data name="StageNumbersMustBeUnique" xml:space="preserve">
+    <value>Номера этапов в регламенте должны быть уникальными.</value>
+  </data>
+  <data name="RuleHasTasksInProcess" xml:space="preserve">
+    <value>Схема правила закрыта от изменения, так как по этому правилу есть стартованные задачи.</value>
+  </data>
+  <data name="DuplicateNotFound" xml:space="preserve">
+    <value>Дубли правила не найдены.</value>
+  </data>
+  <data name="DuplicateDetected" xml:space="preserve">
+    <value>Обнаружены дублирующие записи.</value>
+  </data>
+  <data name="CantRegisterAllDocumentKinds" xml:space="preserve">
+    <value>Исполнитель этапа регистрации должен быть включен в группу регистрации, которая регистрирует документы выбранного документопотока.</value>
+  </data>
+  <data name="IncompatibleDocumentGroupsExcluded" xml:space="preserve">
+    <value>Несовместимые группы документов были исключены из условий.</value>
+  </data>
+  <data name="IncompatibleDocumentKindsExcluded" xml:space="preserve">
+    <value>Несовместимые виды документов были исключены из условий.</value>
+  </data>
+  <data name="RuleMustHaveAtLeastOneStage" xml:space="preserve">
+    <value>Правило должно содержать хотя бы один этап.</value>
+  </data>
+  <data name="StateViewSignHeader" xml:space="preserve">
+    <value>Подтверждение подписания</value>
+  </data>
+  <data name="StateViewSignNone" xml:space="preserve">
+    <value>Подписывающий не указан</value>
+  </data>
+  <data name="StateViewSignSignatory" xml:space="preserve">
+    <value>Подписывающий: {0}</value>
+  </data>
+  <data name="StateViewApproveStartType" xml:space="preserve">
+    <value>Старт – {0}</value>
+  </data>
+  <data name="StateViewApproveReworkAfterEach" xml:space="preserve">
+    <value>Если хотя бы один из согласующих отклонил документ, он будет возвращен на доработку.</value>
+  </data>
+  <data name="StateViewStatusCompleted" xml:space="preserve">
+    <value>Завершен</value>
+  </data>
+  <data name="StateViewStatusAborted" xml:space="preserve">
+    <value>Прекращен</value>
+  </data>
+  <data name="StateViewStatusInProcess" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="StateViewHeaderPrint" xml:space="preserve">
+    <value>Печать документа</value>
+  </data>
+  <data name="StateViewHeaderSimpleAgreement" xml:space="preserve">
+    <value>Задание. {0}</value>
+  </data>
+  <data name="StateViewManagerNone" xml:space="preserve">
+    <value>Руководитель не указан</value>
+  </data>
+  <data name="StateViewApproversNone" xml:space="preserve">
+    <value>Исполнители не указаны</value>
+  </data>
+  <data name="StateViewAddresseeNone" xml:space="preserve">
+    <value>Адресат не указан</value>
+  </data>
+  <data name="StateViewAssistantNone" xml:space="preserve">
+    <value>Исполнитель не указан</value>
+  </data>
+  <data name="ReviewAndSignStageShouldBeBeforeExecution" xml:space="preserve">
+    <value>Этапы рассмотрения и подписания должны идти до этапа создания поручений.</value>
+  </data>
+  <data name="ManyExecution" xml:space="preserve">
+    <value>В одной ветке правила должно быть не более одного этапа создания поручений по документу.</value>
+  </data>
+  <data name="ManyReview" xml:space="preserve">
+    <value>В одной ветке правила должно быть не более одного этапа рассмотрения адресатом.</value>
+  </data>
+  <data name="StateViewHeaderUndefinedCondition" xml:space="preserve">
+    <value>Условие не вычислено</value>
+  </data>
+  <data name="StateViewFillingReviewingResultHeader" xml:space="preserve">
+    <value>Обработка резолюции</value>
+  </data>
+  <data name="StateViewAddressee" xml:space="preserve">
+    <value>Адресат: {0}</value>
+  </data>
+  <data name="StateViewHeaderDocumentNone" xml:space="preserve">
+    <value>Документ для согласования не выбран</value>
+  </data>
+  <data name="StateViewHeaderNotice" xml:space="preserve">
+    <value>Уведомление. {0}</value>
+  </data>
+  <data name="ExecutionStageWithoutReviewOrSign" xml:space="preserve">
+    <value>В одной ветке правила до этапа создания поручений должен быть этап рассмотрения адресатом и/или подписания.</value>
+  </data>
+  <data name="SignStageShouldBeBeforeReview" xml:space="preserve">
+    <value>Этап подписания должен идти до этапа рассмотрения.</value>
+  </data>
+  <data name="ChartGroupApproval" xml:space="preserve">
+    <value>Основные этапы</value>
+  </data>
+  <data name="ChartGroupDocumentHandling" xml:space="preserve">
+    <value>Обработка документа</value>
+  </data>
+  <data name="ChartGroupCounterpartyEndorsing" xml:space="preserve">
+    <value>Переписка с контрагентом</value>
+  </data>
+  <data name="ChartGroupConditions" xml:space="preserve">
+    <value>Условия</value>
+  </data>
+  <data name="ChartDeleteQuestion" xml:space="preserve">
+    <value>Удалить блок из схемы?</value>
+  </data>
+  <data name="ConditionNotSupportedByThisDocument" xml:space="preserve">
+    <value>Условие типа "{0}" не может быть применено к некоторым видам документов.</value>
+  </data>
+  <data name="ChartDeleteConditionRemark" xml:space="preserve">
+    <value>При удалении условия будут удалены все блоки схемы, которые находятся в ветках этого условия.</value>
+  </data>
+  <data name="ConfigStagesOnSchema" xml:space="preserve">
+    <value>Для выделенных элементов схемы выберите этап согласования.</value>
+  </data>
+  <data name="ConfigConditionsOnSchema" xml:space="preserve">
+    <value>Настройте условия в схеме согласования.</value>
+  </data>
+  <data name="ReviewStageShouldBeBeforeExecution" xml:space="preserve">
+    <value>Этап рассмотрения должен идти до этапа создания поручений.</value>
+  </data>
+  <data name="SignStageShouldBeBeforeExecution" xml:space="preserve">
+    <value>Этап подписания должен идти до этапа создания поручений.</value>
+  </data>
+  <data name="UnreachableRoutesExists" xml:space="preserve">
+    <value>Схема содержит недостижимые элементы.</value>
+  </data>
+  <data name="CantUseRoleWithoutStage" xml:space="preserve">
+    <value>Роль "{0}", указанная в отмеченных этапах, не может использоваться в ветке правила без этапа "{1}".</value>
+  </data>
+  <data name="StateViewApproverNone" xml:space="preserve">
+    <value>Исполнитель не указан</value>
+  </data>
+  <data name="CantUseProjectRole" xml:space="preserve">
+    <value>Роль "{0}", указанная в отмеченных этапах, может использоваться только для документов по проекту.</value>
+  </data>
+  <data name="StageNotSupportedByThisDocument" xml:space="preserve">
+    <value>Роль "{0}" не может использоваться с некоторыми видами документов.</value>
+  </data>
+  <data name="ApprovalRuleSetActive" xml:space="preserve">
+    <value>Правило доступно для выбора в задачах на согласование по регламенту.
+</value>
+  </data>
+  <data name="NewVersionNotAllowed" xml:space="preserve">
+    <value>Новая версия правила уже существует.</value>
+  </data>
+  <data name="SignatureSettingsNotSet" xml:space="preserve">
+    <value>&lt;b&gt;Не настроено право подписи&lt;/b&gt;</value>
+  </data>
+  <data name="Addressee" xml:space="preserve">
+    <value>&lt;b&gt;Адресат&lt;/b&gt;</value>
+  </data>
+  <data name="Action_DoCloseConfirmationDescription" xml:space="preserve">
+    <value>Черновик правила согласования будет закрыт и недоступен для изменений.</value>
+  </data>
+  <data name="ClosePreviousRule" xml:space="preserve">
+    <value>Действующая версия правила будет закрыта.</value>
+  </data>
+  <data name="Action_CreateVersionConfirmationDescriptionStatusClosed" xml:space="preserve">
+    <value>Создать новую версию правила согласования для внесения изменений.</value>
+  </data>
+  <data name="Action_CreateVersionConfirmationDescriptionStatusNotClosed" xml:space="preserve">
+    <value>Создать новую версию правила согласования для внесения изменений.
+Текущая версия правила будет доступна для использования.</value>
+  </data>
+  <data name="StateViewSendNote" xml:space="preserve">
+    <value>Способ доставки: {0} {1}</value>
+  </data>
+  <data name="StateViewSendToManyAddressees" xml:space="preserve">
+    <value>по списку рассылки</value>
+  </data>
+  <data name="ConditionNotAvaliableDocumentFlow" xml:space="preserve">
+    <value>Условие "{0}" содержит виды документов, не соответствующие документопотоку правила.
+
+</value>
+  </data>
+  <data name="ConditionNotAvaliableDocumentKind" xml:space="preserve">
+    <value>Условие "{0}" содержит виды документов, не указанные в правиле.</value>
+  </data>
+  <data name="IncorrectReworkDeadline" xml:space="preserve">
+    <value>Срок может принимать только положительное значение.</value>
+  </data>
+  <data name="IncorrectMaxReworkDeadline" xml:space="preserve">
+    <value>Срок должен быть меньше {0} дней.</value>
+  </data>
+  <data name="RuleMustHaveOtherStages" xml:space="preserve">
+    <value>Правило должно содержать другие этапы кроме этапов с выполнением сценария.</value>
+  </data>
+  <data name="CantUseRolesWithoutReviewStage" xml:space="preserve">
+    <value>Роль "{0}", указанная в отмеченных этапах, не может использоваться в ветке правила без этапа "Рассмотрение адресатом" или "Рассмотрение несколькими адресатами".</value>
+  </data>
+</root>

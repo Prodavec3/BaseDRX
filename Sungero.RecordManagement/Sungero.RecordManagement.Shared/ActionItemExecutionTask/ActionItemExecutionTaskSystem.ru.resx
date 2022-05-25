@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action_RequireReport" xml:space="preserve">
+    <value>Запросить отчет</value>
+  </data>
+  <data name="Action_RequireReportDescription" xml:space="preserve">
+    <value>Запрос отчета о состоянии исполнения поручения.</value>
+  </data>
+  <data name="Action_RequireReportHint" xml:space="preserve">
+    <value>Запросить отчет по поручению</value>
+  </data>
+  <data name="Ribbon_JobControl_c778f982723e4c83bc617862643c532e" xml:space="preserve">
+    <value>Контроль</value>
+  </data>
+  <data name="ControlGroup_ae98972b4d8649b4b20b0e940962659b" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="Property_Deadline" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="Property_Supervisor" xml:space="preserve">
+    <value>Контролер</value>
+  </data>
+  <data name="Property_IsCompoundActionItem" xml:space="preserve">
+    <value>Составное поручение</value>
+  </data>
+  <data name="Property_CoAssignees" xml:space="preserve">
+    <value>Соисполнители</value>
+  </data>
+  <data name="Property_ActionItemParts" xml:space="preserve">
+    <value>Пункты поручения</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Задача на исполнение поручения</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Задачу на исполнение поручения</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="Property_ActionItem" xml:space="preserve">
+    <value>Поручение</value>
+  </data>
+  <data name="Property_AssignedBy" xml:space="preserve">
+    <value>Выдал</value>
+  </data>
+  <data name="Property_AbortingReason" xml:space="preserve">
+    <value>Причина прекращения</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Исполнитель</value>
+  </data>
+  <data name="Property_ExecutionState" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="Enum_ExecutionState_OnExecution" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="Enum_ExecutionState_OnControl" xml:space="preserve">
+    <value>На приемке</value>
+  </data>
+  <data name="Enum_ExecutionState_OnRework" xml:space="preserve">
+    <value>На доработке</value>
+  </data>
+  <data name="Enum_ExecutionState_Executed" xml:space="preserve">
+    <value>Исполнено</value>
+  </data>
+  <data name="Enum_ExecutionState_Aborted" xml:space="preserve">
+    <value>Прекращено</value>
+  </data>
+  <data name="Property_Report" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
+  <data name="Property_ActualDate" xml:space="preserve">
+    <value>Факт. дата</value>
+  </data>
+  <data name="Property_ReportNote" xml:space="preserve">
+    <value>Комментарий к отчету</value>
+  </data>
+  <data name="Ribbon_IsHighImportanceDescription_e15644d5b67343bb821e96fedc043b13" xml:space="preserve">
+    <value>Установить для задачи высокую важность</value>
+  </data>
+  <data name="Ribbon_IsLowImportanceDescription_02c5ee2f62d248508781d0e66c094421" xml:space="preserve">
+    <value>Установить для задачи низкую важность</value>
+  </data>
+  <data name="Ribbon_IsLowImportance_02c5ee2f62d248508781d0e66c094421" xml:space="preserve">
+    <value>Низкая важность</value>
+  </data>
+  <data name="Ribbon_TaskCommands_e4e6fdd481594a37a25d70ee43c07975" xml:space="preserve">
+    <value>Поручение</value>
+  </data>
+  <data name="Action_StartDescription" xml:space="preserve">
+    <value>Отправка поручения и закрытие карточки</value>
+  </data>
+  <data name="Action_StartHint" xml:space="preserve">
+    <value>Отправить поручение</value>
+  </data>
+  <data name="Ribbon_JobView_5a79eb10149e456ba4674e8010afdc07" xml:space="preserve">
+    <value>Составное поручение</value>
+  </data>
+  <data name="Ribbon_ComponentResolution_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>Равноправные исполнители</value>
+  </data>
+  <data name="Ribbon_ComponentResolutionHint_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>Переключение между простым и составным поручением</value>
+  </data>
+  <data name="Ribbon_ComponentResolutionDescription_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>Изменить тип поручения на составное, в котором можно указать равноправных исполнителей с индивидуальными поручениями и сроками.
+
+Повторное нажатие вернет карточку в режим простого поручения.</value>
+  </data>
+  <data name="Action_Abort" xml:space="preserve">
+    <value>Прекратить</value>
+  </data>
+  <data name="AttachmentGroup_DocumentsGroupTitle" xml:space="preserve">
+    <value>Документ для исполнения</value>
+  </data>
+  <data name="AttachmentGroup_DocumentsGroupInformationMessage" xml:space="preserve">
+    <value>Документ не вложен</value>
+  </data>
+  <data name="AttachmentGroup_DocumentAttGroupTitle" xml:space="preserve">
+    <value>Приложения</value>
+  </data>
+  <data name="AttachmentGroup_OtherGroupTitle" xml:space="preserve">
+    <value>Дополнительно</value>
+  </data>
+  <data name="AttachmentGroup_OtherGroupInformationMessage" xml:space="preserve">
+    <value>Вложите сопроводительные материалы к исполняемому документу</value>
+  </data>
+  <data name="AttachmentGroup_ResultGroupTitle" xml:space="preserve">
+    <value>Результаты исполнения</value>
+  </data>
+  <data name="AttachmentGroup_ResultGroupInformationMessage" xml:space="preserve">
+    <value>Вложите результат исполнения поручения, если необходимо</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupTitle" xml:space="preserve">
+    <value>Приложения</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupInformationMessage" xml:space="preserve">
+    <value>Приложения к документу отсутствуют</value>
+  </data>
+  <data name="Control_487f3300511c42328f4e7e26adb51307_EmptyText" xml:space="preserve">
+    <value>Для прекращения задачи укажите причину</value>
+  </data>
+  <data name="Property_IsUnderControl" xml:space="preserve">
+    <value>На контроле</value>
+  </data>
+  <data name="Property_ActionItemType" xml:space="preserve">
+    <value>Тип поручения</value>
+  </data>
+  <data name="Enum_ActionItemType_Main" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="Enum_ActionItemType_Additional" xml:space="preserve">
+    <value>Соисполнителю</value>
+  </data>
+  <data name="Enum_ActionItemType_Component" xml:space="preserve">
+    <value>Составное</value>
+  </data>
+  <data name="Action_FollowUpExecution" xml:space="preserve">
+    <value>Контроль исполнения</value>
+  </data>
+  <data name="Action_FollowUpExecutionDescription" xml:space="preserve">
+    <value>Открыть список всех поручений за указанный период</value>
+  </data>
+  <data name="Action_FollowUpExecutionHint" xml:space="preserve">
+    <value>Контроль исполнения поручений</value>
+  </data>
+  <data name="Ribbon_Reports_e26275e99782434080be5d59bf67d1ec" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
+  <data name="Property_Author" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="Property_MaxDeadline" xml:space="preserve">
+    <value>Конечный срок</value>
+  </data>
+  <data name="Action_StartConfirmationMessage" xml:space="preserve">
+    <value>Отправить поручение на исполнение?</value>
+  </data>
+  <data name="Action_AbortHint" xml:space="preserve">
+    <value>Прекратить поручение</value>
+  </data>
+  <data name="Action_AbortDescription" xml:space="preserve">
+    <value>Прекращение исполнения поручения и остановка всех заданий по поручению</value>
+  </data>
+  <data name="Action_AbortConfirmationMessage" xml:space="preserve">
+    <value>Прекратить поручение?</value>
+  </data>
+  <data name="Action_RestartHint" xml:space="preserve">
+    <value>Рестартовать поручение</value>
+  </data>
+  <data name="Action_RestartDescription" xml:space="preserve">
+    <value>Рестарт поручения и переоткрытие карточки</value>
+  </data>
+  <data name="Action_RestartConfirmationMessage" xml:space="preserve">
+    <value>Рестартовать поручение?</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Status_c74dc0c856384d87b46fdbeb51c0e9cc" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_OnExecution_9fa0af31a763445bb0ae7f2a5d053bd1" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_Executed_79a0eac563fb41c295627f852473d618" xml:space="preserve">
+    <value>Завершены</value>
+  </data>
+  <data name="FilterPanel_JobsWithPerformer_2e4bcf312d014fc28ddd58efea81766b" xml:space="preserve">
+    <value>По сотруднику</value>
+  </data>
+  <data name="FilterPanel_Assignee_9f8773dea40d481688f438820f2969c6" xml:space="preserve">
+    <value>Исполнитель</value>
+  </data>
+  <data name="FilterPanel_Supervisor_ef496a176e4947498cd340d5e699534f" xml:space="preserve">
+    <value>Контролер</value>
+  </data>
+  <data name="FilterPanel_Author_822b169c191b46ac8d55fee52900a774" xml:space="preserve">
+    <value>Автор поручения</value>
+  </data>
+  <data name="FilterPanel_ComplianceDeadlines_5d8adf8b536542cf9e07143fbdab5e2a" xml:space="preserve">
+    <value>Соблюдение сроков</value>
+  </data>
+  <data name="FilterPanel_AllDeadlines_bf7aa92ea508463dbf68bf9b9c6c529c" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_Overdue_a1597a3f32b6417188f2114639b2b3cf" xml:space="preserve">
+    <value>Просроченные</value>
+  </data>
+  <data name="FilterPanel_Period_545398040fd04135a2542aaf37bae26c" xml:space="preserve">
+    <value>Плановый срок</value>
+  </data>
+  <data name="FilterPanel_AllTime_cd63fcc550f64fbc9da7460028104253" xml:space="preserve">
+    <value>Все время</value>
+  </data>
+  <data name="FilterPanel_LastMonth_50331cf4eaed48ed8c471d8ed3bf3c42" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_d0f28b79b39345e198989f2f56dbdcca" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="Property_ActionItemObservers" xml:space="preserve">
+    <value>Копия</value>
+  </data>
+  <data name="Property_ParentTask" xml:space="preserve">
+    <value>Ведущая задача</value>
+  </data>
+  <data name="Property_StartId" xml:space="preserve">
+    <value>Ид текущего старта задачи</value>
+  </data>
+  <data name="Property_ParentAssignment" xml:space="preserve">
+    <value>Ведущее задание</value>
+  </data>
+  <data name="Form_88924e9483aa401794749ec1f27e5188" xml:space="preserve">
+    <value>Поручение</value>
+  </data>
+  <data name="Action_StartByForceConfirmationMessage" xml:space="preserve">
+    <value>Отправить поручение на исполнение?</value>
+  </data>
+  <data name="Control_6a18edc7814b41ebb67822399ba94b74_EmptyText" xml:space="preserve">
+    <value>Укажите соисполнителей поручения…</value>
+  </data>
+  <data name="Control_3da2f8487d124bf28d5fbfb6c8773ef9_EmptyText" xml:space="preserve">
+    <value>Укажите наблюдателей…</value>
+  </data>
+  <data name="Property_StartedBy" xml:space="preserve">
+    <value>Стартовал</value>
+  </data>
+  <data name="Property_IsDraftResolution" xml:space="preserve">
+    <value>Входит в проект резолюции</value>
+  </data>
+  <data name="Property_FinalDeadline" xml:space="preserve">
+    <value>Общий срок</value>
+  </data>
+  <data name="Action_AddPerformer" xml:space="preserve">
+    <value>Добавить исполнителей</value>
+  </data>
+  <data name="Action_AddPerformerDescription" xml:space="preserve">
+    <value>Массовое заполнение исполнителей поручения из ролей, подразделений, наших организаций и других групп.
+
+Сотрудники, которые уже указаны в качестве исполнителей, не будут добавлены.</value>
+  </data>
+  <data name="Action_AddPerformerHint" xml:space="preserve">
+    <value>Добавить исполнителей поручения</value>
+  </data>
+  <data name="Action_ChangeCompoundMode" xml:space="preserve">
+    <value>Равноправные исполнители</value>
+  </data>
+  <data name="Action_ChangeCompoundModeDescription" xml:space="preserve">
+    <value>Изменить тип поручения на составное, в котором можно указать равноправных исполнителей с индивидуальными поручениями и сроками.</value>
+  </data>
+  <data name="Action_ChangeCompoundModeHint" xml:space="preserve">
+    <value>Переключение между простым и составным поручением</value>
+  </data>
+  <data name="Property_IsAutoExec" xml:space="preserve">
+    <value>Автоматически выполнить мое задание после выполнения подчиненного поручения</value>
+  </data>
+  <data name="Action_ChangeActionItem" xml:space="preserve">
+    <value>Скорректировать</value>
+  </data>
+  <data name="Action_ChangeActionItemDescription" xml:space="preserve">
+    <value>Изменение участников и сроков поручения.</value>
+  </data>
+  <data name="Action_ChangeActionItemHint" xml:space="preserve">
+    <value>Скорректировать поручение</value>
+  </data>
+  <data name="Property_OnEdit" xml:space="preserve">
+    <value>Режим корректировки поручения</value>
+  </data>
+  <data name="Enum_Status_Aborted" xml:space="preserve">
+    <value>Прекращено</value>
+  </data>
+  <data name="Enum_Status_Completed" xml:space="preserve">
+    <value>Завершено</value>
+  </data>
+  <data name="Enum_Status_Suspended" xml:space="preserve">
+    <value>Остановлено</value>
+  </data>
+  <data name="Enum_Status_UnderReview" xml:space="preserve">
+    <value>На приемке</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPart" xml:space="preserve">
+    <value>Скорректировать пункт</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPartDescription" xml:space="preserve">
+    <value>Изменение пункта поручения.</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPartHint" xml:space="preserve">
+    <value>Скорректировать пункт поручения</value>
+  </data>
+  <data name="Property_CoAssigneesDeadline" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="Footer_ActiveEmptyText" xml:space="preserve">
+    <value>Введите текст поручения…</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPart" xml:space="preserve">
+    <value>Добавить пункт</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPartDescription" xml:space="preserve">
+    <value>Добавление пункта поручения.</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPartHint" xml:space="preserve">
+    <value>Добавить пункт поручения</value>
+  </data>
+  <data name="Property_PartsCoAssignees" xml:space="preserve">
+    <value>Соисполнители в пунктах поручения</value>
+  </data>
+  <data name="Property_HasIndefiniteDeadline" xml:space="preserve">
+    <value>Без срока</value>
+  </data>
+  <data name="Property_OnEditGuid" xml:space="preserve">
+    <value>Идентификатор процесса корректировки</value>
+  </data>
+  <data name="Property_WaitForParentAssignment" xml:space="preserve">
+    <value>Ожидать завершение родительского задания</value>
+  </data>
+</root>

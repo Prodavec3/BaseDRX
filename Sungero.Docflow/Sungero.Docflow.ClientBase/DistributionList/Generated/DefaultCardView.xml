@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection33f0d9a77eda449e95fe5735fe60f258 FormGuid="668fe89f-133a-43e9-8c41-4221cf76b9e8">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">730.4,-2.80000000000001</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="4">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Correspondent</property>
+            <property name="Visible">true</property>
+            <property name="Name">DistributionList_Addressees_Correspondent</property>
+            <property name="ExtendedVisibleIndex">1</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">204</property>
+            <property name="ActualWidth">18*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Addressee</property>
+            <property name="Visible">true</property>
+            <property name="Name">DistributionList_Addressees_Addressee</property>
+            <property name="ExtendedVisibleIndex">2</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Width">148</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">DeliveryMethod</property>
+            <property name="Visible">true</property>
+            <property name="Name">DistributionList_Addressees_DeliveryMethod</property>
+            <property name="ExtendedVisibleIndex">3</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Width">159</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">Number</property>
+            <property name="Visible">true</property>
+            <property name="Name">DistributionList_Addressees_Number</property>
+            <property name="ExtendedVisibleIndex">0</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">45</property>
+            <property name="ActualWidth">4*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Number</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection33f0d9a77eda449e95fe5735fe60f258>
+</settings>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateFinArchiveExportReportTable">
+    <mssql><![CDATA[create table {0}
+([ReportSessionId] varchar(256) NOT NULL,
+ [Document] nvarchar(max) NOT NULL,
+ [Hyperlink] nvarchar(max) NOT NULL,
+ [Id] [int] NOT NULL,
+ [Exported] nvarchar(max) NOT NULL,
+ [Note] nvarchar(max) NOT NULL,
+ [IOHyperlink] nvarchar(max) NOT NULL,
+ [OrderId] [int] NOT NULL)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE IF NOT EXISTS {0}
+(ReportSessionId citext NOT NULL,
+ document citext NOT NULL,
+ hyperlink citext NOT NULL,
+ id int NOT NULL,
+ exported citext NOT NULL,
+ note citext NOT NULL,
+ iohyperlink citext NOT NULL,
+ orderid int NOT NULL)]]></postgres>
+  </query>
+  <query key="SelectFromFinArchiveExportReportTable">
+    <default><![CDATA[select Document, Hyperlink, Id, Exported, Note, IOHyperlink
+      from Sungero_Reports_FinArchExport
+      where ReportSessionId = @ReportSessionId
+      order by OrderId]]></default>
+  </query>
+</queries>

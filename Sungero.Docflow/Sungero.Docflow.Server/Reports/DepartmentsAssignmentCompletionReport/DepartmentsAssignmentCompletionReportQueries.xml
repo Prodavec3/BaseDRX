@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+  ([RowIndex] int NOT NULL,
+   [ReportSessionId] varchar(256) NOT NULL,
+   [Department] int NOT NULL,
+   [Unwrap] bit NOT NULL,
+   [DepartmentName] nvarchar(max) NOT NULL,
+   [IsActiveDepartment] bit NOT NULL,
+   [SubDepartmentName] nvarchar(max) NOT NULL,
+   [IsActiveSubDepartment] nvarchar(max) NOT NULL,
+   [HyperlinkBusinessUnitId] int NOT NULL,
+   [BusinessUnitName] nvarchar(max) NOT NULL,
+   [AssignmentCompletion] int NULL,
+   [AssignmentsCount] int NOT NULL,
+   [AffectDisciplineAssignmentsCount] int NOT NULL,
+   [CompletedInTimeAssignmentsCount] int NOT NULL,
+   [OverdueAssignmentsCount] int NOT NULL
+  )]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (RowIndex int NOT NULL,
+   ReportSessionId citext NOT NULL,
+   Department int NOT NULL,
+   Unwrap boolean NOT NULL,
+   DepartmentName citext NOT NULL,
+   IsActiveDepartment boolean NOT NULL,
+   SubDepartmentName citext NOT NULL,
+   IsActiveSubDepartment boolean NOT NULL,
+   HyperlinkBusinessUnitId int NOT NULL,
+   BusinessUnitName citext NOT NULL,
+   AssignmentCompletion int NULL,
+   AssignmentsCount int NOT NULL,
+   AffectDisciplineAssignmentsCount int NOT NULL,
+   CompletedInTimeAssignmentsCount int NOT NULL,
+   OverdueAssignmentsCount int NOT NULL
+  )]]></postgres>
+  </query>
+  <query key="SelectDepartmentsFromTempTable">
+    <default><![CDATA[select Department,
+       Unwrap,
+       DepartmentName,
+       IsActiveDepartment,
+       SubDepartmentName,
+       IsActiveSubDepartment,
+       HyperlinkBusinessUnitId,
+       BusinessUnitName,
+       AssignmentCompletion,
+       AssignmentsCount,
+       AffectDisciplineAssignmentsCount,
+       CompletedInTimeAssignmentsCount,
+       OverdueAssignmentsCount
+  from Sungero_Reports_DepAsgCompletion
+  where ReportSessionId = @ReportSessionId
+  order by RowIndex;]]></default>
+  </query>
+</queries>

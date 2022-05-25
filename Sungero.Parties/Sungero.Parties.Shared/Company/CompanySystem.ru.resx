@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource_df687b306ddd439d8abc8262e3a8ba92" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_df687b306ddd439d8abc8262e3a8ba92_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_444488dbb11a4c698e87d2156738e190" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_444488dbb11a4c698e87d2156738e190_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7675f69407a5448099fa2dd0a55ebc06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a2dcbf7875d946168d02ae536f0677f2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a2dcbf7875d946168d02ae536f0677f2_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_fe142cae062942c3a05d317ccebdb476" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fe142cae062942c3a05d317ccebdb476_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_1c222dd5274c447d9eca53e501f382a1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_1c222dd5274c447d9eca53e501f382a1_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9e3df66a01e8408aaa4ca5c92a1227fb" xml:space="preserve">
+    <value>Контактная информация</value>
+  </data>
+  <data name="Resource_966f5464efad489f8598d48f1fdfe547" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_966f5464efad489f8598d48f1fdfe547_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_37b611c90c654ebbb20b532c099ebe6d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_37b611c90c654ebbb20b532c099ebe6d_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_0a16025bf9b74ee38653fae0509c4ab4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_0a16025bf9b74ee38653fae0509c4ab4_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_2e356dc05ad946958703d2d84f01c2bf" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2e356dc05ad946958703d2d84f01c2bf_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_db0be72b481a49feb8cb90f6be327354" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_db0be72b481a49feb8cb90f6be327354_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_8aa590633d62455fb454b27459ee3d32" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_8aa590633d62455fb454b27459ee3d32_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_687c94fc67704c17bb0b57a69433b001" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_687c94fc67704c17bb0b57a69433b001_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_4b9defe5f46d4581b50a5c0be4a80a50" xml:space="preserve">
+    <value>Банковские реквизиты</value>
+  </data>
+  <data name="Resource_7ab27d39fff04fe9b1673ec41d087616" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_7ab27d39fff04fe9b1673ec41d087616_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_238f5c7bf35d4f8aa7dc453043354f5d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_238f5c7bf35d4f8aa7dc453043354f5d_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_69a4139490424b338d9ce5253d0a8c27" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Resource_a4203bd178814b25bef4e70576f0d4dd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a4203bd178814b25bef4e70576f0d4dd_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_9076ca8d34a84905bc813820f9122929" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_9076ca8d34a84905bc813820f9122929_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ecde6d2983f144e39d87ad6fcf2bc170" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ecde6d2983f144e39d87ad6fcf2bc170_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_ad0ce6fbbac14ed3976e3bee9f09cc38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ae7b3b5f05c24593b8ba7518f5453634" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ae7b3b5f05c24593b8ba7518f5453634_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ca73cdcac9dd401bb028a1dd826e3fb7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_22c7971cc5cd45a28abc76c7aaa0d977" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_22c7971cc5cd45a28abc76c7aaa0d977_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Организация</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Организации</value>
+  </data>
+</root>

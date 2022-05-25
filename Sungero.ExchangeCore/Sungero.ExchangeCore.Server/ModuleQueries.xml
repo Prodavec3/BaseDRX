@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="GetLastSyncDate">
+    <mssql><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE (Key = '{0}')]]></postgres>
+  </query>
+  <query key="UpdateLastSyncDate">
+    <mssql><![CDATA[if not exists(select 1 from [dbo].[Sungero_Docflow_Params] where [Key] = '{0}')
+  insert [Sungero_Docflow_Params] ([Key],Value) values ('{0}', '{1}')
+else UPDATE Sungero_Docflow_Params SET Value = '{1}' WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[do $$
+begin
+  if not exists(select 1 from Sungero_Docflow_Params where Key = '{0}')
+  then
+    insert into Sungero_Docflow_Params (Key, Value) values ('{0}', '{1}');
+  else
+    UPDATE Sungero_Docflow_Params SET Value = '{1}' WHERE (Key = '{0}');
+  end if;
+end$$;]]></postgres>
+  </query>
+</queries>

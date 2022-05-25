@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateEDocIndex0Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+[LifeCycleState_Docflow_Sungero] ASC,
+[Discriminator] ASC,
+[RespEmpl_Contrac_Sungero] ASC
+)
+INCLUDE ( [SecureObject],
+[IntApprState_Docflow_Sungero],
+[ExtApprState_Docflow_Sungero])
+WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF,
+SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF,
+ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (LifeCycleState_Docflow_Sungero, Discriminator)]]></postgres>
+  </query>
+  <query key="SelectLastNotificationDate">
+    <mssql><![CDATA[select
+	Value
+from
+	Sungero_Docflow_Params
+where
+	[Key] = '{0}']]></mssql>
+    <postgres><![CDATA[select
+	Value
+from
+	Sungero_Docflow_Params
+where
+	Key = '{0}']]></postgres>
+  </query>
+  <query key="SelectDocumentWithSenderTask">
+    <mssql><![CDATA[select
+	EDoc
+from
+	Sungero_Contrac_ExpiringContracts
+where
+	[Task] is not null]]></mssql>
+    <postgres><![CDATA[select
+	EDoc
+from
+	Sungero_Contrac_ExpiringContracts
+where
+	Task is not null]]></postgres>
+  </query>
+  <query key="DeleteTasksWithoutDocuments">
+    <mssql><![CDATA[delete from
+	Sungero_Contrac_ExpiringContracts
+where
+	[Task] is null]]></mssql>
+    <postgres><![CDATA[delete from
+	Sungero_Contrac_ExpiringContracts
+where
+	Task is null]]></postgres>
+  </query>
+  <query key="DeleteTasksWithDocuments">
+    <mssql><![CDATA[delete from
+ 	Sungero_Contrac_ExpiringContracts
+  where
+  	[Task] is not null]]></mssql>
+    <postgres><![CDATA[delete from
+ 	Sungero_Contrac_ExpiringContracts
+ where
+ 	Task is not null]]></postgres>
+  </query>
+  <query key="AddTask">
+    <mssql><![CDATA[if not exists
+	(
+		select
+ 			1
+		from
+			[dbo].[Sungero_Contrac_ExpiringContracts]
+		where
+			[EDoc] = {0}
+	)
+	insert
+		[Sungero_Contrac_ExpiringContracts] ([EDoc], [Task])  values ({0}, {1})
+	else
+		update
+			Sungero_Contrac_ExpiringContracts
+		set
+			[Task] = {1}
+		where
+			[EDoc] = {0}]]></mssql>
+    <postgres><![CDATA[DO
+$$
+BEGIN
+if not exists
+	(select
+		1
+	from
+		Sungero_Contrac_ExpiringContracts
+	where
+		EDoc = {0})
+then		
+	insert into
+		Sungero_Contrac_ExpiringContracts (EDoc, Task)  values ({0}, {1});
+else
+	update
+		Sungero_Contrac_ExpiringContracts
+	set
+		Task = {1}
+	where
+		EDoc = {0};
+end if;	
+END$$]]></postgres>
+  </query>
+  <query key="CountNullTasks">
+    <mssql><![CDATA[select
+	count(*)
+from
+	Sungero_Contrac_ExpiringContracts
+where
+	[Task] is null]]></mssql>
+    <postgres><![CDATA[select
+	count(*)
+from
+	Sungero_Contrac_ExpiringContracts
+where
+	Task is null]]></postgres>
+  </query>
+  <query key="UpdateLastNotificationDate">
+    <mssql><![CDATA[if not exists
+	(
+		select
+			1
+		from
+              	[dbo].[Sungero_Docflow_Params]
+              where
+              	[Key] = '{0}'
+	)
+	insert
+		[Sungero_Docflow_Params] ([Key],Value) values ('{0}', '{1}')
+	else
+ 		update
+ 			Sungero_Docflow_Params
+		set
+			Value = '{1}'
+		where
+			[Key] = '{0}']]></mssql>
+    <postgres><![CDATA[DO
+$$
+BEGIN
+if not exists
+	(select
+		1
+	from
+              Sungero_Docflow_Params
+	where
+		Key = '{0}'
+	) 
+then
+	insert into
+		Sungero_Docflow_Params (Key,Value) values ('{0}', '{1}');
+else
+ 	update
+ 		Sungero_Docflow_Params
+	set
+			Value = '{1}'
+		where
+			Key = '{0}'; 
+end if;	
+END$$]]></postgres>
+  </query>
+  <query key="CreateTableForExpiringContracts">
+    <mssql><![CDATA[if not exists
+	(select
+		* 
+	from
+		sysobjects
+	where
+		name = 'Sungero_Contrac_ExpiringContracts'
+	and xtype='U')
+create table [Sungero_Contrac_ExpiringContracts] (EDoc int unique, Task int)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE IF NOT EXISTS Sungero_Contrac_ExpiringContracts
+  (
+    EDOC integer,
+    Task integer,
+    UNIQUE(EDOC)
+  )]]></postgres>
+  </query>
+  <query key="AddDocumentsToTable">
+    <mssql><![CDATA[insert into Sungero_Contrac_ExpiringContracts ( EDoc ) values ({0})]]></mssql>
+    <postgres><![CDATA[insert into Sungero_Contrac_ExpiringContracts ( EDoc ) values ({0})]]></postgres>
+  </query>
+  <query key="DeleteDocumentIdsWithoutTask">
+    <mssql><![CDATA[delete from
+	Sungero_Contrac_ExpiringContracts
+where
+	[Task] is null
+	and EDoc in ({0})]]></mssql>
+    <postgres><![CDATA[delete from
+ 	Sungero_Contrac_ExpiringContracts
+ where
+ 	Task is not null
+ 	and EDoc in ({0})]]></postgres>
+  </query>
+</queries>

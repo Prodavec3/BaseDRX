@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NamePartForContractor" xml:space="preserve">
+    <value> с </value>
+  </data>
+  <data name="PdfStampSignIsValid" xml:space="preserve">
+    <value>Подпись соответствует файлу документа</value>
+  </data>
+  <data name="PdfStampSignIsInvalid" xml:space="preserve">
+    <value>Подпись не соответствует файлу документа</value>
+  </data>
+  <data name="Adjustment" xml:space="preserve">
+    <value>Корр. </value>
+  </data>
+  <data name="RefillBuyerTitleQuestion" xml:space="preserve">
+    <value>Заполнить реквизиты покупателя повторно?</value>
+  </data>
+  <data name="PropertiesFillingDialog_Text_Universal" xml:space="preserve">
+    <value>Укажите подписывающего, информацию о принятии отгруженных товаров (выполненных работ, оказанных услуг) и разногласиях.</value>
+  </data>
+  <data name="PropertiesFillingDialog_SignedBy" xml:space="preserve">
+    <value>Подписал</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority" xml:space="preserve">
+    <value>Полномочия</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_Deal" xml:space="preserve">
+    <value>Лицо, совершившее сделку</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_Register" xml:space="preserve">
+    <value>Лицо, ответственное за оформление</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_DealAndRegister" xml:space="preserve">
+    <value>Лицо, совершившее сделку и отв. за оформление</value>
+  </data>
+  <data name="PropertiesFillingDialog_Basis" xml:space="preserve">
+    <value>Основание</value>
+  </data>
+  <data name="PropertiesFillingDialog_AcceptanceDate" xml:space="preserve">
+    <value>Дата приемки</value>
+  </data>
+  <data name="PropertiesFillingDialog_Result" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="PropertiesFillingDialog_Result_Accepted" xml:space="preserve">
+    <value>Принято без разногласий</value>
+  </data>
+  <data name="PropertiesFillingDialog_Result_AcceptedWithDisagreement" xml:space="preserve">
+    <value>Принято с разногласиями</value>
+  </data>
+  <data name="PropertiesFillingDialog_Disagreement" xml:space="preserve">
+    <value>Разногласия</value>
+  </data>
+  <data name="PropertiesFillingDialog_SameConsignee" xml:space="preserve">
+    <value>Груз принял получатель груза</value>
+  </data>
+  <data name="PropertiesFillingDialog_Consignee" xml:space="preserve">
+    <value>Груз принял</value>
+  </data>
+  <data name="PropertiesFillingDialog_ConsigneeBasis" xml:space="preserve">
+    <value>Основание</value>
+  </data>
+  <data name="PropertiesFillingDialog_SaveAndSign" xml:space="preserve">
+    <value>Сохранить и подписать</value>
+  </data>
+  <data name="PropertiesFillingDialog_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="PropertiesFillingDialog_Title" xml:space="preserve">
+    <value>Заполнение реквизитов покупателя</value>
+  </data>
+  <data name="PropertiesFillingDialog_Text_UniversalCorrection" xml:space="preserve">
+    <value>Укажите подписывающего и информацию о принятии изменения стоимости отгруженных товаров (выполненных работ, оказанных услуг).</value>
+  </data>
+  <data name="PropertiesFillingDialog_Text_Waybill" xml:space="preserve">
+    <value>Укажите подписывающего, информацию о принятии отгруженных товаров и разногласиях.</value>
+  </data>
+  <data name="PropertiesFillingDialog_Text_Act" xml:space="preserve">
+    <value>Укажите подписывающего, информацию о принятии выполненных работ, оказанных услуг.</value>
+  </data>
+  <data name="PropertiesFillingDialog_DateApproving" xml:space="preserve">
+    <value>Дата согласования</value>
+  </data>
+  <data name="PropertiesFillingDialog_AdjustmentResult_AgreedChanges" xml:space="preserve">
+    <value>С изменением стоимости согласен</value>
+  </data>
+  <data name="PropertiesFillingDialog_Error_TIN" xml:space="preserve">
+    <value>Необходимо указать ИНН в карточке нашей организации.</value>
+  </data>
+  <data name="PropertiesFillingDialog_Error_SignatoryJobTitle" xml:space="preserve">
+    <value>Необходимо указать должность для подписывающего.</value>
+  </data>
+  <data name="PropertiesFillingDialog_Error_ConsigneeJobTitle" xml:space="preserve">
+    <value>Необходимо указать должность для грузополучателя.</value>
+  </data>
+  <data name="LastVersionWillBeChanged" xml:space="preserve">
+    <value>Версия {0} документа (титул покупателя) будет изменена.</value>
+  </data>
+  <data name="NewVersionWillBeCreated" xml:space="preserve">
+    <value>Будет создана новая версия документа.</value>
+  </data>
+  <data name="FillingButtonText" xml:space="preserve">
+    <value>Заполнить</value>
+  </data>
+  <data name="FillBuyerInfoAwaited" xml:space="preserve">
+    <value>Заполните реквизиты покупателя, если необходимо указать дополнительные сведения о приемке товаров (услуг)</value>
+  </data>
+  <data name="ErrorBuyerTitlePropertiesFilling" xml:space="preserve">
+    <value>Произошла ошибка при сохранении реквизитов покупателя.</value>
+  </data>
+  <data name="FillBuyerInfoOutgoingDocument" xml:space="preserve">
+    <value>Заполнить реквизиты покупателя можно только для входящих документов.</value>
+  </data>
+  <data name="PdfStampSignedNotSended" xml:space="preserve">
+    <value>Подписан. Требуется отправка в сервис</value>
+  </data>
+  <data name="PropertiesFillingDialog_Document" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="PropertiesFillingDialog_Error_AttorneyJobTitle" xml:space="preserve">
+    <value>Необходимо указать должность подписавшего доверенность.</value>
+  </data>
+  <data name="PropertiesFillingDialog_Error_AttorneyRegistration" xml:space="preserve">
+    <value>У доверенности должны быть заполнены номер и дата документа.</value>
+  </data>
+  <data name="PropertiesFillingDialog_Error_OtherDocument" xml:space="preserve">
+    <value>Для заполнения реквизитов покупателя должно быть настроено право подписи с основанием "Должностные обязанности" или "Доверенность".</value>
+  </data>
+  <data name="FillSellerInfoAwaited" xml:space="preserve">
+    <value>Заполните реквизиты продавца, если необходимо указать дополнительные сведения о подписывающем</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_DealAndRegisterAndInvoiceSignatory" xml:space="preserve">
+    <value>Лицо, соверш. сделку, отв. за ее офор. и за подп. с/ф</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_RegisterAndInvoiceSignatory" xml:space="preserve">
+    <value>Лицо, отв. за оформление и за подписание с/ф</value>
+  </data>
+  <data name="LastVersionSellerTitleWillBeChanged" xml:space="preserve">
+    <value>Версия {0} документа (титул продавца) будет изменена.</value>
+  </data>
+  <data name="RefillSellerTitleQuestion" xml:space="preserve">
+    <value>Заполнить реквизиты продавца повторно?</value>
+  </data>
+  <data name="PropertiesFillingDialog_Text_SellerTitle" xml:space="preserve">
+    <value>Заполните реквизиты продавца.</value>
+  </data>
+  <data name="PropertiesFillingDialog_SellerTitle" xml:space="preserve">
+    <value>Заполнение реквизитов продавца</value>
+  </data>
+  <data name="NeedCancelRegistrationToChangeKind" xml:space="preserve">
+    <value>Чтобы сменить вид документа, необходимо отменить его регистрацию. </value>
+  </data>
+  <data name="ErrorSellerTitlePropertiesFilling" xml:space="preserve">
+    <value>Произошла ошибка при сохранении реквизитов продавца.</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_SignSchf" xml:space="preserve">
+    <value>Лицо, ответственное за подписание счетов-фактур</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_SignSchfAndRegister" xml:space="preserve">
+    <value>Лицо, отв. за оформление и подписание счетов-фактур</value>
+  </data>
+  <data name="PropertiesFillingDialog_HasAuthority_Other" xml:space="preserve">
+    <value>Лицо с иными полномочиями</value>
+  </data>
+  <data name="PropertiesFillingDialog_Result_NotAccepted" xml:space="preserve">
+    <value>Не принято</value>
+  </data>
+</root>

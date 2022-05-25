@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[CREATE TABLE {0} (MessageType VARCHAR ( 50 ), DocumentName VARCHAR ( MAX ),
+                 SendedFrom VARCHAR( MAX ), Date VARCHAR(50), ReportSessionId VARCHAR (256) NOT NULL )]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0} (MessageType citext, DocumentName citext,
+                 SendedFrom citext, Date citext,
+                 ReportSessionId citext NOT NULL )]]></postgres>
+  </query>
+  <query key="SelectFromTempTable">
+    <default><![CDATA[select *
+  from Sungero_Reports_ExchangeOrder temp
+  where temp.ReportSessionId = @SessionId]]></default>
+  </query>
+</queries>

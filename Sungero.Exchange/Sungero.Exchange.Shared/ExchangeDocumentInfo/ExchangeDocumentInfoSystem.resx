@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Infromation on exchange document</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Infromation on exchange document</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Information on exchange documents</value>
+  </data>
+  <data name="Property_Document" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="Property_Box" xml:space="preserve">
+    <value>Exchange box</value>
+  </data>
+  <data name="Property_ServiceDocumentId" xml:space="preserve">
+    <value>Document ID in ES</value>
+  </data>
+  <data name="Property_VersionId" xml:space="preserve">
+    <value>Document version ID</value>
+  </data>
+  <data name="Property_ServiceMessageId" xml:space="preserve">
+    <value>Message ID</value>
+  </data>
+  <data name="Property_Counterparty" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="Property_NeedSign" xml:space="preserve">
+    <value>Signature is required</value>
+  </data>
+  <data name="Property_MessageType" xml:space="preserve">
+    <value>Message type</value>
+  </data>
+  <data name="Enum_MessageType_Incoming" xml:space="preserve">
+    <value>Incoming</value>
+  </data>
+  <data name="Enum_MessageType_Outgoing" xml:space="preserve">
+    <value>Outgoing</value>
+  </data>
+  <data name="ControlGroup_9057168b2b31462a95e13afb0588ad0e" xml:space="preserve">
+    <value>Exchange document info</value>
+  </data>
+  <data name="Property_MessageDate" xml:space="preserve">
+    <value>Date sent</value>
+  </data>
+  <data name="Property_RevocationStatus" xml:space="preserve">
+    <value>Cancellation status:</value>
+  </data>
+  <data name="Enum_RevocationStatus_None" xml:space="preserve">
+    <value>No requests</value>
+  </data>
+  <data name="Enum_RevocationStatus_Waiting" xml:space="preserve">
+    <value>Received request for cancellation</value>
+  </data>
+  <data name="Enum_RevocationStatus_Revoked" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Property_OutgoingStatus" xml:space="preserve">
+    <value>Approval result</value>
+  </data>
+  <data name="Enum_OutgoingStatus_Signed" xml:space="preserve">
+    <value>Signed</value>
+  </data>
+  <data name="Enum_OutgoingStatus_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Property_ExchangeState" xml:space="preserve">
+    <value>Electronic exchange</value>
+  </data>
+  <data name="Enum_ExchangeState_Received" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="Enum_ExchangeState_Sent" xml:space="preserve">
+    <value>Sent to counterparty</value>
+  </data>
+  <data name="Enum_ExchangeState_Signed" xml:space="preserve">
+    <value>Signed by both parties</value>
+  </data>
+  <data name="Enum_ExchangeState_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Enum_ExchangeState_SignRequired" xml:space="preserve">
+    <value>Awaiting our signature</value>
+  </data>
+  <data name="Enum_ExchangeState_Terminated" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Enum_ExchangeState_Obsolete" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Enum_ExchangeState_SignAwaited" xml:space="preserve">
+    <value>Awaiting counterparty's signature</value>
+  </data>
+  <data name="Property_RevocationTask" xml:space="preserve">
+    <value>Revocation Task</value>
+  </data>
+  <data name="Property_InvoiceState" xml:space="preserve">
+    <value>Tax invoice status</value>
+  </data>
+  <data name="Enum_InvoiceState_Rejected" xml:space="preserve">
+    <value>Clarification of notification requested</value>
+  </data>
+  <data name="Property_RootBox" xml:space="preserve">
+    <value>Leading box</value>
+  </data>
+  <data name="Property_DeliveryConfirmationStatus" xml:space="preserve">
+    <value>Receipt notification</value>
+  </data>
+  <data name="Enum_DeliveryConfirmationStatus_NotRequired" xml:space="preserve">
+    <value>Not required</value>
+  </data>
+  <data name="Enum_DeliveryConfirmationStatus_Sent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="Property_ServiceCounterpartyId" xml:space="preserve">
+    <value>Counterparty ID in ES</value>
+  </data>
+  <data name="Property_ServiceDocuments" xml:space="preserve">
+    <value>Service documents</value>
+  </data>
+  <data name="Property_ReceiverSignId" xml:space="preserve">
+    <value>Recipient signature ID</value>
+  </data>
+  <data name="Property_SenderSignId" xml:space="preserve">
+    <value>Sender signature ID</value>
+  </data>
+  <data name="Property_ExternalBuyerTitleId" xml:space="preserve">
+    <value>External Buyer Title Id</value>
+  </data>
+  <data name="Property_StageId" xml:space="preserve">
+    <value>Stage Id</value>
+  </data>
+  <data name="ControlGroup_d4cdd07b229f466e91fc4395af73af32" xml:space="preserve">
+    <value>Service documents</value>
+  </data>
+  <data name="ControlGroup_f3967adf69634fd89a530e89cfe3d5a8" xml:space="preserve">
+    <value>Exchange state</value>
+  </data>
+  <data name="Property_BuyerAcceptanceStatus" xml:space="preserve">
+    <value>Acceptance status</value>
+  </data>
+  <data name="Enum_BuyerAcceptanceStatus_Accepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="Enum_BuyerAcceptanceStatus_PartiallyAccepted" xml:space="preserve">
+    <value>Partially accepted</value>
+  </data>
+  <data name="Enum_BuyerAcceptanceStatus_Rejected" xml:space="preserve">
+    <value>Not accepted</value>
+  </data>
+</root>

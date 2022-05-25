@@ -1,0 +1,183 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "fafa1803-bcd1-4b88-9e07-eb6f1ec341c6",
+  "Name": "CounterpartyExchangeBoxes",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "ExchangeBoxes",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cca322be-ec07-47ba-b188-ba6de94af85c",
+      "Name": "Counterparty",
+      "CanBeSearch": false,
+      "Code": "Counterparty",
+      "EntityGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false,
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6f85105e-ff7c-4a73-8bae-1cbf10c49654",
+      "Name": "Box",
+      "CanBeSearch": false,
+      "Code": "Box",
+      "EntityGuid": "2dd7a803-8db7-40e1-9da6-b41c62d367c8",
+      "FlatListInStandaloneLookup": true,
+      "IsEnabled": false,
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "cca322be-ec07-47ba-b188-ba6de94af85c",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9c4c8032-0e0b-4864-a5bd-c3af1bd87eed",
+      "Name": "Status",
+      "CanBeSearch": false,
+      "Code": "Status",
+      "DirectValues": [
+        {
+          "NameGuid": "45963728-7bec-4a54-a12d-c86d0fd27cfb",
+          "Name": "Active",
+          "Code": "Active",
+          "Versions": []
+        },
+        {
+          "NameGuid": "f5a64635-37bb-43e0-a661-fe612448dce3",
+          "Name": "Closed",
+          "Code": "Closed",
+          "Versions": []
+        },
+        {
+          "NameGuid": "77ab6ffc-93e0-47a4-a3ae-43439f101cf0",
+          "Name": "ApprovingByUs",
+          "Code": "ApprovingByUs",
+          "Versions": []
+        },
+        {
+          "NameGuid": "1d3ea581-7797-43e8-97d7-84aa12614824",
+          "Name": "ApprovingByCA",
+          "Code": "ApprovingByCA",
+          "Versions": []
+        }
+      ],
+      "IsEnabled": false,
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "6f85105e-ff7c-4a73-8bae-1cbf10c49654",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7a7d6c60-3afd-41ee-819a-5dc3faa1bc4e",
+      "Name": "OrganizationId",
+      "CanBeSearch": false,
+      "Code": "OrganizationId",
+      "IsEnabled": false,
+      "IsRequired": true,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "9c4c8032-0e0b-4864-a5bd-c3af1bd87eed",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "4793bbf9-8681-4b46-b3a9-abbf8a5f174b",
+      "Name": "InvitationText",
+      "CanBeSearch": false,
+      "Code": "InvitationText",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "Length": 1000,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "7a7d6c60-3afd-41ee-819a-5dc3faa1bc4e",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7e7c7591-9d51-4948-8346-1c4fff91026b",
+      "Name": "IsDefault",
+      "CanBeSearch": false,
+      "Code": "IsDefault",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "4793bbf9-8681-4b46-b3a9-abbf8a5f174b",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0be57ef7-0c23-4b2a-b7b5-8491429b2af4",
+      "Name": "CounterpartyBox",
+      "CanBeSearch": false,
+      "Code": "CpartyBox",
+      "IsEnabled": false,
+      "Length": 1000,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "7e7c7591-9d51-4948-8346-1c4fff91026b",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b21bcfd2-5137-4005-a4d2-4e7caf9d7dee",
+      "Name": "IsRoaming",
+      "CanBeSearch": false,
+      "Code": "IsRoaming",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "0be57ef7-0c23-4b2a-b7b5-8491429b2af4",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7a777a1e-4633-4596-ad35-57ee39152b39",
+      "Name": "FtsId",
+      "CanBeSearch": false,
+      "Code": "FtsId",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "b21bcfd2-5137-4005-a4d2-4e7caf9d7dee",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "e963b829-4d3e-4c6a-ad20-4369610d26ef",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "171ff86f-7f51-4b07-9171-45b9f81fa722",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

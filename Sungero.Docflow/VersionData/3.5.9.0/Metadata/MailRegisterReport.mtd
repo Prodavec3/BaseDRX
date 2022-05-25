@@ -1,0 +1,66 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "2875a21b-b6e4-476b-9bef-3693a58040e5",
+  "Name": "MailRegisterReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word",
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer",
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "DisplayName",
+    "Description",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "9ed57b84-0161-47f4-a5c7-5ed3b0543392",
+      "Name": "FromName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "867b20e2-d167-4b52-be32-be99bf52326c",
+      "Name": "TotalMailCount",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "bf958fd6-165c-4c75-9e4c-7d8507fb7a68",
+      "Name": "OutgoingDocuments",
+      "EntityType": "f5f104fb-52e4-422b-9de1-a36937d85a2d",
+      "InternalDataTypeName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "54aa4928-efe8-492e-8327-e6e64963c54d",
+      "Name": "TempTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "0d688b91-8c2f-47b9-8b7e-6925b6cd7ffb",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

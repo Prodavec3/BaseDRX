@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NpoComputer.DCX.ClientApi</name>
+    </assembly>
+    <members>
+        <member name="T:NpoComputer.DCX.ClientApi.Client">
+            <summary>
+            Клиент к сервису обмена.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.ClientApi.Client.#ctor(NpoComputer.DCX.Common.ExchangeSystem,NpoComputer.DCX.Common.ServiceSettings,NpoComputer.DCX.Common.Authentication.IAuthTokenProvider,NpoComputer.DCX.Common.ConnectorSettings)">
+            <summary>
+            Создать экземпляр клиента.
+            </summary>
+            <param name="clientSystem">Система обмена.</param>
+            <param name="settings">Настройки системы обмена.</param>
+            <param name="tokenProvider">Провайдер токена аутентификации для сервиса обмена.</param>
+            <param name="connectorSetting">Расширенные настройки подключения к коннектору.</param>
+        </member>
+    </members>
+</doc>

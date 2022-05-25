@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FilterAuthor" xml:space="preserve">
+    <value>Author: {0} {1}</value>
+  </data>
+  <data name="FilterBusinessUnit" xml:space="preserve">
+    <value>Business Unit: {0} {1}</value>
+  </data>
+  <data name="FilterDepartment" xml:space="preserve">
+    <value>Department: {0} {1}</value>
+  </data>
+  <data name="FilterResponsible" xml:space="preserve">
+    <value>Assignee: {0} {1}</value>
+  </data>
+  <data name="NoAnyActionItems" xml:space="preserve">
+    <value>no action items</value>
+  </data>
+  <data name="ReportDate" xml:space="preserve">
+    <value>Report Date:</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Count of action items
+Executed
+ - Overdue
+In process
+ - Overdue
+</value>
+  </data>
+  <data name="DisciplinePercent" xml:space="preserve">
+    <value>Percent of action items executed on time</value>
+  </data>
+  <data name="RowNumber" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ActionItem" xml:space="preserve">
+    <value>Action Item</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Sched. Date</value>
+  </data>
+  <data name="ActualDate" xml:space="preserve">
+    <value>Actual Date</value>
+  </data>
+  <data name="Overdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="Assignee" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="CoAssignees" xml:space="preserve">
+    <value>Co-Assignees</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Underlying Document</value>
+  </data>
+  <data name="HeaderDeadline" xml:space="preserve">
+    <value>deadline date from {0} to {1}</value>
+  </data>
+  <data name="WorkingDay" xml:space="preserve">
+    <value>WD</value>
+  </data>
+  <data name="HeaderDocument" xml:space="preserve">
+    <value>on document «{0}»</value>
+  </data>
+  <data name="HeaderMeeting" xml:space="preserve">
+    <value>on meeting «{0}»</value>
+  </data>
+  <data name="NoAnyActionItemsForDocument" xml:space="preserve">
+    <value>You did not create any action items based on the document.</value>
+  </data>
+  <data name="NoAnyActionItemsForMeeting" xml:space="preserve">
+    <value>You did not create any action items based on the meeting.</value>
+  </data>
+  <data name="IndefiniteDeadline" xml:space="preserve">
+    <value>Without deadline</value>
+  </data>
+</root>

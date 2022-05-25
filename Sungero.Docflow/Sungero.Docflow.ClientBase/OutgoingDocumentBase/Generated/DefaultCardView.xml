@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection7c638e6d87f943b78dc3d053df36bc9b FormGuid="cd8582a5-250a-436e-85c3-5d77d9f42950">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">883,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">None</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="4">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Correspondent</property>
+            <property name="Visible">true</property>
+            <property name="Name">OutgoingDocumentBase_Addressees_Correspondent</property>
+            <property name="ExtendedVisibleIndex">1</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">479</property>
+            <property name="ActualWidth">41*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Addressee</property>
+            <property name="Visible">true</property>
+            <property name="Name">OutgoingDocumentBase_Addressees_Addressee</property>
+            <property name="ExtendedVisibleIndex">2</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Width">409</property>
+            <property name="ActualWidth">33*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">DeliveryMethod</property>
+            <property name="Visible">true</property>
+            <property name="Name">OutgoingDocumentBase_Addressees_DeliveryMethod</property>
+            <property name="ExtendedVisibleIndex">3</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Width">140</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">Number</property>
+            <property name="Visible">true</property>
+            <property name="Name">OutgoingDocumentBase_Addressees_Number</property>
+            <property name="ExtendedVisibleIndex">0</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Number</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection7c638e6d87f943b78dc3d053df36bc9b>
+  <AccessRightsAccessRightEntryCardGrid_38106a151b4548f2900c4f02ff9fa8b2>
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="\$GridControl" iskey="true" value="GridControl">
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+      </property>
+    </XtraSerializer>
+  </AccessRightsAccessRightEntryCardGrid_38106a151b4548f2900c4f02ff9fa8b2>
+  <collapsableTree>
+    <Layout>
+      <IsDocked>true</IsDocked>
+      <Width>230</Width>
+    </Layout>
+  </collapsableTree>
+  <treeListLayout>
+    <GridViewSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <ColumnWidths>
+        <string>230</string>
+        <string>Auto</string>
+        <string>*</string>
+      </ColumnWidths>
+    </GridViewSettings>
+  </treeListLayout>
+</settings>

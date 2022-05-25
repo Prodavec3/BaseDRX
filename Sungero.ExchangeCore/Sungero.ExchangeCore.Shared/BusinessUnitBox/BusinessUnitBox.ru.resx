@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExchangeServiceNotFound" xml:space="preserve">
+    <value>Укажите сервис обмена.</value>
+  </data>
+  <data name="ExchangeServiceNotSupported" xml:space="preserve">
+    <value>Сервис обмена "{0}" не поддерживается.</value>
+  </data>
+  <data name="CounterpartyNotFound" xml:space="preserve">
+    <value>Контрагент {0} не найден в сервисе обмена {1}.</value>
+  </data>
+  <data name="NoticeSubject" xml:space="preserve">
+    <value>Результаты синхронизации контрагентов {0} с сервисом обмена {1} ({2})</value>
+  </data>
+  <data name="NoticeActiveSection" xml:space="preserve">
+    <value>Разрешен обмен с контрагентами:</value>
+  </data>
+  <data name="NoticeApprovingByUsSection" xml:space="preserve">
+    <value>Получено приглашение к обмену от контрагентов:</value>
+  </data>
+  <data name="NoticeClosedSection" xml:space="preserve">
+    <value>Заблокирован обмен с контрагентами:</value>
+  </data>
+  <data name="NoticeApprovingByCASection" xml:space="preserve">
+    <value>Отправлено приглашение к обмену контрагентам:</value>
+  </data>
+  <data name="NoticeLine" xml:space="preserve">
+    <value>{0}, ИНН/КПП: {1}/{2}</value>
+  </data>
+  <data name="BoxError" xml:space="preserve">
+    <value>Ошибка синхронизации ящика {0}.</value>
+  </data>
+  <data name="TINNote" xml:space="preserve">
+    <value>При синхронизации с сервисом обмена получен некорректный ИНН: {0}.</value>
+  </data>
+  <data name="LoginActionTitle" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="ConnectionEstablished" xml:space="preserve">
+    <value>Соединение успешно установлено.</value>
+  </data>
+  <data name="OrganizationFailed" xml:space="preserve">
+    <value>ИНН/КПП нашей организации должны совпадать с ИНН/КПП, указанными в сервисе обмена.</value>
+  </data>
+  <data name="DuplicateServiceExists" xml:space="preserve">
+    <value>Для выбранной организации уже есть абонентский ящик с указанным сервисом обмена</value>
+  </data>
+  <data name="CertificateNotFound" xml:space="preserve">
+    <value>Для полноценной работы ответственного сотрудника необходимо настроить сертификат сервиса обмена.</value>
+  </data>
+  <data name="LoginChangedToOtherOrganization" xml:space="preserve">
+    <value>Логин для соединения должен принадлежать той же организации, что и указанный ранее.</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>тел. {0}; </value>
+  </data>
+  <data name="FaxNumber" xml:space="preserve">
+    <value>факс {0}</value>
+  </data>
+  <data name="EnterPasswordToCheckConnection" xml:space="preserve">
+    <value>Для проверки подключения необходимо задать пароль</value>
+  </data>
+  <data name="ExchangeServiceConnectionError" xml:space="preserve">
+    <value>Произошла ошибка при подключении к сервису.</value>
+  </data>
+  <data name="NeedProcessSyncronizationConflict" xml:space="preserve">
+    <value>Необходимо обработать конфликты синхронизации контрагентов</value>
+  </data>
+  <data name="SyncronizationConflictProcessed" xml:space="preserve">
+    <value>Конфликты синхронизации обработаны</value>
+  </data>
+  <data name="ConnectorNoLicense" xml:space="preserve">
+    <value>Для подключения к сервису обмена {0} необходима лицензия на коннектор.</value>
+  </data>
+  <data name="LoginIsAlreadyInUse" xml:space="preserve">
+    <value>Для выбранного сервиса обмена уже существует абонентский ящик с указанным логином.</value>
+  </data>
+  <data name="BusinessUnitBoxNotActive" xml:space="preserve">
+    <value>Работа с сервисом обмена разрешена только для действующих ящиков.</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Ошибка аутентификации. Проверьте правильность логина и пароля.</value>
+  </data>
+  <data name="ExchangeServiceName" xml:space="preserve">
+    <value>Абонент сервиса {0}</value>
+  </data>
+  <data name="IsMainCounterpartyBox" xml:space="preserve">
+    <value>Основной ({0})</value>
+  </data>
+  <data name="IsRoamingCounterpartyBox" xml:space="preserve">
+    <value>Роуминг ({0})</value>
+  </data>
+  <data name="NoticeThreadSubject" xml:space="preserve">
+    <value>Результаты синхронизации контрагентов</value>
+  </data>
+  <data name="CertificateValidationError" xml:space="preserve">
+    <value>Ошибка проверки сертификата</value>
+  </data>
+  <data name="FindDocumentDialogTitle" xml:space="preserve">
+    <value>Поиск документов из сервиса обмена</value>
+  </data>
+  <data name="FindDocumentDialogHyperlink" xml:space="preserve">
+    <value>Ссылка</value>
+  </data>
+  <data name="FindDocumentDialogInvalidHyperlink" xml:space="preserve">
+    <value>Укажите корректную ссылку</value>
+  </data>
+  <data name="FindDocumentDialogInvalidExchangeProvider" xml:space="preserve">
+    <value>Поиск возможен только для документов из сервисов обмена Диадок и СБИС.</value>
+  </data>
+  <data name="DocumentFullInfoDialogTitle" xml:space="preserve">
+    <value>Поиск документов из сервиса обмена</value>
+  </data>
+  <data name="DocumentFullInfoDialogForbiddenDocuments" xml:space="preserve">
+    <value>Найдены документы, на которых у вас нет прав доступа. Обратитесь к администратору.</value>
+  </data>
+  <data name="DocumentFullInfoDialogDocuments" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="DocumentFullInfoDialogDocumentInfos" xml:space="preserve">
+    <value>Сведения о документах обмена</value>
+  </data>
+  <data name="DocumentFullInfoDialogMessages" xml:space="preserve">
+    <value>Cообщения в обработке</value>
+  </data>
+  <data name="DocumentFullInfoDialogNoResult" xml:space="preserve">
+    <value>Данные не найдены</value>
+  </data>
+  <data name="DocumentFullInfoDialogAllDocumentsCount" xml:space="preserve">
+    <value>Найдено документов - {0}</value>
+  </data>
+  <data name="DocumentFullInfoDialogForbiddenDocumentsCount" xml:space="preserve">
+    <value>{0}-Без прав доступа - {1}</value>
+  </data>
+  <data name="FindDocumentDialogNext" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="FindDocumentDialogCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="FindDocumentDialogExecuteOnlyAdministratorOrAdvisor" xml:space="preserve">
+    <value>Поиск документа из сервиса обмена доступен только администраторам и аудиторам.</value>
+  </data>
+</root>

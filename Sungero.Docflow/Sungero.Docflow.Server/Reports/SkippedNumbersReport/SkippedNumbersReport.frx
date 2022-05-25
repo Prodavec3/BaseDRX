@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Company.Shared&#13;&#10;Sungero.Company.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Company;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Docflow.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="Documents" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Documents}">
+        <Column Name="RegistrationDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="RegistrationNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="Subject" Enabled="false" DataType="System.String" PropName="Column"/>
+        <Column Name="Note" DataType="System.String" PropName="Column"/>
+        <Column Name="DocumentId" DataType="System.String" PropName="Column"/>
+        <Column Name="DocumentName" DataType="System.String" PropName="Column"/>
+        <Column Name="OrdinalNumber" DataType="System.String" PropName="Column1"/>
+        <Column Name="hyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="RegistrationState" DataType="System.String" PropName="Column"/>
+        <Column Name="NumberOnFormat" DataType="System.Boolean" PropName="Column"/>
+        <Column Name="CanRead" DataType="System.Boolean" PropName="Column"/>
+        <Column Name="InCorrectOrder" DataType="System.Boolean" PropName="Column"/>
+        <CommandParameter Name="TableName" DataType="16" IsDbType="true" Expression="[AvailableDocumentsTableName]"/>
+        <CommandParameter Name="SkipsTableName" DataType="16" IsDbType="true" Expression="[SkipsTableName]"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+        <CommandParameter Name="hyperlinkMask" DataType="16" IsDbType="true" Expression="[hyperlinkMask]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="e7ce2840-46d5-4133-b5ea-ba1e10f82afe" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="PeriodBegin" Id="25c097c0-ad9b-483d-89b8-d6301ccbd7f0" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="PeriodEnd" Id="ff30c8e5-64e6-455a-ae61-534c45fe80b7" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentRegister" Id="dedaec29-014d-4da1-930c-1707c8d3fed5" IsRequired="true" IsCollection="false" InternalDataType="Sungero.Docflow.ILog, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="d7800dd5-a9d2-41e9-bbc4-a39292ac1eeb"/>
+    <SungeroParameter Name="AvailableDocumentsTableName" Id="fb79d12f-504b-4d3f-9ab4-03a9324af7c5" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="SkipsTableName" Id="52de55a7-0367-4f00-b7a8-05ff8e6bd8f0" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="SkipedNumberList" Id="b7545ce2-8eae-4b5f-9f2c-72b4ad5c9ffe" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RegistrationDate" Id="374cc54a-c944-4371-a4fb-31a84d5bdeb0" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentRegisterId" Id="c97d7838-258a-4b4d-8676-9e75fe343ead" IsRequired="false" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="64c49f29-a41e-40c6-ab92-43b55d21e00d" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="hyperlinkMask" Id="d26f87e3-3dc8-4272-9b71-203aff710462" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LeadingDocument" Id="7446a9c8-a224-4082-b76e-c9e8554fc7fb" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="58cca102-1e97-4f07-b6ac-fd866a8b7cb1"/>
+    <SungeroParameter Name="Department" Id="5bdf62c1-a863-40b7-8046-cec2ea036fbf" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IDepartment, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="61b1c19f-26e2-49a5-b3d3-0d3618151e12"/>
+    <SungeroParameter Name="BusinessUnit" Id="5e20ca5a-f49f-4086-ac38-e2ca015d2515" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="eff95720-181f-4f7d-892d-dec034c7b2ab"/>
+    <SungeroParameter Name="CaseFile" Id="e9978efa-9a4f-4d89-99af-a4fa7024be14" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.ICaseFile, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="493bb59e-ae48-4cb5-ab66-071de5f890b0"/>
+    <SungeroParameter Name="NumberFormat" Id="78dbe745-3847-4c4a-b290-380f8582fe0c" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Period" Id="629408c0-4791-4475-9195-481d44d03dd9" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="PeriodOffset" Id="3e418569-6f17-4da6-b60d-2216491407f4" IsRequired="false" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="CurrentDate" Id="def18e66-ffdc-40f7-8710-f5171151566a" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="255.15" CanGrow="true" CanShrink="true">
+      <TextObject Name="Text5" Top="122.85" Width="1048.95" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="false" Text="[[LeadingDocument] == null ? string.Empty : Format(&quot;&lt;b&gt;{0}&lt;/b&gt; «{1}».&quot;, Resources.SkippedNumbersReport.LeadingDocument, [LeadingDocument]);]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text1" Top="217.35" Width="1048.95" Height="37.8" CanBreak="false" Text="[string.IsNullOrEmpty([SkipedNumberList]) ? Format(&quot;&lt;b&gt;{0}&lt;/b&gt;&quot;, Resources.SkippedNumbersReport.NoSkippedNumbers) : Format(&quot;&lt;b&gt;{0}&lt;/b&gt; {1}.&quot;, Resources.SkippedNumbersReport.SkippedNumbers, [SkipedNumberList]);]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text2" Top="189" Width="1048.95" Height="28.35" CanGrow="true" CanBreak="false" Text="[Format(&quot;&lt;b&gt;{0}&lt;/b&gt; {1}&quot;, Resources.SkippedNumbersReport.NumberFormat, [NumberFormat]);]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text3" Top="160.65" Width="1048.95" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="false" Text="[[BusinessUnit] == null ? string.Empty : Format(&quot;&lt;b&gt;{0}&lt;/b&gt; {1}.&quot;, Resources.SkippedNumbersReport.BusinessUnit, [BusinessUnit]);]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text4" Top="141.75" Width="1048.95" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="false" Text="[[Department] == null ? string.Empty : Format(&quot;&lt;b&gt;{0}&lt;/b&gt; {1}.&quot;, Resources.SkippedNumbersReport.Department, [Department]);]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text6" Left="321.3" Top="18.9" Width="415.8" Height="18.9" CanBreak="false" Text="[Resources.SkippedNumbersReport.ReportName]" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text7" Left="321.3" Top="37.8" Width="415.8" Height="28.35" CanGrow="true" CanBreak="false" Text="[Resources.SkippedNumbersReport.DocumentRegister] «[[DocumentRegister].DisplayValue]»" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text8" Left="321.3" Top="66.15" Width="415.8" Height="56.7" CanBreak="false" Text="[Sungero.Docflow.Reports.Resources.SkippedNumbersReport.PeriodFrom] [[PeriodBegin].ToString(&quot;d&quot;)] [IIf(Year([PeriodEnd]) == 9999, &quot;&quot;, Sungero.Docflow.Reports.Resources.SkippedNumbersReport.PeriodTo)] [IIf(Year([PeriodEnd]) == 9999, &quot;&quot;, [PeriodEnd].ToString(&quot;d&quot;))]" HorzAlign="Center" Font="Arial, 12pt, style=Bold">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text9" Left="897.75" Width="151.2" Height="18.9" Text="[CurrentDate]" HorzAlign="Right" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Top="179.55" Width="1048.95" Height="11.5" CanBreak="false" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="259.15" Width="1047.06" Height="53.68" CanGrow="true" CanShrink="true">
+      <TableObject Name="Table2" Width="1044.71" Height="53.68">
+        <TableColumn Name="Column4" Width="112.33"/>
+        <TableColumn Name="Column5" Width="168.82"/>
+        <TableColumn Name="Column6" Width="113.4"/>
+        <TableColumn Name="Column7" Width="328.86"/>
+        <TableColumn Name="Column8" Width="245.7"/>
+        <TableColumn Name="Column14" Width="75.6"/>
+        <TableRow Name="Row3" MinHeight="26.84" Height="26.84">
+          <TableCell Name="Cell9" Border.Lines="All" Text="[Resources.SkippedNumbersReport.DateReg]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="[Resources.SkippedNumbersReport.RegNumber]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell11" Border.Lines="All" Text="[Resources.SkippedNumbersReport.OrderNumberName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell12" Border.Lines="All" Text="[Resources.SkippedNumbersReport.DocumentName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell13" Border.Lines="All" Text="[Resources.SkippedNumbersReport.Note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell30" Border.Lines="All" Text="[Resources.SkippedNumbersReport.Id]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+        </TableRow>
+        <TableRow Name="Row4" MinHeight="26.84" Height="26.84">
+          <TableCell Name="Cell14" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell15" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell16" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Font="Arial, 10pt"/>
+          <TableCell Name="Cell18" Font="Arial, 10pt"/>
+          <TableCell Name="Cell33" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="316.83" Width="1047.06" Height="22.68" CanGrow="true" CanShrink="true" CanBreak="true" DataSource="Table">
+      <TextObject Name="Text11" Width="112.27" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[IIf(Year([Documents.RegistrationDate]) == 1, string.Empty, [Documents.RegistrationDate])]" Format="Date" Format.Format="d" HorzAlign="Center" Font="Arial, 10pt">
+        <Highlight>
+          <Condition Expression="Year([Documents.RegistrationDate]) == 1" Font="Arial, 10pt"/>
+          <Condition Expression="[Documents.RegistrationDate] &lt; [PeriodBegin] || [Documents.RegistrationDate] &gt; [PeriodEnd]" Font="Arial, 10pt"/>
+          <Condition Expression="![Documents.InCorrectOrder]" Font="Arial, 10pt"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text12" Left="112.27" Width="168.97" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents.RegistrationNumber]&lt;i&gt;[[Documents.RegistrationState] == &quot;Reserved&quot; ? Format (&quot;{0}{1}&quot;, &quot;\n&quot;, Resources.SkippedNumbersReport.NumberReserved) : string.Empty;][![Documents.InCorrectOrder] ? Format(&quot;{0}{1}&quot;, &quot;\n&quot;, Resources.SkippedNumbersReport.ChronologicalError) : null]&lt;/i&gt;" HorzAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags">
+        <Highlight>
+          <Condition Expression="Year([Documents.RegistrationDate]) == 1" Font="Arial, 10pt"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text13" Left="281.23" Width="113.4" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents.NumberOnFormat] ? [Documents.OrdinalNumber] : Resources.SkippedNumbersReport.NumberNotOnFormat;]" HorzAlign="Center" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+          <GeneralFormat/>
+        </Formats>
+        <Highlight>
+          <Condition Expression="![Documents.NumberOnFormat]" Font="Arial, 9.75pt, style=Italic" ApplyTextFill="false" ApplyFont="true"/>
+          <Condition Expression="Year([Documents.RegistrationDate]) == 1" Font="Arial, 10pt"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text14" Left="394.63" Width="328.86" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents.CanRead] ? [Documents.DocumentName] : Resources.SkippedNumbersReport.HaveNotEnoughAccessRights;]" Font="Arial, 10pt">
+        <Highlight>
+          <Condition Expression="![Documents.CanRead]" Font="Arial, 9.75pt, style=Italic" ApplyTextFill="false" ApplyFont="true"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text15" Left="723.49" Width="245.7" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents.CanRead] ? [Documents.Note] : string.Empty;]" Font="Arial, 10pt">
+        <Highlight>
+          <Condition Expression="![Documents.CanRead]" Font="Arial, 9.75pt, style=Italic" ApplyTextFill="false" ApplyFont="true"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text16" Left="969.19" Width="75.6" Height="22.68" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[Documents.hyperlink]" CanGrow="true" GrowToBottom="true" Text="[Documents.DocumentId]" HorzAlign="Center" Font="Arial, 9.75pt, style=Underline" TextFill.Color="Blue"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="343.51" Width="1047.06" Height="18.9"/>
+  </ReportPage>
+</Report>

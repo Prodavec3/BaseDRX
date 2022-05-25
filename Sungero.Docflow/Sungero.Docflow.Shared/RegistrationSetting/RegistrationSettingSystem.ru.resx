@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Property_DocumentFlow" xml:space="preserve">
+    <value>Документопоток</value>
+  </data>
+  <data name="Enum_DocumentFlow_Incoming" xml:space="preserve">
+    <value>Входящий</value>
+  </data>
+  <data name="Enum_DocumentFlow_Outgoing" xml:space="preserve">
+    <value>Исходящий</value>
+  </data>
+  <data name="Enum_DocumentFlow_Inner" xml:space="preserve">
+    <value>Внутренний</value>
+  </data>
+  <data name="Enum_DocumentFlow_Contracts" xml:space="preserve">
+    <value>Договоры</value>
+  </data>
+  <data name="Property_DocumentKinds" xml:space="preserve">
+    <value>Виды документов</value>
+  </data>
+  <data name="Property_BusinessUnits" xml:space="preserve">
+    <value>Наши организации</value>
+  </data>
+  <data name="Property_Departments" xml:space="preserve">
+    <value>Подразделения</value>
+  </data>
+  <data name="Property_DocumentRegister" xml:space="preserve">
+    <value>Журнал</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Настройка регистрации</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Настройку регистрации</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Настройки регистрации</value>
+  </data>
+  <data name="Property_Priority" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+  <data name="ControlGroup_308bc550b6e3410b99d5255d10de3dd6" xml:space="preserve">
+    <value>Критерии</value>
+  </data>
+  <data name="ControlGroup_799bc6d8d03e4bbf9fcd7974f7c67bb0" xml:space="preserve">
+    <value>Журнал</value>
+  </data>
+  <data name="Action_ShowDuplicate" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicateDescription" xml:space="preserve">
+    <value>Показать настройки с совпадающими условиями: виды документов, наши организации, подразделения.</value>
+  </data>
+  <data name="Action_ShowDuplicateHint" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Ribbon_Reports_47bdd3709af841a8b6544434e7677dbc" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
+  <data name="Action_ShowRegistrationSettingsList" xml:space="preserve">
+    <value>Настройки регистрации</value>
+  </data>
+  <data name="Action_ShowRegistrationSettingsListDescription" xml:space="preserve">
+    <value>Вывод информации по настройкам регистрации/нумерации в разрезе видов документов, наших организаций и подразделений.</value>
+  </data>
+  <data name="Action_ShowRegistrationSettingsListHint" xml:space="preserve">
+    <value>Отчет "Настройка регистрации документов"</value>
+  </data>
+  <data name="Property_SettingType" xml:space="preserve">
+    <value>Тип настройки</value>
+  </data>
+  <data name="Enum_SettingType_Registration" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Enum_SettingType_Reservation" xml:space="preserve">
+    <value>Резервирование</value>
+  </data>
+  <data name="Enum_SettingType_Numeration" xml:space="preserve">
+    <value>Нумерация</value>
+  </data>
+  <data name="Action_ShowDepartments" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="Action_ShowDepartmentsDescription" xml:space="preserve">
+    <value>Открыть справочник подразделений</value>
+  </data>
+  <data name="Action_ShowDepartmentsHint" xml:space="preserve">
+    <value>Открыть справочник подразделений</value>
+  </data>
+  <data name="Action_ShowBusinessUnits" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="Action_ShowBusinessUnitsDescription" xml:space="preserve">
+    <value>Открыть справочник наших организаций</value>
+  </data>
+  <data name="Action_ShowBusinessUnitsHint" xml:space="preserve">
+    <value>Открыть справочник наших организаций</value>
+  </data>
+  <data name="Action_ShowDocumentKinds" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="Action_ShowDocumentKindsDescription" xml:space="preserve">
+    <value>Открыть справочник видов документов</value>
+  </data>
+  <data name="Action_ShowDocumentKindsHint" xml:space="preserve">
+    <value>Открыть справочник видов документов</value>
+  </data>
+</root>

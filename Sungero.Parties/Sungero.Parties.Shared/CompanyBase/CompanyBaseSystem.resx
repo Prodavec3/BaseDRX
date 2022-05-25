@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="Property_HeadCompany" xml:space="preserve">
+    <value>Head company</value>
+  </data>
+  <data name="Property_TRRC" xml:space="preserve">
+    <value>TRRC</value>
+  </data>
+  <data name="ControlGroup_3d4488c5c6a043b38ad02ddb3418562c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_IsCardReadOnly" xml:space="preserve">
+    <value>Read-only</value>
+  </data>
+  <data name="Action_OpenContacts" xml:space="preserve">
+    <value>Contact Persons</value>
+  </data>
+  <data name="Action_OpenContactsDescription" xml:space="preserve">
+    <value>Open the list of company contact persons.</value>
+  </data>
+  <data name="Action_OpenContactsHint" xml:space="preserve">
+    <value>Open the list of contact persons</value>
+  </data>
+  <data name="Action_OpenContactsConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Contacts_93b9842989774e8099a5d21e270fdfb4" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Property_LegalName" xml:space="preserve">
+    <value>Legal name</value>
+  </data>
+  <data name="Control_bbc3eaaffe1e43afad314f321a131238_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_08274bd16e3a410aa29279477265584b_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_e008555477bd4356916978cd0541af90" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9e3df66a01e8408aaa4ca5c92a1227fb" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="ControlGroup_4b9defe5f46d4581b50a5c0be4a80a50" xml:space="preserve">
+    <value>Bank details</value>
+  </data>
+  <data name="ControlGroup_69a4139490424b338d9ce5253d0a8c27" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="ControlGroup_ad0ce6fbbac14ed3976e3bee9f09cc38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_PSRN" xml:space="preserve">
+    <value>PSRN</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Show companies with identical TIN/TRRC</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Show Duplicate Companies</value>
+  </data>
+  <data name="Action_FillFromService" xml:space="preserve">
+    <value>Fill in by PSRN / TIN</value>
+  </data>
+  <data name="Action_FillFromServiceDescription" xml:space="preserve">
+    <value>Fill in counterparty details automatically by its PSRN according to Unified State Register of Legal Entities and Entrepreneurs. If PSRN is not specified, counterparty search is carried out by TIN or name.</value>
+  </data>
+  <data name="Action_FillFromServiceHint" xml:space="preserve">
+    <value>Fill in Automatically by PSRN / TIN</value>
+  </data>
+  <data name="Action_FillFromServiceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillFromServiceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenOnDueDiligenceWebsite" xml:space="preserve">
+    <value>Open Due Diligence Website</value>
+  </data>
+  <data name="Action_OpenOnDueDiligenceWebsiteDescription" xml:space="preserve">
+    <value>Open counterparty's page on due diligence website</value>
+  </data>
+  <data name="Action_OpenOnDueDiligenceWebsiteHint" xml:space="preserve">
+    <value>Open Counterparty Due Diligence Website</value>
+  </data>
+  <data name="Action_OpenOnDueDiligenceWebsiteConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenOnDueDiligenceWebsiteConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>[City], TIN [TIN], TRRC [TRRC], [LegalName]</value>
+  </data>
+</root>

@@ -1,0 +1,161 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "2d30e2aa-1d0b-45f0-8e4d-00318b3a5cfd",
+  "Name": "BodyConverterQueueItem",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "4e09273f-8b3a-489e-814e-a4ebfbba3e6c",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "IconResourcesKeys": [],
+  "IsAutoCreated": true,
+  "OperationsClass": "",
+  "Overridden": [
+    "IsAutoCreated"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8c23dbed-5e18-4155-ae12-f4d10095e30b",
+      "Name": "ProcessingStatus",
+      "DirectValues": [
+        {
+          "NameGuid": "d0a6e7f2-a8a7-4d20-be34-86679eb0c99b",
+          "Name": "Processed",
+          "Code": "Processed",
+          "Versions": []
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "Values"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0a8327d9-77ba-4682-8a01-9ed836c610cf",
+      "Name": "Document",
+      "Code": "Document",
+      "EntityGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "1c31bdc7-87cb-42d7-88d0-c186d96cbbc2",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1ed7fd93-0396-444a-a923-6c6841fc736c",
+      "Name": "VersionId",
+      "Code": "VersionId",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "0a8327d9-77ba-4682-8a01-9ed836c610cf",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "87f07474-277c-40b3-9426-dac11467e19e",
+      "Name": "ExchangeState",
+      "Code": "ExchangeState",
+      "DirectValues": [
+        {
+          "NameGuid": "61323240-9b5d-44ac-858a-b76abe95610e",
+          "Name": "Received",
+          "Code": "Received",
+          "Versions": []
+        },
+        {
+          "NameGuid": "d3cd045f-89b6-4f13-bde7-584888f5b41a",
+          "Name": "Sent",
+          "Code": "Sent",
+          "Versions": []
+        },
+        {
+          "NameGuid": "4fb39ca7-2c71-4d73-b186-d460a1b196ca",
+          "Name": "Signed",
+          "Code": "Signed",
+          "Versions": []
+        },
+        {
+          "NameGuid": "985f990d-ccde-46d3-a0a1-f63721c8e956",
+          "Name": "Rejected",
+          "Code": "Rejected",
+          "Versions": []
+        },
+        {
+          "NameGuid": "3e4022e8-8466-4105-b16d-28301d2a8ef8",
+          "Name": "SignRequired",
+          "Code": "SignRequired",
+          "Versions": []
+        },
+        {
+          "NameGuid": "8fd70016-68e1-49c7-977d-2c43e1c87d07",
+          "Name": "Terminated",
+          "Code": "Terminated",
+          "Versions": []
+        },
+        {
+          "NameGuid": "5adee810-e480-4e8f-b5d9-b0520b960543",
+          "Name": "Obsolete",
+          "Code": "Obsolete",
+          "Versions": []
+        },
+        {
+          "NameGuid": "c95ac840-b357-4365-b3eb-8997051e924d",
+          "Name": "SignAwaited",
+          "Code": "SignAwaited",
+          "Versions": []
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "1ed7fd93-0396-444a-a923-6c6841fc736c",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "ec0e9a1e-c69e-4f23-b20e-f265f5d6f3ef",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "3dd64828-921e-4a0d-a8a2-7b4a732765ac",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Enum_Result_Sign" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="Action_Sign" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="Action_SignHint" xml:space="preserve">
+    <value>Sign Document</value>
+  </data>
+  <data name="Action_SignConfirmationMessage" xml:space="preserve">
+    <value>Sign the document?</value>
+  </data>
+  <data name="Action_SignDescription" xml:space="preserve">
+    <value>Complete the assignment and sign the document  with result "Approved"</value>
+  </data>
+  <data name="Enum_Result_ForRevision" xml:space="preserve">
+    <value>For Rework</value>
+  </data>
+  <data name="Action_ForRevision" xml:space="preserve">
+    <value>For Rework</value>
+  </data>
+  <data name="Action_ForRevisionHint" xml:space="preserve">
+    <value>Send Document for rework</value>
+  </data>
+  <data name="Action_ForRevisionConfirmationMessage" xml:space="preserve">
+    <value>Send the document for rework?</value>
+  </data>
+  <data name="Action_ForRevisionDescription" xml:space="preserve">
+    <value>Send document for rework and sign the document with result "Not Approved"</value>
+  </data>
+  <data name="Enum_Result_Abort" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Action_Abort" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Action_AbortHint" xml:space="preserve">
+    <value>Reject Signing Document</value>
+  </data>
+  <data name="Action_AbortConfirmationMessage" xml:space="preserve">
+    <value>Reject document signing?</value>
+  </data>
+  <data name="Action_AbortDescription" xml:space="preserve">
+    <value>Reject on document signing and return the document to the employee responsible for the rework.</value>
+  </data>
+  <data name="ControlGroup_15e53e8609794ef8926c3972518e6001" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_eec7fddc3ab5421ba3a14ccc8fb61347" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_d0882c8932a1419a9113443cf77ee8d9" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_6e7238eed73f4aeebae6c05395fd8f27" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_df5d36edaf6940818fa55bc420a9163f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ApprovalForm" xml:space="preserve">
+    <value>Approval Form</value>
+  </data>
+  <data name="Action_ApprovalFormDescription" xml:space="preserve">
+    <value>View approval form for the document</value>
+  </data>
+  <data name="Action_ApprovalFormHint" xml:space="preserve">
+    <value>View Approval Form</value>
+  </data>
+  <data name="Action_ApprovalFormConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Approving_7ae5cfafa1034027a5ce49ec9eb2bf39" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Sign document</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Sign document</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Sign document</value>
+  </data>
+  <data name="Ribbon_AsgGroup_ac82503a7a4749d0b90c9bb512c4559c" xml:space="preserve">
+    <value>Signing</value>
+  </data>
+  <data name="Property_Stage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="Footer_ActiveEmptyText" xml:space="preserve">
+    <value>Note…</value>
+  </data>
+  <data name="Property_CompletedBy" xml:space="preserve">
+    <value>Completed by</value>
+  </data>
+  <data name="ControlGroup_aa1cc08446884d3fb32f201989c10f37" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_056fec45993345efac518d3d8cd9f548_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateCoverLetter" xml:space="preserve">
+    <value>Create Cover Letter</value>
+  </data>
+  <data name="Action_CreateCoverLetterDescription" xml:space="preserve">
+    <value>Create a cover letter for the document you want to send</value>
+  </data>
+  <data name="Action_CreateCoverLetterHint" xml:space="preserve">
+    <value>Create Cover Letter for Document</value>
+  </data>
+  <data name="Action_CreateCoverLetterConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_DocumentPackage_d5bc28d4bab04103ac903d6d15f8fcc4" xml:space="preserve">
+    <value>Document package</value>
+  </data>
+  <data name="Property_IsCollapsed" xml:space="preserve">
+    <value>IsCollapsed</value>
+  </data>
+  <data name="Property_IsConfirmSigning" xml:space="preserve">
+    <value>Is confirm signing of the document</value>
+  </data>
+  <data name="Form_35dbdf5da26743a6bf1457e0db9f4f76" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="ControlGroup_2e68b200223d4f359d768902afb2d19c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_CollapsedStagesTypesSig" xml:space="preserve">
+    <value>Combined stage types</value>
+  </data>
+  <data name="Control_6a70b554152949b5acf605ed8fc18345_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_StageNumber" xml:space="preserve">
+    <value>Stage number</value>
+  </data>
+  <data name="Enum_Result_ConfirmSign" xml:space="preserve">
+    <value>ConfirmSigning</value>
+  </data>
+  <data name="Action_ConfirmSign" xml:space="preserve">
+    <value>Confirm Signing</value>
+  </data>
+  <data name="Action_ConfirmSignHint" xml:space="preserve">
+    <value>Confirm Document Signing.</value>
+  </data>
+  <data name="Action_ConfirmSignConfirmationMessage" xml:space="preserve">
+    <value>Confirm that the document is signed by manager?</value>
+  </data>
+  <data name="Action_ConfirmSignDescription" xml:space="preserve">
+    <value>Confirm that a paper-based document was signed by manager.</value>
+  </data>
+  <data name="Action_CreateActionItem" xml:space="preserve">
+    <value>Create Action Item</value>
+  </data>
+  <data name="Action_CreateActionItemDescription" xml:space="preserve">
+    <value>Create action item and send it for execution</value>
+  </data>
+  <data name="Action_CreateActionItemHint" xml:space="preserve">
+    <value>Create Action Item on Document</value>
+  </data>
+  <data name="Action_CreateActionItemConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_ExecutionGroup_96b2278aa81c4fa8b8ad5058c8ea8f06" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="ControlGroup_6d03b7de120248d9986e271ea534dfd6" xml:space="preserve">
+    <value>Approval Form</value>
+  </data>
+  <data name="Property_DeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Property_ExchangeService" xml:space="preserve">
+    <value>Exchange service</value>
+  </data>
+  <data name="Action_SendViaExchangeService" xml:space="preserve">
+    <value>Send via exchange service</value>
+  </data>
+  <data name="Action_SendViaExchangeServiceDescription" xml:space="preserve">
+    <value>Send the document to counterparty via document exchange service.
+
+If the document was initially received from the counterparty and requires a signature, you will be asked to specify result of signing.
+
+This command is only available if you are included into role "Users authorized to work via exchange service".</value>
+  </data>
+  <data name="Action_SendViaExchangeServiceHint" xml:space="preserve">
+    <value>Send or return document to counterparty via exchange service</value>
+  </data>
+  <data name="Action_SendViaExchangeServiceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendViaExchangeServiceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_DeliveryMethodDescription" xml:space="preserve">
+    <value>Delivery method description</value>
+  </data>
+  <data name="ControlGroup_43edb78565d44e739ab8183252a37735" xml:space="preserve">
+    <value>Delivery Method</value>
+  </data>
+  <data name="Action_CreateAcquaintance" xml:space="preserve">
+    <value>Send for Acquaintance</value>
+  </data>
+  <data name="Action_CreateAcquaintanceDescription" xml:space="preserve">
+    <value>Send document by acquaintance task.</value>
+  </data>
+  <data name="Action_CreateAcquaintanceHint" xml:space="preserve">
+    <value>Send for Acquaintance</value>
+  </data>
+  <data name="Action_CreateAcquaintanceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateAcquaintanceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_323ce45888934d359d03aaa7ac692379" xml:space="preserve">
+    <value>Document Requisites</value>
+  </data>
+  <data name="Action_SendByMail" xml:space="preserve">
+    <value>Send by email</value>
+  </data>
+  <data name="Action_SendByMailDescription" xml:space="preserve">
+    <value>Send document content to a mail recipient.</value>
+  </data>
+  <data name="Action_SendByMailHint" xml:space="preserve">
+    <value>Send by email</value>
+  </data>
+  <data name="Action_SendByMailConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendByMailConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ReworkPerformer" xml:space="preserve">
+    <value>Send for rework to</value>
+  </data>
+  <data name="Action_ExtendDeadline" xml:space="preserve">
+    <value>Deadline Extension Request</value>
+  </data>
+  <data name="Action_ExtendDeadlineDescription" xml:space="preserve">
+    <value>Send request for deadline extension of assignment</value>
+  </data>
+  <data name="Action_ExtendDeadlineHint" xml:space="preserve">
+    <value>Request for Deadline Extension</value>
+  </data>
+  <data name="Action_ExtendDeadlineConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ExtendDeadlineConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_DeadlineGroup_5db09c338b144a63b38c1738375a2800" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+</root>

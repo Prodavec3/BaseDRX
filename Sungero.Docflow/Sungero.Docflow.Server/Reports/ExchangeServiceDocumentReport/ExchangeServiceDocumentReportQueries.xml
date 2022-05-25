@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+                                              ([ReportSessionId] varchar(256) NOT NULL,
+                                               [BusinessUnitName] nvarchar(max) NULL,
+                                               [BusinessUnitId] int NULL,
+                                               [DocName] nvarchar(max) NOT NULL,
+                                               [DocId] int NOT NULL,
+                                               [Counterparty] nvarchar(max) NOT NULL,
+                                               [ExchangeService] nvarchar(max) NOT NULL,
+                                               [Responsible] nvarchar(max) NOT NULL,
+                                               [Department] nvarchar(max) NOT NULL,
+                                               [SendDate] nvarchar(max) NULL,
+                                               [Hyperlink] nvarchar(max) NOT NULL,
+                                               [Delay] nvarchar(max) NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+                                              (ReportSessionId citext NOT NULL,
+                                               BusinessUnitName citext NULL,
+                                               BusinessUnitId int NULL,
+                                               DocName citext NOT NULL,
+                                               DocId int NOT NULL,
+                                               Counterparty citext NOT NULL,
+                                               ExchangeService citext NOT NULL,
+                                               Responsible citext NOT NULL,
+                                               Department citext NOT NULL,
+                                               SendDate citext NULL,
+                                               Hyperlink citext NOT NULL,
+                                               Delay citext NULL)]]></postgres>
+  </query>
+  <query key="SourceQuery">
+    <default><![CDATA[select * 
+from Sungero_Reports_ExServDocuments
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

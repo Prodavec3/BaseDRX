@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Docflow</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Docflow</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>This module is where you can configure document management within your company.
+</value>
+  </data>
+  <data name="CoverGroup_Docflow" xml:space="preserve">
+    <value>Document Settings</value>
+  </data>
+  <data name="CoverAction_DocumentKinds" xml:space="preserve">
+    <value>Document Kinds</value>
+  </data>
+  <data name="CoverDescription_DocumentKinds" xml:space="preserve">
+    <value>Stores information about document kinds that define the way documents are numbered and processed.</value>
+  </data>
+  <data name="CoverAction_DocumentRegisters" xml:space="preserve">
+    <value>Document Registers</value>
+  </data>
+  <data name="CoverDescription_DocumentRegisters" xml:space="preserve">
+    <value>Stores the list of registers used to keep record of documents processed within your company.</value>
+  </data>
+  <data name="CoverAction_RegistrationGroups" xml:space="preserve">
+    <value>Registration Groups</value>
+  </data>
+  <data name="CoverDescription_RegistrationGroups" xml:space="preserve">
+    <value>Stores information about employee groups that keep record of documents in specific document registers.</value>
+  </data>
+  <data name="CoverAction_RegistrationSettings" xml:space="preserve">
+    <value>Registration Settings</value>
+  </data>
+  <data name="CoverDescription_RegistrationSettings" xml:space="preserve">
+    <value>Provides an automatic selection of a document register according to document requisites.</value>
+  </data>
+  <data name="CoverAction_MailDeliveryMethods" xml:space="preserve">
+    <value>Document Delivery Methods</value>
+  </data>
+  <data name="CoverGroup_Approval" xml:space="preserve">
+    <value>Approval Settings</value>
+  </data>
+  <data name="CoverAction_ApprovalRules" xml:space="preserve">
+    <value>Approval Rules</value>
+  </data>
+  <data name="CoverDescription_ApprovalRules" xml:space="preserve">
+    <value>Stores information about the way documents are approved.</value>
+  </data>
+  <data name="CoverAction_ApprovalStages" xml:space="preserve">
+    <value>Approval Stages</value>
+  </data>
+  <data name="CoverDescription_ApprovalStages" xml:space="preserve">
+    <value>Stores information about the stages of document approval.</value>
+  </data>
+  <data name="CoverGroup_RetentionDocument" xml:space="preserve">
+    <value>Case File Management</value>
+  </data>
+  <data name="CoverAction_FileList" xml:space="preserve">
+    <value>Case File List</value>
+  </data>
+  <data name="CoverDescription_FileList" xml:space="preserve">
+    <value>Stores case files created within your company. Case files contain documents related to a particular topic or an activity.</value>
+  </data>
+  <data name="CoverAction_FileRetentionPeriods" xml:space="preserve">
+    <value>Case File Retention Periods</value>
+  </data>
+  <data name="CoverDescription_FileRetentionPeriods" xml:space="preserve">
+    <value>Stores information about periods of time within which your case files should be kept.</value>
+  </data>
+  <data name="CoverGroup_Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="CoverAction_RegistrationSettingsReport" xml:space="preserve">
+    <value>Registration Settings</value>
+  </data>
+  <data name="CoverDescription_RegistrationSettingsReport" xml:space="preserve">
+    <value>Provides information on the way documents are numbered and registered.</value>
+  </data>
+  <data name="CoverAction_ShowAllReports" xml:space="preserve">
+    <value>All Reports</value>
+  </data>
+  <data name="CoverGroup_ApplicationSettings" xml:space="preserve">
+    <value>Associated Application Settings</value>
+  </data>
+  <data name="CoverAction_FileTypes" xml:space="preserve">
+    <value>File Types</value>
+  </data>
+  <data name="CoverDescription_FileTypes" xml:space="preserve">
+    <value>Associated applications are grouped into file types.</value>
+  </data>
+  <data name="CoverAction_AssociatedApplications" xml:space="preserve">
+    <value>Associated Applications</value>
+  </data>
+  <data name="CoverDescription_AssociatedApplications" xml:space="preserve">
+    <value>Stores information about applications that are used to define available file extensions.</value>
+  </data>
+  <data name="CoverGroup_Registration" xml:space="preserve">
+    <value>Registration and Numbering</value>
+  </data>
+  <data name="CoverAction_Templates" xml:space="preserve">
+    <value>Templates</value>
+  </data>
+  <data name="CoverDescription_Templates" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CoverAction_Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="CoverDescription_Application" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CoverAction_RelationsTypes" xml:space="preserve">
+    <value>Relation Types</value>
+  </data>
+  <data name="CoverDescription_RelationsTypes" xml:space="preserve">
+    <value>Stores information about relation types used to group documents according to their purpose.</value>
+  </data>
+  <data name="CoverAction_PersonalSettings" xml:space="preserve">
+    <value>My settings</value>
+  </data>
+  <data name="CoverGroup_PersonalSettings" xml:space="preserve">
+    <value>Personal settings</value>
+  </data>
+  <data name="CoverGroup_Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="CoverAction_ContractCategories" xml:space="preserve">
+    <value>Contract categories</value>
+  </data>
+  <data name="CoverDescription_ContractCategories" xml:space="preserve">
+    <value>Classifies contracts within one document kind.</value>
+  </data>
+  <data name="CoverAction_SignatureSetting" xml:space="preserve">
+    <value>Signature Settings</value>
+  </data>
+  <data name="CoverDescription_SignatureSetting" xml:space="preserve">
+    <value>List of employees authorized to sign documents.</value>
+  </data>
+  <data name="CoverDescription_PersonalSettings" xml:space="preserve">
+    <value>Personal settings for working in the system.</value>
+  </data>
+  <data name="sf_113427f5_1683_4bb8_980c_ba4bcef50e66" xml:space="preserve">
+    <value>Approval Rules</value>
+  </data>
+  <data name="FilterPanel_Status_63c542ab8c3d434483eb51a12adfd4b9" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_Draft_afb61c31a1284641a535dba81b12790d" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_Active_e4cb9f5ca0bf4c9c8096a7c2073d7b0f" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Closed_cb3c02c09e3d45948ed6d6a7922f0714" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Criteria_6008fb4ce5264b0ebc1fdccb6a185e15" xml:space="preserve">
+    <value>Criteria</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_794ec2ce6a964da8b7cf8e5dd67ff0f6" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_5712df35e3b74e9cbd71d8299bd677ef" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Department_aa30e05091ce415982d1591535b9dc78" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="CoverDescription_MailDeliveryMethods" xml:space="preserve">
+    <value>Stores the list of methods used to deliver documents to our company or counterparties.</value>
+  </data>
+  <data name="JobDisplayName_d7044e4489bc4fb39e445491514d9b05" xml:space="preserve">
+    <value>Docflow. Send emails about assignments</value>
+  </data>
+  <data name="JobDescription_d7044e4489bc4fb39e445491514d9b05" xml:space="preserve">
+    <value>Send notice about assignments</value>
+  </data>
+  <data name="JobDisplayName_1e83711cfc184a4883aa124d8ef9b690" xml:space="preserve">
+    <value>Docflow. Grant access rights to documents automatically</value>
+  </data>
+  <data name="JobDescription_1e83711cfc184a4883aa124d8ef9b690" xml:space="preserve">
+    <value>Grant access rights to documents automatically</value>
+  </data>
+  <data name="CoverAction_AccessRightsRule" xml:space="preserve">
+    <value>Rules to Grant Access</value>
+  </data>
+  <data name="CoverDescription_AccessRightsRule" xml:space="preserve">
+    <value>Rules to automatically grant access rights to documents according to their requisites</value>
+  </data>
+  <data name="CoverDescription_ShowAllReports" xml:space="preserve">
+    <value>List of all module reports.</value>
+  </data>
+  <data name="CoverAction_ApprovalRuleConsolidatedReport" xml:space="preserve">
+    <value>Approval Rules Summary Report</value>
+  </data>
+  <data name="CoverDescription_ApprovalRuleConsolidatedReport" xml:space="preserve">
+    <value>Provides information on approval rules settings broken down by company structure, docflows and document kinds.</value>
+  </data>
+  <data name="AsyncHandlerDescription_767ae28bd04348b39e31e54c288bde75" xml:space="preserve">
+    <value>Grant access rights to document automatically</value>
+  </data>
+  <data name="AsyncHandler_Description_767ae28bd04348b39e31e54c288bde75" xml:space="preserve">
+    <value>Automatically assign access rights to documents</value>
+  </data>
+  <data name="AsyncHandler_Description_c43527606439484b9e006c878427d64e" xml:space="preserve">
+    <value>Automatically assign access rights to documents when a rule is created or changed</value>
+  </data>
+  <data name="CoverAction_DocumentTemplatesNew" xml:space="preserve">
+    <value>Document Templates</value>
+  </data>
+  <data name="JobDisplayName_2ff6172c79644df7a29488c77bc97ef2" xml:space="preserve">
+    <value>Records Management. Send task about power of attorney expiration</value>
+  </data>
+  <data name="CoverDescription_DocumentTemplatesNew" xml:space="preserve">
+    <value>List of unified forms used to create documents.</value>
+  </data>
+  <data name="JobDescription_2ff6172c79644df7a29488c77bc97ef2" xml:space="preserve">
+    <value>Send notice about power of attorney expiration</value>
+  </data>
+  <data name="CoverAction_DocumentStoragePolicy" xml:space="preserve">
+    <value>Document Storage Policies</value>
+  </data>
+  <data name="CoverDescription_DocumentStoragePolicy" xml:space="preserve">
+    <value>Rules to distribute documents among file storages by certain criteria.</value>
+  </data>
+  <data name="JobDisplayName_0df1dbd48cd1407d90ba537a251d4f7c" xml:space="preserve">
+    <value>Docflow. Move documents among storages</value>
+  </data>
+  <data name="JobDescription_0df1dbd48cd1407d90ba537a251d4f7c" xml:space="preserve">
+    <value>Move content of documents according to the storage policies.</value>
+  </data>
+  <data name="AsyncHandler_Description_4f03b0d0f0f545edb1c598d32b864503" xml:space="preserve">
+    <value>Move document content to the storage.</value>
+  </data>
+  <data name="sf_371c81c3_d2c8_4bfb_8e86_39470d456c62" xml:space="preserve">
+    <value>Storage Policies</value>
+  </data>
+  <data name="FilterPanel_Status_44a38bd69fc9455c929b1e5307083d1a" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_FlagsList_d8c32f8f94d64237b0af1b97aa89a796" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_FlagsList_4e00b7b74a6840649d9cd8ccbe8c982d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Active_5bb2c61d64e04f9da3498d8ea30ed507" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Closed_0ae349923f924f928bf439c47d44cefd" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_DocumentKindGroup_7bd428f9c7474f729b9be1c332133d83" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_PolicyType_89e5b1a657e34365b615c0187e38f8e7" xml:space="preserve">
+    <value>Policy Type For</value>
+  </data>
+  <data name="FilterPanel_StoragePolicy_934914bd4fe84b1f906ed7d99609abbb" xml:space="preserve">
+    <value>Document Storage</value>
+  </data>
+  <data name="FilterPanel_RetentionPolicy_3ee03aaf32d24c8fa5cd32d2dbb57f29" xml:space="preserve">
+    <value>Document Retention</value>
+  </data>
+  <data name="CoverGroup_SmartProcessingSettings" xml:space="preserve">
+    <value>Smart Document Processing</value>
+  </data>
+  <data name="CoverAction_ShowSmartProcessingSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="CoverDescription_ShowSmartProcessingSettings" xml:space="preserve">
+    <value>Settings for connection to the Directum Ario service.</value>
+  </data>
+  <data name="AsyncHandler_Description_a416fcc6b36148dea665d19de3c5379d" xml:space="preserve">
+    <value>Convert documents (excluding electronic exchange documents) to PDF with an electronic signature mark</value>
+  </data>
+  <data name="AsyncHandler_Description_accf7175912e48e7aa12c7288559f709" xml:space="preserve">
+    <value>Copy case files for period</value>
+  </data>
+  <data name="CoverAction_CopyFiles" xml:space="preserve">
+    <value>Create Case File List</value>
+  </data>
+  <data name="CoverDescription_CopyFiles" xml:space="preserve">
+    <value>Copy case files created within a particular period.</value>
+  </data>
+  <data name="AsyncHandler_Description_1a9bf2e447784fdb8edc1f8b5777416b" xml:space="preserve">
+    <value>Change the document status when an approval task is aborted.</value>
+  </data>
+  <data name="AsyncHandler_Description_0dafb1e3152040a8ab6e09deeae72e8f" xml:space="preserve">
+    <value>Execute a script during a rule-based approval.</value>
+  </data>
+</root>

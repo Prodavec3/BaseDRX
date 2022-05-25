@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection2b9677034e7741d6ad8e6e5878ae6d2a FormGuid="d7914121-d6b5-4d03-8597-39abb7691c2d">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">842,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="Columns" iskey="true" value="14">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FactId</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FactId</property>
+            <property name="ExtendedVisibleIndex">0</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">89</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FieldId</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FieldId</property>
+            <property name="ExtendedVisibleIndex">1</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">89</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">PropertyName</property>
+            <property name="Name">EntityRecognitionInfo_Facts_PropertyName</property>
+            <property name="ExtendedVisibleIndex">2</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Width">89</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">PropertyValue</property>
+            <property name="Name">EntityRecognitionInfo_Facts_PropertyValue</property>
+            <property name="ExtendedVisibleIndex">3</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Width">89</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FactName</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FactName</property>
+            <property name="ExtendedVisibleIndex">4</property>
+            <property name="VisibleIndex">4</property>
+            <property name="Width">100</property>
+            <property name="ActualWidth">9*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FieldName</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FieldName</property>
+            <property name="ExtendedVisibleIndex">5</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Width">89</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FieldValue</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FieldValue</property>
+            <property name="ExtendedVisibleIndex">6</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Width">122</property>
+            <property name="ActualWidth">11*</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FieldProbability</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FieldProbability</property>
+            <property name="ExtendedVisibleIndex">7</property>
+            <property name="VisibleIndex">7</property>
+            <property name="Width">144</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">Position</property>
+            <property name="Name">EntityRecognitionInfo_Facts_Position</property>
+            <property name="ExtendedVisibleIndex">9</property>
+            <property name="VisibleIndex">9</property>
+            <property name="Width">89</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">VerifiedValue</property>
+            <property name="Name">EntityRecognitionInfo_Facts_VerifiedValue</property>
+            <property name="ExtendedVisibleIndex">10</property>
+            <property name="VisibleIndex">10</property>
+            <property name="Width">189</property>
+            <property name="ActualWidth">17*</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FactLabel</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FactLabel</property>
+            <property name="ExtendedVisibleIndex">11</property>
+            <property name="VisibleIndex">11</property>
+            <property name="Width">111</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">CollectionRecordId</property>
+            <property name="Name">EntityRecognitionInfo_Facts_CollectionRecordId</property>
+            <property name="ExtendedVisibleIndex">12</property>
+            <property name="VisibleIndex">12</property>
+            <property name="Width">222</property>
+            <property name="ActualWidth">20*</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">Probability</property>
+            <property name="Name">EntityRecognitionInfo_Facts_Probability</property>
+            <property name="ExtendedVisibleIndex">13</property>
+            <property name="VisibleIndex">13</property>
+            <property name="Width">100</property>
+            <property name="ActualWidth">9*</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="FieldName">FieldConfidence</property>
+            <property name="Name">EntityRecognitionInfo_Facts_FieldConfidence</property>
+            <property name="ExtendedVisibleIndex">8</property>
+            <property name="VisibleIndex">8</property>
+            <property name="ActualWidth">22*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">CollectionRecordId</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection2b9677034e7741d6ad8e6e5878ae6d2a>
+  <Collectiona82408af286c49f3a1c19f74e682e878 FormGuid="4656b098-2f58-4029-b9f2-9c65b534ae67">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">540,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">None</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="3">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">ClassifierID</property>
+            <property name="Visible">true</property>
+            <property name="Name">EntityRecognitionInfo_ExtraClassifiers_ClassifierID</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">19*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">PredictedClass</property>
+            <property name="Visible">true</property>
+            <property name="Name">EntityRecognitionInfo_ExtraClassifiers_PredictedClass</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">18*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">Probability</property>
+            <property name="Visible">true</property>
+            <property name="Name">EntityRecognitionInfo_ExtraClassifiers_Probability</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">20*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collectiona82408af286c49f3a1c19f74e682e878>
+</settings>

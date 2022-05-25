@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="NotValidTin" xml:space="preserve">
+    <value>TIN control digit is incorrect.</value>
+  </data>
+  <data name="TinDuplicate" xml:space="preserve">
+    <value>Duplicate found by TIN: {0} {1}.</value>
+  </data>
+  <data name="IncorrectAccountLength" xml:space="preserve">
+    <value>The number must contain a combination of 8-34 characters.
+The IBAN consists of up to 34 alphanumeric characters and may contain capital Latin letters.</value>
+  </data>
+  <data name="InvitationMessageHeader" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="InvitationMessageDefault" xml:space="preserve">
+    <value>We invite you to exchange electronic documents.</value>
+  </data>
+  <data name="InvitationHeaderAccept" xml:space="preserve">
+    <value>Accept Invitation from Counterparty</value>
+  </data>
+  <data name="InvitationHeaderReject" xml:space="preserve">
+    <value>Decline Invitation from Counterparty</value>
+  </data>
+  <data name="InvitationBoxesNotAllowed" xml:space="preserve">
+    <value>You can already exchange documents with this counterparty via all available exchange services.</value>
+  </data>
+  <data name="InvitationBoxesNotFound" xml:space="preserve">
+    <value>To start legal document exchange, set up connection to exchange services.</value>
+  </data>
+  <data name="InvitationTitle" xml:space="preserve">
+    <value>Send Invitation to Counterparty</value>
+  </data>
+  <data name="NeedFillTinForSendInvitation" xml:space="preserve">
+    <value>To send an exchange invitation, specify counterparty's TIN.</value>
+  </data>
+  <data name="NeedFillTinForCanExchange" xml:space="preserve">
+    <value>To check exchangeability, specify counterparty's TIN.</value>
+  </data>
+  <data name="NotFoundInExchangeServices" xml:space="preserve">
+    <value>The counterparty is not registered in the supported exchange services. You can send an invitation to the counterparty by email.</value>
+  </data>
+  <data name="ExchangeServicesSeparator" xml:space="preserve">
+    <value>, </value>
+  </data>
+  <data name="ToManyExchangeServices" xml:space="preserve">
+    <value>{0} and others</value>
+  </data>
+  <data name="FoundInExchangeServices" xml:space="preserve">
+    <value>You can send exchange invitation to the counterparty.</value>
+  </data>
+  <data name="FoundInExchangeServicesDescription" xml:space="preserve">
+    <value>You can start legal document exchange with the counterparty 
+via exchange service: {0}.</value>
+  </data>
+  <data name="InvitationHeaderRestore" xml:space="preserve">
+    <value>Resume Exchange with Counterparty Exchange Box</value>
+  </data>
+  <data name="InvitationHeaderTermination" xml:space="preserve">
+    <value>Stop Exchange with Counterparty Exchange Box</value>
+  </data>
+  <data name="InvitationHeaderRevoke" xml:space="preserve">
+    <value>Revoke Exchange Invitation</value>
+  </data>
+  <data name="Enum_Operation_SentToCA" xml:space="preserve">
+    <value>Exchange invitation sent</value>
+  </data>
+  <data name="Enum_Operation_SentToUs" xml:space="preserve">
+    <value>Exchange invitation received</value>
+  </data>
+  <data name="Enum_Operation_Activated" xml:space="preserve">
+    <value>Exchange with counterparty allowed</value>
+  </data>
+  <data name="Enum_Operation_Closed" xml:space="preserve">
+    <value>Exchange with counterparty blocked</value>
+  </data>
+  <data name="Enum_OperationDetailed_Changed" xml:space="preserve">
+    <value>For {0} in {1} exchange service</value>
+  </data>
+  <data name="HaveDoubleCounterparties" xml:space="preserve">
+    <value>Exchange via all available exchange services is already configured for the counterparty duplicate.</value>
+  </data>
+  <data name="InvitationBoxesAndDoubleNotAllowed" xml:space="preserve">
+    <value>Exchange via all available exchange services is already configured for the counterparty and its duplicates.</value>
+  </data>
+  <data name="NoExchangeThroughThisService" xml:space="preserve">
+    <value>You cannot exchange documents with the counterparty via the selected exchange service.</value>
+  </data>
+  <data name="NeedSetExchange" xml:space="preserve">
+    <value>Initiate legal document exchange with the counterparty.</value>
+  </data>
+  <data name="NoRightsToChangeCard" xml:space="preserve">
+    <value>You are not authorized to change the counterparty card</value>
+  </data>
+  <data name="NotValidTinRegionCode" xml:space="preserve">
+    <value>TIN region code is incorrect.</value>
+  </data>
+  <data name="DuplicateNotFound" xml:space="preserve">
+    <value>Duplicates not found.</value>
+  </data>
+  <data name="NoDefaultBoxService" xml:space="preserve">
+    <value>Select counterparty exchange box that will be used to send documents via exchange box {0}</value>
+  </data>
+  <data name="ParameterSaveFromUI" xml:space="preserve">
+    <value>SaveFromUI:{0}</value>
+  </data>
+  <data name="ParameterIsForceDuplicateSave" xml:space="preserve">
+    <value>IsForceDuplicateSave:{0}</value>
+  </data>
+  <data name="NotOnlyDigitsTin" xml:space="preserve">
+    <value>TIN must contain only digits.</value>
+  </data>
+</root>

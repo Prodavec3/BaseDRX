@@ -1,0 +1,898 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ControlGroup_406e14dc17444a7f85d8f6eef8abaa3f" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="ControlGroup_4e1d78fc6f6c4c81bf9aa1fa2031a46b" xml:space="preserve">
+    <value>Дата и номер</value>
+  </data>
+  <data name="ControlGroup_696a8bb83e1244c8927a37d955cfbf0f" xml:space="preserve">
+    <value>Хранение</value>
+  </data>
+  <data name="ControlGroup_1b194ce3c44048879f0d1cdc4303c583" xml:space="preserve">
+    <value>Жизненный цикл</value>
+  </data>
+  <data name="Form_Location" xml:space="preserve">
+    <value>Выдача</value>
+  </data>
+  <data name="ControlGroup_f1bb25112ea0463f8e5cc990e5345728" xml:space="preserve">
+    <value>Журнал передачи оригинала и копий документа</value>
+  </data>
+  <data name="Ribbon_RegistrationCommands_7aa0ac2480394d94954284c3d878412e" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Ribbon_DeliveryCommands_df0be3eb70454137aadaab670eccf2a7" xml:space="preserve">
+    <value>Выдача</value>
+  </data>
+  <data name="Enum_Operation_Registration" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Enum_Operation_Unregistration" xml:space="preserve">
+    <value>Отмена регистрации</value>
+  </data>
+  <data name="Enum_Operation_RegChange" xml:space="preserve">
+    <value>Изменение регистрационных данных</value>
+  </data>
+  <data name="Enum_Operation_Reservation" xml:space="preserve">
+    <value>Резервирование номера</value>
+  </data>
+  <data name="Enum_Operation_Numeration" xml:space="preserve">
+    <value>Присвоение номера</value>
+  </data>
+  <data name="Enum_Operation_Unnumeration" xml:space="preserve">
+    <value>Очистка номера</value>
+  </data>
+  <data name="Enum_Operation_NumChange" xml:space="preserve">
+    <value>Изменение реквизитов</value>
+  </data>
+  <data name="Enum_Operation_Unreservation" xml:space="preserve">
+    <value>Отмена резервирования номера</value>
+  </data>
+  <data name="Enum_Operation_EnAborted" xml:space="preserve">
+    <value>Отметка о прекращении согласования</value>
+  </data>
+  <data name="Enum_Operation_EnOnApproval" xml:space="preserve">
+    <value>Отметка о начале согласования</value>
+  </data>
+  <data name="Enum_Operation_EnOnRework" xml:space="preserve">
+    <value>Отметка как дорабатываемого</value>
+  </data>
+  <data name="Enum_Operation_EnPendingSign" xml:space="preserve">
+    <value>Отметка о начале подписания</value>
+  </data>
+  <data name="Enum_Operation_EnSigned" xml:space="preserve">
+    <value>Отметка о подписании</value>
+  </data>
+  <data name="Enum_Operation_EnCancelled" xml:space="preserve">
+    <value>Отметка о прекращении согласования</value>
+  </data>
+  <data name="Enum_Operation_EnStateClear" xml:space="preserve">
+    <value>Очистка статуса согласования</value>
+  </data>
+  <data name="Enum_Operation_CEOnApproval" xml:space="preserve">
+    <value>Отметка о начале согласования с контрагентом</value>
+  </data>
+  <data name="Enum_Operation_CESigned" xml:space="preserve">
+    <value>Отметка о подписании контрагентом</value>
+  </data>
+  <data name="Enum_Operation_CEUnsigned" xml:space="preserve">
+    <value>Отметка о неподписании контрагентом</value>
+  </data>
+  <data name="Enum_Operation_CEStateClear" xml:space="preserve">
+    <value>Очистка статуса согласования с контрагентом</value>
+  </data>
+  <data name="Enum_Operation_ExOnReview" xml:space="preserve">
+    <value>Отметка о начале рассмотрения</value>
+  </data>
+  <data name="Enum_Operation_ExSending" xml:space="preserve">
+    <value>Отметка об ожидании отправки на исполнение</value>
+  </data>
+  <data name="Enum_Operation_ExWithoutExecut" xml:space="preserve">
+    <value>Отметка как не требующего исполнения</value>
+  </data>
+  <data name="Enum_Operation_ExOnExecution" xml:space="preserve">
+    <value>Отметка о начале исполнения</value>
+  </data>
+  <data name="Enum_Operation_ExExecuted" xml:space="preserve">
+    <value>Отметка об исполнении</value>
+  </data>
+  <data name="Enum_Operation_ExAborted" xml:space="preserve">
+    <value>Отметка о прекращении исполнения</value>
+  </data>
+  <data name="Enum_Operation_ExStateClear" xml:space="preserve">
+    <value>Очистка статуса исполнения</value>
+  </data>
+  <data name="Enum_Operation_COnControl" xml:space="preserve">
+    <value>Отметка как на контроле</value>
+  </data>
+  <data name="Enum_Operation_CSpecialControl" xml:space="preserve">
+    <value>Отметка как на особом контроле</value>
+  </data>
+  <data name="Enum_Operation_CWithoutControl" xml:space="preserve">
+    <value>Отметка как не на контроле</value>
+  </data>
+  <data name="Enum_Operation_CControlRemoved" xml:space="preserve">
+    <value>Отметка о снятии с контроля</value>
+  </data>
+  <data name="Enum_Operation_CStateClear" xml:space="preserve">
+    <value>Очистка статуса контроля исполнения</value>
+  </data>
+  <data name="Enum_Operation_SetToDraft" xml:space="preserve">
+    <value>Отметка как разрабатываемого</value>
+  </data>
+  <data name="Enum_Operation_SetToActive" xml:space="preserve">
+    <value>Отметка как действующего</value>
+  </data>
+  <data name="Enum_Operation_SetToTerminated" xml:space="preserve">
+    <value>Отметка о расторжении</value>
+  </data>
+  <data name="Enum_Operation_SetToClosed" xml:space="preserve">
+    <value>Отметка об исполнении</value>
+  </data>
+  <data name="Enum_Operation_SetToCancelled" xml:space="preserve">
+    <value>Отметка об аннулировании</value>
+  </data>
+  <data name="Enum_Operation_SetToObsolete" xml:space="preserve">
+    <value>Отметка о прекращении действия</value>
+  </data>
+  <data name="Enum_Operation_SetToPaid" xml:space="preserve">
+    <value>Отметка об оплате</value>
+  </data>
+  <data name="Enum_Operation_SetToStateClear" xml:space="preserve">
+    <value>Очистка состояния жизненного цикла</value>
+  </data>
+  <data name="Enum_ControlExecutionState_ControlRemoved" xml:space="preserve">
+    <value>Снято с контроля</value>
+  </data>
+  <data name="Enum_ControlExecutionState_OnControl" xml:space="preserve">
+    <value>На контроле</value>
+  </data>
+  <data name="Enum_ControlExecutionState_SpecialControl" xml:space="preserve">
+    <value>На особом контроле</value>
+  </data>
+  <data name="Enum_ControlExecutionState_WithoutControl" xml:space="preserve">
+    <value>Не на контроле</value>
+  </data>
+  <data name="Enum_ExternalApprovalState_Unsigned" xml:space="preserve">
+    <value>Не подписан</value>
+  </data>
+  <data name="Enum_ExternalApprovalState_OnApproval" xml:space="preserve">
+    <value>На согласовании</value>
+  </data>
+  <data name="Enum_ExternalApprovalState_Signed" xml:space="preserve">
+    <value>Подписан</value>
+  </data>
+  <data name="Enum_InternalApprovalState_Aborted" xml:space="preserve">
+    <value>Прекращено</value>
+  </data>
+  <data name="Enum_InternalApprovalState_OnApproval" xml:space="preserve">
+    <value>На согласовании</value>
+  </data>
+  <data name="Enum_InternalApprovalState_OnRework" xml:space="preserve">
+    <value>На доработке</value>
+  </data>
+  <data name="Enum_InternalApprovalState_PendingSign" xml:space="preserve">
+    <value>На подписании</value>
+  </data>
+  <data name="Enum_InternalApprovalState_Signed" xml:space="preserve">
+    <value>Подписан</value>
+  </data>
+  <data name="Enum_ExecutionState_Aborted" xml:space="preserve">
+    <value>Прекращено</value>
+  </data>
+  <data name="Enum_ExecutionState_OnReview" xml:space="preserve">
+    <value>На рассмотрении</value>
+  </data>
+  <data name="Enum_ExecutionState_Executed" xml:space="preserve">
+    <value>Исполнен</value>
+  </data>
+  <data name="Enum_ExecutionState_OnExecution" xml:space="preserve">
+    <value>На исполнении</value>
+  </data>
+  <data name="Enum_ExecutionState_Sending" xml:space="preserve">
+    <value>Отправка на исполнение</value>
+  </data>
+  <data name="Enum_ExecutionState_WithoutExecut" xml:space="preserve">
+    <value>Не требует исполнения</value>
+  </data>
+  <data name="Enum_LifeCycleState_Active" xml:space="preserve">
+    <value>Действующий</value>
+  </data>
+  <data name="Enum_LifeCycleState_Cancelled" xml:space="preserve">
+    <value>Аннулирован</value>
+  </data>
+  <data name="Enum_LifeCycleState_Draft" xml:space="preserve">
+    <value>В разработке</value>
+  </data>
+  <data name="Enum_LifeCycleState_Executed" xml:space="preserve">
+    <value>Исполнен</value>
+  </data>
+  <data name="Enum_LifeCycleState_Terminated" xml:space="preserve">
+    <value>Расторгнут</value>
+  </data>
+  <data name="Operation_Register" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Property_Action" xml:space="preserve">
+    <value>Действие</value>
+  </data>
+  <data name="Property_PlacedToCaseFileDate" xml:space="preserve">
+    <value>Дата помещения</value>
+  </data>
+  <data name="Property_Comment" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_ControlExecutionState" xml:space="preserve">
+    <value>Контроль исполнения</value>
+  </data>
+  <data name="Property_ExternalApprovalState" xml:space="preserve">
+    <value>Согл. с контрагентом</value>
+  </data>
+  <data name="Property_DeliveryDate" xml:space="preserve">
+    <value>Дата выдачи</value>
+  </data>
+  <data name="Property_DeliveryMethod" xml:space="preserve">
+    <value>Способ доставки</value>
+  </data>
+  <data name="Property_DeliveredTo" xml:space="preserve">
+    <value>Кому передан</value>
+  </data>
+  <data name="Property_InternalApprovalState" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="Property_ExecutionState" xml:space="preserve">
+    <value>Исполнение</value>
+  </data>
+  <data name="Property_CaseFile" xml:space="preserve">
+    <value>Дело</value>
+  </data>
+  <data name="Property_Index" xml:space="preserve">
+    <value>Порядковый номер</value>
+  </data>
+  <data name="Property_IsHeldByCounterParty" xml:space="preserve">
+    <value>Требуется возврат от контрагента</value>
+  </data>
+  <data name="Property_IsReturnRequired" xml:space="preserve">
+    <value>Требуется возврат</value>
+  </data>
+  <data name="Property_IsOriginal" xml:space="preserve">
+    <value>Оригинал</value>
+  </data>
+  <data name="Property_LifeCycleState" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="Property_Tracking" xml:space="preserve">
+    <value>Выдача</value>
+  </data>
+  <data name="Property_LocationState" xml:space="preserve">
+    <value>Местонахождение</value>
+  </data>
+  <data name="Property_DocumentRegister" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="Property_RegistrationDate" xml:space="preserve">
+    <value>Дата документа</value>
+  </data>
+  <data name="Property_RegistrationNumber" xml:space="preserve">
+    <value>Рег. №</value>
+  </data>
+  <data name="Property_RegistrationState" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Property_ReturnDate" xml:space="preserve">
+    <value>Дата возврата</value>
+  </data>
+  <data name="Property_ScheduledReturnDateFromCounterparty" xml:space="preserve">
+    <value>Срок возврата от контрагента</value>
+  </data>
+  <data name="Property_ResponsibleForReturnEmployee" xml:space="preserve">
+    <value>Ответственный за возврат</value>
+  </data>
+  <data name="Property_ReturnResult" xml:space="preserve">
+    <value>Результат возврата</value>
+  </data>
+  <data name="Property_ReturnTask" xml:space="preserve">
+    <value>Задача возврата</value>
+  </data>
+  <data name="Property_ReturnDeadline" xml:space="preserve">
+    <value>Срок возврата</value>
+  </data>
+  <data name="Action_SendForApproval" xml:space="preserve">
+    <value>На согласование по регламенту</value>
+  </data>
+  <data name="Action_SendForApprovalDescription" xml:space="preserve">
+    <value>Отправка документа задачей на согласование по регламенту</value>
+  </data>
+  <data name="Action_SendForApprovalHint" xml:space="preserve">
+    <value>Отправить на согласование по регламенту</value>
+  </data>
+  <data name="Action_SendActionItem" xml:space="preserve">
+    <value>На исполнение поручением</value>
+  </data>
+  <data name="Action_SendActionItemDescription" xml:space="preserve">
+    <value>Отправка поручения по текущему документу</value>
+  </data>
+  <data name="Action_SendActionItemHint" xml:space="preserve">
+    <value>Отправить поручение по документу</value>
+  </data>
+  <data name="Action_DeliverDocument" xml:space="preserve">
+    <value>Выдать документ</value>
+  </data>
+  <data name="Action_DeliverDocumentDescription" xml:space="preserve">
+    <value>Выдать бумажный экземпляр документа</value>
+  </data>
+  <data name="Action_DeliverDocumentHint" xml:space="preserve">
+    <value>Выдать документ</value>
+  </data>
+  <data name="Action_Register" xml:space="preserve">
+    <value>Зарегистрировать</value>
+  </data>
+  <data name="Action_RegisterDescription" xml:space="preserve">
+    <value>Регистрация документа в журнале с присвоением регистрационного номера</value>
+  </data>
+  <data name="Action_RegisterHint" xml:space="preserve">
+    <value>Зарегистрировать документ</value>
+  </data>
+  <data name="Action_ChangeRequisites" xml:space="preserve">
+    <value>Изменить реквизиты</value>
+  </data>
+  <data name="Action_ChangeRequisitesDescription" xml:space="preserve">
+    <value>Открытие для изменения реквизитов зарегистрированного документа</value>
+  </data>
+  <data name="Action_ChangeRequisitesHint" xml:space="preserve">
+    <value>Изменить реквизиты</value>
+  </data>
+  <data name="Action_AssignNumber" xml:space="preserve">
+    <value>Присвоить номер</value>
+  </data>
+  <data name="Action_AssignNumberDescription" xml:space="preserve">
+    <value>Присвоение/резервирование номера для документа в журнале</value>
+  </data>
+  <data name="Action_AssignNumberHint" xml:space="preserve">
+    <value>Присвоить/зарезервировать номер для документа</value>
+  </data>
+  <data name="Action_ReturnDocument" xml:space="preserve">
+    <value>Вернуть документ</value>
+  </data>
+  <data name="Action_ReturnDocumentDescription" xml:space="preserve">
+    <value>Вернуть бумажный экземпляр документа</value>
+  </data>
+  <data name="Action_ReturnDocumentHint" xml:space="preserve">
+    <value>Вернуть документ</value>
+  </data>
+  <data name="Action_ReturnFromCounterparty" xml:space="preserve">
+    <value>Вернуть документ</value>
+  </data>
+  <data name="Action_ReturnFromCounterpartyDescription" xml:space="preserve">
+    <value>Вернуть бумажный экземпляр документа</value>
+  </data>
+  <data name="Action_ReturnFromCounterpartyHint" xml:space="preserve">
+    <value>Вернуть документ</value>
+  </data>
+  <data name="Action_ShowRegistrationPane" xml:space="preserve">
+    <value>Область регистрации</value>
+  </data>
+  <data name="Action_ShowRegistrationPaneDescription" xml:space="preserve">
+    <value>Скрытие или отображение области с регистрационно-учетными реквизитами документа</value>
+  </data>
+  <data name="Action_ShowRegistrationPaneHint" xml:space="preserve">
+    <value>Скрыть или показать область регистрации</value>
+  </data>
+  <data name="Action_ShowReturnAssignments" xml:space="preserve">
+    <value>Открыть задание на возврат</value>
+  </data>
+  <data name="Action_ShowReturnAssignmentsDescription" xml:space="preserve">
+    <value>Открыть задание на возврат документа</value>
+  </data>
+  <data name="Action_ShowReturnAssignmentsHint" xml:space="preserve">
+    <value>Открыть задание на возврат</value>
+  </data>
+  <data name="Action_CancelRegistration" xml:space="preserve">
+    <value>Отменить регистрацию</value>
+  </data>
+  <data name="Action_CancelRegistrationDescription" xml:space="preserve">
+    <value>Отмена регистрации текущего документа</value>
+  </data>
+  <data name="Action_CancelRegistrationHint" xml:space="preserve">
+    <value>Отменить регистрацию документа</value>
+  </data>
+  <data name="Enum_RegistrationState_NotRegistered" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="Enum_RegistrationState_Registered" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="Enum_RegistrationState_Reserved" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="Property_DocumentKind" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="Property_BusinessUnit" xml:space="preserve">
+    <value>Наша орг.</value>
+  </data>
+  <data name="Property_Subject" xml:space="preserve">
+    <value>Содержание</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_OurSignatory" xml:space="preserve">
+    <value>Подписал</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Официальный документ</value>
+  </data>
+  <data name="Action_ShowDocumentReturn" xml:space="preserve">
+    <value>Контроль возврата</value>
+  </data>
+  <data name="Action_ShowDocumentReturnDescription" xml:space="preserve">
+    <value>Открыть перечень документов, которые не были возвращены из подразделений</value>
+  </data>
+  <data name="Action_ShowDocumentReturnHint" xml:space="preserve">
+    <value>Контроль возврата документов</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Официальный документ</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Официальные документы</value>
+  </data>
+  <data name="Enum_OperationDetailed_Numeration" xml:space="preserve">
+    <value>Номер {0}, дата {1}, журнал "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_Registration" xml:space="preserve">
+    <value>Номер {0}, дата {1}, журнал "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_Reservation" xml:space="preserve">
+    <value>Номер {0}, дата {1}, журнал "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_NumChange" xml:space="preserve">
+    <value>Номер {0}, дата {1}, журнал "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_RegChange" xml:space="preserve">
+    <value>Номер {0}, дата {1}, журнал "{2}".</value>
+  </data>
+  <data name="Form_30d150530c6440f289b8b68c0c9fd574" xml:space="preserve">
+    <value>Выдача</value>
+  </data>
+  <data name="ControlGroup_42612188cf984a66a4cc5c674787d208" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_DocumentGroup" xml:space="preserve">
+    <value>Группа документов</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Исполнитель</value>
+  </data>
+  <data name="Property_Department" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="Action_ApprovalForm" xml:space="preserve">
+    <value>Лист согласования</value>
+  </data>
+  <data name="Action_ApprovalFormDescription" xml:space="preserve">
+    <value>Открытие листа согласования по документу</value>
+  </data>
+  <data name="Action_ApprovalFormHint" xml:space="preserve">
+    <value>Открыть лист согласования</value>
+  </data>
+  <data name="Form_a1ced6b8fe174f6183100fb8faf6b263" xml:space="preserve">
+    <value>Задачи</value>
+  </data>
+  <data name="Enum_LifeCycleState_Obsolete" xml:space="preserve">
+    <value>Устаревший</value>
+  </data>
+  <data name="Action_SendForFreeApproval" xml:space="preserve">
+    <value>На свободное согласование</value>
+  </data>
+  <data name="Action_SendForFreeApprovalDescription" xml:space="preserve">
+    <value>Отправка документа задачей на свободное согласование</value>
+  </data>
+  <data name="Action_SendForFreeApprovalHint" xml:space="preserve">
+    <value>Отправить на свободное согласование</value>
+  </data>
+  <data name="Action_SendForReview" xml:space="preserve">
+    <value>На рассмотрение руководителю</value>
+  </data>
+  <data name="Action_SendForReviewDescription" xml:space="preserve">
+    <value>Отправка документа задачей на рассмотрение руководителю</value>
+  </data>
+  <data name="Action_SendForReviewHint" xml:space="preserve">
+    <value>Отправить на рассмотрение</value>
+  </data>
+  <data name="Property_PreparedBy" xml:space="preserve">
+    <value>Подготовил</value>
+  </data>
+  <data name="Enum_Operation_EnReviewed" xml:space="preserve">
+    <value>Отметка о рассмотрении</value>
+  </data>
+  <data name="Enum_Operation_EnPendingReview" xml:space="preserve">
+    <value>Отметка о начале рассмотрения</value>
+  </data>
+  <data name="ControlGroup_72e492251e834e65bb33ea838a458e43" xml:space="preserve">
+    <value>Местонахождение</value>
+  </data>
+  <data name="Property_Project" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="Property_AssociatedApplication" xml:space="preserve">
+    <value>Открывается в</value>
+  </data>
+  <data name="Property_LastVersionApproved" xml:space="preserve">
+    <value>Утвержден</value>
+  </data>
+  <data name="Action_CreateAddendum" xml:space="preserve">
+    <value>Создать приложение</value>
+  </data>
+  <data name="Action_CreateAddendumDescription" xml:space="preserve">
+    <value>Создание приложения к документу</value>
+  </data>
+  <data name="Action_CreateAddendumHint" xml:space="preserve">
+    <value>Создать приложение к документу</value>
+  </data>
+  <data name="Ribbon_RelatedDocumentCommands_05d63e9c36c044c3a7fdb1a360e13fc0" xml:space="preserve">
+    <value>Связанные документы</value>
+  </data>
+  <data name="Action_CreateFromTemplateHint" xml:space="preserve">
+    <value>Создать версию из шаблона</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>Автор: [Author]</value>
+  </data>
+  <data name="Ribbon_RelatedDocumentCommands_40129d01a20041e9ab9d7349ae62b2c4" xml:space="preserve">
+    <value>Связанные документы</value>
+  </data>
+  <data name="Action_SendToCounterparty" xml:space="preserve">
+    <value>Через сервис обмена</value>
+  </data>
+  <data name="Action_SendToCounterpartyDescription" xml:space="preserve">
+    <value>Отправка документа контрагенту через сервис обмена электронными документами.
+
+Если документ получен от контрагента и требует подписания, у вас будет запрошен результат подписания.
+
+Действие доступно для пользователей, которые включены в роль "Пользователи с правами на работу через сервис обмена".</value>
+  </data>
+  <data name="Action_SendToCounterpartyHint" xml:space="preserve">
+    <value>Отправить или вернуть документ контрагенту</value>
+  </data>
+  <data name="Property_ExchangeState" xml:space="preserve">
+    <value>Электронный обмен</value>
+  </data>
+  <data name="Operation_SendByExchange" xml:space="preserve">
+    <value>Отправка через сервис обмена</value>
+  </data>
+  <data name="Enum_ExchangeState_Received" xml:space="preserve">
+    <value>Получен</value>
+  </data>
+  <data name="Enum_ExchangeState_Sent" xml:space="preserve">
+    <value>Отправлен контрагенту</value>
+  </data>
+  <data name="Enum_ExchangeState_SignAwaited" xml:space="preserve">
+    <value>Ожидается подпись контрагента</value>
+  </data>
+  <data name="Enum_ExchangeState_SignRequired" xml:space="preserve">
+    <value>Требуется подписание</value>
+  </data>
+  <data name="Enum_ExchangeState_Signed" xml:space="preserve">
+    <value>Подписан обеими сторонами</value>
+  </data>
+  <data name="Enum_ExchangeState_Rejected" xml:space="preserve">
+    <value>Отказано в подписании</value>
+  </data>
+  <data name="Enum_ExchangeState_Terminated" xml:space="preserve">
+    <value>Аннулирован</value>
+  </data>
+  <data name="Enum_ExchangeState_Obsolete" xml:space="preserve">
+    <value>Аннулирован</value>
+  </data>
+  <data name="Property_LeadingDocument" xml:space="preserve">
+    <value>Ведущий док.</value>
+  </data>
+  <data name="Action_OpenInExchangeService" xml:space="preserve">
+    <value>Открыть в сервисе</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceDescription" xml:space="preserve">
+    <value>Открытие документа на сайте сервиса электронного обмена.</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceHint" xml:space="preserve">
+    <value>Открыть документ в сервисе обмена</value>
+  </data>
+  <data name="Ribbon_ServiceGroup_0ae336b121774ccfa3fbd7004a8a08b8" xml:space="preserve">
+    <value>Сервис обмена</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReport" xml:space="preserve">
+    <value>Протокол эл. обмена</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReportDescription" xml:space="preserve">
+    <value>Просмотр протокола электронного обмена по документу</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReportHint" xml:space="preserve">
+    <value>Открыть протокол электронного обмена</value>
+  </data>
+  <data name="Action_OpenOriginal" xml:space="preserve">
+    <value>Открыть оригинал</value>
+  </data>
+  <data name="Action_OpenOriginalDescription" xml:space="preserve">
+    <value>Открытие документа в оригинальном форматировании без штампов визуализации электронной подписи.</value>
+  </data>
+  <data name="Action_OpenOriginalHint" xml:space="preserve">
+    <value>Открыть версию документа до преобразования</value>
+  </data>
+  <data name="Action_OpenDocumentReadHint" xml:space="preserve">
+    <value>Читать документ</value>
+  </data>
+  <data name="Action_OpenDocumentReadDescription" xml:space="preserve">
+    <value>Открытие электронного документа без возможности изменения.</value>
+  </data>
+  <data name="Action_SendForAcquaintance" xml:space="preserve">
+    <value>На ознакомление</value>
+  </data>
+  <data name="Action_SendForAcquaintanceDescription" xml:space="preserve">
+    <value>Отправка документа задачей на ознакомление.</value>
+  </data>
+  <data name="Action_SendForAcquaintanceHint" xml:space="preserve">
+    <value>Отправить на ознакомление</value>
+  </data>
+  <data name="Ribbon_Reports_6bafd262471346eb9c42e68884286194" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="Ribbon_Reports_9a84f93c07e44320a7fb6c7b9ef14a0e" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReport" xml:space="preserve">
+    <value>Лист ознакомления</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReportDescription" xml:space="preserve">
+    <value>Открытие листа ознакомления с документом</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReportHint" xml:space="preserve">
+    <value>Открыть лист ознакомления</value>
+  </data>
+  <data name="Ribbon_Reports_33726bc171f1472e9a614a4077a73ee9" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="Ribbon_Reports_b21a077bc7224d74875595f9613f7d94" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="Ribbon_Reports_a213091392ab4963bc2542cc53d1f44b" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="Action_BarcodeReport" xml:space="preserve">
+    <value>Штрихкод документа</value>
+  </data>
+  <data name="Action_BarcodeReportDescription" xml:space="preserve">
+    <value>Печать штрихкода для добавления его на документ.</value>
+  </data>
+  <data name="Action_BarcodeReportHint" xml:space="preserve">
+    <value>Печать штрихкода для документа</value>
+  </data>
+  <data name="Ribbon_Print_f9b455431766414d841f525a57c99e45" xml:space="preserve">
+    <value>Печать</value>
+  </data>
+  <data name="Action_ShowRelatedDocuments" xml:space="preserve">
+    <value>Связанные документы</value>
+  </data>
+  <data name="Action_ShowRelatedDocumentsDescription" xml:space="preserve">
+    <value>Открыть список документов, которые связаны с текущим.</value>
+  </data>
+  <data name="Action_ShowRelatedDocumentsHint" xml:space="preserve">
+    <value>Показать связанные документы</value>
+  </data>
+  <data name="Ribbon_EditRelationsCommands_f5b525c195e747e79eb6fdfe15e87078" xml:space="preserve">
+    <value>Правка</value>
+  </data>
+  <data name="Ribbon_RelatedGroup_6b0284ae25ec48f88a76c812488e633e" xml:space="preserve">
+    <value>Связи</value>
+  </data>
+  <data name="Action_ConvertToPdf" xml:space="preserve">
+    <value>Создать PDF с отметкой об ЭП</value>
+  </data>
+  <data name="Action_ConvertToPdfDescription" xml:space="preserve">
+    <value>Преобразование документа в формат PDF с отметкой об электронной подписи.
+После преобразования документа оригинал доступен по действию "Открыть оригинал" на вкладке "Версии".</value>
+  </data>
+  <data name="Action_ConvertToPdfHint" xml:space="preserve">
+    <value>Преобразовать документ в формат PDF с отметкой об электронной подписи</value>
+  </data>
+  <data name="Form_520df4eae55447458d4f018b6d022962" xml:space="preserve">
+    <value>Верификация</value>
+  </data>
+  <data name="ControlGroup_fd86ec670272447fbe4580324ca8a699" xml:space="preserve">
+    <value>Предпросмотр</value>
+  </data>
+  <data name="ControlGroup_8f91b21ba3744bd5807bb01130dff98f" xml:space="preserve">
+    <value>Свойства</value>
+  </data>
+  <data name="ControlGroup_812fa7c1ee734284a3458e74ae533761" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="ControlGroup_b6b8a84b12bf4dfca14371690f1ae498" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_VerificationState" xml:space="preserve">
+    <value>Верификация</value>
+  </data>
+  <data name="Enum_VerificationState_InProcess" xml:space="preserve">
+    <value>В процессе</value>
+  </data>
+  <data name="Enum_VerificationState_Completed" xml:space="preserve">
+    <value>Завершена</value>
+  </data>
+  <data name="ControlGroup_8b050f363a594f4ca5bd78314ab6d183" xml:space="preserve">
+    <value>Жизненный цикл</value>
+  </data>
+  <data name="Property_DocumentDate" xml:space="preserve">
+    <value>Дата создания/регистрации</value>
+  </data>
+  <data name="Action_SendByMail" xml:space="preserve">
+    <value>Вложением в письмо</value>
+  </data>
+  <data name="Action_SendByMailHint" xml:space="preserve">
+    <value>Отправить вложением в письмо</value>
+  </data>
+  <data name="Action_SendByMailDescription" xml:space="preserve">
+    <value>Отправка содержимого документа по электронной почте</value>
+  </data>
+  <data name="Action_CreateManyAddendumHint" xml:space="preserve">
+    <value>Добавить приложения к документу из файлов</value>
+  </data>
+  <data name="Action_CreateManyAddendumDescription" xml:space="preserve">
+    <value>Массовое добавление приложений к документу из файлов</value>
+  </data>
+  <data name="Action_CreateManyAddendum" xml:space="preserve">
+    <value>Добавить приложения</value>
+  </data>
+  <data name="Property_Storage" xml:space="preserve">
+    <value>Хранилище</value>
+  </data>
+  <data name="Ribbon_ServiceGroup_2ed94346ba894c529815d18010d3a2ae" xml:space="preserve">
+    <value>Сервис</value>
+  </data>
+  <data name="Action_ChangeDocumentType" xml:space="preserve">
+    <value>Сменить тип</value>
+  </data>
+  <data name="Action_ChangeDocumentTypeDescription" xml:space="preserve">
+    <value>После смены типа документа карточка будет изменена. Потребуется указать необходимые реквизиты.
+
+Повторная смена типа будет невозможна.</value>
+  </data>
+  <data name="Action_ChangeDocumentTypeHint" xml:space="preserve">
+    <value>Сменить тип документа</value>
+  </data>
+  <data name="Ribbon_ServiceGroup_bc285966c6e245ee95412efcf471bf14" xml:space="preserve">
+    <value>Сервис</value>
+  </data>
+  <data name="Ribbon_Document_6d15b5678aaa43c98c9eaca6d8f16bfe" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="Action_ExportDocument" xml:space="preserve">
+    <value>Выгрузить документ</value>
+  </data>
+  <data name="Action_ExportDocumentDescription" xml:space="preserve">
+    <value>Выгрузить документ с утверждающими электронными подписями.</value>
+  </data>
+  <data name="Action_ExportDocumentHint" xml:space="preserve">
+    <value>Выгрузка документа</value>
+  </data>
+  <data name="Ribbon_Export_a38da52fcc71444094309bdf17239dd2" xml:space="preserve">
+    <value>Выгрузка</value>
+  </data>
+</root>

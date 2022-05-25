@@ -1,0 +1,910 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "2dd7a803-8db7-40e1-9da6-b41c62d367c8",
+  "Name": "BusinessUnitBox",
+  "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "d552baf1-ef5a-4d6c-8c5e-f016ac430d07",
+      "Name": "Login",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_Login_large_d552baf1ef5a4d6c8c5ef016ac430d07.png",
+      "SmallIconName": "Action_Login_small_d552baf1ef5a4d6c8c5ef016ac430d07.png",
+      "Versions": []
+    },
+    {
+      "NameGuid": "644aae0e-3108-41dd-9b69-98081e4a45b7",
+      "Name": "OpenLogonUrl",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_OpenLogonUrl_large_644aae0e310841dd9b6998081e4a45b7.png",
+      "SmallIconName": "Action_OpenLogonUrl_small_644aae0e310841dd9b6998081e4a45b7.png",
+      "Versions": []
+    },
+    {
+      "NameGuid": "7297eee1-4b2c-4974-b12b-e910144c57f5",
+      "Name": "CheckConnection",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CheckConnection_large_7297eee14b2c4974b12be910144c57f5.png",
+      "SmallIconName": "Action_CheckConnection_small_7297eee14b2c4974b12be910144c57f5.png",
+      "Versions": []
+    },
+    {
+      "NameGuid": "2d3861c2-fa7a-4016-87ac-41923d599eee",
+      "Name": "ShowMessageQueueItem",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowMessageQueueItem_large_2d3861c2fa7a401687ac41923d599eee.png",
+      "SmallIconName": "Action_ShowMessageQueueItem_small_2d3861c2fa7a401687ac41923d599eee.png"
+    },
+    {
+      "NameGuid": "266778df-5f74-4eda-8634-959af71eca10",
+      "Name": "FindDocument",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_FindDocument_large_266778df5f744eda8634959af71eca10.png",
+      "SmallIconName": "Action_FindDocument_small_266778df5f744eda8634959af71eca10.png"
+    }
+  ],
+  "BaseGuid": "f91dcce6-a914-4c04-aba1-0f940475696b",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "f5cf3290-86ba-43ea-ad26-cb2891a06b87",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "Name": "ControlGroup",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 31.55
+            },
+            {
+              "Percentage": 18.23
+            },
+            {
+              "Percentage": 50.22
+            }
+          ],
+          "IsAncestorMetadata": true,
+          "Overridden": [
+            "Controls",
+            "ColumnDefinitions"
+          ],
+          "SharedNestedGroupsAlignment": true,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "75edbf16-1578-4a1e-afe4-a2a24e442114",
+          "Name": "Name",
+          "ColumnNumber": 0,
+          "ColumnSpan": 3,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "439bb6b6-72f8-4f25-9dd4-9167dff9a13c",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "0d6364a7-6a9b-445c-b2fc-92c174b60da1",
+          "Name": "Responsible",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "55366496-0f4a-4ddd-bc15-b2fdd02797c0",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "55cd3119-c2d8-45b0-afc0-2e49dc6ce7fa",
+          "Name": "Status",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "0be9c055-cc09-4c51-b135-5aca1ff3eccf",
+          "Name": "BusinessUnit",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "85476bf0-a807-48c7-9644-13f35bf7385b",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d42f156e-3c4f-4439-92b9-5e600a958cd5",
+          "Name": "ExchangeService",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "bb0d84c1-55e1-4dc7-9c53-95517355df7b",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "3570b4fd-d2c3-4dbb-ac1a-db9c512b5304",
+          "Name": "Login",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "e15a4f2c-c579-42d3-a52c-a23cf326a9c0",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "4c2e9ef5-a901-4662-97f1-04b175cf1dec",
+          "Name": "ConnectionStatus",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "b1937fdb-48c6-4a62-a880-421771ffffd8",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c53ee847-f96f-4bfc-a886-047599d2155e",
+          "Name": "Routing",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "1d58ca72-ae6d-4abd-85d8-ae662382405e",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "608e509a-f111-465a-ac75-02caf1659476",
+          "Name": "CertificateReceiptNotifications",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "309b7d9c-818f-44d4-bbdd-73d8387371b0",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ee46338d-3421-4b81-98c8-52290b3f1272",
+          "Name": "DeadlineInDays",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "35814d12-9b0b-4e76-acc4-bed2a254a904",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "12a330a0-b2e6-4e84-a11b-e2255c3e483f",
+          "Name": "DeadlineInHours",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "1cf39fc2-04c2-4195-b8d7-829e40400bb7",
+          "PropertyGuid": "535599e6-c483-40c8-9048-0d5a100c906c",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": []
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [],
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "CreatingFromServer",
+    "BeforeSaveServer",
+    "CreatedServer",
+    "RefreshClient",
+    "AfterSaveServer"
+  ],
+  "IconResourcesKeys": [],
+  "OperationsClass": "",
+  "Overridden": [
+    "IsVisible",
+    "IsCacheable"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b1937fdb-48c6-4a62-a880-421771ffffd8",
+      "Name": "ConnectionStatus",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+      "Name": "Status",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "55366496-0f4a-4ddd-bc15-b2fdd02797c0",
+      "Name": "Responsible",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "439bb6b6-72f8-4f25-9dd4-9167dff9a13c",
+      "Name": "Name",
+      "IsAncestorMetadata": true,
+      "IsDisplayValue": true,
+      "IsEnabled": false,
+      "Overridden": [
+        "IsEnabled"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "85476bf0-a807-48c7-9644-13f35bf7385b",
+      "Name": "BusinessUnit",
+      "Code": "BusinessUnit",
+      "EntityGuid": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "f5d51fd1-52b9-44e1-83c8-6515a9e8b685",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "bb0d84c1-55e1-4dc7-9c53-95517355df7b",
+      "Name": "ExchangeService",
+      "Code": "ExchangeServic",
+      "EntityGuid": "d6c0fcaf-4ac9-4a6a-9e2c-8fed1e35c08a",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared",
+        "LookupServer"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "PreviousPropertyGuid": "85476bf0-a807-48c7-9644-13f35bf7385b",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "e15a4f2c-c579-42d3-a52c-a23cf326a9c0",
+      "Name": "Login",
+      "CanBeSearch": false,
+      "Code": "Login",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsRequired": true,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "bb0d84c1-55e1-4dc7-9c53-95517355df7b",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "472ac1e3-61b2-4e56-af2c-f9147604ea43",
+      "Name": "Password",
+      "Code": "Password",
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
+      "PreviousPropertyGuid": "e15a4f2c-c579-42d3-a52c-a23cf326a9c0",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "edf7eec7-1edb-4d80-99c9-a95640a7e888",
+      "Name": "OrganizationId",
+      "CanBeSearch": false,
+      "Code": "OrganizationId",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "472ac1e3-61b2-4e56-af2c-f9147604ea43",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "40243333-5c74-412d-aa07-a669abde3d97",
+      "Name": "ExchangeServiceCertificates",
+      "Code": "ExCertificates",
+      "EntityGuid": "6b3c4688-1125-4f7e-a24b-7cd485aab591",
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "PreviousPropertyGuid": "edf7eec7-1edb-4d80-99c9-a95640a7e888",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d7f1542c-d121-4151-ad03-60bd73003b0a",
+      "Name": "HasExchangeServiceCertificates",
+      "CanBeSearch": false,
+      "Code": "HasCert",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "40243333-5c74-412d-aa07-a669abde3d97",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1b31ea4e-8327-4d1e-9964-ac76466f624f",
+      "Name": "FtsId",
+      "CanBeSearch": false,
+      "Code": "FtsId",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d7f1542c-d121-4151-ad03-60bd73003b0a",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "309b7d9c-818f-44d4-bbdd-73d8387371b0",
+      "Name": "CertificateReceiptNotifications",
+      "Code": "ServiceDocCert",
+      "EntityGuid": "afa0c3aa-50ff-453e-87a1-39a696f8917b",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "PreviousPropertyGuid": "1b31ea4e-8327-4d1e-9964-ac76466f624f",
+      "Versions": []
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "AcceptInvitation",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterpartyId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "invitationNote",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "CanSendInvitationFrom",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "CheckAllResponsibleCertificates",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "CheckResponsibleServiceCertificates",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "ConvertAddressToPostalFormat",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "addressTerms",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetActiveBoxes",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.ExchangeCore.IBusinessUnitBox>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetBusinessUnit",
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::Sungero.Company.IBusinessUnit",
+      "ReturnTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetCertificatesOfEmployee",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.CoreEntities.ICertificate>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetConnectedBoxes",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.ExchangeCore.IBusinessUnitBox>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetDefaultExchangeService",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.ExchangeCore.IExchangeService",
+      "ReturnTypeFullName": "Sungero.ExchangeCore.IExchangeService, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEncryptedData",
+      "Parameters": [
+        {
+          "Name": "data",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetPublicClient",
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "System.Object"
+    },
+    {
+      "Name": "GetRootBox",
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+      "ReturnTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetUsedServicesOfBox",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.ExchangeCore.IExchangeService>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetUsedServicesOfBox",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.ExchangeCore.IExchangeService>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "RejectInvitation",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterpartyId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "invitationNote",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "SendInvitation",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "invitationNote",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "SendInvitation",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "organizationId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "counterpartyName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "invitationNote",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "SyncBoxCounterparties",
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ExchangeServiceNotFound",
+    "ExchangeServiceNotSupported",
+    "CounterpartyNotFound",
+    "NoticeSubject",
+    "NoticeActiveSection",
+    "NoticeApprovingByUsSection",
+    "NoticeClosedSection",
+    "NoticeApprovingByCASection",
+    "NoticeLine",
+    "BoxError",
+    "TINNote",
+    "LoginActionTitle",
+    "ConnectionEstablished",
+    "OrganizationFailed",
+    "DuplicateServiceExists",
+    "CertificateNotFound",
+    "LoginChangedToOtherOrganization",
+    "PhoneNumber",
+    "FaxNumber",
+    "EnterPasswordToCheckConnection",
+    "ExchangeServiceConnectionError",
+    "NeedProcessSyncronizationConflict",
+    "SyncronizationConflictProcessed",
+    "ConnectorNoLicense",
+    "LoginIsAlreadyInUse",
+    "BusinessUnitBoxNotActive",
+    "WrongPassword",
+    "ExchangeServiceName",
+    "IsMainCounterpartyBox",
+    "IsRoamingCounterpartyBox",
+    "NoticeThreadSubject",
+    "CertificateValidationError",
+    "FindDocumentDialogTitle",
+    "FindDocumentDialogHyperlink",
+    "FindDocumentDialogInvalidHyperlink",
+    "FindDocumentDialogInvalidExchangeProvider",
+    "DocumentFullInfoDialogTitle",
+    "DocumentFullInfoDialogForbiddenDocuments",
+    "DocumentFullInfoDialogDocuments",
+    "DocumentFullInfoDialogDocumentInfos",
+    "DocumentFullInfoDialogMessages",
+    "DocumentFullInfoDialogNoResult",
+    "DocumentFullInfoDialogAllDocumentsCount",
+    "DocumentFullInfoDialogForbiddenDocumentsCount",
+    "FindDocumentDialogNext",
+    "FindDocumentDialogCancel",
+    "FindDocumentDialogExecuteOnlyAdministratorOrAdvisor"
+  ],
+  "RibbonCardMetadata": {
+    "NameGuid": "10bf9897-b436-4ebf-b73e-8c36e61274da",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "fdc04e09-6616-4d77-95cb-03cbe8f0fb91",
+        "Name": "Login",
+        "ActionGuid": "d552baf1-ef5a-4d6c-8c5e-f016ac430d07",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "ParentGuid": "2744af0e-bdef-48e0-8aab-2ca277524d31",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e3b36bfe-3433-400c-a969-5c9f252212a7",
+        "Name": "OpenLogonUrl",
+        "ActionGuid": "644aae0e-3108-41dd-9b69-98081e4a45b7",
+        "ButtonSize": "Large",
+        "Index": 2,
+        "ParentGuid": "45f3d368-c638-44c0-a209-fbf500249fed",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "9ca7a906-b8d6-44e2-b447-3544f8a4d8ef",
+        "Name": "CheckConnection",
+        "ActionGuid": "7297eee1-4b2c-4974-b12b-e910144c57f5",
+        "ButtonSize": "Large",
+        "Index": 1,
+        "ParentGuid": "2744af0e-bdef-48e0-8aab-2ca277524d31",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "3810865d-10b4-416b-b96f-7c52de82ad83",
+        "Name": "ShowMessageQueueItem",
+        "ActionGuid": "2d3861c2-fa7a-4016-87ac-41923d599eee",
+        "ButtonSize": "Large",
+        "Index": 31,
+        "ParentGuid": "f5671141-d97a-40aa-962c-24aa87a848f1"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "79297e2c-ec00-4117-972e-686260b45a7a",
+        "Name": "FindDocument",
+        "ActionGuid": "266778df-5f74-4eda-8634-959af71eca10",
+        "ButtonSize": "Large",
+        "Index": 29,
+        "ParentGuid": "f5671141-d97a-40aa-962c-24aa87a848f1"
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "2744af0e-bdef-48e0-8aab-2ca277524d31",
+        "Name": "ExchangeSettings",
+        "IconName": "Ribbon_ExchangeSettings_2744af0ebdef48e08aab2ca277524d31.png",
+        "Index": 21,
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "SmallIconName": "Ribbon_ExchangeSettings_small_2744af0ebdef48e08aab2ca277524d31.png",
+        "Versions": []
+      },
+      {
+        "NameGuid": "45f3d368-c638-44c0-a209-fbf500249fed",
+        "Name": "ExchangeService",
+        "IconName": "Ribbon_ExchangeService_45f3d368c63844c0a209fbf500249fed.png",
+        "Index": 22,
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "SmallIconName": "Ribbon_ExchangeService_small_45f3d368c63844c0a209fbf500249fed.png",
+        "Versions": []
+      }
+    ],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "b793fae9-d53e-43f9-a0ab-3c6cbe49ec8b",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

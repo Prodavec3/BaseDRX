@@ -1,0 +1,955 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateAccessRightsType">
+    <mssql><![CDATA[-- Параметры:
+-- {0} - Имя опреации.
+-- {1} - Sid опреации.
+-- {2} - GUID типа сущности.
+-- {3} - Набор операций типа прав.
+-- {4} - Маска разрешенных операций.
+-- {5} - Область типа прав: экземпляр, тип или оба.
+-- {6} - Описание.
+-- {7} - Признак того, является ли тип прав переопределением базового.
+if (select top 1 1 from Sungero_Core_AccessRightTyp where lower(EntityTypeGuid) = '{2}' and Sid = '{1}') is null
+  begin
+    declare @AccessRightTypTableName varchar(30) = 'Sungero_Core_AccessRightTyp'
+    declare @NewId int
+    exec Sungero_System_GetNewId @AccessRightTypTableName, @NewId output
+    insert into [dbo].[Sungero_Core_AccessRightTyp] ([Id], [Name], [EntityTypeGuid], [OperationSet],
+                                                                                             [GrantedMask], [AccessRightsTypeArea], [Description], [Sid],
+                                                                                             [IsOverride], [Discriminator], [Status])
+    values (@NewId, N'{0}', N'{2}', {3}, {4}, N'{5}', N'{6}', N'{1}', {7}, N'34D8054F-43C0-4C6A-A1A6-7EE427D65DC8', 'Active')
+  end
+else
+  begin
+    update Sungero_Core_AccessRightTyp
+    set [Name] = N'{0}',
+          [OperationSet] = {3},
+          [GrantedMask] = {4},
+          [AccessRightsTypeArea] = N'{5}',
+          [Description] = N'{6}',
+          [IsOverride] = {7}
+    where lower(EntityTypeGuid) = '{2}' and Sid = '{1}'
+end]]></mssql>
+    <postgres><![CDATA[-- Параметры:
+-- {0} - Имя опреации.
+-- {1} - Sid опреации.
+-- {2} - GUID типа сущности.
+-- {3} - Набор операций типа прав.
+-- {4} - Маска разрешенных операций.
+-- {5} - Область типа прав: экземпляр, тип или оба.
+-- {6} - Описание.
+-- {7} - Признак того, является ли тип прав переопределением базового.
+DO $$
+DECLARE newId int;
+BEGIN
+  IF NOT EXISTS(SELECT 1 FROM Sungero_Core_AccessRightTyp WHERE EntityTypeGuid = uuid('{2}') AND Sid = '{1}')
+  THEN
+    SELECT INTO newId public.sungero_system_getnewid('Sungero_Core_AccessRightTyp');
+    INSERT INTO Sungero_Core_AccessRightTyp(Discriminator, Id, Name, EntityTypeGuid, OperationSet, GrantedMask, AccessRightsTypeArea, Description, Sid, IsOverride, Status)
+    VALUES (uuid('34D8054F-43C0-4C6A-A1A6-7EE427D65DC8'), newId, '{0}', '{2}', '{3}', '{4}', '{5}', '{6}', '{1}', '{7}', 'Active');
+  ELSE
+    UPDATE Sungero_Core_AccessRightTyp
+    SET Name = '{0}',
+          OperationSet = '{3}',
+          GrantedMask = '{4}',
+          AccessRightsTypeArea = '{5}',
+          Description = '{6}',
+          IsOverride = '{7}'
+    WHERE EntityTypeGuid = uuid('{2}')
+      AND Sid = '{1}';
+  END IF;
+END$$;]]></postgres>
+  </query>
+  <query key="CreateParametersTable">
+    <mssql><![CDATA[-- Создать таблицу параметров.
+if not exists(select 1 from sys.objects where object_id = OBJECT_ID(N'[dbo].[Sungero_Docflow_Params]') and type in (N'U'))
+create table [Sungero_Docflow_Params]
+(
+                [Key] varchar(50),
+                [Value] varchar(max)
+
+constraint PK_Key primary key clustered ([Key])
+                with (PAD_INDEX  = off, STATISTICS_NORECOMPUTE  = off, IGNORE_DUP_KEY = off, ALLOW_ROW_LOCKS  = on, ALLOW_PAGE_LOCKS  = on) on [primary]
+) on [primary]
+
+
+if not exists(select 1 from [dbo].[Sungero_Docflow_Params] where [Key] = 'LastNotificationOfAssignment')
+  insert [Sungero_Docflow_Params] ([Key],Value)
+  values ('LastNotificationOfAssignment', convert(varchar, getutcdate(), 127) + '+0')]]></mssql>
+    <postgres><![CDATA[DO $$
+BEGIN
+  CREATE TABLE IF NOT EXISTS Sungero_Docflow_Params
+  (
+    Key citext NOT NULL CHECK (char_length(Key::text) <= 50),
+    Value citext,
+    PRIMARY KEY (Key)
+  );
+
+  IF NOT EXISTS(SELECT 1 FROM Sungero_Docflow_Params WHERE Key = 'LastNotificationOfAssignment')
+  THEN
+    INSERT INTO Sungero_Docflow_Params(Key, Value) VALUES ('LastNotificationOfAssignment', to_char(CURRENT_TIMESTAMP, 'YYYY-MM-DD"T"HH24:MI:SS.MSOF'));
+  END IF;
+END$$]]></postgres>
+  </query>
+  <query key="CreateSungeroDocregisterCurrentNumbersTable">
+    <mssql><![CDATA[-- Создать табличку очередных номеров журналов регистрации, если её нет.
+if not exists (select * from sys.objects where object_id = OBJECT_ID(N'[dbo].[Sungero_DocRegister_CurrentNumbers]') and type in (N'U'))
+begin
+  create table [dbo].[Sungero_DocRegister_CurrentNumbers]
+  (
+    [DocRegisterId] [int] NOT NULL,
+    [CurrentNumber] [int] NOT NULL,
+    [Month] [int] NOT NULL,
+    [Year] [int] NOT NULL,
+    [LeadDocument] [int] NOT NULL,
+    [Quarter] [int] NOT NULL,
+    [Department] [int] NOT NULL,
+    [BUnit] [int] NOT NULL,
+    [Day] [int] NOT NULL
+  )
+end]]></mssql>
+    <postgres><![CDATA[-- Создать табличку очередных номеров журналов регистрации, если её нет.
+CREATE TABLE IF NOT EXISTS Sungero_DocRegister_CurrentNumbers
+  (
+    DocRegisterId int not null,
+    CurrentNumber int not null,
+    Month int not null,
+    Year int not null,
+    LeadDocument int not null,
+    Quarter int not null,
+    Department int not null,
+    BUnit int not null,
+    Day int not null
+  );]]></postgres>
+  </query>
+  <query key="DropProcedureSungeroDocRegisterGetNextNumber">
+    <mssql><![CDATA[-- Удалить ХП для получение очередных номеров
+if exists (select name from sys.objects where object_id = OBJECT_ID(N'[dbo].[Sungero_DocRegister_GetNextNumber]') and type in (N'P'))
+  drop procedure [dbo].[Sungero_DocRegister_GetNextNumber]]]></mssql>
+    <postgres><![CDATA[-- Удалить ХП для получение очередных номеров
+DROP FUNCTION IF EXISTS Sungero_DocRegister_GetNextNumber();]]></postgres>
+  </query>
+  <query key="CreateProcedureSungeroDocRegisterGetNextNumber">
+    <mssql><![CDATA[-- Создать ХП для получения очередных номеров
+create procedure [dbo].[Sungero_DocRegister_GetNextNumber]
+  @basevalue int,
+  @docregid int,
+  @newmonth int,
+  @newyear int,
+  @leaddoc int,
+  @newquarter int,
+  @newdep int,
+  @newbusinessunit int,
+  @newday int,
+  @result int OUTPUT
+as
+begin
+  if not exists(select * 
+                from [dbo].[Sungero_DocRegister_CurrentNumbers]
+                where [DocRegisterId] = @docregid and [Month] = @newmonth and [Year] = @newyear 
+                  and [LeadDocument] = @leaddoc and [Quarter] = @newquarter and [Department] = @newdep and [BUnit] = @newbusinessunit and [Day] = @newday)
+    begin
+      insert
+        [dbo].[Sungero_DocRegister_CurrentNumbers]([DocRegisterId], [CurrentNumber], [Month], [Year], [LeadDocument], [Quarter], [Department], [BUnit], [Day])
+      values
+        (@docregid, @basevalue, @newmonth, @newyear, @leaddoc, @newquarter, @newdep, @newbusinessunit, @newday)
+      set @result = @basevalue
+    end
+  else
+    update
+      [dbo].[Sungero_DocRegister_CurrentNumbers] with (ROWLOCK)
+    set
+      @result = [CurrentNumber] + 1,
+      [CurrentNumber] = [CurrentNumber] + 1
+    where
+      [DocRegisterId] = @docregid
+      and [Month] = @newmonth
+      and [Year] = @newyear
+      and [LeadDocument] = @leaddoc
+      and [Quarter] = @newquarter
+      and [Department] = @newdep
+      and [BUnit] = @newbusinessunit
+      and [Day] = @newday
+end]]></mssql>
+    <postgres><![CDATA[-- Создать функцию для получения очередных номеров
+CREATE OR REPLACE FUNCTION Sungero_DocRegister_GetNextNumber(
+  basevalue int,
+  docregid int,
+  newmonth int,
+  newyear int,
+  leaddoc int,
+  newquarter int,
+  newdep int,
+  newbusinessunit int,
+  newday int)
+RETURNS int AS $$
+BEGIN
+  IF NOT EXISTS(SELECT *
+                FROM sungero_docregister_currentnumbers
+                WHERE docregisterid = docregid
+                  AND month = newmonth
+                  AND year = newyear
+                  AND leaddocument = leaddoc
+                  AND quarter = newquarter
+                  AND department = newdep
+                  AND bunit = newbusinessunit
+                  AND day = newday)
+  THEN
+    INSERT INTO sungero_docregister_currentnumbers(docregisterid, currentnumber, month, year, leaddocument, quarter, department, bunit, day)
+    VALUES (docregid, basevalue, newmonth, newyear, leaddoc, newquarter, newdep, newbusinessunit, newday);
+    RETURN basevalue;
+  ELSE
+    UPDATE sungero_docregister_currentnumbers
+    SET currentnumber = currentnumber + 1
+    WHERE docregisterid = docregid
+      AND month = newmonth
+      AND year = newyear
+      AND leaddocument = leaddoc
+      AND quarter = newquarter
+      AND department = newdep
+      AND bunit = newbusinessunit
+      AND day = newday;
+    RETURN (SELECT currentnumber
+            FROM sungero_docregister_currentnumbers
+            WHERE docregisterid = docregid
+              AND month = newmonth
+              AND year = newyear
+              AND leaddocument = leaddoc
+              AND quarter = newquarter
+              AND department = newdep
+              AND bunit = newbusinessunit
+              AND day = newday);
+  END IF;
+END;
+$$
+LANGUAGE plpgsql;]]></postgres>
+  </query>
+  <query key="CreateIndicesSungeroDocRegisterCurrentNumber">
+    <mssql><![CDATA[-- Добавить необходимые индексы
+if not exists (select * from sys.indexes where object_id = OBJECT_ID(N'[dbo].[Sungero_DocRegister_CurrentNumbers]') and name = N'Sungero_DocRegister_CurrentNumbers_DocRegisterId')
+  create index [Sungero_DocRegister_CurrentNumbers_DocRegisterId] on [dbo].[Sungero_DocRegister_CurrentNumbers] ([DocRegisterId] ASC)
+if not exists (select * from sys.indexes where object_id = OBJECT_ID(N'[dbo].[Sungero_DocRegister_CurrentNumbers]') and name = N'Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month')
+  create index [Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month] on [dbo].[Sungero_DocRegister_CurrentNumbers] ([DocRegisterId] ASC, [Month])
+if not exists (select * from sys.indexes where object_id = OBJECT_ID(N'[dbo].[Sungero_DocRegister_CurrentNumbers]') and name = N'Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month_Year')
+  create index [Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month_Year] on [dbo].[Sungero_DocRegister_CurrentNumbers] ([DocRegisterId] ASC, [Month], [Year])
+if not exists (select * from sys.indexes where object_id = OBJECT_ID(N'[dbo].[Sungero_DocRegister_CurrentNumbers]') and name = N'Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month_Year_LDoc')
+  create index [Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month_Year_LDoc] on [dbo].[Sungero_DocRegister_CurrentNumbers] ([DocRegisterId] ASC, [Month], [Year], [LeadDocument])]]></mssql>
+    <postgres><![CDATA[-- Добавить необходимые индексы
+CREATE INDEX IF NOT EXISTS Sungero_DocRegister_CurrentNumbers_DocRegisterId ON Sungero_DocRegister_CurrentNumbers (DocRegisterId ASC);
+CREATE INDEX IF NOT EXISTS Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month ON Sungero_DocRegister_CurrentNumbers (DocRegisterId ASC, Month);
+CREATE INDEX IF NOT EXISTS Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month_Year ON Sungero_DocRegister_CurrentNumbers (DocRegisterId ASC, Month, Year);
+CREATE INDEX IF NOT EXISTS Sungero_DocRegister_CurrentNumbers_DocRegisterId_Month_Year_LDoc ON Sungero_DocRegister_CurrentNumbers (DocRegisterId ASC, Month, Year, LeadDocument);]]></postgres>
+  </query>
+  <query key="CreateIndexOnTable">
+    <mssql><![CDATA[if (not exists (select 1 from sys.indexes
+                where object_id = (select object_id from sys.objects where name = '{0}')
+                and name = '{1}'))
+begin
+{2}
+end]]></mssql>
+    <postgres><![CDATA[{2}]]></postgres>
+  </query>
+  <query key="SungeroWFAssignmentIndex0Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [Performer],
+  [Author],
+  [MainTask],
+  [CompletedBy],
+  [Created]
+)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Discriminator, Performer, Author, MainTask, CompletedBy, Created)]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex0Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator] ASC,
+  [Created] ASC,
+  [LifeCycleState_Docflow_Sungero] ASC
+)
+INCLUDE (
+  [RegDate_Docflow_Sungero],
+  [RegState_Docflow_Sungero]
+)
+WITH (
+  PAD_INDEX = OFF,
+  STATISTICS_NORECOMPUTE = OFF,
+  SORT_IN_TEMPDB = OFF,
+  DROP_EXISTING = OFF,
+  ONLINE = OFF,
+  ALLOW_ROW_LOCKS = ON,
+  ALLOW_PAGE_LOCKS = ON
+) ON [PRIMARY]]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Discriminator, Created, LifeCycleState_Docflow_Sungero, RegDate_Docflow_Sungero, RegState_Docflow_Sungero)]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex1Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator] ,
+  [RegState_Docflow_Sungero] ,
+  [RegDate_Docflow_Sungero] DESC,
+  [RegNumber_Docflow_Sungero] DESC,
+  [Created] ASC
+)
+WITH (
+  PAD_INDEX = OFF,
+  STATISTICS_NORECOMPUTE = OFF,
+  SORT_IN_TEMPDB = OFF,
+  DROP_EXISTING = OFF,
+  ONLINE = OFF,
+  ALLOW_ROW_LOCKS = ON,
+  ALLOW_PAGE_LOCKS = ON
+) ON [PRIMARY]]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Discriminator, RegState_Docflow_Sungero, RegDate_Docflow_Sungero DESC, RegNumber_Docflow_Sungero DESC, Created)]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex2Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Index_Docflow_Sungero],
+  [DocRegister_Docflow_Sungero],
+  [Id],
+  [Discriminator]
+)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Index_Docflow_Sungero, DocRegister_Docflow_Sungero, Id, Discriminator)]]></postgres>
+  </query>
+  <query key="DropTable">
+    <mssql><![CDATA[if exists (select * from information_schema.tables where table_name = '{0}')
+  drop table {0}]]></mssql>
+    <postgres><![CDATA[DROP TABLE IF EXISTS {0}]]></postgres>
+  </query>
+  <query key="CreateTempTableForRights">
+    <mssql><![CDATA[create table {0} ([Id] [int] NOT NULL, [ReportSessionId] varchar(256) NULL)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0} (Id int NOT NULL, ReportSessionId citext NULL)]]></postgres>
+  </query>
+  <query key="InsertIntoTempTableForRights">
+    <mssql><![CDATA[insert into {0} ([Id]) values ({1})]]></mssql>
+    <postgres><![CDATA[INSERT INTO {0} (Id) VALUES ({1})]]></postgres>
+  </query>
+  <query key="ReadLicense">
+    <mssql><![CDATA[select [Id], [Key] from dbo.Sungero_System_License]]></mssql>
+    <postgres><![CDATA[SELECT Id, Key FROM Sungero_System_License]]></postgres>
+  </query>
+  <query key="DeleteLicense">
+    <mssql><![CDATA[delete from dbo.Sungero_System_License]]></mssql>
+    <postgres><![CDATA[DELETE FROM Sungero_System_License]]></postgres>
+  </query>
+  <query key="RestoreLicense">
+    <mssql><![CDATA[insert into dbo.Sungero_System_License ([Id], [Key]) values (@id, @key)]]></mssql>
+    <postgres><![CDATA[INSERT INTO Sungero_System_License (Id, Key) values (@id, @key)]]></postgres>
+  </query>
+  <query key="DropProcedureSungeroDocRegisterSetCurrentNumber">
+    <mssql><![CDATA[-- Не акльтуально, т.к. процедура ненужна]]></mssql>
+    <postgres><![CDATA[-- Процедуры нужно удалять, т.к. create or replace function не работает при изменении параметров.
+DROP FUNCTION IF EXISTS Sungero_DocRegister_SetCurrentNumber();]]></postgres>
+  </query>
+  <query key="CreateProcedureSungeroDocRegisterSetCurrentNumber">
+    <mssql><![CDATA[-- Не акльтуально, т.к. процедура ненужна]]></mssql>
+    <postgres><![CDATA[create or replace function Sungero_DocRegister_SetCurrentNumber(
+  docRegId int,
+  currNumb int,
+  newMonth int,
+  newYear int,
+  leadDoc int,
+  newQuarter int,
+  newdep int,
+  newbusinessUnit int,
+  newday int)
+  returns void as $$
+begin
+  if exists (select *
+             from Sungero_DocRegister_CurrentNumbers
+             where DocRegisterId = docRegId
+               and Month = newMonth
+               and Year = newYear
+               and LeadDocument = leadDoc
+               and Quarter = newQuarter
+               and Department = newdep
+               and BUnit = newbusinessUnit
+               and Day = newday) then
+    update Sungero_DocRegister_CurrentNumbers
+       set CurrentNumber = currNumb
+     where DocRegisterId = docRegId
+       and Month = newMonth
+       and Year = newYear
+       and LeadDocument = leadDoc
+       and Quarter = newQuarter
+       and Department = newdep
+       and BUnit = newbusinessUnit
+       and Day = newday;
+  else
+    insert into Sungero_DocRegister_CurrentNumbers (DocRegisterId, CurrentNumber, Month, Year, LeadDocument, Quarter, Department, BUnit, Day)
+    values (docRegId, currNumb, newMonth, newYear, leadDoc, newQuarter, newdep, newbusinessUnit, newday);
+  end if;
+end;
+$$
+language plpgsql;]]></postgres>
+  </query>
+  <query key="InsertOrUpdateDocflowParamsValue">
+    <mssql><![CDATA[if not exists(select 1 from [dbo].[Sungero_Docflow_Params] where [Key] = '{0}')
+  insert [Sungero_Docflow_Params] ([Key],Value) values ('{0}', '{1}')
+else UPDATE Sungero_Docflow_Params SET Value = '{1}' WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[do $$
+begin
+  if not exists(select 1 from Sungero_Docflow_Params where Key = '{0}')
+  then
+    insert into Sungero_Docflow_Params (Key, Value) values ('{0}', '{1}');
+  else
+    UPDATE Sungero_Docflow_Params SET Value = '{1}' WHERE (Key = '{0}');
+  end if;
+end$$;]]></postgres>
+  </query>
+  <query key="SelectDocflowParamsValue">
+    <mssql><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE (Key = '{0}')]]></postgres>
+  </query>
+  <query key="DeleteReportData">
+    <mssql><![CDATA[delete from {0}
+where [ReportSessionId] = '{1}']]></mssql>
+    <postgres><![CDATA[DELETE FROM {0}
+WHERE ReportSessionId = '{1}']]></postgres>
+  </query>
+  <query key="GetAllRecipientMembers">
+    <mssql><![CDATA[exec sungero_core_getallrecipientmembers {0}]]></mssql>
+    <postgres><![CDATA[select sungero_core_getallrecipientmembers({0})]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex3Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [DocumentDate_Docflow_Sungero],
+  [RegState_Docflow_Sungero],
+  [DocumentKind_Docflow_Sungero]
+) include (SecureObject)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  Discriminator, 
+  DocumentDate_Docflow_Sungero, 
+  RegState_Docflow_Sungero,
+  DocumentKind_Docflow_Sungero,
+  /*include*/ SecureObject
+)]]></postgres>
+  </query>
+  <query key="OneFieldIndexQuery">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [{2}]
+)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  {2}
+)]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex4Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [DocumentKind_Docflow_Sungero]
+)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  Discriminator, 
+  DocumentKind_Docflow_Sungero
+)]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex5Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [DocumentDate_Docflow_Sungero],
+  [LifeCycleState_Docflow_Sungero],
+  [IntApprState_Docflow_Sungero]
+) include (SecureObject)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  Discriminator, 
+  DocumentDate_Docflow_Sungero, 
+  LifeCycleState_Docflow_Sungero,
+  IntApprState_Docflow_Sungero,
+  /*include*/ SecureObject
+)]]></postgres>
+  </query>
+  <query key="SungeroWFTaskIndex1Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [ExecutionState_RecMan_Sungero],
+  [IsCompound_RecMan_Sungero],
+  [Status]
+) include (AssignedBy_RecMan_Sungero, Supervisor_RecMan_Sungero, AssigneeTAI_RecMan_Sungero, MainTask)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  Discriminator, 
+  ExecutionState_RecMan_Sungero, 
+  IsCompound_RecMan_Sungero,
+  Status,
+  /*include*/ AssignedBy_RecMan_Sungero,
+  Supervisor_RecMan_Sungero,
+  AssigneeTAI_RecMan_Sungero,
+  MainTask
+)]]></postgres>
+  </query>
+  <query key="SungeroWFTaskIndex2Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [Status]
+) include (DeadlineTAI_RecMan_Sungero, IsCompound_RecMan_Sungero, ActualDate_RecMan_Sungero, MainTask)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  Discriminator, 
+  Status,
+  /*include*/ DeadlineTAI_RecMan_Sungero,
+  IsCompound_RecMan_Sungero,
+  ActualDate_RecMan_Sungero,
+  MainTask
+)]]></postgres>
+  </query>
+  <query key="SungeroContentEDocIndex6Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [DocumentDate_Docflow_Sungero],
+  [RegState_Docflow_Sungero]
+) include (SecureObject)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} 
+(
+  Discriminator, 
+  DocumentDate_Docflow_Sungero, 
+  RegState_Docflow_Sungero,
+  SecureObject
+)]]></postgres>
+  </query>
+  <query key="AddGrantRightsTypeToDocflowParams" />
+  <query key="SelectDocflowParamsValueByKey">
+    <mssql><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE ([Key] = @key)]]></mssql>
+    <postgres><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE (Key = @key)]]></postgres>
+  </query>
+  <query key="CreateTableForExpiringPowerOfAttorney">
+    <mssql><![CDATA[if OBJECT_ID('Sungero_Docflow_ExpiringPoA') is null
+create table [Sungero_Docflow_ExpiringPoA] (EDoc int unique, Task int);]]></mssql>
+    <postgres><![CDATA[CREATE TABLE IF NOT EXISTS Sungero_Docflow_ExpiringPoA
+  (
+    EDOC integer,
+    Task integer,
+    UNIQUE(EDOC)
+  )]]></postgres>
+  </query>
+  <query key="SelectDocumentWithSendedTask">
+    <mssql><![CDATA[select EDoc
+from {0}
+where [Task] is not null]]></mssql>
+    <postgres><![CDATA[select EDoc
+from {0}
+where Task is not null]]></postgres>
+  </query>
+  <query key="DeleteDocumentIdsWithoutTask">
+    <mssql><![CDATA[delete from {0}
+where
+  [Task] is null
+  and EDoc in ({1})]]></mssql>
+    <postgres><![CDATA[delete from {0}
+ where
+  Task is not null
+  and EDoc in ({1})]]></postgres>
+  </query>
+  <query key="AddExpiringDocumentsToTable">
+    <default><![CDATA[insert into {0} ( EDoc ) values ({1})]]></default>
+  </query>
+  <query key="AddTaskExpiringDocumentTable">
+    <mssql><![CDATA[if not exists
+ (
+    select
+      1
+    from
+      [dbo].[{0}]
+    where
+      [EDoc] = {1}
+  )
+  insert
+    [{0}] ([EDoc], [Task])  values ({1}, {2})
+  else
+    update
+      {0}
+    set
+      [Task] = {2}
+    where
+      [EDoc] = {1}]]></mssql>
+    <postgres><![CDATA[DO
+$$
+BEGIN
+if not exists
+  (select
+    1
+  from
+    {0}
+  where
+    EDoc = {1})
+then
+  insert into
+    {0} (EDoc, Task)  values ({1}, {2});
+else
+  update
+    {0}
+  set
+    Task = {2}
+  where
+    EDoc = {1};
+end if;
+END$$]]></postgres>
+  </query>
+  <query key="CountNullExpiringTasks">
+    <mssql><![CDATA[select
+  count(*)
+from
+  {0}
+where
+  [Task] is null]]></mssql>
+    <postgres><![CDATA[select
+  count(*)
+from
+  {0}
+where
+  Task is null]]></postgres>
+  </query>
+  <query key="UpdateLastExpiringNotificationDate">
+    <mssql><![CDATA[if not exists
+  (
+    select
+      1
+    from
+      [dbo].[Sungero_Docflow_Params]
+    where
+      [Key] = '{0}'
+  )
+  insert
+    [Sungero_Docflow_Params] ([Key],Value) values ('{0}', '{1}')
+  else
+    update
+      Sungero_Docflow_Params
+    set
+      Value = '{1}'
+    where
+      [Key] = '{0}']]></mssql>
+    <postgres><![CDATA[DO
+$$
+BEGIN
+if not exists
+  (select
+    1
+  from
+    Sungero_Docflow_Params
+  where
+    Key = '{0}'
+  )
+then
+  insert into
+    Sungero_Docflow_Params (Key,Value) values ('{0}', '{1}');
+else
+  update
+    Sungero_Docflow_Params
+  set
+    Value = '{1}'
+  where
+    Key = '{0}';
+end if;
+END$$]]></postgres>
+  </query>
+  <query key="ClearExpiringTableWithoutTasks">
+    <mssql><![CDATA[delete from
+  {0}
+where
+  [Task] is null]]></mssql>
+    <postgres><![CDATA[delete from
+  {0}
+where
+  Task is null]]></postgres>
+  </query>
+  <query key="ClearExpiringTableWithTasks">
+    <mssql><![CDATA[delete from
+  {0}
+where
+  [Task] is not null]]></mssql>
+    <postgres><![CDATA[delete from
+  {0}
+where
+  Task is not null]]></postgres>
+  </query>
+  <query key="CreateStoragePolicySettings">
+    <mssql><![CDATA[if exists (select * from information_schema.tables where table_name = '{0}')
+  drop table {0}
+
+select r.Storage, rdk.DocumentKind,
+  case when r.DocDateType = 'DocumentDate' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as DocumentDate,
+  case when r.DocDateType = 'Modified' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as Modified,
+  case when r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' then r.[Priority] else r.[Priority] + (select coalesce(max(r2.[Priority]), 0) from Sungero_Docflow_StoragePolicy r2 where r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') end as [Priority],
+  case when coalesce(r.NextRetention, '{1}') <= '{1}' then 1 else 0 end as NeedRetention
+into {0}
+  from Sungero_Docflow_StoragePolicy r
+  join Sungero_Docflow_SPolicyDocKind rdk
+    on rdk.StoragePolicy = r.Id
+	where r.Status = 'Active';
+
+insert into {0}
+select r.Storage, rdk.Id,
+  case when r.DocDateType = 'DocumentDate' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as DocumentDate,
+  case when r.DocDateType = 'Modified' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as Modified,
+  case when r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' then r.[Priority] else r.[Priority] + (select coalesce(max(r2.[Priority]), 0) from Sungero_Docflow_StoragePolicy r2 where r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') end as [Priority],
+  case when coalesce(r.NextRetention, '{1}') <= '{1}' then 1 else 0 end as NeedRetention
+  from Sungero_Docflow_StoragePolicy r
+  join Sungero_Docflow_DocumentKind rdk
+    on 1=1
+	where r.Status = 'Active'
+	  and not exists (select 1 from Sungero_Docflow_SPolicyDocKind k where k.StoragePolicy = r.Id);
+	  
+insert into {0}
+select s.Id, rdk.Id, '2100-01-01 00:00:00.000', '2100-01-01 00:00:00.000', -1, 1
+  from Sungero_Core_Storage s
+  join Sungero_Docflow_DocumentKind rdk
+    on 1=1
+  where s.IsDefault = 1;]]></mssql>
+    <postgres><![CDATA[DO $$
+BEGIN
+  IF EXISTS (SELECT * FROM information_schema.tables WHERE table_name = LOWER('{0}')) THEN
+    DROP TABLE {0};
+  END IF;
+END $$;
+
+SELECT r.Storage, rdk.DocumentKind,
+  CASE 
+    WHEN r.DocDateType = 'DocumentDate' 
+    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
+    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+  END AS DocumentDate,
+  CASE 
+    WHEN r.DocDateType = 'Modified' 
+    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
+    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+  END AS Modified,
+  CASE 
+    WHEN r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' 
+    THEN r.Priority 
+    ELSE r.Priority + (SELECT COALESCE(MAX(r2.Priority), 0) FROM Sungero_Docflow_StoragePolicy r2 WHERE r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') 
+  END AS Priority,
+  CASE 
+    WHEN COALESCE(r.NextRetention, '{1}') <= '{1}' 
+    THEN 1 
+    ELSE 0
+  END AS NeedRetention
+INTO {0}
+  FROM Sungero_Docflow_StoragePolicy r
+  JOIN Sungero_Docflow_SPolicyDocKind rdk
+    ON rdk.StoragePolicy = r.Id
+  WHERE r.Status = 'Active';
+
+INSERT INTO {0}
+SELECT r.Storage, rdk.Id,
+  CASE 
+    WHEN r.DocDateType = 'DocumentDate' 
+    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
+    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+  END AS DocumentDate,
+  CASE 
+    WHEN r.DocDateType = 'Modified' 
+    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
+    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+  END AS Modified,
+  CASE 
+    WHEN r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' 
+    THEN r.Priority 
+    ELSE r.Priority + (SELECT COALESCE(MAX(r2.Priority), 0) FROM Sungero_Docflow_StoragePolicy r2 WHERE r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') 
+  END AS Priority,
+  CASE 
+    WHEN COALESCE(r.NextRetention, '{1}') <= '{1}' 
+    THEN 1 
+    ELSE 0 
+  END AS NeedRetention
+  FROM Sungero_Docflow_StoragePolicy r
+  JOIN Sungero_Docflow_DocumentKind rdk
+    ON 1=1
+    WHERE r.Status = 'Active'
+      AND NOT EXISTS (SELECT 1 FROM Sungero_Docflow_SPolicyDocKind k WHERE k.StoragePolicy = r.Id);
+      
+INSERT INTO {0}
+SELECT s.Id, rdk.Id, 
+       TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS'), 
+       TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS'), -1, 1
+  FROM Sungero_Core_Storage s
+  JOIN Sungero_Docflow_DocumentKind rdk
+    ON 1=1
+  WHERE s.IsDefault = TRUE;]]></postgres>
+  </query>
+  <query key="SelectDocumentsToTransfer">
+    <default><![CDATA[select doc.Id, t.Storage
+	from Sungero_Content_EDoc doc
+	join {0} t
+	  on t.DocumentKind = doc.DocumentKind_Docflow_Sungero
+	  and doc.DocumentDate_Docflow_Sungero <= t.DocumentDate
+	  and doc.Modified <= t.Modified
+	where t.Priority = (select max(tt.Priority) 
+	                      from {0} tt 
+						  where tt.DocumentKind = doc.DocumentKind_Docflow_Sungero
+	                        and doc.DocumentDate_Docflow_Sungero <= tt.DocumentDate
+	                        and doc.Modified <= tt.Modified)
+	and t.Storage != doc.Storage_Docflow_Sungero
+	and doc.Storage_Docflow_Sungero is not null
+	and t.NeedRetention = 1]]></default>
+  </query>
+  <query key="SungeroContentEDocIndex7Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1}
+ON {0} (DocumentKind_Docflow_Sungero, DocumentDate_Docflow_Sungero, Modified, Storage_Docflow_Sungero)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1}
+ON {0} (DocumentKind_Docflow_Sungero, DocumentDate_Docflow_Sungero, Modified, Storage_Docflow_Sungero);]]></postgres>
+  </query>
+  <query key="ConvertDocumentKindsAccessRights">
+    <mssql><![CDATA[declare @documentKindTypeGuid uniqueidentifier
+declare @accessRightTypeSid uniqueidentifier
+declare @documentKindId int
+declare @recipientId int
+declare @operations int 
+declare @secureObjectid int
+declare @accessRightsTypeId int
+declare @accessRightsId int
+declare @cursor cursor
+declare @accessctrlentNewId int
+declare @accessrightentNewId int
+
+set @documentKindTypeGuid = '14a59623-89a2-4ea8-b6e9-2ad4365f358c'
+set @accessRightTypeSid = 'f3c5d7c0-c5c3-4957-add6-193a2f44f267'
+set @recipientId = (select r.id from sungero_core_recipient r where r.sid = '440103EA-A766-47A8-98AD-5260CA32DE46')
+set @operations = 16777216;
+set @accessctrlentNewId = {0};
+set @accessrightentNewId = {1};
+
+begin
+  set @accessRightsTypeId = (select art.id from sungero_core_accessrighttyp art where art.sid = @accessRightTypeSid)
+  
+  if (@accessRightsTypeId is not null)
+  begin
+    -- Выдача экземплярных прав в sungero_system_accessctrlent на каждый вид документа.
+    set @cursor = cursor for select id from sungero_docflow_documentkind dk
+      where not exists(select 1 from sungero_system_accessctrlent ace where ace.granted = 'True' and 
+                    ace.operationset = @operations and
+                    ace.recipient = @recipientid and
+                    ace.secureobject = (select so.id from sungero_system_secureobject so where so.entityid = dk.id and so.entitytypeguid = dk.discriminator))
+    
+    open @cursor
+    fetch next from @cursor into @documentKindId
+    
+    while @@FETCH_STATUS = 0
+    begin
+      set @secureObjectId = (select so.id from sungero_system_secureobject so where so.entityid = @documentKindId and so.entitytypeguid = @documentKindTypeGuid)
+      if (@secureObjectId is not null)
+      begin
+        insert into sungero_system_accessctrlent(id, granted, operationset, recipient, secureobject)
+        values (@accessctrlentNewId, 'True', @operations, @recipientId, @secureObjectId);
+        set @accessctrlentNewId = @accessctrlentNewId + 1;
+      end
+    
+      fetch next from @cursor into @documentKindId
+    end
+    close @cursor
+      
+    -- Выдача экземплярных прав в sungero_core_accessrightent на каждый вид документа.
+    
+    set @cursor = cursor for select id from sungero_docflow_documentkind dk
+      where not exists(select 1 from sungero_core_accessrightent aren where 
+                        aren.accessrights = (select ar.id from sungero_core_accessrights ar where  ar.entityid = dk.id and ar.entitytypeguid = dk.discriminator) and 
+                   			aren.recipient = @recipientid and
+                   			aren.accessrightstype = @accessRightsTypeId)
+    
+    open @cursor
+    fetch next from @cursor into @documentKindId
+    
+    while @@FETCH_STATUS = 0
+    begin
+      set @accessRightsId = (select ar.id from sungero_core_accessrights ar where ar.entityid = @documentKindId and ar.entitytypeguid = @documentKindTypeGuid)
+      if (@accessRightsId is not null)
+      begin
+        insert into sungero_core_accessrightent (id, accessrights, recipient, accessrightstype)
+        values (@accessrightentNewId, @accessRightsId, @recipientId, @accessRightsTypeId);
+        set @accessrightentNewId = @accessrightentNewId + 1;
+      end 
+    
+      fetch next from @cursor into @documentKindId
+    end
+    close @cursor
+  end
+end]]></mssql>
+    <postgres><![CDATA[DO $$
+declare documentKindTypeGuid uuid;
+declare accessRightTypeSid uuid;
+declare documentKindId int;
+declare recipientId int;
+declare operations int; 
+declare secureObjectid int;
+declare accessRightsTypeId int;
+declare accessRightsId int;
+declare accessctrlentNewId int;
+declare accessrightentNewId int;
+
+begin
+	documentKindTypeGuid := '14a59623-89a2-4ea8-b6e9-2ad4365f358c';
+  accessRightTypeSid := 'f3c5d7c0-c5c3-4957-add6-193a2f44f267';
+	recipientId := (select r.id from sungero_core_recipient r where r.sid = '440103EA-A766-47A8-98AD-5260CA32DE46');
+  operations := 16777216;
+  accessctrlentNewId := {0};
+  accessrightentNewId := {1};
+
+  accessRightsTypeId := (select art.id from sungero_core_accessrighttyp art where art.sid = accessRightTypeSid);
+  
+  if (accessRightsTypeId is not null) then 
+    -- Выдача экземплярных прав в sungero_system_accessctrlent на каждый вид документа.
+    for documentKindId in select id from sungero_docflow_documentkind dk
+      where not exists(select 1 from sungero_system_accessctrlent ace where ace.granted = true and 
+                    ace.operationset = operations and
+                    ace.recipient = recipientid and
+                    ace.secureobject = (select so.id from sungero_system_secureobject so where so.entityid = dk.id and so.entitytypeguid = dk.discriminator))
+    loop
+      secureObjectId := (select so.id from sungero_system_secureobject so where so.entityid = documentKindId and so.entitytypeguid = documentKindTypeGuid);
+      if (secureObjectId is not null)
+      then
+        insert into sungero_system_accessctrlent(id, granted, operationset, recipient, secureobject)
+        values (accessctrlentNewId, true, operations, recipientId, secureObjectId);
+        accessctrlentNewId := accessctrlentNewId + 1;
+      end if;
+    end loop;
+    
+    -- Выдача экземплярных прав в sungero_core_accessrightent на каждый вид документа.
+    for documentKindId in select id from sungero_docflow_documentkind dk
+      where not exists(select 1 from sungero_core_accessrightent aren where 
+                        aren.accessrights = (select ar.id from sungero_core_accessrights ar where  ar.entityid = dk.id and ar.entitytypeguid = dk.discriminator) and 
+                   			aren.recipient = recipientid and
+                   			aren.accessrightstype = accessRightsTypeId)
+    loop
+      accessRightsId = (select ar.id from sungero_core_accessrights ar where ar.entityid = documentKindId and ar.entitytypeguid = documentKindTypeGuid);
+      if (accessRightsId is not null)
+      then
+        insert into sungero_core_accessrightent (id, accessrights, recipient, accessrightstype)
+        values (accessrightentNewId, accessRightsId, recipientId, accessRightsTypeId);
+        accessrightentNewId := accessrightentNewId + 1;
+      end if;
+    end loop;
+  end if;
+end $$;]]></postgres>
+  </query>
+  <query key="SungeroWFAssignmentIndex1Query">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  [Discriminator],
+  [Performer],
+  [Status],
+  [Deadline],
+  [Completed],
+  [Created]
+)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Discriminator, Performer, Status, Deadline, Completed, Created)]]></postgres>
+  </query>
+  <query key="ReservIdsQuery">
+    <mssql><![CDATA[Declare @id int
+exec Sungero_System_GetNewId '{0}', @id output, {1}
+select @id]]></mssql>
+    <postgres><![CDATA[select sungero_system_GetNewId('{0}', {1});]]></postgres>
+  </query>
+</queries>

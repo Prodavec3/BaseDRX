@@ -1,0 +1,98 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "fa6cf309-21c1-4c6f-8221-6ad7d332ea33",
+  "Name": "ProjectClassifier",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "ProjectClassif",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "87cad92b-ef80-4ebb-90a7-54e2c7920bf1",
+      "Name": "Project",
+      "CanBeSearch": false,
+      "Code": "Project",
+      "EntityGuid": "4383f2ff-56e6-46f4-b4ef-cc17e6aeef40",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false,
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0fd0e9eb-af19-4593-9367-2ab71ad02dec",
+      "Name": "FolderName",
+      "CanBeSearch": false,
+      "Code": "FolderName",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "87cad92b-ef80-4ebb-90a7-54e2c7920bf1",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "29b2e089-5ce8-40e5-9314-e4b7af9aba8f",
+      "Name": "DocumentKind",
+      "CanBeSearch": false,
+      "Code": "DocumentKind",
+      "EntityGuid": "14a59623-89a2-4ea8-b6e9-2ad4365f358c",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "0fd0e9eb-af19-4593-9367-2ab71ad02dec",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ff7da1f8-d5c1-48a1-bd1f-a611d4234f58",
+      "Name": "Folder",
+      "CanBeSearch": false,
+      "Code": "Folder",
+      "EntityGuid": "271898c8-18ca-4192-9892-e27b273ce5fc",
+      "FlatListInStandaloneLookup": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "29b2e089-5ce8-40e5-9314-e4b7af9aba8f",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "1c3c4e47-a259-4010-a84e-98bddec4ea6c",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "52d7ead6-1290-4a4f-9f16-9d0376a12ad7",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

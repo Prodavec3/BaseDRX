@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Сведения о документе обмена</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Сведения о документе обмена</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Сведения о документах обмена</value>
+  </data>
+  <data name="Property_Document" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="Property_Box" xml:space="preserve">
+    <value>Абонентский ящик</value>
+  </data>
+  <data name="Property_ServiceDocumentId" xml:space="preserve">
+    <value>ИД документа в СО</value>
+  </data>
+  <data name="Property_VersionId" xml:space="preserve">
+    <value>ИД версии документа</value>
+  </data>
+  <data name="Property_ServiceMessageId" xml:space="preserve">
+    <value>ИД сообщения</value>
+  </data>
+  <data name="Property_Counterparty" xml:space="preserve">
+    <value>Контрагент</value>
+  </data>
+  <data name="Property_NeedSign" xml:space="preserve">
+    <value>Требует подписания</value>
+  </data>
+  <data name="Property_MessageType" xml:space="preserve">
+    <value>Тип сообщения</value>
+  </data>
+  <data name="Enum_MessageType_Incoming" xml:space="preserve">
+    <value>Входящее</value>
+  </data>
+  <data name="Enum_MessageType_Outgoing" xml:space="preserve">
+    <value>Исходящее</value>
+  </data>
+  <data name="ControlGroup_9057168b2b31462a95e13afb0588ad0e" xml:space="preserve">
+    <value>Информация о документе обмена</value>
+  </data>
+  <data name="Property_MessageDate" xml:space="preserve">
+    <value>Дата отправки</value>
+  </data>
+  <data name="Property_RevocationStatus" xml:space="preserve">
+    <value>Статус аннулирования</value>
+  </data>
+  <data name="Enum_RevocationStatus_None" xml:space="preserve">
+    <value>Нет запросов</value>
+  </data>
+  <data name="Enum_RevocationStatus_Waiting" xml:space="preserve">
+    <value>Получен запрос на аннулирование</value>
+  </data>
+  <data name="Enum_RevocationStatus_Revoked" xml:space="preserve">
+    <value>Аннулирован</value>
+  </data>
+  <data name="Property_OutgoingStatus" xml:space="preserve">
+    <value>Результат согласования</value>
+  </data>
+  <data name="Enum_OutgoingStatus_Signed" xml:space="preserve">
+    <value>Подписано</value>
+  </data>
+  <data name="Enum_OutgoingStatus_Rejected" xml:space="preserve">
+    <value>Отказано</value>
+  </data>
+  <data name="Property_ExchangeState" xml:space="preserve">
+    <value>Электронный обмен</value>
+  </data>
+  <data name="Enum_ExchangeState_Received" xml:space="preserve">
+    <value>Получен</value>
+  </data>
+  <data name="Enum_ExchangeState_Sent" xml:space="preserve">
+    <value>Отправлен контрагенту</value>
+  </data>
+  <data name="Enum_ExchangeState_Signed" xml:space="preserve">
+    <value>Подписан обеими сторонами</value>
+  </data>
+  <data name="Enum_ExchangeState_Rejected" xml:space="preserve">
+    <value>Отказано в подписании</value>
+  </data>
+  <data name="Enum_ExchangeState_SignRequired" xml:space="preserve">
+    <value>Ожидается наша подпись</value>
+  </data>
+  <data name="Enum_ExchangeState_Terminated" xml:space="preserve">
+    <value>Аннулирован</value>
+  </data>
+  <data name="Enum_ExchangeState_Obsolete" xml:space="preserve">
+    <value>Аннулирован</value>
+  </data>
+  <data name="Enum_ExchangeState_SignAwaited" xml:space="preserve">
+    <value>Ожидается подпись контрагента</value>
+  </data>
+  <data name="Property_RevocationTask" xml:space="preserve">
+    <value>Задача на аннулирование</value>
+  </data>
+  <data name="Property_InvoiceState" xml:space="preserve">
+    <value>Статус счета-фактуры</value>
+  </data>
+  <data name="Enum_InvoiceState_Rejected" xml:space="preserve">
+    <value>Запрошено уведомление об уточнении</value>
+  </data>
+  <data name="Property_RootBox" xml:space="preserve">
+    <value>Ведущий аб. ящик</value>
+  </data>
+  <data name="Property_DeliveryConfirmationStatus" xml:space="preserve">
+    <value>Извещение о получении</value>
+  </data>
+  <data name="Enum_DeliveryConfirmationStatus_NotRequired" xml:space="preserve">
+    <value>Не требуется</value>
+  </data>
+  <data name="Enum_DeliveryConfirmationStatus_Sent" xml:space="preserve">
+    <value>Отправлено</value>
+  </data>
+  <data name="Property_ServiceCounterpartyId" xml:space="preserve">
+    <value>ИД контрагента в СО</value>
+  </data>
+  <data name="Property_ServiceDocuments" xml:space="preserve">
+    <value>Служебные документы</value>
+  </data>
+  <data name="Property_ReceiverSignId" xml:space="preserve">
+    <value>ИД подписи получателя</value>
+  </data>
+  <data name="Property_SenderSignId" xml:space="preserve">
+    <value>ИД подписи отправителя</value>
+  </data>
+  <data name="Property_ExternalBuyerTitleId" xml:space="preserve">
+    <value>Сервисный ИД титула покупателя</value>
+  </data>
+  <data name="Property_StageId" xml:space="preserve">
+    <value>ИД этапа</value>
+  </data>
+  <data name="ControlGroup_d4cdd07b229f466e91fc4395af73af32" xml:space="preserve">
+    <value>Служебные документы</value>
+  </data>
+  <data name="ControlGroup_f3967adf69634fd89a530e89cfe3d5a8" xml:space="preserve">
+    <value>Состояние документооборота</value>
+  </data>
+  <data name="Property_BuyerAcceptanceStatus" xml:space="preserve">
+    <value>Статус приемки</value>
+  </data>
+  <data name="Enum_BuyerAcceptanceStatus_Accepted" xml:space="preserve">
+    <value>Принято без разногласий</value>
+  </data>
+  <data name="Enum_BuyerAcceptanceStatus_PartiallyAccepted" xml:space="preserve">
+    <value>Принято с разногласиями</value>
+  </data>
+  <data name="Enum_BuyerAcceptanceStatus_Rejected" xml:space="preserve">
+    <value>Не принято</value>
+  </data>
+</root>

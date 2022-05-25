@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TaskSubject" xml:space="preserve">
+    <value>Action item:</value>
+  </data>
+  <data name="ControlNoticeSubject" xml:space="preserve">
+    <value>You are appointed as a supervisor for the action item:</value>
+  </data>
+  <data name="ActionItemsNotFilled" xml:space="preserve">
+    <value>Add at least one part of action item to the compound action item.</value>
+  </data>
+  <data name="WorkFromActionItemIsCompleted" xml:space="preserve">
+    <value>Action item is executed by assignee {0}:</value>
+  </data>
+  <data name="ControlWorkFromJob" xml:space="preserve">
+    <value>Accept work:</value>
+  </data>
+  <data name="SubjectWithDocument" xml:space="preserve">
+    <value> {0}</value>
+  </data>
+  <data name="SentToCoAssignee" xml:space="preserve">
+    <value>Sent to co-assignee.</value>
+  </data>
+  <data name="WorkFromActionItemIsAccepted" xml:space="preserve">
+    <value>Work accepted:</value>
+  </data>
+  <data name="NoticeSubjectWithoutDoc" xml:space="preserve">
+    <value>Execution stopped</value>
+  </data>
+  <data name="DeadlineSubActionItemExecution" xml:space="preserve">
+    <value>Deadline date of the current action item must be less than deadline date of the parent one - {0}.</value>
+  </data>
+  <data name="NumberIsNotPositive" xml:space="preserve">
+    <value>Sequence numbers must be positive integers.</value>
+  </data>
+  <data name="ActionItemExecutionSubject" xml:space="preserve">
+    <value>Execute:</value>
+  </data>
+  <data name="OnControl" xml:space="preserve">
+    <value>Action item is under control. Supervisor - {0}. </value>
+  </data>
+  <data name="YouAreAdditionalAssignee" xml:space="preserve">
+    <value>You are assigned as a co-assignee.</value>
+  </data>
+  <data name="YouAreResponsibleAssignee" xml:space="preserve">
+    <value>You are assigned as a responsible assignee.</value>
+  </data>
+  <data name="YouAreAssignee" xml:space="preserve">
+    <value>You are assigned as an assignee.</value>
+  </data>
+  <data name="OnControlWithResponsible" xml:space="preserve">
+    <value>Action item controlled by {0}. </value>
+  </data>
+  <data name="NoActiveChildActionItems" xml:space="preserve">
+    <value>There are no active child action items now.</value>
+  </data>
+  <data name="ComponentActionItemExecutionSubject" xml:space="preserve">
+    <value>Compound action item:</value>
+  </data>
+  <data name="StopAdditionalActionItemExecutions" xml:space="preserve">
+    <value>What to do with action items in process?</value>
+  </data>
+  <data name="AutoAbortingReason" xml:space="preserve">
+    <value>Action item was aborted automatically as the parent action item was executed.</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="WorkFromActionItemIsCreated" xml:space="preserve">
+    <value>Work started:</value>
+  </data>
+  <data name="StateViewActionItemOnExecution" xml:space="preserve">
+    <value>Action item has been sent for execution</value>
+  </data>
+  <data name="StateViewSubordinateActionItemSent" xml:space="preserve">
+    <value>Subordinate action item has been assigned</value>
+  </data>
+  <data name="StateViewNotSpecified" xml:space="preserve">
+    <value>Not Specified</value>
+  </data>
+  <data name="ActionItem" xml:space="preserve">
+    <value>Action Item</value>
+  </data>
+  <data name="StateViewCompoundActionItem" xml:space="preserve">
+    <value>Compound action item</value>
+  </data>
+  <data name="StateViewActionItemForCoAssignee" xml:space="preserve">
+    <value>Action item to co-assignee</value>
+  </data>
+  <data name="StateViewActionItemForResponsible" xml:space="preserve">
+    <value>Action item to responsible assignee</value>
+  </data>
+  <data name="StateViewActionItemPart" xml:space="preserve">
+    <value>Action item part No.</value>
+  </data>
+  <data name="StateViewReport" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="StateViewActionItem" xml:space="preserve">
+    <value>Action item</value>
+  </data>
+  <data name="ActionItemCanNotAssignedByUser" xml:space="preserve">
+    <value>In the "Assigned by" field you can specify only your name, your manager, employee you substitute for, or his or her manager.</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CompoundActionItem" type="System.Byte[], mscorlib">
+    <value>
+        AAABAAIAICAAAAEAIACoEAAAJgAAABAQAAABACAAaAQAAM4QAAAoAAAAIAAAAEAAAAABACAAAAAAAIAQ
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOGiUCjholGo4aJTCOGiU9zholP84aJT/OGiU9Tho
+        lLw4aJRiOGiUBgAAAAAAAAAAAAAAAAAAAACUlJTglJSU/5SUlPuUlJT7lJSU+5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSUGDholEI4aJTiOGiU/zholP84aJT/SHSc/0dz
+        nP84aJT/OGiU/zholP84aJTbOGiUPAAAAAAAAAAAAAAAAJSUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSUs5SUlCY4aJRhOGiU+zholP9ukbH/ucva//j6
+        +/////////////b5+v+zxdf/a4+v/zholP84aJT5OGiUVQAAAAAAAAAAlJSU/5SUlP//////////////
+        ////////////////////////////////////////////////////////yNXh/zpqlf84aJT/hqO+////
+        ////////////////////////////////////////haK9/zholP84aJT1OGiUNgAAAACUlJT/lJSU////
+        //////////////////////////////////////////////////////////////b5+v9NeJ//OGiU/4ek
+        vv//////////////////////////////////////////////////////gqC7/zholP84aJTXOGiUBJSU
+        lP+UlJT/////////////////////////////////////////////////////////////////rMDT/zho
+        lP9vkrL/////////////////////////////////////////////////////////////////ao6v/zho
+        lP84aJRalJSU/5SUlP//////////////////////////////////////////////////////////////
+        //9qjq//OGiU/7jK2v//////////////////////////////////////////////////////////////
+        //+swNP/OGiU/zholLKUlJT/lJSU////////////////////////////////////////////////////
+        /////////////z1sl/84aJT/+fr8////////////////////////////////////////////////////
+        /////////////+vw9P84aJT/OGiU5pSUlP+UlJT/////////////////////////////////////////
+        ///////////////////u8vb/OGiU/0h0nf////////////////////////////////+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP///////f3+/zholP84aJT9lJSU/5SUlP//////////////////////////////
+        /////////////////////////////+rv9P84aJT/THef/////////////////////////////////5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU////////////PGuW/zholP+UlJT/lJSU////////////////////
+        /////////////////////////////////////////P39/z1slv84aJT/+Pr7////////////////////
+        ////////lJSU/5SUlP///////////////////////////+3x9f84aJT/OGiU6ZSUlP+UlJT/////////
+        ////////////////////////////////////////////////////////bpGx/zholP+3ydn/////////
+        //////////////////+UlJT/lJSU////////////////////////////qb3R/zholP84aJSvlJSU/5SU
+        lP////////////////////////////////////////////////////////////////+twdT/OGiU/26R
+        sf///////////////////////////5SUlP+UlJT///////////////////////////9njK3/OGiU/zho
+        lFWUlJT/lJSU//////////////////////////////////////////////////////////////////j6
+        +/9QeqH/OGiU/4ekvv//////////////////////lJSU/5SUlP//////////////////////gqC7/zho
+        lP84aJTTOGiUA5SUlP+UlJT/////////////////////////////////////////////////////////
+        /////////////8rX4/86apX/OGiU/4Sivf////////////////+UlJT/lJSU/////////////////4Gf
+        u/84aJT/OGiU9TholC4AAAAAlJSU/5SUlP//////////////////////////////////////////////
+        /////////////////////////////7bI2P89bJf/OGiU/2mNrv+vwtX/8fT4////////////7PH1/6m9
+        0f9jiav/OGiU/0Fumf84aJRKAAAAAAAAAACUlJT/lJSU////////////////////////////////////
+        /////////////////////////////////////////////9Hc5v9Xf6T/OGiU/zholP84aJT/QnCZ/0Fv
+        mf84aJT/OGiU/zholP9ehaj/2uPr/wAAAAAAAAAAAAAAAJSUlP+UlJT/////////////////////////
+        //////////////////////////////////////////////////////////////z9/f+1yNj/dJa0/0Nw
+        mv84aJT/OGiU/0Vym/95mbf/vM3c//3+/v//////lJSU/wAAAAAAAAAAlJSU/5SUlP//////////////
+        //////////////////////////////////////////////////////////////////////////////7+
+        /v/9/f3///////T3+f/19/r//////////////////////5SUlP+UlJT/AAAAAAAAAACUlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP//////////////////////////////////////lJSU/5SUlP8AAAAAAAAAAJSU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU//////////////////////////////////////+UlJT/lJSU/wAA
+        AAAAAAAAlJSU/5SUlP+UlJT/9PT0///////09PT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+VlZX/9PT0///////09PT/lJSU/5SUlP+UlJT//////////////////////////////////////5SU
+        lP+UlJT/AAAAAAAAAACUlJT/lJSU/5SUlP//////lJSU//////+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5iYmP//////lJSU//////+UlJT/lJSU/5SUlP//////////////////////////////
+        ////////lJSU/5SUlP8AAAAAAAAAAJSUlM2UlJT/lJSU/wAAAACUlJT/AAAAAJSUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/mJiY//////+UlJT//////5SUlP+UlJT/t7e3////////////////////
+        //////////////////+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAD//////////////////////////5SUlP//////////////////////////////
+        /////////////////////////////5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACUlJT/lJSU////////////////////////////////////////////////////
+        ////////////////////////////////////////lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU/5SUlP/09PT///////T0
+        9P+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5WVlf/09PT///////T09P+UlJT/lJSU/5SU
+        lP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/lJSU////
+        //+UlJT//////5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/mJiY//////+UlJT//////5SU
+        lP+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSUzZSU
+        lP+UlJT/AAAAAJSUlP8AAAAAlJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT2AAAAAJSU
+        lP8AAAAAlJSU/5SUlP+UlJSqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAlJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAlJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//wA8AAAAHAAAAAwAAAAEAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAMAAAAHAAAAAwAAAAMAAAADAAAAAwAA
+        AAMAAAADFAAAA/fgAAP/gAAD/4AAA/+AAAP/gAAD/4AAA/+KAKP/+/+/KAAAABAAAAAgAAAAAQAgAAAA
+        AABABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADho
+        lKo4aJTcOGiU/zholNw4aJSoAAAAAAAAAAAAAAAAfHx85Hx8fP98fHz/fHx8/3x8fP98fHz/AAAAADho
+        lN+DoLz/6O7z//z9/f/o7vP/g6C8/zholNwAAAAAAAAAAHx8fP///////////////////////////3qa
+        t/+DoLz///////////////////////////+DoLz/OGiUpQAAAAB8fHz/////////////////////////
+        //9TfaP/6O7z////////////////////////////6O7z/zholO8AAAAAfHx8////////////////////
+        ////////OGiU//z9/f///////////4GBgf+BgYH/gYGB//z9/f84aJT+AAAAAHx8fP//////////////
+        /////////////0Jwmf/o7vP///////////+BgYH////////////o7vP/OGiU8AAAAAB8fHz/////////
+        //////////////////9tkLD/g6C8////////////gYGB////////////g6C8/zholLkAAAAAfHx8////
+        /////////////////////////////1F7of+DoLz/6O7z//z9/f/o7vP/g6C8/z1sluQAAAAAAAAAAHx8
+        fP//////////////////////////////////////epq3/1N9o/84aJT/U32j/3qat/////8lAAAAAAAA
+        AAB8fHz/////////////////////////////////////////////////////////////////fHx8/wAA
+        AAAAAAAAfHx8/////////////////////////////////////////////////3x8fP///////////3x8
+        fP8AAAAAAAAAAHx8fP98fHz/fHx8/3x8fP98fHz/fHx8/3x8fP98fHz/fHx8/3x8fP98fHz/////////
+        //98fHz/AAAAAAAAAAB8fHzffHx8/wAAAAB8fHz/gICA/4CAgP+AgID/fHx8//////98fHz/lpaW////
+        ////////fHx8/wAAAAAAAAAAAAAAAAAAAAAAAAAAfHx8Af//////////////////////////////////
+        /////////////3x8fP8AAAAAAAAAAAAAAAAAAAAAAAAAAHx8fP98fHz/fHx8/3x8fP98fHz/fHx8/3x8
+        fP98fHz/fHx8/3x8fP98fHz/AAAAAAAAAAAAAAAAAAAAAAAAAAB8fHzLfHx8/wAAAAB8fHz/fHx8/3x8
+        fP98fHz/fHx8/wAAAAB8fHz/fHx8xgAAAAD/gwAAgQEAAIAAAACAAAAAgAAAAIAAAACAAAAAgAEAAIAB
+        AACAAQAAgAEAAIABAACQAQAA8AEAAPABAADyCQAA
+</value>
+  </data>
+  <data name="SubtaskSubjectPostfix" xml:space="preserve">
+    <value> "{0}" for</value>
+  </data>
+  <data name="WillBeSentAfterApprove" xml:space="preserve">
+    <value>Action item will be sent after draft resolution is approved by manager.</value>
+  </data>
+  <data name="WillBeAddToDocumentReviewTask" xml:space="preserve">
+    <value>Action item will be attached to task to review by manager and sent for execution after draft resolution is approved.</value>
+  </data>
+  <data name="EmptyActionItem" xml:space="preserve">
+    <value>Fill in the text in the action item or in the table.</value>
+  </data>
+  <data name="EmptyFinalDeadline" xml:space="preserve">
+    <value>Fill in the final deadline or deadline in the table.</value>
+  </data>
+  <data name="DefaultActionItem" xml:space="preserve">
+    <value>Complete the action item.</value>
+  </data>
+  <data name="BigGroupWarning" xml:space="preserve">
+    <value>You can fill in performers from a group that does not include more than {0} employees.</value>
+  </data>
+  <data name="WorkFromActionItemIsCreatedCompound" xml:space="preserve">
+    <value>Work started: compound action item</value>
+  </data>
+  <data name="ChangeCompoundModeQuestion" xml:space="preserve">
+    <value>Do you want to send a simple action item?</value>
+  </data>
+  <data name="ChangeCompoundModeDescription" xml:space="preserve">
+    <value>The performers will be moved to the simple action item.
+Action item parts will be deleted.</value>
+  </data>
+  <data name="EmptyAbortingReason" xml:space="preserve">
+    <value>Specify the reason for task abortion.</value>
+  </data>
+  <data name="ActionItemAsigneeTooMatch" xml:space="preserve">
+    <value>There are more than {0} performers of the action item. Divide the action item into several tasks.</value>
+  </data>
+  <data name="ActionItemWithNumberThreadSubject" xml:space="preserve">
+    <value>Action item part</value>
+  </data>
+  <data name="CompoundActionItemThreadSubject" xml:space="preserve">
+    <value>Compound action item</value>
+  </data>
+  <data name="ActionItemExecutionNotificationThreadSubject" xml:space="preserve">
+    <value>Notice about action item execution</value>
+  </data>
+  <data name="ActionItemThreadSubject" xml:space="preserve">
+    <value>Action item</value>
+  </data>
+  <data name="SelectDepartmentOrRole" xml:space="preserve">
+    <value>Select Department or Role</value>
+  </data>
+  <data name="ActionItemExecutionExecutedLabel" xml:space="preserve">
+    <value>Executed</value>
+  </data>
+  <data name="ActionItemChanged" xml:space="preserve">
+    <value>Action Item Changed:</value>
+  </data>
+  <data name="AddCoAssignees" xml:space="preserve">
+    <value>Add co-assignees</value>
+  </data>
+  <data name="ChangeActionItem" xml:space="preserve">
+    <value>Edit Action Item</value>
+  </data>
+  <data name="AssigneeChangedFromTo" xml:space="preserve">
+    <value>The assignee was changed: {0} -&gt; {1}</value>
+  </data>
+  <data name="SupervisorChangedFromTo" xml:space="preserve">
+    <value>The supervisor was changed: {0} -&gt; {1}</value>
+  </data>
+  <data name="ActionItemExecutionChangeNotification" xml:space="preserve">
+    <value>Notice on Action Item Change</value>
+  </data>
+  <data name="RemoveCoAssignees" xml:space="preserve">
+    <value>Remove co-assignees</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="TaskPutUnderSupervision" xml:space="preserve">
+    <value>A supervisor was assigned: {0}</value>
+  </data>
+  <data name="CoAssigneesDeleted" xml:space="preserve">
+    <value>Co-assignees were removed: {0}</value>
+  </data>
+  <data name="CoAssigneesAdded" xml:space="preserve">
+    <value>Co-assignees were added: {0}</value>
+  </data>
+  <data name="StopAssignmentSubtask" xml:space="preserve">
+    <value>If required, abort subtasks and child action items you've sent.</value>
+  </data>
+  <data name="ActionItemExecutionTaskLockedByUser" xml:space="preserve">
+    <value>The action item is locked by {0}. Try to edit it later.</value>
+  </data>
+  <data name="ActionItemIsAlreadyInChangingProcess" xml:space="preserve">
+    <value>The action item is being changed. Try to edit it later.</value>
+  </data>
+  <data name="ActionItemExecuted" xml:space="preserve">
+    <value>Cannot edit the action item because it is executed or aborted.</value>
+  </data>
+  <data name="ActionItemOnControlCannotChangeAssignee" xml:space="preserve">
+    <value>Cannot change the action item assignee/deadline because the supervisor has already received the assignment to accept work.</value>
+  </data>
+  <data name="СhooseCoAssigneesForAdd" xml:space="preserve">
+    <value>Select Co-Assignees to Add</value>
+  </data>
+  <data name="СhooseCoAssigneesForDelete" xml:space="preserve">
+    <value>Select Co-Assignees to Remove</value>
+  </data>
+  <data name="ChangeActionItemDialogInfo" xml:space="preserve">
+    <value>If you change the action item participants, the specified employees will receive assignments.</value>
+  </data>
+  <data name="ChangeActionItemPart" xml:space="preserve">
+    <value>Edit Action Item Part No. {0}</value>
+  </data>
+  <data name="ActionItemChangeError" xml:space="preserve">
+    <value>An error occurred when changing the action item. Contact your system administrator.</value>
+  </data>
+  <data name="ChangeCompoundActionItemPartDialogInfo" xml:space="preserve">
+    <value>Assignee: {0} Deadline: {1}
+{2}
+{3}
+
+If you change the action item participants, the specified employees will receive assignments.</value>
+  </data>
+  <data name="ActionItemWasChanged" xml:space="preserve">
+    <value>Action item has been changed. Refresh the card and try to edit it again.</value>
+  </data>
+  <data name="ChangeActionItemSuccess" xml:space="preserve">
+    <value>Action item change is initiated. Refresh the card to see the changes.</value>
+  </data>
+  <data name="Ellipsis_ShortActionItemPart" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="Ellipsis_FormattedActionItem" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="CoAssigneesDeadlineError" xml:space="preserve">
+    <value>The deadline for co-assignees cannot be later than the deadline for the assignee.</value>
+  </data>
+  <data name="CoAssigneeDeadlineLessThanToday" xml:space="preserve">
+    <value>The deadline for co-assignees must be later or equal to the current date.</value>
+  </data>
+  <data name="DeadlineChanged" xml:space="preserve">
+    <value>Execution deadline changed from {0} to {1}</value>
+  </data>
+  <data name="AssigneeDeadlineLessThanToday" xml:space="preserve">
+    <value>The deadline for the assignee must be later or equal to the current date.</value>
+  </data>
+  <data name="EmptyActiveText" xml:space="preserve">
+    <value>Enter the action item text.</value>
+  </data>
+  <data name="CoAssigneesDeadlineChanged" xml:space="preserve">
+    <value>Execution deadline for co-assignees changed from {0} to {1}</value>
+  </data>
+  <data name="CoAssigneesDeadlineSet" xml:space="preserve">
+    <value>Execution deadline for co-assignees changed to {0}</value>
+  </data>
+  <data name="NotCompletedExecutionSubTasksHyperlinkTitle" xml:space="preserve">
+    <value>Action items in process</value>
+  </data>
+  <data name="EmptyEditingReason" xml:space="preserve">
+    <value>Specify the reason for editing the action item.</value>
+  </data>
+  <data name="EditingReason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="EditingReasonText" xml:space="preserve">
+    <value>Reason: {0}</value>
+  </data>
+  <data name="AddCompoundActionItemPart" xml:space="preserve">
+    <value>Add Action Item Part</value>
+  </data>
+  <data name="AddButtonDialog" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="CoAssigneesDeadlineDialog" xml:space="preserve">
+    <value>Deadline (co-assign.)</value>
+  </data>
+  <data name="EditCompoundActionItemPart" xml:space="preserve">
+    <value>Change Action Item Part No. {0}</value>
+  </data>
+  <data name="EditButtonDialog" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="ParentAssignmentExists" xml:space="preserve">
+    <value>The assignment to accept work has a parent action item</value>
+  </data>
+  <data name="ShowParentAssignment" xml:space="preserve">
+    <value>Open parent assignment</value>
+  </data>
+  <data name="EmptySupervisor" xml:space="preserve">
+    <value>Specify the supervisor in the action item or in the table.</value>
+  </data>
+  <data name="AssigneeDeadlineSet" xml:space="preserve">
+    <value>Execution deadline changed to {0}</value>
+  </data>
+  <data name="NotSpecified" xml:space="preserve">
+    <value>not specified</value>
+  </data>
+  <data name="ChangeCompoundActionItemDialogText" xml:space="preserve">
+    <value>Overall deadline: {0}.
+{1}
+
+Your changes will be applied to all selected parts.
+If you add or change a supervisor, the selected employee will receive an assignment to accept work.</value>
+  </data>
+  <data name="Parts" xml:space="preserve">
+    <value>Parts</value>
+  </data>
+  <data name="AllParts" xml:space="preserve">
+    <value>All parts</value>
+  </data>
+  <data name="ExcludeParts" xml:space="preserve">
+    <value>Exclude parts</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="SpecifyParts" xml:space="preserve">
+    <value>Select Parts to Exclude</value>
+  </data>
+  <data name="PartsNotSpecified" xml:space="preserve">
+    <value>No parts selected</value>
+  </data>
+  <data name="AllPartsExclude" xml:space="preserve">
+    <value>All parts except for:
+{0}</value>
+  </data>
+  <data name="ChangedParts" xml:space="preserve">
+    <value>Parts:
+{0}</value>
+  </data>
+  <data name="ShortPartViewTemplate" xml:space="preserve">
+    <value>No.{0} {1} ({2}): {3}</value>
+  </data>
+  <data name="ActionItemSelectedPartsOnControlCannotChangeDeadline" xml:space="preserve">
+    <value>Cannot change the deadline. The selected parts have been sent for acceptance to the supervisor.</value>
+  </data>
+  <data name="ActionItemSelectedPartsExecuted" xml:space="preserve">
+    <value>Cannot edit the action item. The selected parts have been completed or aborted.</value>
+  </data>
+  <data name="ActionItemWithoutDeadlineDenied" xml:space="preserve">
+    <value>The system administrator disabled sending action items without deadline.</value>
+  </data>
+  <data name="EmptyCoAssigneeDeadline" xml:space="preserve">
+    <value>Specify deadlines for co-assignees by clicking "Edit Part".</value>
+  </data>
+  <data name="ActionItemOldDeadlineEqualsNew" xml:space="preserve">
+    <value>The new deadline must differ from the current one.</value>
+  </data>
+  <data name="ActionItemOldSupervisorEqualsNew" xml:space="preserve">
+    <value>The new supervisor must differ from the current one.</value>
+  </data>
+  <data name="ActionItemOnControl" xml:space="preserve">
+    <value>The action item is under control. Supervisor: not specified.</value>
+  </data>
+  <data name="Supervisor" xml:space="preserve">
+    <value>Supervisor: {0}</value>
+  </data>
+  <data name="ChangeCompoundActionItem" xml:space="preserve">
+    <value>Edit Compound Action Item</value>
+  </data>
+  <data name="ActionItemNotUnderControl" xml:space="preserve">
+    <value>The action item is not under control.</value>
+  </data>
+  <data name="ActionItemWithoutDeadline" xml:space="preserve">
+    <value>without deadline</value>
+  </data>
+  <data name="Enum_Operation_ChangeDeadline" xml:space="preserve">
+    <value>Change deadline</value>
+  </data>
+  <data name="ChangeCompoundActionItemHistory" xml:space="preserve">
+    <value>Execution deadlines were changed. For more information, see notices and history of the action item parts. </value>
+  </data>
+</root>

@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Number" xml:space="preserve">
+    <value> №</value>
+  </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value> от </value>
+  </data>
+  <data name="DocumentNameAutotext" xml:space="preserve">
+    <value>&lt;Имя будет сформировано автоматически по содержанию и другим реквизитам документа&gt;</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Фамилия Имя Отчество</value>
+  </data>
+  <data name="LastNameAndInitials" xml:space="preserve">
+    <value>Фамилия И.О.</value>
+  </data>
+  <data name="Addenda" xml:space="preserve">
+    <value>Отметка о наличии приложений</value>
+  </data>
+  <data name="InitialsAndLastName" xml:space="preserve">
+    <value>И.О. Фамилия</value>
+  </data>
+  <data name="DocumentIsNotSigned" xml:space="preserve">
+    <value>У документа отсутствуют электронные подписи для формирования листа согласования.</value>
+  </data>
+  <data name="NoApprovalRuleWarning" xml:space="preserve">
+    <value>Для документа с данными реквизитами не найден регламент согласования.  
+Проверьте корректность заполнения всех обязательных полей документа или обратитесь к администратору системы. 
+</value>
+  </data>
+  <data name="StateViewTo" xml:space="preserve">
+    <value>Кому</value>
+  </data>
+  <data name="StateViewDeadline" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="StateViewFinalDeadline" xml:space="preserve">
+    <value>Общий срок</value>
+  </data>
+  <data name="StateViewDefault" xml:space="preserve">
+    <value>Нет задач для отображения, или у вас недостаточно прав для доступа к ним.</value>
+  </data>
+  <data name="StateViewDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="StateViewSystem" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="StateViewInstead" xml:space="preserve">
+    <value> за </value>
+  </data>
+  <data name="StateViewSupervisor" xml:space="preserve">
+    <value>Контролер</value>
+  </data>
+  <data name="StateViewDelay" xml:space="preserve">
+    <value>Задержка</value>
+  </data>
+  <data name="StateViewTaskSent" xml:space="preserve">
+    <value>Задача отправлена</value>
+  </data>
+  <data name="StateViewTaskSentForRevision" xml:space="preserve">
+    <value>Задача отправлена на доработку</value>
+  </data>
+  <data name="StateViewTaskSentAfterRestart" xml:space="preserve">
+    <value>Задача отправлена после рестарта</value>
+  </data>
+  <data name="StateViewTask" xml:space="preserve">
+    <value>Задача</value>
+  </data>
+  <data name="StateViewWithoutTerm" xml:space="preserve">
+    <value>без срока</value>
+  </data>
+  <data name="StateViewAssignment" xml:space="preserve">
+    <value>Задание</value>
+  </data>
+  <data name="StateViewAssignmentForReview" xml:space="preserve">
+    <value>Задание на приемку</value>
+  </data>
+  <data name="StateViewAnd" xml:space="preserve">
+    <value> и еще {0} {1}.</value>
+  </data>
+  <data name="PerformerNotes" xml:space="preserve">
+    <value>Отметка об исполнителе</value>
+  </data>
+  <data name="NoRightsToUpdateOrDelete" xml:space="preserve">
+    <value>Нет прав на изменение или удаление документа.</value>
+  </data>
+  <data name="DocumentUseInTasks" xml:space="preserve">
+    <value>Удаление документа запрещено, так как он используется в задачах (ИД задач: {0}).</value>
+  </data>
+  <data name="MarkDocumentAsObsolete" xml:space="preserve">
+    <value>Отметить документ как устаревший</value>
+  </data>
+  <data name="Enum_Operation_TAChange" xml:space="preserve">
+    <value>Изменение суммы</value>
+  </data>
+  <data name="Enum_OperationDetailed_TAChange" xml:space="preserve">
+    <value>Сумма {0} {1}</value>
+  </data>
+  <data name="Enum_OperationDetailed_TAClear" xml:space="preserve">
+    <value>Сумма очищена</value>
+  </data>
+  <data name="NamePartForLeadDocument" xml:space="preserve">
+    <value> к </value>
+  </data>
+  <data name="ReservationButtonName" xml:space="preserve">
+    <value>Зарезервировать</value>
+  </data>
+  <data name="AlternativeOkButtonName" xml:space="preserve">
+    <value>Пронумеровать</value>
+  </data>
+  <data name="RegistrationButtonName" xml:space="preserve">
+    <value>Зарегистрировать</value>
+  </data>
+  <data name="ReservationTitle" xml:space="preserve">
+    <value>Резервирование номера</value>
+  </data>
+  <data name="RegistrationTitle" xml:space="preserve">
+    <value>Регистрация документа</value>
+  </data>
+  <data name="AlternativeTitle" xml:space="preserve">
+    <value>Присвоение номера</value>
+  </data>
+  <data name="RegistrationNumber" xml:space="preserve">
+    <value>Рег. №</value>
+  </data>
+  <data name="AlternativeRegistrationNumber" xml:space="preserve">
+    <value>№ док.</value>
+  </data>
+  <data name="DialogRegistrationLog" xml:space="preserve">
+    <value>Журнал</value>
+  </data>
+  <data name="DialogRegistrationDate" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="IsManualNumber" xml:space="preserve">
+    <value>Ввести номер вручную</value>
+  </data>
+  <data name="IsPreliminaryNumber" xml:space="preserve">
+    <value>- предварительный</value>
+  </data>
+  <data name="LogNumberList" xml:space="preserve">
+    <value>Пропущенные номера</value>
+  </data>
+  <data name="RegistrationNumberIsNotUnique" xml:space="preserve">
+    <value>Документ с таким номером уже существует.</value>
+  </data>
+  <data name="RelationPropertyDisabled" xml:space="preserve">
+    <value>Свойство содержит ссылку на ведущий документ и недоступно для изменения.</value>
+  </data>
+  <data name="Enum_Operation_TypeChanged" xml:space="preserve">
+    <value>Смена типа документа</value>
+  </data>
+  <data name="Enum_OperationDetailed_FrmExS" xml:space="preserve">
+    <value>Получен из сервиса обмена "{0}"</value>
+  </data>
+  <data name="Enum_Operation_ExchSendDoc" xml:space="preserve">
+    <value>Отправка документа контрагенту</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchSendDoc" xml:space="preserve">
+    <value>"{0}" через сервис "{1}"</value>
+  </data>
+  <data name="Enum_Operation_ExchSendAnswer" xml:space="preserve">
+    <value>Возврат контрагенту</value>
+  </data>
+  <data name="Enum_Operation_ExchGetAnswer" xml:space="preserve">
+    <value>Возврат от контрагента</value>
+  </data>
+  <data name="Enum_Operation_ExchReadTo" xml:space="preserve">
+    <value>Отправлено извещение о получении</value>
+  </data>
+  <data name="Enum_Operation_ExchReadFrom" xml:space="preserve">
+    <value>Получено извещение о получении</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchSign" xml:space="preserve">
+    <value>"{0}", результат "Подписан", через сервис "{1}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchReject" xml:space="preserve">
+    <value>"{0}", результат "Отказано", через сервис "{1}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchReadTo" xml:space="preserve">
+    <value>Для "{0}" через сервис "{1}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchReadFrom" xml:space="preserve">
+    <value>От "{0}" через сервис "{1}"</value>
+  </data>
+  <data name="DocumentNameBeforeChangingTypeNote" xml:space="preserve">
+    <value>Имя документа до смены типа: {0}</value>
+  </data>
+  <data name="ChangeTypeUnnumerationComment" xml:space="preserve">
+    <value>Смена типа</value>
+  </data>
+  <data name="Enum_Operation_ExchObsoletOur" xml:space="preserve">
+    <value>Аннулирован нашей организацией</value>
+  </data>
+  <data name="Enum_Operation_ExchObsoleteCP" xml:space="preserve">
+    <value>Аннулирован контрагентом</value>
+  </data>
+  <data name="Enum_Operation_ExchTerminOur" xml:space="preserve">
+    <value>Отозван нашей организацией</value>
+  </data>
+  <data name="Enum_Operation_ExchTerminCP" xml:space="preserve">
+    <value>Отозван контрагентом</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchObsoleteCP" xml:space="preserve">
+    <value>"{0}" через сервис "{1}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchTerminCP" xml:space="preserve">
+    <value>"{0}" через сервис "{1}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchObsoletOur" xml:space="preserve">
+    <value>Через сервис "{0}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchTerminOur" xml:space="preserve">
+    <value>Через сервис "{0}"</value>
+  </data>
+  <data name="TrackingNoneReturnFromCounterparty" xml:space="preserve">
+    <value>Документ отправлен через сервис обмена. Возврат будет осуществлен автоматически.</value>
+  </data>
+  <data name="DocumentIsReceivedFrom" xml:space="preserve">
+    <value>Получен через сервис обмена {0}</value>
+  </data>
+  <data name="DocumentIsSentTo" xml:space="preserve">
+    <value>Отправлен через сервис обмена {0}</value>
+  </data>
+  <data name="ExchangeStateSignAwaited" xml:space="preserve">
+    <value>Ожидается подпись контрагента</value>
+  </data>
+  <data name="ExchangeStateSignRequired" xml:space="preserve">
+    <value>Ожидается наша подпись</value>
+  </data>
+  <data name="CannotChangeTrackingSentByExchange" xml:space="preserve">
+    <value>Документ был отправлен контрагенту через сервис обмена. Результат возврата будет заполнен автоматически.</value>
+  </data>
+  <data name="LocationVersion" xml:space="preserve">
+    <value>{0} (версия {1})</value>
+  </data>
+  <data name="Enum_Operation_ExportToFolder" xml:space="preserve">
+    <value>Выгрузка из архива</value>
+  </data>
+  <data name="Enum_OperationDetailed_BuyerTitle" xml:space="preserve">
+    <value>Титул покупателя</value>
+  </data>
+  <data name="Enum_OperationDetailed_SlrTtlFrmExS" xml:space="preserve">
+    <value>Титул продавца. Получен из сервиса обмена "{0}"</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchInvReject" xml:space="preserve">
+    <value>"{0}", результат "Запрошено уточнение", через сервис "{1}"</value>
+  </data>
+  <data name="LocationIncomingInvoiceRejected" xml:space="preserve">
+    <value>Отправлено уведомление об уточнении</value>
+  </data>
+  <data name="LocationOutgoingInvoiceRejected" xml:space="preserve">
+    <value>Контрагент отправил уведомление об уточнении</value>
+  </data>
+  <data name="SigningVersionWasDeleted" xml:space="preserve">
+    <value>Подписываемая версия документа была удалена другим сотрудником. Перед выполнением задания ознакомьтесь с изменениями.</value>
+  </data>
+  <data name="CannotChangeRegisteredDocumentToNumerable" xml:space="preserve">
+    <value>При изменении вида зарегистрированного документа можно выбрать только регистрируемый вид.</value>
+  </data>
+  <data name="CannotChangeNumeratedDocumentToRegistrable" xml:space="preserve">
+    <value>При изменении вида пронумерованного документа можно выбрать только нумеруемый вид.</value>
+  </data>
+  <data name="DocumentNotInService" xml:space="preserve">
+    <value>Документ отсутствует в сервисе обмена</value>
+  </data>
+  <data name="DocumentNotFromService" xml:space="preserve">
+    <value>Документ не участвовал в электронном обмене через сервис</value>
+  </data>
+  <data name="ExchangeReportOnlyInService" xml:space="preserve">
+    <value>Для данного документа формирование протокола эл. обмена доступно только в личном кабинете сервиса обмена</value>
+  </data>
+  <data name="NoAcquaintanceTasks" xml:space="preserve">
+    <value>Для построения отчета необходимо наличие хотя бы одной задачи на ознакомление с документом.</value>
+  </data>
+  <data name="SendButtonText" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="ShowButtonText" xml:space="preserve">
+    <value>Показать задачи</value>
+  </data>
+  <data name="DocumentHasApprovalTasks" xml:space="preserve">
+    <value>Документ ранее был отправлен на согласование.</value>
+  </data>
+  <data name="ContinueCreationApprovalTaskQuestion" xml:space="preserve">
+    <value>Отправить документ на повторное согласование по регламенту?</value>
+  </data>
+  <data name="ContinueCreationReviewTaskQuestion" xml:space="preserve">
+    <value>Отправить документ на повторное рассмотрение?</value>
+  </data>
+  <data name="DocumentHasReviewTasks" xml:space="preserve">
+    <value>Документ ранее был отправлен на рассмотрение руководителю.</value>
+  </data>
+  <data name="BusinessUnitPropertyDisabled" xml:space="preserve">
+    <value>Свойство "Наша организация" недоступно для изменения. </value>
+  </data>
+  <data name="DepartmentPropertyDisabled" xml:space="preserve">
+    <value>Свойство "Подразделение" недоступно для изменения. </value>
+  </data>
+  <data name="CanNotUseScriptsInHtml" xml:space="preserve">
+    <value>{0}\nНельзя использовать скрипты в конвертируемом HTML-файле.</value>
+  </data>
+  <data name="ActionItemCreationDialogLoginAsEmployeeError" xml:space="preserve">
+    <value>Создать поручения по документу может только сотрудник. Войдите в систему под учетной записью сотрудника.</value>
+  </data>
+  <data name="ActionItemCreationDialog" xml:space="preserve">
+    <value>Создание поручений по документу</value>
+  </data>
+  <data name="ActionItemCreationDialogContinueButtonText" xml:space="preserve">
+    <value>Продолжить</value>
+  </data>
+  <data name="ActionItemCreationDialogCloseButtonText" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="ActionItemCreationDialogExistedActionItems" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="ActionItemCreationDialogNotFilledActionItems" xml:space="preserve">
+    <value>Требуют заполнения</value>
+  </data>
+  <data name="ActionItemCreationDialogDraftExists" xml:space="preserve">
+    <value>По документу ранее были созданы поручения.</value>
+  </data>
+  <data name="ActionItemCreationDialogDraftWhereDeleted" xml:space="preserve">
+    <value>Черновики поручений были удалены.</value>
+  </data>
+  <data name="ActionItemCreationDialogDraftWillBeDelete" xml:space="preserve">
+    <value>После нажатия на кнопку "Продолжить" черновики поручений будут удалены, поручения по документу будут созданы вновь.</value>
+  </data>
+  <data name="ActionItemCreationDialogInProcessExists_Desktop" xml:space="preserve">
+    <value>Поручения, отправленные на исполнение, не будут изменены. Их можно посмотреть на закладке "Задачи" или в отчете "Контроль исполнения".</value>
+  </data>
+  <data name="ActionItemCreationDialogInProcessExists_Web" xml:space="preserve">
+    <value>Поручения, отправленные на исполнение, не будут изменены. Их можно посмотреть в отчете "Контроль исполнения".</value>
+  </data>
+  <data name="ActionItemCreationDialogNoDraftAndInProgressExist" xml:space="preserve">
+    <value>По документу нет черновиков и поручений в работе.</value>
+  </data>
+  <data name="ActionItemCreationDialogOnlyForWordDocument" xml:space="preserve">
+    <value>Поручения можно создавать из документов в формате: {0}.</value>
+  </data>
+  <data name="ActionItemCreationDialogOnlyByTags" xml:space="preserve">
+    <value>Поручения можно создать только из заполненной таблицы соответствующего шаблона.</value>
+  </data>
+  <data name="ActionItemCreationDialogException" xml:space="preserve">
+    <value>Формат данных не поддерживается или файл поврежден.</value>
+  </data>
+  <data name="ActionItemCreationDialogActionItemTag" xml:space="preserve">
+    <value>Текст поручения</value>
+  </data>
+  <data name="ActionItemCreationDialogResponsibleTag" xml:space="preserve">
+    <value>Ответственный</value>
+  </data>
+  <data name="ActionItemCreationDialogDeadlineTag" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillBeforeSending" xml:space="preserve">
+    <value>Перед отправкой на исполнение нужно дозаполнить поручения.</value>
+  </data>
+  <data name="ActionItemCreationDialogCreateCompletedActionItems" xml:space="preserve">
+    <value>Всего поручений - {0}</value>
+  </data>
+  <data name="ActionItemCreationDialogStartComplete" xml:space="preserve">
+    <value>Поручения успешно отправлены на исполнение</value>
+  </data>
+  <data name="ActionItemCreationDialogSended" xml:space="preserve">
+    <value>отправлено</value>
+  </data>
+  <data name="ActionItemCreationDialogSomeActionItemsCouldNotBeDeleted" xml:space="preserve">
+    <value>Некоторые поручения не удалось удалить из-за отсутствия нужных полномочий.</value>
+  </data>
+  <data name="ActionItemCreationDialogCreatedActionItems" xml:space="preserve">
+    <value>Созданные поручения</value>
+  </data>
+  <data name="ActionItemCreationDialogSendForExecutionButtonText" xml:space="preserve">
+    <value>Отправить на исполнение</value>
+  </data>
+  <data name="ActionItemCreationDialogDeleteAndCloseButtonText" xml:space="preserve">
+    <value>Удалить и закрыть</value>
+  </data>
+  <data name="ActionItemCreationDialogSuccessfullyCreated" xml:space="preserve">
+    <value>Поручения успешно созданы.</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillAssignee" xml:space="preserve">
+    <value>необходимо указать исполнителя</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillDeadline" xml:space="preserve">
+    <value>необходимо заполнить срок</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillSubject" xml:space="preserve">
+    <value>необходимо указать тему</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedSendManual" xml:space="preserve">
+    <value>необходимо отправить вручную</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillAndSendingManual" xml:space="preserve">
+    <value>Некоторые поручения необходимо дозаполнить и отправить вручную.</value>
+  </data>
+  <data name="ActionItemCreationDialogSomeActionItemsDraftNotDeleted" xml:space="preserve">
+    <value>Некоторые черновики поручений не были удалены.</value>
+  </data>
+  <data name="ActionItemCreationDialogToCreateActionItemsPressNext" xml:space="preserve">
+    <value>Для создания поручений нажмите "Продолжить".</value>
+  </data>
+  <data name="CloseDocumentAndOpenLater" xml:space="preserve">
+    <value>Закройте карточку документа. Для просмотра PDF с отметкой об ЭП откройте документ позже.</value>
+  </data>
+  <data name="NoVersionError" xml:space="preserve">
+    <value>Документ должен иметь хотя бы одну версию.</value>
+  </data>
+  <data name="ConvertionErrorTitleBase" xml:space="preserve">
+    <value>Произошла ошибка при конвертации документа.</value>
+  </data>
+  <data name="LastVersionNotApproved" xml:space="preserve">
+    <value>Для преобразования в PDF должна быть утверждена последняя версия документа.</value>
+  </data>
+  <data name="ExtensionNotSupported" xml:space="preserve">
+    <value>Преобразование документа в формате {0} не поддерживается.</value>
+  </data>
+  <data name="NoVersionWithNumberError" xml:space="preserve">
+    <value>Версия документа с Id = {0} отсутствует.</value>
+  </data>
+  <data name="ConvertionInProgress" xml:space="preserve">
+    <value>Документ находится в обработке.</value>
+  </data>
+  <data name="ConvertionDone" xml:space="preserve">
+    <value>Документ успешно преобразован.</value>
+  </data>
+  <data name="SignatureNotValidError" xml:space="preserve">
+    <value>Для преобразования документа подпись должна быть действительной. {0}. Обратитесь к администратору системы</value>
+  </data>
+  <data name="SignatureNotValidErrorTitle" xml:space="preserve">
+    <value>Подпись недействительна.</value>
+  </data>
+  <data name="LastVersionNotApprovedTitle" xml:space="preserve">
+    <value>Отсутствует утверждающая подпись.</value>
+  </data>
+  <data name="SendByEmailDialogTitle" xml:space="preserve">
+    <value>Отправка по электронной почте</value>
+  </data>
+  <data name="SendByEmailDialogAttachments" xml:space="preserve">
+    <value>Дополнительно</value>
+  </data>
+  <data name="SendByEmailSubjectPrefix" xml:space="preserve">
+    <value>Отправка: {0}</value>
+  </data>
+  <data name="SendByEmailDialogText" xml:space="preserve">
+    <value>При необходимости выберите приложения к документу.</value>
+  </data>
+  <data name="SendByEmailDialogMainDocument" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="DocumentIsBeingEdited" xml:space="preserve">
+    <value>Выбранный документ в данный момент редактируется.</value>
+  </data>
+  <data name="VersionBeingSentMightBeOutdated" xml:space="preserve">
+    <value>Отправляемая версия документа "{0}" может быть не актуальна.</value>
+  </data>
+  <data name="DialogButtonSend" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="SeveralDocumentsAreBeingEdited" xml:space="preserve">
+    <value>Несколько выбранных документов в данный момент редактируются.</value>
+  </data>
+  <data name="VersionsBeingSentMightBeOutdated" xml:space="preserve">
+    <value>Отправляемые версии документов могут быть не актуальны.</value>
+  </data>
+  <data name="VersionCreatedByCaptureService" xml:space="preserve">
+    <value>Версия создана службой ввода документов</value>
+  </data>
+  <data name="ManyAddendumDialogText" xml:space="preserve">
+    <value>Выберите файлы для загрузки:</value>
+  </data>
+  <data name="AddendumAddFiles" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="AddendaCreatedSuccesfully" xml:space="preserve">
+    <value>Успешно создано {0} {1}.
+</value>
+  </data>
+  <data name="ManyAddendumDialogTitle" xml:space="preserve">
+    <value>Добавление приложений</value>
+  </data>
+  <data name="SetCorrectDate" xml:space="preserve">
+    <value>Укажите корректную дату.</value>
+  </data>
+  <data name="IncorrectOurSignatory" xml:space="preserve">
+    <value>{0} не имеет права подписи на данный документ.</value>
+  </data>
+  <data name="Enum_Operation_ConvertToPdf" xml:space="preserve">
+    <value>Преобразование в PDF</value>
+  </data>
+  <data name="Enum_OperationDetailed_ConvertToPdf" xml:space="preserve">
+    <value>Завершено с ошибкой</value>
+  </data>
+  <data name="CheckRegDataAndFinishRegistration" xml:space="preserve">
+    <value>Проверьте корректность даты и номера. Завершите регистрацию вручную.</value>
+  </data>
+  <data name="NumberAddresseeListIsNotPositive" xml:space="preserve">
+    <value>Порядковые номера в списке адресатов должны быть положительными.</value>
+  </data>
+  <data name="FillAddresseesOnAddresseesTab" xml:space="preserve">
+    <value>Укажите сотрудников на закладке "Адресаты".</value>
+  </data>
+  <data name="ManyAddresseesPlaceholder" xml:space="preserve">
+    <value>Несколько адресатов</value>
+  </data>
+  <data name="ChangeManyAddresseesQuestion" xml:space="preserve">
+    <value>Переключиться в режим одного адресата?</value>
+  </data>
+  <data name="ChangeManyAddresseesDescription" xml:space="preserve">
+    <value>Удалятся все адресаты, кроме {0}</value>
+  </data>
+  <data name="ToManyAddressees" xml:space="preserve">
+    <value>Согласно списку рассылки</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>Должность адресата</value>
+  </data>
+  <data name="ConvertToPDFHistoryComment" xml:space="preserve">
+    <value>Преобразование в PDF</value>
+  </data>
+  <data name="CloseDocumentAndOpenLaterWithRegistrationStamp" xml:space="preserve">
+    <value>Закройте карточку документа. Для просмотра PDF с отметкой о поступлении откройте документ позже.</value>
+  </data>
+  <data name="VersionWithRegistrationStamp" xml:space="preserve">
+    <value>С отметкой о поступлении</value>
+  </data>
+  <data name="Enum_Operation_ExchReadNRecTo" xml:space="preserve">
+    <value>Отправлено уведомление о приеме</value>
+  </data>
+  <data name="Enum_Operation_ExchReadNRFrom" xml:space="preserve">
+    <value>Получено уведомление о приеме</value>
+  </data>
+  <data name="Enum_Operation_ExchReadRNRecTo" xml:space="preserve">
+    <value>Отправлено извещение о получении уведомления о приеме</value>
+  </data>
+  <data name="Enum_Operation_ExchReadRNRFrom" xml:space="preserve">
+    <value>Получено извещение о получении уведомления о приеме</value>
+  </data>
+</root>

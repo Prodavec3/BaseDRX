@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Управление проектами</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для управления проектами и проектной документацией.</value>
+  </data>
+  <data name="CoverGroup_Projects" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="CoverAction_CreateProject" xml:space="preserve">
+    <value>Создать проект</value>
+  </data>
+  <data name="CoverAction_ProjectsList" xml:space="preserve">
+    <value>Реестр проектов</value>
+  </data>
+  <data name="CoverDescription_ProjectsList" xml:space="preserve">
+    <value>Перечень проектов компании с разбивкой по видам, руководителям, срокам и т.д.</value>
+  </data>
+  <data name="CoverGroup_Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="CoverAction_ProjectKinds" xml:space="preserve">
+    <value>Виды проектов</value>
+  </data>
+  <data name="CoverDescription_ProjectKinds" xml:space="preserve">
+    <value>Классификация проектов по направлениям деятельности компании (инвестиционные проекты, проекты по развитию и др.)</value>
+  </data>
+  <data name="CoverGroup_Documents" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="CoverAction_ProjectDocuments" xml:space="preserve">
+    <value>Документы по проектам</value>
+  </data>
+  <data name="CoverDescription_ProjectDocuments" xml:space="preserve">
+    <value>Быстрый поиск документов, относящихся к проектам.</value>
+  </data>
+  <data name="sf_81fa363f_766c_423b_818a_e48efe57c3d4" xml:space="preserve">
+    <value>Документы по проектам</value>
+  </data>
+  <data name="FilterPanel_Project_6d78f158044741e3bf87b10b1de31cc9" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_286433eadb3e49a6b3aa150598cf894c" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Author_753c5dd2fa6144e8a09afe6f9bed716a" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="FilterPanel_Date_f40fdd3c735c4ca7aab24b8b503abc19" xml:space="preserve">
+    <value>Изменен</value>
+  </data>
+  <data name="FilterPanel_LastWeek_7befeaa6398d40aaa7c9e0bcc2e7c19d" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_1efda314472d4b14900c668e4351c8c0" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_b3e59898419b41f5acd8d8bdccfe3c98" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_bd80acd3fa9c4d6c82762cc822ceb273" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="CoverGroup_Links" xml:space="preserve">
+    <value>Связанная информация</value>
+  </data>
+  <data name="CoverDescription_ShowEmployees" xml:space="preserve">
+    <value>Открытие справочника сотрудников</value>
+  </data>
+  <data name="CoverAction_ShowEmployees" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="CoverAction_Create" xml:space="preserve">
+    <value>Создать документ</value>
+  </data>
+  <data name="CoverDescription_Create" xml:space="preserve">
+    <value>Быстрое создание проектных документов (уставов, планов-графиков, отчетов, технических заданий), протоколов совещаний и других документов по проектам.</value>
+  </data>
+  <data name="CoverAction_ShowCompanies" xml:space="preserve">
+    <value>Организации</value>
+  </data>
+  <data name="CoverDescription_ShowCompanies" xml:space="preserve">
+    <value>Открытие справочника организаций-контрагентов.</value>
+  </data>
+  <data name="CoverAction_Contacts" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="CoverDescription_Contacts" xml:space="preserve">
+    <value>Информация о контактных лицах организаций.</value>
+  </data>
+  <data name="FilterPanel_Main_91080bbec03d4eb984de46646abd58c7" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="WidgetTitle_ProjectStages" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
+  <data name="WidgetAction_ProjectStages_AllProjects" xml:space="preserve">
+    <value>Всего</value>
+  </data>
+  <data name="WidgetAction_ProjectStages_Initiation" xml:space="preserve">
+    <value>Инициация</value>
+  </data>
+  <data name="WidgetAction_ProjectStages_InWork" xml:space="preserve">
+    <value>Исполнение</value>
+  </data>
+  <data name="WidgetAction_ProjectStages_Closing" xml:space="preserve">
+    <value>Завершение</value>
+  </data>
+  <data name="WidgetAction_ProjectStages_Overdue" xml:space="preserve">
+    <value>Просрочено</value>
+  </data>
+  <data name="WidgetParameter_ProjectStages_Performer" xml:space="preserve">
+    <value>Отображать</value>
+  </data>
+  <data name="Enum_ProjectStages_Performer_MyProjects" xml:space="preserve">
+    <value>Мои проекты</value>
+  </data>
+  <data name="Enum_ProjectStages_Performer_MyDepartment" xml:space="preserve">
+    <value>Проекты моего подразделения</value>
+  </data>
+  <data name="Enum_ProjectStages_Performer_AllProjects" xml:space="preserve">
+    <value>Все проекты</value>
+  </data>
+  <data name="WidgetDescription_ProjectStages" xml:space="preserve">
+    <value>Отображение проектов по стадиям.</value>
+  </data>
+  <data name="JobDisplayName_be8a8c8c9ebf415e8260d4437b76e3d1" xml:space="preserve">
+    <value>Проекты. Автоматическое назначение прав на документы</value>
+  </data>
+  <data name="JobDescription_be8a8c8c9ebf415e8260d4437b76e3d1" xml:space="preserve">
+    <value>Автоматическое назначение прав на документы</value>
+  </data>
+  <data name="JobDisplayName_cead24350dde4cd981897986a11a3e14" xml:space="preserve">
+    <value>Проекты. Автоматическое назначение прав на проекты и проектные папки</value>
+  </data>
+  <data name="JobDescription_cead24350dde4cd981897986a11a3e14" xml:space="preserve">
+    <value>Автоматическое назначение прав на проекты и проектные папки</value>
+  </data>
+</root>

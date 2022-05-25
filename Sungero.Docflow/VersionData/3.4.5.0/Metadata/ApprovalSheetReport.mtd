@@ -1,0 +1,90 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "35a9397d-9602-46a3-b922-09f6681f1241",
+  "Name": "ApprovalSheetReport",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "AccessRightsMode",
+    "Description",
+    "DisplayName",
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "5141a8ea-d13a-44f1-96d3-a7ebd018f5af",
+      "Name": "DocumentName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "56411bc1-4c7a-4270-be79-4afdcce4be6a",
+      "Name": "OurOrgName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "c4d31cc0-5a9e-4920-8d9c-8e00aeb5843a",
+      "Name": "CurrentDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "5ed19ff6-e9fe-431d-a62c-027117451f94",
+      "Name": "Clerk",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "c0d67455-b484-4b36-ac47-5411b59e55fb",
+      "Name": "Document",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "8cc2f4c2-e6e3-4806-b3e3-b553146cc2c0",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "66d7d854-e809-4309-a818-bf7c657938e1",
+      "Name": "RespEmployee",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "c0d07341-6c78-43c6-83a6-298069e3a4fc",
+      "Name": "HasRespEmployee",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ReportName",
+    "Approver",
+    "Result",
+    "Note",
+    "Version",
+    "DateTime",
+    "PrintedBy",
+    "ResponsibleEmployee",
+    "SignStatus",
+    "SignStatusActive"
+  ],
+  "Versions": []
+}

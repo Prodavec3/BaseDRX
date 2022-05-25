@@ -1,0 +1,1024 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ControlGroup_406e14dc17444a7f85d8f6eef8abaa3f" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ControlGroup_03fde41782544f08950cd543871033a8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_01dd99f5db49480eb69928488f2653fb" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_28a6d4a8a26a467b8fe6da426092ec4a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_4e1d78fc6f6c4c81bf9aa1fa2031a46b" xml:space="preserve">
+    <value>Date and number</value>
+  </data>
+  <data name="ControlGroup_696a8bb83e1244c8927a37d955cfbf0f" xml:space="preserve">
+    <value>Retention</value>
+  </data>
+  <data name="ControlGroup_1b194ce3c44048879f0d1cdc4303c583" xml:space="preserve">
+    <value>Lifecycle</value>
+  </data>
+  <data name="Form_Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Form_Location" xml:space="preserve">
+    <value>Tracking</value>
+  </data>
+  <data name="ControlGroup_f1bb25112ea0463f8e5cc990e5345728" xml:space="preserve">
+    <value>Tracking of Original Document and Copies</value>
+  </data>
+  <data name="Ribbon_RegistrationCommands_7aa0ac2480394d94954284c3d878412e" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Ribbon_DeliveryCommands_df0be3eb70454137aadaab670eccf2a7" xml:space="preserve">
+    <value>Tracking</value>
+  </data>
+  <data name="Enum_Operation_Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Enum_Operation_Unregistration" xml:space="preserve">
+    <value>Cancel registration</value>
+  </data>
+  <data name="Enum_Operation_RegChange" xml:space="preserve">
+    <value>Change registration data</value>
+  </data>
+  <data name="Enum_Operation_Reservation" xml:space="preserve">
+    <value>Reserve number</value>
+  </data>
+  <data name="Enum_Operation_Numeration" xml:space="preserve">
+    <value>Assign number</value>
+  </data>
+  <data name="Enum_Operation_Unnumeration" xml:space="preserve">
+    <value>Clear number</value>
+  </data>
+  <data name="Enum_Operation_NumChange" xml:space="preserve">
+    <value>Change requisites</value>
+  </data>
+  <data name="Enum_Operation_Unreservation" xml:space="preserve">
+    <value>Cancel number reservation</value>
+  </data>
+  <data name="Enum_Operation_EnAborted" xml:space="preserve">
+    <value>Endorsement state set to abort</value>
+  </data>
+  <data name="Enum_Operation_EnOnApproval" xml:space="preserve">
+    <value>Endorsement state set to on endorsement</value>
+  </data>
+  <data name="Enum_Operation_EnOnRework" xml:space="preserve">
+    <value>Endorsement state set to on rework</value>
+  </data>
+  <data name="Enum_Operation_EnPendingSign" xml:space="preserve">
+    <value>Endorsement state set to on sign</value>
+  </data>
+  <data name="Enum_Operation_EnSigned" xml:space="preserve">
+    <value>Endorsement state set to signed</value>
+  </data>
+  <data name="Enum_Operation_EnCancelled" xml:space="preserve">
+    <value>Endorsement state set to cancelled</value>
+  </data>
+  <data name="Enum_Operation_EnStateClear" xml:space="preserve">
+    <value>Endorsement state clear</value>
+  </data>
+  <data name="Enum_Operation_CEOnApproval" xml:space="preserve">
+    <value>Counterparty endorsement state set to on endorsement</value>
+  </data>
+  <data name="Enum_Operation_CESigned" xml:space="preserve">
+    <value>Counterparty endorsement state set to signed</value>
+  </data>
+  <data name="Enum_Operation_CEUnsigned" xml:space="preserve">
+    <value>Counterparty endorsement state set to not signed</value>
+  </data>
+  <data name="Enum_Operation_CEStateClear" xml:space="preserve">
+    <value>Counterparty endorsement state clear</value>
+  </data>
+  <data name="Enum_Operation_ExOnReview" xml:space="preserve">
+    <value>Execution state set to consideration</value>
+  </data>
+  <data name="Enum_Operation_ExSending" xml:space="preserve">
+    <value>Execution state set to waiting</value>
+  </data>
+  <data name="Enum_Operation_ExWithoutExecut" xml:space="preserve">
+    <value>Execution state set to without executing</value>
+  </data>
+  <data name="Enum_Operation_ExOnExecution" xml:space="preserve">
+    <value>Execution state set to on execution</value>
+  </data>
+  <data name="Enum_Operation_ExExecuted" xml:space="preserve">
+    <value>Execution state set to executed</value>
+  </data>
+  <data name="Enum_Operation_ExAborted" xml:space="preserve">
+    <value>Execution state set to aborted</value>
+  </data>
+  <data name="Enum_Operation_ExStateClear" xml:space="preserve">
+    <value>Execution state clear</value>
+  </data>
+  <data name="Enum_Operation_COnControl" xml:space="preserve">
+    <value>Control execution state set to on control</value>
+  </data>
+  <data name="Enum_Operation_CSpecialControl" xml:space="preserve">
+    <value>Control execution state set to special control</value>
+  </data>
+  <data name="Enum_Operation_CWithoutControl" xml:space="preserve">
+    <value>Control execution state set to without control</value>
+  </data>
+  <data name="Enum_Operation_CControlRemoved" xml:space="preserve">
+    <value>Control execution state set to control removed</value>
+  </data>
+  <data name="Enum_Operation_CStateClear" xml:space="preserve">
+    <value>Control execution state clear</value>
+  </data>
+  <data name="Enum_Operation_SetToDraft" xml:space="preserve">
+    <value>Change lifecycle stage to "Draft"</value>
+  </data>
+  <data name="Enum_Operation_SetToActive" xml:space="preserve">
+    <value>Change lifecycle stage to "Active"</value>
+  </data>
+  <data name="Enum_Operation_SetToTerminated" xml:space="preserve">
+    <value>Change lifecycle stage to "Terminated"</value>
+  </data>
+  <data name="Enum_Operation_SetToClosed" xml:space="preserve">
+    <value>Change lifecycle stage to "Closed"</value>
+  </data>
+  <data name="Enum_Operation_SetToCancelled" xml:space="preserve">
+    <value>Change lifecycle stage to "Void"</value>
+  </data>
+  <data name="Enum_Operation_SetToObsolete" xml:space="preserve">
+    <value>Change lifecycle stage to "Obsolete"</value>
+  </data>
+  <data name="Enum_Operation_SetToPaid" xml:space="preserve">
+    <value>Change lifecycle stage to "Paid"</value>
+  </data>
+  <data name="Enum_Operation_SetToStateClear" xml:space="preserve">
+    <value>Clear state of lifecycle stage</value>
+  </data>
+  <data name="Enum_ControlExecutionState_ControlRemoved" xml:space="preserve">
+    <value>Removed from control</value>
+  </data>
+  <data name="Enum_ControlExecutionState_OnControl" xml:space="preserve">
+    <value>Under control</value>
+  </data>
+  <data name="Enum_ControlExecutionState_SpecialControl" xml:space="preserve">
+    <value>Under special control</value>
+  </data>
+  <data name="Enum_ControlExecutionState_WithoutControl" xml:space="preserve">
+    <value>Not under control</value>
+  </data>
+  <data name="Enum_ExternalApprovalState_Unsigned" xml:space="preserve">
+    <value>Unsigned</value>
+  </data>
+  <data name="Enum_ExternalApprovalState_OnApproval" xml:space="preserve">
+    <value>On approval</value>
+  </data>
+  <data name="Enum_ExternalApprovalState_Signed" xml:space="preserve">
+    <value>Signed</value>
+  </data>
+  <data name="Enum_InternalApprovalState_Aborted" xml:space="preserve">
+    <value>Aborted</value>
+  </data>
+  <data name="Enum_InternalApprovalState_OnApproval" xml:space="preserve">
+    <value>On approval</value>
+  </data>
+  <data name="Enum_InternalApprovalState_OnRework" xml:space="preserve">
+    <value>On rework</value>
+  </data>
+  <data name="Enum_InternalApprovalState_PendingSign" xml:space="preserve">
+    <value>Pending signature</value>
+  </data>
+  <data name="Enum_InternalApprovalState_Signed" xml:space="preserve">
+    <value>Signed</value>
+  </data>
+  <data name="Enum_ExecutionState_Aborted" xml:space="preserve">
+    <value>Aborted</value>
+  </data>
+  <data name="Enum_ExecutionState_OnReview" xml:space="preserve">
+    <value>On review</value>
+  </data>
+  <data name="Enum_ExecutionState_Executed" xml:space="preserve">
+    <value>Executed</value>
+  </data>
+  <data name="Enum_ExecutionState_OnExecution" xml:space="preserve">
+    <value>On execution</value>
+  </data>
+  <data name="Enum_ExecutionState_Sending" xml:space="preserve">
+    <value>Sending for execution</value>
+  </data>
+  <data name="Enum_ExecutionState_WithoutExecut" xml:space="preserve">
+    <value>Execution not required</value>
+  </data>
+  <data name="Enum_LifeCycleState_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Enum_LifeCycleState_Cancelled" xml:space="preserve">
+    <value>Void</value>
+  </data>
+  <data name="Enum_LifeCycleState_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Enum_LifeCycleState_Executed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Enum_LifeCycleState_Terminated" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="Operation_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Property_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Property_PlacedToCaseFileDate" xml:space="preserve">
+    <value>Date placed to file</value>
+  </data>
+  <data name="Property_Comment" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Property_ControlExecutionState" xml:space="preserve">
+    <value>Follow up</value>
+  </data>
+  <data name="Property_ExternalApprovalState" xml:space="preserve">
+    <value>External approval</value>
+  </data>
+  <data name="Property_DeliveryDate" xml:space="preserve">
+    <value>Delivery date</value>
+  </data>
+  <data name="Property_DeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Property_DeliveredTo" xml:space="preserve">
+    <value>Delivered to</value>
+  </data>
+  <data name="Property_InternalApprovalState" xml:space="preserve">
+    <value>Internal approval</value>
+  </data>
+  <data name="Property_ExecutionState" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="Property_CaseFile" xml:space="preserve">
+    <value>Case File</value>
+  </data>
+  <data name="Property_Index" xml:space="preserve">
+    <value>Order Number</value>
+  </data>
+  <data name="Property_IsHeldByCounterParty" xml:space="preserve">
+    <value>Return from counterparty required</value>
+  </data>
+  <data name="Property_IsReturnRequired" xml:space="preserve">
+    <value>Return required</value>
+  </data>
+  <data name="Property_IsOriginal" xml:space="preserve">
+    <value>Original document</value>
+  </data>
+  <data name="Property_LifeCycleState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Property_Tracking" xml:space="preserve">
+    <value>Tracking</value>
+  </data>
+  <data name="Property_LocationState" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Property_DocumentRegister" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="Property_RegistrationDate" xml:space="preserve">
+    <value>Document date</value>
+  </data>
+  <data name="Property_RegistrationNumber" xml:space="preserve">
+    <value>Reg. No.</value>
+  </data>
+  <data name="Property_RegistrationState" xml:space="preserve">
+    <value>Registration state</value>
+  </data>
+  <data name="Property_ReturnDate" xml:space="preserve">
+    <value>Return date</value>
+  </data>
+  <data name="Property_ScheduledReturnDateFromCounterparty" xml:space="preserve">
+    <value>Scheduled return date from counterparty</value>
+  </data>
+  <data name="Property_ResponsibleForReturnEmployee" xml:space="preserve">
+    <value>Employee resp. for return</value>
+  </data>
+  <data name="Property_ReturnResult" xml:space="preserve">
+    <value>Return result</value>
+  </data>
+  <data name="Property_ReturnTask" xml:space="preserve">
+    <value>Task to return document</value>
+  </data>
+  <data name="Property_ReturnDeadline" xml:space="preserve">
+    <value>Return deadline</value>
+  </data>
+  <data name="Action_SendForApproval" xml:space="preserve">
+    <value>For Rule-Based Approval</value>
+  </data>
+  <data name="Action_SendForApprovalDescription" xml:space="preserve">
+    <value>Send document for approval according to approval rules</value>
+  </data>
+  <data name="Action_SendForApprovalHint" xml:space="preserve">
+    <value>Send for rule-based approval</value>
+  </data>
+  <data name="Action_SendActionItem" xml:space="preserve">
+    <value>To Assignees as Action Item</value>
+  </data>
+  <data name="Action_SendActionItemDescription" xml:space="preserve">
+    <value>Send action item on the current document</value>
+  </data>
+  <data name="Action_SendActionItemHint" xml:space="preserve">
+    <value>Send Action Item on Document</value>
+  </data>
+  <data name="Action_DeliverDocument" xml:space="preserve">
+    <value>Deliver document</value>
+  </data>
+  <data name="Action_DeliverDocumentDescription" xml:space="preserve">
+    <value>Deliver paper document to a person or track to whom it was delivered and at what time and date</value>
+  </data>
+  <data name="Action_DeliverDocumentHint" xml:space="preserve">
+    <value>Deliver document</value>
+  </data>
+  <data name="Action_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Action_RegisterDescription" xml:space="preserve">
+    <value>Register document assigning registration number</value>
+  </data>
+  <data name="Action_RegisterHint" xml:space="preserve">
+    <value>Register Document</value>
+  </data>
+  <data name="Action_ChangeRequisites" xml:space="preserve">
+    <value>Change Requisites</value>
+  </data>
+  <data name="Action_ChangeRequisitesDescription" xml:space="preserve">
+    <value>Open card of registered document to change registration data</value>
+  </data>
+  <data name="Action_ChangeRequisitesHint" xml:space="preserve">
+    <value>Change Requisites</value>
+  </data>
+  <data name="Action_AssignNumber" xml:space="preserve">
+    <value>Assign Number</value>
+  </data>
+  <data name="Action_AssignNumberDescription" xml:space="preserve">
+    <value>Assign registration number for document in the register</value>
+  </data>
+  <data name="Action_AssignNumberHint" xml:space="preserve">
+    <value>Assign Registration Number</value>
+  </data>
+  <data name="Action_ReturnDocument" xml:space="preserve">
+    <value>Return Document</value>
+  </data>
+  <data name="Action_ReturnDocumentDescription" xml:space="preserve">
+    <value>Return paper document</value>
+  </data>
+  <data name="Action_ReturnDocumentHint" xml:space="preserve">
+    <value>Return Document</value>
+  </data>
+  <data name="Action_ReturnFromCounterparty" xml:space="preserve">
+    <value>Return Document</value>
+  </data>
+  <data name="Action_ReturnFromCounterpartyDescription" xml:space="preserve">
+    <value>Return paper document</value>
+  </data>
+  <data name="Action_ReturnFromCounterpartyHint" xml:space="preserve">
+    <value>Return Document</value>
+  </data>
+  <data name="Action_ShowRegistrationPane" xml:space="preserve">
+    <value>Registration Pane</value>
+  </data>
+  <data name="Action_ShowRegistrationPaneDescription" xml:space="preserve">
+    <value>Show or hide pane containing additional document requisites</value>
+  </data>
+  <data name="Action_ShowRegistrationPaneHint" xml:space="preserve">
+    <value>Show or Hide Registration Pane</value>
+  </data>
+  <data name="Action_ShowReturnAssignments" xml:space="preserve">
+    <value>Open Assignment to Return Document</value>
+  </data>
+  <data name="Action_ShowReturnAssignmentsDescription" xml:space="preserve">
+    <value>Open assignment to return paper document</value>
+  </data>
+  <data name="Action_ShowReturnAssignmentsHint" xml:space="preserve">
+    <value>Open Assignment to Return Document</value>
+  </data>
+  <data name="Action_CancelRegistration" xml:space="preserve">
+    <value>Cancel Registration</value>
+  </data>
+  <data name="Action_CancelRegistrationDescription" xml:space="preserve">
+    <value>Cancel registration of the current document</value>
+  </data>
+  <data name="Action_CancelRegistrationHint" xml:space="preserve">
+    <value>Cancel Document Registration</value>
+  </data>
+  <data name="Enum_RegistrationState_NotRegistered" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="Enum_RegistrationState_Registered" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="Enum_RegistrationState_Reserved" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="Property_DocumentKind" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="Property_BusinessUnit" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="Property_Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Property_OurSignatory" xml:space="preserve">
+    <value>Signed by</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Official Document</value>
+  </data>
+  <data name="Control_f0607051ea774af2b7966d11cd8a7374_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b8017e2288d643da8d6d8d11917b1dd6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowDocumentReturn" xml:space="preserve">
+    <value>Check Return</value>
+  </data>
+  <data name="Action_ShowDocumentReturnDescription" xml:space="preserve">
+    <value>Open list of the documents that were not returned from departments</value>
+  </data>
+  <data name="Action_ShowDocumentReturnHint" xml:space="preserve">
+    <value>Check Document Return</value>
+  </data>
+  <data name="Action_ShowDocumentReturnConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Official Document</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Official Documents</value>
+  </data>
+  <data name="Enum_OperationDetailed_Numeration" xml:space="preserve">
+    <value>A number {0}, date {1}, register "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_Registration" xml:space="preserve">
+    <value>A number {0}, date {1}, register "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_Reservation" xml:space="preserve">
+    <value>A number {0}, date {1}, register "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_NumChange" xml:space="preserve">
+    <value>A number {0}, date {1}, register "{2}".</value>
+  </data>
+  <data name="Enum_OperationDetailed_RegChange" xml:space="preserve">
+    <value>A number {0}, date {1}, register "{2}".</value>
+  </data>
+  <data name="Form_30d150530c6440f289b8b68c0c9fd574" xml:space="preserve">
+    <value>Tracking</value>
+  </data>
+  <data name="ControlGroup_42612188cf984a66a4cc5c674787d208" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Control_0e47ae684ffc4acb80bf3d6f715ce7c2_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_DocumentGroup" xml:space="preserve">
+    <value>Document group</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="Property_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Action_ApprovalForm" xml:space="preserve">
+    <value>Approval Form</value>
+  </data>
+  <data name="Action_ApprovalFormDescription" xml:space="preserve">
+    <value>View approval form for the document</value>
+  </data>
+  <data name="Action_ApprovalFormHint" xml:space="preserve">
+    <value>View Approval Form</value>
+  </data>
+  <data name="Action_ApprovalFormConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Form_a1ced6b8fe174f6183100fb8faf6b263" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="ControlGroup_b01c534e2f234b8ba69a8942a59fb290" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_35c8fbc9420e4524bfeb64a8a91d8f32" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_LifeCycleState_Obsolete" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="Action_SendForFreeApproval" xml:space="preserve">
+    <value>For Free Approval</value>
+  </data>
+  <data name="Action_SendForFreeApprovalDescription" xml:space="preserve">
+    <value>Send document for free approval by task</value>
+  </data>
+  <data name="Action_SendForFreeApprovalHint" xml:space="preserve">
+    <value>Send for free approval</value>
+  </data>
+  <data name="Action_SendForFreeApprovalConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendForReview" xml:space="preserve">
+    <value>To Manager for Review</value>
+  </data>
+  <data name="Action_SendForReviewDescription" xml:space="preserve">
+    <value>Send document to manager for review</value>
+  </data>
+  <data name="Action_SendForReviewHint" xml:space="preserve">
+    <value>Send for Review</value>
+  </data>
+  <data name="Action_SendForReviewConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_PreparedBy" xml:space="preserve">
+    <value>Prepared by</value>
+  </data>
+  <data name="Control_fc50c88831554ff196e8ff7064894ead_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_Operation_EnReviewed" xml:space="preserve">
+    <value>Endorsement state set to reviewed</value>
+  </data>
+  <data name="Enum_Operation_EnPendingReview" xml:space="preserve">
+    <value>Endorsement state set to on review</value>
+  </data>
+  <data name="Control_826a189b01cd446287d73d27e1ede6f9_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_72e492251e834e65bb33ea838a458e43" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Property_Project" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="Property_AssociatedApplication" xml:space="preserve">
+    <value>Opens with</value>
+  </data>
+  <data name="Property_LastVersionApproved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="Action_CreateAddendum" xml:space="preserve">
+    <value>Create Addendum</value>
+  </data>
+  <data name="Action_CreateAddendumDescription" xml:space="preserve">
+    <value>Create an addendum to the document</value>
+  </data>
+  <data name="Action_CreateAddendumHint" xml:space="preserve">
+    <value>Create Addendum to Document</value>
+  </data>
+  <data name="Action_CreateAddendumConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_RelatedDocumentCommands_05d63e9c36c044c3a7fdb1a360e13fc0" xml:space="preserve">
+    <value>Related Documents</value>
+  </data>
+  <data name="Action_CreateFromTemplateHint" xml:space="preserve">
+    <value>Create version from template</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>Author [Author]</value>
+  </data>
+  <data name="Ribbon_RelatedDocumentCommands_40129d01a20041e9ab9d7349ae62b2c4" xml:space="preserve">
+    <value>Related Documents</value>
+  </data>
+  <data name="Action_SendToCounterparty" xml:space="preserve">
+    <value>Via Exchange Service</value>
+  </data>
+  <data name="Action_SendToCounterpartyDescription" xml:space="preserve">
+    <value>Send the document to counterparty via document exchange service.
+
+If the document was initially received from the counterparty and requires a signature, you will be asked to specify result of signing.
+
+This command is only available if you are included into role "Users authorized to work via exchange service".</value>
+  </data>
+  <data name="Action_SendToCounterpartyHint" xml:space="preserve">
+    <value>Send or Return Document to Counterparty</value>
+  </data>
+  <data name="Action_SendToCounterpartyConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendToCounterpartyConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ExchangeState" xml:space="preserve">
+    <value>Electronic exchange</value>
+  </data>
+  <data name="Operation_SendByExchange" xml:space="preserve">
+    <value>Send via exchange service</value>
+  </data>
+  <data name="Enum_ExchangeState_Received" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="Enum_ExchangeState_Sent" xml:space="preserve">
+    <value>Sent to counterparty</value>
+  </data>
+  <data name="Enum_ExchangeState_SignAwaited" xml:space="preserve">
+    <value>Awaiting counterparty's signature</value>
+  </data>
+  <data name="Enum_ExchangeState_SignRequired" xml:space="preserve">
+    <value>Signature required</value>
+  </data>
+  <data name="Enum_ExchangeState_Signed" xml:space="preserve">
+    <value>Signed by both parties</value>
+  </data>
+  <data name="Enum_ExchangeState_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Enum_ExchangeState_Terminated" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Enum_ExchangeState_Obsolete" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="Property_LeadingDocument" xml:space="preserve">
+    <value>Leading document</value>
+  </data>
+  <data name="Action_OpenInExchangeService" xml:space="preserve">
+    <value>Open in Service</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceDescription" xml:space="preserve">
+    <value>Open the document on website of the exchange service</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceHint" xml:space="preserve">
+    <value>Open Document in Exchange Service</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenInExchangeServiceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_ServiceGroup_0ae336b121774ccfa3fbd7004a8a08b8" xml:space="preserve">
+    <value>Exchange service</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReport" xml:space="preserve">
+    <value>Electronic Exchange Log</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReportDescription" xml:space="preserve">
+    <value>View electronic document exchange log</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReportHint" xml:space="preserve">
+    <value>Open Electronic Exchange Log</value>
+  </data>
+  <data name="Action_OpenExchangeOrderReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenExchangeOrderReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenOriginal" xml:space="preserve">
+    <value>Open Original</value>
+  </data>
+  <data name="Action_OpenOriginalDescription" xml:space="preserve">
+    <value>Open the document in original format without electronic signature stamps.</value>
+  </data>
+  <data name="Action_OpenOriginalHint" xml:space="preserve">
+    <value>Open Original Document Version</value>
+  </data>
+  <data name="Action_OpenOriginalConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenOriginalConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenDocumentReadHint" xml:space="preserve">
+    <value>Read document</value>
+  </data>
+  <data name="Action_OpenDocumentReadDescription" xml:space="preserve">
+    <value>Open the document as read-only.</value>
+  </data>
+  <data name="Action_SendForAcquaintance" xml:space="preserve">
+    <value>For Acquaintance</value>
+  </data>
+  <data name="Action_SendForAcquaintanceDescription" xml:space="preserve">
+    <value>Send document by acquaintance task.</value>
+  </data>
+  <data name="Action_SendForAcquaintanceHint" xml:space="preserve">
+    <value>Send for Acquaintance</value>
+  </data>
+  <data name="Action_SendForAcquaintanceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendForAcquaintanceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Reports_6bafd262471346eb9c42e68884286194" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Ribbon_Reports_9a84f93c07e44320a7fb6c7b9ef14a0e" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReport" xml:space="preserve">
+    <value>Acquaintance Report</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReportDescription" xml:space="preserve">
+    <value>View document acquaintance report</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReportHint" xml:space="preserve">
+    <value>Document Acquaintance Report</value>
+  </data>
+  <data name="Action_ShowAcquaintanceReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowAcquaintanceReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Reports_33726bc171f1472e9a614a4077a73ee9" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Ribbon_Reports_b21a077bc7224d74875595f9613f7d94" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Ribbon_Reports_a213091392ab4963bc2542cc53d1f44b" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Action_BarcodeReport" xml:space="preserve">
+    <value>Document Barcode</value>
+  </data>
+  <data name="Action_BarcodeReportDescription" xml:space="preserve">
+    <value>Print barcode to put it on the document.</value>
+  </data>
+  <data name="Action_BarcodeReportHint" xml:space="preserve">
+    <value>Print Document Barcode</value>
+  </data>
+  <data name="Action_BarcodeReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_BarcodeReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Print_f9b455431766414d841f525a57c99e45" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Action_ShowRelatedDocuments" xml:space="preserve">
+    <value>Related Documents</value>
+  </data>
+  <data name="Action_ShowRelatedDocumentsDescription" xml:space="preserve">
+    <value>Open the list of documents related to the current one.</value>
+  </data>
+  <data name="Action_ShowRelatedDocumentsHint" xml:space="preserve">
+    <value>Show Related Documents</value>
+  </data>
+  <data name="Action_ShowRelatedDocumentsConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowRelatedDocumentsConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_EditRelationsCommands_f5b525c195e747e79eb6fdfe15e87078" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Ribbon_RelatedGroup_6b0284ae25ec48f88a76c812488e633e" xml:space="preserve">
+    <value>Related</value>
+  </data>
+  <data name="Action_ConvertToPdf" xml:space="preserve">
+    <value>Create PDF with Digital Signature Mark</value>
+  </data>
+  <data name="Action_ConvertToPdfDescription" xml:space="preserve">
+    <value>Convert the document to PDF with a mark about the digital signature.
+To open the initial document after it was converted, click "Open Original" on the "Versions" tab.</value>
+  </data>
+  <data name="Action_ConvertToPdfHint" xml:space="preserve">
+    <value>Convert Document to PDF with Digital Signature Mark</value>
+  </data>
+  <data name="Action_ConvertToPdfConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ConvertToPdfConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Form_520df4eae55447458d4f018b6d022962" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="ControlGroup_9c0e981c710f4665bcbc2d8f5d8084d3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_fd86ec670272447fbe4580324ca8a699" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="ControlGroup_8f91b21ba3744bd5807bb01130dff98f" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ControlGroup_812fa7c1ee734284a3458e74ae533761" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ControlGroup_be2e7b3b0c934025bd189aa01ba7f66c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b6b8a84b12bf4dfca14371690f1ae498" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Property_VerificationState" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="Enum_VerificationState_InProcess" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="Enum_VerificationState_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="ControlGroup_8b050f363a594f4ca5bd78314ab6d183" xml:space="preserve">
+    <value>Lifecycle</value>
+  </data>
+  <data name="Property_DocumentDate" xml:space="preserve">
+    <value>Document created/registered</value>
+  </data>
+  <data name="Action_SendByMail" xml:space="preserve">
+    <value>By email</value>
+  </data>
+  <data name="Action_SendByMailHint" xml:space="preserve">
+    <value>Send by email</value>
+  </data>
+  <data name="Action_SendByMailDescription" xml:space="preserve">
+    <value>Send document content to a mail recipient.</value>
+  </data>
+  <data name="Action_CreateManyAddendumConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateManyAddendumHint" xml:space="preserve">
+    <value>Add Addenda to Document from Files</value>
+  </data>
+  <data name="Action_CreateManyAddendumConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateManyAddendumDescription" xml:space="preserve">
+    <value>Add multiple addenda to the document from files</value>
+  </data>
+  <data name="Action_CreateManyAddendum" xml:space="preserve">
+    <value>Add Addenda</value>
+  </data>
+  <data name="Property_Storage" xml:space="preserve">
+    <value>Storage</value>
+  </data>
+  <data name="Ribbon_ServiceGroup_2ed94346ba894c529815d18010d3a2ae" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="Action_ChangeDocumentType" xml:space="preserve">
+    <value>Change Type</value>
+  </data>
+  <data name="Action_ChangeDocumentTypeDescription" xml:space="preserve">
+    <value>After you change document type, document card will change as well. You will be prompted to specify required requisites.
+
+You will not be able to change document type again.</value>
+  </data>
+  <data name="Action_ChangeDocumentTypeHint" xml:space="preserve">
+    <value>Change Document Type</value>
+  </data>
+  <data name="Action_ChangeDocumentTypeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeDocumentTypeConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_ServiceGroup_bc285966c6e245ee95412efcf471bf14" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="Ribbon_Document_6d15b5678aaa43c98c9eaca6d8f16bfe" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="Action_ExportDocument" xml:space="preserve">
+    <value>Export Document</value>
+  </data>
+  <data name="Action_ExportDocumentDescription" xml:space="preserve">
+    <value>Export the document with approval electronic signatures.</value>
+  </data>
+  <data name="Action_ExportDocumentHint" xml:space="preserve">
+    <value>Export Document with Electronic Signatures</value>
+  </data>
+  <data name="Action_ExportDocumentConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ExportDocumentConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Export_a38da52fcc71444094309bdf17239dd2" xml:space="preserve">
+    <value>Export</value>
+  </data>
+</root>

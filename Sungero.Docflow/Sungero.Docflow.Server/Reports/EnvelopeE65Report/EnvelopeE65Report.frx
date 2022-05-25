@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Content&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Docflow.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="LetterRequisites" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${DataSource}">
+        <Column Name="Id" DataType="System.Int32" PropName="Column"/>
+        <Column Name="ToName" DataType="System.String" PropName="Column"/>
+        <Column Name="FromName" DataType="System.String" PropName="Column"/>
+        <Column Name="ToZipCode" DataType="System.String" PropName="Column"/>
+        <Column Name="FromZipCode" DataType="System.String" PropName="Column"/>
+        <Column Name="ToPlace" DataType="System.String" PropName="Column"/>
+        <Column Name="FromPlace" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="770ac42f-f924-4d0c-8b98-2fddca65166c" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="e5985b53-b0ff-43b3-b0c8-00fcd6ce3100" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="PrintSender" Id="f0a14e76-edf7-4f76-a789-004e3c02ef32" IsRequired="false" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="OutgoingDocuments" Id="c054f027-af71-43e6-a987-10c6ed3eb71d" IsRequired="false" IsCollection="true" InternalDataType="Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="f5f104fb-52e4-422b-9de1-a36937d85a2d"/>
+    <SungeroParameter Name="ContractualDocuments" Id="41e6dbbd-2a8d-434d-a2a4-f0b000087fd0" IsRequired="false" IsCollection="true" InternalDataType="Sungero.Docflow.IContractualDocumentBase, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="454df3c6-b850-47cf-897f-a10d767baa77"/>
+    <SungeroParameter Name="AccountingDocuments" Id="b2030da1-880c-48e4-a378-e71a514dc7d7" IsRequired="false" IsCollection="true" InternalDataType="Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="96c4f4f3-dc74-497a-b347-e8faf4afe320"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="220" PaperHeight="110" RawPaperSize="27" LeftMargin="0" TopMargin="0" RightMargin="0" BottomMargin="0" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <DataBand Name="Data1" Width="831.6" Height="415.8" DataSource="Table">
+      <TextObject Name="FromLines" Left="18.9" Top="18.9" Width="359.1" Height="75.6" Font="Arial, 10pt" LineHeight="24.57">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="ToLines" Left="396.9" Top="173.88" Width="359.1" Height="151.2" VertAlign="Bottom" Font="Arial, 10pt" LineHeight="24.57"/>
+      <ZipCodeObject Name="ZipCode" Left="37.8" Top="321.3" Width="238.14" Height="55.92" Expression="[LetterRequisites.ToZipCode]" Text="      "/>
+      <TextObject Name="ImagePlaceholder" Left="18.9" Top="116.42" Width="359.1" Height="189" Fill.Color="Gainsboro" Text="(Зона иллюстрации)" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+        <Highlight>
+          <Condition Expression="0 == 0" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="ZipCodeTo" Left="396.9" Top="321.3" Width="132.3" Height="30.24" Border.Lines="All" Text="[LetterRequisites.ToZipCode]" HorzAlign="Center" VertAlign="Bottom" Font="Arial, 14pt"/>
+      <TextObject Name="ZipCodeToPlaceholder" Left="396.9" Top="315.63" Width="132.3" Height="18.9" Text="Индекс места назначения" HorzAlign="Center" VertAlign="Center" Font="Arial, 6.75pt, style=Italic"/>
+      <TextObject Name="ZipCodeFrom" Left="264.6" Top="92.61" Width="113.4" Height="24.57" Border.Lines="All" Text="[LetterRequisites.FromZipCode]" HorzAlign="Center" VertAlign="Bottom" Font="Arial, 11.25pt">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="StampsCorner" Left="737.1" Top="28.35" Width="56.7" Height="56.7" Border.Lines="Right, Top" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="ZipCodeFromPlaceholder" Left="255.15" Top="86.94" Width="132.3" Height="18.9" Text="Индекс места отправления" HorzAlign="Center" VertAlign="Center" Font="Arial, 6pt, style=Italic">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="ToPlaceLabel" Left="396.9" Top="224.91" Width="47.25" Height="24.57" Fill.Color="White" Text="Куда" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt, style=Italic"/>
+      <TextObject Name="ToNameLabel" Left="396.9" Top="174.64" Width="47.25" Height="24.57" Fill.Color="White" Text="Кому" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt, style=Italic"/>
+      <TextObject Name="FromNameField1" Left="85.05" Top="18.9" Width="556.79" Height="24.57" Text="[LetterRequisites.FromName]" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="52.92">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+          <Condition Expression="Length([LetterRequisites.FromName]) &gt; 190" Font="Arial, 5.25pt" ApplyTextFill="false" ApplyFont="true"/>
+          <Condition Expression="Length([LetterRequisites.FromName]) &gt; 170 &amp; Length([LetterRequisites.FromName]) &lt;= 190" Font="Arial, 6pt" ApplyTextFill="false" ApplyFont="true"/>
+          <Condition Expression="Length([LetterRequisites.FromName]) &gt; 140 &amp; Length([LetterRequisites.FromName]) &lt;= 170" Font="Arial, 6.75pt" ApplyTextFill="false" ApplyFont="true"/>
+          <Condition Expression="Length([LetterRequisites.FromName]) &gt; 60 &amp; Length([LetterRequisites.FromName]) &lt;= 140" Font="Arial, 8.25pt" ApplyTextFill="false" ApplyFont="true"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="FromPlaceField1" Left="85.05" Top="43.47" Width="292.19" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" BreakTo="FromPlaceField2" Text="[LetterRequisites.FromPlace]" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="52.92">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="FromPlaceField2" Left="18.9" Top="68.04" Width="359.1" Height="24.57" Padding="0, 0, 0, 0" AutoWidth="true" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="52.92">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="FromNameLabel" Left="18.14" Top="20.79" Width="60.48" Height="24.57" Fill.Color="White" Text="От кого" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt, style=Italic">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="FromPlaceLabel" Left="18.14" Top="45.36" Width="60.48" Height="24.57" Fill.Color="White" Text="Откуда" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt, style=Italic">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="ToNameField1" Left="444.15" Top="173.88" Width="311.85" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" BreakTo="ToNameField2" Text="[LetterRequisites.ToName]" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="ToNameField2" Left="396.9" Top="198.45" Width="359.1" Height="24.57" Padding="0, 0, 0, 0" AutoWidth="true" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="ToPlaceField1" Left="444.15" Top="223.02" Width="311.85" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" BreakTo="ToPlaceField2" Text="[LetterRequisites.ToPlace]" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="ToPlaceField2" Left="396.9" Top="247.59" Width="359.1" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" BreakTo="ToPlaceField3" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="ToPlaceField3" Left="396.9" Top="272.16" Width="359.1" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" BreakTo="ToPlaceField4" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="ToPlaceField4" Left="396.9" Top="296.73" Width="359.1" Height="24.57" AutoWidth="true" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="Text1" Left="396.9" Top="198.45" Width="359.1" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="Text2" Left="396.9" Top="296.73" Width="359.1" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="47.25"/>
+      <TextObject Name="Text3" Left="18.9" Top="68.04" Width="359.1" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="52.92">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+      <TextObject Name="Text4" Left="85.05" Top="18.9" Width="292.19" Height="24.57" Border.Lines="Bottom" Border.Width="0.5" Padding="0, 0, 0, 0" VertAlign="Bottom" Font="Arial, 10pt" FirstTabOffset="52.92">
+        <Highlight>
+          <Condition Expression="![PrintSender]" Visible="false" Font="Arial, 10pt" ApplyTextFill="false"/>
+        </Highlight>
+      </TextObject>
+    </DataBand>
+  </ReportPage>
+</Report>

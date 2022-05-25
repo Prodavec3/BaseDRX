@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Исходящий документ</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Исходящий документ</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Исходящие документы</value>
+  </data>
+  <data name="Property_Correspondent" xml:space="preserve">
+    <value>Корреспондент</value>
+  </data>
+  <data name="Property_InResponseTo" xml:space="preserve">
+    <value>В ответ на</value>
+  </data>
+  <data name="Property_Addressee" xml:space="preserve">
+    <value>Адресат</value>
+  </data>
+  <data name="Action_DocumentRegister" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="Action_DocumentRegisterDescription" xml:space="preserve">
+    <value>Открыть список исходящих зарегистрированных документов</value>
+  </data>
+  <data name="Action_DocumentRegisterHint" xml:space="preserve">
+    <value>Журнал исходящих документов</value>
+  </data>
+  <data name="Ribbon_Reports_40e1a9a3197f41cead96e60e8b8d285a" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="FilterPanel_DocumentRegisterGroup_c9e68bc0629544cd9ede1b4e92fcc0a2" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="FilterPanel_CounterpartyGroup_c97851993a4b409fbf99eccf8bb6651b" xml:space="preserve">
+    <value>Кому</value>
+  </data>
+  <data name="FilterPanel_Period_0efb676ea5824d969dacdf32691b0e5c" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_LastWeek_3b9e8ee3c5ee47c399da83f09f736200" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_a21decaa7c0449d4bef266ab881dc911" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_7c329f643020496bafb6d6c2c0dbb49d" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_30471734153a49f4a0e296557a0827fd" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Status_dc33a7febb604824a4c7897401b19404" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Registered_1d77e5b204c94b6c81a2c808f127fc49" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_4e85c9002dd8475e83f178e3b33d0793" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Reserved_7057b92ec3a64a1fb7172c4d57474fde" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="FilterPanel_DocumentKindGroup_d806ac63a71f4a1faee223e08e4df4b0" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="ControlGroup_5e1a61ccb14746089932da958641bf0b" xml:space="preserve">
+    <value>От кого</value>
+  </data>
+  <data name="ControlGroup_a6652cd2eb6049329e68bac89373e5b9" xml:space="preserve">
+    <value>Кому</value>
+  </data>
+  <data name="FilterPanel_DepartmentGroup_a0a2aed44cf943069abd9efbcca8c097" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Исполнитель</value>
+  </data>
+  <data name="Enum_LifeCycleState_Obsolete" xml:space="preserve">
+    <value>Недействующий</value>
+  </data>
+  <data name="Property_Author" xml:space="preserve">
+    <value>Автор</value>
+  </data>
+  <data name="Property_Subject" xml:space="preserve">
+    <value>Содержание</value>
+  </data>
+  <data name="Action_PrintEnvelope" xml:space="preserve">
+    <value>Напечатать конверты</value>
+  </data>
+  <data name="Action_PrintEnvelopeDescription" xml:space="preserve">
+    <value>Печать конвертов для выбранных документов. Доступные форматы: С4, С5, С65, Е65.
+
+Для выбора документов нажмите и удерживайте клавишу CTRL, затем выделите элементы левой кнопкой мыши.
+
+
+</value>
+  </data>
+  <data name="Action_PrintEnvelopeHint" xml:space="preserve">
+    <value>Напечатать конверты</value>
+  </data>
+  <data name="Action_MailRegister" xml:space="preserve">
+    <value>Реестр почтовых отправлений</value>
+  </data>
+  <data name="Action_MailRegisterDescription" xml:space="preserve">
+    <value>Сформировать список почтовых отправлений для выбранных документов (ф.103).
+
+Для выбора документов нажмите и удерживайте клавишу CTRL, затем выделите элементы левой кнопкой мыши.
+
+
+</value>
+  </data>
+  <data name="Action_MailRegisterHint" xml:space="preserve">
+    <value>Реестр почтовых отправлений</value>
+  </data>
+  <data name="Action_PrintEnvelopeCard" xml:space="preserve">
+    <value>Напечатать конверт</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardDescription" xml:space="preserve">
+    <value>Печать конверта.
+Доступные форматы: С4, С5, С65, Е65.
+</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardHint" xml:space="preserve">
+    <value>Печать конверта</value>
+  </data>
+  <data name="Ribbon_PostCommands_b09a758e0774412d83476d78e7e3abc3" xml:space="preserve">
+    <value>Почта</value>
+  </data>
+  <data name="Ribbon_Post_537458c86298450b9cc44e0876977278" xml:space="preserve">
+    <value>Почта</value>
+  </data>
+  <data name="Property_IsManyAddressees" xml:space="preserve">
+    <value>Несколько адресатов</value>
+  </data>
+  <data name="Property_Addressees" xml:space="preserve">
+    <value>Список рассылки письма</value>
+  </data>
+  <data name="Ribbon_ManyAddressees_8473b69bcb12418f878ae30193cc1384" xml:space="preserve">
+    <value>Кому</value>
+  </data>
+  <data name="Ribbon_ManyAddresseesToggleButton_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>Несколько адресатов</value>
+  </data>
+  <data name="Form_cd8582a5250a436e85c35d77d9f42950" xml:space="preserve">
+    <value>Адресаты</value>
+  </data>
+  <data name="ControlGroup_69e2f0d4c1704012b51015b0796cea33" xml:space="preserve">
+    <value>Список рассылки письма</value>
+  </data>
+  <data name="Ribbon_ManyAddresseesToggleButtonHint_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>Переключение в режим указания нескольких адресатов</value>
+  </data>
+  <data name="Ribbon_ManyAddresseesToggleButtonDescription_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>Режим указания нескольких адресатов. Заполнить список рассылки необходимо на закладке “Адресаты”.
+Повторное нажатие вернет документ в режим одного адресата</value>
+  </data>
+  <data name="Property_DistributionCorrespondent" xml:space="preserve">
+    <value>Корреспондент</value>
+  </data>
+  <data name="Action_SaveToDistributionList" xml:space="preserve">
+    <value>Сохранить список</value>
+  </data>
+  <data name="Action_SaveToDistributionListDescription" xml:space="preserve">
+    <value>Сохранение корреспондентов, адресатов и способов доставки в новый список рассылки.</value>
+  </data>
+  <data name="Action_SaveToDistributionListHint" xml:space="preserve">
+    <value>Сохранить список участников рассылки</value>
+  </data>
+  <data name="Action_FillFromDistributionList" xml:space="preserve">
+    <value>Заполнить из списка</value>
+  </data>
+  <data name="Action_FillFromDistributionListDescription" xml:space="preserve">
+    <value>Заполнение корреспондентов, адресатов и способов доставки из списка рассылки.</value>
+  </data>
+  <data name="Action_FillFromDistributionListHint" xml:space="preserve">
+    <value>Заполнить из списка рассылки</value>
+  </data>
+  <data name="Action_PrintDistributionSheet" xml:space="preserve">
+    <value>Печать листа рассылки</value>
+  </data>
+  <data name="Action_PrintDistributionSheetDescription" xml:space="preserve">
+    <value>Открытие листа рассылки письма.</value>
+  </data>
+  <data name="Action_PrintDistributionSheetHint" xml:space="preserve">
+    <value>Открыть лист рассылки</value>
+  </data>
+  <data name="Action_PrintDistributionSheetChild" xml:space="preserve">
+    <value>Печать листа рассылки</value>
+  </data>
+  <data name="Action_PrintDistributionSheetChildDescription" xml:space="preserve">
+    <value>Открытие листа рассылки письма.</value>
+  </data>
+  <data name="Action_PrintDistributionSheetChildHint" xml:space="preserve">
+    <value>Открыть лист рассылки</value>
+  </data>
+  <data name="Action_ChangeManyAddressees" xml:space="preserve">
+    <value>Несколько адресатов</value>
+  </data>
+  <data name="Action_ChangeManyAddresseesDescription" xml:space="preserve">
+    <value>Режим указания нескольких адресатов. Заполнить список рассылки необходимо на закладке “Адресаты”.
+Повторное нажатие вернет документ в режим одного адресата</value>
+  </data>
+  <data name="Action_ChangeManyAddresseesHint" xml:space="preserve">
+    <value>Переключение в режим указания нескольких адресатов</value>
+  </data>
+</root>

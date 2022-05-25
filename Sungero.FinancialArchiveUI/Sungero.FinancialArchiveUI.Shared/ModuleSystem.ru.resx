@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Финансовый архив</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Финансовый архив</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для учета, хранения и поиска финансово-хозяйственных документов, а также для подготовки к проверкам</value>
+  </data>
+  <data name="CoverGroup_Documents" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="CoverGroup_LinkedInformation" xml:space="preserve">
+    <value>Связанная информация</value>
+  </data>
+  <data name="CoverGroup_Search" xml:space="preserve">
+    <value>Поиск документов</value>
+  </data>
+  <data name="CoverAction_CreateDocument" xml:space="preserve">
+    <value>Создать документ</value>
+  </data>
+  <data name="CoverDescription_CreateDocument" xml:space="preserve">
+    <value>Быстрое создание актов, накладных, счетов-фактур, универсальных передаточных документов</value>
+  </data>
+  <data name="CoverAction_AllFinancialDocuments" xml:space="preserve">
+    <value>Финансовые документы</value>
+  </data>
+  <data name="CoverDescription_AllFinancialDocuments" xml:space="preserve">
+    <value>Список всех финансовых документов: актов, накладных, счетов-фактур и универсальных передаточных документов</value>
+  </data>
+  <data name="CoverAction_AllContractualDocuments" xml:space="preserve">
+    <value>Договоры и дополнительные соглашения</value>
+  </data>
+  <data name="CoverDescription_AllContractualDocuments" xml:space="preserve">
+    <value>Список всех действующих, расторгнутых и исполненных договоров и дополнительных соглашений</value>
+  </data>
+  <data name="CoverAction_SearchByRequisites" xml:space="preserve">
+    <value>Поиск по архиву</value>
+  </data>
+  <data name="CoverDescription_SearchByRequisites" xml:space="preserve">
+    <value>Поиск финансовых документов по реквизитам</value>
+  </data>
+  <data name="CoverAction_SearchAndExport" xml:space="preserve">
+    <value>Выгрузка документов</value>
+  </data>
+  <data name="CoverDescription_SearchAndExport" xml:space="preserve">
+    <value>Массовая выгрузка документов из архива для их предоставления в налоговые органы или для прочих проверок</value>
+  </data>
+  <data name="CoverAction_Organizations" xml:space="preserve">
+    <value>Организации</value>
+  </data>
+  <data name="CoverDescription_Organizations" xml:space="preserve">
+    <value>Организации, с которыми взаимодействует наша компания</value>
+  </data>
+  <data name="CoverAction_Contacts" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="CoverDescription_Contacts" xml:space="preserve">
+    <value>Информация о контактных лицах организаций</value>
+  </data>
+  <data name="CoverAction_Persons" xml:space="preserve">
+    <value>Персоны</value>
+  </data>
+  <data name="CoverDescription_Persons" xml:space="preserve">
+    <value>Физические лица (контрагенты, сотрудники, контакты), с которыми взаимодействует наша организация</value>
+  </data>
+  <data name="sf_727ee230_9497_48cd_bceb_096fe7fc9a63" xml:space="preserve">
+    <value>Договоры и доп.соглашения</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_8817db1ca27a4a359d8f47f97382b3e3" xml:space="preserve">
+    <value>Типы документов</value>
+  </data>
+  <data name="FilterPanel_Contracts_a786d7dbb13549ae8c3efc85dd4572da" xml:space="preserve">
+    <value>Договоры</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_a31e69fa35134be48d41208eeea03eef" xml:space="preserve">
+    <value>Доп. соглашения</value>
+  </data>
+  <data name="FilterPanel_Main_3516acd0080e4daf897c43895f06a80f" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_0ee0fe5432a347b2a4b64714bb61cf05" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Category_c072cc0b90da486492af748b16ac621f" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="FilterPanel_Contractor_767ac60de6cd4827b1d12ecfe1be6344" xml:space="preserve">
+    <value>Контрагент</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_a0394bb7bcc94981bcd9c596320a92cc" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_Department_2b9983dc3d84412683c044eb1caf9f18" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_Period_68f72961985e42ad8de2415d8d0bb1ac" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="FilterPanel_CurrentMonth_8c5a6cdc39fe464fbf45f0f61dca82e9" xml:space="preserve">
+    <value>Текущий месяц</value>
+  </data>
+  <data name="FilterPanel_PreviousMonth_5cfa2b2893314e649a870fb7a811ba1e" xml:space="preserve">
+    <value>Предыдущий месяц</value>
+  </data>
+  <data name="FilterPanel_CurrentQuarter_2cf479f5ff0f41c6932291b73b88bc09" xml:space="preserve">
+    <value>Текущий квартал</value>
+  </data>
+  <data name="FilterPanel_PreviousQuarter_f260ac74a9884f6bbf92f077a6ae2c20" xml:space="preserve">
+    <value>Предыдущий квартал</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_f5d649ff2b7e45249b1f62d50282e1fe" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="CoverGroup_Control" xml:space="preserve">
+    <value>Контроль полноты архива</value>
+  </data>
+  <data name="CoverAction_DocumentsWithoutScan" xml:space="preserve">
+    <value>Отсутствуют скан-копии</value>
+  </data>
+  <data name="CoverDescription_DocumentsWithoutScan" xml:space="preserve">
+    <value>Финансовые документы, у которых последняя версия не является скан-копией или версии отсутствуют</value>
+  </data>
+  <data name="CoverAction_SignAwaitedDocuments" xml:space="preserve">
+    <value>Ожидают подписания</value>
+  </data>
+  <data name="CoverDescription_SignAwaitedDocuments" xml:space="preserve">
+    <value>Финансовые документы в электронном формате, которые ожидают подписания нашей организацией или контрагентом</value>
+  </data>
+  <data name="sf_7dd47bdf_ac4b_4919_a6f1_4ed67d7e086a" xml:space="preserve">
+    <value>Отсутствуют скан-копии</value>
+  </data>
+  <data name="sf_0e79392a_07bb_42e8_85fa_3be38d8a4cc5" xml:space="preserve">
+    <value>Ожидают подписания</value>
+  </data>
+  <data name="FilterPanel_GeneralGroup_600eb2bbb4a0494c94eedc922dbe72ff" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_5a1e446a6ffd4e6b8062f6db111a0920" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_Department_e2416c28e36e4ddbb254998a191dec8f" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_Counterparty_b931a9e2ce794f3781a7541f18306d6a" xml:space="preserve">
+    <value>Контрагент</value>
+  </data>
+  <data name="FilterPanel_Period_414a87692ba246a0bf1ec08d4513570a" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="FilterPanel_CurrentMonth_b11530ae4f83466fa4f6026c0b6ebf37" xml:space="preserve">
+    <value>Текущий месяц</value>
+  </data>
+  <data name="FilterPanel_PreviousMonth_6b2e6b2ca4b14832a3d7ab22c9ebe0ac" xml:space="preserve">
+    <value>Предыдущий месяц</value>
+  </data>
+  <data name="FilterPanel_CurrentQuarter_fc82358a460c4e7fbeebdf55412d092b" xml:space="preserve">
+    <value>Текущий квартал</value>
+  </data>
+  <data name="FilterPanel_PreviousQuarter_ada7ff5817cf4a438ddf239fe17746d6" xml:space="preserve">
+    <value>Предыдущий квартал</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_5771599b9a2b4fb193927cf03834f44f" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_GeneralGroup_e387d2ff42bf464d9ccf57173fe5f150" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="FilterPanel_Period_66111e78e4824c79b3a4159f75a00db5" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_856d0217b3184e20aa502d745e2fca82" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_CurrentMonth_ed951c0ce7f44fa5a9f1b4f2e1c5870f" xml:space="preserve">
+    <value>Текущий месяц</value>
+  </data>
+  <data name="FilterPanel_PreviousMonth_f2104da227294b15981cd673748a821c" xml:space="preserve">
+    <value>Предыдущий месяц</value>
+  </data>
+  <data name="FilterPanel_CurrentQuarter_0ce7f11f226147d4b18e1d306a699ece" xml:space="preserve">
+    <value>Текущий квартал</value>
+  </data>
+  <data name="FilterPanel_PreviousQuarter_dab725f7aad144b482e5223d4f67267a" xml:space="preserve">
+    <value>Предыдущий квартал</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_f4d444ec24d4491f9b2fa088b62e4a1a" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Department_d230384ebc084dfd82847cae764260df" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_Counterparty_7afc940b75224285b371d66de67e70c7" xml:space="preserve">
+    <value>Контрагент</value>
+  </data>
+  <data name="FilterPanel_ByBusinessUnit_a4a61ec77b3f48e6b426fb31d1dd108c" xml:space="preserve">
+    <value>Нашей организацией</value>
+  </data>
+  <data name="FilterPanel_ByCounterparty_51d5b97eadb94ed7be545257eee08975" xml:space="preserve">
+    <value>Контрагентом</value>
+  </data>
+  <data name="FilterPanel_SignAwaitedBy_a7452ee3427d426198e0600d3338b561" xml:space="preserve">
+    <value>Ожидают подписания</value>
+  </data>
+  <data name="CoverAction_ImportDocument" xml:space="preserve">
+    <value>Импортировать XML-файл для отправки</value>
+  </data>
+  <data name="CoverDescription_ImportDocument" xml:space="preserve">
+    <value>Загрузить файл обмена установленного формата (УПД, УКД, ДПТ, ДПРР) для отправки через сервисы юридически значимого электронного документооборота. После загрузки в системе будет создан финансово-хозяйственный документ, который необходимо будет подписать электронной подписью и отправить контрагенту.</value>
+  </data>
+  <data name="CoverGroup_Exchange" xml:space="preserve">
+    <value>Электронный обмен</value>
+  </data>
+</root>

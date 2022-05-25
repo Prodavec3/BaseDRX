@@ -1,0 +1,73 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "8371fa12-018a-43da-a8b9-786be12e040c",
+  "Name": "RegistrationGroupRecipientLinks",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "20784da1-10a0-4ce1-97de-8a075142c47a",
+  "CanBeAncestor": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "17ad7a7f-8762-49b8-9885-42d0c6d64b71",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true
+  },
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1dab57e3-a543-4ac4-bf85-947c588119b7",
+      "Name": "Member",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "NeedPassEntityToLookupEvent",
+        "HandledEvents"
+      ]
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "75c0daf6-68bf-4140-b41d-ca537c0ed1c5",
+      "Name": "Group",
+      "EntityGuid": "6eddf9a4-bf7b-4cac-961b-a1f0f0bc7ab6",
+      "IsAncestorMetadata": true,
+      "IsReferenceToRootEntity": true,
+      "Overridden": [
+        "EntityGuid"
+      ]
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "7d070170-3c08-412c-9b07-75f08a777f9c",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "09f2fca3-dae8-4659-915d-00dd04465686",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

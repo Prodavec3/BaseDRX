@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Desktop>
+    <Widgets SettingsVersion="4">
+      <Widget Column="0" Row="0" ZIndex="0" ActionListGuid="c1491b3d-4085-4e59-8553-963b4b72ddeb" />
+      <Widget Column="0" Row="13" ZIndex="4" ActionListGuid="790204fb-6926-4d0f-a470-0f9721b156a9">
+        <Parameters>
+          <Parameter Id="6c0c8f8c-533e-453e-ba35-e48be332990b" Value="false" />
+        </Parameters>
+      </Widget>
+      <Widget Column="12" Row="0" ZIndex="1" ActionListGuid="07cae475-76e5-4fdb-b8dd-72a3b4fca75e">
+        <LocalizedTitles>
+          <LocalizedTitle Localization="en" Title="My Assignment Completion" />
+          <LocalizedTitle Localization="ru" Title="Моя исполнительская дисциплина" />
+        </LocalizedTitles>
+      </Widget>
+      <Widget Column="12" Row="13" ZIndex="3" ActionListGuid="087ec236-6052-4a73-889f-5ba54d416704">
+        <Parameters>
+          <Parameter Id="c011d9ef-d54a-478f-9f3f-c39a9613867a" Value="2f5febbc-0a20-4fd8-852e-44c296f62d9f" />
+          <Parameter Id="3b305e97-1ca2-4a53-bb01-14dcbd669dc7" Value="false" />
+        </Parameters>
+      </Widget>
+      <Widget Column="24" Row="0" ZIndex="2" ActionListGuid="0a50b572-9cb1-40cf-9307-dc760bd0485d">
+        <Parameters>
+          <Parameter Id="a99d9384-adf9-414e-8a88-0b77fe520710" Value="f8d93d36-00cb-4080-8bdc-92e494988472" />
+        </Parameters>
+        <LocalizedTitles>
+          <LocalizedTitle Localization="en" Title="My Projects" />
+          <LocalizedTitle Localization="ru" Title="Мои проекты" />
+        </LocalizedTitles>
+      </Widget>
+    </Widgets>
+  </Desktop>
+</settings>

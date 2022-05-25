@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Organizational Structure Visibility Rule</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Organizational Structure Visibility Rule</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Organizational Structure Visibility Rules</value>
+  </data>
+  <data name="Property_Recipients" xml:space="preserve">
+    <value>Groups and employees</value>
+  </data>
+  <data name="Property_VisibleMembers" xml:space="preserve">
+    <value>Groups and employees</value>
+  </data>
+  <data name="ControlGroup_23e9892ff944457cb000bcce3e0ca8f0" xml:space="preserve">
+    <value>Employees Authorized to View</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="ControlGroup_3c911ff45ee24e1cb9f9be269c9d4c57" xml:space="preserve">
+    <value>Employees Not to Be Viewed</value>
+  </data>
+  <data name="Property_ExcludedMembers" xml:space="preserve">
+    <value>Groups and employees</value>
+  </data>
+  <data name="ControlGroup_ebb91b40b45b4864a90617e4802be089" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="ControlGroup_8bb8c60c2c4247d9bc3af1bcbde0627e" xml:space="preserve">
+    <value>Employees Authorized to View</value>
+  </data>
+  <data name="ControlGroup_76ca0b782a8a4cc691a51ded0b28756f" xml:space="preserve">
+    <value>Employees to Be Viewed</value>
+  </data>
+  <data name="FilterPanel_Status_d9056f08c5e3443ba02deaaeefab7abd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Active_3b529c29c08940f5b59fde0e4778fa4a" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Recipient_8fbb16ac4cc84f0386096347462e2b9e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Status_51847e1376224d7da5f7d03447e9332e" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Closed_de0777abf430405c97227034c1f3a285" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Recipient_45afff172e564894b80448bf13a9eff5" xml:space="preserve">
+    <value>Employees Authorized to View</value>
+  </data>
+  <data name="FilterPanel_VisibleMember_0e45afa56599422494971dfaeb9ef9bf" xml:space="preserve">
+    <value>Employees to Be Viewed</value>
+  </data>
+  <data name="Control_6755d161e62448bd8b047f8d6311f8e4_EmptyText" xml:space="preserve">
+    <value>Specify employees or groups of employees that must not be displayed</value>
+  </data>
+</root>

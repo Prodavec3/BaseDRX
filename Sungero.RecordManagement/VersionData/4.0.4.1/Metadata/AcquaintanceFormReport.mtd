@@ -1,0 +1,73 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "4fb95eaa-eed1-4fcb-a601-e0b88ad0f5ae",
+  "Name": "AcquaintanceFormReport",
+  "AssociatedGuid": "2d53959b-2cee-41f7-83c2-98ae1dbbd538",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "Parameters",
+    "HandledEvents",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "Description"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "f517d8dd-2067-4cac-b425-ec4d225c36e4",
+      "Name": "Document",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "80ab9461-1241-4f3f-963b-89bc222930bb",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "158b05c6-b10f-4609-adb2-ec5be8ca5c57",
+      "Name": "DocumentName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "03b4d56e-e2e4-4e65-a161-4b4bccf165bf",
+      "Name": "AddendaDescription",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "68092e0a-9522-457d-abff-4ed9579c4ff8",
+      "Name": "Printed",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "f0cd34df-623a-4b22-80f4-c31a3ce515ea",
+      "Name": "Task",
+      "EntityType": "2d53959b-2cee-41f7-83c2-98ae1dbbd538",
+      "InternalDataTypeName": "Sungero.RecordManagement.IAcquaintanceTask, Sungero.Domain.Interfaces",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "Date",
+    "Signature"
+  ],
+  "Versions": []
+}

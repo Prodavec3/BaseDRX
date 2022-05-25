@@ -1,0 +1,225 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "a8dc61a5-862e-4c8a-a0e0-a5735ec3c3b3",
+  "Name": "ApprovalRule",
+  "Actions": [
+    {
+      "NameGuid": "c2f699e1-cecf-458b-bfe0-0b2efea4b94c",
+      "Name": "CreateVersion",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler",
+        "NeedConfirmation"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "9d6d0b9e-a625-4314-a04a-407fbf011f79",
+      "Name": "ChartAddCondition",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "b02987c8-ab4d-4915-a3d1-6871745c1f03",
+      "Name": "ChartConfigCondition",
+      "CollectionPropertyGuid": "264e56a8-f5b2-4f22-aa5f-c20f54c4ab99",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    }
+  ],
+  "BaseGuid": "42a6a084-6828-47d9-95bb-50b0538a6037",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "beeb8989-e26b-4f51-9d71-0298cc629266",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "HandledEvents": [
+    "CreatedServer",
+    "RefreshClient"
+  ],
+  "IconResourcesKeys": [],
+  "IsStatusEnabled": true,
+  "IsVisible": false,
+  "OperationsClass": "",
+  "Overridden": [
+    "IsStatusEnabled",
+    "IsCacheable",
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5e924248-ded1-4303-93b3-9b820a4cfde2",
+      "Name": "DocumentKinds",
+      "EntityGuid": "b4dd47f2-c49f-45bf-8a29-8a462c66050d",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents",
+        "EntityGuid",
+        "IsOverridden"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "264e56a8-f5b2-4f22-aa5f-c20f54c4ab99",
+      "Name": "Conditions",
+      "EntityGuid": "a5711709-ae60-4738-a7b1-0878f756a6d1",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "756ba0fb-c93c-41dd-a09b-470c7392bafb",
+      "Name": "Transitions",
+      "EntityGuid": "dc4449c7-5a08-4b4d-a95e-677db85e6d5d",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c74fe5c1-b21e-49c9-a550-7dfe5fb2e75c",
+      "Name": "DocumentFlow",
+      "HandledEvents": [
+        "FilteringClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d7319199-3333-49cc-a7b9-8467617ccf20",
+      "Name": "Id",
+      "IsAncestorMetadata": true,
+      "IsIdentifier": true,
+      "IsUnique": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "IsVisibleInFolderByDefault"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+      "Name": "Status",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList",
+        "IsVisibility",
+        "CanBeSearch"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cf771fd1-2bbf-4b96-9571-354fbe011132",
+      "Name": "Departments",
+      "EntityGuid": "dfe3129b-e1ad-42a1-b5f3-8505dd6392bf",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6775d26a-f091-4ee8-ba55-c37efc783d03",
+      "Name": "Stages",
+      "EntityGuid": "a097b1e2-ee8d-41cc-ac0d-68524c2e374a",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5a7ccc63-ac0a-41c6-b197-1a1534973ba2",
+      "Name": "BusinessUnits",
+      "EntityGuid": "07e78391-6f52-4e18-b8b8-799c5cfd9977",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d106c52e-0f28-4c96-9191-c34aea9f9795",
+      "Name": "DocumentGroups",
+      "EntityGuid": "5812c54a-95f4-4579-84d4-9be9ae8a7e58",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid",
+        "IsOverridden"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "903e99d3-bcb3-4662-a626-fa76613a8e1b",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "65fc0549-c520-4a4b-9182-0d187e712afb",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

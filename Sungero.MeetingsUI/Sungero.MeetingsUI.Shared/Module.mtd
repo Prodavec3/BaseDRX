@@ -1,0 +1,358 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "6ea9a047-b597-42eb-8f90-da8c559dd057",
+  "Name": "MeetingsUI",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.MeetingsUI.Client",
+  "ClientBaseAssemblyName": "Sungero.MeetingsUI.ClientBase",
+  "ClientBaseNamespace": "Sungero.MeetingsUI.ClientBase",
+  "ClientNamespace": "Sungero.MeetingsUI.Client",
+  "Code": "MeetUI",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "fce72d75-7f1e-448a-8165-8836c6246ff9",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "49b026a9-1b10-4a80-a6ae-d630e7392f57",
+        "Name": "CreateMinutes",
+        "FunctionName": "CreateMinutes",
+        "GroupId": "09ac4246-c011-4525-8a9c-70710323384b",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "81d7c40b-82a9-4144-bba0-94de2fc43a7e",
+        "Name": "AgendaList",
+        "EntityTypeId": "5261da93-7879-4210-b3db-c92fa894ab4d",
+        "GroupId": "493238b2-8a4e-4f5d-9cf6-06702b94ed4a",
+        "PreviousItemGuid": "8d140b1b-c958-4605-942d-350a679a70a2",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "8d140b1b-c958-4605-942d-350a679a70a2",
+        "Name": "CreateAgenda",
+        "FunctionName": "CreateAgenda",
+        "GroupId": "493238b2-8a4e-4f5d-9cf6-06702b94ed4a",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "8e5c53cc-b444-490f-ae47-dcc6a7b81606",
+        "Name": "Employees",
+        "EntityTypeId": "b7905516-2be5-4931-961c-cb38d5677565",
+        "GroupId": "6aa2e4d2-89c0-48c6-bb0f-146613c99d44",
+        "PreviousItemGuid": "da24830f-527c-4a52-a50c-42b5a2a03301",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "9cb0a9e3-3da3-4579-b666-0fffe396a06f",
+        "Name": "CreateMeeting",
+        "FunctionName": "CreateMeeting",
+        "GroupId": "b3e5e4a4-f8e4-4b5c-8c96-52b1dc02a0a6",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "aa3e9792-d862-4501-b6d2-76dec52ef5f2",
+        "Name": "MeetingsList",
+        "EntityTypeId": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
+        "GroupId": "b3e5e4a4-f8e4-4b5c-8c96-52b1dc02a0a6",
+        "PreviousItemGuid": "9cb0a9e3-3da3-4579-b666-0fffe396a06f",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "da24830f-527c-4a52-a50c-42b5a2a03301",
+        "Name": "MeetingActionItems",
+        "FunctionName": "ShowMeetingActionItemExecutionTasks",
+        "GroupId": "6aa2e4d2-89c0-48c6-bb0f-146613c99d44",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "da8e1569-7f25-4b5c-9fbe-2587c9ae1b19",
+        "Name": "ActionItemsExecutionReport",
+        "FunctionName": "OpenActionItemExecutionReport",
+        "GroupId": "f835ecc9-a394-4ae3-aa36-40fee5802e1a",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "e8e1230b-a02d-45cf-a057-123278d1cf07",
+        "Name": "MinutesList",
+        "ComputableFolderId": "27269d06-5094-49a2-8b00-d4bb04d1ae88",
+        "GroupId": "09ac4246-c011-4525-8a9c-70710323384b",
+        "PreviousItemGuid": "49b026a9-1b10-4a80-a6ae-d630e7392f57",
+        "Versions": []
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "626c9ed6-c6a9-4e71-b51a-a95dbabade93",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [
+      {
+        "NameGuid": "b3e5e4a4-f8e4-4b5c-8c96-52b1dc02a0a6",
+        "Name": "Meetings",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconMeetings_b3e5e4a4f8e44b5c8c9652b1dc02a0a6.png",
+        "Versions": []
+      },
+      {
+        "NameGuid": "f835ecc9-a394-4ae3-aa36-40fee5802e1a",
+        "Name": "Reports",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconReports_f835ecc9a3944ae3aa3640fee5802e1a.png",
+        "PreviousItemGuid": "b3e5e4a4-f8e4-4b5c-8c96-52b1dc02a0a6",
+        "Versions": []
+      },
+      {
+        "NameGuid": "493238b2-8a4e-4f5d-9cf6-06702b94ed4a",
+        "Name": "Agendas",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconAgendas_493238b28a4e4f5d9cf606702b94ed4a.png",
+        "PreviousItemGuid": "f835ecc9-a394-4ae3-aa36-40fee5802e1a",
+        "Versions": []
+      },
+      {
+        "NameGuid": "6aa2e4d2-89c0-48c6-bb0f-146613c99d44",
+        "Name": "LinkedInformation",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconLinkedInformation_6aa2e4d289c048c6bb0f146613c99d44.png",
+        "PreviousItemGuid": "493238b2-8a4e-4f5d-9cf6-06702b94ed4a",
+        "Versions": []
+      },
+      {
+        "NameGuid": "09ac4246-c011-4525-8a9c-70710323384b",
+        "Name": "Minutes",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconMinutes_09ac4246c01145258a9c70710323384b.png",
+        "PreviousItemGuid": "6aa2e4d2-89c0-48c6-bb0f-146613c99d44",
+        "Versions": []
+      }
+    ],
+    "Header": {
+      "NameGuid": "7ff9dee6-1113-4e5a-a30e-0830c8be1d6e",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
+      "Versions": []
+    },
+    {
+      "ItemId": "27269d06-5094-49a2-8b00-d4bb04d1ae88",
+      "PreviousItemId": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
+      "Versions": []
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "High",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.MeetingsUI",
+  "IsLicensed": true,
+  "Overridden": [
+    "Importance",
+    "IsLicensed"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.MeetingsUI",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "Sungero.MeetingsUI.Server",
+  "ServerNamespace": "Sungero.MeetingsUI.Server",
+  "SharedAssemblyName": "Sungero.MeetingsUI.Shared",
+  "SharedNamespace": "Sungero.MeetingsUI.Shared",
+  "SpecialFolders": [
+    {
+      "NameGuid": "27269d06-5094-49a2-8b00-d4bb04d1ae88",
+      "Name": "Minutes",
+      "DefaultContentType": "bb4780ff-b2c3-4044-a390-e9e110791bf6",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "622cc9fc-140e-4501-98ff-2a306a9936ac",
+        "Name": "FilterPanel",
+        "Controls": [
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "1096b1e4-4137-4c71-968a-52bc36d1145e",
+            "Name": "MyMinutes",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "5efec93a-ad0b-4679-90a4-b00e3652a820",
+            "Name": "MyMinutesList",
+            "IsMultiSelect": true,
+            "ParentGuid": "1096b1e4-4137-4c71-968a-52bc36d1145e",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "a32a9789-3933-4126-80a7-a6d964a94e7b",
+            "Name": "President",
+            "ParentGuid": "5efec93a-ad0b-4679-90a4-b00e3652a820",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "aea5f3e6-5380-4321-960a-d450f844bcac",
+            "Name": "Secretary",
+            "ParentGuid": "5efec93a-ad0b-4679-90a4-b00e3652a820",
+            "PreviousGuid": "a32a9789-3933-4126-80a7-a6d964a94e7b",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "365a6eb5-2f9a-434b-bdb9-35555fdd26ed",
+            "Name": "Member",
+            "ParentGuid": "5efec93a-ad0b-4679-90a4-b00e3652a820",
+            "PreviousGuid": "aea5f3e6-5380-4321-960a-d450f844bcac",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "2b5ebe6c-674d-471b-9027-1d0cc2eea7d6",
+            "Name": "ForExecution",
+            "PreviousGuid": "1096b1e4-4137-4c71-968a-52bc36d1145e",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "6c28b634-c728-402d-9109-719938a1a101",
+            "Name": "ForExecutionList",
+            "IsMultiSelect": true,
+            "ParentGuid": "2b5ebe6c-674d-471b-9027-1d0cc2eea7d6",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "9318fefd-2601-4c6a-a2e4-01e64148600e",
+            "Name": "ByMe",
+            "ParentGuid": "6c28b634-c728-402d-9109-719938a1a101",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "ec13479e-83ed-40f0-bb28-9f123e205e6e",
+            "Name": "ByMySubordinate",
+            "ParentGuid": "6c28b634-c728-402d-9109-719938a1a101",
+            "PreviousGuid": "9318fefd-2601-4c6a-a2e4-01e64148600e",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "ed92ed99-055d-456d-a1bf-6503b54dd91f",
+            "Name": "ByEmployee",
+            "ParentGuid": "6c28b634-c728-402d-9109-719938a1a101",
+            "PreviousGuid": "ec13479e-83ed-40f0-bb28-9f123e205e6e",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+            "NameGuid": "3aebc86e-146d-4ca7-b1c6-e0643250355b",
+            "Name": "Employee",
+            "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+            "MasterControlId": "ed92ed99-055d-456d-a1bf-6503b54dd91f",
+            "ParentGuid": "2b5ebe6c-674d-471b-9027-1d0cc2eea7d6",
+            "PreviousGuid": "6c28b634-c728-402d-9109-719938a1a101",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "9f7dacf2-f1e9-4a43-9394-f36ab0a6f79a",
+            "Name": "Period",
+            "PreviousGuid": "2b5ebe6c-674d-471b-9027-1d0cc2eea7d6",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "77179b5f-f917-4873-92dc-adcf3b276de6",
+            "Name": "DateList",
+            "ParentGuid": "9f7dacf2-f1e9-4a43-9394-f36ab0a6f79a",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "9ea6d4ee-267e-40e7-94b3-f107610881e4",
+            "Name": "LastWeek",
+            "IsSelected": true,
+            "ParentGuid": "77179b5f-f917-4873-92dc-adcf3b276de6",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "ee10276f-3122-447b-8f17-7234a0677f83",
+            "Name": "LastMonth",
+            "ParentGuid": "77179b5f-f917-4873-92dc-adcf3b276de6",
+            "PreviousGuid": "9ea6d4ee-267e-40e7-94b3-f107610881e4",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "54c6f2f9-3dbe-407a-afaa-83fe063e1af7",
+            "Name": "Last90Days",
+            "ParentGuid": "77179b5f-f917-4873-92dc-adcf3b276de6",
+            "PreviousGuid": "ee10276f-3122-447b-8f17-7234a0677f83",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "5aa3db23-c06b-4fa3-90a0-b4d499083fbc",
+            "Name": "ManualPeriod",
+            "ParentGuid": "77179b5f-f917-4873-92dc-adcf3b276de6",
+            "PreviousGuid": "54c6f2f9-3dbe-407a-afaa-83fe063e1af7",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterDateRangeMetadata, Sungero.Metadata",
+            "NameGuid": "c356a373-c43e-461b-ad07-fde40f38a3e0",
+            "Name": "DateRange",
+            "MasterControlId": "5aa3db23-c06b-4fa3-90a0-b4d499083fbc",
+            "ParentGuid": "9f7dacf2-f1e9-4a43-9394-f36ab0a6f79a",
+            "PreviousGuid": "77179b5f-f917-4873-92dc-adcf3b276de6",
+            "Versions": []
+          }
+        ],
+        "Versions": []
+      },
+      "HandledEvents": [
+        "DataQueryServer"
+      ],
+      "IconPath": "Minutes_27269d06509449a28b00d4bb04d1ae88.ico",
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false,
+      "OpenCardByDefault": true,
+      "Versions": []
+    }
+  ],
+  "Version": "4.3.27.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

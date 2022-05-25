@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection09a301d820bb4b4a92ea24bb1f7fde19 FormGuid="ad83498f-d515-4027-b87c-339dfa82a92f">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">887,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Member</property>
+            <property name="Visible">true</property>
+            <property name="Name">Department_RecipientLinks_Member</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">659</property>
+            <property name="ActualWidth">69*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection09a301d820bb4b4a92ea24bb1f7fde19>
+</settings>

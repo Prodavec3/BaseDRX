@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_ProjectKind" xml:space="preserve">
+    <value>Вид проекта</value>
+  </data>
+  <data name="Property_ShortName" xml:space="preserve">
+    <value>Сокращенное имя</value>
+  </data>
+  <data name="Property_InternalCustomer" xml:space="preserve">
+    <value>Внутренний заказчик</value>
+  </data>
+  <data name="Property_ExternalCustomer" xml:space="preserve">
+    <value>Внешний заказчик</value>
+  </data>
+  <data name="Property_StartDate" xml:space="preserve">
+    <value>Дата начала (план)</value>
+  </data>
+  <data name="Property_EndDate" xml:space="preserve">
+    <value>Дата окончания (план)</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="ControlGroup_ab0d039d1cf949aea7fa6756f64635c3" xml:space="preserve">
+    <value>Сроки проекта</value>
+  </data>
+  <data name="ControlGroup_c45f3bb48e80474a97be56d5b5cda28c" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_TeamMembers" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="Property_Manager" xml:space="preserve">
+    <value>Руководитель проекта</value>
+  </data>
+  <data name="Property_Folder" xml:space="preserve">
+    <value>Папка проекта</value>
+  </data>
+  <data name="Action_ShowFolderDescription" xml:space="preserve">
+    <value>Открыть папку проекта</value>
+  </data>
+  <data name="Action_ShowFolderHint" xml:space="preserve">
+    <value>Папка проекта</value>
+  </data>
+  <data name="Action_ShowFolder" xml:space="preserve">
+    <value>Папка проекта</value>
+  </data>
+  <data name="Ribbon_Project_44d591cd3c8c4b96b2bda9e7d909ba65" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Реестр проектов</value>
+  </data>
+  <data name="FilterPanel_Status_3bf8c0c08a75463faf4040d627c1cc5d" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Active_8fb90d59c564493694ee10b2498a939c" xml:space="preserve">
+    <value>Исполнение</value>
+  </data>
+  <data name="FilterPanel_Closed_9c63f8e8e84c416cac1a2fe7ccd01d70" xml:space="preserve">
+    <value>Завершен</value>
+  </data>
+  <data name="FilterPanel_StartGroup_65f3d35600414b418d4d8700a336da5e" xml:space="preserve">
+    <value>Дата начала</value>
+  </data>
+  <data name="FilterPanel_StartPeriodThisMonth_7428f7e7f2814848b9b0a0464d9bfa8e" xml:space="preserve">
+    <value>В текущем месяце</value>
+  </data>
+  <data name="FilterPanel_StartPeriodManual_429e715222ec4004bd5922faab907e7c" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_FinishGroup_4e9bf44a9dc44dde9e37b908940b3698" xml:space="preserve">
+    <value>Дата окончания</value>
+  </data>
+  <data name="FilterPanel_FinishPeriodThisMonth_d196e0af003c4ef99cd3c40b73212059" xml:space="preserve">
+    <value>В текущем месяце</value>
+  </data>
+  <data name="FilterPanel_FinishPeriodManual_9e36678f3819413cafe1795907d6233c" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="Form_9b10a47766fb4c598132bc8d29cb09f2" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="ControlGroup_d0099f1c8f714b258357d03402a48541" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="Property_Classifier" xml:space="preserve">
+    <value>Папки</value>
+  </data>
+  <data name="Form_4523887dc1e3468eaef77dbe96a408cf" xml:space="preserve">
+    <value>Папки</value>
+  </data>
+  <data name="ControlGroup_d4d0d738cb3744de9960f6d03c5f6c7e" xml:space="preserve">
+    <value>Структура папок проекта</value>
+  </data>
+  <data name="FilterPanel_Main_51dfbbceb44a4b08a68483016ea322bf" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="FilterPanel_ProjectKind_c7c629cb018e488e8d5b29956386136b" xml:space="preserve">
+    <value>Вид проекта</value>
+  </data>
+  <data name="FilterPanel_ProjectManager_e9b5b1fbeeb54019838164718971afe1" xml:space="preserve">
+    <value>Руководитель проекта</value>
+  </data>
+  <data name="FilterPanel_InternalCustomer_f228583efda6488d80f3757ae8b59f41" xml:space="preserve">
+    <value>Внутренний</value>
+  </data>
+  <data name="FilterPanel_ExternalCustomer_310496a07158446586013e87e4851009" xml:space="preserve">
+    <value>Внешний</value>
+  </data>
+  <data name="Action_CreateProjectDocument" xml:space="preserve">
+    <value>Создать документ</value>
+  </data>
+  <data name="Action_CreateProjectDocumentDescription" xml:space="preserve">
+    <value>Создать проектный документ</value>
+  </data>
+  <data name="Action_CreateProjectDocumentHint" xml:space="preserve">
+    <value>Создать документ</value>
+  </data>
+  <data name="Action_CloseProject" xml:space="preserve">
+    <value>Закрыть проект</value>
+  </data>
+  <data name="Action_CloseProjectDescription" xml:space="preserve">
+    <value>Проект будет закрыт. Папка проекта будет перенесена в папку "Архив проектов".</value>
+  </data>
+  <data name="Action_CloseProjectHint" xml:space="preserve">
+    <value>Закрыть проект и перенести в архив</value>
+  </data>
+  <data name="Ribbon_ProjectActions_29729d9624f34092b3ece047ebb6383f" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="Ribbon_ProjectActions_a2fbbc635813445c9b2695d6c1ed0f1e" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="Action_ReopenProject" xml:space="preserve">
+    <value>Переоткрыть проект</value>
+  </data>
+  <data name="Action_ReopenProjectHint" xml:space="preserve">
+    <value>Переоткрыть проект и извлечь из архива</value>
+  </data>
+  <data name="Action_ReopenProjectDescription" xml:space="preserve">
+    <value>Проект будет открыт. Папка проекта будет перенесена в папку "Проекты".</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="Property_LeadingProject" xml:space="preserve">
+    <value>Ведущий проект</value>
+  </data>
+  <data name="FilterPanel_LeadingProject_a3b992f3988c4dffb8f0de16116b918d" xml:space="preserve">
+    <value>Ведущий проект</value>
+  </data>
+  <data name="ControlGroup_f73c485555ef452a8456ec09adc01721" xml:space="preserve">
+    <value>Заказчики</value>
+  </data>
+  <data name="FilterPanel_Customers_88a30b4e71eb4fa5bd916500d4d6acc7" xml:space="preserve">
+    <value>Заказчики</value>
+  </data>
+  <data name="Property_Administrator" xml:space="preserve">
+    <value>Администратор проекта</value>
+  </data>
+  <data name="Property_ActualStartDate" xml:space="preserve">
+    <value>Дата начала (факт)</value>
+  </data>
+  <data name="Property_ActualFinishDate" xml:space="preserve">
+    <value>Дата окончания (факт)</value>
+  </data>
+  <data name="Property_ExecutionPercent" xml:space="preserve">
+    <value>% выполнения</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>Руководитель проекта: [Manager]</value>
+  </data>
+  <data name="FilterPanel_Initiation_18e9a02a1cd049b3a118b458041a55e1" xml:space="preserve">
+    <value>Инициация</value>
+  </data>
+  <data name="FilterPanel_Closing_0dc4a532b69b474292a37b62e9c98b0a" xml:space="preserve">
+    <value>Завершение</value>
+  </data>
+  <data name="Property_Stage" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="Enum_Stage_Initiation" xml:space="preserve">
+    <value>Инициация</value>
+  </data>
+  <data name="Enum_Stage_Execution" xml:space="preserve">
+    <value>Исполнение</value>
+  </data>
+  <data name="Enum_Stage_Completion" xml:space="preserve">
+    <value>Завершение</value>
+  </data>
+  <data name="Enum_Stage_Completed" xml:space="preserve">
+    <value>Завершен</value>
+  </data>
+  <data name="Action_ReopenProjectConfirmationMessage" xml:space="preserve">
+    <value>Переоткрыть проект и извлечь из архива?</value>
+  </data>
+  <data name="Action_ReopenProjectConfirmationDescription" xml:space="preserve">
+    <value>Проект будет открыт. Папка проекта будет перенесена в папку "Проекты".</value>
+  </data>
+  <data name="Action_ShowDocuments" xml:space="preserve">
+    <value>Документы по проекту</value>
+  </data>
+  <data name="Action_ShowDocumentsDescription" xml:space="preserve">
+    <value>Поиск документов по данному проекту.</value>
+  </data>
+  <data name="Action_ShowDocumentsHint" xml:space="preserve">
+    <value>Показать документы по проекту</value>
+  </data>
+  <data name="Property_Modified" xml:space="preserve">
+    <value>Изменено</value>
+  </data>
+</root>

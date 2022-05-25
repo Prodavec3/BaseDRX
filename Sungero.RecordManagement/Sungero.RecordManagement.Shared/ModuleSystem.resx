@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Record Documents</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Records Management</value>
+  </data>
+  <data name="CoverGroup_Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="CoverGroup_Group1" xml:space="preserve">
+    <value>Group1</value>
+  </data>
+  <data name="CoverGroup_Group2" xml:space="preserve">
+    <value>Group2</value>
+  </data>
+  <data name="CoverGroup_Group3" xml:space="preserve">
+    <value>Group3</value>
+  </data>
+  <data name="CoverGroup_Assignments" xml:space="preserve">
+    <value>Action Items</value>
+  </data>
+  <data name="CoverAction_Action2" xml:space="preserve">
+    <value>Action2</value>
+  </data>
+  <data name="CoverAction_Action3" xml:space="preserve">
+    <value>Action3</value>
+  </data>
+  <data name="CoverAction_Action4" xml:space="preserve">
+    <value>Action4</value>
+  </data>
+  <data name="CoverAction_Action5" xml:space="preserve">
+    <value>Action5</value>
+  </data>
+  <data name="CoverAction_Action6" xml:space="preserve">
+    <value>Action6</value>
+  </data>
+  <data name="CoverAction_Action7" xml:space="preserve">
+    <value>Action7</value>
+  </data>
+  <data name="CoverAction_Action8" xml:space="preserve">
+    <value>Action8</value>
+  </data>
+  <data name="CoverAction_Action9" xml:space="preserve">
+    <value>Action9</value>
+  </data>
+  <data name="CoverAction_Action10" xml:space="preserve">
+    <value>Action10</value>
+  </data>
+  <data name="CoverAction_Action11" xml:space="preserve">
+    <value>Action11</value>
+  </data>
+  <data name="CoverAction_Action12" xml:space="preserve">
+    <value>Action12</value>
+  </data>
+  <data name="CoverAction_Action13" xml:space="preserve">
+    <value>Action13</value>
+  </data>
+  <data name="CoverAction_Action14" xml:space="preserve">
+    <value>Action14</value>
+  </data>
+  <data name="CoverAction_Action15" xml:space="preserve">
+    <value>Action15</value>
+  </data>
+  <data name="CoverAction_Action16" xml:space="preserve">
+    <value>Action16</value>
+  </data>
+  <data name="CoverAction_Action17" xml:space="preserve">
+    <value>Action17</value>
+  </data>
+  <data name="CoverAction_Action18" xml:space="preserve">
+    <value>Action18</value>
+  </data>
+  <data name="CoverGroup_Group4" xml:space="preserve">
+    <value>Group4</value>
+  </data>
+  <data name="CoverGroup_Group5" xml:space="preserve">
+    <value>Group5</value>
+  </data>
+  <data name="CoverGroup_Group6" xml:space="preserve">
+    <value>Group6</value>
+  </data>
+  <data name="CoverGroup_Group7" xml:space="preserve">
+    <value>Group7</value>
+  </data>
+  <data name="CoverGroup_Group8" xml:space="preserve">
+    <value>Group8</value>
+  </data>
+  <data name="CoverGroup_Group9" xml:space="preserve">
+    <value>Group9</value>
+  </data>
+  <data name="CoverGroup_Group10" xml:space="preserve">
+    <value>Group10</value>
+  </data>
+  <data name="CoverAction_AllIncomingCorrespondence" xml:space="preserve">
+    <value>All Incoming Documents</value>
+  </data>
+  <data name="CoverAction_CreateAssignmentFromTemplate" xml:space="preserve">
+    <value>Create Action Item from Template</value>
+  </data>
+  <data name="CoverAction_OnMyControl" xml:space="preserve">
+    <value>For me to control</value>
+  </data>
+  <data name="CoverAction_OnMyExecution" xml:space="preserve">
+    <value>For me to execute</value>
+  </data>
+  <data name="CoverAction_AllAssinments" xml:space="preserve">
+    <value>All Action Items</value>
+  </data>
+  <data name="CoverAction_RCSearch" xml:space="preserve">
+    <value>Search RC</value>
+  </data>
+  <data name="CoverAction_SearchAssignments" xml:space="preserve">
+    <value>Search for Action Items</value>
+  </data>
+  <data name="CoverAction_RegisteredDocuments" xml:space="preserve">
+    <value>Registered documents</value>
+  </data>
+  <data name="CoverDescription_RegisteredDocuments" xml:space="preserve">
+    <value>List of all registered documents</value>
+  </data>
+  <data name="CoverAction_OfficialCorrespondenceWithOrganisation" xml:space="preserve">
+    <value>Business Correspondence</value>
+  </data>
+  <data name="CoverAction_ReturnableDocuments" xml:space="preserve">
+    <value>Documents to return</value>
+  </data>
+  <data name="CoverAction_OverdueAssignments" xml:space="preserve">
+    <value>Overdue action items</value>
+  </data>
+  <data name="CoverAction_OutstandingOrders" xml:space="preserve">
+    <value>Outstanding assig</value>
+  </data>
+  <data name="CoverAction_OutstandingAssignments" xml:space="preserve">
+    <value>Not executed action items</value>
+  </data>
+  <data name="CoverAction_FileList" xml:space="preserve">
+    <value>File list</value>
+  </data>
+  <data name="CoverAction_RCNotFiledToFileLists" xml:space="preserve">
+    <value>RC not included in files</value>
+  </data>
+  <data name="CoverDescription_FileList" xml:space="preserve">
+    <value>Stores information about all files in the company.</value>
+  </data>
+  <data name="CoverDescription_RCNotFiledToFileLists" xml:space="preserve">
+    <value>List of registered documents not included in files</value>
+  </data>
+  <data name="CoverDescription_ReturnableDocuments" xml:space="preserve">
+    <value>List of all documents to return</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>The module is designed to automate legal documents processing.</value>
+  </data>
+  <data name="CoverAction_SearcByDetail" xml:space="preserve">
+    <value>Search by requisites</value>
+  </data>
+  <data name="CoverAction_SearchByRegistrationNumber" xml:space="preserve">
+    <value>Search by registration number</value>
+  </data>
+  <data name="CoverDescription_SearchByRegistrationNumber" xml:space="preserve">
+    <value>Fast search by registration number only</value>
+  </data>
+  <data name="CoverAction_DocumentsWithoutFileLists" xml:space="preserve">
+    <value>Documents not placed in files</value>
+  </data>
+  <data name="CoverDescription_DocumentsWithoutFileLists" xml:space="preserve">
+    <value>List of documents not included in files</value>
+  </data>
+  <data name="CoverGroup_Initilization" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="CoverAction_ShowIncomingDocumentsLog" xml:space="preserve">
+    <value>Incoming documents register.</value>
+  </data>
+  <data name="sf_e91c8894_eda9_432c_aee3_e54f8a85b057" xml:space="preserve">
+    <value>Incoming Documents</value>
+  </data>
+  <data name="sf_2c887659_2ee6_4e71_96af_20c8b85aa139" xml:space="preserve">
+    <value>Internal Documents</value>
+  </data>
+  <data name="sf_a1151a78_dbb2_487b_9a63_85aa9ed449e8" xml:space="preserve">
+    <value>Outgoing Documents</value>
+  </data>
+  <data name="CoverGroup_DocumentsLogs" xml:space="preserve">
+    <value>Document logs</value>
+  </data>
+  <data name="CoverGroup_DocumentLogs" xml:space="preserve">
+    <value>Document registers</value>
+  </data>
+  <data name="CoverAction_IncomingDocumentsLog" xml:space="preserve">
+    <value>Incoming Documents Register</value>
+  </data>
+  <data name="CoverGroup_Jobs" xml:space="preserve">
+    <value>Action Items</value>
+  </data>
+  <data name="CoverAction_TestAction" xml:space="preserve">
+    <value>Test action</value>
+  </data>
+  <data name="sf_bd7ced8f_379e_4cda_9f18_a28193b8d53b" xml:space="preserve">
+    <value>Documents to return</value>
+  </data>
+  <data name="FilterPanel_Parametrs_51e7251b733e45d9bab4bfbe40f8c796" xml:space="preserve">
+    <value>Received from</value>
+  </data>
+  <data name="FilterPanel_RegistrationGroup_694e73f2d52748ef9b34764133ae9cd7" xml:space="preserve">
+    <value>Registration group</value>
+  </data>
+  <data name="FilterPanel_Department_f69581a5799c4469be63b664ced740f3" xml:space="preserve">
+    <value>In department</value>
+  </data>
+  <data name="FilterPanel_Employee_48ba7a7d7d3e4b3c88e3e9b991c1a8b4" xml:space="preserve">
+    <value>At employee</value>
+  </data>
+  <data name="FilterPanel_ReturnPeriod_2666f5cd675f4d76ba997fff94f2741a" xml:space="preserve">
+    <value>Scheduled return date</value>
+  </data>
+  <data name="FilterPanel_ReturnPeriodDataRange_1747432d159f420ebb4e867121c1c66d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Flag_f8be518804c04d9b931dfeb0d0f6cf95" xml:space="preserve">
+    <value>Delivered by me</value>
+  </data>
+  <data name="FilterPanel_Period_ddb819a0dc094fe0a3c39c1c2dfd4dc7" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_LastWeek_d549ee8443a64231a2075bd6f86c102f" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="FilterPanel_LastMonth_ab95f56f992f4679af4dd6557c7dabac" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_827da7643b2a464482f5824a6f08a17d" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_Log_082a5f7402304aaab050f94b62ac078f" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="FilterPanel_Log_de3d4a0278854935b8ab66ee0390d836" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Status_4537dd79bc894c3b97ed40812aa91003" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_Registered_e7fcfb48e2424b00b56fe9b8a5711269" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_c8e92a1fb9bc4fea9ea667a7ef581e66" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="FilterPanel_Correspondent_d1db9ffe30ed41979c2bfead75936492" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FilterPanel_Organization_144cf2a9dbc5439bb47b2c216753daf5" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="FilterPanel_Person_2ae1405b61dc48b291a52295082f6b34" xml:space="preserve">
+    <value>Individual</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_d7ee910f4f724b1592aafc46876b04e3" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Log_c9e68bc0629544cd9ede1b4e92fcc0a2" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_d806ac63a71f4a1faee223e08e4df4b0" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Status_dc33a7febb604824a4c7897401b19404" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_Correspondent_c97851993a4b409fbf99eccf8bb6651b" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="FilterPanel_Period_0efb676ea5824d969dacdf32691b0e5c" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_LastWeek_3b9e8ee3c5ee47c399da83f09f736200" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="FilterPanel_LastMonth_a21decaa7c0449d4bef266ab881dc911" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_30471734153a49f4a0e296557a0827fd" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_Organization_1099337fbbab456fb43efc8cb99beed6" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="FilterPanel_Person_12750cd0d42a4a2c9834ce010e89f985" xml:space="preserve">
+    <value>Individual</value>
+  </data>
+  <data name="FilterPanel_Registered_1d77e5b204c94b6c81a2c808f127fc49" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_4e85c9002dd8475e83f178e3b33d0793" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="FilterPanel_Reserved_7057b92ec3a64a1fb7172c4d57474fde" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="FilterPanel_Log_9968476ffa314585afe3c3996f7be771" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_e7aba2850bda48e4806d5747d92c961e" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Status_8e282a3739d74835a50573f7a06375db" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_Registered_1fcb3ea054704a83bc54a10322f40105" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_45b781fad44a4bd498e88e69d70e1183" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="FilterPanel_Reserved_9652941628364b4ca3751d704487ffaf" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="FilterPanel_Flag_8b39e4fadedb47bc959f480b31746c4b" xml:space="preserve">
+    <value>Last week</value>
+  </data>
+  <data name="FilterPanel_LastMonth_bfb6d4056ba1408b87e4aa583dbe4e4d" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="FilterPanel_LastWeek_8b39e4fadedb47bc959f480b31746c4b" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_e16ecd21eb4242928369defc66531763" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_Period_1d11f5c1abcf4c5590f9abbeb378963b" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_OurCompany_748114917dc74444a6ee53c253b84937" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Located_c3fd22693f1d498b90a7c0e0b1491ff2" xml:space="preserve">
+    <value>Located</value>
+  </data>
+  <data name="FilterPanel_EndWeek_824fc05a2ba54828baa68090fbe48479" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="FilterPanel_Manual_d90b56fa01274c78838e01c63a599160" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_EndMonth_5af752aa725c4be190d2eebbf3488b7c" xml:space="preserve">
+    <value>This month</value>
+  </data>
+  <data name="FilterPanel_Filelist_1da1454421004908a00ae73fd6eaefc7" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FilterPanel_Status_5df417d1ffab4edba8a17f6a3208c1e3" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_EndDay_8a02e40155614abfa98c5a832373629e" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="CoverAction_ShowJobTasks" xml:space="preserve">
+    <value>Job executions</value>
+  </data>
+  <data name="FilterPanel_AllTime_de8f7e7451534da98d3dec28c6b6c22f" xml:space="preserve">
+    <value>All time</value>
+  </data>
+  <data name="FilterPanel_Last90Days_baa19d08a4a04316a4d671f3526ff9a8" xml:space="preserve">
+    <value>Last 90 days</value>
+  </data>
+  <data name="FilterPanel_Last90Days_c5c0badcfc2a4da1a2e18daf21e617c0" xml:space="preserve">
+    <value>Last 90 days</value>
+  </data>
+  <data name="FilterPanel_Last90Days_7c329f643020496bafb6d6c2c0dbb49d" xml:space="preserve">
+    <value>Last 90 days</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_600735806e2d47119b29813edd1ff42e" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_OverdueGroup_32d0991bf39941deabb38a1870daea56" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Overdue_5b04efdbc23d4e55ba119f296d2c0151" xml:space="preserve">
+    <value>Only overdue</value>
+  </data>
+  <data name="sf_c21fa108_1570_4155_8a0c_0d04957bc72b" xml:space="preserve">
+    <value>To execute</value>
+  </data>
+  <data name="FilterPanel_StateGroup_1c3649251fa84a1196083b41439e535f" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="FilterPanel_InProcess_56d3477d60ea46bfb42f0e4169daae82" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="FilterPanel_All_28a4b96d389940dcab1f4d043bf755cf" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_f63464d4fec54381b45019a886f66bfb" xml:space="preserve">
+    <value>Received in the last</value>
+  </data>
+  <data name="FilterPanel_Last30Days_01848d256f724bba9064b0763566eb43" xml:space="preserve">
+    <value>30 Days</value>
+  </data>
+  <data name="FilterPanel_Last90Days_430ad03c84f041538091959419e728d9" xml:space="preserve">
+    <value>90 Days</value>
+  </data>
+  <data name="FilterPanel_Last180Days_0f9d211d466c48fba4a5dd070f48fbbc" xml:space="preserve">
+    <value>180 Days</value>
+  </data>
+  <data name="sf_4b30b2be_330e_42bd_833c_7ecf19b32e12" xml:space="preserve">
+    <value>Action Items</value>
+  </data>
+  <data name="FilterPanel_StateGroup_887415fe435344488ce7165331d0dc30" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="FilterPanel_InProcess_83bc0f71da5e49a1a3b4d1585894686e" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="FilterPanel_All_ab3f7b8634294f6eb440dd60a16282a8" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_521a0b9f3d804ad2bd6b5ab581c83dd5" xml:space="preserve">
+    <value>Sent in the last</value>
+  </data>
+  <data name="FilterPanel_Last30Days_83b9f57b11e642dbad7c63d0897f62d3" xml:space="preserve">
+    <value>30 Days</value>
+  </data>
+  <data name="FilterPanel_Last90Days_406898df952f4ad6b2150720023277c0" xml:space="preserve">
+    <value>90 Days</value>
+  </data>
+  <data name="FilterPanel_Last180Days_5f837527813f4f598eb136df0e295b99" xml:space="preserve">
+    <value>180 Days</value>
+  </data>
+  <data name="WidgetTitle_ActionItems" xml:space="preserve">
+    <value>Action Items Under Control</value>
+  </data>
+  <data name="WidgetDescription_ActionItems" xml:space="preserve">
+    <value>Summary information on action items to control.</value>
+  </data>
+  <data name="WidgetParameter_ActionItems_Substitution" xml:space="preserve">
+    <value>Include substitutes</value>
+  </data>
+  <data name="WidgetAction_ActionItems_UnderControl" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="WidgetAction_ActionItems_Overdue" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="WidgetTitle_ActionItemCompletionGraph" xml:space="preserve">
+    <value>Action Items Executed On Time</value>
+  </data>
+  <data name="WidgetDescription_ActionItemCompletionGraph" xml:space="preserve">
+    <value>Percent of action items executed on time by month.</value>
+  </data>
+  <data name="WidgetParameter_ActionItemCompletionGraph_Performer" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Enum_ActionItemCompletionGraph_Performer_Author" xml:space="preserve">
+    <value>Action items assigned by me</value>
+  </data>
+  <data name="Enum_ActionItemCompletionGraph_Performer_All" xml:space="preserve">
+    <value>All action items</value>
+  </data>
+  <data name="AsyncHandler_Description_fb88010446734410a4d221ad2e17656d" xml:space="preserve">
+    <value>Complete parent assignment to execute action item.</value>
+  </data>
+  <data name="AsyncHandler_Description_2fbfc87b31d24c6bac46d6d8cb5b2498" xml:space="preserve">
+    <value>Edit compound action item.</value>
+  </data>
+  <data name="AsyncHandler_Description_55ddaa850e924619994b2211545f06b2" xml:space="preserve">
+    <value>Make edits to action items that are not related with waiting for unlocking of assignments within the current action item.</value>
+  </data>
+  <data name="AsyncHandler_Description_16102ef88cb046c29281c3234fd704fb" xml:space="preserve">
+    <value>Make edits to action items that are not related with waiting for unlocking of assignments within the current action item.</value>
+  </data>
+</root>

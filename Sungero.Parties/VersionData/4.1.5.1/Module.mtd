@@ -1,0 +1,524 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
+  "Name": "Parties",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.Parties.Client",
+  "ClientBaseAssemblyName": "Sungero.Parties.ClientBase",
+  "ClientBaseNamespace": "Sungero.Parties.ClientBase",
+  "ClientNamespace": "Sungero.Parties.Client",
+  "Code": "Parties",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "5545f75b-2a10-4347-a72d-e4e3e3f9b12f",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "1a611115-6d4e-4d7e-ae1b-cae05f944e2b",
+        "Name": "BlockedCounterparties",
+        "ComputableFolderId": "1f0ee6ab-06cb-4f66-bf2d-97abb3ea1a43",
+        "GroupId": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "PreviousItemGuid": "bf0da1ea-c959-41e1-89cb-7572f211d6e5",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "1fefb056-ba8c-4747-99ed-2248ebbc9eab",
+        "Name": "DueDiligenceWebsite",
+        "EntityTypeId": "977a5b9a-67eb-4820-ade3-4c51a39d3b7b",
+        "GroupId": "87826cb7-c807-4d7a-9855-13002fa7a7d0",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "336d9cc5-5eaa-4d3f-b88e-0841e5ea1850",
+        "Name": "CreateCompany",
+        "FunctionName": "CreateCompany",
+        "GroupId": "ad56e847-534f-45fc-bb68-89422da6f002",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "350817fc-6e22-43cd-b2e8-618b7d6a26a3",
+        "Name": "ShowPersons",
+        "EntityTypeId": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+        "GroupId": "f95eb691-7265-4bca-878c-4dcbb2cecdf8",
+        "PreviousItemGuid": "c435d413-0ccf-47f3-84a1-fa3b79eb2962",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "3ffd4e1a-a908-4cee-b8b3-eed688a7bac8",
+        "Name": "ShowBanks",
+        "EntityTypeId": "80c4e311-e95f-449b-984d-1fd540b8f0af",
+        "GroupId": "ad56e847-534f-45fc-bb68-89422da6f002",
+        "PreviousItemGuid": "45908c00-bb2d-4a0d-ac2f-9fc977443939",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "45908c00-bb2d-4a0d-ac2f-9fc977443939",
+        "Name": "ShowAllCompanies",
+        "EntityTypeId": "593e143c-616c-4d95-9457-fd916c4aa7f8",
+        "GroupId": "ad56e847-534f-45fc-bb68-89422da6f002",
+        "PreviousItemGuid": "336d9cc5-5eaa-4d3f-b88e-0841e5ea1850",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "6384d004-7cbc-4bc2-93f3-215b02df193b",
+        "Name": "InviteCounterparty",
+        "FunctionName": "InviteCounterpartyToExchange",
+        "GroupId": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "a08d30fa-582f-4b51-8505-357ba55bfbf3",
+        "Name": "ShowCountries",
+        "EntityTypeId": "1f612925-95fc-4662-807d-c92c810a62b1",
+        "GroupId": "4587e4ba-98c4-428e-abee-37d8eab138cd",
+        "PreviousItemGuid": "a7b35806-6ef9-4064-a895-2d693fac7885",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "a7b35806-6ef9-4064-a895-2d693fac7885",
+        "Name": "ShowRegions",
+        "EntityTypeId": "4efe2fa9-b1d1-4b47-b366-4128fe0a391c",
+        "GroupId": "4587e4ba-98c4-428e-abee-37d8eab138cd",
+        "PreviousItemGuid": "d6785301-4b9c-46d4-b128-575e2e243c05",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "b63b4f57-a7bb-4967-b595-23cd923300f6",
+        "Name": "CreateContact",
+        "FunctionName": "CreateContact",
+        "GroupId": "f11faba8-2ffa-4c2a-b96a-be73705cccc5",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "bf0da1ea-c959-41e1-89cb-7572f211d6e5",
+        "Name": "ActiveCounterparties",
+        "FunctionName": "ShowCounterpartiesAvailableForExchange",
+        "GroupId": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "PreviousItemGuid": "6384d004-7cbc-4bc2-93f3-215b02df193b",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "c435d413-0ccf-47f3-84a1-fa3b79eb2962",
+        "Name": "CreatePerson",
+        "FunctionName": "CreatePerson",
+        "GroupId": "f95eb691-7265-4bca-878c-4dcbb2cecdf8",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "d6785301-4b9c-46d4-b128-575e2e243c05",
+        "Name": "ShowSettlements",
+        "EntityTypeId": "3a0c21f8-aa88-429c-891f-56c24d56fcef",
+        "GroupId": "4587e4ba-98c4-428e-abee-37d8eab138cd",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "d894b0da-c9d4-4424-81f0-6d419c909514",
+        "Name": "InvitedCounterparties",
+        "ComputableFolderId": "87d25407-dbad-46a4-927c-34d0e11562dc",
+        "GroupId": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "PreviousItemGuid": "1a611115-6d4e-4d7e-ae1b-cae05f944e2b",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "ef59ada2-010f-4656-9b3b-30ffac805997",
+        "Name": "ShowContactPersons",
+        "EntityTypeId": "c8daaef9-a679-4a29-ac01-b93c1637c72e",
+        "GroupId": "f11faba8-2ffa-4c2a-b96a-be73705cccc5",
+        "PreviousItemGuid": "b63b4f57-a7bb-4967-b595-23cd923300f6",
+        "Versions": []
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "6e02a7f8-92de-4cf7-a4b9-2f552b58e417",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [
+      {
+        "NameGuid": "ad56e847-534f-45fc-bb68-89422da6f002",
+        "Name": "Companies",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconCompanies_ad56e847534f45fcbb6889422da6f002.png",
+        "Versions": []
+      },
+      {
+        "NameGuid": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "Name": "Exchange",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconExchange_accdd7aaea5249c3b63467738e98d1a9.png",
+        "PreviousItemGuid": "ad56e847-534f-45fc-bb68-89422da6f002",
+        "Versions": []
+      },
+      {
+        "NameGuid": "f11faba8-2ffa-4c2a-b96a-be73705cccc5",
+        "Name": "ContactPersons",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconContactPersons_f11faba82ffa4c2ab96abe73705cccc5.png",
+        "PreviousItemGuid": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "Versions": []
+      },
+      {
+        "NameGuid": "4587e4ba-98c4-428e-abee-37d8eab138cd",
+        "Name": "Links",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconLinks_4587e4ba98c4428eabee37d8eab138cd.png",
+        "PreviousItemGuid": "f11faba8-2ffa-4c2a-b96a-be73705cccc5",
+        "Versions": []
+      },
+      {
+        "NameGuid": "f95eb691-7265-4bca-878c-4dcbb2cecdf8",
+        "Name": "Persons",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconPersons_f95eb69172654bca878c4dcbb2cecdf8.png",
+        "PreviousItemGuid": "4587e4ba-98c4-428e-abee-37d8eab138cd",
+        "Versions": []
+      },
+      {
+        "NameGuid": "11b4aab8-7cfc-46a3-8b92-94c5de9b6c90",
+        "Name": "Empty",
+        "BackgroundPosition": "Stretch",
+        "PreviousItemGuid": "f95eb691-7265-4bca-878c-4dcbb2cecdf8",
+        "Versions": []
+      },
+      {
+        "NameGuid": "87826cb7-c807-4d7a-9855-13002fa7a7d0",
+        "Name": "Integration",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconCheckCounterparty_87826cb7c8074d7a985513002fa7a7d0.png",
+        "PreviousItemGuid": "11b4aab8-7cfc-46a3-8b92-94c5de9b6c90",
+        "Versions": []
+      }
+    ],
+    "Header": {
+      "NameGuid": "3e1c3c30-2ddb-488b-a101-340f35c027e9",
+      "BackgroundPosition": "Stretch",
+      "IconName": "",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "459fa497-ee5b-49a4-9980-de00cada9b7a",
+      "MaxVersion": "",
+      "MinVersion": "2.5.18.0"
+    },
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    },
+    {
+      "Id": "ec7b606a-21ee-4f16-aba8-ab8c2af76d12",
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    },
+    {
+      "Id": "bc0d1897-640a-4b4d-a43a-a23c5984a009",
+      "MaxVersion": "",
+      "MinVersion": "2.5.2.1"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "593e143c-616c-4d95-9457-fd916c4aa7f8",
+      "Versions": []
+    },
+    {
+      "ItemId": "c8daaef9-a679-4a29-ac01-b93c1637c72e",
+      "PreviousItemId": "593e143c-616c-4d95-9457-fd916c4aa7f8",
+      "Versions": []
+    },
+    {
+      "ItemId": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+      "PreviousItemId": "c8daaef9-a679-4a29-ac01-b93c1637c72e",
+      "Versions": []
+    },
+    {
+      "ItemId": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+      "PreviousItemId": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+      "Versions": []
+    },
+    {
+      "ItemId": "80c4e311-e95f-449b-984d-1fd540b8f0af",
+      "PreviousItemId": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+      "Versions": []
+    },
+    {
+      "ItemId": "78278dd7-f0d2-4e35-b543-13d0bd462cd6",
+      "PreviousItemId": "80c4e311-e95f-449b-984d-1fd540b8f0af",
+      "Versions": []
+    },
+    {
+      "IsVisible": false,
+      "ItemId": "1f0ee6ab-06cb-4f66-bf2d-97abb3ea1a43",
+      "PreviousItemId": "78278dd7-f0d2-4e35-b543-13d0bd462cd6",
+      "Versions": []
+    },
+    {
+      "IsVisible": false,
+      "ItemId": "87d25407-dbad-46a4-927c-34d0e11562dc",
+      "PreviousItemId": "1f0ee6ab-06cb-4f66-bf2d-97abb3ea1a43",
+      "Versions": []
+    },
+    {
+      "ItemId": "977a5b9a-67eb-4820-ade3-4c51a39d3b7b",
+      "PreviousItemId": "87d25407-dbad-46a4-927c-34d0e11562dc",
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Parties",
+  "Libraries": [
+    {
+      "NameGuid": "753b78ed-642c-4b61-96d8-5a40abb6886f",
+      "Name": "CompanyData",
+      "Scope": "Server",
+      "Versions": []
+    }
+  ],
+  "Overridden": [
+    "NeedResetCache"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "InitializeExternalLinkSystem",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Initialize\""
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "EmailIsValid",
+      "Parameters": [
+        {
+          "Name": "emailAddress",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "FindCounterparty",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "uuid",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "tin",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "trrc",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "sysid",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Parties.ICounterparty>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetResponsibilitiesReportData",
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Sungero.Company.Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Parties",
+  "ResourcesKeys": [
+    "WrongEmailFormat",
+    "WrongWebsite",
+    "WizardTinInputStepDescription",
+    "WizardCounterpartySelectedStepDescription",
+    "WizardMailInviteStepDescription",
+    "WizardMailInviteStepDescriptionShort",
+    "WizardStatusStepDescriptionShort",
+    "WizardStatusStepActiveDescription",
+    "WizardInviteResultStepDecriptionShort",
+    "WizardInviteResultStepDecription",
+    "WizardTitle",
+    "TIN",
+    "Counterparty",
+    "WizardFrom",
+    "WizardBack",
+    "WizardNext",
+    "OpenCard",
+    "WizardInviteByEmail",
+    "WizardInvite",
+    "WizardCompleted",
+    "WizardMailRegisterSynerdocs",
+    "WizardCounterpartyView",
+    "WizardCounterpartyViewShort",
+    "ContactAdministrator",
+    "NeedToBeIncludedInRole",
+    "WizardStatusStepBlockedDescription",
+    "WizardStatusStepApprovingByCADescription",
+    "WizardStatusStepApprovingByUsDescription",
+    "WizardMailBody",
+    "WizardMail",
+    "WizardMailSubject",
+    "WizardCancel",
+    "WizardMailRegisterDiadoc",
+    "TRRC",
+    "WizardCounterpartyFullName",
+    "WizardCounterpartyFullNameShort",
+    "WizardExchangeServices",
+    "WizardCounterpartySelectedStepOneDescription",
+    "WizardCounterpartyInfo",
+    "WizardCounterpartyInfoShort",
+    "WizardBusinessUnitInfo",
+    "WizardFromMany",
+    "WizardSyncronizationInProcess",
+    "DistributionListCounterpartyName",
+    "OrganizationResponsible"
+  ],
+  "ServerAssemblyName": "Sungero.Parties.Server",
+  "ServerNamespace": "Sungero.Parties.Server",
+  "SharedAssemblyName": "Sungero.Parties.Shared",
+  "SharedNamespace": "Sungero.Parties.Shared",
+  "SpecialFolders": [
+    {
+      "NameGuid": "1f0ee6ab-06cb-4f66-bf2d-97abb3ea1a43",
+      "Name": "BlockedCounterparties",
+      "DefaultContentType": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "80e1cc07-46a1-43f1-a652-bbf7b1236401",
+        "Name": "FilterPanel",
+        "Controls": [
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "ec07491a-6dc4-4f97-9bbc-f75f412d758a",
+            "Name": "Main",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+            "NameGuid": "0c2ea93f-e5ad-4f72-aba4-fc5e9971b135",
+            "Name": "ExchangeService",
+            "EntityGuid": "d6c0fcaf-4ac9-4a6a-9e2c-8fed1e35c08a",
+            "ParentGuid": "ec07491a-6dc4-4f97-9bbc-f75f412d758a",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+            "NameGuid": "72e51db5-f4e4-4219-82dc-9f2ac1db6392",
+            "Name": "BusinessUnit",
+            "EntityGuid": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+            "ParentGuid": "ec07491a-6dc4-4f97-9bbc-f75f412d758a",
+            "PreviousGuid": "0c2ea93f-e5ad-4f72-aba4-fc5e9971b135",
+            "Versions": []
+          }
+        ],
+        "Versions": []
+      },
+      "HandledEvents": [
+        "DataQueryServer"
+      ],
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false,
+      "Versions": []
+    },
+    {
+      "NameGuid": "87d25407-dbad-46a4-927c-34d0e11562dc",
+      "Name": "InvitedCounterparties",
+      "DefaultContentType": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "cde1e5a1-511c-46fe-a1dd-14306bf159a2",
+        "Name": "FilterPanel",
+        "Controls": [
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "bec76875-de30-4f4f-93fa-6b23cca90dd7",
+            "Name": "Main",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+            "NameGuid": "bec61335-9ffe-4aa9-878b-f5dfe5ec06ac",
+            "Name": "ExchangeService",
+            "EntityGuid": "d6c0fcaf-4ac9-4a6a-9e2c-8fed1e35c08a",
+            "ParentGuid": "bec76875-de30-4f4f-93fa-6b23cca90dd7",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+            "NameGuid": "89a75bde-942c-4332-94fe-d9b156ff06a5",
+            "Name": "BusinessUnit",
+            "EntityGuid": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+            "ParentGuid": "bec76875-de30-4f4f-93fa-6b23cca90dd7",
+            "PreviousGuid": "bec61335-9ffe-4aa9-878b-f5dfe5ec06ac",
+            "Versions": []
+          }
+        ],
+        "Versions": []
+      },
+      "HandledEvents": [
+        "DataQueryServer"
+      ],
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false,
+      "Versions": []
+    }
+  ],
+  "Version": "4.1.5.1",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Content&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Docflow.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${DataSource}">
+        <Column Name="EmployeeName" DataType="System.String" PropName="Column"/>
+        <Column Name="SignType" DataType="System.String" PropName="Column"/>
+        <Column Name="Comment" DataType="System.String" PropName="Column"/>
+        <Column Name="Version" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Date" DataType="System.DateTime" PropName="Column" Format="Date"/>
+        <Column Name="SignErrors" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="6735aba2-d243-48fb-ae52-ecbaac831c82" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentName" Id="5141a8ea-d13a-44f1-96d3-a7ebd018f5af" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="OurOrgName" Id="56411bc1-4c7a-4270-be79-4afdcce4be6a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="CurrentDate" Id="c4d31cc0-5a9e-4920-8d9c-8e00aeb5843a" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Clerk" Id="5ed19ff6-e9fe-431d-a62c-027117451f94" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Document" Id="c0d67455-b484-4b36-ac47-5411b59e55fb" IsRequired="true" IsCollection="false" InternalDataType="Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="58cca102-1e97-4f07-b6ac-fd866a8b7cb1"/>
+    <SungeroParameter Name="ReportSessionId" Id="8cc2f4c2-e6e3-4806-b3e3-b553146cc2c0" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RespEmployee" Id="66d7d854-e809-4309-a818-bf7c657938e1" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="HasRespEmployee" Id="c0d07341-6c78-43c6-83a6-298069e3a4fc" IsRequired="false" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" LeftMargin="20" TopMargin="20" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="680.4" Height="151.2" CanGrow="true" CanShrink="true">
+      <TextObject Name="Text1" Top="18.9" Width="680.4" Height="37.8" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.ReportName]" HorzAlign="Center" Font="Arial, 14.25pt"/>
+      <TextObject Name="Text12" Left="66.15" Top="56.7" Width="548.1" Height="18.9" CanGrow="true" Text="[DocumentName]" HorzAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text2" Width="680.4" Height="18.9" CanGrow="true" Text="[OurOrgName]" HorzAlign="Right" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Top="75.6" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text19" Top="113.4" Width="680.4" Height="18.9" CanGrow="true" CanShrink="true" Text="[RespEmployee]" HideZeros="true" Font="Arial, 10pt"/>
+      <TextObject Name="Text23" Top="94.5" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text24" Top="132.3" Width="94.5" Height="18.9" CanShrink="true" Text="[IIf([HasRespEmployee],&quot;   &quot;,&quot;&quot;)]" HideZeros="true" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="155.2" Width="680.4" Height="37.8">
+      <TextObject Name="Text4" Width="160.65" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Approver]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="160.65" Width="94.5" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Result]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="255.15" Width="179.55" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="538.65" Width="56.7" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Version]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="595.35" Width="85.05" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.DateTime]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text20" Left="434.7" Width="103.95" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.SignStatus]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="197" Width="680.4" Height="37.8" CanGrow="true" CanShrink="true" KeepChild="true" DataSource="Table" KeepTogether="true" KeepDetail="true">
+      <TextObject Name="Text13" Width="160.65" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.EmployeeName]" Padding="3, 3, 3, 3" VertAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text14" Left="160.65" Width="94.5" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignType]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="255.15" Width="179.55" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Comment]" Padding="3, 3, 3, 3" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="595.35" Width="85.05" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Date]" Padding="3, 3, 3, 3" Format="Custom" Format.Format="dd.MM.yyyy   HH:mm" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text21" Left="434.7" Width="103.95" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignErrors]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="538.65" Width="56.7" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Version]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <Sort>
+        <Sort Expression="[Table.Date]"/>
+      </Sort>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="238.8" Width="680.4" Height="56.7">
+      <TextObject Name="Text3" Top="37.8" Width="538.65" Height="18.9" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.PrintedBy] _____________________ / [Clerk] / [CurrentDate]" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <CustomFormat Format="dd.MM.yyyy HH:mm:ss"/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text9" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Top="18.9" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text22" Left="538.65" Top="37.8" Width="141.75" Height="18.9" Text="[Sungero.Docflow.Resources.PageShort] [Page#] [Sungero.Docflow.Resources.PageOf] [TotalPages#]" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

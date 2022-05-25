@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateCriteriaSourceTable">
+    <mssql><![CDATA[create table {0}
+  ([ReportSessionId] varchar(256) NOT NULL,
+   [Criterion] nvarchar(max),
+   [Value] nvarchar(max),
+   [ValueId] int,
+   [ValueHyperlink] varchar(256))]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (ReportSessionId citext NOT NULL,
+   Criterion citext,
+   Value citext,
+   ValueId int,
+   ValueHyperlink citext)]]></postgres>
+  </query>
+  <query key="SelectCriteriaDataFromTable">
+    <default><![CDATA[select *
+from Sungero_Reports_ApprovalRuleCardCriteria temp
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+  <query key="CreateConditionsSourceTable">
+    <mssql><![CDATA[create table {0}
+ ([ReportSessionId] varchar(256) NOT NULL,
+ [Prefix] nvarchar(max) NULL,
+ [Header] nvarchar(max) NULL,
+ [StageType] nvarchar(max) NULL,
+ [Performers] nvarchar(max) NULL,
+ [Deadline] nvarchar(max) NULL,
+ [Parameters] nvarchar(max) NULL,
+ [Item] nvarchar(max) NULL,
+ [Text] nvarchar(max) NULL,
+ [RuleId] nvarchar(max) NULL,
+ [Hyperlink] nvarchar(max) NULL,
+ [IsCondition] bit NOT NULL,
+ [Id] int NULL,
+ [TableLineId] int NULL,
+ [Level] int NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+ (ReportSessionId citext NOT NULL,
+  Prefix citext NULL,
+  Header citext NULL,
+  StageType citext NULL,
+  Performers citext NULL,
+  Deadline citext NULL,
+  Parameters citext NULL,
+  Item citext NULL,
+  Text citext NULL,
+  RuleId citext NULL,
+  Hyperlink citext NULL,
+  IsCondition bool NOT NULL,
+  Id int NULL,
+  TableLineId int NULL,
+  Level int NULL)]]></postgres>
+  </query>
+  <query key="SelectConditionsDataFromTable">
+    <default><![CDATA[select *
+from Sungero_Reports_ApprovalRuleCondition temp
+where ReportSessionId = @ReportSessionId
+order by Id]]></default>
+  </query>
+  <query key="CreateSignatureSettingsTable">
+    <mssql><![CDATA[create table {0}
+ ([ReportSessionId] varchar(256) NOT NULL,
+ [Name] nvarchar(max) NOT NULL,
+ [Id] int NOT NULL,
+ [Hyperlink] nvarchar(max) NULL,
+ [OrderNumber] int NOT NULL,
+ [UnitsAndDeps] nvarchar(max) NULL,
+ [KindsAndCategories] nvarchar(max) NULL,
+ [Priority] int NULL,
+ [Limits] nvarchar(max) NULL,
+ [ValidTill] nvarchar(max) NULL,
+ [Note] nvarchar(max) NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+ (ReportSessionId citext NOT NULL,
+  Name citext NOT NULL,
+  Id int NOT NULL,
+  Hyperlink citext NULL,
+  OrderNumber int NOT NULL,
+  UnitsAndDeps citext NULL,
+  KindsAndCategories citext NULL,
+  Priority int NULL,
+  Limits citext NULL,
+  ValidTill citext NULL,
+  Note citext NULL)]]></postgres>
+  </query>
+  <query key="SelectSignatureSettingsDataFromTable">
+    <default><![CDATA[select *
+from Sungero_Reports_ApprovalRuleSignSett
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

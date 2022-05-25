@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Контрагент</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Контрагента</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Контрагенты</value>
+  </data>
+  <data name="Property_TIN" xml:space="preserve">
+    <value>ИНН</value>
+  </data>
+  <data name="Property_City" xml:space="preserve">
+    <value>Населенный пункт</value>
+  </data>
+  <data name="Property_Region" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="Property_LegalAddress" xml:space="preserve">
+    <value>Юридический адрес</value>
+  </data>
+  <data name="Property_PostalAddress" xml:space="preserve">
+    <value>Почтовый адрес</value>
+  </data>
+  <data name="Property_Phones" xml:space="preserve">
+    <value>Телефоны</value>
+  </data>
+  <data name="Property_Email" xml:space="preserve">
+    <value>Эл. почта</value>
+  </data>
+  <data name="Property_Homepage" xml:space="preserve">
+    <value>Сайт</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Action_WriteLetter" xml:space="preserve">
+    <value>Написать письмо</value>
+  </data>
+  <data name="Action_WriteLetterDescription" xml:space="preserve">
+    <value>Написать письмо этому контрагенту</value>
+  </data>
+  <data name="Action_WriteLetterHint" xml:space="preserve">
+    <value>Написать письмо</value>
+  </data>
+  <data name="Action_GoToWebsite" xml:space="preserve">
+    <value>Перейти на сайт контрагента</value>
+  </data>
+  <data name="Action_GoToWebsiteDescription" xml:space="preserve">
+    <value>Открыть сайт контрагента в браузере</value>
+  </data>
+  <data name="Action_GoToWebsiteHint" xml:space="preserve">
+    <value>Перейти на сайт</value>
+  </data>
+  <data name="Ribbon_Contacts_7ef0a3c576ac4fedb79e26827b7bf183" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="Enum_Status_Active" xml:space="preserve">
+    <value>Действующая</value>
+  </data>
+  <data name="Enum_Status_Closed" xml:space="preserve">
+    <value>Закрытая</value>
+  </data>
+  <data name="Property_Nonresident" xml:space="preserve">
+    <value>Нерезидент</value>
+  </data>
+  <data name="FilterPanel_CounterpartyType_a275dde3082948dba476c2ee6e2c0087" xml:space="preserve">
+    <value>Тип контрагента</value>
+  </data>
+  <data name="FilterPanel_Company_70c78d285565449db132a5ac47ef0e80" xml:space="preserve">
+    <value>Организация</value>
+  </data>
+  <data name="FilterPanel_Person_351049c0fabc4e9089a455f31285f889" xml:space="preserve">
+    <value>Персона</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>[City], ИНН [TIN]</value>
+  </data>
+  <data name="Property_PSRN" xml:space="preserve">
+    <value>ОГРН</value>
+  </data>
+  <data name="Property_NCEO" xml:space="preserve">
+    <value>ОКПО</value>
+  </data>
+  <data name="Property_NCEA" xml:space="preserve">
+    <value>ОКВЭД</value>
+  </data>
+  <data name="Action_SearchDocuments" xml:space="preserve">
+    <value>Документы по контрагенту</value>
+  </data>
+  <data name="Action_SearchDocumentsDescription" xml:space="preserve">
+    <value>Показать входящую, исходящую корреспонденцию, финансово-хозяйственные документы по данному контрагенту (договоры, дополнительные соглашения, первичные документы и др.)</value>
+  </data>
+  <data name="Action_SearchDocumentsHint" xml:space="preserve">
+    <value>Документы по контрагенту</value>
+  </data>
+  <data name="Property_Account" xml:space="preserve">
+    <value>Номер счета</value>
+  </data>
+  <data name="Property_Bank" xml:space="preserve">
+    <value>Банк</value>
+  </data>
+  <data name="ControlGroup_9e3df66a01e8408aaa4ca5c92a1227fb" xml:space="preserve">
+    <value>Контактная информация</value>
+  </data>
+  <data name="ControlGroup_4b9defe5f46d4581b50a5c0be4a80a50" xml:space="preserve">
+    <value>Банковские реквизиты</value>
+  </data>
+  <data name="ControlGroup_69a4139490424b338d9ce5253d0a8c27" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="FilterPanel_Bank_64a4eb7cee5241c1b64cc6c33740bef0" xml:space="preserve">
+    <value>Банк</value>
+  </data>
+  <data name="Property_ExchangeBoxes" xml:space="preserve">
+    <value>Электронный обмен</value>
+  </data>
+  <data name="Form_7fdc0378de564ad7864191aae797d1ec" xml:space="preserve">
+    <value>Эл. обмен</value>
+  </data>
+  <data name="ControlGroup_1876358f75e34b29bcff19fb7e44c187" xml:space="preserve">
+    <value>Электронный обмен с абонентскими ящиками контрагента</value>
+  </data>
+  <data name="Action_SendInvitation" xml:space="preserve">
+    <value>Отправить приглашение</value>
+  </data>
+  <data name="Action_SendInvitationDescription" xml:space="preserve">
+    <value>Отправить контрагенту приглашение к электронному обмену документами</value>
+  </data>
+  <data name="Action_SendInvitationHint" xml:space="preserve">
+    <value>Отправить приглашение контрагенту</value>
+  </data>
+  <data name="Ribbon_Invitation_5640d1dc94a04cb495c520cdad8f0368" xml:space="preserve">
+    <value>Приглашения</value>
+  </data>
+  <data name="Ribbon_ExchangeBoxes_1d6bd8b0f5514372a47978dfc81c6745" xml:space="preserve">
+    <value>Эл. обмен</value>
+  </data>
+  <data name="Action_AcceptInvitation" xml:space="preserve">
+    <value>Начать обмен</value>
+  </data>
+  <data name="Action_AcceptInvitationDescription" xml:space="preserve">
+    <value>Принять приглашение или возобновить обмен электронными документами с выбранным абонентским ящиком контрагента.</value>
+  </data>
+  <data name="Action_AcceptInvitationHint" xml:space="preserve">
+    <value>Начать обмен с выбранным абонентским ящиком контрагента</value>
+  </data>
+  <data name="Action_RejectInvitation" xml:space="preserve">
+    <value>Прекратить обмен</value>
+  </data>
+  <data name="Action_RejectInvitationDescription" xml:space="preserve">
+    <value>Отклонить приглашение или прекратить обмен электронными документами с выбранным абонентским ящиком контрагента.</value>
+  </data>
+  <data name="Action_RejectInvitationHint" xml:space="preserve">
+    <value>Прекратить обмен с выбранным абонентским ящиком контрагента</value>
+  </data>
+  <data name="Ribbon_Relation_98408b2b5a874ef08366115fe6e746ef" xml:space="preserve">
+    <value>Действия</value>
+  </data>
+  <data name="Action_CanExchange" xml:space="preserve">
+    <value>Проверка возможности обмена</value>
+  </data>
+  <data name="Action_CanExchangeDescription" xml:space="preserve">
+    <value>Проверить возможность электронного обмена юридически значимыми документами с контрагентом.</value>
+  </data>
+  <data name="Action_CanExchangeHint" xml:space="preserve">
+    <value>Проверить возможность обмена электронными документами</value>
+  </data>
+  <data name="Property_CanExchange" xml:space="preserve">
+    <value>Эл. обмен</value>
+  </data>
+  <data name="Operation_SetExchange" xml:space="preserve">
+    <value>Установление обмена</value>
+  </data>
+  <data name="Operation_ChangeCard" xml:space="preserve">
+    <value>Изменение карточки</value>
+  </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Открытие списка для просмотра дублей.</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Ribbon_Duplicates_9ebc8a1f68a94412861f769ed7331e53" xml:space="preserve">
+    <value>Дубли</value>
+  </data>
+  <data name="Property_Code" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="Ribbon_CounterpartyDocuments_8027263514d84043a4f87521b30b5b7b" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Action_ShowCounterpartyDocuments" xml:space="preserve">
+    <value>Открыть досье </value>
+  </data>
+  <data name="Action_ShowCounterpartyDocumentsDescription" xml:space="preserve">
+    <value>Показать комплект документов для проверки надежности контрагента (устав, свидетельство о регистрации, выписки из ЕГРЮЛ и др.)
+</value>
+  </data>
+  <data name="Action_ShowCounterpartyDocumentsHint" xml:space="preserve">
+    <value>Показать комплект документов для проверки надежности контрагента</value>
+  </data>
+  <data name="Ribbon_Documents_c549bd4aa35d4259a573d779467749b3" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Ribbon_Information_aa25262be7824a70829e0856dd1e2b57" xml:space="preserve">
+    <value>Сведения</value>
+  </data>
+  <data name="FilterPanel_Navigation_2635e0992ecd48b39ec0877e42d8ea61" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_CounterpartyType_57749e2fdf7b4d8b9cae3bab5b8fb35e" xml:space="preserve">
+    <value>Ответственный</value>
+  </data>
+  <data name="FilterPanel_Responsible_57749e2fdf7b4d8b9cae3bab5b8fb35e" xml:space="preserve">
+    <value>Ответственный</value>
+  </data>
+  <data name="Property_Responsible" xml:space="preserve">
+    <value>Ответственный</value>
+  </data>
+  <data name="Action_ForceDuplicateSave" xml:space="preserve">
+    <value>Сохранить дубль</value>
+  </data>
+  <data name="Action_ForceDuplicateSaveHint" xml:space="preserve">
+    <value>Сохранить дубль</value>
+  </data>
+  <data name="Action_ForceDuplicateSaveDescription" xml:space="preserve">
+    <value>Сохранение дубля организации. При повторном открытии предупреждение появится снова.</value>
+  </data>
+</root>

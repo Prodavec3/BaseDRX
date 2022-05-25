@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TaskSubject" xml:space="preserve">
+    <value>Processing: Documents from {0} for {1} (received {2} via exchange service {3})</value>
+  </data>
+  <data name="AssignmentSubject" xml:space="preserve">
+    <value>Process: Documents from {0} for {1} (received {2} via exchange service {3})</value>
+  </data>
+  <data name="TaskActiveText" xml:space="preserve">
+    <value>Process attached documents</value>
+  </data>
+  <data name="NotAllDocumentTypesAreChanged" xml:space="preserve">
+    <value>To complete the assignment, change document type and fill in required requisites for all the received documents.</value>
+  </data>
+  <data name="NotAllDocumentsSendedForProcessing" xml:space="preserve">
+    <value>Complete the assignment without sending documents for further processing?</value>
+  </data>
+  <data name="StateViewTaskBlockHeader" xml:space="preserve">
+    <value>Incoming exchange documents processing</value>
+  </data>
+  <data name="StateViewSender" xml:space="preserve">
+    <value>Sender:</value>
+  </data>
+  <data name="StateViewRecipient" xml:space="preserve">
+    <value>Recipient:</value>
+  </data>
+  <data name="StateViewAssignmentBlockHeader" xml:space="preserve">
+    <value>Process documents</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ExchangeDocumentIcon" type="System.Byte[], mscorlib">
+    <value>
+        AAABAAIAICAAAAEAIACoEAAAJgAAABAQAAABACAAaAQAAM4QAAAoAAAAIAAAAEAAAAABACAAAAAAAIAQ
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //////////////////+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SU
+        lP//////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACUlJT/lJSU////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAJSUlP+UlJT/////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////+UlJT/lJSU/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP//////////////////////////////////////////////
+        //8zp3j/M6d4/////////////////////////////////////////////////5SUlP+UlJT/AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU////////////////////////////////////
+        ////////M6d4/zOneP8zp3j/M6d4////////////////////////////////////////////lJSU/5SU
+        lP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/////////////////////////
+        ///9/f3//////zOneP8zp3j/M6d4/zOneP8zp3j/M6d4////////////////////////////////////
+        //+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP//////////////
+        //////////////////8zp3j/M6d4/zOneP8zp3j/M6d4/zOneP8zp3j/M6d4////////////////////
+        /////////////5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU////
+        ////////////////////////M6d4/zOneP8zp3j/M6d4/zOneP8zp3j/M6d4/zOneP8zp3j/M6d4////
+        ////////////////////////lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSU
+        lP+UlJT//////////////////////zOneP8zp3j/M6d4/zOneP8zp3j/M6d4/zOneP8zp3j/M6d4/zOn
+        eP8zp3j/M6d4//////////////////////+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAlJSU/5SUlP//////////////////////////////////////M6d4/zOneP8zp3j/M6d4/zOn
+        eP8zp3j//////////////////////////////////////5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACUlJT/lJSU//////////////////////////////////////8zp3j/M6d4/zOn
+        eP8zp3j/M6d4/zOneP//////////////////////////////////////lJSU/5SUlP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT//////////////////////////////////////zOn
+        eP8zp3j/M6d4/zOneP8zp3j/M6d4//////////////////////////////////////+UlJT/lJSU/wAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP///////////////////////v7+//z8
+        /P//////M6d4/zOneP8zp3j/M6d4/zOneP8zp3j//////////////////////////////////////5SU
+        lP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU////////////////////
+        ///+/v7///////////8zp3j/M6d4/zOneP8zp3j/M6d4/zOneP//////////////////////////////
+        ////////lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/////////
+        /////////////////////////////zOneP8zp3j/M6d4/zOneP8zp3j/M6d4////////////////////
+        //////////////////+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SU
+        lP//////////////////////////////////////M6d4/zOneP8zp3j/M6d4/zOneP8zp3j/////////
+        /////////////////////////////5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACUlJT/lJSU//////////////////////////////////////8zp3j/M6d4/zOneP8zp3j/M6d4/zOn
+        eP//////////////////////////////////////lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAJSUlP+UlJT/////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////+UlJT/lJSU/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP//////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////5SUlP+UlJT/AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////lJSU/5SU
+        lP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP//////////////
+        /////////////////////////////////////////////////////////////5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUlJT/lJSU////
+        ////////////////////////////////////////////////////////////////////////lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSU
+        lP+UlJT/////////////////////////////////////////////////////////////////////////
+        //+UlJT/lJSU////////////lJSU/5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAlJSU/5SUlP//////////////////////////////////////////////////////////////
+        /////////////5SUlP+UlJT//////5SUlP+UlJT/lJSU/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACUlJT/lJSU////////////////////////////////////////////////////
+        ////////////////////////lJSU/5SUlP+UlJT/lJSU/5SUlP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJSUlP+UlJT/////////////////////////////////////////
+        //////////////////////////////////+UlJT/lJSU/5SUlP+UlJT/AAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlJSU/5SUlP+UlJT/lJSU/5SU
+        lP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP+UlJT/lJSU/5SUlP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAABAAAAAgAAAAAQAgAAAA
+        AABABAAAAAAAAAAAAAAAAAAAAAAAAP///wD///8AfX19nX19ff99fX3/fX19/319ff99fX3/fX19/319
+        ff99fX3/fX19/319ff99fX2d////AP///wD///8A////AH19ff//////////////////////////////
+        ////////////////////////fX19/////wD///8A////AP///wB9fX3/////////////////////////
+        /////////////////////////////319ff////8A////AP///wD///8AfX19////////////////////
+        //80qHn/NKh5//////////////////////99fX3/////AP///wD///8A////AH19ff//////////////
+        //80qHn/NKh5/zSoef80qHn/////////////////fX19/////wD///8A////AP///wB9fX3/////////
+        //80qHn/NKh5/zSoef80qHn/NKh5/zSoef///////////319ff////8A////AP///wD///8AfX19////
+        //////////////////80qHn/NKh5//////////////////////99fX3/////AP///wD///8A////AH19
+        ff//////////////////////NKh5/zSoef//////////////////////fX19/////wD///8A////AP//
+        /wB9fX3//////////////////////zSoef80qHn//////////////////////319ff////8A////AP//
+        /wD///8AfX19//////////////////////80qHn/NKh5//////////////////////99fX3/////AP//
+        /wD///8A////AH19ff//////////////////////////////////////////////////////fX19////
+        /wD///8A////AP///wB9fX3//////////////////////////////////////////////////////319
+        ff////8A////AP///wD///8AfX19//////////////////////////////////////99fX3/fX19/319
+        ff99fX3/////AP///wD///8A////AH19ff//////////////////////////////////////fX19////
+        //99fX3/////AP///wD///8A////AP///wB9fX3//////////////////////////////////////319
+        ff99fX3/////AP///wD///8A////AP///wD///8AfX192319ff99fX3/fX19/319ff99fX3/fX19/319
+        ff99fX3/////AP///wD///8A////AP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+</value>
+  </data>
+  <data name="StateViewInformationBlock" xml:space="preserve">
+    <value>Document received from {0} exchange service.</value>
+  </data>
+  <data name="DocumentIsSignedByUs" xml:space="preserve">
+    <value>Document {0} has been already signed by our company in the exchange service.</value>
+  </data>
+  <data name="DocumentsIsRejectedByUs" xml:space="preserve">
+    <value>Rejection on documents {0} has already been sent.</value>
+  </data>
+  <data name="DocumentIsRejectedByUs" xml:space="preserve">
+    <value>Rejection on document {0} has already been sent.</value>
+  </data>
+  <data name="OutcomingDocumentProcessingTaskActiveText" xml:space="preserve">
+    <value>Process attached documents that were sent by our company via {0} exchange service.</value>
+  </data>
+  <data name="DocumentSentToAnotherResponsible" xml:space="preserve">
+    <value>The document was sent to department "{0}". This assignment has been forwarded to you as an employee responsible for the department box is not specified. Contact your administrator to configure the system properly.</value>
+  </data>
+  <data name="DocumentSentToClosedBox" xml:space="preserve">
+    <value>The document was sent to department "{0}". This assignment has been forwarded to you as the department box is closed. Contact your administrator to configure the system properly.</value>
+  </data>
+</root>

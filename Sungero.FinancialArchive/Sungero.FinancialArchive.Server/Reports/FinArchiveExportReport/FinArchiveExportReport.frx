@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.FinancialArchive.Shared&#13;&#10;Sungero.FinancialArchive.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.FinancialArchive.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="ExportedDocuments" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectFromFinArchiveExportReportTable}">
+        <Column Name="Document" DataType="System.String" PropName="Column"/>
+        <Column Name="Hyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="Id" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Exported" DataType="System.String" PropName="Column"/>
+        <Column Name="Note" DataType="System.String" PropName="Column"/>
+        <Column Name="IOHyperlink" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Size="100" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="de05e2c9-cf88-48d7-9e39-77c01a25395a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="CurrentTime" Id="ca902e06-6180-4d26-8afa-41c08c6de0d0" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="4a1dd30c-ad72-4ea8-914c-6c3fddbed427" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Exported" Id="3ad7fecb-a8c0-41b3-8679-191cce43c581" IsRequired="false" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NotExported" Id="4b01891f-717c-4af6-9b5e-d0f2c753355b" IsRequired="false" IsCollection="false" InternalDataType="System.Int32" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="85.05" CanGrow="true">
+      <TextObject Name="Text1" Width="718.2" Height="37.8" CanGrow="true" Text="[Format(Sungero.FinancialArchive.Reports.Resources.FinArchiveExportReport.Header,[CurrentTime])]" HorzAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text12" Top="37.8" Width="718.2" Height="47.25" CanGrow="true" Text="[Format(Sungero.FinancialArchive.Reports.Resources.FinArchiveExportReport.SubHeader,[Exported], [NotExported])]" Font="Arial, 11pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="89.05" Width="718.2" Height="37.8" PrintOn="FirstPage, SinglePage">
+      <TextObject Name="Text4" Width="56.7" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.FinancialArchive.Reports.Resources.FinArchiveExportReport.Id]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="56.7" Width="340.2" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.FinancialArchive.Reports.Resources.FinArchiveExportReport.Document]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="396.9" Width="75.6" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.FinancialArchive.Reports.Resources.FinArchiveExportReport.Exported]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text8" Left="472.5" Width="245.7" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.FinancialArchive.Reports.Resources.FinArchiveExportReport.Note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="130.85" Width="718.2" Height="37.8" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text13" Width="56.7" Height="37.8" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[ExportedDocuments.Hyperlink]" CanGrow="true" GrowToBottom="true" Text="[ExportedDocuments.Id]" Padding="3, 3, 3, 3" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text14" Left="56.7" Width="340.2" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ExportedDocuments.Document]" Padding="3, 3, 3, 3" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="396.9" Width="75.6" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ExportedDocuments.Exported]" Padding="3, 3, 3, 3" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text17" Left="472.5" Width="245.7" Height="37.8" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[ExportedDocuments.IOHyperlink]" CanGrow="true" GrowToBottom="true" Text="[ExportedDocuments.Note]" Padding="3, 3, 3, 3" Format="Custom" Format.Format="dd.MM.yyyy   HH:mm" Font="Arial, 10pt">
+        <Highlight>
+          <Condition Expression="Length([ExportedDocuments.IOHyperlink]) != 0" TextFill.Color="Blue" Font="Arial, 10.2pt, style=Underline" ApplyFont="true"/>
+        </Highlight>
+      </TextObject>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="172.65" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Folder>
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">844,-176</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+          <property name="WaitIndicatorType">Panel</property>
+        </property>
+        <property name="Columns" iskey="true" value="18">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Integer_ID</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Integer_ID</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">5*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Enumeration_Status_Status_04581d2607804cfdb3cdc2cafc5798b0</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Enumeration_Status_Status_04581d2607804cfdb3cdc2cafc5798b0</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">9*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">String_Name</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Name</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">39*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">String_TIN</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_TIN</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">12*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_City_3a0c21f8aa88429c891f56c24d56fcef</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Navigation_City_3a0c21f8aa88429c891f56c24d56fcef</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_Region_4efe2fa9b1d14b47b3664128fe0a391c</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Navigation_Region_4efe2fa9b1d14b47b3664128fe0a391c</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">String_Legal_address</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Legal_address</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">String_Postal_address</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Postal_address</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">String_Phone_numbers</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Phone_numbers</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">String_Email</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Email</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">11*</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">String_Homepage</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Homepage</property>
+            <property name="VisibleIndex">8</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">String_Note</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Note</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">11*</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="FieldName">String_PSRN</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_PSRN</property>
+            <property name="VisibleIndex">9</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="FieldName">String_NCEO</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_NCEO</property>
+            <property name="VisibleIndex">9</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="FieldName">String_NCEA</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_NCEA</property>
+            <property name="VisibleIndex">9</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item16" isnull="true" iskey="true">
+            <property name="FieldName">String_Account_number</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Account_number</property>
+            <property name="VisibleIndex">9</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item17" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_Bank_294767f1009f4fbd80fcf98c49ddc560</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Navigation_Bank_294767f1009f4fbd80fcf98c49ddc560</property>
+            <property name="VisibleIndex">9</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item18" isnull="true" iskey="true">
+            <property name="FieldName">Boolean_TODO</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">Boolean_TODO</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Folder>
+  <Folder>
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">844,-176</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+          <property name="WaitIndicatorType">Panel</property>
+        </property>
+        <property name="Columns" iskey="true" value="18">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Integer_ID</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Integer_ID</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">5*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Enumeration_Status_Status_04581d2607804cfdb3cdc2cafc5798b0</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Enumeration_Status_Status_04581d2607804cfdb3cdc2cafc5798b0</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">9*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">String_Name</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Name</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">42*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">String_TIN</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_TIN</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_City_3a0c21f8aa88429c891f56c24d56fcef</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Navigation_City_3a0c21f8aa88429c891f56c24d56fcef</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_Region_4efe2fa9b1d14b47b3664128fe0a391c</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Navigation_Region_4efe2fa9b1d14b47b3664128fe0a391c</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">String_Legal_address</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Legal_address</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">String_Postal_address</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Postal_address</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">String_Phone_numbers</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Phone_numbers</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">String_Email</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Email</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">String_Homepage</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Homepage</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">String_Note</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">String_Note</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="FieldName">String_PSRN</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_PSRN</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="FieldName">String_NCEO</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_NCEO</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="FieldName">String_NCEA</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_NCEA</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item16" isnull="true" iskey="true">
+            <property name="FieldName">String_Account_number</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">String_Account_number</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item17" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_Bank_294767f1009f4fbd80fcf98c49ddc560</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">Navigation_Bank_294767f1009f4fbd80fcf98c49ddc560</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item18" isnull="true" iskey="true">
+            <property name="FieldName">Boolean_TODO</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">Boolean_TODO</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">String_Note</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Folder>
+</settings>

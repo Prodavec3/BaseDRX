@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RouteScheme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             HandlerClassName="Sungero.Docflow.Server.FreeApprovalTaskRouteHandlers, Sungero.Docflow.Server"
+             VendorDevelopmentVersion="2">
+  <Blocks>
+    <BlockBase xsi:type="StartBlock">
+      <Id>1</Id>
+    </BlockBase>
+    <BlockBase xsi:type="AssignmentBlock">
+      <Id>2</Id>
+      <Title>Согласование рецензентами</Title>
+      <TypeGuid>01be6c28-8785-4f74-9877-e3270704452e</TypeGuid>
+      <NoPerformersResult>Approved</NoPerformersResult>
+    </BlockBase>
+    <BlockBase xsi:type="AssignmentBlock">
+      <Id>3</Id>
+      <Title>Корректировка автором</Title>
+      <TypeGuid>593ff79e-38b4-4903-b20e-9e08cfea6307</TypeGuid>
+    </BlockBase>
+    <BlockBase xsi:type="FinishBlock">
+      <Id>4</Id>
+    </BlockBase>
+    <BlockBase xsi:type="NoticeBlock">
+      <Id>7</Id>
+      <Title>Уведомление согласовавшим о новом круге согласования</Title>
+      <IsParallel>false</IsParallel>
+      <TypeGuid>7d9816f6-1dea-4718-84a5-1a413df81145</TypeGuid>
+    </BlockBase>
+    <BlockBase xsi:type="DecisionBlock">
+      <Id>5</Id>
+      <Title>Нужно задание-контроль?</Title>
+    </BlockBase>
+    <BlockBase xsi:type="NoticeBlock">
+      <Id>6</Id>
+      <Title>Уведомление инициатора о завершении согласования</Title>
+      <IsParallel>false</IsParallel>
+      <TypeGuid>7d9816f6-1dea-4718-84a5-1a413df81145</TypeGuid>
+    </BlockBase>
+    <BlockBase xsi:type="AssignmentBlock">
+      <Id>8</Id>
+      <Title>Задание инициатору о завершении согласования</Title>
+      <TypeGuid>d3277007-c49f-4aaa-a0f7-e397fa4fb9fc</TypeGuid>
+    </BlockBase>
+    <BlockBase xsi:type="DecisionBlock">
+      <Id>9</Id>
+      <Title>Нужно уведомлять об отправке на доработку?</Title>
+    </BlockBase>
+    <BlockBase xsi:type="MonitoringBlock">
+      <Id>10</Id>
+      <Title>Кто-то отправил на доработку?</Title>
+      <Period>0.00:30:00</Period>
+    </BlockBase>
+    <BlockBase xsi:type="NoticeBlock">
+      <Id>11</Id>
+      <Title>Уведомление автору об отправке на доработку</Title>
+      <TypeGuid>7d9816f6-1dea-4718-84a5-1a413df81145</TypeGuid>
+    </BlockBase>
+  </Blocks>
+  <Edges>
+    <Edge>
+      <Id>0</Id>
+      <Source>1</Source>
+      <Target>7</Target>
+    </Edge>    
+    <Edge>
+      <Id>1</Id>
+      <Source>7</Source>
+      <Target>2</Target>
+    </Edge>
+    <Edge>
+      <Id>4</Id>
+      <Source>2</Source>
+      <Target>5</Target>
+      <Value>Approved</Value>
+    </Edge>
+    <Edge>
+      <Id>5</Id>
+      <Source>2</Source>
+      <Target>3</Target>
+      <Value></Value>
+    </Edge>
+    <Edge>
+      <Id>6</Id>
+      <Source>3</Source>
+      <Target>7</Target>
+      <Value>Reworked</Value>
+    </Edge>
+    <Edge>
+      <Id>8</Id>
+      <Source>5</Source>
+      <Target>6</Target>
+      <Value>False</Value>
+    </Edge>
+    <Edge>
+      <Id>9</Id>
+      <Source>5</Source>
+      <Target>8</Target>
+      <Value>True</Value>
+    </Edge>
+    <Edge>
+      <Id>10</Id>
+      <Source>6</Source>
+      <Target>4</Target>
+    </Edge>
+    <Edge>
+      <Id>11</Id>
+      <Source>8</Source>
+      <Target>4</Target>
+    </Edge>
+    <Edge>
+      <Id>12</Id>
+      <Source>1</Source>
+      <Target>9</Target>
+    </Edge>
+    <Edge>
+      <Id>14</Id>
+      <Source>9</Source>
+      <Target>10</Target>
+      <Value>True</Value>
+    </Edge>
+    <Edge>
+      <Id>15</Id>
+      <Source>10</Source>
+      <Target>11</Target>
+      <Value>True</Value>
+    </Edge>
+    <Edge>
+      <Id>16</Id>
+      <Source>11</Source>
+      <Target>10</Target>
+    </Edge>
+  </Edges>
+</RouteScheme>

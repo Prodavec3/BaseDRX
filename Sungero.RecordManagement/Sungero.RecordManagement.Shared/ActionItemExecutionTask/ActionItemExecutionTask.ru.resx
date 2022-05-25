@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TaskSubject" xml:space="preserve">
+    <value>Поручение:</value>
+  </data>
+  <data name="ControlNoticeSubject" xml:space="preserve">
+    <value>Вы назначены контролером:</value>
+  </data>
+  <data name="ActionItemsNotFilled" xml:space="preserve">
+    <value>В составное поручение необходимо добавить хотя бы один пункт поручения.</value>
+  </data>
+  <data name="WorkFromActionItemIsCompleted" xml:space="preserve">
+    <value>Выполнено поручение, исполнитель {0}:</value>
+  </data>
+  <data name="ControlWorkFromJob" xml:space="preserve">
+    <value>Примите работы:</value>
+  </data>
+  <data name="SubjectWithDocument" xml:space="preserve">
+    <value> {0}</value>
+  </data>
+  <data name="SentToCoAssignee" xml:space="preserve">
+    <value>Отправлено соисполнителю.</value>
+  </data>
+  <data name="WorkFromActionItemIsAccepted" xml:space="preserve">
+    <value>Приняты работы:</value>
+  </data>
+  <data name="NoticeSubjectWithoutDoc" xml:space="preserve">
+    <value>Прекращено исполнение</value>
+  </data>
+  <data name="DeadlineSubActionItemExecution" xml:space="preserve">
+    <value>Дата текущего поручения превышает дату основного поручения - {0}.</value>
+  </data>
+  <data name="NumberIsNotPositive" xml:space="preserve">
+    <value>Порядковые номера в пунктах составного поручения должны быть положительными.</value>
+  </data>
+  <data name="ActionItemExecutionSubject" xml:space="preserve">
+    <value>Исполните:</value>
+  </data>
+  <data name="OnControl" xml:space="preserve">
+    <value>Поручение на контроле. Контролер - {0}. </value>
+  </data>
+  <data name="YouAreAdditionalAssignee" xml:space="preserve">
+    <value>Вы являетесь соисполнителем поручения.</value>
+  </data>
+  <data name="YouAreResponsibleAssignee" xml:space="preserve">
+    <value>Вы являетесь ответственным исполнителем поручения.</value>
+  </data>
+  <data name="YouAreAssignee" xml:space="preserve">
+    <value>Вы являетесь исполнителем поручения.</value>
+  </data>
+  <data name="OnControlWithResponsible" xml:space="preserve">
+    <value>Поручение на контроле у ответственного исполнителя - {0}. </value>
+  </data>
+  <data name="NoActiveChildActionItems" xml:space="preserve">
+    <value>На данный момент нет активных подчиненных поручений.</value>
+  </data>
+  <data name="ComponentActionItemExecutionSubject" xml:space="preserve">
+    <value>Составное поручение:</value>
+  </data>
+  <data name="StopAdditionalActionItemExecutions" xml:space="preserve">
+    <value>Что делать с незавершенными подчиненными поручениями?</value>
+  </data>
+  <data name="AutoAbortingReason" xml:space="preserve">
+    <value>Поручение прекращено автоматически при выполнении ведущего поручения.</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Подтверждение</value>
+  </data>
+  <data name="WorkFromActionItemIsCreated" xml:space="preserve">
+    <value>Начаты работы:</value>
+  </data>
+  <data name="StateViewActionItemOnExecution" xml:space="preserve">
+    <value>Поручение отправлено на исполнение</value>
+  </data>
+  <data name="StateViewSubordinateActionItemSent" xml:space="preserve">
+    <value>Отправлено подчиненное поручение</value>
+  </data>
+  <data name="StateViewNotSpecified" xml:space="preserve">
+    <value>Не указано</value>
+  </data>
+  <data name="ActionItem" xml:space="preserve">
+    <value>Поручение</value>
+  </data>
+  <data name="StateViewCompoundActionItem" xml:space="preserve">
+    <value>Составное поручение</value>
+  </data>
+  <data name="StateViewActionItemForCoAssignee" xml:space="preserve">
+    <value>Поручение соисполнителю</value>
+  </data>
+  <data name="StateViewActionItemForResponsible" xml:space="preserve">
+    <value>Поручение ответственному исполнителю</value>
+  </data>
+  <data name="StateViewActionItemPart" xml:space="preserve">
+    <value>Пункт составного поручения №</value>
+  </data>
+  <data name="StateViewReport" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
+  <data name="StateViewActionItem" xml:space="preserve">
+    <value>Поручение</value>
+  </data>
+  <data name="ActionItemCanNotAssignedByUser" xml:space="preserve">
+    <value>В свойстве "Выдал" можно указать только себя, замещаемого сотрудника, своего руководителя (если Вы являетесь его помощником) или руководителя замещаемого сотрудника (если замещаемый сотрудник является помощником своего руководителя).</value>
+  </data>
+  <data name="SubtaskSubjectPostfix" xml:space="preserve">
+    <value> "{0}" по</value>
+  </data>
+  <data name="WillBeSentAfterApprove" xml:space="preserve">
+    <value>Поручение будет отправлено на исполнение после утверждения проекта резолюции.</value>
+  </data>
+  <data name="WillBeAddToDocumentReviewTask" xml:space="preserve">
+    <value>Поручение будет вложено в задачу на рассмотрение руководителю и отправлено на исполнение после утверждения проекта резолюции.
+</value>
+  </data>
+  <data name="EmptyActionItem" xml:space="preserve">
+    <value>Заполните текст в поручении или в табличной части.</value>
+  </data>
+  <data name="EmptyFinalDeadline" xml:space="preserve">
+    <value>Заполните общий срок или срок в табличной части.</value>
+  </data>
+  <data name="DefaultActionItem" xml:space="preserve">
+    <value>В работу.</value>
+  </data>
+  <data name="BigGroupWarning" xml:space="preserve">
+    <value>Заполнить исполнителей можно из группы, в которую входит не больше {0} сотрудников.</value>
+  </data>
+  <data name="WorkFromActionItemIsCreatedCompound" xml:space="preserve">
+    <value>Начаты работы: составное поручение</value>
+  </data>
+  <data name="ChangeCompoundModeQuestion" xml:space="preserve">
+    <value>Переключиться в режим простого поручения?</value>
+  </data>
+  <data name="ChangeCompoundModeDescription" xml:space="preserve">
+    <value>Исполнители перенесутся в простое поручение.
+Пункты составного поручения удалятся.</value>
+  </data>
+  <data name="EmptyAbortingReason" xml:space="preserve">
+    <value>Заполните причину прекращения задачи.</value>
+  </data>
+  <data name="ActionItemAsigneeTooMatch" xml:space="preserve">
+    <value>Исполнителей по поручению больше {0}. Разделите поручение на несколько задач.</value>
+  </data>
+  <data name="ActionItemWithNumberThreadSubject" xml:space="preserve">
+    <value>Пункт поручения</value>
+  </data>
+  <data name="CompoundActionItemThreadSubject" xml:space="preserve">
+    <value>Составное поручение</value>
+  </data>
+  <data name="ActionItemExecutionNotificationThreadSubject" xml:space="preserve">
+    <value>Уведомление об исполнении поручения</value>
+  </data>
+  <data name="ActionItemThreadSubject" xml:space="preserve">
+    <value>Поручение</value>
+  </data>
+  <data name="SelectDepartmentOrRole" xml:space="preserve">
+    <value>Выберите подразделение или роль</value>
+  </data>
+  <data name="ActionItemExecutionExecutedLabel" xml:space="preserve">
+    <value>Исполнено</value>
+  </data>
+  <data name="ActionItemChanged" xml:space="preserve">
+    <value>Скорректировано поручение:</value>
+  </data>
+  <data name="AddCoAssignees" xml:space="preserve">
+    <value>Добавить соисполнителей</value>
+  </data>
+  <data name="ChangeActionItem" xml:space="preserve">
+    <value>Корректировка поручения</value>
+  </data>
+  <data name="AssigneeChangedFromTo" xml:space="preserve">
+    <value>Изменен исполнитель: {0} -&gt; {1}</value>
+  </data>
+  <data name="SupervisorChangedFromTo" xml:space="preserve">
+    <value>Изменен контролер: {0} -&gt; {1}</value>
+  </data>
+  <data name="ActionItemExecutionChangeNotification" xml:space="preserve">
+    <value>Уведомление о корректировке поручения</value>
+  </data>
+  <data name="RemoveCoAssignees" xml:space="preserve">
+    <value>Исключить соисполнителей</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Скорректировать</value>
+  </data>
+  <data name="TaskPutUnderSupervision" xml:space="preserve">
+    <value>Назначен контролер: {0}</value>
+  </data>
+  <data name="CoAssigneesDeleted" xml:space="preserve">
+    <value>Исключены соисполнители: {0}</value>
+  </data>
+  <data name="CoAssigneesAdded" xml:space="preserve">
+    <value>Добавлены соисполнители: {0}</value>
+  </data>
+  <data name="StopAssignmentSubtask" xml:space="preserve">
+    <value>---
+При необходимости прекратите созданные вами подчиненные поручения и подзадачи.</value>
+  </data>
+  <data name="ActionItemExecutionTaskLockedByUser" xml:space="preserve">
+    <value>Поручение заблокировано пользователем {0}. Скорректируйте его позднее.</value>
+  </data>
+  <data name="ActionItemIsAlreadyInChangingProcess" xml:space="preserve">
+    <value>Поручение находится в процессе изменения. Скорректируйте его позднее.</value>
+  </data>
+  <data name="ActionItemExecuted" xml:space="preserve">
+    <value>Поручение исполнено или прекращено. Корректировка невозможна.</value>
+  </data>
+  <data name="ActionItemOnControlCannotChangeAssignee" xml:space="preserve">
+    <value>Поручение находится на приемке у контролера. Корректировка исполнителя/срока невозможна.</value>
+  </data>
+  <data name="СhooseCoAssigneesForAdd" xml:space="preserve">
+    <value>Выберите соисполнителей для добавления</value>
+  </data>
+  <data name="СhooseCoAssigneesForDelete" xml:space="preserve">
+    <value>Выберите соисполнителей для исключения</value>
+  </data>
+  <data name="ChangeActionItemDialogInfo" xml:space="preserve">
+    <value>При изменении участников поручения задания придут выбранным сотрудникам.</value>
+  </data>
+  <data name="ChangeActionItemPart" xml:space="preserve">
+    <value>Корректировка пункта поручения №{0}</value>
+  </data>
+  <data name="ActionItemChangeError" xml:space="preserve">
+    <value>Возникла ошибка при корректировке поручения. Обратитесь к администратору.</value>
+  </data>
+  <data name="ChangeCompoundActionItemPartDialogInfo" xml:space="preserve">
+    <value>Исполнитель: {0} Срок: {1}
+{2}
+{3}
+
+При изменении участников поручения задания придут выбранным сотрудникам.</value>
+  </data>
+  <data name="ActionItemWasChanged" xml:space="preserve">
+    <value>Поручение было изменено. Обновите карточку поручения и запустите корректировку заново.</value>
+  </data>
+  <data name="ChangeActionItemSuccess" xml:space="preserve">
+    <value>Корректировка поручения инициирована. Обновите карточку для просмотра результатов.</value>
+  </data>
+  <data name="Ellipsis_ShortActionItemPart" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="Ellipsis_FormattedActionItem" xml:space="preserve">
+    <value>…</value>
+  </data>
+  <data name="CoAssigneesDeadlineError" xml:space="preserve">
+    <value>Срок поручения для соисполнителей не может быть больше срока для ответственного исполнителя.</value>
+  </data>
+  <data name="CoAssigneeDeadlineLessThanToday" xml:space="preserve">
+    <value>Срок поручения для соисполнителей должен быть больше или равен текущей дате.</value>
+  </data>
+  <data name="DeadlineChanged" xml:space="preserve">
+    <value>Изменен срок исполнения с {0} на {1}</value>
+  </data>
+  <data name="AssigneeDeadlineLessThanToday" xml:space="preserve">
+    <value>Срок поручения для исполнителя должен быть больше или равен текущей дате.</value>
+  </data>
+  <data name="EmptyActiveText" xml:space="preserve">
+    <value>Введите текст поручения.</value>
+  </data>
+  <data name="CoAssigneesDeadlineChanged" xml:space="preserve">
+    <value>Изменен срок для соисполнителей c {0} на {1}</value>
+  </data>
+  <data name="CoAssigneesDeadlineSet" xml:space="preserve">
+    <value>Изменен срок для соисполнителей – {0}</value>
+  </data>
+  <data name="NotCompletedExecutionSubTasksHyperlinkTitle" xml:space="preserve">
+    <value>Подчиненные поручения в работе</value>
+  </data>
+  <data name="EmptyEditingReason" xml:space="preserve">
+    <value>Заполните обоснование для корректировки поручения.</value>
+  </data>
+  <data name="EditingReason" xml:space="preserve">
+    <value>Обоснование</value>
+  </data>
+  <data name="EditingReasonText" xml:space="preserve">
+    <value>
+Обоснование: {0}</value>
+  </data>
+  <data name="AddCompoundActionItemPart" xml:space="preserve">
+    <value>Добавление пункта поручения</value>
+  </data>
+  <data name="AddButtonDialog" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="CoAssigneesDeadlineDialog" xml:space="preserve">
+    <value>Срок соисп.</value>
+  </data>
+  <data name="EditCompoundActionItemPart" xml:space="preserve">
+    <value>Редактирование пункта поручения №{0}</value>
+  </data>
+  <data name="EditButtonDialog" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="ParentAssignmentExists" xml:space="preserve">
+    <value>У задания на приемку есть ведущее поручение</value>
+  </data>
+  <data name="ShowParentAssignment" xml:space="preserve">
+    <value>Показать ведущее поручение</value>
+  </data>
+  <data name="EmptySupervisor" xml:space="preserve">
+    <value>Укажите контролера в поручении или в табличной части.</value>
+  </data>
+  <data name="AssigneeDeadlineSet" xml:space="preserve">
+    <value>Изменен срок исполнения - {0}</value>
+  </data>
+  <data name="NotSpecified" xml:space="preserve">
+    <value>не указан</value>
+  </data>
+  <data name="ChangeCompoundActionItemDialogText" xml:space="preserve">
+    <value>Общий срок: {0}.
+{1}
+
+Изменения применятся для выбранных пунктов.
+При добавлении или изменении контролера задания на приемку отправятся выбранному сотруднику.</value>
+  </data>
+  <data name="Parts" xml:space="preserve">
+    <value>Пункты</value>
+  </data>
+  <data name="AllParts" xml:space="preserve">
+    <value>Все пункты</value>
+  </data>
+  <data name="ExcludeParts" xml:space="preserve">
+    <value>Исключить пункты</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="SpecifyParts" xml:space="preserve">
+    <value>Выберите пункты для исключения</value>
+  </data>
+  <data name="PartsNotSpecified" xml:space="preserve">
+    <value>Пункты не выбраны</value>
+  </data>
+  <data name="AllPartsExclude" xml:space="preserve">
+    <value>Все пункты, кроме:
+{0}</value>
+  </data>
+  <data name="ChangedParts" xml:space="preserve">
+    <value>Пункты:
+{0}</value>
+  </data>
+  <data name="ShortPartViewTemplate" xml:space="preserve">
+    <value>№{0} {1} ({2}): {3}</value>
+  </data>
+  <data name="ActionItemSelectedPartsOnControlCannotChangeDeadline" xml:space="preserve">
+    <value>Выбранные пункты находятся на приемке у контролера. Корректировка срока невозможна.</value>
+  </data>
+  <data name="ActionItemSelectedPartsExecuted" xml:space="preserve">
+    <value>Выбранные пункты исполнены или прекращены. Корректировка невозможна.</value>
+  </data>
+  <data name="ActionItemWithoutDeadlineDenied" xml:space="preserve">
+    <value>Возможность отправки поручений без срока отключена администратором.</value>
+  </data>
+  <data name="EmptyCoAssigneeDeadline" xml:space="preserve">
+    <value>Заполните сроки для соисполнителей по кнопке "Скорректировать пункт".</value>
+  </data>
+  <data name="ActionItemOldDeadlineEqualsNew" xml:space="preserve">
+    <value>Новый срок должен отличаться от текущего.</value>
+  </data>
+  <data name="ActionItemOldSupervisorEqualsNew" xml:space="preserve">
+    <value>Новый контролер должен отличаться от текущего.</value>
+  </data>
+  <data name="ActionItemOnControl" xml:space="preserve">
+    <value>Поручение на контроле. Контролер: не указан.</value>
+  </data>
+  <data name="Supervisor" xml:space="preserve">
+    <value>Контролер: {0}</value>
+  </data>
+  <data name="ChangeCompoundActionItem" xml:space="preserve">
+    <value>Корректировка составного поручения</value>
+  </data>
+  <data name="ActionItemNotUnderControl" xml:space="preserve">
+    <value>Поручение не на контроле.</value>
+  </data>
+  <data name="ActionItemWithoutDeadline" xml:space="preserve">
+    <value>без срока</value>
+  </data>
+  <data name="Enum_Operation_ChangeDeadline" xml:space="preserve">
+    <value>Изменение срока</value>
+  </data>
+  <data name="ChangeCompoundActionItemHistory" xml:space="preserve">
+    <value>Изменены сроки исполнения. Подробнее см. в уведомлениях и истории пунктов поручения</value>
+  </data>
+</root>

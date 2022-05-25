@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="PasteDocumentNames">
+    <mssql><![CDATA[update {0}
+set DocumentInfo = docs.Name
+from (select
+        task.id Task,
+        docs.Name Name
+      from {0} task
+      join Sungero_WF_Attachment attachment
+        on task.Id = attachment.Task
+      join Sungero_Content_EDoc docs
+        on attachment.AttachmentId = docs.Id
+      where attachment.[Group] = '804f50fe-f3da-411b-bb2e-e5373936e029') docs
+where id = docs.Task and ReportSessionId = '{1}']]></mssql>
+    <postgres><![CDATA[update {0}
+set DocumentInfo = docs.Name
+from (select
+        task.id Task,
+        docs.Name 
+      from {0} task
+      join Sungero_WF_Attachment attachment
+        on task.Id = attachment.Task
+      join Sungero_Content_EDoc docs
+        on attachment.AttachmentId = docs.Id
+      where attachment.Group = '804f50fe-f3da-411b-bb2e-e5373936e029') docs
+where id = docs.Task and ReportSessionId = '{1}']]></postgres>
+  </query>
+  <query key="SelectDataFromTable">
+    <default><![CDATA[select *
+from  Sungero_Reports_AIExecReport temp
+where ReportSessionId = @ReportSessionId
+order by RowIndex]]></default>
+  </query>
+  <query key="CreateActionItemExecutionReportSourceTable">
+    <mssql><![CDATA[create table {0}
+  ([RowIndex] int NOT NULL,
+  [Id] int NOT NULL,
+  [Hyperlink] nvarchar(max) NOT NULL,
+  [ActionItemText] nvarchar(max) NOT NULL,
+  [Author] nvarchar(max) NOT NULL,
+  [State] nvarchar(max) NOT NULL,
+  [PlanDate] nvarchar(max),
+  [PlanDateSort] nvarchar(max),
+  [ActualDate] nvarchar(max),
+  [Overdue] nvarchar(max),
+  [Assignee] nvarchar(max),
+  [CoAssignees] nvarchar(max),
+  [DocumentInfo] nvarchar(max),
+  [ReportSessionId] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (RowIndex int NOT NULL,
+  Id int NOT NULL,
+  Hyperlink citext NOT NULL,
+  ActionItemText citext NOT NULL,
+  Author citext NOT NULL,
+  State citext NOT NULL,
+  PlanDate citext,
+  PlanDateSort timestamp,
+  ActualDate citext,
+  Overdue int,
+  Assignee citext,
+  CoAssignees citext,
+  DocumentInfo citext,
+  ReportSessionId citext NOT NULL)]]></postgres>
+  </query>
+</queries>

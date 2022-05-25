@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="DocumentKind" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="Registered" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="ConsiderationText" xml:space="preserve">
+    <value>Прошу рассмотреть документ.</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Дата начала</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Дата завершения</value>
+  </data>
+  <data name="IncomingDocumentsReport" xml:space="preserve">
+    <value>Журнал входящих документов</value>
+  </data>
+  <data name="InternalDocumentsReport" xml:space="preserve">
+    <value>Журнал внутренних документов</value>
+  </data>
+  <data name="OutgoingDocumentsReport" xml:space="preserve">
+    <value>Журнал исходящих документов</value>
+  </data>
+  <data name="ActionItemsExecutionReport" xml:space="preserve">
+    <value>Контроль сроков исполнения поручений</value>
+  </data>
+  <data name="DocumentReturnReport" xml:space="preserve">
+    <value>Контроль возврата документов</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Сотрудник</value>
+  </data>
+  <data name="DeliveredFrom" xml:space="preserve">
+    <value>Выдан с</value>
+  </data>
+  <data name="DeliveredTo" xml:space="preserve">
+    <value>Выдан по</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineLessThanToday" xml:space="preserve">
+    <value>Срок по заданию должен быть больше или равен текущей дате.</value>
+  </data>
+  <data name="FailedGetSettings" xml:space="preserve">
+    <value>Не удалось получить настройки. Обратитесь к администратору системы.</value>
+  </data>
+  <data name="IncomingDocumentsProcessingReportName" xml:space="preserve">
+    <value>Контроль обработки входящих документов</value>
+  </data>
+  <data name="AllReportsTitle" xml:space="preserve">
+    <value>Отчеты "Делопроизводство"</value>
+  </data>
+  <data name="PeriodFrom" xml:space="preserve">
+    <value>Срок исполнения с</value>
+  </data>
+  <data name="PeriodTo" xml:space="preserve">
+    <value>Срок исполнения по</value>
+  </data>
+  <data name="AssignedBy" xml:space="preserve">
+    <value>Автор поручения</value>
+  </data>
+  <data name="ResponsiblePerformer" xml:space="preserve">
+    <value>Отв. исполнитель</value>
+  </data>
+  <data name="AssignmentCompletion" xml:space="preserve">
+    <value>Процент исполнительской дисциплины</value>
+  </data>
+  <data name="ActionItemCompletion" xml:space="preserve">
+    <value>Процент исполнения поручений в срок</value>
+  </data>
+  <data name="IncomingLetterTypeName" xml:space="preserve">
+    <value>Входящее письмо</value>
+  </data>
+  <data name="OutgoingLetterTypeName" xml:space="preserve">
+    <value>Исходящее письмо</value>
+  </data>
+  <data name="OrderTypeName" xml:space="preserve">
+    <value>Приказ</value>
+  </data>
+  <data name="IncomingLetterKindName" xml:space="preserve">
+    <value>Входящее письмо</value>
+  </data>
+  <data name="IncomingLetterKindShortName" xml:space="preserve">
+    <value>Вх. письмо</value>
+  </data>
+  <data name="OutgoingLetterKindName" xml:space="preserve">
+    <value>Исходящее письмо</value>
+  </data>
+  <data name="OutgoingLetterKindShortName" xml:space="preserve">
+    <value>Исх. письмо</value>
+  </data>
+  <data name="OrderKindName" xml:space="preserve">
+    <value>Приказ</value>
+  </data>
+  <data name="OrderKindShortName" xml:space="preserve">
+    <value>Приказ</value>
+  </data>
+  <data name="ConfirmDeleteDraftResolutionAssignment" xml:space="preserve">
+    <value>Поручения из проекта резолюции будут удалены.
+</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="ActionItemsExecutionReportForMeetings" xml:space="preserve">
+    <value>Контроль сроков исполнения поручений по совещаниям</value>
+  </data>
+  <data name="SignatorySubstitute" xml:space="preserve">
+    <value>{0} за {1}</value>
+  </data>
+  <data name="SignatureValidationMessage" xml:space="preserve">
+    <value>Подпись: {0} от {1}. {2}.</value>
+  </data>
+  <data name="SignatureValidationErrorMessage" xml:space="preserve">
+    <value>Утверждающая подпись документа некорректна. Обратитесь к администратору системы.</value>
+  </data>
+  <data name="CompanyDirectiveTypeName" xml:space="preserve">
+    <value>Распоряжение</value>
+  </data>
+  <data name="CompanyDirectiveKindName" xml:space="preserve">
+    <value>Распоряжение</value>
+  </data>
+  <data name="CompanyDirectiveKindShortName" xml:space="preserve">
+    <value>Распоряжение</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineForAssignee" xml:space="preserve">
+    <value>Срок задания для исполнителя уже истек.</value>
+  </data>
+  <data name="TwoSpotTemplate" xml:space="preserve">
+    <value>{0}:</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineLessThanTodayCorrectIt" xml:space="preserve">
+    <value>Скорректируйте сроки поручений в проекте резолюции. Срок должен быть больше или равен текущей дате.</value>
+  </data>
+  <data name="UnsupportedAccessRightsTypeMessage" xml:space="preserve">
+    <value>Параметр '{0}'. Передан тип прав '{1}'. Для сравнения допустимы только экземплярные типы прав.</value>
+  </data>
+  <data name="CoAssignees" xml:space="preserve">
+    <value> (соисполнители)</value>
+  </data>
+  <data name="ActionItemIndefiniteDeadline" xml:space="preserve">
+    <value>без срока</value>
+  </data>
+</root>

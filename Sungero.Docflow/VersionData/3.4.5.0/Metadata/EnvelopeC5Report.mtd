@@ -1,0 +1,61 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "8ca78880-7162-4e8f-8d8f-a606673a401f",
+  "Name": "EnvelopeC5Report",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "HandledEvents",
+    "Parameters",
+    "DisplayName",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "e5985b53-b0ff-43b3-b0c8-00fcd6ce3100",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "f0a14e76-edf7-4f76-a789-004e3c02ef32",
+      "Name": "PrintSender",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "c054f027-af71-43e6-a987-10c6ed3eb71d",
+      "Name": "OutgoingDocuments",
+      "EntityType": "f5f104fb-52e4-422b-9de1-a36937d85a2d",
+      "InternalDataTypeName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true
+    },
+    {
+      "NameGuid": "41e6dbbd-2a8d-434d-a2a4-f0b000087fd0",
+      "Name": "ContractualDocuments",
+      "EntityType": "454df3c6-b850-47cf-897f-a10d767baa77",
+      "InternalDataTypeName": "Sungero.Docflow.IContractualDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true
+    },
+    {
+      "NameGuid": "a76f6239-2fac-4687-9977-b62ab28a3711",
+      "Name": "AccountingDocuments",
+      "EntityType": "96c4f4f3-dc74-497a-b347-e8faf4afe320",
+      "InternalDataTypeName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Шаблон документа</value>
+  </data>
+  <data name="ControlGroup_23092c0fc1764ec8a484885eddc6d094" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="Resource_fe35197153c149a0b4af7676329577ec" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fe35197153c149a0b4af7676329577ec_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_5b60092fa2ec437b8fb836f08d61843b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_4bcf6c98ca9a4640abe194d93793a59c" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Resource_5221178d6eea46fe9ce28b1d0d12c560" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_5221178d6eea46fe9ce28b1d0d12c560_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9da4b40d3c4f46f99b6b060ca7d7381a" xml:space="preserve">
+    <value>Предпросмотр шаблона</value>
+  </data>
+  <data name="Resource_bc17b2f0efd34ee697b13d1b788bea7f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_281abfe82875430dbd307ed38bdc61de" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_306dbaa9d7354419ba5934045d2625e0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_767bfd9cf5ab401d90ab17e0adf0e2c7" xml:space="preserve">
+    <value>Критерии</value>
+  </data>
+  <data name="Property_DocumentKinds" xml:space="preserve">
+    <value>Виды документов</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="Enum_Status_Active" xml:space="preserve">
+    <value>Действующий</value>
+  </data>
+  <data name="Enum_Status_Closed" xml:space="preserve">
+    <value>Закрытый</value>
+  </data>
+  <data name="FilterPanel_Active_6a316990065b4ce1ac107ba67ee9fa0e" xml:space="preserve">
+    <value>Действующий</value>
+  </data>
+  <data name="FilterPanel_Status_78cd6de6cefc40d0a8b67ba36f9c9cc5" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Closed_9eac2fb954d946af957bd8fbff2a3d31" xml:space="preserve">
+    <value>Закрытый</value>
+  </data>
+  <data name="FilterPanel_Criteria_2039a9453d6341a4b06bd515e47c838e" xml:space="preserve">
+    <value>Критерии</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_119689aa65fb48698fa524ec5269c20e" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_c6fde210fabe4a2e8c9c66c157ad65d7" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Department_199e5f32d47b4bd38c40cc2809895ff2" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="Property_Departments" xml:space="preserve">
+    <value>Подразделения</value>
+  </data>
+  <data name="Property_BusinessUnits" xml:space="preserve">
+    <value>Наши организации</value>
+  </data>
+</root>

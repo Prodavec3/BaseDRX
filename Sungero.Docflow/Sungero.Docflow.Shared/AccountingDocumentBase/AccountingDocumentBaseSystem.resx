@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Financial document</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Financial document</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Financial documents</value>
+  </data>
+  <data name="Property_Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Property_Date" xml:space="preserve">
+    <value>Issued</value>
+  </data>
+  <data name="Property_TotalAmount" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="Property_Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Property_Counterparty" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="ControlGroup_86bc6ac8f1014c25b56262751b8e5223" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="ControlGroup_a549655787f44e62a0975a9e48878e5c" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="ControlGroup_51f9d51559f74999bb6187796e7a87cb" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Control_826a189b01cd446287d73d27e1ede6f9_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ResponsibleEmployee" xml:space="preserve">
+    <value>Resp. employee</value>
+  </data>
+  <data name="Property_Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_6ce44ace7fe74fb2aafa18b60b479024" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="FilterPanel_GeneralGroup_56a13280b6b047af9accbbe7daf2113e" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="FilterPanel_Counterparty_07b8ac30e83449d6ab57a0a1ad9c3df7" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_Period_62cff621a8cc41feb541cd37d8257119" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_CurrentMonth_3dc1a68838b3418498f8636a14a27844" xml:space="preserve">
+    <value>Current month</value>
+  </data>
+  <data name="FilterPanel_PreviousMonth_caabffd74a1c4a3faa174f322a64206e" xml:space="preserve">
+    <value>Previous month</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_e0aaee1f72464a4981391725a119b0d2" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="Resource_fc50c88831554ff196e8ff7064894ead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fc50c88831554ff196e8ff7064894ead_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ddf41ead829a4a3f8d12d40a52b7440c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f0607051ea774af2b7966d11cd8a7374" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f0607051ea774af2b7966d11cd8a7374_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a915c070568d4f08a7365fbdabe9e559" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_LeadingDocument" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+  <data name="Property_IsFormalized" xml:space="preserve">
+    <value>Formalized</value>
+  </data>
+  <data name="Property_RegistrationNumber" xml:space="preserve">
+    <value>Document number</value>
+  </data>
+  <data name="FilterPanel_TaxInvoice_1bdb86bfddf64eada9224a3c8cc7c76c" xml:space="preserve">
+    <value>Tax Invoices</value>
+  </data>
+  <data name="FilterPanel_Waybill_c6e0a6f71473479d90ac41ecb2c0212b" xml:space="preserve">
+    <value>Waybills</value>
+  </data>
+  <data name="FilterPanel_ContractStatement_778b3c610ca24d31a5c49f4afe2998b6" xml:space="preserve">
+    <value>Contract Statements</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_e8af27967514400f9b886017f2da1da3" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_CurrentQuarter_15969484259046ac93deb8a9773b9800" xml:space="preserve">
+    <value>Current quarter</value>
+  </data>
+  <data name="FilterPanel_PreviousQuarter_208060d2a4004f289d49764431cc2c1f" xml:space="preserve">
+    <value>Previous quarter</value>
+  </data>
+  <data name="Property_SellerTitleId" xml:space="preserve">
+    <value>Seller's details ID</value>
+  </data>
+  <data name="Property_BuyerTitleId" xml:space="preserve">
+    <value>Buyer's details ID</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>Author [Author]</value>
+  </data>
+  <data name="ControlGroup_b8017e2288d643da8d6d8d11917b1dd6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_CounterpartySignatory" xml:space="preserve">
+    <value>Signed by</value>
+  </data>
+  <data name="Property_DocumentGroup" xml:space="preserve">
+    <value>Document group</value>
+  </data>
+  <data name="Action_ExportFinancialDocument" xml:space="preserve">
+    <value>Export from Archive</value>
+  </data>
+  <data name="Action_ExportFinancialDocumentDescription" xml:space="preserve">
+    <value>Export the document from archive to submit it to a tax authority or for other inspections</value>
+  </data>
+  <data name="Action_ExportFinancialDocumentHint" xml:space="preserve">
+    <value>Export Document from Archive</value>
+  </data>
+  <data name="Action_ExportFinancialDocumentConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ExportFinancialDocumentConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_SellerSignatureId" xml:space="preserve">
+    <value>Seller signature ID</value>
+  </data>
+  <data name="Property_BuyerSignatureId" xml:space="preserve">
+    <value>Buyer signature ID</value>
+  </data>
+  <data name="Property_BusinessUnitBox" xml:space="preserve">
+    <value>Business Unit Box</value>
+  </data>
+  <data name="Ribbon_ExportCommands_461ca98ebca84575bf927a34a8881c9e" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Ribbon_ExportCommands_db1475f36fe74aba804f1a127ed649f4" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Property_IsAdjustment" xml:space="preserve">
+    <value>Corrective</value>
+  </data>
+  <data name="Property_Corrected" xml:space="preserve">
+    <value>Corrects</value>
+  </data>
+  <data name="FilterPanel_UniversalTransfer_20d17b46d9f5449ab4c2975f00128947" xml:space="preserve">
+    <value>Universal Transfer Documents</value>
+  </data>
+  <data name="Action_FillBuyerInfo" xml:space="preserve">
+    <value>Fill In Buyer Information</value>
+  </data>
+  <data name="Action_FillBuyerInfoDescription" xml:space="preserve">
+    <value>Fill in information on buyer's signatory and specify if goods or services are accepted.</value>
+  </data>
+  <data name="Action_FillBuyerInfoHint" xml:space="preserve">
+    <value>Fill In Additional Information about Buyer</value>
+  </data>
+  <data name="Action_FillBuyerInfoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillBuyerInfoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ExchangeState" xml:space="preserve">
+    <value>Electronic exchange</value>
+  </data>
+  <data name="FilterPanel_LifeCycleState_5179b9b9ed8a4b22a21f08b90db1edf9" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_DraftState_1763f5a1e5584725be52a2d1a667dd6b" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Enum_LifeCycleState_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_ActiveState_b8c15bf31caf46ff9bfde31dc9e2208d" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_ObsoleteState_92f8adad350d4d59956e7f946e31b0de" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="Enum_LifeCycleState_Obsolete" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="Property_FormalizedServiceType" xml:space="preserve">
+    <value>Document type in service</value>
+  </data>
+  <data name="Enum_FormalizedServiceType_Invoice" xml:space="preserve">
+    <value>Tax invoice</value>
+  </data>
+  <data name="Enum_FormalizedServiceType_Act" xml:space="preserve">
+    <value>Contract statement</value>
+  </data>
+  <data name="Enum_FormalizedServiceType_Waybill" xml:space="preserve">
+    <value>Waybill</value>
+  </data>
+  <data name="Enum_FormalizedServiceType_GoodsTransfer" xml:space="preserve">
+    <value>Goods transfer document</value>
+  </data>
+  <data name="Enum_FormalizedServiceType_WorksTransfer" xml:space="preserve">
+    <value>Work results transfer document</value>
+  </data>
+  <data name="Enum_FormalizedServiceType_GeneralTransfer" xml:space="preserve">
+    <value>Universal transfer document</value>
+  </data>
+  <data name="FilterPanel_Department_7cf54cf46f704775ae48a11533e69ef5" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Form_30d150530c6440f289b8b68c0c9fd574" xml:space="preserve">
+    <value>Tracking</value>
+  </data>
+  <data name="Enum_ExchangeState_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Action_PrintEnvelope" xml:space="preserve">
+    <value>Print Envelopes</value>
+  </data>
+  <data name="Action_PrintEnvelopeDescription" xml:space="preserve">
+    <value>Print envelopes for selected documents. Available sizes: С4, С5, С65, Е65.
+
+Hold the CTRL key and click the items in a list to choose them.</value>
+  </data>
+  <data name="Action_PrintEnvelopeHint" xml:space="preserve">
+    <value>Print Envelopes</value>
+  </data>
+  <data name="Action_PrintEnvelopeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintEnvelopeConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintEnvelopeCard" xml:space="preserve">
+    <value>Print Envelope</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardDescription" xml:space="preserve">
+    <value>Print Envelope.
+Available sizes: С4, С5, С65, Е65.</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardHint" xml:space="preserve">
+    <value>Print Envelope</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintEnvelopeCardConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillSellerInfo" xml:space="preserve">
+    <value>Fill In Seller Information</value>
+  </data>
+  <data name="Action_FillSellerInfoDescription" xml:space="preserve">
+    <value>Fill in information about the signatory from the seller's side.
+
+Action is available for electronic documents.</value>
+  </data>
+  <data name="Action_FillSellerInfoHint" xml:space="preserve">
+    <value>Fill In Additional Information About Seller</value>
+  </data>
+  <data name="Action_FillSellerInfoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillSellerInfoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_FormalizedFunction" xml:space="preserve">
+    <value>Function</value>
+  </data>
+  <data name="Enum_FormalizedFunction_Schf" xml:space="preserve">
+    <value>Tax invoice</value>
+  </data>
+  <data name="Enum_FormalizedFunction_SchfDop" xml:space="preserve">
+    <value>Tax invoice and primary document</value>
+  </data>
+  <data name="Enum_FormalizedFunction_Dop" xml:space="preserve">
+    <value>Primary document</value>
+  </data>
+  <data name="Property_IsRevision" xml:space="preserve">
+    <value>Revision</value>
+  </data>
+  <data name="Property_IsFormalizedSignatoryEmpty" xml:space="preserve">
+    <value>Signatory not filled in</value>
+  </data>
+  <data name="Ribbon_PostCommands_270b074548e2493d9d0f2b5797bb6083" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Ribbon_Post_a170401b3c9c4e6083ec405174411abd" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="ControlGroup_9c0e981c710f4665bcbc2d8f5d8084d3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_fd86ec670272447fbe4580324ca8a699" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="ControlGroup_8f91b21ba3744bd5807bb01130dff98f" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Resource_9ad3461d21c94da4b0898738dbfe6076" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_812fa7c1ee734284a3458e74ae533761" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ControlGroup_be2e7b3b0c934025bd189aa01ba7f66c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b6b8a84b12bf4dfca14371690f1ae498" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Resource_3653e8a6c90940d29bc4de985ef7c3ac" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3653e8a6c90940d29bc4de985ef7c3ac_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_3b8b809f288240f88f7e7446096e1ed8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3b8b809f288240f88f7e7446096e1ed8_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_132ee2a30e9c4614b8a1df223dedad31" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_132ee2a30e9c4614b8a1df223dedad31_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_842a9477e5f2479eacb79fbbe56ccd2a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_842a9477e5f2479eacb79fbbe56ccd2a_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_8b050f363a594f4ca5bd78314ab6d183" xml:space="preserve">
+    <value>Lifecycle</value>
+  </data>
+  <data name="Resource_83f2f039ecf94529be545847e6564b38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_6795a4a4bde5412dbe6431fdc0469fd3" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="ControlGroup_70a66773c92a417699a968592ae9e9f6" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Ribbon_ServiceGroup_2ed94346ba894c529815d18010d3a2ae" xml:space="preserve">
+    <value>Document</value>
+  </data>
+</root>

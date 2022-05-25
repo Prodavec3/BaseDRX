@@ -1,0 +1,605 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "459fa497-ee5b-49a4-9980-de00cada9b7a",
+  "Name": "Commons",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.Commons.Client",
+  "ClientBaseAssemblyName": "Sungero.Commons.ClientBase",
+  "ClientBaseNamespace": "Sungero.Commons.ClientBase",
+  "ClientNamespace": "Sungero.Commons.Client",
+  "Code": "Commons",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "d4c0d93c-8e47-4d87-8887-93ea823aa01f",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "059d9914-e97a-4900-ac5b-8f2a0eff8289",
+        "Name": "ShowSettlements",
+        "EntityTypeId": "3a0c21f8-aa88-429c-891f-56c24d56fcef",
+        "GroupId": "00df3aee-c8d5-4194-a21b-a4617a8e53e0",
+        "PreviousItemGuid": "dc2ee527-c481-4bc0-983b-ed2161dd8d07",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "4ff8580d-eac8-4224-9482-cc450cf93eaa",
+        "Name": "ShowRegions",
+        "EntityTypeId": "4efe2fa9-b1d1-4b47-b366-4128fe0a391c",
+        "GroupId": "00df3aee-c8d5-4194-a21b-a4617a8e53e0",
+        "PreviousItemGuid": "059d9914-e97a-4900-ac5b-8f2a0eff8289",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "532a3286-089e-4996-8b7e-029fc1a5ef88",
+        "Name": "ShowCurrency",
+        "EntityTypeId": "ffc2629f-dc30-4106-a3ce-c402ae7d32b9",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "73c2ee10-0b5e-420d-9a71-b5012b2bf23d",
+        "Name": "ShowVATRates",
+        "EntityTypeId": "fe0ed345-5965-40d6-a559-24dcde189a95",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisible": false,
+        "PreviousItemGuid": "532a3286-089e-4996-8b7e-029fc1a5ef88"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "bd8fdfe9-c73f-42e6-8199-77fee7478cbc",
+        "Name": "ShowCountries",
+        "EntityTypeId": "1f612925-95fc-4662-807d-c92c810a62b1",
+        "GroupId": "00df3aee-c8d5-4194-a21b-a4617a8e53e0",
+        "PreviousItemGuid": "4ff8580d-eac8-4224-9482-cc450cf93eaa",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "dc2ee527-c481-4bc0-983b-ed2161dd8d07",
+        "Name": "CreateCity",
+        "FunctionName": "CreateNewCity",
+        "GroupId": "00df3aee-c8d5-4194-a21b-a4617a8e53e0",
+        "Versions": []
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "db759dcd-27e3-433e-ab04-6e372c138253",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [
+      {
+        "NameGuid": "00df3aee-c8d5-4194-a21b-a4617a8e53e0",
+        "Name": "Location",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconLocation_00df3aeec8d54194a21ba4617a8e53e0.png",
+        "Versions": []
+      },
+      {
+        "NameGuid": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "Name": "Info",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconInfo_056413d6d13e41cfa4e31b05196c4d4f.png",
+        "PreviousItemGuid": "00df3aee-c8d5-4194-a21b-a4617a8e53e0",
+        "Versions": []
+      }
+    ],
+    "Header": {
+      "NameGuid": "fe802c21-fe26-49f6-8074-24d53d8be47f",
+      "BackgroundPosition": "Stretch",
+      "IconName": "",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "3a0c21f8-aa88-429c-891f-56c24d56fcef",
+      "Versions": []
+    },
+    {
+      "ItemId": "4efe2fa9-b1d1-4b47-b366-4128fe0a391c",
+      "PreviousItemId": "3a0c21f8-aa88-429c-891f-56c24d56fcef",
+      "Versions": []
+    },
+    {
+      "ItemId": "1f612925-95fc-4662-807d-c92c810a62b1",
+      "PreviousItemId": "4efe2fa9-b1d1-4b47-b366-4128fe0a391c",
+      "Versions": []
+    },
+    {
+      "ItemId": "ffc2629f-dc30-4106-a3ce-c402ae7d32b9",
+      "PreviousItemId": "1f612925-95fc-4662-807d-c92c810a62b1",
+      "Versions": []
+    },
+    {
+      "ItemId": "4346363e-39b9-40eb-9c12-64f0cf48d87f",
+      "PreviousItemId": "ffc2629f-dc30-4106-a3ce-c402ae7d32b9",
+      "Versions": []
+    },
+    {
+      "ItemId": "32ea0857-adf7-41c2-bc0c-188320e40786",
+      "PreviousItemId": "4346363e-39b9-40eb-9c12-64f0cf48d87f",
+      "Versions": []
+    },
+    {
+      "ItemId": "fe0ed345-5965-40d6-a559-24dcde189a95",
+      "PreviousItemId": "32ea0857-adf7-41c2-bc0c-188320e40786"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Low",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Commons",
+  "NeedResetAppliedCache": true,
+  "Overridden": [
+    "NeedResetCache",
+    "NeedResetAppliedCache"
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "EntityParamsContainsKey",
+      "Parameters": [
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "paramName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "GetAggregateFieldsProbability",
+      "Parameters": [
+        {
+          "Name": "weightedFields",
+          "ParameterType": "System.Collections.Generic.IDictionary<global::Sungero.Commons.Structures.Module.IArioFactField, global::System.Double>"
+        }
+      ],
+      "ReturnType": "global::System.Double",
+      "ReturnTypeFullName": "System.Double"
+    },
+    {
+      "Name": "GetExternalEntityLinks",
+      "Parameters": [
+        {
+          "Name": "uuid",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "sysid",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Commons.IExternalEntityLink>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetFactLabel",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "propertyName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetFacts",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "factName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetFacts",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "factName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetField",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.Structures.Module.IArioFactField",
+      "ReturnTypeFullName": "Sungero.Commons.Structures.Module.IArioFactField"
+    },
+    {
+      "Name": "GetFieldDateTimeValue",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Nullable<global::System.DateTime>",
+      "ReturnTypeFullName": "System.Nullable"
+    },
+    {
+      "Name": "GetFieldNumericalValue",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Nullable<global::System.Double>",
+      "ReturnTypeFullName": "System.Nullable"
+    },
+    {
+      "Name": "GetFieldProbability",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Nullable<global::System.Double>",
+      "ReturnTypeFullName": "System.Nullable"
+    },
+    {
+      "Name": "GetFields",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "fieldNames",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Commons.Structures.Module.IArioFactField>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetFieldValue",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetFieldValue",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "factName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "fieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetFinalTypeName",
+      "Parameters": [
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetOrderedFacts",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "factName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "orderFieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetPreviousPropertyRecognitionResults",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "propertyName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.IEntityRecognitionInfoFacts",
+      "ReturnTypeFullName": "Sungero.Commons.IEntityRecognitionInfoFacts, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetPreviousPropertyRecognitionResults",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "propertyName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "filterPropertyValue",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "filterPropertyName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.IEntityRecognitionInfoFacts",
+      "ReturnTypeFullName": "Sungero.Commons.IEntityRecognitionInfoFacts, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetValueAsString",
+      "Parameters": [
+        {
+          "Name": "propertyValue",
+          "ParameterType": "System.Object"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "IsAllExternalEntityLinksDeleted",
+      "Parameters": [
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "IsServerCultureRussian",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "ArioFact",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Id",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Name",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Fields",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFactField>"
+        }
+      ],
+      "StructureNamespace": "Sungero.Commons.Structures.Module"
+    },
+    {
+      "Name": "ArioFactField",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Id",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Name",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Value",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Probability",
+          "TypeFullName": "global::System.Double"
+        }
+      ],
+      "StructureNamespace": "Sungero.Commons.Structures.Module"
+    },
+    {
+      "Name": "ArioSignature",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Probability",
+          "TypeFullName": "global::System.Double"
+        },
+        {
+          "Name": "Position",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Angle",
+          "TypeFullName": "global::System.Double"
+        }
+      ],
+      "StructureNamespace": "Sungero.Commons.Structures.Module"
+    },
+    {
+      "Name": "ArioStamp",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Probability",
+          "TypeFullName": "global::System.Double"
+        },
+        {
+          "Name": "Position",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Angle",
+          "TypeFullName": "global::System.Double"
+        }
+      ],
+      "StructureNamespace": "Sungero.Commons.Structures.Module"
+    }
+  ],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Commons",
+  "ResourcesKeys": [
+    "DuplicateDetected",
+    "DuplicateNotFound",
+    "Empty",
+    "HasLinkedExternalEntities",
+    "RequiredPropertiesNotFilledIn",
+    "LinkedEntityLocked"
+  ],
+  "ServerAssemblyName": "Sungero.Commons.Server",
+  "ServerNamespace": "Sungero.Commons.Server",
+  "SharedAssemblyName": "Sungero.Commons.Shared",
+  "SharedNamespace": "Sungero.Commons.Shared",
+  "SpecialFolders": [],
+  "Version": "4.3.27.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SelectFromDocumentsReturnReportTable">
+    <default><![CDATA[select 
+  DepName,
+  DepId,
+  FullName,
+  DocName,
+  OriginalOrCopy,
+  DeliveryDate,
+  ScheduledReturnDate,  
+  OverdueDelay,
+  DocId,
+  Hyperlink
+from Sungero_Reports_DocumentsReturn
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+  <query key="CreateDocumentsReturnReportTable">
+    <mssql><![CDATA[create table {0}
+                                              ([ReportSessionId] varchar(256) NOT NULL,
+						     [FullName] nvarchar(max) NULL,
+                                               [DocName] nvarchar(max) NOT NULL,
+                                               [OriginalOrCopy] nvarchar(max) NOT NULL,
+                                               [DeliveryDate] nvarchar(max) NOT NULL,
+                                               [ScheduledReturnDate] nvarchar(max) NULL,
+                                               [OverdueDelay] int NULL,
+                                               [DocId] int NOT NULL,
+                                               [Hyperlink] nvarchar(max) NOT NULL,
+                                               [DepName] nvarchar(max) NULL,
+                                               [DepId] int NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+                                              (ReportSessionId citext NOT NULL,
+						     FullName citext NULL,
+                                               DocName citext NOT NULL,
+                                               OriginalOrCopy citext NOT NULL,
+                                               DeliveryDate citext NOT NULL,
+                                               ScheduledReturnDate citext NULL,
+                                               OverdueDelay int NULL,
+                                               DocId int NOT NULL,
+                                               Hyperlink citext NOT NULL,
+                                               DepName citext NULL,
+                                               DepId int NULL)]]></postgres>
+  </query>
+</queries>

@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_BusinessUnit" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="Property_ExchangeService" xml:space="preserve">
+    <value>Сервис обмена</value>
+  </data>
+  <data name="Action_Login" xml:space="preserve">
+    <value>Задать пароль</value>
+  </data>
+  <data name="Action_LoginDescription" xml:space="preserve">
+    <value>Ввести пароль для подключения к сервису обмена и проверить статус соединения.</value>
+  </data>
+  <data name="Action_LoginHint" xml:space="preserve">
+    <value>Задать пароль для абонентского ящика</value>
+  </data>
+  <data name="Ribbon_ExchangeSettings_2744af0ebdef48e08aab2ca277524d31" xml:space="preserve">
+    <value>Настройка</value>
+  </data>
+  <data name="Property_Login" xml:space="preserve">
+    <value>Логин для соединения</value>
+  </data>
+  <data name="Property_Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Action_OpenLogonUrl" xml:space="preserve">
+    <value>Открыть личный кабинет</value>
+  </data>
+  <data name="Action_OpenLogonUrlDescription" xml:space="preserve">
+    <value>Перейти на страницу входа в личный кабинет сервиса обмена</value>
+  </data>
+  <data name="Action_OpenLogonUrlHint" xml:space="preserve">
+    <value>Перейти в личный кабинет</value>
+  </data>
+  <data name="Ribbon_ExchangeService_45f3d368c63844c0a209fbf500249fed" xml:space="preserve">
+    <value>Сервис обмена</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Абонентский ящик нашей организации</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Абонентский ящик нашей организации</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Абонентские ящики нашей организации</value>
+  </data>
+  <data name="Action_CheckConnection" xml:space="preserve">
+    <value>Проверить подключение</value>
+  </data>
+  <data name="Action_CheckConnectionDescription" xml:space="preserve">
+    <value>Проверить подключение к сервису обмена и введенные учетные данные.</value>
+  </data>
+  <data name="Action_CheckConnectionHint" xml:space="preserve">
+    <value>Проверить подключение к сервису обмена</value>
+  </data>
+  <data name="Property_ConnectionStatus" xml:space="preserve">
+    <value>Соединение</value>
+  </data>
+  <data name="Enum_ConnectionStatus_Connected" xml:space="preserve">
+    <value>Установлено</value>
+  </data>
+  <data name="Enum_ConnectionStatus_Waiting" xml:space="preserve">
+    <value>Необходимо задать пароль</value>
+  </data>
+  <data name="Enum_ConnectionStatus_Error" xml:space="preserve">
+    <value>Произошла ошибка</value>
+  </data>
+  <data name="ControlGroup_9180f9f233784d1195cfffa156a44cd9" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_ExchangeServiceCertificates" xml:space="preserve">
+    <value>Сертификаты сервиса обмена</value>
+  </data>
+  <data name="Property_HasExchangeServiceCertificates" xml:space="preserve">
+    <value>Загружены сертификаты сервиса обмена</value>
+  </data>
+  <data name="Property_FtsId" xml:space="preserve">
+    <value>ФНС ИД</value>
+  </data>
+  <data name="Property_CertificateReceiptNotifications" xml:space="preserve">
+    <value>Сертификат для служебных док.</value>
+  </data>
+  <data name="Action_ShowMessageQueueItem" xml:space="preserve">
+    <value>Показать сообщения в обработке</value>
+  </data>
+  <data name="Action_ShowMessageQueueItemDescription" xml:space="preserve">
+    <value>Открыть список сообщений из сервиса обмена, которые стоят в очереди на обработку.</value>
+  </data>
+  <data name="Action_ShowMessageQueueItemHint" xml:space="preserve">
+    <value>Показать сообщения в обработке</value>
+  </data>
+  <data name="Ribbon_Group_c7404a7dce7245afb7977eab0d5533d3" xml:space="preserve">
+    <value>Диагностика</value>
+  </data>
+  <data name="Action_FindDocument" xml:space="preserve">
+    <value>Найти документ</value>
+  </data>
+  <data name="Action_FindDocumentDescription" xml:space="preserve">
+    <value>Найти документ из сервиса обмена по ссылке из веб-клиента</value>
+  </data>
+  <data name="Action_FindDocumentHint" xml:space="preserve">
+    <value>Найти документ из сервиса обмена</value>
+  </data>
+</root>

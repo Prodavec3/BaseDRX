@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Задача на согласование по регламенту</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Задачу на согласование по регламенту</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Задачи на согласование по регламенту</value>
+  </data>
+  <data name="Property_ReqApprovers" xml:space="preserve">
+    <value>Обязательные</value>
+  </data>
+  <data name="Property_AddApprovers" xml:space="preserve">
+    <value>Дополнительные</value>
+  </data>
+  <data name="Property_Signatory" xml:space="preserve">
+    <value>На подпись</value>
+  </data>
+  <data name="Property_StageNumber" xml:space="preserve">
+    <value>Номер этапа</value>
+  </data>
+  <data name="Property_ApprovalRule" xml:space="preserve">
+    <value>Регламент</value>
+  </data>
+  <data name="AttachmentGroup_DocumentGroupTitle" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupTitle" xml:space="preserve">
+    <value>Приложения</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupInformationMessage" xml:space="preserve">
+    <value>Приложения к документу отсутствуют</value>
+  </data>
+  <data name="AttachmentGroup_OtherGroupTitle" xml:space="preserve">
+    <value>Дополнительно</value>
+  </data>
+  <data name="ControlGroup_21c21d997a5d4f98a4a4cf07b9ff27f2" xml:space="preserve">
+    <value>Согласующие</value>
+  </data>
+  <data name="Form_Page" xml:space="preserve">
+    <value>Регламент</value>
+  </data>
+  <data name="ControlGroup_15f9016511bf45479fe80534c6ff71d3" xml:space="preserve">
+    <value>Другие участники</value>
+  </data>
+  <data name="Property_Observers" xml:space="preserve">
+    <value>Копия</value>
+  </data>
+  <data name="Footer_ActiveEmptyText" xml:space="preserve">
+    <value>Введите текст задачи…</value>
+  </data>
+  <data name="Action_StartHint" xml:space="preserve">
+    <value>Отправить документ на согласование</value>
+  </data>
+  <data name="Action_Start" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="Action_StartDescription" xml:space="preserve">
+    <value>Отправка документа на согласование и закрытие карточки</value>
+  </data>
+  <data name="Action_StartConfirmationMessage" xml:space="preserve">
+    <value>Отправить документ на согласование?</value>
+  </data>
+  <data name="Action_Abort" xml:space="preserve">
+    <value>Прекратить</value>
+  </data>
+  <data name="Action_AbortDescription" xml:space="preserve">
+    <value>Прекращение согласования документа и остановка всех заданий по согласованию</value>
+  </data>
+  <data name="Action_AbortHint" xml:space="preserve">
+    <value>Прекратить согласование</value>
+  </data>
+  <data name="Action_AbortConfirmationMessage" xml:space="preserve">
+    <value>Прекратить согласование документа?</value>
+  </data>
+  <data name="Action_Restart" xml:space="preserve">
+    <value>Рестартовать</value>
+  </data>
+  <data name="Action_RestartDescription" xml:space="preserve">
+    <value>Рестарт согласования документа и переоткрытие карточки</value>
+  </data>
+  <data name="Action_RestartHint" xml:space="preserve">
+    <value>Рестартовать согласование документа</value>
+  </data>
+  <data name="Action_RestartConfirmationMessage" xml:space="preserve">
+    <value>Рестартовать согласование документа?</value>
+  </data>
+  <data name="Ribbon_TaskCommands_e4e6fdd481594a37a25d70ee43c07975" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="Property_ControlReturnStartDate" xml:space="preserve">
+    <value>Дата старта контроля возврата</value>
+  </data>
+  <data name="Property_Iteration" xml:space="preserve">
+    <value>Итерация</value>
+  </data>
+  <data name="Property_MaxDeadline" xml:space="preserve">
+    <value>Ожидаемый срок</value>
+  </data>
+  <data name="Form_9592daf2ec2b4477812b6e2aed084643" xml:space="preserve">
+    <value>Регламент</value>
+  </data>
+  <data name="ControlGroup_8b99cf466c9a4920bc1ab1f2481a00de" xml:space="preserve">
+    <value>Этапы</value>
+  </data>
+  <data name="Property_AbortingReason" xml:space="preserve">
+    <value>Причина прекращения</value>
+  </data>
+  <data name="Property_Addressee" xml:space="preserve">
+    <value>Адресат</value>
+  </data>
+  <data name="Property_ResolutionText" xml:space="preserve">
+    <value>Текст резолюции</value>
+  </data>
+  <data name="Property_ReworkReason" xml:space="preserve">
+    <value>Причина отправки на доработку</value>
+  </data>
+  <data name="Enum_Status_Draft" xml:space="preserve">
+    <value>Черновик</value>
+  </data>
+  <data name="Enum_Status_InProcess" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="Control_6ed6ac17ade74155b16ad48304172170_EmptyText" xml:space="preserve">
+    <value>Укажите дополнительных согласующих…</value>
+  </data>
+  <data name="Control_a8d21b6bd26b44b685f87d3bcd507b76_EmptyText" xml:space="preserve">
+    <value>Укажите наблюдателей…</value>
+  </data>
+  <data name="Property_DeliveryMethod" xml:space="preserve">
+    <value>Способ доставки</value>
+  </data>
+  <data name="Property_ExchangeService" xml:space="preserve">
+    <value>Сервис обмена</value>
+  </data>
+  <data name="ControlGroup_93dbe86017f4436aaa0690e310422029" xml:space="preserve">
+    <value>Отправка документов контрагенту</value>
+  </data>
+  <data name="Property_AddApproversExpanded" xml:space="preserve">
+    <value>Развернутые дополнительные согласующие</value>
+  </data>
+  <data name="Property_StartedBy" xml:space="preserve">
+    <value>Стартовал</value>
+  </data>
+  <data name="Property_Author" xml:space="preserve">
+    <value>От</value>
+  </data>
+  <data name="Property_IsStageAssigneeNotFound" xml:space="preserve">
+    <value>Исполнитель этапа не определен</value>
+  </data>
+  <data name="Action_ApprovalForm" xml:space="preserve">
+    <value>Лист согласования</value>
+  </data>
+  <data name="Action_ApprovalFormDescription" xml:space="preserve">
+    <value>Открытие листа согласования по документу</value>
+  </data>
+  <data name="Action_ApprovalFormHint" xml:space="preserve">
+    <value>Открыть лист согласования</value>
+  </data>
+  <data name="Ribbon_Report_0d480d4f632446adaf8340b2334894c8" xml:space="preserve">
+    <value>Отчет</value>
+  </data>
+  <data name="Property_DocumentExternalApprovalState" xml:space="preserve">
+    <value>Согл. с контрагентом</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_OnApproval" xml:space="preserve">
+    <value>На согласовании</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_Signed" xml:space="preserve">
+    <value>Подписан</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_Unsigned" xml:space="preserve">
+    <value>Не подписан</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_Empty" xml:space="preserve">
+    <value>Не заполнено</value>
+  </data>
+  <data name="Property_ReworkPerformer" xml:space="preserve">
+    <value>Ответственный за доработку</value>
+  </data>
+  <data name="Action_StartByForceHint" xml:space="preserve">
+    <value>Отправить задачу принудительно</value>
+  </data>
+  <data name="Property_RevokedDocumentsRights" xml:space="preserve">
+    <value>Права на документы до понижения</value>
+  </data>
+  <data name="Property_Addressees" xml:space="preserve">
+    <value>Адресаты</value>
+  </data>
+  <data name="Property_IsManyAddressees" xml:space="preserve">
+    <value>Несколько адресатов</value>
+  </data>
+  <data name="Property_AddedAddenda" xml:space="preserve">
+    <value>Документы, добавленные в группу "Приложения"</value>
+  </data>
+  <data name="Property_RemovedAddenda" xml:space="preserve">
+    <value>Документы, удаленные из группы "Приложения"</value>
+  </data>
+</root>

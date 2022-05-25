@@ -1,0 +1,3223 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NpoComputer.DCX.Common</name>
+    </assembly>
+    <members>
+        <member name="T:NpoComputer.DCX.Common.Authentication.IAuthTokenProvider">
+            <summary>
+            Провайдер для доступа к текущему токену авторизации для сервиса обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Authentication.IAuthTokenProvider.AuthenticationToken">
+            <summary>
+            Токен аутентификации. Представлен в виде base64-строки.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Authentication.TokenExpiredEventArgs">
+            <summary>
+            Аргументы события на истечение срока действия токена авторизации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Authentication.TokenExpiredEventArgs.TokenUpdated">
+            <summary>
+            Признак того, что токен был обновлен.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ClientBase">
+            <summary>
+            Базовый клиент к сервису обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ClientBase.DefaultAuthTokenProvider">
+            <summary>
+            Класс по умолчанию для доступа к токену.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ClientBase.serviceClient">
+            <summary>
+            Коннектор, через который работаем
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.OurOrganization">
+            <summary>
+            Наша организация.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ClientBase.authTokenProvider">
+            <summary>
+            Объект для доступа к токену авторизации на сервисе обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.OurSubscriber">
+            <summary>
+            Абонент, от которого залогинен клиент.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.CanGetOurSubscriberCertificates">
+            <summary>
+            Признак того, что для коннектора можно получить сертификаты нашей организации.
+            </summary>
+            <returns>True, если сертификаты можно получить, иначе False.</returns>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.ServiceName">
+            <summary>
+            Имя сервиса обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.ContactCapabilities">
+            <summary>
+            Доступные опреации со списком контактов.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.UseRegulationsForNonformalizedDocuments">
+            <summary>
+            Признак необходимости отправки служебных документов на неформализованные документы.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.UseReceiptsForGeneralTransferDopSellerDocuments">
+            <summary>
+            Признак использования ИОП при обмене УПД ДОП.
+            </summary>
+        </member>
+        <member name="E:NpoComputer.DCX.Common.ClientBase.TokenExpired">
+            <summary>
+            Событие истечения срока действия токена авторизации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ClientBase.CanSynchronizeContacts">
+            <summary>
+            Признак возможности синхронизировать контакты с сервиса обмена.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.Initialize(NpoComputer.DCX.Common.LogDelegate,NpoComputer.DCX.Common.LogExceptionDelegate)">
+            <summary>
+            Инициализация DCX.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.IsLoggedIn">
+            <summary>
+            Получить признак того, что клиент залогинен на сервисе обмена.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetOurSubscriber">
+            <summary>
+            Загрузить из СОД информацию о Нашем абоненте для использования внутри класса
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.Login(System.String,System.String)">
+            <summary>
+            Подключиться к СОД по паролю.
+            </summary>
+            <param name="login">Логин пользователя в СОД.</param>
+            <param name="password">Пароль пользователя в СОД.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.LoginGetEncryptedToken(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Начать аутентификацию по сертификату.
+            </summary>
+            <param name="certificate">Сертификат.</param>
+            <remarks>Не сбрасывает текущую авторизацию, если она есть.</remarks>
+            <returns>Зашифрованный токен безопасности, который надо расшифровать указанным сертификатом.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.LoginGetEncryptedToken(System.Byte[])">
+            <summary>
+            Начать аутентификацию по сертификату.
+            </summary>
+            <param name="certificateContent">Сертификат в виде байтового массива.</param>
+            <remarks>Не сбрасывает текущую авторизацию, если она есть.</remarks>
+            <returns>Зашифрованный токен безопасности, который надо расшифровать указанным сертификатом.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.LoginSetToken(System.String)">
+            <summary>
+            Закончить аутентификацию. Проверить и сохранить токен безопасности.
+            </summary>
+            <param name="token">
+            Расшифрованный токен аутентификации, который был получен на этапе аутентификации.
+            Токен должен быть представлен в виде base64-строки.
+            </param>
+            <returns>true, если система обмена принимает токен</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.SendInvitationRequest(NpoComputer.DCX.Common.Organization,System.String)">
+            <summary>
+            Отправить запрос на установление связи
+            </summary>
+            <param name="organization">Организация контрагента.</param>
+            <param name="comment">Комментарий к запросу.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.BreakWithCounteragent(NpoComputer.DCX.Common.Organization,System.String)">
+            <summary>
+            Разорвать контакт с контрагентом.
+            </summary>
+            <param name="organization">Организация контрагента.</param>
+            <param name="comment">Комментарий к запросу.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetOrganizationStructure(System.String)">
+            <summary>
+            Получить оргструктуру организации.
+            </summary>
+            <param name="counteragentId">ИД контрагента.</param>
+            <returns>Оргструктура организации.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.AcceptInvitation(NpoComputer.DCX.Common.Organization,System.String)">
+            <summary>
+            Принять приглашение контрагента.
+            </summary>
+            <param name="organization">Организация контрагента.</param>
+            <param name="comment">Комментарий к запросу.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.RejectInvitation(NpoComputer.DCX.Common.Organization,System.String)">
+            <summary>
+            Отклонить приглашение контрагента.
+            </summary>
+            <param name="organization">Организация контрагента.</param>
+            <param name="comment">Комментарий к запросу.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetContactStatus(NpoComputer.DCX.Common.Organization)">
+            <summary>
+            Получить статус контакта с контрагентом.
+            </summary>
+            <param name="organization">Организация контрагента.</param>
+            <returns>Статус контакта с контрагентом.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetContact(System.String)">
+            <summary>
+            Получить контакт по его ИД на сервисе обмена.
+            </summary>
+            <param name="counteragentId">ИД контрагента.</param>
+            <returns>Контакт с контрагентом.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.FindOrganizationsByInnKpp(System.String,System.String)">
+            <summary>
+            Найти организации по ИНН и КПП.
+            </summary>
+            <param name="inn">ИНН организации.</param>
+            <param name="kpp">КПП организации (может отсутствовать).</param>
+            <returns>Список организаций по заданным ИНН и КПП.</returns>
+            <remarks>Если КПП не задан, будут найдены все организации с указанным ИНН.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetContacts(System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Получить список контактов организации.
+            Список контактов включает в себя все контакты организации, в том числе те, с которыми обмен запрещен.
+            </summary>
+            <param name="changedAfterDate">Дата последнего изменения контактов.
+            Если указана, будут выбраны только те контакты, которые были измененны после заданной даты.
+            При сравнении дата будет преобразовываться в формат UTC.</param>
+            <param name="cancellationToken">Токен для отмены операции.</param>
+            <returns>Список контактов организации.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetDocumentContent(System.String,System.String,System.IO.Stream)">
+            <summary>
+            Получить тело документа из системы обмена в виде потока.
+            </summary>
+            <param name="docId">ИД в системе обмена.</param>
+            <param name="messageId">ИД сообщения в системе обмена.</param>
+            <param name="stream">Поток.</param>
+            <remarks>messageId используется пока только в Диадок.</remarks>
+            <remarks>Позиция в потоке при записи не сбрасывается: содержимое документа записывается в текущую позицию.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessage(System.String)">
+            <summary>
+            Получить сообщение из системы обмена с указанным ИД.
+            </summary>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Сообщение системы обмена.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessageToReload(System.String)">
+            <summary>
+            Получить сообщение из системы обмена с указанным ИД для перезагрузки.
+            </summary>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Сообщение системы обмена.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.PrepareReplyMessage(NpoComputer.DCX.Common.IMessage,NpoComputer.DCX.Common.SignerInfo)">
+            <summary>
+            Подготовить ответное сообщение к отправке.
+            </summary>
+            <param name="message">Ответное сообщение с основными документами, по которым указан результат подписания (IsSigned).
+            После выполнения метода из сообщения удаляются все основные документы (кроме СОА) и добавляются служебные (УОУ, УОП) для отправки на сервис.</param>
+            <param name="signerInfo">Информация о подписанте, которая будет использоваться при генерации необходимых служебных документов.</param>
+            <returns>Перечень документов, которые необходимо подписать перед отправкой.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.SendMessage(NpoComputer.DCX.Common.IMessage)">
+            <summary>
+            Отправить сообщение в систему обмена.
+            </summary>
+            <param name="message">Сообщение.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.ReceiveEventsFromService(System.Guid,System.String,System.Nullable{System.DateTime},System.String@)">
+            <summary>
+            Получить события сервиса
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.SendRevocationOffer(NpoComputer.DCX.Common.ISubscriber,NpoComputer.DCX.Common.IDocument,System.Byte[])">
+            <summary>
+            Отправить запрос на аннулирование.
+            </summary>
+            <param name="counteragent">Контрагент, которому нужно отправить запрос на аннулирование.</param>
+            <param name="document">Документ с аннулированием.</param>
+            <param name="signContent">Подпись.</param>
+            <returns>Отправленное сообщение с аннулированием.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.SendRevocationOffer(NpoComputer.DCX.Common.IMessage)">
+            <summary>
+            Отправить запрос на аннулирование.
+            </summary>
+            <param name="message">Сообщение с запросом на аннулирование.</param>
+            <returns>Отправленное сообщение с аннулированием.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateRevocationOffer(System.String,System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать запрос на аннулирование.
+            </summary>
+            <param name="documentId">ИД документа, который нужно аннулировать.</param>
+            <param name="comment">Комментарий.</param>
+            <param name="messageId">ИД сообщения на сервисе.</param>
+            <param name="certificateThumbprint">Отпечаток сертификата.</param>
+            <returns>Документ с аннулированием.</returns>
+            <remarks>messageId и certificateThumbprint требуются пока только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateRevocationOffer(System.String,System.String,NpoComputer.DCX.Common.SignerInfo,System.String)">
+            <summary>
+            Сгенерировать запрос на аннулирование.
+            </summary>
+            <param name="documentId">ИД документа, который нужно аннулировать.</param>
+            <param name="comment">Комментарий.</param>
+            <param name="signerInfo">Информация о подписанте.</param>
+            <param name="messageId">ИД сообщения на сервисе.</param>
+            <returns>Документ с аннулированием.</returns>
+            <remarks>messageId и certificateThumbprint требуются пока только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.CanSendDeliveryConfirmation(System.String,System.String)">
+            <summary>
+            Проверить возможность/необходимость отправки извещения о получении для документа.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetAllowedAnswers(System.String,System.String,System.String)">
+            <summary>
+            Проверить возможность/необходимость отправки подписи\титула_покупателя\отказа\УОУ для документа.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Допустимые варианты подписания \ отказа \ УОУ на документ.</returns>
+            <remarks>Параметр messageId пока нужен только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateDeliveryConfirmation(System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateDeliveryConfirmation(System.String,System.Byte[])">
+            <summary>
+            Сгенерировать извещение о получении.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="cert">Сертификат.</param>
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateDeliveryConfirmation(System.String,System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности (основного документа).</param>
+            <param name="messageId">ИД сообщения.</param>     
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateDeliveryConfirmation(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности (основного документа).</param>
+            <param name="messageId">ИД сообщения.</param>     
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetNextReglamentDocuments(NpoComputer.DCX.Common.IDocument,NpoComputer.DCX.Common.SignerInfo,System.Boolean@)">
+            <summary>
+            Получить очередные служебные документы для отправки в систему обмена.
+            </summary>
+            <param name="document">Основной документ.</param>
+            <param name="signerInfo">Информация о подписанте.</param>
+            <param name="isDocflowFinished">Признак завершенности документооборота.</param>
+            <returns>Очередные служебные документы.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateInvoiceDeliveryConfirmation(System.String,System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении по регламенту СФ.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности (основного документа).</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateInvoiceDeliveryConfirmation(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении по регламенту СФ.
+            </summary>
+            <param name="documentId">ИД документа.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности (основного документа).</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateAmendmentRequest(NpoComputer.DCX.Common.IDocument,System.String,System.String)">
+            <summary>
+            Сгенерировать уведомление об уточнении неформализованного документа.
+            </summary>
+            <param name="document">Документ, на который нужно сгенерировать УОУ.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="comment">Комментарий к отказу.</param>
+            <returns>Уведомление об уточнении.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateInvoiceAmendmentRequest(NpoComputer.DCX.Common.IDocument,System.String,System.String)">
+            <summary>
+            Сгенерировать уведомление об уточнении на СФ.
+            </summary>
+            <param name="invoice">СФ, на который нужно сгенерировать УОУ.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="comment">Комментарий к отказу.</param>
+            <returns>Уведомление об уточнении.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateInvoiceAmendmentRequest(NpoComputer.DCX.Common.IDocument,System.Byte[],System.String)">
+            <summary>
+            Сгенерировать уведомление об уточнении на СФ.
+            </summary>
+            <param name="invoice">СФ, на который нужно сгенерировать УОУ.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="comment">Комментарий к отказу.</param>
+            <returns>Уведомление об уточнении.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateInvoiceAmendmentRequestsForPackage(System.Collections.Generic.List{NpoComputer.DCX.Common.IDocument},System.String,System.String)">
+            <summary>
+            Сгенерировать уведомления об уточнении на СФ.
+            </summary>
+            <param name="invoices">СФ, на которые нужно сгенерировать УОУ.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="comment">Комментарий к отказу.</param>
+            <returns>Уведомления об уточнении.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateInvoiceAmendmentRequestsForPackage(System.Collections.Generic.List{NpoComputer.DCX.Common.IDocument},System.Byte[],System.String)">
+            <summary>
+            Сгенерировать уведомления об уточнении на СФ.
+            </summary>
+            <param name="invoices">СФ, на которые нужно сгенерировать УОУ.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="comment">Комментарий к отказу.</param>
+            <returns>Уведомления об уточнении.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessages(System.String,System.String)">
+            <summary>
+            Получить сообщения из системы обмена, которые были созданы после указанного сообщения.
+            </summary>
+            <param name="lastReceivedMessageId">ИД последнего загруженного входящего сообщения.</param>
+            <param name="lastSentMessageId">ИД последнего загруженного исходящего сообщения.</param>
+            <returns>Список сообщений систем обмена.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessages(System.DateTime)">
+            <summary>
+            Получить сообщения из системы обмена, которые были созданы после указанной даты.
+            </summary>
+            <param name="startingDate">Дата, начиная с которой будут загружены сообщения. Дата должна быть задана в локальном формате.</param>
+            <returns>Список сообщений систем обмена.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessages(System.String,System.String,System.String@,System.String@)">
+            <summary>
+            Получить сообщения из системы обмена, которые были созданы после указанного сообщения.
+            </summary>
+            <param name="lastReceivedMessageId">ИД последнего загруженного входящего сообщения.</param>
+            <param name="lastSentMessageId">ИД последнего загруженного исходящего сообщения.</param>
+            <param name="lastIncomeEventId">ИД последнего входящего события.</param>
+            <param name="lastOutcomeEventId">ИД последнего исходящего события.</param>
+            <returns>Список сообщений систем обмена.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessages(System.String,System.String,System.String@,System.String@,System.Threading.CancellationToken)">
+            <summary>
+            Получить сообщения из системы обмена, которые были созданы после указанного сообщения.
+            </summary>
+            <param name="lastReceivedMessageId">ИД последнего загруженного входящего сообщения.</param>
+            <param name="lastSentMessageId">ИД последнего загруженного исходящего сообщения.</param>
+            <param name="lastIncomeEventId">ИД последнего входящего события.</param>
+            <param name="lastOutcomeEventId">ИД последнего исходящего события.</param>
+            <param name="cancellationToken">Токен отмены операции.</param>
+            <returns>Список сообщений систем обмена.</returns>
+            <exception cref="T:System.OperationCanceledException"/>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessages(System.DateTime,System.String@,System.String@)">
+            <summary>
+            Получить сообщения из системы обмена, которые были созданы после указанной даты.
+            </summary>
+            <param name="startingDate">Дата, начиная с которой будут загружены сообщения. Дата должна быть задана в локальном формате.</param>
+            <param name="lastIncomeEventId">ИД последнего входящего события.</param>
+            <param name="lastOutcomeEventId">ИД последнего исходящего события.</param>
+            <returns>Список сообщений систем обмена.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetMessages(System.DateTime,System.String@,System.String@,System.Threading.CancellationToken)">
+            <summary>
+            Получить сообщения из системы обмена, которые были созданы после указанной даты.
+            </summary>
+            <param name="startingDate">Дата, начиная с которой будут загружены сообщения. Дата должна быть задана в локальном формате.</param>
+            <param name="lastIncomeEventId">ИД последнего входящего события.</param>
+            <param name="lastOutcomeEventId">ИД последнего исходящего события.</param>
+            <param name="cancellationToken">Токен отмены операции.</param>
+            <returns>Список сообщений систем обмена.</returns>
+            <exception cref="T:System.OperationCanceledException"/>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetOrganizationCertificates(System.Collections.Generic.List{System.Byte[]})">
+            <summary>
+            Получить список сертификатов пользователей нашей организации.
+            </summary>
+            <param name="thumbprints">Список отпечатков, которые необходимо проверить.</param>
+            <returns>Список сертификатов.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetReceipt(System.String,NpoComputer.DCX.Common.Document)">
+            <summary>
+            Загрузить ИОП с сервиса обмена.
+            </summary>
+            <param name="primaryDocument">Основной документ.</param>
+            <param name="parentEntityId">ИД родительского документа.</param>
+            <returns>ИОП на документ, или null, если извещение не найдено.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateTorg12XmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для накладной торг-12.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateActXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для акта выполненных работ.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateUniversalTransferDocumentXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для УПД.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateUniversalTransferCorrectionDocumentXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для УКД.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateWorksTransferXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для ДПРР.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GenerateGoodsTransferXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для ДПТ.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.GetDocumentUri(System.String,System.String)">
+            <summary>
+            Получить ссылку на документ в вебе.
+            </summary>
+            <param name="messageId">ИД сообщения.</param>
+            <param name="documentId">ИД документа.</param>
+            <returns>Ссылка на открытие документа в вебе.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.UpdateToken">
+            <summary>
+            Обновить токен авторизации.
+            </summary>
+            <returns>Признак того, что токен был обновлен.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.ResolveConnector(NpoComputer.DCX.Common.ExchangeSystem)">
+            <summary>
+            Найти и создать коннектор к системе обмена.
+            </summary>
+            <param name="clientSystem">Система обмена.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.InitializeDefaultProxy">
+            <summary>
+            Инициализировать прокси по-умолчанию.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ClientBase.#ctor(NpoComputer.DCX.Common.ExchangeSystem,NpoComputer.DCX.Common.ServiceSettings,NpoComputer.DCX.Common.Authentication.IAuthTokenProvider,NpoComputer.DCX.Common.ConnectorSettings)">
+            <summary>
+            Создать экземпляр клиента.
+            </summary>
+            <param name="clientSystem">Система обмена.</param>
+            <param name="settings">Настройки системы обмена.</param>
+            <param name="tokenProvider">Провайдер токена аутентификации для сервиса обмена.</param>
+            <param name="connectorSetting">Расширенные настройки подключения к коннектору.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ConnectorSettings.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ConnectorSettings.#ctor(System.Boolean)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="extendedLogging"></param>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Cryptography.Certificate">
+            <summary>
+            Сертификат.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Cryptography.Certificate.Thumbprint">
+            <summary>
+            Отпечаток сертификата.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Cryptography.Certificate.RawCertificateData">
+            <summary>
+            Сертификат в виде массива байт.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Cryptography.Certificate.#ctor(System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="thumbprint">Отпечаток сертификата.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Cryptography.Certificate.#ctor(System.Byte[])">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="rawCertificateData">Сертификат в виде массива байтов.</param>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Event">
+            <summary>
+            Событие
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Event.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.EventEntityType">
+            <summary>
+            Тип сущности события.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventEntityType.Document">
+            <summary>
+            Документ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventEntityType.Subdivision">
+            <summary>
+            Подразделение оргструктуры.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventEntityType.Subscriber">
+            <summary>
+            Абонент.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventEntityType.User">
+            <summary>
+            Пользователь.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IEventInitiator">
+            <summary>
+            Информация об инициаторе события
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventInitiator.SubscriberId">
+            <summary>
+            Идентификатор абонента
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventInitiator.UserId">
+            <summary>
+            Идентификатор пользователя
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.EventInitiator">
+            <summary>
+            Информация об инициаторе события.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.EventInitiator.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IEventLink">
+            <summary>
+            Ссылка на объект, на который повлияло событие
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventLink.EntityId">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventLink.EntityName">
+            <summary>
+            Наименование сущности
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventLink.EntityType">
+            <summary>
+            Тип сущности
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventLink.LinkType">
+            <summary>
+            Тип ссылки события
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.EventLink">
+            <summary>
+            Ссылка на объект, на который повлияло событие.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.EventLink.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.EventLinkType">
+            <summary>
+            Тип ссылки события сервиса.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventLinkType.Accessible">
+            <summary>
+            Доступный объект.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventLinkType.Recipient">
+            <summary>
+            Получатель.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventLinkType.Sender">
+            <summary>
+            Отправитель.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IEventObject">
+            <summary>
+            Информация об объекте, с которым произошло событие
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventObject.EntityId">
+            <summary>
+            Идентификатор сущности
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventObject.EntityName">
+            <summary>
+            Наименование сущности
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEventObject.EntityType">
+            <summary>
+            Тип сущности
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.EventObject">
+            <summary>
+            Информация об объекте, с которым произошло событие.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.EventObject.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.EventType">
+            <summary>
+            Тип события сервиса.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.DocumentDeliveryErrorToRoamingOperator">
+            <summary>
+            Ошибка доставки документа другому оператору (в роуминг).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.DocumentDeliveredToRoamingOperator">
+            <summary>
+            Документ успешно принят другим оператором (роуминг).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.DocumentSentToRoamingOperator">
+            <summary>
+            Документ отправлен другому оператору (в роуминг).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.GoodsMarkingCodesAccepted">
+            <summary>
+            Коды маркировки приняты в ГИС МТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.GoodsMarkingCodesDelivered">
+            <summary>
+            Коды маркировки доставлены в ГИС МТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.GoodsMarkingCodesRejected">
+            <summary>
+            Коды маркировки не приняты в ГИС МТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.SendingGoodsMarkingCodes">
+            <summary>
+            Коды маркировки готовятся к отправке в ГИС МТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.EventType.UserAccessToSubdivisionsChanged">
+            <summary>
+            Изменен список доступных подразделений пользователя.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IEvent">
+            <summary>
+            Событие
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.EventType">
+            <summary>
+            Тип события
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.Id">
+            <summary>
+            Идентификатор события
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.Links">
+            <summary>
+            Ссылки на другие объекты, на которые повлияло событие 
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.AdditionalInfo">
+            <summary>
+            Дополнительная информация о событии. Может содержать текст ошибки
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.Object">
+            <summary>
+            Информация об объекте, с которым произошло событие
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.Date">
+            <summary>
+            Дата и время события(переименовать в Date)
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.SubscriberIds">
+            <summary>
+            Идентификаторы абонентов, к которым относится событие
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IEvent.Initiator">
+            <summary>
+            Информация об инициаторе события. Может быть не заполнено, если инициатором событий был внутренний сервис
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.AuthenticationException">
+            <summary>
+            Ошибка авторизации.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.ConflictException">
+            <summary>
+            Исключение, возникшее в результате конфликта на сервисе обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.ConnectionException">
+            <summary>
+            Исключение установки подключения.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.DeliveredWithErrorException">
+            <summary>
+            Исключение при внутренней ошибке сервиса. 
+            Если возникает при отправке, то есть вероятность, что сообщение было реально доставлено на сервис обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.ExchangeSystemConnectorException">
+            <summary>
+            Исключение коннектора к системе обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.ExchangeSystemConnectorResolveException">
+            <summary>
+            Ошибка загрузки коннектора к системе обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.MessageOperationException">
+            <summary>
+            Исключение обработки сообщения.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.ServiceException">
+            <summary>
+            Ошибка сервиса обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.SignatureException">
+            <summary>
+            Исключение извлечения сертификата из подписи.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.UnsupportedDocumentTypeException">
+            <summary>
+            Исключение отправки документа неподдерживаемого типа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Exceptions.UnsupportedDocumentTypeException.UnsupportedDocumentTypeErrorMessageTemplate">
+            <summary>
+            Шаблон сообщения ошибки неподдерживаемого типа документа.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Exceptions.WorkflowViolationException">
+            <summary>
+            Исключение при ошибке регламента документооборота.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ExchangeSystem">
+            <summary>
+            Система обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IExchangeServiceConnector">
+            <summary>
+            Коннектор к сервису обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnector.ServiceName">
+            <summary>
+            Имя сервиса.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnector.UseRegulationsForNonformalizedDocuments">
+            <summary>
+            Признак необходимости отправки служебных документов на неформализованные документы.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnector.UseReceiptsForGeneralTransferDopSellerDocuments">
+            <summary>
+            Признак использования ИОП при обмене УПД ДОП.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnector.ContactCapabilities">
+            <summary>
+            Поддерживаемые операции работы с контактами.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.Initialize(NpoComputer.DCX.Common.ServiceSettings,NpoComputer.DCX.Common.Authentication.IAuthTokenProvider,System.Func{System.Boolean},NpoComputer.DCX.Common.ConnectorSettings)">
+            <summary>
+            Инициализировать коннектор.
+            </summary>
+            <param name="serviceSettings">Настройки коннектора.</param>
+            <param name="authTokenProvider">Провайдер токена аутентификации.</param>
+            <param name="tokenExpiredHandler">Обработчик события на истечение срока действия токена аутентификации.</param>
+            <param name="connectorSetting">Расширенные настройки подключения к коннектору.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.AuthenticateByPassword(System.String,System.String)">
+            <summary>
+            Выполнить аутентификацию на сервисе обмена по логину и паролю.
+            </summary>
+            <param name="login">Логин пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+            <returns>Токен авторизации.</returns>
+            <exception cref="T:NpoComputer.DCX.Common.Exceptions.AuthenticationException">Некорректный логин/пароль</exception>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.AuthenticateByCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Выполнить аутентификацию на сервисе обмена по сертификату.
+            </summary>
+            <param name="certificate">Cертификат.</param>
+            <returns>Зашифрованный токен авторизации.</returns>
+            <remarks>
+            Не расшифровывает токен, даже если в параметре передаётся сертификат с закрытым ключом.
+            Для использования токена его нужно расшифровать с помощью сертификата, который использовался при авторизации.
+            </remarks>
+            <exception cref="T:NpoComputer.DCX.Common.Exceptions.AuthenticationException">Некорректный сертификат</exception>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.AuthenticateByCertificate(System.Byte[])">
+            <summary>
+            Выполнить аутентификацию на сервисе обмена по сертификату.
+            </summary>
+            <param name="certificateContent">Cертификат в виде байтового массива.</param>
+            <remarks>
+            Не расшифровывает токен, даже если в параметре передаётся сертификат с закрытым ключом.
+            Для использования токена его нужно расшифровать с помощью сертификата, который использовался при авторизации.
+            </remarks>
+            <exception cref="T:NpoComputer.DCX.Common.Exceptions.AuthenticationException">Некорректный сертификат</exception>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnector.CanSynchronizeContacts">
+            <summary>
+            Признак возможности синхронизировать контакты с сервиса обмена.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetContactList(System.String,System.String,System.Nullable{System.DateTime},System.Threading.CancellationToken)">
+            <summary>
+            Получить список контактов организации.
+            </summary>
+            <param name="boxId">ИД ящика нашей организации.</param>
+            <param name="ourOrganizationId">ИД нашей организации на сервисе.</param>
+            <param name="changedAfterDate">Дата последнего изменения контактов.
+            Если указана, будут выбраны только те контакты, которые были измененны после заданной даты.
+            При сравнении дата будет преобразовываться в формат UTC.</param>
+            <param name="cancellationToken">Токен для отмены операции.</param>
+            <returns>Список контактов организации.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.BreakWithCounteragent(System.String,System.String,System.String)">
+            <summary>
+            Разорвать контакт с контрагентом.
+            </summary>
+            <param name="ourOrganizationId">ИД нашей организации.</param>
+            <param name="counteragentId">ИД контрагента.</param>
+            <param name="comment">Комментарий.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.SendInvitationRequest(System.String,System.String,System.String)">
+            <summary>
+            Отправить организации запрос на участие в обмене документами.
+            </summary>
+            <param name="ourOrganizationId">ИД нашей организации.</param>
+            <param name="counteragentId">ИД контрагента.</param>
+            <param name="comment">Комментарий.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.AcceptInvitation(System.String,System.String,System.String)">
+            <summary>
+            Принять приглашение контрагента.
+            </summary>
+            <param name="ourOrganizationId">ИД нашей организации.</param>
+            <param name="counteragentId">ИД контрагента.</param>
+            <param name="comment">Комментарий.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.RejectInvitation(System.String,System.String,System.String)">
+            <summary>
+            Отклонить приглашение контрагента.
+            </summary>
+            <param name="ourOrganizationId">ИД нашей организации.</param>
+            <param name="counteragentId">ИД контрагента.</param>
+            <param name="comment">Комментарий.</param>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.FindOrganizationsByInnKpp(System.String,System.String)">
+            <summary>
+            Получить список организаций по ИНН и КПП.
+            </summary>
+            <param name="inn">ИНН организации.</param>
+            <param name="kpp">КПП организации (может отсутствовать).</param>
+            <returns>Список организаций с заданными ИНН и КПП.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetContact(System.String,System.String,System.String)">
+            <summary>
+            Получить контакт с контрагентом.
+            </summary>
+            <param name="boxId">ИД ящика нашей организации.</param>
+            <param name="ourOrganizationId">Ид нашей организации.</param>
+            <param name="counteragentId">Ид контрагента на сервисе обмена.</param>
+            <returns>Контакт с контрагентом.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetActualCounteragentStatus(System.String,System.String)">
+            <summary>
+            Получить актуальный статус контрагента.
+            </summary>
+            <param name="ourOrganizationId">ИД нашей организации в сервисе обмена. Должна соответствовать организации, к которой относится текущий пользователь.</param>
+            <param name="counteragentId">Ид контрагента на сервисе обмена.</param>
+            <returns>Статус.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetDocumentContent(System.String,System.String,System.String,System.IO.Stream)">
+            <summary>
+            Получить тело документа из системы обмена в виде потока.
+            </summary>
+            <param name="boxId">ИД ящика.</param>
+            <param name="docId">ИД документа в системе обмена.</param>
+            <param name="messageId">ИД сообщения в системе обмена.</param>
+            <param name="stream">Поток.</param>
+            <remarks>messageId используется пока только в Диадок.</remarks>
+            <remarks>Позиция в потоке при записи не сбрасывается: содержимое документа записывается в текущую позицию.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetDocumentPrintedForm(System.String,System.String,System.String)">
+            <summary>
+            Получить печатную форму документа с сервиса обмена.
+            </summary>
+            <param name="boxId">ИД абонентского ящика.</param>
+            <param name="messageId">ИД сообщения в системе обмена.</param>
+            <param name="documentId">ИД документа в системе обмена.</param>
+            <returns>Массив байт, содержащий ПДФ версию печатной формы документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateDeliveryConfirmation(System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении документа.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="documentId">Ид документа, на который нужно сгенерировать ИОП.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateDeliveryConfirmation(System.String,System.String,System.Byte[])">
+            <summary>
+            Сгенерировать извещение о получении документа.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="documentId">Ид документа, на который нужно сгенерировать ИОП.</param>
+            <param name="cert">Сертификат.</param>
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateDeliveryConfirmation(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении документа.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="documentId">Ид документа, на который нужно сгенерировать ИОП.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности.</param>
+            <param name="messageId">ИД сообщения.</param>     
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateDeliveryConfirmation(System.String,System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении документа.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="documentId">Ид документа, на который нужно сгенерировать ИОП.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности.</param>
+            <param name="messageId">ИД сообщения.</param>     
+            <returns>Извещение о получении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetNextReglamentDocuments(System.String,NpoComputer.DCX.Common.IDocument,NpoComputer.DCX.Common.SignerInfo,System.Boolean@)">
+            <summary>
+            Получить очередные служебные документы для отправки в систему обмена.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="document">Основной документ.</param>
+            <param name="signerInfo">Информация о подписанте.</param>
+            <param name="isDocflowFinished">Признак завершенности документооборота.</param>
+            <returns>Очередные служебные документы.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateInvoiceDeliveryConfirmation(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении для регламента СФ.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="parentDocumentId">Ид документа, на который нужно сгенерировать ИОП.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Список извещений о получении регламента СФ.</returns>
+            <remarks>Параметр messageId пока нужен только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateInvoiceDeliveryConfirmation(System.String,System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Сгенерировать извещение о получении для регламента СФ.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="parentDocumentId">Ид документа, на который нужно сгенерировать ИОП.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="rootServiceEntityId">ИД корневой сущности.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Список извещений о получении регламента СФ.</returns>
+            <remarks>Параметр messageId пока нужен только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateAmendmentRequest(System.String,NpoComputer.DCX.Common.IDocument,System.String,System.String)">
+            <summary>
+            Сгенерировать уведомление об уточнении документа.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="document">Документ, на который нужно сгенерировать УОУ.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="comment">Комментарий к отказу.</param>
+            <returns>Уведомление об уточнении документа.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateInvoiceAmendmentRequest(System.String,NpoComputer.DCX.Common.IDocument,System.String,System.String)">
+            <summary>
+            Сгенерировать уведомление об уточнении на СФ.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="invoice">СФ, на который нужно сгенерировать УОУ.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="comment">Комментарий к УОУ.</param>
+            <returns>УОУ на СФ.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateInvoiceAmendmentRequest(System.String,NpoComputer.DCX.Common.IDocument,System.Byte[],System.String)">
+            <summary>
+            Сгенерировать уведомление об уточнении на СФ.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="invoice">СФ, на который нужно сгенерировать УОУ.</param>
+            <param name="cert">Сертификат.</param>
+            <param name="comment">Комментарий к УОУ.</param>
+            <returns>УОУ на СФ.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateInvoiceAmendmentRequestsForPackage(System.String,System.Collections.Generic.List{NpoComputer.DCX.Common.IDocument},System.String,System.String)">
+            <summary>
+            Сгенерировать уведомления об уточнении на СФ.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="invoices">СФ, на которые нужно сгенерировать УОУ.</param>
+            <param name="certThumbprint">Отпечаток сертификата.</param>
+            <param name="comment">Комментарий к УОУ.</param>
+            <returns>УОУ на СФ.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateInvoiceAmendmentRequestsForPackage(System.String,System.Collections.Generic.List{NpoComputer.DCX.Common.IDocument},System.Byte[],System.String)">
+            <summary>
+            Сгенерировать уведомления об уточнении на СФ.
+            </summary>
+            <param name="ourBoxId">Ящик текущей организации.</param>
+            <param name="invoices">СФ, на которые нужно сгенерировать УОУ.</param>
+            <param name="cert">Cертификат.</param>
+            <param name="comment">Комментарий к УОУ.</param>
+            <returns>УОУ на СФ.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetMessage(NpoComputer.DCX.Common.ISubscriber,System.String)">
+            <summary>
+            Получить сообщение от сервиса.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Cообщение.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetMessageToReload(NpoComputer.DCX.Common.ISubscriber,System.String)">
+            <summary>
+            Получить сообщение от сервиса для перезагрузки.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>Cообщение.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.SendMessage(NpoComputer.DCX.Common.ISubscriber,NpoComputer.DCX.Common.IMessage)">
+            <summary>
+            Отправить сообщение в сервис.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="message">Сообщение.</param>
+            <returns>Cообщение.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.ReceiveEventsFromService(System.Guid,System.String,System.Nullable{System.DateTime},System.String@)">
+            <summary>
+            Получить события сервиса
+            </summary>
+            <param name="ourSubscriberId">ИД нашего абонента на сервисе в виде GUID </param>
+            <param name="startingDate">Дата начала загрузки событий</param>
+            <param name="lastProcessedEventId">ИД последнего обработанного</param>
+            <param name="lastEventId">ИД последнего события в пачке событий, полученных с сервиса </param>
+            <returns>Список событий</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.PrepareReplyMessage(NpoComputer.DCX.Common.ISubscriber,NpoComputer.DCX.Common.IMessage,NpoComputer.DCX.Common.SignerInfo)">
+            <summary>
+            Подготовить ответное сообщение к отправке.
+            </summary>
+            <param name="ourSubscriber">Абонент нашей организации в системе обмена.</param>
+            <param name="message">Ответное сообщение.</param>
+            <param name="signerInfo">Информация о подписанте, которая будет использоваться при генерации необходимых служебных документов.</param>
+            <returns>Перечень документов, которые необходимо подписать перед отправкой.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.ReceiveMessagesFromService(NpoComputer.DCX.Common.ISubscriber,System.String,System.String,System.Nullable{System.DateTime})">
+            <summary>
+            Получить сообщения от сервиса.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="lastReceivedMessageId">ИД последнего полученного входящего сообщения.</param>
+            <param name="lastSentMessageId">ИД последнего полученного исходящего сообщения.</param>
+            <param name="startingDate">Начальная дата загрузки (локальное время).</param>
+            <returns>Список полученных сообщений.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.ReceiveMessagesFromService(NpoComputer.DCX.Common.ISubscriber,System.String,System.String,System.Nullable{System.DateTime},System.String@,System.String@,System.Threading.CancellationToken)">
+            <summary>
+            Получить сообщения от сервиса.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="lastReceivedMessageId">ИД последнего полученного входящего сообщения.</param>
+            <param name="lastSentMessageId">ИД последнего полученного исходящего сообщения.</param>
+            <param name="startingDate">Начальная дата загрузки (локальное время).</param>
+            <param name="lastIncomeEventId">ИД последнего входящего события.</param>
+            <param name="lastOutcomeEventId">ИД последнего исходящего события.</param>
+            <param name="cancellationToken">Токен отмены операции.</param>
+            <returns>Список полученных сообщений.</returns>
+            <exception cref="T:System.OperationCanceledException"/>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateRevocationOffer(NpoComputer.DCX.Common.ISubscriber,System.String,System.String,System.String,System.String)">
+            <summary>
+            Сгенерировать запрос на аннулирование.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="documentId">ИД документа, который нужно аннулировать.</param>
+            <param name="comment">Комментарий.</param>
+            <param name="messageId">ИД сообщения на сервисе.</param>
+            <param name="certificateThumbprint">Отпечаток сертификата.</param>
+            <returns>Документ с аннулированием.</returns>
+            <remarks>Параметры messageId и certificateThumbprint пока нужны только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateRevocationOffer(NpoComputer.DCX.Common.ISubscriber,System.String,System.String,NpoComputer.DCX.Common.SignerInfo,System.String)">
+            <summary>
+            Сгенерировать запрос на аннулирование.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="documentId">ИД документа, который нужно аннулировать.</param>
+            <param name="comment">Комментарий.</param>
+            <param name="signerInfo">Информация о подписанте.</param>
+            <param name="messageId">ИД сообщения на сервисе.</param>
+            <returns>Документ с аннулированием.</returns>
+            <remarks>Параметры messageId и certificateThumbprint пока нужны только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.SendRevocationOffer(NpoComputer.DCX.Common.ISubscriber,NpoComputer.DCX.Common.ISubscriber,NpoComputer.DCX.Common.IDocument,System.Byte[])">
+            <summary>
+            Отправить запрос на аннулирование.
+            </summary>
+            <param name="ourSubscriber">Контрагент нашей организации в системе обмена.</param>
+            <param name="counteragent">Контрагент, которому нужно отправить запрос на аннулирование.</param>
+            <param name="document">Документ с аннулированием.</param>
+            <param name="signContent">Подпись.</param>
+            <returns>Отрпавленное сообщение с аннулированием.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.SendRevocationOffer(NpoComputer.DCX.Common.IMessage)">
+            <summary>
+            Отправить запрос на аннулирование.
+            </summary>
+            <param name="message">Сообщение с запросом на аннулирование.</param>
+            <returns>Отправленное сообщение с аннулированием.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetOurSubscriber">
+            <summary>
+            Получить информацию о нашем абоненте на сервисе.
+            </summary>
+            <returns>Наш абонент.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetOrganizationCertificates(System.String,System.String,System.Collections.Generic.List{System.Byte[]})">
+            <summary>
+            Получить список сертификатов пользователей нашей организации.
+            </summary>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="organizationId">ИД организации.</param>
+            <param name="thumbprints">Список отпечатков, которые необходимо проверить.</param>
+            <returns>Список сертификатов.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.CanSendDeliveryConfirmation(System.String,System.String,System.String)">
+            <summary>
+            Проверить возможность/необходимость отправки извещения о получении для документа.
+            </summary>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="documentId">ИД документа.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <returns>True, если на указанный документ можно отправить ИОП.</returns>
+            <remarks>messageId требуется только для Диадок.</remarks>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetAllowedAnswers(System.String,System.String,System.String,System.String)">
+            <summary>
+            Проверить возможность/необходимость отправки подписи\титула_покупателя\отказа\УОУ для документа.
+            </summary>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="documentId">ИД документа.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <param name="buyerTitleId">ИД титула покупателя.</param>
+            <returns>Допустимые варианты подписания \ отказа \ УОУ на документ.</returns>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnector.CanGetOurSubscriberCertificates">
+            <summary>
+            Признак того, что для коннектора можно получить сертификаты нашей организации.
+            </summary>
+            <returns>True, если сертификаты можно получить, иначе False.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetReceipt(System.String,System.String,System.String,System.String)">
+            <summary>
+            Загрузить ИОП с сервиса обмена.
+            </summary>
+            <param name="ourBoxId">ИД ящика организации.</param>
+            <param name="parentEntityId">ИД родительского документа (на который был сгенерирован ИОП).</param>
+            <param name="primaryDocumentId">ИД основного документа (корневой документ. Например, в случае ИОП на ПДО СФ корневым будет являться СФ).</param>
+            <param name="primaryDocumentMessageId">ИД сообщения, в котором пришел основной документ.</param>
+            <returns>ИОП на документ, или null, если извещение не найдено.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateTorg12XmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для накладной торг-12.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateActXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для накладной торг-12.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateUniversalTransferDocumentXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для УПД.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateUniversalTransferCorrectionDocumentXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для УКД.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateWorksTransferXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для ДПРР.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GenerateGoodsTransferXmlForBuyer(NpoComputer.DCX.Common.BuyerTitle,System.String,System.String,System.String)">
+            <summary>
+            Сформировать титул покупателя для ДПТ.
+            </summary>
+            <param name="bt">Информация о покупателе.</param>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="sellerTitleMessageId">ИД сообщения с титулом продавца.</param>
+            <param name="sellerAttachmentId">ИД документа с титулом продавца.</param>
+            <returns>Титул покупателя в xml формате.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.IExchangeServiceConnector.GetDocumentUri(System.String,System.String,System.String)">
+            <summary>
+            Получить ссылку на документ в вебе.
+            </summary>
+            <param name="boxId">ИД ящика организации.</param>
+            <param name="messageId">ИД сообщения.</param>
+            <param name="documentId">ИД документа.</param>
+            <returns>Ссылка на открытие документа в вебе.</returns>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IExchangeServiceConnectorMetadata">
+            <summary>
+            Метаданные клиента к сервису обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IExchangeServiceConnectorMetadata.ExchangeSystem">
+            <summary>
+            Система обмена.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.BoundDocument">
+            <summary>
+            Связанный документ.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BoundDocument.MessageId">
+            <summary>
+            ИД сообщения на сервисе.
+            </summary>
+            <remarks>
+            Используется в Диадоке для адресации документа, который находится в другом сообщении.
+            Может быть null, если связываемые документы находятся в одном сообщении.
+            </remarks>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BoundDocument.DocumentId">
+            <summary>
+            ИД связываемого документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.SignResult">
+            <summary>
+            Результат подписания - с разногласиями или без.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.ActOfDisagreement">
+            <summary>
+            Акт разногласий.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.OrganizationName">
+            <summary>
+            Название организации-составителя.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.OperationContent">
+            <summary>
+            СодОпер - Содержание операции.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.Signer">
+            <summary>
+            Подписывающий.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.Consignee">
+            <summary>
+            Сотрудник, принявший груз.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.Attorney">
+            <summary>
+            Доверенность старого формата (торг-12, акт).
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.SellerTitle">
+            <summary>
+            Титул продавца.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.StageId">
+            <summary>
+            ИД этапа. Используется для СБИС.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.DocumentTypeNamedId">
+            <summary>
+            Уникальный строковый идентификатор типа документа.
+            </summary>
+            <remarks>Используется для Диадока.</remarks>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.BuyerTitle.DocumentVersion">
+            <summary>
+            Идентификатор версии, уникальный в рамках функции типа документа.
+            </summary>
+            <remarks>Используется для Диадока.</remarks>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.OldFormatAttorney">
+            <summary>
+            Доверенность.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OldFormatAttorney.IssuerPerson">
+            <summary>
+            Кто выдал доверенность.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.BuyerAcceptanceStatus">
+            <summary>
+            Статус приемки.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.BuyerAcceptanceStatus.Accepted">
+            <summary>
+            КодИтога = 1. Товары (работы, услуги, права) приняты без расхождений (претензий).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.BuyerAcceptanceStatus.PartiallyAccepted">
+            <summary>
+            КодИтога = 2. Товары (работы, услуги, права) приняты с расхождениями (претензией).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.BuyerAcceptanceStatus.Rejected">
+            <summary>
+            КодИтога = 3. Товары (работы, услуги, права) не приняты.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Document">
+            <summary>
+            Документ обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Document.FormalizedDate">
+            <summary>
+            Дата формализованного документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Document.FormalizedDateString">
+            <summary>
+            Дата формализованного документа в строковом формате.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Document.FormalizedNumber">
+            <summary>
+            Номер формализованного документа.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.DocumentAllowedAnswer">
+            <summary>
+            Допустимые варианты подписания \ отказа \ УОУ на документ.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.DocumentAllowedAnswer.CanSendSign">
+            <summary>
+            Можно подписать.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.DocumentAllowedAnswer.CanSendAmendmentRequest">
+            <summary>
+            Можно отказать в подписании.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.DocumentAllowedAnswer.CanSendInvoiceAmendmentRequest">
+            <summary>
+            Можно запросить уведомление об уточнении.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.DocumentType">
+            <summary>
+            Тип документа обмена.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.Invoice">
+            <summary>
+            Счет-фактура.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.InvoiceRevision">
+            <summary>
+            Исправленный счет-фактура.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.InvoiceCorrection">
+            <summary>
+            Корректировочный счет-фактура.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.InvoiceCorrectionRevision">
+            <summary>
+            Исправленный корректировочный счет-фактура.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.Nonformalized">
+            <summary>
+            Неформализованный документ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.Waybill">
+            <summary>
+            Товарная накладная. Титул продавца.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.Act">
+            <summary>
+            Акт. Титул исполнителя.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.RevocationOffer">
+            <summary>
+            Запрос на аннулирование.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.WorksTransferSeller">
+            <summary>
+            ДПРР.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.WorksTransferRevisionSeller">
+            <summary>
+            ДПРР. Исправление.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GoodsTransferSeller">
+            <summary>
+            ДПТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GoodsTransferRevisionSeller">
+            <summary>
+            ДПТ. Исправление.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfSeller">
+            <summary>
+            УПД СЧФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfRevisionSeller">
+            <summary>
+            Исправленный УПД СЧФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfCorrectionSeller">
+            <summary>
+            Корректировочный УПД СЧФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfCorrectionRevisionSeller">
+            <summary>
+            Исправленный корректировочный УПД СЧФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfDopSeller">
+            <summary>
+            УПД СЧФДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfDopRevisionSeller">
+            <summary>
+            Исправленный УПД СЧФДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfDopCorrectionSeller">
+            <summary>
+            Корректировочный УПД СЧФДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferSchfDopCorrectionRevisionSeller">
+            <summary>
+            Исправленный корректировочный УПД СЧФДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferDopSeller">
+            <summary>
+            УПД ДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferDopRevisionSeller">
+            <summary>
+            Исправленный УПД ДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferDopCorrectionSeller">
+            <summary>
+            Корректировочный УПД ДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.GeneralTransferDopCorrectionRevisionSeller">
+            <summary>
+            Исправленный корректировочный УПД ДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.TransportWaybillConsignorTitle">
+            <summary>
+            Титул грузоотправителя Трн.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.TransportWaybillConsigneeTitle">
+            <summary>
+            Титул грузополучателя Трн.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.TransportWaybillCargoDeliveredTitle">
+            <summary>
+            Титул водителя при сдаче груза.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.TransportWaybillCargoReceivedTitle">
+            <summary>
+            Титул водителя при приеме груза.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.TransportWaybillCarrierTitle">
+            <summary>
+            Титул транспортной компании.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.DocumentType.TransportWaybillDeliveryPlaceChangeTitle">
+            <summary>
+            Титул изменения адреса доставки.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IBaseDocument">
+            <summary>
+            Базовый интерфейс документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IBaseDocument.FileName">
+            <summary>
+            Имя файла.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IBaseDocument.ServiceEntityId">
+            <summary>
+            ИД сущности на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IBaseDocument.ParentServiceEntityId">
+            <summary>
+            ИД родительской сущности на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IBaseDocument.Content">
+            <summary>
+            Содержимое документа.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IDocument">
+            <summary>
+            Интерфейс документа обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.NeedSign">
+            <summary>
+            Признак необходимости подписания.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.ReplyAction">
+            <summary>
+            Ответное действие.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.DocumentType">
+            <summary>
+            Тип документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.Comment">
+            <summary>
+            Текст комментария.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.GlobalDocumentId">
+            <summary>
+            Глобальный ИД документа, уникальный для всех систем обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.IsLegitimate">
+            <summary>
+            Признак юридической значимости документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.NonformalizedKind">
+            <summary>
+            Вид неформализованного документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.Card">
+            <summary>
+            Карточка документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.DisiParams">
+            <summary>
+            Дополнительные параметры DISI.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.Date">
+            <summary>
+            Дата и время документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.BoundDocuments">
+            <summary>
+            Связанные документы.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.RevocationStatus">
+            <summary>
+            Статус аннулирования документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.SignStatus">
+            <summary>
+            Статус подписания документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.BuyerAcceptanceStatus">
+            <summary>
+            Статус приемки.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.NeedReceipt">
+            <summary>
+            Признак необходимости подтверждения получения документа.
+            Имеет смысл только для Synerdocs. Если признак установлен, то без подтверждения получения документа (ИОП)
+            свойство Content документа недоступно. После отправки ИОП-а нужно получить контент вручную.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.ServiceMessageId">
+            <summary>
+            ИД сообщения на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.ReceiverDepartmentId">
+            <summary>
+            ИД подразделения получателя документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.IsUnknownDocumentType">
+            <summary>
+            Признак того, что тип документа нам неизвестен.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.MultipleSignThumbprints">
+            <summary>
+            Отпечатки сертификатов подписей, которые необходимо добавить к документу на отправку.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDocument.Metadata">
+            <summary>
+            Набор метаданных.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IMessage">
+            <summary>
+            Интерфейс сообщения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.ServiceMessageId">
+            <summary>
+            ИД сообщения на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.ServiceEventId">
+            <summary>
+            ИД события на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.TimeStamp">
+            <summary>
+            Время появления сообщения на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.Sender">
+            <summary>
+            Отправитель сообщения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.FromDepartment">
+            <summary>
+            Подразделение отправителя.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.Receiver">
+            <summary>
+            Получатель сообщения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.ToDepartment">
+            <summary>
+            Подразделение получателя.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.PrimaryDocuments">
+            <summary>
+            Основные документы, связанные с сообщением.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.ReglamentDocuments">
+            <summary>
+            Регламентные документы, связанные с сообщением.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.Signatures">
+            <summary>
+            Подписи.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.ParentServiceMessageId">
+            <summary>
+            ИД родительского сообщения на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.IsReply">
+            <summary>
+            Признак, что сообщение ответное.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.IsTest">
+            <summary>
+            Признак, что сообщение тестовое.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.IsIncome">
+            <summary>
+            Признак входящего сообщения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.SendDocumentWithMultipleSigns">
+            <summary>
+            Признак того, что в сообщении есть документы, отправленные с несколькими подписями.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.HasErrors">
+            <summary>
+            Признак того, что возникла ошибка.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IMessage.ErrorText">
+            <summary>
+            Текст ошибки.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IReglamentDocument">
+            <summary>
+            Интерфейс регламентного документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IReglamentDocument.RootServiceEntityId">
+            <summary>
+            ИД корневой сущности на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IReglamentDocument.DocflowStageId">
+            <summary>
+            Идентификатор этапа документооборота на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IReglamentDocument.DocumentType">
+            <summary>
+            Тип регламентного документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IReglamentDocument.DateTime">
+            <summary>
+            Дата-время документа на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IReglamentDocument.ParentReglamentDocumentType">
+            <summary>
+            Тип родительского регламентного документа, или null, если документ сформирован на основной документ.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IReglamentDocument.ParentServiceMessageId">
+            <summary>
+            ИД сообщения с родительским документом.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Message">
+            <summary>
+            Сообщение.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Message.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ReglamentDocument">
+            <summary>
+            Служебный (регламентный) документ.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ReglamentDocumentType">
+            <summary>
+            Тип служебного (регламентного) документа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.WaybillBuyerTitle">
+            <summary>
+            Товарная накладная. Титул покупателя.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.ActClientTitle">
+            <summary>
+            Акт. Титул заказчика.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.InvoiceConfirmation">
+            <summary>
+            Подтверждение СФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.InvoiceReceipt">
+            <summary>
+            Извещение на СФ участника.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.InvoiceAmendmentRequest">
+            <summary>
+            Уведомление об уточнении СФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.Receipt">
+            <summary>
+            Извещение участника.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.AmendmentRequest">
+            <summary>
+            Извещение на уточнение документа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.DeliveryFailureNotification">
+            <summary>
+            Уведомление о невозможности доставки сообщения.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.SignatureVerificationResult">
+            <summary>
+            Протокол проверки ЭП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.GeneralTransferBuyer">
+            <summary>
+            Титул покупателя УПД.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.GeneralTransferCorrectionBuyer">
+            <summary>
+            Титул покупателя УКД.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.GoodsTransferBuyer">
+            <summary>
+            Титул покупателя ДПТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.WorksTransferBuyer">
+            <summary>
+            Титул заказчика ДПРР.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.NotificationReceipt">
+            <summary>
+            Уведомление о получении.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.NotificationOnReceiptOfNotificationReceipt">
+            <summary>
+            Извещение о получении Уведомления о приеме.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.Rejection">
+            <summary>
+            Отказ от подписания документа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.SimpleSign">
+            <summary>
+            Простая подпись.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.TransportWaybillConsignorTitle">
+            <summary>
+            Титул грузоотправителя Трн.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.TransportWaybillConsigneeTitle">
+            <summary>
+            Титул грузополучателя Трн.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.TransportWaybillCargoDeliveredTitle">
+            <summary>
+            Титул водителя при сдаче груза.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.TransportWaybillCargoReceivedTitle">
+            <summary>
+            Титул водителя при приеме груза.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.TransportWaybillCarrierTitle">
+            <summary>
+            Титул транспортной компании.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ReglamentDocumentType.TransportWaybillDeliveryPlaceChangeTitle">
+            <summary>
+            Титул изменения адреса доставки.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ReplyAction">
+            <summary>
+            Ответное действие
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.RevocationStatus">
+            <summary>
+            Статус аннулирования документа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.RevocationStatus.NoRevocation">
+            <summary>
+            Нет запросов на аннулирование.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.RevocationStatus.RevocationAwaited">
+            <summary>
+            Отправлен запрос контрагенту на аннулирование документа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.RevocationStatus.RevocationRequired">
+            <summary>
+            От контрагента получен запрос на аннулирование документа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.RevocationStatus.RevocationRejected">
+            <summary>
+            Отклонен запрос на аннулирование. 
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.RevocationStatus.RevocationAccepted">
+            <summary>
+            Принят запрос на аннулирование.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.SentMessage">
+            <summary>
+            Результат отправки сообщения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SentMessage.DocumentIds">
+            <summary>
+            Сопоставление локальных ИД документов с ИД сервиса.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SentMessage.ServiceMessageId">
+            <summary>
+            ИД сообщения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SentMessage.TimeStamp">
+            <summary>
+            Дата отправки в формате UTC.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.DocumentIds">
+            <summary>
+            Сопоставление локального ИД документа с ИД сервиса обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.DocumentIds.LocalId">
+            <summary>
+            Локальный ИД.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.DocumentIds.ServiceId">
+            <summary>
+            ИД сервиса обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.DocumentIds.IsLegitimate">
+            <summary>
+            Признак юридической значимости документа.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.DocumentIds.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="localId">Локальный ИД.</param>
+            <param name="serviceId">ИД сервиса обмена.</param>
+            <param name="isLegitimate">Признак юридической значимости документа.</param>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Signature">
+            <summary>
+            Подпись.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.DocumentId">
+            <summary>
+            Идентификатор подписанного документа.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.Content">
+            <summary>
+            Содержимое подписи.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.Subject">
+            <summary>
+            Информация о субъекте.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.SignerBoxId">
+            <summary>
+            Информация о ящике подписанта.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.SignerInfo">
+            <summary>
+            Информация о подписанте.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.Type">
+            <summary>
+            Тип подписи.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Signature.CreateFromContent(System.Byte[],System.String,System.String,NpoComputer.DCX.Common.SignType)">
+            <summary>
+            Создать объект Signature из тела подписи.
+            </summary>
+            <param name="signContent">Содержимое подписи.</param>
+            <param name="documentId">ИД подписанного документа</param>
+            <param name="signerBoxId">ИД ящика подписанта.</param>
+            <param name="signType">Тип подписи.</param>
+            <returns>Подпись.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Signature.GetCertificateFromSignature(System.Byte[])">
+            <summary>
+            Получить сертификат из подписи.
+            </summary>
+            <param name="signature">Данные подписи.</param>
+            <returns>Сертификат подписи, null если сертификат не найден.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Signature.GetCertificateFromThumbprint(System.String)">
+            <summary>
+            Получить сертификат по отпечатку.
+            </summary>
+            <param name="thumbprint">Отпечаток.</param>
+            <returns>Сертификат подписи, null если сертификат не найден.</returns>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.SignType">
+            <summary>
+            Тип подписи.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.SignType.Authenticating">
+            <summary>
+            Согласующая подпись.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.SignType.Approving">
+            <summary>
+            Утверждающая подпись.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.SignedDocument`1">
+            <summary>
+            Подписанный документ.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SignedDocument`1.Document">
+            <summary>
+            Документ.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SignedDocument`1.Sign">
+            <summary>
+            Подпись к документу.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ServiceSettings">
+            <summary>
+            Настройки сервиса: URL, прокси, временные папки.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.ServiceUrl">
+            <summary>
+            Url-адрес сервиса.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.HyperlinkUrl">
+            <summary>
+            Url-адрес сервиса для построения ссылок на документы.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.Proxy">
+            <summary>
+            Прокси.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.OurOrganizationInn">
+            <summary>
+            ИНН организации на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.OurOrganizationKpp">
+            <summary>
+            КПП организации на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.OurOrganizationBoxId">
+            <summary>
+            ИД ящика организации на сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ServiceSettings.OperatorCode">
+            <summary>
+            Код оператора.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ProxySettings">
+            <summary>
+            Настройки прокси.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ProxySettings.Server">
+            <summary>
+            Сервер.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ProxySettings.User">
+            <summary>
+            Пользователь прокси.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ProxySettings.Password">
+            <summary>
+            Пароль.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ProxySettings.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.ProxySettings.#ctor(System.Uri,System.String,System.String)">
+            <summary>
+            Конструктор.
+            </summary>
+            <param name="server">Сервер.</param>
+            <param name="user">Имя пользователя.</param>
+            <param name="password">Пароль пользователя.</param>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Department">
+            <summary>
+            Подразделение.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Department.#ctor">
+            <summary>
+            Конструктор.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Department.#ctor(NpoComputer.DCX.Common.IDepartment)">
+            <summary>
+            Конструктор копирования.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IContact">
+            <summary>
+            Контакт с контрагентом.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IContact.Organization">
+            <summary>
+            Организация контрагента.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IContact.Status">
+            <summary>
+            Состояние обмена с контрагентом.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IContact.StatusChangeDate">
+            <summary>
+            Дата изменения статуса в формате UTC.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IContact.Comment">
+            <summary>
+            Комментарий контрагента.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ContactStatus">
+            <summary>
+            Статус связи с контрагентом.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.SendingRequest">
+            <summary>
+            Отправка запроса.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.ApprovingByCounteragent">
+            <summary>
+            Подтверждение контрагентом.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.ApprovingByUs">
+            <summary>
+            Подтверждение нами.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.SendingApproval">
+            <summary>
+            Отправка согласия.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.SendingReject">
+            <summary>
+            Отправка отказа.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.Active">
+            <summary>
+            Действующий.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.Closing">
+            <summary>
+            Закрытие.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.Closed">
+            <summary>
+            Закрытый.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.ContactStatus.Error">
+            <summary>
+            Ошибка.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.IDepartment">
+            <summary>
+            Интерфейс подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.Id">
+            <summary>
+            ИД подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.ParentDepartmentId">
+            <summary>
+            ИД родительского подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.Name">
+            <summary>
+            Наименование подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.Abbreviation">
+            <summary>
+            Код подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.IsHead">
+            <summary>
+            Признак головного подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.Kpp">
+            <summary>
+            КПП подразделения.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.IDepartment.AdditionalInfo">
+            <summary>
+            Дополнительная информация.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.ISubscriber">
+            <summary>
+            Абонент в системе обмена
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.Organization">
+            <summary>
+            Информация об организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.BoxId">
+            <summary>
+            ИД ящика организации на сервисе обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.Departments">
+            <summary>
+            Коллекция подразделений абонента.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.HeadDepartment">
+            <summary>
+            Адрес головного подразделения
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.InvoiceReglamentAccepted">
+            <summary>
+            Признак, что абонент подписал регламент ФНС для обмена счетами-фактурами.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.CounteragentId">
+            <summary>
+            ИД контрагента.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.FnsParticipantId">
+            <summary>
+            ИД участника документооборота СФ, зарегистрированный в ФНС.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.ISubscriber.SubscriberId">
+            <summary>
+            ИД абонента в виде GUID.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Organization">
+            <summary>
+            Организация-участник обмена электронными документами.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.Name">
+            <summary>
+            Наименование организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.LegalName">
+            <summary>
+            Юридическое наименование организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.FirstName">
+            <summary>
+            Имя (для ФЛ).
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.LastName">
+            <summary>
+            Фамилия (для ФЛ).
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.MiddleName">
+            <summary>
+            Отчество (для ФЛ).
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.Inn">
+            <summary>
+            ИНН организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.Kpp">
+            <summary>
+            КПП организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.Ogrn">
+            <summary>
+            ОГРН организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.OrganizationId">
+            <summary>
+            ИД организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.FnsParticipantId">
+            <summary>
+            ИД участника документооборота СФ, зарегистрированный в ФНС.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.Bik">
+            <summary>
+            БИК.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.CurrentAccount">
+            <summary>
+            Расчетный счет.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.PhoneNumber">
+            <summary>
+            Телефон.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.Fax">
+            <summary>
+            Факс.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.BoxId">
+            <summary>
+            Адрес абонентского ящика. 
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.LegalAddress">
+            <summary>
+            Юридический адрес.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.MailAddress">
+            <summary>
+            Почтовый адрес.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.RegistrationAddress">
+            <summary>
+            Адрес регистрации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.OrganizationType">
+            <summary>
+            Тип организации.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.IsRoaming">
+            <summary>
+            Признак роуминга.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.ExchangeServiceName">
+            <summary>
+            Название сервиса обмена.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Organization.OperatorCode">
+            <summary>
+            Код оператора.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.OrganizationAddress">
+            <summary>
+            Адрес организации-участника обмена электронными документами.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.IsForeign">
+            <summary>
+            Признак иностранного адреса.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.CountryCode">
+            <summary>
+            Код страны (для иностранного адреса).
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.ForeignAddress">
+            <summary>
+            Иностранный адрес.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.RegionCode">
+            <summary>
+            Код региона.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.City">
+            <summary>
+            Город.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.Locality">
+            <summary>
+            Населенный пункт.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.Street">
+            <summary>
+            Улица.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.House">
+            <summary>
+            Дом.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.Building">
+            <summary>
+            Строение.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.Apartment">
+            <summary>
+            Квартира.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.OrganizationAddress.PostalCode">
+            <summary>
+            Почтовый индекс.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.OrganizationType">
+            <summary>
+            Тип организации.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.OrganizationType.LegalEntity">
+            <summary>
+            Юридическое лицо.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.OrganizationType.SoleTrader">
+            <summary>
+            Индивидуальный предприниматель.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.OrganizationType.Individual">
+            <summary>
+            Физическое лицо.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.SignerInfo">
+            <summary>
+            Информация о подписанте.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SignerInfo.FullName">
+            <summary>
+            Полное имя подписанта.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SignerInfo.JobTitle">
+            <summary>
+            Должность.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SignerInfo.Organization">
+            <summary>
+            Информация об организации, от имени которой выступает подписант.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.SignerInfo.CertificateThumbprint">
+            <summary>
+            Отпечаток сертификата, используемый подписантом.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.SignerInfo.CreateFromSignature(System.Byte[])">
+            <summary>
+            Извлечь информацию о подписанте из подписи.
+            </summary>
+            <param name="signatureContent">Содержимое подписи.</param>
+            <returns>Информация о подписанте.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.SignerInfo.CreateFromThumbprint(System.String)">
+            <summary>
+            Получить информацию о подписанте по отпечатку сертификата.
+            </summary>
+            <param name="thumbprint">Отпечаток.</param>
+            <returns>Информация о подписанте.</returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.SignerInfo.CreateFromCertificate(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Извлечь информацию о подписанте из сертификата.
+            </summary>
+            <param name="certificate">Сертификат.</param>
+            <returns>Информация о подписанте.</returns>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Utils.ContactCapabilities">
+            <summary>
+            Возможности коннектора работать с контактами.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.None">
+            <summary>
+            Не поддерживает никаких операций.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.SendInvitation">
+            <summary>
+            Отправлять запрос на установление контакта.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.AcceptInvitation">
+            <summary>
+            Принимать запрос на установление контакта.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.RejectInvitation">
+            <summary>
+            Отказывать в запросе на установление контакта.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.Break">
+            <summary>
+            Разрывать контакта с контрагентом.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.RetriveContactList">
+            <summary>
+            Получать список контактов.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ContactCapabilities.All">
+            <summary>
+            Поддерживает все операции.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Utils.DocumentUtils">
+            <summary>
+            Утилиты работы с документами.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GeneralTransferFileNamePrefix">
+            <summary>
+            Префикс имени файла документа УПД.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GeneralTransfer820FileNamePrefix">
+            <summary>
+            Префикс имени файла документа УПД 820.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GoodsTransferFileNamePrefix">
+            <summary>
+            Префикс имени файла документа ДПТ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.BuyerGoodsTransferFileNamePrefix">
+            <summary>
+            Префикс имени файла документа ДПТ покупателя.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.WorksTransferFileNamePrefix">
+            <summary>
+            Префикс имени файла документа ДПРР.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.BuyerWorksTransferFileNamePrefix">
+            <summary>
+            Префикс имени файла документа ДПРР покупателя.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GeneralTransferCorrectionSellerFileNamePrefix">
+            <summary>
+            Префикс имени файла документа УКД.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GeneralTransferCorrectionSeller736FileNamePrefix">
+            <summary>
+            Префикс имени файла документа УКД 736.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GeneralTransferCorrectionBuyerFileNamePrefix">
+            <summary>
+            Префикс имени файла документа УКД.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.DocumentElementName">
+            <summary>
+            Имя элемента xml документа, определяющий расположение комментария контрагента.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.AmendmentRequestInfoElementName">
+            <summary>
+            Имя элемента xml документа, определяющий расположение комментария контрагента.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.AmendmentRequestTextElementName">
+            <summary>
+            Имя элемента xml документа, определяющего расположение комментария контрагента.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.UTDOldFormatTaxDocumentClassifierItems">
+            <summary>
+            Коды документа по КНД (приказ от 24.03.2016 N ММВ-7-15/155@).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.UTDBuyer">
+            <summary>
+            Код титула покупателя для УПД по КНД (Приказ ФНС РФ от 19.12.2018 N ММВ-7-15/820@)
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.OldUCDBuyer">
+            <summary>
+            Код титула покупателя для УКД по КНД (Приказ ФНС России от 13.04.2016 N ММВ-7-15/189@)
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.UCDBuyer">
+            <summary>
+            Код титула покупателя для УКД по КНД (Приказ ФНС РФ от 12.10.2020 N ЕД-7-26/736@)
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GoodsTransferSeller">
+            <summary>
+            Коды документа по КНД (приказ от 30.11.2015 N ММВ-7-10/551@).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.GoodsTransferBuyer">
+            <summary>
+            Коды титула покупателя для ДПТ по КНД (приказ от 30.11.2015 N ММВ-7-10/551@).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.WorksTransferSeller">
+            <summary>
+            Коды документа по КНД (приказ от 30.11.2015 N ММВ-7-10/552@).
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.DocumentUtils.WorksTransferBuyer">
+            <summary>
+            Коды титула покупателя для ДПРР по КНД (приказ от 30.11.2015 N ММВ-7-10/552@).
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsFormalized(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли указанный документ к группе формализованных (УПД, акты/накладные и СФ старого формата).
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsFormalized(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли указанный тип документа группе формализованных (УПД, акты/накладные и СФ старого формата).
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsActOrWaybill(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли указанный тип документа актам или накладным.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsInvoiceCorrection(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли указанный тип документа группе корректировочных СФ.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsInvoiceCorrection(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли указанный документ группе корректировочных СФ.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGoodsOrWorksRevisionTransfer(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, входит ли тип документа в группу исправленных ДПТ/ДПРР.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGoodsOrWorksRevisionTransfer(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, входит ли документ в группу исправленных ДПТ/ДПРР.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsCorrectionFormalizedDocument(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, входит ли документ в группу корректировочных УПД/СФ или исправленных ДПТ/ДПРР.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGoodsTransferSeller(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, входит ли тип документа в группу ДПТ.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGoodsTransferSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, входит ли документ в группу ДПТ.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsWorksTransferSeller(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, входит ли тип документа в группу ДПРР.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsWorksTransferSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, входит ли документ в группу ДПРР.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsWorksOrGoodsTransferSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, входит ли документ в группу ДПРР или ДПРР.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsReceipt(NpoComputer.DCX.Common.IReglamentDocument)">
+            <summary>
+            Проверить, является ли регламентный документ извещением о получении (ИОП).
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsInvoice(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе счетов-фактур.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsInvoice(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли документ группе счетов-фактур.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsInvoiceRevision(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе исправленных счетов-фактур.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsInvoiceRevision(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе исправленных счетов-фактур.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransfer(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе УПД/УКД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferSchfDopSeller(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе УПД/УКД СЧФДОП.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferSchfSeller(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе УПД/УКД СЧФ.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferDopSeller(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить принадлежит ли тип документа группе УПД/УКД ДОП.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransfer(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли документ группе УПД/УКД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsTransportWaybillTitle(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли документ группе титулов ТрН.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsTransportWaybillTitle(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли тип документа группе титулов ТрН.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferDopSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить принадлежит ли документ группе УПД/УКД ДОП.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferSchfSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить принадлежит ли документ группе УПД/УКД СЧФ.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferSchfDopSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить принадлежит ли документ группе УПД/УКД СЧФ ДОП.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferCorrectionDopSeller(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли документ группе УКД ДОП.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferCorrectionDopSeller(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить принадлежит ли тип документа группе УКД ДОП.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferCorrection(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить принадлежит ли тип документа группе УКД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferCorrection(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить принадлежит ли документ группе УКД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferRevision(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить принадлежит ли тип документа группе исправленных УПД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferRevision(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить принадлежит ли тип документа группе исправленных УПД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferCorrectionRevision(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли указанный тип документа группе корректировочных/исправленных УПД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsGeneralTransferCorrectionRevision(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли указанный документ группе корректировочных/исправленных УПД.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsResponseTitleNeedType(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, принадлежит ли указанный тип группе типов, которые предполагают ответные титулы.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsResponseTitleNeed(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, принадлежит ли указанный документ группе документов, которые предполагают ответные титулы.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsReplyTitle(NpoComputer.DCX.Common.IReglamentDocument)">
+            <summary>
+            Проверить, является ли документ ответным титулом.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsRevision(NpoComputer.DCX.Common.DocumentType)">
+            <summary>
+            Проверить, является ли документ ответным титулом.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.IsRevision(NpoComputer.DCX.Common.IDocument)">
+            <summary>
+            Проверить, является ли документ ответным титулом.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.DocumentUtils.GetAmendmentComment(System.Byte[])">
+            <summary>
+            Получить текст комментария из УОУ.
+            </summary>
+            <param name="amendmentDocumentContent">Содержимое xml документа УОУ.</param>
+            <returns>Текст комментария.</returns>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.ExchangeServiceUtils.ExchangeServicesNames">
+            <summary>
+            Поддерживаемые коды сервисов.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.ExchangeServiceUtils.GetExchangeServiceNameByCode(System.String)">
+            <summary>
+            Получить наименование сервиса по коду организации-оператора.
+            </summary>
+            <param name="operatorCode">Код оператора.</param>
+            <returns>Наименование сервиса</returns>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions">
+            <summary>
+            Константы для функций УПД/УКД.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions.SchfDop">
+            <summary>
+            Имя параметра, определяющего функцию УПД СЧФДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions.Schf">
+            <summary>
+            Имя параметра, определяющего функцию УПД СЧФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions.Dop">
+            <summary>
+            Имя параметра, определяющего функцию УПД ДОП.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions.Kschf">
+            <summary>
+            Имя параметра, определяющего функцию УКД КСЧФ.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions.KschfDis">
+            <summary>
+            Имя параметра, определяющего функцию УКД КСЧФДИС.
+            </summary>
+        </member>
+        <member name="F:NpoComputer.DCX.Common.Utils.GeneralTransferFunctions.Dis">
+            <summary>
+            Имя параметра, определяющего функцию УКД ДИС.
+            </summary>
+        </member>
+        <member name="T:NpoComputer.DCX.Common.Utils.ObjectExtensions">
+            <summary>
+            Расширения для работы с объектами.
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.ObjectExtensions.In``1(``0,``0[])">
+            <summary>
+            Проверяет, равен ли объект одному из параметров, использует метод IEnumerable.Contains
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Utils.ObjectExtensions.In``1(``0,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Проверяет, равен ли объект одному из значений в коллекции, использует метод IEnumerable.Contains
+            (входит ли объект в коллекцию)
+            </summary>
+            <typeparam name="T">тип объекта</typeparam>
+            <param name="obj">этот объект</param>
+            <param name="objects">коллекция, может быть null, тогда метод возвращает false</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection FormGuid="cddd4c25-da1e-45d4-ab4b-0250a22ce940">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">934,-194</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">true</property>
+          <property name="AllowGrouping">true</property>
+          <property name="AllowSorting">true</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="Columns" iskey="true" value="12">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">T</property>
+            <property name="Visible">true</property>
+            <property name="VisibleIndex">0</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Id</property>
+            <property name="Visible">false</property>
+            <property name="Name">CounterpartyQueueItem_Id</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">5*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="Visible">false</property>
+            <property name="Name">CounterpartyQueueItem_Name</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">ExternalId</property>
+            <property name="Visible">false</property>
+            <property name="Name">CounterpartyQueueItem_ExternalId</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">Box.DisplayValue</property>
+            <property name="Visible">true</property>
+            <property name="Name">CounterpartyQueueItem_Box</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">17*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">Retries</property>
+            <property name="Visible">true</property>
+            <property name="Name">CounterpartyQueueItem_Retries</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">17*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">Note</property>
+            <property name="Visible">true</property>
+            <property name="Name">CounterpartyQueueItem_Note</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">29*</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">ProcessingStatus</property>
+            <property name="Visible">true</property>
+            <property name="Name">CounterpartyQueueItem_ProcessingStatus</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">16*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">LastUpdate</property>
+            <property name="Visible">true</property>
+            <property name="Name">CounterpartyQueueItem_LastUpdate</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">MatchingTask.DisplayValue</property>
+            <property name="Visible">false</property>
+            <property name="Name">CounterpartyQueueItem_MatchingTask</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">SyncResult</property>
+            <property name="Visible">false</property>
+            <property name="Name">CounterpartyQueueItem_SyncResult</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">Counterparty.DisplayValue</property>
+            <property name="Visible">false</property>
+            <property name="Name">CounterpartyQueueItem_Counterparty</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection>
+</settings>

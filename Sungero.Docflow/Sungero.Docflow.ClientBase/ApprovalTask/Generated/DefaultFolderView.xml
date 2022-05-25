@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Folder FormGuid="8dbb6507-6d7b-4ef2-9247-a64a15eb5dbb">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="View" isnull="true" iskey="true">
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">588,49.2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="AllowGrouping">true</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+        </property>
+        <property name="Columns" iskey="true" value="17">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">T</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Visible">true</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Id</property>
+            <property name="Name">OffDocEndorsement_Id</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Subject</property>
+            <property name="Name">OffDocEndorsement_Subject</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">43*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Author.DisplayValue</property>
+            <property name="Name">OffDocEndorsement_Author</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Status</property>
+            <property name="Name">OffDocEndorsement_Status</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="Name">OffDocEndorsement_Importance</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Created</property>
+            <property name="Name">OffDocEndorsement_Created</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Modified</property>
+            <property name="Name">OffDocEndorsement_Modified</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Started</property>
+            <property name="Name">OffDocEndorsement_Started</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">MaxDeadline</property>
+            <property name="Name">OffDocEndorsement_MaxDeadline</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">NeedsReview</property>
+            <property name="Name">OffDocEndorsement_NeedsReview</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">ParentTask.DisplayValue</property>
+            <property name="Name">OffDocEndorsement_ParentTask</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">ParentAssignment.DisplayValue</property>
+            <property name="Name">OffDocEndorsement_ParentAssignment</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">MainTask.DisplayValue</property>
+            <property name="Name">OffDocEndorsement_MainTask</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Signatory.DisplayValue</property>
+            <property name="Name">OffDocEndorsement_Signatory</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">18*</property>
+          </property>
+          <property name="Item16" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">StageNumber</property>
+            <property name="Name">OffDocEndorsement_StageNumber</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item17" isnull="true" iskey="true">
+            <property name="Visible">false</property>
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Rule.DisplayValue</property>
+            <property name="Name">OffDocEndorsement_Rule</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">19*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="MRUFilters" iskey="true" value="0" />
+        <property name="FilterString" isnull="true" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Folder>
+</settings>

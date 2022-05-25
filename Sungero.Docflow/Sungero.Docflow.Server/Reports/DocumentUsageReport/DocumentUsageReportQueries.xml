@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="DataSource">
+    <mssql><![CDATA[select
+  emp.Name as Employee,
+  pos.Name as JobTitle,
+  dep.Name as Department,
+  ISNULL(SUM(Created), 0) as Created,
+  ISNULL(SUM(Updated), 0) as Updated,
+  ISNULL(SUM(Readed), 0) as Readed
+from
+  Sungero_Core_Recipient emp
+  left join 
+  (select
+     Employee, 
+     DocId,
+     case when ActionType = 'Create' then 1 else 0
+     end as Created,  
+     case when ActionType = 'Update' then 1 else 0
+     end as Updated, 
+     case when ActionType = 'Read' then 1 else 0
+     end as Readed
+   from
+     (select
+        distinct
+        his.[User] as Employee,
+        EntityId as DocId,
+        case 
+          when [Action] = 'Create'
+            then 'Create'
+          when [Action] = 'Update' and (Operation = 'UpdateVerBody' or Operation = 'CreateVersion')
+            then 'Update'
+          when [Action] = 'Read' and Operation = 'ReadVerBody'
+            then 'Read'
+          end as ActionType
+      from 
+        [dbo].[Sungero_Content_DocHistory] his
+      where
+        EntityId <> 0
+        and his.HistoryDate between @PeriodBegin and @PeriodEnd) hist
+        ) history on
+    emp.Id = history.Employee
+  left join Sungero_Company_JobTitle pos on
+    emp.JobTitle_Company_Sungero = pos.Id
+  join Sungero_Core_Login logins on
+    emp.Login = logins.Id
+  join Sungero_Core_Recipient dep on
+    emp.Department_Company_Sungero = dep.Id
+where
+  emp.Discriminator = 'b7905516-2be5-4931-961c-cb38d5677565'    
+  and emp.Status = 'Active'
+  and (@DepartmentId = 0 or emp.Department_Company_Sungero = @DepartmentId)
+group by 
+  emp.Name, pos.Name, dep.Name
+order by
+  ISNULL(SUM(Created), 0) + ISNULL(SUM(Updated), 0) + ISNULL(SUM(Readed), 0), dep.Name, emp.Name]]></mssql>
+    <postgres><![CDATA[select
+  emp.Name as Employee,
+  pos.Name as JobTitle,
+  dep.Name as Department,
+  COALESCE(SUM(Created), 0) as Created,
+  COALESCE(SUM(Updated), 0) as Updated,
+  COALESCE(SUM(Readed), 0) as Readed
+from
+  Sungero_Core_Recipient emp
+  left join 
+  (select
+     Employee, 
+     DocId,
+     case when ActionType = 'Create' then 1 else 0
+     end as Created,  
+     case when ActionType = 'Update' then 1 else 0
+     end as Updated, 
+     case when ActionType = 'Read' then 1 else 0
+     end as Readed
+   from
+     (select
+        distinct
+        his.User as Employee,
+        EntityId as DocId,
+        case 
+          when Action = 'Create'
+            then 'Create'
+          when Action = 'Update' and (Operation = 'UpdateVerBody' or Operation = 'CreateVersion')
+            then 'Update'
+          when Action = 'Read' and Operation = 'ReadVerBody'
+            then 'Read'
+          end as ActionType
+      from 
+        Sungero_Content_DocHistory his
+      where
+        EntityId <> 0
+        and his.HistoryDate between @PeriodBegin and @PeriodEnd) hist
+        ) history on
+    emp.Id = history.Employee
+  left join Sungero_Company_JobTitle pos on
+    emp.JobTitle_Company_Sungero = pos.Id
+  join Sungero_Core_Login logins on
+    emp.Login = logins.Id
+  join Sungero_Core_Recipient dep on
+    emp.Department_Company_Sungero = dep.Id
+where
+  emp.Discriminator = 'b7905516-2be5-4931-961c-cb38d5677565'    
+  and emp.Status = 'Active'
+  and (@DepartmentId = 0 or emp.Department_Company_Sungero = @DepartmentId)
+group by 
+  emp.Name, pos.Name, dep.Name
+order by
+  COALESCE(SUM(Created), 0) + COALESCE(SUM(Updated), 0) + COALESCE(SUM(Readed), 0), dep.Name, emp.Name
+]]></postgres>
+  </query>
+</queries>

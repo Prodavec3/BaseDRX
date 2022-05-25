@@ -1,0 +1,131 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "0de3eaa4-5b9d-46c3-a64d-5dd32c4a3f7c",
+  "Name": "AcquaintanceReport",
+  "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer",
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "DisplayName",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "PublicConstants",
+    "PublicStructures",
+    "HandledEvents",
+    "Parameters",
+    "Description"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1397ba6e-64b8-49dc-bae5-26550d733eff",
+      "Name": "Document",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "04273331-eb75-4699-8bb4-e5a816775960",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "b4f28a8f-aeb1-495a-b534-ef80351d2231",
+      "Name": "Task",
+      "EntityType": "2d53959b-2cee-41f7-83c2-98ae1dbbd538",
+      "InternalDataTypeName": "Sungero.RecordManagement.IAcquaintanceTask, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "b1ec3039-c317-4461-987d-9d88f3cbdd0f",
+      "Name": "DocumentName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "f8c7579a-6b0b-48b3-8b6a-5cedb11329d4",
+      "Name": "DocumentVersion",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "7dcfb1c9-1543-47e9-8a3d-a8c1a4db0a28",
+      "Name": "AddendaDescription",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "369c9dd0-ee96-48ce-832d-c486f3d9ee3f",
+      "Name": "DocumentHyperlink",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "4614b726-0571-4584-a267-2c0a142feafc",
+      "Name": "Printed",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "fe7ea2fb-7bdf-4c9e-a8fe-06e42420b630",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d60f54d6-b2ae-4220-b9b0-7d5f0e6b24a1",
+      "Name": "EmployeesAcquaintanceStatus",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "a7ced383-10db-48df-b9d1-bd4707c5b804",
+      "Name": "SignValidationErrors",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "6b66c048-4c54-4b46-a090-93cdec97c83d",
+      "Name": "IncludeSubDepartments",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true,
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ElectronicAcquaintanceTaskDisplayName",
+    "AcquaintedState",
+    "CompletedState",
+    "AcquaintanceReportName",
+    "RowNumber",
+    "EmployeesName",
+    "JobTitle",
+    "Department",
+    "AcquaintanceDate",
+    "State",
+    "Note",
+    "AssignmentId",
+    "Addendas",
+    "PrintedBy",
+    "ForAllPerformers",
+    "ForAcquaintedPerformers",
+    "ForNotAcquaintedPerformers",
+    "AcquaintedDefaultResult",
+    "DialogAcquaintanceStatuses",
+    "IncludeSubDepartments",
+    "SelfSignAcquaintanceTaskDisplayName"
+  ],
+  "Versions": []
+}

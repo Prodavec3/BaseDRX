@@ -1,0 +1,93 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "540f174a-d952-47c4-8b87-eaeb029ddb74",
+  "Name": "IncomingDocumentsReport",
+  "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word",
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient",
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "cef354cc-7c2c-46d7-a54d-9f06e96051ff",
+      "Name": "BeginDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "5b67a9a9-cb70-4451-a3d0-3fb77de01faa",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "d2361e02-2cc4-40a3-bc0f-57be2811cce2",
+      "Name": "DocumentRegister",
+      "EntityType": "d7800dd5-a9d2-41e9-bbc4-a39292ac1eeb",
+      "InternalDataTypeName": "Sungero.RecordManagement.ILog, Sungero.Domain.Interfaces",
+      "IsRequired": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "2eae8039-33b6-468b-a2af-679cb57c2306",
+      "Name": "DocumentsDataTableName",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "d08dcf74-0b28-48f2-bafe-54613bdccda6",
+      "Name": "JobsDataTableName",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "d7fbd7d0-1ecb-47f4-be09-b2f0fae46be7",
+      "Name": "AvailableDocumentsIdsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "7e1d7288-7a19-4c1f-9060-0a486270f8a9",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "IsRequired": true,
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ByPeriod",
+    "PeriodFrom",
+    "PeriodTo",
+    "Document",
+    "RegistrationDate",
+    "RegistrationNumber",
+    "CorrespondentNameDateNumber",
+    "Subject",
+    "ActionItem",
+    "Assignees",
+    "ReportHeader"
+  ],
+  "Versions": []
+}

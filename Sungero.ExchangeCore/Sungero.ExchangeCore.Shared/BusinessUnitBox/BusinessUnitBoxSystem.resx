@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_BusinessUnit" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="Property_ExchangeService" xml:space="preserve">
+    <value>Exchange service</value>
+  </data>
+  <data name="ControlGroup_c7975ef9b1984d9fa8a52ff9124cd455" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_Login" xml:space="preserve">
+    <value>Set Password</value>
+  </data>
+  <data name="Action_LoginDescription" xml:space="preserve">
+    <value>Enter a password to connect to exchange service and check connection status.</value>
+  </data>
+  <data name="Action_LoginHint" xml:space="preserve">
+    <value>Set Password for Exchange Box</value>
+  </data>
+  <data name="Action_LoginConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_LoginConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_ExchangeSettings_2744af0ebdef48e08aab2ca277524d31" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Property_Login" xml:space="preserve">
+    <value>Username to connect</value>
+  </data>
+  <data name="Property_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Action_OpenLogonUrl" xml:space="preserve">
+    <value>Go to Personal Account</value>
+  </data>
+  <data name="Action_OpenLogonUrlDescription" xml:space="preserve">
+    <value>Go to the exchange service sign-in page.</value>
+  </data>
+  <data name="Action_OpenLogonUrlHint" xml:space="preserve">
+    <value>Go to Personal Account</value>
+  </data>
+  <data name="Action_OpenLogonUrlConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenLogonUrlConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_ExchangeService_45f3d368c63844c0a209fbf500249fed" xml:space="preserve">
+    <value>Exchange Service</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Business Unit Exchange Box</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Business Unit Exchange Box</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Business Unit Exchange Boxes</value>
+  </data>
+  <data name="Action_CheckConnection" xml:space="preserve">
+    <value>Check Connection</value>
+  </data>
+  <data name="Action_CheckConnectionDescription" xml:space="preserve">
+    <value>Check connection to the exchange service and specified credentials.</value>
+  </data>
+  <data name="Action_CheckConnectionHint" xml:space="preserve">
+    <value>Check Connection to Exchange Service</value>
+  </data>
+  <data name="Action_CheckConnectionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CheckConnectionConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ConnectionStatus" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="Enum_ConnectionStatus_Connected" xml:space="preserve">
+    <value>Established</value>
+  </data>
+  <data name="Enum_ConnectionStatus_Waiting" xml:space="preserve">
+    <value>Set a password</value>
+  </data>
+  <data name="Enum_ConnectionStatus_Error" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="ControlGroup_9180f9f233784d1195cfffa156a44cd9" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Property_OrganizationId" xml:space="preserve">
+    <value>OrganizationId</value>
+  </data>
+  <data name="Property_ExchangeServiceCertificates" xml:space="preserve">
+    <value>Exchange service certificates</value>
+  </data>
+  <data name="Property_HasExchangeServiceCertificates" xml:space="preserve">
+    <value>Exchange service certificates uploaded</value>
+  </data>
+  <data name="Resource_75edbf1615784a1eafe4a2a24e442114" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_0d6364a76a9b445cb2fc92c174b60da1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_55cd3119c2d845b0afc02e49dc6ce7fa" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_FtsId" xml:space="preserve">
+    <value>Federal Tax Service ID</value>
+  </data>
+  <data name="Property_CertificateReceiptNotifications" xml:space="preserve">
+    <value>Certificate for service doc.</value>
+  </data>
+  <data name="Action_ShowMessageQueueItem" xml:space="preserve">
+    <value>Show Message Queue</value>
+  </data>
+  <data name="Action_ShowMessageQueueItemDescription" xml:space="preserve">
+    <value>Show list of messages in the processing queue.</value>
+  </data>
+  <data name="Action_ShowMessageQueueItemHint" xml:space="preserve">
+    <value>Show Message Queue</value>
+  </data>
+  <data name="Action_ShowMessageQueueItemConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowMessageQueueItemConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Group_c7404a7dce7245afb7977eab0d5533d3" xml:space="preserve">
+    <value>Trouble-Shouting</value>
+  </data>
+  <data name="Action_FindDocument" xml:space="preserve">
+    <value>Search for Document</value>
+  </data>
+  <data name="Action_FindDocumentDescription" xml:space="preserve">
+    <value>Search for a document from an exchange service by the link from the Web-Client.</value>
+  </data>
+  <data name="Action_FindDocumentHint" xml:space="preserve">
+    <value>Search for Document from Exchange Service</value>
+  </data>
+  <data name="Action_FindDocumentConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FindDocumentConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+</root>

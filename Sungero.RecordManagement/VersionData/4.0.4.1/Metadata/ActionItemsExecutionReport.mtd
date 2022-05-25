@@ -1,0 +1,215 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "48704d21-fc8c-4081-8a24-575cc8264537",
+  "Name": "ActionItemsExecutionReport",
+  "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "BeforeExecuteClient",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "DataSources",
+    "DisplayName",
+    "Description",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "e9411cd2-0339-44e0-a25e-98dd1259e112",
+      "Name": "BeginDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "0ad1723a-6ea5-44db-8c3d-5a2907131adc",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "2a5d4ed3-99b3-42a2-9f1d-65232c2ded3d",
+      "Name": "ExecutiveDisciplineLevel",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d70901c7-8ba3-40b8-b62d-b462300c064a",
+      "Name": "ClientEndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "3dc3cc3c-bfde-41b1-b2ce-39112e758c0e",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "ac36e512-22e8-4334-926f-cba231a5b1a6",
+      "Name": "Performer",
+      "EntityType": "243c2d26-f5f7-495f-9faf-951d91215c77",
+      "InternalDataTypeName": "Sungero.CoreEntities.IUser, Sungero.Domain.Shared",
+      "Versions": []
+    },
+    {
+      "NameGuid": "647f8305-c49b-4534-8a9e-acda2972cc51",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "21340b99-8f1a-40df-ab29-e4006eadf992",
+      "Name": "Author",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "9e6c8157-51c2-4d7b-b0ea-d1d54d838268",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "b1c110a6-92eb-4bcd-a53c-02865c32b856",
+      "Name": "TotalCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "584eca40-bcce-4583-9d3c-884d5b57529e",
+      "Name": "Completed",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "0ed84fc1-35a4-41d9-82a0-3435773a6368",
+      "Name": "CompletedInTime",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "705bbede-b0e2-47d7-8818-d3922d3c873c",
+      "Name": "CompletedOverdue",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "e30f7a6e-593e-454c-a044-c4c72375a9ed",
+      "Name": "InProcess",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "6ad56418-60ab-4689-82c0-920b33f316e9",
+      "Name": "InProcessOverdue",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "ee258574-de81-4eec-9cb2-bbfc81db708e",
+      "Name": "ParamsDescriprion",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "bdbf8979-5d6d-43e9-8d47-cadf1cb04f20",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "0befb560-c78f-4478-995d-d975fdba0535",
+      "Name": "Document",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "e6c669d6-f1d8-4862-b4f6-29e259e93f9d",
+      "Name": "Subheader",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "cb37754e-bf1d-4cf6-9f68-6d65bc98e518",
+      "Name": "Meeting",
+      "EntityType": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
+      "InternalDataTypeName": "Sungero.Meetings.IMeeting, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "349c37ba-f99f-4271-9e85-cf429311c03c",
+      "Name": "IsMeetingsCoverContext",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "60379fb0-02b8-4171-8b75-e30863535d92",
+      "Name": "Header",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "9e0013e7-88bf-41ec-9049-d95fc24ac47b",
+      "Name": "DocumentType",
+      "EntityType": "0896aa80-e1da-4a1e-9485-d172f8e242bc",
+      "InternalDataTypeName": "Sungero.Docflow.IDocumentType, Sungero.Domain.Interfaces",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "FilterAuthor",
+    "FilterBusinessUnit",
+    "FilterDepartment",
+    "FilterResponsible",
+    "NoAnyActionItems",
+    "ReportDate",
+    "Statistics",
+    "DisciplinePercent",
+    "RowNumber",
+    "Id",
+    "ActionItem",
+    "Author",
+    "Status",
+    "Deadline",
+    "ActualDate",
+    "Overdue",
+    "Assignee",
+    "CoAssignees",
+    "Document",
+    "HeaderDeadline",
+    "WorkingDay",
+    "HeaderDocument",
+    "HeaderMeeting",
+    "NoAnyActionItemsForDocument",
+    "NoAnyActionItemsForMeeting"
+  ],
+  "Versions": []
+}

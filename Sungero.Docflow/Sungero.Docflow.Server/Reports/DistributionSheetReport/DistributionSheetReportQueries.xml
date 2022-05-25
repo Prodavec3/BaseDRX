@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+                          ([ReportSessionId] varchar(256) NOT NULL,
+                           [CompanyName] nvarchar(max) NOT NULL,
+                           [NameWithJobTitle] nvarchar(max) NOT NULL,
+                           [DeliveryMethod] nvarchar(max) NOT NULL,
+                           [ContactsInformation] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+                          (ReportSessionId citext NOT NULL,
+                           CompanyName citext NOT NULL,
+                           NameWithJobTitle citext NOT NULL,
+                           DeliveryMethod citext NOT NULL,
+                           ContactsInformation citext NOT NULL)]]></postgres>
+  </query>
+  <query key="SelectFromTempTable">
+    <default><![CDATA[select *
+  from Sungero_Reports_DistribSheet temp
+  where temp.ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

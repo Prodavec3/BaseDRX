@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.CoreEntities.Server&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Company.Shared&#13;&#10;Sungero.Company.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Company;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Company.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="SourceTable" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectDataFromTable}">
+        <Column Name="ModuleName" DataType="System.String" PropName="Column"/>
+        <Column Name="Responsibility" DataType="System.String" PropName="Column"/>
+        <Column Name="Record" DataType="System.String" PropName="Column"/>
+        <Column Name="RecordId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="RecordHyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="Priority" DataType="System.Int32" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="8d5b9efe-b1a6-4cce-8109-b47ea85c1d33" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Employee" Id="4654e36b-1c27-4aae-8ccb-433fd374e9cb" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="b7905516-2be5-4931-961c-cb38d5677565"/>
+    <SungeroParameter Name="ReportSessionId" Id="7e5bbe89-6073-42a9-964b-2dbe29c94258" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="CurrentDate" Id="d916c502-ea51-4d58-a4b3-52f85f491f2f" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="94.5">
+      <TextObject Name="Text1" Left="56.7" Top="28.35" Width="614.25" Height="28.35" Text="[Resources.ResponsibilitiesReport.ReportName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text2" Left="56.7" Top="66.15" Width="614.25" Height="18.9" Text="[Employee]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt"/>
+      <TextObject Name="Text7" Left="567" Width="151.2" Height="18.9" Text="[CurrentDate]" HorzAlign="Right" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="98.5" Width="718.2" Height="94.5" KeepWithData="true" Condition="[SourceTable.ModuleName]" SortOrder="None">
+      <TextObject Name="Text3" Left="9.45" Top="28.35" Width="434.7" Height="18.9" Text="[SourceTable.ModuleName]" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TableObject Name="Table1" Left="9.45" Top="56.7" Width="708.75" Height="37.8" Border.Lines="All">
+        <TableColumn Name="Column1" Width="207.9"/>
+        <TableColumn Name="Column2" Width="434.7"/>
+        <TableColumn Name="Column3"/>
+        <TableRow Name="Row1" Height="37.8">
+          <TableCell Name="Cell1" Border.Lines="All" Text="[Resources.ResponsibilitiesReport.Responsibility]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" Text="[Resources.ResponsibilitiesReport.Record]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell3" Text="[Resources.ResponsibilitiesReport.RecordId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <DataBand Name="Data1" Top="197" Width="718.2" Height="28.35" CanGrow="true" CanShrink="true" Guides="0" DataSource="Table" KeepTogether="true" KeepDetail="true">
+        <TextObject Name="Text4" Left="9.45" Width="207.9" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SourceTable.Responsibility]" Padding="2, 2, 2, 2" Duplicates="Merge" VertAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text5" Left="217.35" Width="434.7" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SourceTable.Record]" Padding="2, 2, 2, 2" VertAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+        <TextObject Name="Text6" Left="652.05" Width="66.15" Height="28.35" Border.Lines="All" Hyperlink.Expression="[SourceTable.RecordHyperlink]" CanGrow="true" GrowToBottom="true" Text="[IIf([SourceTable.RecordId] == 0, string.Empty, [SourceTable.RecordId])]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue"/>
+        <Sort>
+          <Sort Expression="[SourceTable.Priority]"/>
+          <Sort Expression="[SourceTable.Record]"/>
+        </Sort>
+      </DataBand>
+    </GroupHeaderBand>
+  </ReportPage>
+</Report>

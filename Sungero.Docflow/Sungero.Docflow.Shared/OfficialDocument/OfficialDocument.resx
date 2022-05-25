@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Number" xml:space="preserve">
+    <value> No.</value>
+  </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value> from </value>
+  </data>
+  <data name="DocumentNameAutotext" xml:space="preserve">
+    <value>&lt;Autogenerated name&gt;</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="LastNameAndInitials" xml:space="preserve">
+    <value>Last name and initials</value>
+  </data>
+  <data name="Addenda" xml:space="preserve">
+    <value>Addenda</value>
+  </data>
+  <data name="InitialsAndLastName" xml:space="preserve">
+    <value>Initials and last name</value>
+  </data>
+  <data name="DocumentIsNotSigned" xml:space="preserve">
+    <value>Cannot generate the "Approval Form" report as the document is not signed.</value>
+  </data>
+  <data name="NoApprovalRuleWarning" xml:space="preserve">
+    <value>Approval rules were not found for the document with such requisites.
+Make sure all required fields of the document are filled in or contact your system administrator.</value>
+  </data>
+  <data name="StateViewTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="StateViewDeadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="StateViewFinalDeadline" xml:space="preserve">
+    <value>Final deadline</value>
+  </data>
+  <data name="StateViewDefault" xml:space="preserve">
+    <value>No tasks to display, or you do not have sufficient access rights to access them.</value>
+  </data>
+  <data name="StateViewDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="StateViewSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="StateViewInstead" xml:space="preserve">
+    <value> on behalf of </value>
+  </data>
+  <data name="StateViewSupervisor" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+  <data name="StateViewDelay" xml:space="preserve">
+    <value>Delay</value>
+  </data>
+  <data name="StateViewTaskSent" xml:space="preserve">
+    <value>Task has been sent</value>
+  </data>
+  <data name="StateViewTaskSentForRevision" xml:space="preserve">
+    <value>Task has been sent for rework</value>
+  </data>
+  <data name="StateViewTaskSentAfterRestart" xml:space="preserve">
+    <value>Task has been sent after restart</value>
+  </data>
+  <data name="StateViewTask" xml:space="preserve">
+    <value>Task</value>
+  </data>
+  <data name="StateViewWithoutTerm" xml:space="preserve">
+    <value>no deadline</value>
+  </data>
+  <data name="StateViewAssignment" xml:space="preserve">
+    <value>Assignment</value>
+  </data>
+  <data name="StateViewAssignmentForReview" xml:space="preserve">
+    <value>Assignment for review</value>
+  </data>
+  <data name="StateViewAnd" xml:space="preserve">
+    <value> and {0} more {1}.</value>
+  </data>
+  <data name="PerformerNotes" xml:space="preserve">
+    <value>Performer notes</value>
+  </data>
+  <data name="NoRightsToUpdateOrDelete" xml:space="preserve">
+    <value>You are not authorized to edit or delete the document.</value>
+  </data>
+  <data name="DocumentUseInTasks" xml:space="preserve">
+    <value>Cannot delete document as it is currently being used in the tasks. Tasks ID: {0}.</value>
+  </data>
+  <data name="MarkDocumentAsObsolete" xml:space="preserve">
+    <value>Mark document as obsolete</value>
+  </data>
+  <data name="Enum_Operation_TAChange" xml:space="preserve">
+    <value>Change total amount</value>
+  </data>
+  <data name="Enum_OperationDetailed_TAChange" xml:space="preserve">
+    <value>Total amount {0} {1}</value>
+  </data>
+  <data name="Enum_OperationDetailed_TAClear" xml:space="preserve">
+    <value>Clear total amount</value>
+  </data>
+  <data name="NamePartForLeadDocument" xml:space="preserve">
+    <value> to </value>
+  </data>
+  <data name="ReservationButtonName" xml:space="preserve">
+    <value>Reserve</value>
+  </data>
+  <data name="AlternativeOkButtonName" xml:space="preserve">
+    <value>Assign number</value>
+  </data>
+  <data name="RegistrationButtonName" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="ReservationTitle" xml:space="preserve">
+    <value>Number Reservation</value>
+  </data>
+  <data name="RegistrationTitle" xml:space="preserve">
+    <value>Document Registration</value>
+  </data>
+  <data name="AlternativeTitle" xml:space="preserve">
+    <value>Number Assignment</value>
+  </data>
+  <data name="RegistrationNumber" xml:space="preserve">
+    <value>Reg. No.</value>
+  </data>
+  <data name="AlternativeRegistrationNumber" xml:space="preserve">
+    <value>Document No.</value>
+  </data>
+  <data name="DialogRegistrationLog" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="DialogRegistrationDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="IsManualNumber" xml:space="preserve">
+    <value>Enter number manually</value>
+  </data>
+  <data name="IsPreliminaryNumber" xml:space="preserve">
+    <value>- preliminary</value>
+  </data>
+  <data name="LogNumberList" xml:space="preserve">
+    <value>Skipped numbers</value>
+  </data>
+  <data name="RegistrationNumberIsNotUnique" xml:space="preserve">
+    <value>Document with the same number already exists.</value>
+  </data>
+  <data name="RelationPropertyDisabled" xml:space="preserve">
+    <value>Property contains link to the leading document and it is not available for changing.</value>
+  </data>
+  <data name="Enum_Operation_TypeChanged" xml:space="preserve">
+    <value>Change document type</value>
+  </data>
+  <data name="Enum_OperationDetailed_FrmExS" xml:space="preserve">
+    <value>Received from exchange service "{0}"</value>
+  </data>
+  <data name="Enum_Operation_ExchSendDoc" xml:space="preserve">
+    <value>Send document to counterparty</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchSendDoc" xml:space="preserve">
+    <value>"{0}" via "{1}" service</value>
+  </data>
+  <data name="Enum_Operation_ExchSendAnswer" xml:space="preserve">
+    <value>Send reply to counterparty</value>
+  </data>
+  <data name="Enum_Operation_ExchGetAnswer" xml:space="preserve">
+    <value>Reply from counterparty received</value>
+  </data>
+  <data name="Enum_Operation_ExchReadTo" xml:space="preserve">
+    <value>Receipt notification sent</value>
+  </data>
+  <data name="Enum_Operation_ExchReadFrom" xml:space="preserve">
+    <value>Receipt notification received</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchSign" xml:space="preserve">
+    <value>"{0}", result "Signed", via "{1}" service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchReject" xml:space="preserve">
+    <value>"{0}", result "Rejected", via "{1}" service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchReadTo" xml:space="preserve">
+    <value>For "{0}" via "{1}" service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchReadFrom" xml:space="preserve">
+    <value>From "{0}" via "{1}" service</value>
+  </data>
+  <data name="DocumentNameBeforeChangingTypeNote" xml:space="preserve">
+    <value>Document name before type change: {0}</value>
+  </data>
+  <data name="ChangeTypeUnnumerationComment" xml:space="preserve">
+    <value>Change type</value>
+  </data>
+  <data name="Enum_Operation_ExchObsoletOur" xml:space="preserve">
+    <value>Cancelled by our company</value>
+  </data>
+  <data name="Enum_Operation_ExchObsoleteCP" xml:space="preserve">
+    <value>Cancelled by counterparty</value>
+  </data>
+  <data name="Enum_Operation_ExchTerminOur" xml:space="preserve">
+    <value>Revoked by our company</value>
+  </data>
+  <data name="Enum_Operation_ExchTerminCP" xml:space="preserve">
+    <value>Revoked by counterparty</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchObsoleteCP" xml:space="preserve">
+    <value>"{0}" via "{1}" service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchTerminCP" xml:space="preserve">
+    <value>"{0}" via "{1}" service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchObsoletOur" xml:space="preserve">
+    <value>Via "{0}" service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchTerminOur" xml:space="preserve">
+    <value>Via "{0}" service</value>
+  </data>
+  <data name="TrackingNoneReturnFromCounterparty" xml:space="preserve">
+    <value>The document was sent via exchange service and will be returned automatically.</value>
+  </data>
+  <data name="DocumentIsReceivedFrom" xml:space="preserve">
+    <value>Received via {0} exchange service</value>
+  </data>
+  <data name="DocumentIsSentTo" xml:space="preserve">
+    <value>Sent via {0} exchange service</value>
+  </data>
+  <data name="ExchangeStateSignAwaited" xml:space="preserve">
+    <value>Awaiting counterparty's signature</value>
+  </data>
+  <data name="ExchangeStateSignRequired" xml:space="preserve">
+    <value>Awaiting our signature</value>
+  </data>
+  <data name="CannotChangeTrackingSentByExchange" xml:space="preserve">
+    <value>The document was sent via exchange service. Return result will be filled in automatically.</value>
+  </data>
+  <data name="LocationVersion" xml:space="preserve">
+    <value>{0} (version {1})</value>
+  </data>
+  <data name="Enum_Operation_ExportToFolder" xml:space="preserve">
+    <value>Export from archive</value>
+  </data>
+  <data name="Enum_OperationDetailed_BuyerTitle" xml:space="preserve">
+    <value>Buyer's details</value>
+  </data>
+  <data name="Enum_OperationDetailed_SlrTtlFrmExS" xml:space="preserve">
+    <value>Seller's details. Received from "{0}" exchange service</value>
+  </data>
+  <data name="Enum_OperationDetailed_ExchInvReject" xml:space="preserve">
+    <value>"{0}", result "Clarification requested", via "{1}" service</value>
+  </data>
+  <data name="LocationIncomingInvoiceRejected" xml:space="preserve">
+    <value>Notification of clarification sent</value>
+  </data>
+  <data name="LocationOutgoingInvoiceRejected" xml:space="preserve">
+    <value>Counterparty sent a notification of clarification</value>
+  </data>
+  <data name="SigningVersionWasDeleted" xml:space="preserve">
+    <value>Document version you are trying to sign was deleted by another employee. View changes before you complete the assignment.</value>
+  </data>
+  <data name="CannotChangeRegisteredDocumentToNumerable" xml:space="preserve">
+    <value>You can select only registrable document kind when you change the kind of a registered document.</value>
+  </data>
+  <data name="CannotChangeNumeratedDocumentToRegistrable" xml:space="preserve">
+    <value>You can select only numerable document kind when you change the kind of a numbered document.</value>
+  </data>
+  <data name="DocumentNotInService" xml:space="preserve">
+    <value>There is no such document on the exchange service</value>
+  </data>
+  <data name="DocumentNotFromService" xml:space="preserve">
+    <value>The document did not participate in electronic exchange via the service</value>
+  </data>
+  <data name="ExchangeReportOnlyInService" xml:space="preserve">
+    <value>You can generate electronic exchange log for this document only in the personal account of the exchange service</value>
+  </data>
+  <data name="NoAcquaintanceTasks" xml:space="preserve">
+    <value>To view the report, there should be at least one acquaintance task.</value>
+  </data>
+  <data name="SendButtonText" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ShowButtonText" xml:space="preserve">
+    <value>Show Tasks</value>
+  </data>
+  <data name="DocumentHasApprovalTasks" xml:space="preserve">
+    <value>The document has already been sent for approval.</value>
+  </data>
+  <data name="ContinueCreationApprovalTaskQuestion" xml:space="preserve">
+    <value>Send the document for rule-based approval again?</value>
+  </data>
+  <data name="ContinueCreationReviewTaskQuestion" xml:space="preserve">
+    <value>Send the document for review by manager again?</value>
+  </data>
+  <data name="DocumentHasReviewTasks" xml:space="preserve">
+    <value>The document has already been sent for review by manager.</value>
+  </data>
+  <data name="BusinessUnitPropertyDisabled" xml:space="preserve">
+    <value>Cannot change the business unit property.</value>
+  </data>
+  <data name="DepartmentPropertyDisabled" xml:space="preserve">
+    <value>Cannot change the department property.</value>
+  </data>
+  <data name="CanNotUseScriptsInHtml" xml:space="preserve">
+    <value>{0}\nCannot use scripts in a convertible HTML file.</value>
+  </data>
+  <data name="ActionItemCreationDialogLoginAsEmployeeError" xml:space="preserve">
+    <value>Only employees can create action items based on the document. Log on to the system by using an employee's account.</value>
+  </data>
+  <data name="ActionItemCreationDialog" xml:space="preserve">
+    <value>Create Action Items Based on Document</value>
+  </data>
+  <data name="ActionItemCreationDialogContinueButtonText" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="ActionItemCreationDialogCloseButtonText" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ActionItemCreationDialogExistedActionItems" xml:space="preserve">
+    <value>Action items</value>
+  </data>
+  <data name="ActionItemCreationDialogNotFilledActionItems" xml:space="preserve">
+    <value>Need adjusting</value>
+  </data>
+  <data name="ActionItemCreationDialogDraftExists" xml:space="preserve">
+    <value>Action items have already been created based on the document.</value>
+  </data>
+  <data name="ActionItemCreationDialogDraftWhereDeleted" xml:space="preserve">
+    <value>Draft action items have been deleted.</value>
+  </data>
+  <data name="ActionItemCreationDialogDraftWillBeDelete" xml:space="preserve">
+    <value>After you click "Continue", draft action items will be deleted. New action items will be created based on the document. </value>
+  </data>
+  <data name="ActionItemCreationDialogInProcessExists_Desktop" xml:space="preserve">
+    <value>Action items sent for execution will not be changed. You can view them on the "Tasks" tab or in the "Follow Up Execution" report.</value>
+  </data>
+  <data name="ActionItemCreationDialogInProcessExists_Web" xml:space="preserve">
+    <value>Action items sent for execution will not be changed. You can view them in the "Follow Up Execution" report.</value>
+  </data>
+  <data name="ActionItemCreationDialogNoDraftAndInProgressExist" xml:space="preserve">
+    <value>There are no drafts and action items in process on the document.</value>
+  </data>
+  <data name="ActionItemCreationDialogOnlyForWordDocument" xml:space="preserve">
+    <value>You can create action items from documents of the following formats: {0}.</value>
+  </data>
+  <data name="ActionItemCreationDialogOnlyByTags" xml:space="preserve">
+    <value>Action items can be created only from a filled in table of a proper template.</value>
+  </data>
+  <data name="ActionItemCreationDialogException" xml:space="preserve">
+    <value>The data format is not supported, or the file is damaged.</value>
+  </data>
+  <data name="ActionItemCreationDialogActionItemTag" xml:space="preserve">
+    <value>Action item text</value>
+  </data>
+  <data name="ActionItemCreationDialogResponsibleTag" xml:space="preserve">
+    <value>Responsible</value>
+  </data>
+  <data name="ActionItemCreationDialogDeadlineTag" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillBeforeSending" xml:space="preserve">
+    <value>Fill in action items before sending them for execution.</value>
+  </data>
+  <data name="ActionItemCreationDialogCreateCompletedActionItems" xml:space="preserve">
+    <value>Total action items - {0}</value>
+  </data>
+  <data name="ActionItemCreationDialogStartComplete" xml:space="preserve">
+    <value>Action items have been successfully sent for execution</value>
+  </data>
+  <data name="ActionItemCreationDialogSended" xml:space="preserve">
+    <value>sent</value>
+  </data>
+  <data name="ActionItemCreationDialogSomeActionItemsCouldNotBeDeleted" xml:space="preserve">
+    <value>Cannot delete several action items, because you are not authorized to delete them.</value>
+  </data>
+  <data name="ActionItemCreationDialogCreatedActionItems" xml:space="preserve">
+    <value>Created action items</value>
+  </data>
+  <data name="ActionItemCreationDialogSendForExecutionButtonText" xml:space="preserve">
+    <value>Send for Execution</value>
+  </data>
+  <data name="ActionItemCreationDialogDeleteAndCloseButtonText" xml:space="preserve">
+    <value>Delete and Close</value>
+  </data>
+  <data name="ActionItemCreationDialogSuccessfullyCreated" xml:space="preserve">
+    <value>Action items have been successfully created.</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillAssignee" xml:space="preserve">
+    <value>specify performer</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillDeadline" xml:space="preserve">
+    <value>specify deadline</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillSubject" xml:space="preserve">
+    <value>specify subject</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedSendManual" xml:space="preserve">
+    <value>send manually</value>
+  </data>
+  <data name="ActionItemCreationDialogNeedFillAndSendingManual" xml:space="preserve">
+    <value>Fill in some action items and send them manually.</value>
+  </data>
+  <data name="ActionItemCreationDialogSomeActionItemsDraftNotDeleted" xml:space="preserve">
+    <value>Some draft action items have not been deleted.</value>
+  </data>
+  <data name="ActionItemCreationDialogToCreateActionItemsPressNext" xml:space="preserve">
+    <value>To create action items, click "Continue".</value>
+  </data>
+  <data name="CloseDocumentAndOpenLater" xml:space="preserve">
+    <value>Close the document card. To view PDF with the digital signature mark, open the document later.</value>
+  </data>
+  <data name="NoVersionError" xml:space="preserve">
+    <value>The document must contain at least one version.</value>
+  </data>
+  <data name="ConvertionErrorTitleBase" xml:space="preserve">
+    <value>An error occurred while converting the document.</value>
+  </data>
+  <data name="LastVersionNotApproved" xml:space="preserve">
+    <value>To transform to PDF, the latest version of the document has to be approved.</value>
+  </data>
+  <data name="ExtensionNotSupported" xml:space="preserve">
+    <value>Cannot convert {0} file.</value>
+  </data>
+  <data name="NoVersionWithNumberError" xml:space="preserve">
+    <value>There is no document version with ID {0}.</value>
+  </data>
+  <data name="ConvertionInProgress" xml:space="preserve">
+    <value>Document is being processed.</value>
+  </data>
+  <data name="ConvertionDone" xml:space="preserve">
+    <value>Document successfully converted.</value>
+  </data>
+  <data name="SignatureNotValidError" xml:space="preserve">
+    <value>To convert the document, its digital signature must be valid. {0}. Contact your system administrator.</value>
+  </data>
+  <data name="SignatureNotValidErrorTitle" xml:space="preserve">
+    <value>Invalid signature.</value>
+  </data>
+  <data name="LastVersionNotApprovedTitle" xml:space="preserve">
+    <value>There is no approval signature.</value>
+  </data>
+  <data name="SendByEmailDialogTitle" xml:space="preserve">
+    <value>Send By Email</value>
+  </data>
+  <data name="SendByEmailDialogAttachments" xml:space="preserve">
+    <value>Attachments</value>
+  </data>
+  <data name="SendByEmailSubjectPrefix" xml:space="preserve">
+    <value>Send: {0}</value>
+  </data>
+  <data name="SendByEmailDialogText" xml:space="preserve">
+    <value>If required, select addenda to the document.</value>
+  </data>
+  <data name="SendByEmailDialogMainDocument" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="DocumentIsBeingEdited" xml:space="preserve">
+    <value>The Selected Document Is Being Edited Now.</value>
+  </data>
+  <data name="VersionBeingSentMightBeOutdated" xml:space="preserve">
+    <value>The {0} document version you are trying to send may be outdated.</value>
+  </data>
+  <data name="DialogButtonSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SeveralDocumentsAreBeingEdited" xml:space="preserve">
+    <value>Several Selected Documents Are Being Edited Now.</value>
+  </data>
+  <data name="VersionsBeingSentMightBeOutdated" xml:space="preserve">
+    <value>The document versions you are trying to send may be outdated.</value>
+  </data>
+  <data name="VersionCreatedByCaptureService" xml:space="preserve">
+    <value>Version Created by Document Capture Service</value>
+  </data>
+  <data name="ManyAddendumDialogText" xml:space="preserve">
+    <value>Select files to upload:</value>
+  </data>
+  <data name="AddendumAddFiles" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="AddendaCreatedSuccesfully" xml:space="preserve">
+    <value>{0} {1} created successfully.
+</value>
+  </data>
+  <data name="ManyAddendumDialogTitle" xml:space="preserve">
+    <value>Add Addenda</value>
+  </data>
+  <data name="SetCorrectDate" xml:space="preserve">
+    <value>Set correct date.</value>
+  </data>
+  <data name="IncorrectOurSignatory" xml:space="preserve">
+    <value>{0} is not authorized to sign the document.</value>
+  </data>
+  <data name="Enum_Operation_ConvertToPdf" xml:space="preserve">
+    <value>Convert to PDF</value>
+  </data>
+  <data name="Enum_OperationDetailed_ConvertToPdf" xml:space="preserve">
+    <value>Completed with error</value>
+  </data>
+  <data name="CheckRegDataAndFinishRegistration" xml:space="preserve">
+    <value>Check if the Reg. No. and date are correct. Complete the document registration manually.</value>
+  </data>
+  <data name="NumberAddresseeListIsNotPositive" xml:space="preserve">
+    <value>Sequence numbers in the list of addressees must be positive.</value>
+  </data>
+  <data name="FillAddresseesOnAddresseesTab" xml:space="preserve">
+    <value>Specify the employees on the "Addressees" tab.</value>
+  </data>
+  <data name="ManyAddresseesPlaceholder" xml:space="preserve">
+    <value>Several addressees</value>
+  </data>
+  <data name="ChangeManyAddresseesQuestion" xml:space="preserve">
+    <value>Do you want to send the letter to only one addressee?</value>
+  </data>
+  <data name="ChangeManyAddresseesDescription" xml:space="preserve">
+    <value>All addressees except {0} will be deleted.</value>
+  </data>
+  <data name="ToManyAddressees" xml:space="preserve">
+    <value>From distribution list</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>Addressee's job title</value>
+  </data>
+  <data name="ConvertToPDFHistoryComment" xml:space="preserve">
+    <value>Convert to PDF</value>
+  </data>
+  <data name="CloseDocumentAndOpenLaterWithRegistrationStamp" xml:space="preserve">
+    <value>Close the document card. To view PDF with registration mark, open the document later.</value>
+  </data>
+  <data name="VersionWithRegistrationStamp" xml:space="preserve">
+    <value>Version with registration stamp</value>
+  </data>
+  <data name="Enum_Operation_ExchReadNRecTo" xml:space="preserve">
+    <value>Send acknowledgment receipt</value>
+  </data>
+  <data name="Enum_Operation_ExchReadNRFrom" xml:space="preserve">
+    <value>Receive acknowledgment receipt</value>
+  </data>
+  <data name="Enum_Operation_ExchReadRNRecTo" xml:space="preserve">
+    <value>Send notification on receipt of acknowledgement receipt</value>
+  </data>
+  <data name="Enum_Operation_ExchReadRNRFrom" xml:space="preserve">
+    <value>Receive notification on receipt of acknowledgement receipt</value>
+  </data>
+</root>

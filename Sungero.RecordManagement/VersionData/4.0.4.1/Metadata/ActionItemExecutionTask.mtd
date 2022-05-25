@@ -1,0 +1,1661 @@
+{
+  "$type": "Sungero.Metadata.TaskMetadata, Sungero.Workflow.Shared",
+  "NameGuid": "c290b098-12c7-487d-bb38-73e2c98f9789",
+  "Name": "ActionItemExecutionTask",
+  "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "83bd59b6-466b-4163-9719-1da6acffc409",
+      "Name": "Restart",
+      "AllowUserDisableConfirmation": true,
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "NeedConfirmation": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "39704bac-4e78-47a0-aefc-a3562e28f044",
+      "Name": "StartByForce",
+      "IsAncestorMetadata": true,
+      "IsVisibleInWebClient": false,
+      "Overridden": [
+        "NeedConfirmation"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "00fae4b6-935a-4047-831d-312fd3c02faf",
+      "Name": "CopyEntity",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "0871245b-1f6a-45e4-bb5c-16320db12a30",
+      "Name": "Start",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler",
+        "NeedConfirmation",
+        "AllowUserDisableConfirmation"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "d3da67a4-89e7-4ee5-bd0c-6b0f0bfb4bca",
+      "Name": "Abort",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler",
+        "NeedConfirmation",
+        "AllowUserDisableConfirmation"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "20dcc207-6554-4429-b0c9-39b75cc6d6bf",
+      "Name": "RequireReport",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_RequireReport_large_20dcc20765544429b0c939b75cc6d6bf.png",
+      "SmallIconName": "Action_RequireReport_small_20dcc20765544429b0c939b75cc6d6bf.png",
+      "Versions": []
+    },
+    {
+      "NameGuid": "56ac8798-c7f6-42cf-a406-e6dfd8a84d42",
+      "Name": "FollowUpExecution",
+      "ActionArea": "Collection",
+      "GenerateHandler": true,
+      "IsEmptySelectionAllowed": true,
+      "LargeIconName": "Action_FollowUpExecution_large_56ac8798c7f642cfa406e6dfd8a84d42.png",
+      "SmallIconName": "Action_FollowUpExecution_small_56ac8798c7f642cfa406e6dfd8a84d42.png",
+      "Versions": []
+    },
+    {
+      "NameGuid": "242eaf08-4ae7-452b-b2f9-725cb56831d4",
+      "Name": "AddPerformer",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_AddPerformer_large_242eaf084ae7452bb2f9725cb56831d4.png",
+      "SmallIconName": "Action_AddPerformer_small_242eaf084ae7452bb2f9725cb56831d4.png",
+      "Versions": []
+    },
+    {
+      "NameGuid": "ea35864a-00a2-465b-b6c6-c39a52b413de",
+      "Name": "ChangeCompoundMode",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": null,
+      "SmallIconName": null,
+      "Versions": []
+    }
+  ],
+  "AttachmentGroups": [
+    {
+      "NameGuid": "804f50fe-f3da-411b-bb2e-e5373936e029",
+      "Name": "DocumentsGroup",
+      "Constraints": [
+        {
+          "NameGuid": "a13f2429-455c-4e7b-bd68-81cd008ec30c",
+          "Name": "OfficialDocuments",
+          "ConstraintTypeId": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+          "Limit": 1,
+          "Versions": []
+        }
+      ],
+      "HandledEvents": [
+        "AddedShared",
+        "DeletedShared"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "d44a8df5-3fe9-4a1b-a5a0-e8aaa65820da",
+      "Name": "AddendaGroup",
+      "Constraints": [
+        {
+          "NameGuid": "4049ec5e-87e7-486c-9af4-b4d8b592b67c",
+          "Name": "OfficialDocuments",
+          "ConstraintTypeId": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+          "Versions": []
+        }
+      ],
+      "IsEnabled": false,
+      "Versions": []
+    },
+    {
+      "NameGuid": "13a98dcd-c5ec-4fd0-a682-424613f615d4",
+      "Name": "OtherGroup",
+      "Constraints": [],
+      "Versions": []
+    },
+    {
+      "NameGuid": "6977b087-9b93-4527-9d0f-24d0e8b7ce88",
+      "Name": "ResultGroup",
+      "Constraints": [
+        {
+          "NameGuid": "5f7fe3e6-e2d4-4a6f-b902-b7c8b15f8bf1",
+          "Name": "OfficialDocuments",
+          "ConstraintTypeId": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+          "Versions": []
+        }
+      ],
+      "Versions": []
+    }
+  ],
+  "BaseGuid": "d795d1f6-45c1-4e5e-9677-b53fb7280c7e",
+  "CanBeNavigationPropertyType": true,
+  "CanBeSearch": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "3a710e98-f782-4479-b7ce-e07b8fc8d6eb",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "bd0a4ce3-3467-48ad-b905-3820bf6b9da6",
+    "Name": "FilterPanel",
+    "Controls": [
+      {
+        "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+        "NameGuid": "c74dc0c8-5638-4d87-b46f-dbeb51c0e9cc",
+        "Name": "Status",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+        "NameGuid": "5fdb64a9-730b-49d5-9ff3-173cba54f3cb",
+        "Name": "StatusList",
+        "IsMultiSelect": true,
+        "ParentGuid": "c74dc0c8-5638-4d87-b46f-dbeb51c0e9cc",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "9fa0af31-a763-445b-b0ae-7f2a5d053bd1",
+        "Name": "OnExecution",
+        "IsSelected": true,
+        "ParentGuid": "5fdb64a9-730b-49d5-9ff3-173cba54f3cb",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "79a0eac5-63fb-41c2-9562-7f852473d618",
+        "Name": "Executed",
+        "ParentGuid": "5fdb64a9-730b-49d5-9ff3-173cba54f3cb",
+        "PreviousGuid": "9fa0af31-a763-445b-b0ae-7f2a5d053bd1",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+        "NameGuid": "2e4bcf31-2d01-4fc2-8ddd-58efea81766b",
+        "Name": "JobsWithPerformer",
+        "PreviousGuid": "c74dc0c8-5638-4d87-b46f-dbeb51c0e9cc",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+        "NameGuid": "5d8adf8b-5365-42cf-9e07-143fbdab5e2a",
+        "Name": "ComplianceDeadlines",
+        "PreviousGuid": "2e4bcf31-2d01-4fc2-8ddd-58efea81766b",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+        "NameGuid": "9403c6f7-73ca-42db-bcf0-8f21d0d38e3f",
+        "Name": "ComplianceDeadlinesList",
+        "ParentGuid": "5d8adf8b-5365-42cf-9e07-143fbdab5e2a",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "bf7aa92e-a508-463d-bf68-bf9b9c6c529c",
+        "Name": "AllDeadlines",
+        "IsSelected": true,
+        "ParentGuid": "9403c6f7-73ca-42db-bcf0-8f21d0d38e3f",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "a1597a3f-32b6-4171-88f2-114639b2b3cf",
+        "Name": "Overdue",
+        "ParentGuid": "9403c6f7-73ca-42db-bcf0-8f21d0d38e3f",
+        "PreviousGuid": "bf7aa92e-a508-463d-bf68-bf9b9c6c529c",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+        "NameGuid": "54539804-0fd0-4135-a254-2aaf37bae26c",
+        "Name": "Period",
+        "PreviousGuid": "5d8adf8b-5365-42cf-9e07-143fbdab5e2a",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+        "NameGuid": "77eae8a1-2ad4-40bb-a5f9-05f92c0910c7",
+        "Name": "PeriodsList",
+        "ParentGuid": "54539804-0fd0-4135-a254-2aaf37bae26c",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "cd63fcc5-50f6-4fbc-9da7-460028104253",
+        "Name": "AllTime",
+        "IsSelected": true,
+        "ParentGuid": "77eae8a1-2ad4-40bb-a5f9-05f92c0910c7",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "50331cf4-eaed-48ed-8c47-1d8ed3bf3c42",
+        "Name": "LastMonth",
+        "ParentGuid": "77eae8a1-2ad4-40bb-a5f9-05f92c0910c7",
+        "PreviousGuid": "cd63fcc5-50f6-4fbc-9da7-460028104253",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "d0f28b79-b393-45e1-9898-9f2f56dbdcca",
+        "Name": "ManualPeriod",
+        "ParentGuid": "77eae8a1-2ad4-40bb-a5f9-05f92c0910c7",
+        "PreviousGuid": "50331cf4-eaed-48ed-8c47-1d8ed3bf3c42",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterDateRangeMetadata, Sungero.Metadata",
+        "NameGuid": "34db174f-1437-41c2-a23f-a19e95d5f9f7",
+        "Name": "DateRange",
+        "MasterControlId": "d0f28b79-b393-45e1-9898-9f2f56dbdcca",
+        "ParentGuid": "54539804-0fd0-4135-a254-2aaf37bae26c",
+        "PreviousGuid": "77eae8a1-2ad4-40bb-a5f9-05f92c0910c7",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+        "NameGuid": "822b169c-191b-46ac-8d55-fee52900a774",
+        "Name": "Author",
+        "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+        "LookupMode": "Standalone",
+        "ParentGuid": "2e4bcf31-2d01-4fc2-8ddd-58efea81766b",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+        "NameGuid": "9f8773de-a40d-4816-88f4-38820f2969c6",
+        "Name": "Assignee",
+        "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+        "LookupMode": "Standalone",
+        "ParentGuid": "2e4bcf31-2d01-4fc2-8ddd-58efea81766b",
+        "PreviousGuid": "822b169c-191b-46ac-8d55-fee52900a774",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterNavigationMetadata, Sungero.Metadata",
+        "NameGuid": "ef496a17-6e49-4749-8cd3-40d5e699534f",
+        "Name": "Supervisor",
+        "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+        "LookupMode": "Standalone",
+        "ParentGuid": "2e4bcf31-2d01-4fc2-8ddd-58efea81766b",
+        "PreviousGuid": "9f8773de-a40d-4816-88f4-38820f2969c6",
+        "Versions": []
+      }
+    ],
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "Controls"
+    ],
+    "Versions": []
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.WorkflowEntityStandaloneFormMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "02fae1ba-d7a8-4205-ace1-b3b605572b4c",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b7fdf314-105d-4487-95e5-0d73e9b1dd54",
+          "Name": "SubjectControl",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "58d89475-4f17-45b6-bfd2-916bd9cf434d",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 40
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "73781929-9ac8-4aa0-8feb-4f9daf6d093b",
+          "Name": "ResolutionAuthor",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "57ae3670-578d-455f-8dd6-65638b9e912a",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "f5723f22-18ff-4015-b9a4-fcb6c5165d82",
+          "Name": "Controller",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "1ae03970-b01e-4565-842e-0d66a7502aa4",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "e9a35354-0135-4b79-8bc5-ed66f76e8c98",
+          "Name": "TotalDeadline",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "8578de21-5e1d-464a-9ac3-b1ee5479c55c",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "6a18edc7-814b-41eb-b678-22399ba94b74",
+          "Name": "JobPerformers",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "d9bd17b3-ad31-4ef9-8358-79fe189b4592",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "NavigationPropertyGuid",
+              "Value": "0b5a48d1-ba03-490b-9747-745da6814c8c"
+            },
+            {
+              "Name": "IsDuplicatesAllowed",
+              "Value": false
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "2f904bfc-2608-442b-b136-fafa445cf119",
+          "Name": "ResponsiblePerformer",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "30ff1aee-de08-4e86-9265-a28d8916a4f7",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "838fb0be-8b22-45e5-a063-ba4e88eb3890",
+          "Name": "Jobs",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
+          "HeaderLocation": "None",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "8b4e4c08-f012-4e92-8614-93ec79dc77e2",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 250
+            },
+            {
+              "Name": "ShowVerticalLines",
+              "Value": false
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": true
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ec23002f-3673-4e14-9e52-abfa3ed86a30",
+          "Name": "Resolution",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
+          "HeaderLocation": "Top",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "11f0499b-7583-4f3e-9975-ee4eb9d7f61b",
+          "RowNumber": 7,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 100
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": true
+            },
+            {
+              "Name": "IsAutotextEnabled",
+              "Value": true
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "487f3300-511c-4232-8f4e-7e26adb51307",
+          "Name": "AbortReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
+          "HeaderLocation": "Top",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "8d81c6bc-af3e-4a55-9b67-fc77dfcdeb4f",
+          "RowNumber": 8,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 50
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "502cbd3b-8e1f-404a-ac92-dd0da2651d5e",
+          "Name": "NeedsControl",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "03c0f366-d300-4b12-b045-693ac27694ca",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "Name": "TaskGroup",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 69.0
+            },
+            {
+              "Percentage": 31.0
+            }
+          ],
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "ParentGuid": "98a172a9-a570-4919-9790-4531d4d2a0b1",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "98a172a9-a570-4919-9790-4531d4d2a0b1",
+          "Name": "ControlGroup",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "ParentGuid": "271b6cd2-e08b-4964-99e1-b000129b04e6",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.HeaderControlGroupMetadata, Sungero.Workflow.Shared",
+          "NameGuid": "271b6cd2-e08b-4964-99e1-b000129b04e6",
+          "Name": "Header",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ThreadControlGroupMetadata, Sungero.Workflow.Shared",
+          "NameGuid": "10fe4c39-fce0-4669-b732-66e53f481a2e",
+          "Name": "Thread",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.FooterControlGroupMetadata, Sungero.Workflow.Shared",
+          "NameGuid": "e1db87ba-ea39-49bf-934a-7768427cb801",
+          "Name": "Footer",
+          "IsActiveTextHidden": true,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "3da2f848-7d12-4bf2-8d5f-bfb6c8773ef9",
+          "Name": "Observers",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "5c08c18d-8fa0-4577-bd9a-1c78d5dad7a5",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "NavigationPropertyGuid",
+              "Value": "e929dbc4-7b23-4683-830e-48b97e4417a2"
+            },
+            {
+              "Name": "IsDuplicatesAllowed",
+              "Value": false
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ab7485f5-c623-4582-bb68-1e83cf50c9f6",
+          "Name": "Control",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+          "ParentGuid": "ae98972b-4d86-49b4-b20b-0e940962659b",
+          "PropertyGuid": "7a9563ea-13ce-4944-a65b-b05aba774c3b",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        }
+      ],
+      "NeedFitReadOnlyGridHeightToContent": true,
+      "Overridden": [
+        "Controls"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "88924e94-83aa-4017-9474-9ec1f27e5188",
+      "Name": "State",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "e0809ade-efab-45bc-a423-c83d69fd21bd",
+          "Name": "ControlGroup",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.FunctionControlMetadata, Sungero.Metadata",
+          "NameGuid": "05998a4c-b886-48d1-85f2-f8aa2605955c",
+          "Name": "Control",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StateViewToFunctionBinder",
+          "FunctionName": "GetStateView",
+          "HeaderLocation": "None",
+          "ParentGuid": "e0809ade-efab-45bc-a423-c83d69fd21bd",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        }
+      ],
+      "ParentFormGuid": "02fae1ba-d7a8-4205-ace1-b3b605572b4c",
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "RefreshClient",
+    "CreatedServer",
+    "BeforeStartServer",
+    "BeforeAbortServer",
+    "BeforeSaveServer",
+    "BeforeRestartServer",
+    "ShowingClient",
+    "FilteringServer",
+    "CreatingFromServer"
+  ],
+  "IconName": "ActionItemExecutionTask.ico",
+  "IconResourcesKeys": [
+    "CompoundActionItem"
+  ],
+  "IsVisibleThreadText": true,
+  "NeverLinkToParentWhenCreated": true,
+  "OperationsClass": "",
+  "Overridden": [
+    "CanBeSearch",
+    "IconName",
+    "IsVisible",
+    "ShowTypeNameInThread"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d7319199-3333-49cc-a7b9-8467617ccf20",
+      "Name": "Id",
+      "IsAncestorMetadata": true,
+      "IsIdentifier": true,
+      "IsUnique": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "85819998-a535-4e76-8632-dc2bf26ffa02",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "58d89475-4f17-45b6-bfd2-916bd9cf434d",
+      "Name": "Subject",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "IsDisplayValue": true,
+      "IsEnabled": false,
+      "Overridden": [
+        "IsEnabled",
+        "IsVisibleInCollectionByDefault"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "01b02296-d037-430f-8c8a-1a3a13337c53",
+      "Name": "Author",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "2fb308b2-ff58-4e33-9c65-099da99ee108",
+      "Name": "StartedBy",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "eaf51221-e939-4463-9331-5a4e65961f6e",
+      "Name": "Status",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "30ff1aee-de08-4e86-9265-a28d8916a4f7",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "26af3cc6-b87e-4eb5-b023-102a216a42bb",
+      "Name": "Importance",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "eaf51221-e939-4463-9331-5a4e65961f6e",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "145ff949-0ec6-4bff-b04b-d40a637de507",
+      "Name": "Created",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "26af3cc6-b87e-4eb5-b023-102a216a42bb",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6e5a3778-6a10-4d14-bd16-6d7726757468",
+      "Name": "Modified",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "145ff949-0ec6-4bff-b04b-d40a637de507",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a3b2398f-6cb3-425f-ac1a-efbca4eafe15",
+      "Name": "Started",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "6e5a3778-6a10-4d14-bd16-6d7726757468",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "85819998-a535-4e76-8632-dc2bf26ffa02",
+      "Name": "MaxDeadline",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "a3b2398f-6cb3-425f-ac1a-efbca4eafe15",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0e9c52cf-a26c-42c9-b87c-36b69e3fe008",
+      "Name": "IterationId",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "4d9abda0-54a5-413a-baf4-a22fc1f25e0d",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "3364c324-c4c4-4ccb-a81c-53653255a022",
+      "Name": "Observers",
+      "EntityGuid": "65471a50-e16c-4c58-bf20-d4362cdb4e83",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid",
+        "EntityGuid"
+      ],
+      "PreviousPropertyGuid": "0e9c52cf-a26c-42c9-b87c-36b69e3fe008",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9cd9f7ea-a285-49dd-acfa-57f044a692bc",
+      "Name": "NeedsReview",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "3364c324-c4c4-4ccb-a81c-53653255a022",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "32c36262-dd4e-4d13-859e-76707a24862c",
+      "Name": "ParentTask",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "9cd9f7ea-a285-49dd-acfa-57f044a692bc",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "bd39f96d-8ad1-4a56-a384-ba7adbb0f343",
+      "Name": "ParentAssignment",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "32c36262-dd4e-4d13-859e-76707a24862c",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0432b758-0710-419f-839f-636a5281477a",
+      "Name": "MainTask",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsVisibleInCollectionByDefault",
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "bd39f96d-8ad1-4a56-a384-ba7adbb0f343",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "53d590f3-29bf-4d84-9dda-55270ce426f6",
+      "Name": "ParentStartId",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "0432b758-0710-419f-839f-636a5281477a",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "517a47db-ee89-488d-a03b-c27d4e2bc834",
+      "Name": "StartId",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "53d590f3-29bf-4d84-9dda-55270ce426f6",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8578de21-5e1d-464a-9ac3-b1ee5479c55c",
+      "Name": "Deadline",
+      "Code": "DeadlineTAI",
+      "DateTimeFormat": "DateTime",
+      "HandledEvents": [
+        "ValueInputClient",
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "517a47db-ee89-488d-a03b-c27d4e2bc834",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1ae03970-b01e-4565-842e-0d66a7502aa4",
+      "Name": "Supervisor",
+      "CanBeSearch": false,
+      "Code": "Supervisor",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsEnabled": false,
+      "IsQuickSearchAllowed": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "8578de21-5e1d-464a-9ac3-b1ee5479c55c",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a01b4034-c56e-42e4-8396-6da1c294869d",
+      "Name": "IsCompoundActionItem",
+      "CanBeSearch": false,
+      "Code": "IsCompound",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "1ae03970-b01e-4565-842e-0d66a7502aa4",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d9bd17b3-ad31-4ef9-8358-79fe189b4592",
+      "Name": "CoAssignees",
+      "Code": "TAICoAssignees",
+      "EntityGuid": "f87455f2-4292-42f8-9e2c-0b3bf34eac87",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToChildCollectionBinder",
+      "PreviousPropertyGuid": "a01b4034-c56e-42e4-8396-6da1c294869d",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8b4e4c08-f012-4e92-8614-93ec79dc77e2",
+      "Name": "ActionItemParts",
+      "Code": "TAIParts",
+      "EntityGuid": "e2e199fe-7c2e-403f-8986-7a6801f86191",
+      "HandledEvents": [
+        "AddedShared",
+        "ChangedShared"
+      ],
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToChildCollectionBinder",
+      "PreviousPropertyGuid": "d9bd17b3-ad31-4ef9-8358-79fe189b4592",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "11f0499b-7583-4f3e-9975-ee4eb9d7f61b",
+      "Name": "ActionItem",
+      "CanBeSearch": false,
+      "Code": "ActionItemTAI",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsQuickSearchAllowed": true,
+      "Length": 1000,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "8b4e4c08-f012-4e92-8614-93ec79dc77e2",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "57ae3670-578d-455f-8dd6-65638b9e912a",
+      "Name": "AssignedBy",
+      "CanBeSearch": false,
+      "Code": "AssignedBy",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "ChangedShared",
+        "LookupServer"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "PreviousPropertyGuid": "11f0499b-7583-4f3e-9975-ee4eb9d7f61b",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8d81c6bc-af3e-4a55-9b67-fc77dfcdeb4f",
+      "Name": "AbortingReason",
+      "CanBeSearch": false,
+      "Code": "AbortingReason",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
+      "PreviousPropertyGuid": "57ae3670-578d-455f-8dd6-65638b9e912a",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "30ff1aee-de08-4e86-9265-a28d8916a4f7",
+      "Name": "Assignee",
+      "Code": "AssigneeTAI",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsQuickSearchAllowed": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "01b02296-d037-430f-8c8a-1a3a13337c53",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "34746ee5-9a05-486a-82cf-6ab0b1f273b5",
+      "Name": "ExecutionState",
+      "CanBeSearch": false,
+      "Code": "ExecutionState",
+      "DirectValues": [
+        {
+          "NameGuid": "d36fbc67-47bd-4c9b-9a7c-7864b31d0178",
+          "Name": "OnExecution",
+          "Code": "OnExecution",
+          "Versions": []
+        },
+        {
+          "NameGuid": "e152bec9-a301-480e-871a-08bd05c715f3",
+          "Name": "OnControl",
+          "Code": "OnControl",
+          "Versions": []
+        },
+        {
+          "NameGuid": "05bab80e-e320-431f-9e05-a2b310b49795",
+          "Name": "OnRework",
+          "Code": "OnRework",
+          "Versions": []
+        },
+        {
+          "NameGuid": "db9675b6-960e-43fa-a31f-0e4581aaa191",
+          "Name": "Executed",
+          "Code": "Executed",
+          "Versions": []
+        },
+        {
+          "NameGuid": "84ce4759-6312-49a5-81cb-eb6f80dd217b",
+          "Name": "Aborted",
+          "Code": "Aborted",
+          "Versions": []
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1e34ab6f-4ec4-452d-bb9a-260bda44ea53",
+      "Name": "Report",
+      "CanBeSearch": false,
+      "Code": "ReportTAI",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7f586f85-f564-4664-a680-de91afce3059",
+      "Name": "ActualDate",
+      "CanBeSearch": false,
+      "Code": "ActualDate",
+      "DateTimeFormat": "DateTime",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b06836a1-5833-401b-b8d3-89018f662d17",
+      "Name": "ReportNote",
+      "CanBeSearch": false,
+      "Code": "ReportNoteTAI",
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "03c0f366-d300-4b12-b045-693ac27694ca",
+      "Name": "IsUnderControl",
+      "CanBeSearch": false,
+      "Code": "IsUnderControl",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "86de1b25-85c2-42cc-ade9-a9541f02f30b",
+      "Name": "ActionItemType",
+      "CanBeSearch": false,
+      "Code": "ActionItemType",
+      "DirectValues": [
+        {
+          "NameGuid": "3bf4e0ed-0938-4f11-ac14-142187234d7d",
+          "Name": "Main",
+          "Code": "Main",
+          "Versions": []
+        },
+        {
+          "NameGuid": "f4e65afc-a6c8-4f20-af85-37ca67752349",
+          "Name": "Additional",
+          "Code": "Additional",
+          "Versions": []
+        },
+        {
+          "NameGuid": "10cb10b6-52e5-4e17-bc50-b851c16c55f8",
+          "Name": "Component",
+          "Code": "Component",
+          "Versions": []
+        }
+      ],
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5c08c18d-8fa0-4577-bd9a-1c78d5dad7a5",
+      "Name": "ActionItemObservers",
+      "Code": "TAIObservers",
+      "EntityGuid": "5bb73a81-d4cb-4a63-a00d-fffb8cf91956",
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToChildCollectionBinder",
+      "PreviousPropertyGuid": "86de1b25-85c2-42cc-ade9-a9541f02f30b",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c5beeae0-331c-4664-8176-445bd2050982",
+      "Name": "IsDraftResolution",
+      "CanBeSearch": false,
+      "Code": "IsDraftResolut",
+      "IsLoadEagerly": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "5c08c18d-8fa0-4577-bd9a-1c78d5dad7a5",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7a9563ea-13ce-4944-a65b-b05aba774c3b",
+      "Name": "FinalDeadline",
+      "Code": "FDeadlineTAI",
+      "DateTimeFormat": "DateTime",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "c5beeae0-331c-4664-8176-445bd2050982",
+      "Versions": []
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "CheckDeadline",
+      "ParentClasses": [
+        "ActionItemExecutionTask"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"CheckDeadline\""
+    },
+    {
+      "Name": "MaxCompoundGroup",
+      "ParentClasses": [
+        "ActionItemExecutionTask"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "100"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "ActionItemInfoProvider",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "CheckOverdueActionItemExecutionTask",
+      "Parameters": [
+        {
+          "Name": "actionItemExecutionTask",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "FormatActionItemForSubject",
+      "Parameters": [
+        {
+          "Name": "actionItem",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "hasDocument",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetActionItemsForResolution",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "status",
+          "ParameterType": "global::Sungero.Core.Enumeration",
+          "ParameterTypeFullName": "Sungero.Core.Enumeration, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "addressee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Workflow.ITask>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetActionItemStateView",
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "openedTask",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "stateViewModel",
+          "ParameterType": "global::Sungero.RecordManagement.Structures.ActionItemExecutionTask.IStateViewModel",
+          "ParameterTypeFullName": "Sungero.RecordManagement.Structures.ActionItemExecutionTask.IStateViewModel"
+        },
+        {
+          "Name": "draftAssignee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "draftActionItem",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "draftDeadline",
+          "ParameterType": "global::System.Nullable<global::System.DateTime>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "draftNumber",
+          "ParameterType": "global::System.Nullable<global::System.Int32>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "skipResolutionBlock",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "withHighlight",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::Sungero.Core.StateView",
+      "ReturnTypeFullName": "Sungero.Core.StateView, Sungero.Domain.Shared"
+    },
+    {
+      "Name": "GetStateViewXml",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "actionItemExecutionTask",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GrantAccessRightToAssignment",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "targetAssignment",
+          "ParameterType": "global::Sungero.Workflow.IAssignment",
+          "ParameterTypeFullName": "Sungero.Workflow.IAssignment, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "sourceTask",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Workflow.IAssignment",
+      "ReturnTypeFullName": "Sungero.Workflow.IAssignment, Sungero.Workflow.Interfaces"
+    },
+    {
+      "Name": "HasSubActionItems",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "assignment",
+          "ParameterType": "global::Sungero.Workflow.IAssignment",
+          "ParameterTypeFullName": "Sungero.Workflow.IAssignment, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "HasSubActionItems",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "HasSubActionItems",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "status",
+          "ParameterType": "global::Sungero.Core.Enumeration",
+          "ParameterTypeFullName": "Sungero.Core.Enumeration, Sungero.Domain.Shared"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "HasSubActionItems",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "status",
+          "ParameterType": "global::Sungero.Core.Enumeration",
+          "ParameterTypeFullName": "Sungero.Core.Enumeration, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "addressee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "SetRecipientsToAssignees",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "actionItemExecutionTask",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "recipient",
+          "ParameterType": "global::Sungero.CoreEntities.IRecipient",
+          "ParameterTypeFullName": "Sungero.CoreEntities.IRecipient, Sungero.Domain.Shared"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "StateViewModel",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "StatusesCache",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.Dictionary<global::System.Nullable<global::Sungero.Core.Enumeration>, global::System.String>"
+        },
+        {
+          "Name": "Tasks",
+          "IsEntity": true,
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>"
+        },
+        {
+          "Name": "Assignments",
+          "IsEntity": true,
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.Workflow.IAssignment>"
+        }
+      ],
+      "StructureNamespace": "Sungero.RecordManagement.Structures.ActionItemExecutionTask"
+    }
+  ],
+  "ResourcesKeys": [
+    "TaskSubject",
+    "ControlNoticeSubject",
+    "ActionItemsNotFilled",
+    "WorkFromActionItemIsCompleted",
+    "ControlWorkFromJob",
+    "SubjectWithDocument",
+    "SentToCoAssignee",
+    "WorkFromActionItemIsAccepted",
+    "NoticeSubjectWithoutDoc",
+    "DeadlineSubActionItemExecution",
+    "NumberIsNotPositive",
+    "ActionItemExecutionSubject",
+    "OnControl",
+    "YouAreAdditionalAssignee",
+    "YouAreResponsibleAssignee",
+    "YouAreAssignee",
+    "OnControlWithResponsible",
+    "ActionItemReworkSubject",
+    "NoActiveChildActionItems",
+    "ComponentActionItemExecutionSubject",
+    "StopAdditionalActionItemExecutions",
+    "StopAdditionalActionItemExecutionsDescription",
+    "AutoAbortingReason",
+    "AllowableLengthAssignmentsCharacters",
+    "Confirmation",
+    "WorkFromActionItemIsCreated",
+    "StateViewActionItemOnExecution",
+    "StateViewSubordinateActionItemSent",
+    "StateViewNotSpecified",
+    "ActionItem",
+    "StateViewCompoundActionItem",
+    "StateViewActionItemForCoAssignee",
+    "StateViewActionItemForResponsible",
+    "StateViewActionItemPart",
+    "StateViewReport",
+    "StateViewActionItem",
+    "ActionItemCanNotAssignedByUser",
+    "SubtaskSubjectPostfix",
+    "WillBeSentAfterApprove",
+    "WillBeAddToDocumentReviewTask",
+    "EmptyActionItem",
+    "EmptyFinalDeadline",
+    "DefaultActionItem",
+    "BigGroupWarning",
+    "WorkFromActionItemIsCreatedCompound",
+    "ChangeCompoundModeQuestion",
+    "ChangeCompoundModeDescription",
+    "EmptyAbortingReason",
+    "ActionItemAsigneeTooMatch",
+    "ActionItemWithNumberThreadSubject",
+    "CompoundActionItemThreadSubject",
+    "ActionItemExecutionNotificationThreadSubject",
+    "ActionItemThreadSubject",
+    "SelectDepartmentOrRole"
+  ],
+  "RibbonCardMetadata": {
+    "NameGuid": "c3657edc-205c-4bd7-82f1-d5015ef6f88a",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "ad2c8cc8-99bc-4bc9-96ae-24b934bf34f6",
+        "Name": "RequestReport",
+        "ActionGuid": "20dcc207-6554-4429-b0c9-39b75cc6d6bf",
+        "ButtonSize": "Large",
+        "Index": 2,
+        "ParentGuid": "c778f982-723e-4c83-bc61-7862643c532e",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonStateToggleButtonMetadata, Sungero.Metadata",
+        "NameGuid": "977f7789-881e-4b50-b1db-a56b360e4f24",
+        "Name": "ComponentResolution",
+        "ActionGuid": "ea35864a-00a2-465b-b6c6-c39a52b413de",
+        "ButtonSize": "Large",
+        "Index": 2,
+        "LargeIconName": "Ribbon_ComponentResolution_large_977f7789881e4b50b1dba56b360e4f24.png",
+        "ParentGuid": "5a79eb10-149e-456b-a467-4e8010afdc07",
+        "SmallIconName": "Ribbon_ComponentResolution_small_977f7789881e4b50b1dba56b360e4f24.png",
+        "StatePropertyGuid": "a01b4034-c56e-42e4-8396-6da1c294869d",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonCustomToggleButtonMetadata, Sungero.Metadata",
+        "NameGuid": "b2c6f511-586e-49a4-8143-503f6e979e6a",
+        "Name": "IsAuthorVisible",
+        "CustomButtonTypeName": "Sungero.Presentation.BarItems.CustomBarToggleButtonItem",
+        "Index": 53,
+        "IsAncestorMetadata": true,
+        "IsVisible": false,
+        "Overridden": [
+          "IsVisible"
+        ],
+        "ParentGuid": "91104789-9e63-4f9c-abfe-49a0d6bb7cca",
+        "PropertyBindingPath": "IsAuthorVisible",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "4ea2f90a-79c7-4023-8300-ef5b8d01fcbc",
+        "Name": "AddPerformer",
+        "ActionGuid": "242eaf08-4ae7-452b-b2f9-725cb56831d4",
+        "ButtonSize": "Large",
+        "Index": 3,
+        "ParentGuid": "5a79eb10-149e-456b-a467-4e8010afdc07",
+        "Versions": []
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "c778f982-723e-4c83-bc61-7862643c532e",
+        "Name": "JobControl",
+        "IconName": "Ribbon_JobControl_c778f982723e4c83bc617862643c532e.png",
+        "Index": 59,
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "SmallIconName": "Ribbon_JobControl_small_c778f982723e4c83bc617862643c532e.png",
+        "Versions": []
+      },
+      {
+        "NameGuid": "91104789-9e63-4f9c-abfe-49a0d6bb7cca",
+        "Name": "ImportanceCommands",
+        "Index": 61,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "Versions": []
+      },
+      {
+        "NameGuid": "5a79eb10-149e-456b-a467-4e8010afdc07",
+        "Name": "JobView",
+        "IconName": "Ribbon_JobView_5a79eb10149e456ba4674e8010afdc07.png",
+        "Index": 60,
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "SmallIconName": "Ribbon_JobView_small_5a79eb10149e456ba4674e8010afdc07.png",
+        "Versions": []
+      }
+    ],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "66f216c2-f807-4bce-9e84-8eb19cbd36af",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "bfd7c553-e3c2-4c51-b33a-63fd8acc21af",
+        "Name": "JobExecution",
+        "ActionGuid": "56ac8798-c7f6-42cf-a406-e6dfd8a84d42",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "ParentGuid": "e26275e9-9782-4340-80be-5d59bf67d1ec",
+        "Versions": []
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "e26275e9-9782-4340-80be-5d59bf67d1ec",
+        "Name": "Reports",
+        "IconName": "Ribbon_Reports_e26275e99782434080be5d59bf67d1ec.png",
+        "Index": 26,
+        "ParentGuid": "3a9d7dc2-d662-4966-9fdc-c8004b9c83e2",
+        "SmallIconName": "Ribbon_Reports_small_e26275e99782434080be5d59bf67d1ec.png",
+        "Versions": []
+      }
+    ],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Scheme": {
+    "NameGuid": "c7ae4ee8-f2a6-4784-8e61-7f7f642dbcd1",
+    "Name": "RouteScheme",
+    "CurrentVersionGuid": "0745199f-eaac-4875-8563-40ed1e5ce317",
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "CurrentVersionGuid"
+    ],
+    "VersionsCounter": 1
+  },
+  "ShowTypeNameInThread": true,
+  "Versions": [
+    {
+      "Type": "TaskMetadata",
+      "Number": 1
+    },
+    {
+      "Type": "WorkflowEntityMetadata",
+      "Number": 2
+    },
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

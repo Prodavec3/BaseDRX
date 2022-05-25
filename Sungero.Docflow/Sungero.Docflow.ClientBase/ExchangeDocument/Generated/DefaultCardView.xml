@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection206b91b3920941ba91fcf50db5cdcb8c FormGuid="30d15053-0c64-40f2-89b8-b68c0c9fd574">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">885,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="8">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Action</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_Action</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">DeliveredTo</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_DeliveredTo</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">IsOriginal</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_IsOriginal</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">ReturnDeadline</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_ReturnDeadline</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">ReturnDate</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_ReturnDate</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">DeliveryDate</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_DeliveryDate</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">ReturnResult</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_ReturnResult</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">Note</property>
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocument_Tracking_Note</property>
+            <property name="VisibleIndex">7</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="3">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">DeliveryDate</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">ReturnDeadline</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">ReturnDate</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection206b91b3920941ba91fcf50db5cdcb8c>
+  <AccessRightsAccessRightEntryCardGrid_38106a151b4548f2900c4f02ff9fa8b2>
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="\$GridControl" iskey="true" value="GridControl">
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+      </property>
+    </XtraSerializer>
+  </AccessRightsAccessRightEntryCardGrid_38106a151b4548f2900c4f02ff9fa8b2>
+  <collapsableTree>
+    <Layout>
+      <IsDocked>true</IsDocked>
+      <Width>230</Width>
+    </Layout>
+  </collapsableTree>
+  <treeListLayout>
+    <GridViewSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <ColumnWidths>
+        <string>230</string>
+        <string>Auto</string>
+        <string>*</string>
+      </ColumnWidths>
+    </GridViewSettings>
+  </treeListLayout>
+</settings>

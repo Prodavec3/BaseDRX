@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateResponsibilitiesReportTable">
+    <mssql><![CDATA[create table {0}
+  ([ReportSessionId] varchar(256) NOT NULL,
+   [ModuleName] nvarchar(max),
+   [Responsibility] nvarchar(max),
+   [Record] nvarchar(max),
+   [RecordId] int,
+   [RecordHyperlink] varchar(256),
+   [Priority] int)]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (ReportSessionId citext NOT NULL,
+   ModuleName citext,
+   Responsibility citext,
+   Record citext,
+   RecordId int,
+   RecordHyperlink citext,
+   Priority int)]]></postgres>
+  </query>
+  <query key="SelectDataFromTable">
+    <default><![CDATA[select *
+from  Sungero_Reports_Responsibilities temp
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

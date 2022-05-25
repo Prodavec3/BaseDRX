@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AcquaintanceTaskSubject" xml:space="preserve">
+    <value>Get acquainted with document {0}</value>
+  </data>
+  <data name="AcquaintanceTaskDocumentWithoutBodyMessage" xml:space="preserve">
+    <value>To send document for electronic acquaintance, create a document version.</value>
+  </data>
+  <data name="FromSignAssignmentDesription" xml:space="preserve">
+    <value>Get acquainted with the document, contact a responsible person and leave a signed acknowledgement.</value>
+  </data>
+  <data name="TaskAutoText" xml:space="preserve">
+    <value>Please get acquainted with the document.</value>
+  </data>
+  <data name="AcquaintanceAssignmentSubject" xml:space="preserve">
+    <value>Get acquainted with: {0}</value>
+  </data>
+  <data name="AcquaintanceFinishAssignmentSubject" xml:space="preserve">
+    <value>Finish acquaintance: {0}</value>
+  </data>
+  <data name="CompletedBySubstitution" xml:space="preserve">
+    <value>To complete the assignment for an employee, leave your comments in the text of the assignment.</value>
+  </data>
+  <data name="DocumentNotReaded" xml:space="preserve">
+    <value>To complete the assignment, get acquainted with document version {0}.</value>
+  </data>
+  <data name="DocumentSignatureNotValid" xml:space="preserve">
+    <value>The approving document signature is not valid, contact the person responsible for acquaintance.</value>
+  </data>
+  <data name="CompletedByAnother" xml:space="preserve">
+    <value>Completed.</value>
+  </data>
+  <data name="PerformersCantBeEmpty" xml:space="preserve">
+    <value>At least one employee should be specified in acquaintance list.</value>
+  </data>
+  <data name="NotAutomatedUserWithoutSubstitutionError" xml:space="preserve">
+    <value>To send document for acquaintance, all performers should have accounts or substitutes.</value>
+  </data>
+  <data name="DocumentCantBeEmpty" xml:space="preserve">
+    <value>Attach "Document for acquaintance" to the task.</value>
+  </data>
+  <data name="ElectronicAcquaintanceDecription" xml:space="preserve">
+    <value>Electronic acquaintance.</value>
+  </data>
+  <data name="SelfSignAcquaintanceDecription" xml:space="preserve">
+    <value>Acquaintance with a signed acknowledgement.</value>
+  </data>
+  <data name="StateViewDocumentSendFromAcquaintance" xml:space="preserve">
+    <value>Document sent for acquaintance.</value>
+  </data>
+  <data name="StateViewDocumentElectonicAcquaintance" xml:space="preserve">
+    <value>Electronic document acquaintance</value>
+  </data>
+  <data name="StateViewAcquainted" xml:space="preserve">
+    <value>Acquainted</value>
+  </data>
+  <data name="StateViewCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AcquaintanceTaskIco" type="System.Byte[], mscorlib">
+    <value>
+        AAABAAIAEBAAAAEAIAAfAQAAJgAAACAgAAABACAAJwIAAEUBAACJUE5HDQoaCgAAAA1JSERSAAAAEAAA
+        ABAIBgAAAB/z/2EAAAABc1JHQgCuzhzpAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwwAADsMBx2+o
+        ZAAAALRJREFUOE9jAIGKpva2yqaO/yA2iMaF4fKNHfNAbDhAV0gMhmqFAGwKCGGoVgjApoAQhmqFAJAA
+        KWAYGADVhgCEDJi5YOn/DVt3/H/y9BmYH5qSr1/W2LEsvaTuBFEGhKcV/b9w6cr/2ra+/9Wtvf8Lq1t+
+        HT52EixOtAEwgM4eSQaAYuHOvftgNig2tu7ai2xA+zGQIdgwSD48vdg+PqeyK6+y6S5IU3ZZw5P0otqp
+        IWmF7gBTxsTdsoCkRgAAAABJRU5ErkJggolQTkcNChoKAAAADUlIRFIAAAAgAAAAIAgGAAAAc3p69AAA
+        AAFzUkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABvElEQVRYR2PA
+        B+YsWtY2d+HSeVAuyYBk/WANi5b+B2EQHxubWIxTPz4HwRUBMQhgYxOLkfUgs0EYah0mQFb04ePH/zv3
+        7Pu/duPm/z9+/EAxgBiMTz/UOkyArGjP/oP/v3379v/Xr1//z56/gGIAMRiffqh1mABZES0x1DpMgE0x
+        LTDUOkwAU0ArMOqAUQeMOmCwOGAf1DpMQGsHQK3BDShxwIatO/6v3rDl/+FjJ/8/efrs/58/f6AyCACy
+        Izy92D4srTC/vLFzQ1ZJ3Q6wxTBAiQPC04pQcFl9+/8z5y7AHXLl2o3/2WUNb9DVQa2GAGo4YP+ho/9b
+        e6fA+SCH1LX1w/kg9q59B+F8qNUQQA0HwAAoGmYuWAoX750y6/+de/ehsgj1UKshgJoOgAFC4lCrIWDU
+        AaMOGHXAsHAAqJR7/eYNVBTTAe/efwDXFzBxqNUQAHMAqRikNz6n/DPMUBBGL3JB9QJyEQ3C0Vklv8AW
+        wwDQsGPohhODQXrD0/PlQ9IK3YtqWrtLGzouIVuEjAuqmu/XtPbNDEstDI9MK1IHW0wLAHJQflXrxIzi
+        2k/JBVXfC2taFmNayMAAAF5L99qbSzP7AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="StateViewFinish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="StateViewAsquaintance" xml:space="preserve">
+    <value>Acquaintance</value>
+  </data>
+  <data name="StateViewFinishAssignment" xml:space="preserve">
+    <value>Acquaintance Finish</value>
+  </data>
+  <data name="SubstitutionAccept" type="System.Byte[], mscorlib">
+    <value>
+        AAABAAIAICAAAAEAIACoEAAAJgAAABAQAAABACAAaAQAAM4QAAAoAAAAIAAAAEAAAAABACAAAAAAAIAQ
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADqD1zA6g9fgOoPX/zqD13AAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjoJugo6Cb/6Ogm/+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6CboAAAAAA6g9cQOoPX8DqD1/86g9f/OoPX/zqD
+        10AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOgm/+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm6AAAAAAOoPXEDqD19A6g9f/OoPX/zqD
+        1/86g9f/OoPX8DqD1xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo6Cb/6Og
+        m/////////////////////////////////////////////////////////////P3/P9emd7/OoPX/zqD
+        1/86g9f/QYfY+TqD1/86g9f/OoPX0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACjoJv/o6Cb///////////////////////////////////////////////////////z9/z/Xpne/zqD
+        1/86g9f/OoPX/5vA6/+00fD/OoPX/zqD1/86g9f/OoPXkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAKOgm/+joJv/////////////////////////////////////////////////8/f8/16Z
+        3v86g9f/OoPX/zqD1/+DsOb///////////+DsOb/OoPX/zqD1/86g9f/OoPXUAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAo6Cb/6Ogm///////////////////////////////////////////////
+        //+bwOv/OoPX/zqD1/86g9f/g7Dm//////////////////P3/P9emd7/OoPX/zqD1/86g9fwOoPXIAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjoJv/o6Cb////////////////////////////////////
+        /////////////5vA6/86g9f/OoPX/4Ow5v///////////////////////////9ro9/9Fitn/OoPX/zqD
+        1/86g9fQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOgm/+joJv/////////////////////////
+        ////////////////////////5/D6/87g9f/O4PX//////////////////////////////////////7TR
+        8P86g9f/OoPX/zqD1/86g9eQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo6Cb/6Ogm///////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////4Ow5v86g9f/OoPX/zqD1/86g9dQAAAAAAAAAAAAAAAAAAAAAAAAAACjoJv/o6Cb////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////8/f8/16Z3v86g9f/OoPX/zqD1/A6g9cgAAAAAAAAAAAAAAAAAAAAAKOg
+        m/+joJv/////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////2uj3/zqD1/A6g9f/OoPX/zqD19AAAAAAAAAAAAAA
+        AAAAAAAAo6Cb/6Ogm///////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////OoPXYDqD1/86g9f/OoPX/zqD
+        15AAAAAAAAAAAAAAAACjoJv/o6Cb////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////8AAAAAOoPXoDqD
+        1/86g9f/OoPXwAAAAAAAAAAAAAAAAKOgm/+joJv/////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////6Og
+        m1A6g9cQOoPX0DqD1/86g9fAAAAAAAAAAAAAAAAAo6Cb/6Ogm///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////o6Cb8KOgmyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjoJv/o6Cb////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //////////////////+joJv/o6Cb0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOgm/+joJv/////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////6Ogm/+joJv/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo6Cb/6Og
+        m///////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////o6Cb/6Ogm/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACjoJv/o6Cb////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////+joJv/o6Cb/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAKOgm/+joJv/////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////6Ogm/+joJv/AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAo6Cb/6Ogm///////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////o6Cb/6Og
+        m/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjoJv/o6Cb////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        //+joJv/o6Cb/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOgm/+joJv/////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////////////6Ogm/+joJv/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo6Cb/6Ogm///////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////o6Cb/6Ogm/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjoJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOg
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/AAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAo6Cb/6Ogm/+joJv/tLGt/+Pi4P/j4uD/tLGt/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/7Sxrf/j4uD/4+Lg/7Sxrf+joJv/o6Cb/6Ogm/8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACjoJv/o6Cb/6Ogm//j4uD/x8PA/8fDwP/j4uD/o6Cb/6Ogm/+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/4+Lg/8fDwP/Hw8D/4+Lg/6Ogm/+joJv/o6Cb/wAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOgm/+joJv/o6Cb//////+joJv/o6Cb//////+joJv/o6Cb/6Og
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm///////o6Cb/6Ogm///////o6Cb/6Og
+        m/+joJv/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo6CboKOgm/+joJv/AAAAAKOgm/+joJv/AAAAAKOg
+        m/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/6Ogm/+joJv/o6Cb/wAAAACjoJv/o6Cb/wAA
+        AACjoJv/o6Cb/6Ogm6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAo6CboKOg
+        m6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKOg
+        m6CjoJugAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//4f/gAED/4ACAf+AAAH/gAAA/4AAAH+AA
+        AA/gAAAP4AAAB+AAAAPgAAAB4AAAAeAAAADgAAAQ4AAAAOAAAAfgAAAH4AAAB+AAAAfgAAAH4AAAB+AA
+        AAfgAAAH4AAAB+AAAAfgAAAH4AAAB+AAAAfgAAAH4AAAB+JAAkf+f/5/KAAAABAAAAAgAAAAAQAgAAAA
+        AABABAAAAAAAAAAAAAAAAAAAAAAAAAAAAACGgHeghoB3/4aAd/+GgHf/hoB3/4aAd6AAAAAAOoPXYDqD
+        1/86g9egAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhoB3////////////////////////////tNHw/zqD
+        1/86g9f/OoPX/zqD12AAAAAAAAAAAAAAAAAAAAAAAAAAAIaAd///////////////////////tNHw/zqD
+        1/86g9f/g7Dm/zqD1/86g9fwOoPXMAAAAAAAAAAAAAAAAAAAAACGgHf/////////////////wNny/zqD
+        1/86g9f/m8Dr//////+DsOb/OoPX/zqD19A6g9cQAAAAAAAAAAAAAAAAhoB3/////////////////5vA
+        6/86g9f/g7Dm////////////8/f8/16Z3v86g9f/OoPXoAAAAAAAAAAAAAAAAIaAd///////////////
+        ///////////////////////////////////a6Pf/Q4nZ/DqD1/86g9dgAAAAAAAAAACGgHf/////////
+        /////////////////////////////////////////////7TR8P86g9f/OoPX/zqD1zAAAAAAhoB3////
+        ////////////////////////////////////////////////////////OoPXoDqD1/86g9fgAAAAAIaA
+        d////////////////////////////////////////////////////////////wAAAAA6g9fAOoPX4AAA
+        AACGgHf///////////////////////////////////////////////////////////+GgHegAAAAAAAA
+        AAAAAAAAhoB3////////////////////////////////////////////////////////////hoB3/wAA
+        AAAAAAAAAAAAAIaAd////////////////////////////////////////////////////////////4aA
+        d/8AAAAAAAAAAAAAAACGgHf/hoB3/4aAd/+GgHf/hoB3/4aAd/+GgHf/hoB3/4aAd/+GgHf/hoB3/4aA
+        d/+GgHf/AAAAAAAAAAAAAAAAhoB3/4aAd/+GgHf/hoB3/4aAd/+GgHf/hoB3/4aAd/+GgHf/hoB3/4aA
+        d/+GgHf/hoB3/wAAAAAAAAAAAAAAAIaAd/+GgHf/hoB3/4aAd/+GgHf/hoB3/4aAd/+GgHf/hoB3/4aA
+        d/+GgHf/hoB3/4aAd/8AAAAAAAAAAAAAAACGgHeghoB3/wAAAACGgHf/hoB3/4aAd/+GgHf/hoB3/4aA
+        d/+GgHf/AAAAAIaAd/+GgHegAAAAAAAAAACBHwAAgA8AAIAHAACAAwAAgAMAAIABAACAAAAAgAAAAIAE
+        AACAAwAAgAMAAIADAACAAwAAgAMAAIADAACQEwAA
+</value>
+  </data>
+  <data name="Acquainted" xml:space="preserve">
+    <value>Acquainted.</value>
+  </data>
+  <data name="StateViewDocumentSelfSignAcquaintance" xml:space="preserve">
+    <value>Document acquaintance with a signed acknowledgement</value>
+  </data>
+  <data name="DocumentNotReadedLastVersion" xml:space="preserve">
+    <value>To complete the assignment, get acquainted with document.</value>
+  </data>
+  <data name="TooManyPerformers" xml:space="preserve">
+    <value>There are more than {0} employees in the acquaintance task. Create acquaintance tasks by departments or business units.</value>
+  </data>
+  <data name="RecommendApprovalSignature" xml:space="preserve">
+    <value>For legal effect, it is recommended that you have the document signed with an electronic signature with the "Approve" result.</value>
+  </data>
+</root>

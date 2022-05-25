@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Enum_Result_Complete" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Action_Complete" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Action_CompleteHint" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="Action_CompleteConfirmationMessage" xml:space="preserve">
+    <value>Complete the assignment?</value>
+  </data>
+  <data name="Action_CompleteDescription" xml:space="preserve">
+    <value>Complete the assignment</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Create action items</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Create action items</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Create action items</value>
+  </data>
+  <data name="Action_CreateActionItem" xml:space="preserve">
+    <value>Create Action Item</value>
+  </data>
+  <data name="Action_CreateActionItemDescription" xml:space="preserve">
+    <value>Create action item and send it for execution</value>
+  </data>
+  <data name="Action_CreateActionItemHint" xml:space="preserve">
+    <value>Create Action Item on Document</value>
+  </data>
+  <data name="Action_CreateActionItemConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Stage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="Ribbon_ExecutionGroup_a2d7b043f07d4deaa0750b2b564b7ef0" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="Property_ResolutionText" xml:space="preserve">
+    <value>Resolution</value>
+  </data>
+  <data name="Form_a4d4b9fc14e24238a7eca4e6a7625f17" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="ControlGroup_5365003fda52458ea5af250904267db1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_CollapsedStagesTypesExe" xml:space="preserve">
+    <value>Combined stage types</value>
+  </data>
+  <data name="Ribbon_AsgGroup_ac82503a7a4749d0b90c9bb512c4559c" xml:space="preserve">
+    <value>Action items</value>
+  </data>
+  <data name="Control_1bbfaba9c44445878d1c51150787fb2e_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_StageNumber" xml:space="preserve">
+    <value>Stage number</value>
+  </data>
+  <data name="Property_DeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Property_ExchangeService" xml:space="preserve">
+    <value>Exchange service</value>
+  </data>
+  <data name="Action_SendViaExchangeService" xml:space="preserve">
+    <value>Send via exchange service</value>
+  </data>
+  <data name="Action_SendViaExchangeServiceDescription" xml:space="preserve">
+    <value>Send the document to counterparty via document exchange service.
+
+If the document was initially received from the counterparty and requires a signature, you will be asked to specify result of signing.
+
+This command is only available if you are included into role "Users authorized to work via exchange service".</value>
+  </data>
+  <data name="Action_SendViaExchangeServiceHint" xml:space="preserve">
+    <value>Send or return document to counterparty via exchange service</value>
+  </data>
+  <data name="Action_SendViaExchangeServiceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendViaExchangeServiceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_DocumentPackage_9b003349584a46f7a102362e337b2d93" xml:space="preserve">
+    <value>Document package</value>
+  </data>
+  <data name="Property_DeliveryMethodDescription" xml:space="preserve">
+    <value>Delivery method description</value>
+  </data>
+  <data name="ControlGroup_6da0624353094f9697cdc431a98b3575" xml:space="preserve">
+    <value>Delivery Method</value>
+  </data>
+  <data name="Action_CreateAcquaintance" xml:space="preserve">
+    <value>Send for Acquaintance</value>
+  </data>
+  <data name="Action_CreateAcquaintanceDescription" xml:space="preserve">
+    <value>Send document by acquaintance task.</value>
+  </data>
+  <data name="Action_CreateAcquaintanceHint" xml:space="preserve">
+    <value>Send for Acquaintance</value>
+  </data>
+  <data name="Action_CreateAcquaintanceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateAcquaintanceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendByMail" xml:space="preserve">
+    <value>Send by email</value>
+  </data>
+  <data name="Action_SendByMailDescription" xml:space="preserve">
+    <value>Send document content to a mail recipient.</value>
+  </data>
+  <data name="Action_SendByMailHint" xml:space="preserve">
+    <value>Send by email</value>
+  </data>
+  <data name="Action_SendByMailConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendByMailConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ReworkPerformer" xml:space="preserve">
+    <value>Send for rework to</value>
+  </data>
+  <data name="Enum_Result_ForRevision" xml:space="preserve">
+    <value>For Rework</value>
+  </data>
+  <data name="Action_ForRevision" xml:space="preserve">
+    <value>For rework</value>
+  </data>
+  <data name="Action_ForRevisionHint" xml:space="preserve">
+    <value>Send Document for Revision</value>
+  </data>
+  <data name="Action_ForRevisionConfirmationMessage" xml:space="preserve">
+    <value>Send the document for rework?</value>
+  </data>
+  <data name="Action_ForRevisionDescription" xml:space="preserve">
+    <value>Send the document for revision.</value>
+  </data>
+</root>

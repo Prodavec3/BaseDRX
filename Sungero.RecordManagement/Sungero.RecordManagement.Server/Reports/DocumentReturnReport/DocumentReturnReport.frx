@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Company.Shared&#13;&#10;Sungero.Company.Server&#13;&#10;Sungero.RecordManagement.Shared&#13;&#10;Sungero.RecordManagement.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Company;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.RecordManagement.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table5" Alias="DocumentReturningData" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectFromDocumentsReturnReportTable}">
+        <Column Name="FullName" DataType="System.String" PropName="Column"/>
+        <Column Name="DocName" DataType="System.String" PropName="Column"/>
+        <Column Name="OriginalOrCopy" DataType="System.String" PropName="Column"/>
+        <Column Name="DeliveryDate" DataType="System.String" PropName="Column"/>
+        <Column Name="ScheduledReturnDate" DataType="System.String" PropName="Column"/>
+        <Column Name="OverdueDelay" DataType="System.Int32" PropName="Column"/>
+        <Column Name="DocId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Hyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="DepName" DataType="System.String" PropName="Column"/>
+        <Column Name="DepId" DataType="System.Int32" PropName="Column1"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="6981ae2b-3f82-42b3-bf5f-bfed8319fcbf" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AvailableIdsTableName" Id="69e4f2a9-e147-4a72-a184-2588cc41f49e" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnit" Id="37aec550-a713-4591-b81f-c07d39325e5c" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IOurCompany, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="eff95720-181f-4f7d-892d-dec034c7b2ab"/>
+    <SungeroParameter Name="Department" Id="0a98e8f2-c74a-4c56-b8ca-1f4641db1b44" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IDepartment, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="61b1c19f-26e2-49a5-b3d3-0d3618151e12"/>
+    <SungeroParameter Name="Employee" Id="efd3f543-3394-4ccf-a054-498164f4abf3" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="b7905516-2be5-4931-961c-cb38d5677565"/>
+    <SungeroParameter Name="DeliveryDateFrom" Id="a183750d-3fc5-4af1-8d24-78658f7abef3" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DeliveryDateTo" Id="e5870dd8-2d85-47cc-8e2d-4fef93f8da37" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="NeedShowDialog" Id="c4818623-0c7f-4bd1-897a-d338d1650a06" IsRequired="false" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="MinDeliveryDate" Id="f0d01ad4-5ae0-4d24-884f-91675a4400d9" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="MaxDeliveryDate" Id="2c185053-c738-43c2-87a4-4656e82de0e4" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="2197e5a8-208c-4a89-a70a-896d2cd6370a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" TopMargin="25" BottomMargin="15" MirrorMargins="true" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="113.4" CanGrow="true">
+      <TextObject Name="Text17" Width="529.2" Height="37.8" CanGrow="true" Text="[BusinessUnit]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text18" Left="529.2" Width="519.75" Height="37.8" CanGrow="true" Text="[Sungero.Core.Calendar.Now]" Format="Date" Format.Format="d" HorzAlign="Right" Font="Arial, 10pt"/>
+      <TextObject Name="Text19" Top="37.8" Width="1048.95" Height="37.8" CanGrow="true" Text="[Resources.DocumentReturnReport.ReportName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text20" Left="349.65" Top="75.6" Width="349.65" Height="37.8" CanGrow="true" Text="[[DeliveryDateFrom] == [MinDeliveryDate] &amp;&amp; [DeliveryDateTo] == [MaxDeliveryDate] ? string.Empty : Resources.DocumentReturnReport.Issued + &quot; &quot;;][[DeliveryDateFrom] == [MinDeliveryDate] ? string.Empty : Sungero.RecordManagement.Reports.Resources.DocumentReturnReport.PeriodFrom + &quot; &quot; + [DeliveryDateFrom].ToString(&quot;d&quot;);][[DeliveryDateTo] == [MaxDeliveryDate] ? string.Empty : &quot; &quot; + Sungero.RecordManagement.Reports.Resources.DocumentReturnReport.PeriodTo + &quot; &quot; + [DeliveryDateTo].ToString(&quot;d&quot;);]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="117.4" Width="1047.06" Height="56.7">
+      <TextObject Name="Text2" Width="189" Height="56.7" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.DocumentReturnReport.Employee]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text3" Left="189" Width="444.15" Height="56.7" Border.Lines="All" Text="[Resources.DocumentReturnReport.DocumentName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="689.85" Width="85.05" Height="56.7" Border.Lines="All" Text="[Resources.DocumentReturnReport.OriginalOrCopy]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text5" Left="774.9" Width="94.5" Height="56.7" Border.Lines="All" Text="[Resources.DocumentReturnReport.IssueDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="869.4" Width="85.05" Height="56.7" Border.Lines="All" Text="[Resources.DocumentReturnReport.ReturnDeadline]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text7" Left="954.45" Width="94.5" Height="56.7" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.DocumentReturnReport.Delay]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="633.15" Width="56.7" Height="56.7" Border.Lines="All" Text="[Resources.DocumentReturnReport.ID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="178.1" Width="1047.06" Height="37.8" CanGrow="true" CanShrink="true" Condition="[DocumentReturningData.DepId]">
+      <TextObject Name="Text9" Width="1048.95" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.DepName]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <DataBand Name="Data1" Top="219.9" Width="1047.06" Height="56.7" CanGrow="true" CanShrink="true" DataSource="Table5" KeepTogether="true" KeepDetail="true">
+        <TextObject Name="Text11" Left="189" Width="444.15" Height="56.7" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.DocName]" VertAlign="Center" Font="Arial, 10pt">
+          <Highlight>
+            <Condition Expression="[DocumentReturningData.OverdueDelay] &gt; 0" Font="Arial, 10pt"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text10" Width="189" Height="56.7" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.FullName]" Padding="13, 1, 2, 1" VertAlign="Center" Font="Arial, 10pt">
+          <Highlight>
+            <Condition Expression="[DocumentReturningData.OverdueDelay] &gt; 0" Font="Arial, 10pt"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text12" Left="689.85" Width="85.05" Height="56.7" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.OriginalOrCopy]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+          <Highlight>
+            <Condition Expression="[DocumentReturningData.OverdueDelay] &gt; 0" Font="Arial, 10pt"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text13" Left="774.9" Width="94.5" Height="56.7" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.DeliveryDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+          <Formats>
+            <DateFormat/>
+            <GeneralFormat/>
+          </Formats>
+          <Highlight>
+            <Condition Expression="[DocumentReturningData.OverdueDelay] &gt; 0" Font="Arial, 10pt"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text14" Left="869.4" Width="85.05" Height="56.7" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.ScheduledReturnDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+          <Formats>
+            <DateFormat/>
+            <GeneralFormat/>
+          </Formats>
+          <Highlight>
+            <Condition Expression="[DocumentReturningData.OverdueDelay] &gt; 0" Font="Arial, 10pt"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text15" Left="954.45" Width="94.5" Height="56.7" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[DocumentReturningData.OverdueDelay] &lt;= 0 ? &quot;-&quot; : [DocumentReturningData.OverdueDelay].ToString();]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt">
+          <Highlight>
+            <Condition Expression="[DocumentReturningData.OverdueDelay] &gt; 0" Font="Arial, 10pt"/>
+          </Highlight>
+        </TextObject>
+        <TextObject Name="Text16" Left="633.15" Width="56.7" Height="56.7" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[DocumentReturningData.Hyperlink]" CanGrow="true" GrowToBottom="true" Text="[DocumentReturningData.DocId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue"/>
+        <Sort>
+          <Sort Expression="[DocumentReturningData.OverdueDelay]" Descending="true"/>
+          <Sort Expression="[DocumentReturningData.ScheduledReturnDate]"/>
+          <Sort Expression="[DocumentReturningData.DeliveryDate]"/>
+        </Sort>
+      </DataBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="280.6" Width="1047.06" Height="47.25">
+      <TextObject Name="Text1" Left="954.45" Width="94.5" Height="18.9" Text="[Page]" HorzAlign="Right" Font="Arial, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

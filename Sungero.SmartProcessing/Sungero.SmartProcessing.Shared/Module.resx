@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmptyScanPackage" xml:space="preserve">
+    <value>Package not found.</value>
+  </data>
+  <data name="InvalidSenderLineName" xml:space="preserve">
+    <value>No settings were found for line {0}. Set up valid document capture sources.</value>
+  </data>
+  <data name="CheckPackageTaskName" xml:space="preserve">
+    <value>Check document package: {0}</value>
+  </data>
+  <data name="CheckDocumentTaskName" xml:space="preserve">
+    <value>Check document: {0}</value>
+  </data>
+  <data name="DocumentName" xml:space="preserve">
+    <value>Document No. {0}</value>
+  </data>
+  <data name="SimpleDocumentName" xml:space="preserve">
+    <value>Simple document</value>
+  </data>
+  <data name="AttachmentName" xml:space="preserve">
+    <value>Attachment No. {0}</value>
+  </data>
+  <data name="EmailBodyDocumentName" xml:space="preserve">
+    <value>Email from {0}</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>document</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>documents</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>kind</value>
+  </data>
+  <data name="Kinds" xml:space="preserve">
+    <value>kinds</value>
+  </data>
+  <data name="DocumentsWithRegistrationFailureTaskText" xml:space="preserve">
+    <value>Could not identify registration setting for {0} of {2} {1} or document with the same number already exists:</value>
+  </data>
+  <data name="FailedClassifyDocumentsTaskText" xml:space="preserve">
+    <value>Capture Service cannot classify the documents:</value>
+  </data>
+  <data name="FailedClassifyDocumentTaskText" xml:space="preserve">
+    <value>Capture Service cannot classify the document:</value>
+  </data>
+  <data name="DocumentFoundByBarcodeTaskText" xml:space="preserve">
+    <value>The system found a document by barcode. New version has been created:</value>
+  </data>
+  <data name="DocumentWasLockedTaskText" xml:space="preserve">
+    <value>was edited while being processed</value>
+  </data>
+  <data name="DocumentLockedByEmployeeTaskText" xml:space="preserve">
+    <value>is being edited by {0}</value>
+  </data>
+  <data name="FailedCreateVersionsTaskText" xml:space="preserve">
+    <value>Capture Service cannot upload the documents to new versions:</value>
+  </data>
+  <data name="FailedCreateVersionTaskText" xml:space="preserve">
+    <value>Capture Service cannot upload the document to a new version:</value>
+  </data>
+  <data name="DocumentsFoundByBarcodeTaskText" xml:space="preserve">
+    <value>The system found documents by barcodes. New version has been created for each document:</value>
+  </data>
+  <data name="RequiredPropertyIsEmpty" xml:space="preserve">
+    <value>required property is empty</value>
+  </data>
+  <data name="WithoutNumberWithSlash" xml:space="preserve">
+    <value>w/o No.</value>
+  </data>
+  <data name="WithoutNumber" xml:space="preserve">
+    <value>w/o No.</value>
+  </data>
+  <data name="WithoutNumberWithDash" xml:space="preserve">
+    <value>w/o No.</value>
+  </data>
+  <data name="DocumentSkippedByReason" xml:space="preserve">
+    <value>VerificationTask Verification is not completed. (id = {0}, reason = {1}).</value>
+  </data>
+  <data name="VerificationTaskThreadSubject" xml:space="preserve">
+    <value>Verify document package</value>
+  </data>
+  <data name="VerificationAssignmentThreadSubject" xml:space="preserve">
+    <value>Verification</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeleteButtonName" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteDocumentsDialogCancelButtonName1" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DeleteDocumentsDialogCancelButtonName2" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DeleteDocumentDialogDeletingExceptionDocumentsHyperlinkTitle" xml:space="preserve">
+    <value>Documents that were not deleted</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeletionTotals" xml:space="preserve">
+    <value>Documents to delete - {0}{1}</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeletionSuccess" xml:space="preserve">
+    <value>- deleted - {0}{1}</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeletionFailed" xml:space="preserve">
+    <value>- cannot be deleted - {0}{1}</value>
+  </data>
+  <data name="TaxInvoiceCorrects" xml:space="preserve">
+    <value> Corrects tax invoice No. {0} from {1}.</value>
+  </data>
+  <data name="UTDCorrects" xml:space="preserve">
+    <value>Corrects document confirming goods shipment (work completion) No. {0} from {1}.</value>
+  </data>
+  <data name="FailedCreateDocumentTaskText" xml:space="preserve">
+    <value>error in processing of the document classified by the Ario service as a {0}</value>
+  </data>
+  <data name="FailedArioProcessDocumentTaskText" xml:space="preserve">
+    <value>error in the Ario service</value>
+  </data>
+  <data name="OrderAndLinkErrorsTaskText" xml:space="preserve">
+    <value>Errors occurred when assigning names to the documents or adding relations between them.</value>
+  </data>
+  <data name="CreateDocumentFromEmailBodyErrorsTaskText" xml:space="preserve">
+    <value>Cannot create a document containing the text of email: {0} "{1}".</value>
+  </data>
+  <data name="ArioErrorsNotificationTitle" xml:space="preserve">
+    <value>Processing the document package: errors in the Ario service ({0})</value>
+  </data>
+  <data name="ArioErrorsNotificationPrefix" xml:space="preserve">
+    <value>Errors occurred in the Ario service when processing a document package from a folder or scanner. Contact your system administrator.</value>
+  </data>
+  <data name="ArioErrorsNotificationText" xml:space="preserve">
+    <value>{3}
+Information on the document package:
+  Source: {0}
+  Document package ID: {1}
+  Processing by Document Capture Service started at: {2}</value>
+  </data>
+  <data name="ContactSysAdminIfNeeded" xml:space="preserve">
+    <value>Contact your system administrator if necessary.</value>
+  </data>
+  <data name="DocumentPackageHasErrors" xml:space="preserve">
+    <value>The following errors occurred when processing documents:</value>
+  </data>
+</root>

@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorCantDeleteDependentCompany" xml:space="preserve">
+    <value>The company is a copy of the business unit and cannot be deleted.</value>
+  </data>
+  <data name="IncorrectTinLength" xml:space="preserve">
+    <value>TIN must contain 10 digits for companies, 12 digits for individual entrepreneurs.</value>
+  </data>
+  <data name="TinTrrcDuplicate" xml:space="preserve">
+    <value>Duplicate found by TIN/TRRC: {0} {1}.</value>
+  </data>
+  <data name="IncorrecPsrnLength" xml:space="preserve">
+    <value>PSRN must contain 13 or 15 digits.</value>
+  </data>
+  <data name="IncorrecNceoLength" xml:space="preserve">
+    <value>The NCEO code must consist of 8 digits for companies, 10 digits for private entrepreneurs, and 14 digits for TOSP (Territory Separated Structural Units).</value>
+  </data>
+  <data name="HeadCompanyCyclicReference" xml:space="preserve">
+    <value>The selected company is the child of the current one. Select another head company.</value>
+  </data>
+  <data name="NeedFillTinAndTrrcForSendInvitation" xml:space="preserve">
+    <value>To send an exchange invitation, specify counterparty's TIN and TRRC.</value>
+  </data>
+  <data name="NeedFillTinAndTrrcForCanExchange" xml:space="preserve">
+    <value>To check exchangeability, specify counterparty's TIN and TRRC.</value>
+  </data>
+  <data name="ErrorNeedFillTinPsrnNameForService" xml:space="preserve">
+    <value>Specify PSRN, TIN or name.</value>
+  </data>
+  <data name="ErrorCompanyNotFoundInService" xml:space="preserve">
+    <value>Counterparty with the specified requisites was not found. Specify requisites more precisely to search further.</value>
+  </data>
+  <data name="FillFromServiceSuccess" xml:space="preserve">
+    <value>Requisites filled in successfully</value>
+  </data>
+  <data name="FoundSeveralCompaniesInService" xml:space="preserve">
+    <value>Select a counterparty to fill in the requisites.
+
+{0} found on service.
+Adjust your search criteria if required.</value>
+  </data>
+  <data name="ChoseCompanyDialogTitle" xml:space="preserve">
+    <value>Select Company</value>
+  </data>
+  <data name="NeedFillTinForDueDiligenceWebsite" xml:space="preserve">
+    <value>Fill in counterparty's TIN for due diligence</value>
+  </data>
+  <data name="NeedFillPsrnForDueDiligenceWebsite" xml:space="preserve">
+    <value>Fill in counterparty's PSRN for due diligence</value>
+  </data>
+  <data name="FoundMoreThanNCompaniesInService" xml:space="preserve">
+    <value>Select a counterparty to fill in the requisites.
+
+{1} found on service, first {0} shown.
+Adjust your search criteria if required.</value>
+  </data>
+  <data name="FillFrom" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="ErrorForbidden" xml:space="preserve">
+    <value>You should have an active subscription to automatically fill in the fields.</value>
+  </data>
+  <data name="ErrorNotFound" xml:space="preserve">
+    <value>Service for supplying information on companies is unavailable. 
+Try again later.</value>
+  </data>
+  <data name="ErrorInService" xml:space="preserve">
+    <value>An error occurred when trying to connect to service for supplying information on companies.</value>
+  </data>
+  <data name="CompanySelectDialogText" xml:space="preserve">
+    <value>{0} (TIN: {1})</value>
+  </data>
+  <data name="ErrorNoLicense" xml:space="preserve">
+    <value>You have no license, or it is corrupt.</value>
+  </data>
+  <data name="CompanySelectDialogTextWithTRRC" xml:space="preserve">
+    <value>{0} (TIN: {1} TRRC: {2})</value>
+  </data>
+  <data name="ContactAdministrator" xml:space="preserve">
+    <value>Contact your system administrator.</value>
+  </data>
+  <data name="ErrorUnauthorized" xml:space="preserve">
+    <value>Service is unavailable.</value>
+  </data>
+  <data name="ErrorTooManyRequests" xml:space="preserve">
+    <value>Maximum number of requests to the service has been exceeded. Try again on the next day.</value>
+  </data>
+  <data name="NotOnlyDigitsPsrn" xml:space="preserve">
+    <value>PSRN must contain only digits.</value>
+  </data>
+  <data name="NotOnlyDigitsTrrc" xml:space="preserve">
+    <value>TRRC must contain only digits.</value>
+  </data>
+  <data name="IncorrectTrrcLength" xml:space="preserve">
+    <value>TRRC must contain 9 digits.</value>
+  </data>
+</root>

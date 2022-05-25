@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action_RequireReport" xml:space="preserve">
+    <value>Request Report</value>
+  </data>
+  <data name="Action_RequireReportDescription" xml:space="preserve">
+    <value>Request action item status report.</value>
+  </data>
+  <data name="Action_RequireReportHint" xml:space="preserve">
+    <value>Request Status Report</value>
+  </data>
+  <data name="Ribbon_JobControl_c778f982723e4c83bc617862643c532e" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="ControlGroup_98a172a9a570491997904531d4d2a0b1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_ae98972b4d8649b4b20b0e940962659b" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Property_Deadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="Property_Supervisor" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+  <data name="Property_IsCompoundActionItem" xml:space="preserve">
+    <value>Compound action item</value>
+  </data>
+  <data name="Property_CoAssignees" xml:space="preserve">
+    <value>Co-Assignees</value>
+  </data>
+  <data name="Property_ActionItemParts" xml:space="preserve">
+    <value>Action item parts</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Task to execute action item</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Task to execute action item</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Action Items</value>
+  </data>
+  <data name="Property_ActionItem" xml:space="preserve">
+    <value>Action item</value>
+  </data>
+  <data name="Property_AssignedBy" xml:space="preserve">
+    <value>Assigned by</value>
+  </data>
+  <data name="Property_AbortingReason" xml:space="preserve">
+    <value>Reason to abort task</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="Property_ExecutionState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Enum_ExecutionState_OnExecution" xml:space="preserve">
+    <value>In process</value>
+  </data>
+  <data name="Enum_ExecutionState_OnControl" xml:space="preserve">
+    <value>Under review</value>
+  </data>
+  <data name="Enum_ExecutionState_OnRework" xml:space="preserve">
+    <value>On rework</value>
+  </data>
+  <data name="Enum_ExecutionState_Executed" xml:space="preserve">
+    <value>Executed</value>
+  </data>
+  <data name="Enum_ExecutionState_Aborted" xml:space="preserve">
+    <value>Aborted</value>
+  </data>
+  <data name="Property_Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Property_ActualDate" xml:space="preserve">
+    <value>Actual date</value>
+  </data>
+  <data name="Property_ReportNote" xml:space="preserve">
+    <value>Note to report</value>
+  </data>
+  <data name="Ribbon_IsHighImportanceDescription_e15644d5b67343bb821e96fedc043b13" xml:space="preserve">
+    <value>Set high importance for the task</value>
+  </data>
+  <data name="Ribbon_IsLowImportanceDescription_02c5ee2f62d248508781d0e66c094421" xml:space="preserve">
+    <value>Set low importance for the task</value>
+  </data>
+  <data name="Ribbon_IsLowImportance_02c5ee2f62d248508781d0e66c094421" xml:space="preserve">
+    <value>Low importance</value>
+  </data>
+  <data name="Ribbon_TaskCommands_e4e6fdd481594a37a25d70ee43c07975" xml:space="preserve">
+    <value>Action Item</value>
+  </data>
+  <data name="Action_StartDescription" xml:space="preserve">
+    <value>Send action item and close the card</value>
+  </data>
+  <data name="Action_StartHint" xml:space="preserve">
+    <value>Send Action Item</value>
+  </data>
+  <data name="Ribbon_JobView_5a79eb10149e456ba4674e8010afdc07" xml:space="preserve">
+    <value>Compound action item</value>
+  </data>
+  <data name="Ribbon_StateToggleButton_6a641c1bb7284e6c8afa39da981d0e13" xml:space="preserve">
+    <value>StateToggleButton</value>
+  </data>
+  <data name="Ribbon_StateToggleButton_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>StateToggleButton</value>
+  </data>
+  <data name="Ribbon_ComponentResolution_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>Equal Assignees</value>
+  </data>
+  <data name="Ribbon_ComponentResolutionHint_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>Switch Between Simple And Compound Action Item</value>
+  </data>
+  <data name="Ribbon_ComponentResolutionDescription_977f7789881e4b50b1dba56b360e4f24" xml:space="preserve">
+    <value>Change the action item type to compound, which allows you to specify the equal assignees with individual action items and deadlines.
+Click again to bring the card back to the simple action mode.</value>
+  </data>
+  <data name="Action_Abort" xml:space="preserve">
+    <value>Abort</value>
+  </data>
+  <data name="AttachmentGroup_DocumentsGroupTitle" xml:space="preserve">
+    <value>Document for execution</value>
+  </data>
+  <data name="AttachmentGroup_DocumentsGroupInformationMessage" xml:space="preserve">
+    <value>Document not attached</value>
+  </data>
+  <data name="AttachmentGroup_DocumentAttGroupTitle" xml:space="preserve">
+    <value>Addenda</value>
+  </data>
+  <data name="AttachmentGroup_DocumentAttGroupInformationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AttachmentGroup_OtherGroupTitle" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="AttachmentGroup_OtherGroupInformationMessage" xml:space="preserve">
+    <value>Attach supplementary documents</value>
+  </data>
+  <data name="AttachmentGroup_ResultGroupTitle" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="AttachmentGroup_ResultGroupInformationMessage" xml:space="preserve">
+    <value>Attach documents created on action item if required</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupTitle" xml:space="preserve">
+    <value>Addenda</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupInformationMessage" xml:space="preserve">
+    <value>There are no addenda to document</value>
+  </data>
+  <data name="AttachmentGroup_AttachmentGroupTitle" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AttachmentGroup_AttachmentGroupInformationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_487f3300511c42328f4e7e26adb51307_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_IsUnderControl" xml:space="preserve">
+    <value>Under control</value>
+  </data>
+  <data name="Property_ActionItemType" xml:space="preserve">
+    <value>Type of action item</value>
+  </data>
+  <data name="Enum_ActionItemType_Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Enum_ActionItemType_Additional" xml:space="preserve">
+    <value>To co-assignee</value>
+  </data>
+  <data name="Enum_ActionItemType_Component" xml:space="preserve">
+    <value>Compound</value>
+  </data>
+  <data name="Action_FollowUpExecution" xml:space="preserve">
+    <value>Follow Up Execution</value>
+  </data>
+  <data name="Action_FollowUpExecutionDescription" xml:space="preserve">
+    <value>Open list of all action items within the specified period</value>
+  </data>
+  <data name="Action_FollowUpExecutionHint" xml:space="preserve">
+    <value>Follow Up Execution of Action Items</value>
+  </data>
+  <data name="Action_FollowUpExecutionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Reports_e26275e99782434080be5d59bf67d1ec" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Control_b7fdf314105d448795e50d73e9b1dd54_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_1e71e7eb3e76450daed1c897462b5d55_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Author" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Property_MaxDeadline" xml:space="preserve">
+    <value>Final deadline</value>
+  </data>
+  <data name="Action_StartConfirmationMessage" xml:space="preserve">
+    <value>Send the action item for execution?</value>
+  </data>
+  <data name="Action_AbortHint" xml:space="preserve">
+    <value>Abort Task</value>
+  </data>
+  <data name="Action_AbortDescription" xml:space="preserve">
+    <value>Stop execution of action item and abort all assignments created on it.</value>
+  </data>
+  <data name="Action_AbortConfirmationMessage" xml:space="preserve">
+    <value>Abort the action item?</value>
+  </data>
+  <data name="Action_RestartHint" xml:space="preserve">
+    <value>Restart Task</value>
+  </data>
+  <data name="Action_RestartDescription" xml:space="preserve">
+    <value>Restart the task to execute action item and open its card</value>
+  </data>
+  <data name="Action_RestartConfirmationMessage" xml:space="preserve">
+    <value>Restart the action item?</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_Status_c74dc0c856384d87b46fdbeb51c0e9cc" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_OnExecution_9fa0af31a763445bb0ae7f2a5d053bd1" xml:space="preserve">
+    <value>In process</value>
+  </data>
+  <data name="FilterPanel_Executed_79a0eac563fb41c295627f852473d618" xml:space="preserve">
+    <value>Executed</value>
+  </data>
+  <data name="FilterPanel_JobsWithPerformer_2e4bcf312d014fc28ddd58efea81766b" xml:space="preserve">
+    <value>By employee</value>
+  </data>
+  <data name="FilterPanel_Assignee_9f8773dea40d481688f438820f2969c6" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="FilterPanel_Supervisor_ef496a176e4947498cd340d5e699534f" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+  <data name="FilterPanel_Author_822b169c191b46ac8d55fee52900a774" xml:space="preserve">
+    <value>Assigned By</value>
+  </data>
+  <data name="FilterPanel_ComplianceDeadlines_5d8adf8b536542cf9e07143fbdab5e2a" xml:space="preserve">
+    <value>Meeting deadlines</value>
+  </data>
+  <data name="FilterPanel_AllDeadlines_bf7aa92ea508463dbf68bf9b9c6c529c" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_Overdue_a1597a3f32b6417188f2114639b2b3cf" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Period_545398040fd04135a2542aaf37bae26c" xml:space="preserve">
+    <value>Scheduled date</value>
+  </data>
+  <data name="FilterPanel_AllTime_cd63fcc550f64fbc9da7460028104253" xml:space="preserve">
+    <value>All time</value>
+  </data>
+  <data name="FilterPanel_LastMonth_50331cf4eaed48ed8c471d8ed3bf3c42" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_d0f28b79b39345e198989f2f56dbdcca" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="Property_ActionItemObservers" xml:space="preserve">
+    <value>CC</value>
+  </data>
+  <data name="Property_ParentTask" xml:space="preserve">
+    <value>Parent task</value>
+  </data>
+  <data name="Property_StartId" xml:space="preserve">
+    <value>Current task start ID</value>
+  </data>
+  <data name="Property_ParentAssignment" xml:space="preserve">
+    <value>Parent assignment</value>
+  </data>
+  <data name="Form_88924e9483aa401794749ec1f27e5188" xml:space="preserve">
+    <value>Action item</value>
+  </data>
+  <data name="ControlGroup_e0809adeefab45bca423c83d69fd21bd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_StartByForceConfirmationMessage" xml:space="preserve">
+    <value>Send the action item for execution?</value>
+  </data>
+  <data name="Control_6a18edc7814b41ebb67822399ba94b74_EmptyText" xml:space="preserve">
+    <value>Specify co-assignees of the action item…</value>
+  </data>
+  <data name="Control_3da2f8487d124bf28d5fbfb6c8773ef9_EmptyText" xml:space="preserve">
+    <value>Specify observers…</value>
+  </data>
+  <data name="Property_StartedBy" xml:space="preserve">
+    <value>Sent by</value>
+  </data>
+  <data name="Property_IsDraftResolution" xml:space="preserve">
+    <value>Belongs to draft resolution</value>
+  </data>
+  <data name="Property_FinalDeadline" xml:space="preserve">
+    <value>Overall deadline</value>
+  </data>
+  <data name="Action_AddPerformer" xml:space="preserve">
+    <value>Add Performers</value>
+  </data>
+  <data name="Action_AddPerformerDescription" xml:space="preserve">
+    <value>Bulk filling in of action item performers from roles, departments, business units and other groups.
+
+Employees already specified as performers will not be added.</value>
+  </data>
+  <data name="Action_AddPerformerHint" xml:space="preserve">
+    <value>Add Action Item Performers</value>
+  </data>
+  <data name="Action_AddPerformerConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_AddPerformerConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeCompoundMode" xml:space="preserve">
+    <value>Equal Assignees</value>
+  </data>
+  <data name="Action_ChangeCompoundModeDescription" xml:space="preserve">
+    <value>Change the action item type to compound, which allows you to specify the equal assignees with individual action items and deadlines.</value>
+  </data>
+  <data name="Action_ChangeCompoundModeHint" xml:space="preserve">
+    <value>Switch Between Simple And Compound Action Item</value>
+  </data>
+  <data name="Action_ChangeCompoundModeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeCompoundModeConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_IsAutoExec" xml:space="preserve">
+    <value>Complete my assignment automatically when child action item is executed</value>
+  </data>
+  <data name="Action_Forward" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="Action_ForwardDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ForwardHint" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ForwardConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ForwardConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeActionItem" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Action_ChangeActionItemDescription" xml:space="preserve">
+    <value>Change the action item participants and deadline.</value>
+  </data>
+  <data name="Action_ChangeActionItemHint" xml:space="preserve">
+    <value>Edit Action Item</value>
+  </data>
+  <data name="Action_ChangeActionItemConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeActionItemConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_OnEdit" xml:space="preserve">
+    <value>Action item edit mode</value>
+  </data>
+  <data name="Enum_Status_Aborted" xml:space="preserve">
+    <value>Aborted</value>
+  </data>
+  <data name="Enum_Status_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Enum_Status_Suspended" xml:space="preserve">
+    <value>Suspended</value>
+  </data>
+  <data name="Enum_Status_UnderReview" xml:space="preserve">
+    <value>Under review</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPart" xml:space="preserve">
+    <value>Edit Part</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPartDescription" xml:space="preserve">
+    <value>Change action item part.</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPartHint" xml:space="preserve">
+    <value>Edit Part of Action Item</value>
+  </data>
+  <data name="Action_ChangeCompoundActionItemPartConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeCompoundActionItemPartConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_CoAssigneesDeadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="Footer_ActiveEmptyText" xml:space="preserve">
+    <value>Type the action item text…</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPart" xml:space="preserve">
+    <value>Add Part</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPartDescription" xml:space="preserve">
+    <value>Add an action item part.</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPartHint" xml:space="preserve">
+    <value>Add Action Item Part</value>
+  </data>
+  <data name="Action_AddCompoundActionItemPartConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_AddCompoundActionItemPartConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_PartsCoAssignees" xml:space="preserve">
+    <value>Co-assignees of action item parts</value>
+  </data>
+  <data name="Property_HasIndefiniteDeadline" xml:space="preserve">
+    <value>No deadline</value>
+  </data>
+  <data name="Property_OnEditGuid" xml:space="preserve">
+    <value>ID for the action item editing mode</value>
+  </data>
+  <data name="Property_WaitForParentAssignment" xml:space="preserve">
+    <value>Wait for the parent assignment to be completed</value>
+  </data>
+</root>

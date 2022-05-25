@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection FormGuid="cddd4c25-da1e-45d4-ab4b-0250a22ce940">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="AutoWidth">true</property>
+          <property name="AllowGrouping">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">604,12</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="IsRowCellMenuEnabled">true</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="13">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">T</property>
+            <property name="Visible">true</property>
+            <property name="VisibleIndex">0</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Id</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="Visible">false</property>
+            <property name="Name">Contact_Id</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">40</property>
+            <property name="ActualWidth">5*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">Status</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">false</property>
+            <property name="Name">Contact_Status</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">true</property>
+            <property name="Name">Contact_Name</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">26*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">Person.DisplayValue</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">false</property>
+            <property name="Name">Contact_Person</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">Company.DisplayValue</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">true</property>
+            <property name="Name">Contact_Company</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">20*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">Department</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">false</property>
+            <property name="Name">Contact_Department</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">JobTitle</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">true</property>
+            <property name="Name">Contact_JobTitle</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">16*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">Phone</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">true</property>
+            <property name="Name">Contact_Phone</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">12*</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">Fax</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">false</property>
+            <property name="Name">Contact_Fax</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">Email</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">true</property>
+            <property name="Name">Contact_Email</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">Note</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">true</property>
+            <property name="Name">Contact_Note</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="FieldName">Homepage</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="Visible">false</property>
+            <property name="Name">Contact_Homepage</property>
+            <property name="VisibleIndex">7</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection>
+</settings>

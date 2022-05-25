@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>This module is where you can automate your contract management process.</value>
+  </data>
+  <data name="CoverGroup_Documents" xml:space="preserve">
+    <value>Contractual Documents</value>
+  </data>
+  <data name="CoverAction_ContractsList" xml:space="preserve">
+    <value>Contract List</value>
+  </data>
+  <data name="CoverGroup_LinkedInformation" xml:space="preserve">
+    <value>Related Information</value>
+  </data>
+  <data name="CoverDescription_ContractsList" xml:space="preserve">
+    <value>Contains the list of all contracts.</value>
+  </data>
+  <data name="sf_825bcdaa_f676_490f_9ce8_3c95355a63d4" xml:space="preserve">
+    <value>Contract List</value>
+  </data>
+  <data name="CoverAction_Organizations" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="CoverDescription_Organizations" xml:space="preserve">
+    <value>Stores information about companies that our company deals with.</value>
+  </data>
+  <data name="CoverDescription_Persons" xml:space="preserve">
+    <value>Stores information about all individuals (counterparties, employees, contacts) that our company deals with.</value>
+  </data>
+  <data name="CoverAction_Persons" xml:space="preserve">
+    <value>Persons</value>
+  </data>
+  <data name="CoverDescription_Contacts" xml:space="preserve">
+    <value>Stores information about representatives of your counterparties so you can contact them quickly.</value>
+  </data>
+  <data name="CoverAction_Contacts" xml:space="preserve">
+    <value>Contact Persons</value>
+  </data>
+  <data name="FilterPanel_Last30days_8877ae20f56d4485917add5cc35fc3c3" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_ab0e0901383e4f509e8af2d235d8d9fb" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_e0702a4e10a44c5dbfc05af11c644d13" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Contractor_2adc8d2d997642c4802c82e20699077d" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_Main_e561d48480844132870f5156359a3978" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="FilterPanel_Period_384dc2d88a6946809a555186fe6a1262" xml:space="preserve">
+    <value>Document date</value>
+  </data>
+  <data name="FilterPanel_Category_531d1ac5ad7d40b4bc9742af237abdb1" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CoverDescription_CreateDocument" xml:space="preserve">
+    <value>Create a new contract, supplemental agreement or appendix to contract.</value>
+  </data>
+  <data name="FilterPanel_State_3cd5a14f50bf440e94bedaca4c2f8783" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Draft_d333c7b4b61842a686411383811cca90" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_Active_e6034db33690496094b6208e41b0cacf" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Executed_7906e82d24a4486c88fc09fa08140acd" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Terminated_c633b2f3ef1f42fbbbc6d0f051f26673" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="FilterPanel_Cancelled_cd382af6d6f74881bbcecdf554447788" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_d27880601b714b11ac171ea000c87c42" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Last365days_a0a91a718858434cb77d3e888d656c97" xml:space="preserve">
+    <value>Last 365 days</value>
+  </data>
+  <data name="sf_f7a4bbcf_69d8_49c5_a86e_274fa1b1ce5f" xml:space="preserve">
+    <value>Expiring Soon</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_003ff7ce7f814b83ab4ea108c7943fce" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="FilterPanel_Contracts_10391e5a4cf74867b9c9f8154a2648ae" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_e42ccf1d6aa54e2ea1863c2f8bd6e761" xml:space="preserve">
+    <value>Supp. agreements</value>
+  </data>
+  <data name="FilterPanel_DocumentType_8514b6062e3943dca2d4fd21127bce50" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Document_bc5c4d548a384771be74c141d05562d0" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_ec4f3505dd3643459a1defd201f38933" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Category_204a674665884ad9b597bd272c503a1a" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_Contractor_2ec8dc498432404fb403214cb7b26180" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_e3ba81cc35af4baab30474e904271e5f" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Responsible_dcf036f7c21e416d8374d07ba530dca2" xml:space="preserve">
+    <value>Responsible person</value>
+  </data>
+  <data name="sf_7afd9b8e_f293_4984_a75e_c09f44b598a7" xml:space="preserve">
+    <value>Held by Counterparties</value>
+  </data>
+  <data name="FilterPanel_Document_2832e16b4bac457b92a54e87531aab72" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_f9c182401a58457789ed0a414cafb03c" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Category_7be3338fb125400d87e6b53773007bd4" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_Contractor_abe9e4b156f04d47addfa467595246ba" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_934d0be326ad4acbbf81dc51079425f5" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Responsible_b88d10ea38254be58cb18fbe15e88233" xml:space="preserve">
+    <value>Person responsible for return</value>
+  </data>
+  <data name="FilterPanel_Group_3f5f08fcde1541fc8d27c5f390aad62d" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Overdue_a8797a5d43df4d11bbf9e8e2410d869e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_OverdueGroup_3f5f08fcde1541fc8d27c5f390aad62d" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_OnlyOverdue_9323f1fd9bd74889ba51b8e5db0ad112" xml:space="preserve">
+    <value>Only overdue</value>
+  </data>
+  <data name="sf_c09c7eeb_5957_4631_be80_a589b8cfbec5" xml:space="preserve">
+    <value>Contract History</value>
+  </data>
+  <data name="FilterPanel_State_66975b602c1148c6baca3816373e5e95" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Concluded_7dea411ac4c544c18112ef592fdafaba" xml:space="preserve">
+    <value>Concluded</value>
+  </data>
+  <data name="FilterPanel_Executed_9be6a37e43a942a28e0ff3d665442d41" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Terminated_1989dffd82aa4272aa38748528b435d8" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="FilterPanel_Cancelled_58bfce84c2f1471e85d1a106acc17cf4" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="FilterPanel_Document_92d42c1a59d84aa08e2562457ba223d5" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_06c5d4d7101c4345911ab04c6c1c9f12" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Category_99b52b123c5d4237902b546177ab437d" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_7715cc950de9497692bf9a9280007800" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Responsible_b6e75cd8670c4371b791d8a7897e2d29" xml:space="preserve">
+    <value>Responsible person</value>
+  </data>
+  <data name="FilterPanel_Period_a43be82f9e174af89ec423026ae9c247" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_f3838da119f047eea2f7d4c975460efc" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="FilterPanel_DocumentType_35722cd86bae4b87bda1a4359122d510" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Contracts_a5c3126fae5b4e58a6a390904b0706c2" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_3388df145ff041b0a8125b352fc8acc8" xml:space="preserve">
+    <value>Supp. agreements</value>
+  </data>
+  <data name="FilterPanel_Last30days_e8f85890820443a891b24434dc5c902b" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_Last365days_7e7299aa659b495686247fdc82e7fb44" xml:space="preserve">
+    <value>Last 365 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_ffe95bda6e61466c82cff730c0e5dd0a" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="sf_37d0e546_5b38_4b60_b680_5ab862dcea47" xml:space="preserve">
+    <value>Held by Employees</value>
+  </data>
+  <data name="FilterPanel_Status_3dbf085c0c7d4fc7b9c785ef2e38c7d9" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_b23be1bf5fb74e98ad7f0a612b26adb1" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Located_b73188f3195b4b7f9c7a7c36e4eb0324" xml:space="preserve">
+    <value>Located</value>
+  </data>
+  <data name="FilterPanel_Employee_dfe4df01b9eb412a950972a5d69974ca" xml:space="preserve">
+    <value>At employee</value>
+  </data>
+  <data name="FilterPanel_Department_c7c5fa767604491f8c302dbbab595644" xml:space="preserve">
+    <value>In department</value>
+  </data>
+  <data name="FilterPanel_Parametrs_4848266759584ad398fa91fca1557880" xml:space="preserve">
+    <value>Received from</value>
+  </data>
+  <data name="FilterPanel_RegistrationGroup_201966940ea54e5fb7d578a72c8aad5a" xml:space="preserve">
+    <value>Registration group</value>
+  </data>
+  <data name="FilterPanel_File_1f66e6bd987f410b938933d3acfcffa9" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FilterPanel_OverdueGroup_2e1d7d2e85454c259287bbf6f08d0c2a" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Overdue_4d6a140abf6d40fabeead9b2b7f59806" xml:space="preserve">
+    <value>Only overdue</value>
+  </data>
+  <data name="FilterPanel_ReturnPeriod_a9fb23c80fac45b2beb012d9720bd886" xml:space="preserve">
+    <value>Scheduled return date</value>
+  </data>
+  <data name="FilterPanel_EndDay_34643f2519d34124b15c4e96177ca945" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="FilterPanel_EndWeek_5164df427aaa4d3b82264468ca102d3e" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="FilterPanel_EndMonth_40aae83909e64e5cb51d012bbf0a313c" xml:space="preserve">
+    <value>This month</value>
+  </data>
+  <data name="FilterPanel_Manual_a53de89d8ac74b58971f7954758b0f32" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="CoverAction_CreateDocument" xml:space="preserve">
+    <value>New Document</value>
+  </data>
+  <data name="CoverAction_CompletedContracts" xml:space="preserve">
+    <value>Set to Expire Soon</value>
+  </data>
+  <data name="CoverDescription_CompletedContracts" xml:space="preserve">
+    <value>Contractual documents whose validity period is about to expire.</value>
+  </data>
+  <data name="CoverAction_ContractsAtContractors" xml:space="preserve">
+    <value>Held by Counterparties</value>
+  </data>
+  <data name="CoverDescription_ContractsAtContractors" xml:space="preserve">
+    <value>Contractual documents sent to counterparties for signing and to be returned.</value>
+  </data>
+  <data name="CoverAction_ContractsHistory" xml:space="preserve">
+    <value>Contract History</value>
+  </data>
+  <data name="CoverDescription_ContractsHistory" xml:space="preserve">
+    <value>Contractual documents concluded, executed, terminated or cancelled during a specified period of time.</value>
+  </data>
+  <data name="FilterPanel_Department_a0b90086de3c4a9cb3ebf9fe2162dabd" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="CoverGroup_Control" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="CoverGroup_Search" xml:space="preserve">
+    <value>Document Search</value>
+  </data>
+  <data name="CoverGroup_Invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="CoverAction_SearchByRegistrationData" xml:space="preserve">
+    <value>Search by Registration Data</value>
+  </data>
+  <data name="CoverDescription_SearchByRegistrationData" xml:space="preserve">
+    <value>Search contractual documents by common registration data.</value>
+  </data>
+  <data name="CoverAction_ContractualDocumentsWithContractors" xml:space="preserve">
+    <value>Search by Counterparty</value>
+  </data>
+  <data name="CoverDescription_ContractualDocumentsWithContractors" xml:space="preserve">
+    <value>Search for contractual documents related to a specific counterparty.</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_5ce6d611bd6f400e93d98540838d3cdb" xml:space="preserve">
+    <value>Supp. agreements</value>
+  </data>
+  <data name="FilterPanel_Contracts_d646f5e3dbec4ad49d5f62705b805c9a" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_b8ac06d46caf4e179aa0599c41105929" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="CoverAction_IncomingInvoices" xml:space="preserve">
+    <value>Incoming Invoices</value>
+  </data>
+  <data name="CoverDescription_IncomingInvoices" xml:space="preserve">
+    <value>Invoices received from counterparties.</value>
+  </data>
+  <data name="WidgetTitle_MyContracts" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="WidgetAction_MyContracts_OnApproval" xml:space="preserve">
+    <value>On approval</value>
+  </data>
+  <data name="WidgetAction_MyContracts_Completed" xml:space="preserve">
+    <value>Expiring soon</value>
+  </data>
+  <data name="WidgetAction_MyContracts_IsNotAutomaticRenewal" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="WidgetAction_MyContracts_IsAutomaticRenewal" xml:space="preserve">
+    <value>Automatic renewal</value>
+  </data>
+  <data name="WidgetParameter_MyContracts_Substitution" xml:space="preserve">
+    <value>Include substitutes</value>
+  </data>
+  <data name="WidgetParameter_MyContracts_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Enum_MyContracts_Show_My" xml:space="preserve">
+    <value>My contracts</value>
+  </data>
+  <data name="Enum_MyContracts_Show_Department" xml:space="preserve">
+    <value>Contracts of my department</value>
+  </data>
+  <data name="Enum_MyContracts_Show_All" xml:space="preserve">
+    <value>All contracts</value>
+  </data>
+  <data name="WidgetDescription_MyContracts" xml:space="preserve">
+    <value>Monitoring of contracts and supplemental agreements that are on approval or require closing.</value>
+  </data>
+  <data name="WidgetTitle_ContractTotalAmountGraph" xml:space="preserve">
+    <value>Volume of Concluded Contracts</value>
+  </data>
+  <data name="WidgetParameter_ContractTotalAmountGraph_Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Enum_ContractTotalAmountGraph_Currency_USD" xml:space="preserve">
+    <value>US dollar</value>
+  </data>
+  <data name="Enum_ContractTotalAmountGraph_Currency_RUB" xml:space="preserve">
+    <value>Russian ruble</value>
+  </data>
+  <data name="Enum_ContractTotalAmountGraph_Currency_EUR" xml:space="preserve">
+    <value>Euro</value>
+  </data>
+  <data name="WidgetDescription_ContractTotalAmountGraph" xml:space="preserve">
+    <value>Total amount of concluded contracts by month.</value>
+  </data>
+  <data name="WidgetParameter_ContractTotalAmountGraph_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Enum_ContractTotalAmountGraph_Show_My" xml:space="preserve">
+    <value>My contracts</value>
+  </data>
+  <data name="Enum_ContractTotalAmountGraph_Show_Department" xml:space="preserve">
+    <value>Contracts of my department</value>
+  </data>
+  <data name="Enum_ContractTotalAmountGraph_Show_All" xml:space="preserve">
+    <value>All contracts</value>
+  </data>
+  <data name="CoverAction_OutgoingInvoices" xml:space="preserve">
+    <value>Outgoing Invoices</value>
+  </data>
+  <data name="CoverDescription_OutgoingInvoices" xml:space="preserve">
+    <value>Invoices issued to counterparties.</value>
+  </data>
+</root>

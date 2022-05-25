@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="HasTaskInProcess">
+    <default><![CDATA[-- Получить число задач по правилу в работе.
+select
+  count(*)
+from
+  Sungero_WF_Task
+where
+  ApprovalRule_Docflow_Sungero = {0}
+  and Status != 'Draft']]></default>
+  </query>
+  <query key="GetForReapprovingAssignmentResultId">
+    <default><![CDATA[-- Получить id последнего задания на доработку по задаче.
+select
+  max(id)
+from
+  Sungero_WF_Assignment
+where
+  Result = 'ForReapproving'
+  and Task = {0}]]></default>
+  </query>
+</queries>

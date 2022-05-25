@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Общие сервисы</value>
+  </data>
+  <data name="sf_0d61168d_1ae5_4570_a42e_bdd5f3b07b02" xml:space="preserve">
+    <value>На рассмотрение</value>
+  </data>
+  <data name="FilterPanel_StateGroup_b54241b2d7dc47f4b70e18ec914e85c8" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcess_d78d2c9619794d1580d349a7a3664496" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_b90ac9bdbfbf482e94ba64a2b2c5a716" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_5f8c1a32883b4f83a95c0a48474e59ec" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_bf0f999196494a8e98f5f944db30e77b" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_03cf1d01b56549719a1df591096008c7" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_d0640cd06fa044ecb91d21da32ec7859" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_DocumentsTypeGroup_de9e8746c9d044f7b3512c1eec470eb5" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="FilterPanel_Incoming_6c98c7b01415499c9d3fc5f7e3f13507" xml:space="preserve">
+    <value>Входящие</value>
+  </data>
+  <data name="FilterPanel_Inner_3ea7652454a045fb8206299f804a7ad0" xml:space="preserve">
+    <value>Прочие</value>
+  </data>
+  <data name="sf_669ff039_2f05_4eb3_9d6a_049dafee948f" xml:space="preserve">
+    <value>На подписание</value>
+  </data>
+  <data name="FilterPanel_InProcess_2efd2c9a881946618a4680adcfe73a2c" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_96d0a5e763994a97bd75304d06592ae3" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_Last30Days_3ea90968aed243dfb3525bd94ffd0a03" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_9bb247b9f38a4b8a9cc042f1539d623e" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_21f256bce17e4fbaa56b092f4bc35e3e" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_StateGroup_670a883612d749c3a816a4ed7269659e" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_8d888799a1374f6791a981e6aa42e5ba" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="sf_1ead1abe_1b7e_4833_9e01_ee7f8404537a" xml:space="preserve">
+    <value>На обработку</value>
+  </data>
+  <data name="FilterPanel_AsgTypeGroup_d2d7ccfa9de54b5a8380740ad319914d" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="FilterPanel_ConfirmSigning_5e30401692b94e48b8e6734446810cfc" xml:space="preserve">
+    <value>Подтвер. подписания</value>
+  </data>
+  <data name="FilterPanel_ProcessResolution_e7efc972bbfc4acf97777f0027951f9e" xml:space="preserve">
+    <value>Обработка резолюции</value>
+  </data>
+  <data name="FilterPanel_SendActionItem_537491d2370e4be49881bdb1494bd0bb" xml:space="preserve">
+    <value>Отправка поручений</value>
+  </data>
+  <data name="FilterPanel_Send_4521795d3d604972ad0ba1013156c520" xml:space="preserve">
+    <value>Отправка контрагенту</value>
+  </data>
+  <data name="FilterPanel_CheckReturn_af1b7526b4954464b2096ea003876fef" xml:space="preserve">
+    <value>Контроль возврата</value>
+  </data>
+  <data name="FilterPanel_Other_2c6a31f438cc4cf4a786629a86611ab8" xml:space="preserve">
+    <value>Прочие задания</value>
+  </data>
+  <data name="FilterPanel_StateGroup_fe16ad1ddd5a4f04bb993f1fcaa83678" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcess_33ee6a0a7d604891b1385b4fd099e7d5" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_55b6ce51274148be9702bb17030aa552" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_5ec0581b07df4d2486e8b247bd0c3e0d" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_8edf2ff1f90f4228970085d9561dbf19" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_d544da6c5a424772b54ee2dafeeb542a" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_d35109ab9675429d9d03f34c294ca33c" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="sf_852ea6a2_304e_48d1_88e5_1bcbb1fb69a2" xml:space="preserve">
+    <value>На согласование</value>
+  </data>
+  <data name="FilterPanel_ApprovalTypeGroup_d2cdb7dfa12e407c9ac35879143cc1e3" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="FilterPanel_StateGroup_953844a2e1b6474ea2fc6f01fd3a361d" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_eadb3267e8564af8a0b63cb0e147798c" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_RuleBased_37d4339cce0248beaad2d7a24f3428cc" xml:space="preserve">
+    <value>По регламенту</value>
+  </data>
+  <data name="FilterPanel_Free_aae64c27529b48fabc01ce693b7acc9d" xml:space="preserve">
+    <value>Свободное</value>
+  </data>
+  <data name="FilterPanel_InProcess_37bfe188a53c4789b95c17c81f0ecdc3" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_af38d1ea090f44f5bcc4c1542be0b7c8" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_Last180Days_fb4171b4d987427d940b61f7ea355cd1" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_Last30Days_1b4782039dec45fe8dc90da85a9a5a1e" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_b35e5ea35be043158d8c869db615173d" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_InProcess_29ef9eadb5dd47ad9d52b761b2101e68" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_Completed_8e9550d885de443b84b9f96b40e10ad7" xml:space="preserve">
+    <value>Выполненные</value>
+  </data>
+  <data name="FilterPanel_Last90Days_fbf2eb9c24b3436f839299159f4e07e3" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last30Days_9130f239d0374d5cb50496d326f0365c" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last365Days_2911a8a5223746e0a3e490f0bf7d3bd1" xml:space="preserve">
+    <value>Последние 365 дней</value>
+  </data>
+  <data name="sf_a353a121_f96e_4842_8b80_bf77d074a0c2" xml:space="preserve">
+    <value>На приемку</value>
+  </data>
+  <data name="FilterPanel_StateGroup_33e1e25e770d4b32a6cea7bcaec41880" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_005a7ea22b554203a64eaf32f069b1b7" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_ChekingGroup_09b74140690547aca29614721e864932" xml:space="preserve">
+    <value>Приемка</value>
+  </data>
+  <data name="FilterPanel_ActionItem_f92e72edf8464126988b9fba7820a6d5" xml:space="preserve">
+    <value>Поручений</value>
+  </data>
+  <data name="FilterPanel_Other_ecd537d8271c4c1da17045a17e8c2048" xml:space="preserve">
+    <value>Прочих задач</value>
+  </data>
+  <data name="FilterPanel_InProcess_ed6d2099223a44799a3ca2c2a16f4f47" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_6048fa69ce124729abad2b2393e82f6b" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_Last30Days_7ac32c5c120f45359b5018fc1bc6b0b8" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_28fc4774daa14e4fbf591200657e6c9b" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_768d470c7d9b4162937d355d2f2390ba" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_ApprovalType_d2cdb7dfa12e407c9ac35879143cc1e3" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="FilterPanel_AsgType_d2d7ccfa9de54b5a8380740ad319914d" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="sf_35d23c5e_9106_4068_bc3a_46b471928fa0" xml:space="preserve">
+    <value>На печать</value>
+  </data>
+  <data name="sf_a584ebf5_f9b3_4e41_b7cf_15d8c2f96844" xml:space="preserve">
+    <value>На доработку</value>
+  </data>
+  <data name="FilterPanel_StateGroup_9d1aca23616e4fd5878de57a50e11a15" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_7fc3fc52396f406fbf69df9102ad1f71" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_22c915ee01264caeb1030ce87e1d8699" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_2b61b7ac5f8944e0bc9dd5223c06c288" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_debc89638e314a8fb742b4268489d51a" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_InProcess_a9150fc504f649f692899006c7503abb" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_afc93f56380242d58efc73e183c01904" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_StateGroup_ce4c984fa42b4015b7b78462e21e899c" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcess_855e776da7094f56a571763e98a82dac" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_d44e613e4bfe4953931b3ba96234d269" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_8dce188d760e454ba2f90b750241fb7f" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_c3f999c61d8643a481c45281a734491f" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_17f75b5463044f5aa0b2751528d56d64" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_1ff2a955751a4107b00bb98da2ade343" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="sf_aee5f0a0_8a5f_422f_bc40_e98db38e94ca" xml:space="preserve">
+    <value>На регистрацию</value>
+  </data>
+  <data name="FilterPanel_StateGroup_514adb571e2841d7bf019399f16dc974" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcess_35cda5daccc0457db9d9e8360d705d47" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_4c02518156824d9b974990edac37c45a" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_52faff93fe894c039219f2202764ad44" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_61c3f09e4772442ea05b7d1d2dd35481" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_11c84f5365ff41b7b755674bab0147c1" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_41c8c0dfaae9475f86626d1eed720557" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="sf_ae3b3ff0_73ac_4590_961c_adf4579d59de" xml:space="preserve">
+    <value>Уведомления</value>
+  </data>
+  <data name="sf_1440d1dc_6746_434a_908d_e596c2a1f849" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="FilterPanel_ApprovalType_41c0c5354c2a4479b18b0a05a546a4fa" xml:space="preserve">
+    <value>Согласование</value>
+  </data>
+  <data name="FilterPanel_RuleBased_c24eae7816e145cc8917086affdc0e13" xml:space="preserve">
+    <value>По регламенту</value>
+  </data>
+  <data name="FilterPanel_Free_7157de651cc24d72bd3e567117b87bda" xml:space="preserve">
+    <value>Свободное</value>
+  </data>
+  <data name="FilterPanel_StateGroup_8b3453f849044751bdd61f9d94eb11e7" xml:space="preserve">
+    <value>Задачи</value>
+  </data>
+  <data name="FilterPanel_InProcess_1d9621b7539544b6bbc2cb898f1060ed" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_5a6579eacbc242e3b6de87d0b435a52a" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_9fcf03fd95f0495c9cdbad4d013f6f19" xml:space="preserve">
+    <value>Отправлены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_dba28e552b7d4f0b8b9cbc42dfaafa39" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_e37753b060b3497f96813818d7cf319a" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_02d977c92c8d4dfc8c5c8f197218db12" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_ShowGroup_8172c9a9bbd744d0ae0fa304afca546c" xml:space="preserve">
+    <value>Уведомления</value>
+  </data>
+  <data name="FilterPanel_IsRead_5c4af52b40bc4b8d8f072957a505c6b2" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_IsNotRead_6fb41fdfaf734e7e9cfaec413d66863d" xml:space="preserve">
+    <value>Непрочитанные</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_b66f12e567544e8880b977c406bd9bea" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_a68758532fc6437eb6b8829f5841a9f8" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_63cb8083a732489e98556199b2d219dd" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_ead259a3edc843419f809d5fe1d01542" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="WidgetTitle_TopLoadedPerformersGraph" xml:space="preserve">
+    <value>Сотрудники с высокой загрузкой</value>
+  </data>
+  <data name="WidgetDescription_TopLoadedPerformersGraph" xml:space="preserve">
+    <value>Отображение сотрудников с наибольшей загрузкой за период.</value>
+  </data>
+  <data name="WidgetParameter_TopLoadedPerformersGraph_Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="Enum_TopLoadedPerformersGraph_Period_Last30Days" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="Enum_TopLoadedPerformersGraph_Period_Last90Days" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="WidgetParameter_TopLoadedPerformersGraph_CarriedObjects" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="Enum_TopLoadedPerformersGraph_CarriedObjects_MyDepartments" xml:space="preserve">
+    <value>Моих подразделений с дочерними</value>
+  </data>
+  <data name="Enum_TopLoadedPerformersGraph_CarriedObjects_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="WidgetTitle_TopLoadedDepartmentsGraph" xml:space="preserve">
+    <value>Подразделения с высокой загрузкой</value>
+  </data>
+  <data name="WidgetDescription_TopLoadedDepartmentsGraph" xml:space="preserve">
+    <value>Отображение подразделений с наибольшей загрузкой за период.</value>
+  </data>
+  <data name="WidgetParameter_TopLoadedDepartmentsGraph_Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="Enum_TopLoadedDepartmentsGraph_Period_Last30Days" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="Enum_TopLoadedDepartmentsGraph_Period_Last90Days" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="WidgetTitle_ActiveAssignmentsDynamic" xml:space="preserve">
+    <value>Динамика количества заданий</value>
+  </data>
+  <data name="WidgetDescription_ActiveAssignmentsDynamic" xml:space="preserve">
+    <value>Мониторинг количества активных и просроченных заданий.</value>
+  </data>
+  <data name="WidgetParameter_ActiveAssignmentsDynamic_CarriedObjects" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_CarriedObjects_My" xml:space="preserve">
+    <value>Текущий сотрудник</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_CarriedObjects_MyDepartments" xml:space="preserve">
+    <value>Моих подразделений с дочерними</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_CarriedObjects_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_Period_Last90Days" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_Period_Last180Days" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="WidgetParameter_ActiveAssignmentsDynamic_Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_Period_Last30Days" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="WidgetTitle_AssignmentCompletionGraph" xml:space="preserve">
+    <value>Исполнительская дисциплина</value>
+  </data>
+  <data name="WidgetDescription_AssignmentCompletionGraph" xml:space="preserve">
+    <value>Показатель исполнительской дисциплины по заданиям.</value>
+  </data>
+  <data name="WidgetParameter_AssignmentCompletionGraph_Performer" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="WidgetParameter_AssignmentCompletionGraph_Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Performer_My" xml:space="preserve">
+    <value>Текущий сотрудник</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Performer_MyDepartments" xml:space="preserve">
+    <value>Моих подразделений с дочерними</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Performer_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Period_Last30Days" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Period_Last90Days" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="WidgetTitle_AssignmentCompletionDepartmentGraph" xml:space="preserve">
+    <value>Исполнительская дисциплина подразделений</value>
+  </data>
+  <data name="WidgetDescription_AssignmentCompletionDepartmentGraph" xml:space="preserve">
+    <value>Отображение подразделений с наименьшей исполнительской дисциплиной.</value>
+  </data>
+  <data name="WidgetParameter_AssignmentCompletionDepartmentGraph_Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="Enum_AssignmentCompletionDepartmentGraph_Period_Last30Days" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="Enum_AssignmentCompletionDepartmentGraph_Period_Last90Days" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="WidgetTitle_AssignmentCompletionEmployeeGraph" xml:space="preserve">
+    <value>Исполнительская дисциплина сотрудников</value>
+  </data>
+  <data name="WidgetDescription_AssignmentCompletionEmployeeGraph" xml:space="preserve">
+    <value>Отображение сотрудников с наименьшей исполнительской дисциплиной.</value>
+  </data>
+  <data name="WidgetParameter_AssignmentCompletionEmployeeGraph_Performer" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="WidgetParameter_AssignmentCompletionEmployeeGraph_Period" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="Enum_AssignmentCompletionEmployeeGraph_Period_Last30Days" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="Enum_AssignmentCompletionEmployeeGraph_Period_Last90Days" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="Enum_AssignmentCompletionEmployeeGraph_Performer_MyDepartments" xml:space="preserve">
+    <value>Моих подразделений с дочерними</value>
+  </data>
+  <data name="Enum_AssignmentCompletionEmployeeGraph_Performer_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="WidgetTitle_MyTodayAssignments" xml:space="preserve">
+    <value>Мои задания</value>
+  </data>
+  <data name="WidgetDescription_MyTodayAssignments" xml:space="preserve">
+    <value>Сводная информация по заданиям на сегодня.</value>
+  </data>
+  <data name="WidgetParameter_MyTodayAssignments_Substitution" xml:space="preserve">
+    <value>Учитывать замещение</value>
+  </data>
+  <data name="sf_1031e40e_2c3a_4964_92ce_92036cdcb3b9" xml:space="preserve">
+    <value>От контрагентов</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_18c779c334d94f868c7c848dbeb5686b" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_StateGroup_fdca1f03b44e4d57ad681f3843829082" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcess_7ace6523479d48e0905a71276d9d722c" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_7c38c0b546354fd0a6fa2ddb553259f5" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_Last180Days_fd864de4c2f6459885782cb7378ebf23" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_5fa6568eeda84dcdb45ddbf34616e952" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last30Days_ed9add38a3c9425eba51ebef196f05e9" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="sf_83d1dcdf_fb2c_4cd9_9246_e57d641b0a48" xml:space="preserve">
+    <value>На верификацию</value>
+  </data>
+  <data name="FilterPanel_StateGroup_1b44d77dce164755ab3be9cdd8b099b3" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_9b4c331a7e474710b26075d42b352e4a" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_8e2d5fb702e74f9a90c83a3317c44c4f" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_d9bbbc0f33bf4007b4699e8787be1a91" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_6f291aadccb843a6b3d03f9c885d8d44" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_InProcess_1750665d796c4e89b7a08dbd433174a7" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_7fbad9d79d3f4119b006fe3e4c3c15ff" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Performer_MyDirectDepts" xml:space="preserve">
+    <value>Моих подразделений</value>
+  </data>
+  <data name="Enum_AssignmentCompletionGraph_Performer_MyBusinessUnits" xml:space="preserve">
+    <value>Моей организации</value>
+  </data>
+  <data name="Enum_TopLoadedPerformersGraph_CarriedObjects_MyDirectDepts" xml:space="preserve">
+    <value>Моих подразделений</value>
+  </data>
+  <data name="Enum_TopLoadedPerformersGraph_CarriedObjects_MyBusinessUnits" xml:space="preserve">
+    <value>Моей организации</value>
+  </data>
+  <data name="Enum_AssignmentCompletionEmployeeGraph_Performer_MyDirectDepts" xml:space="preserve">
+    <value>Моих подразделений</value>
+  </data>
+  <data name="Enum_AssignmentCompletionEmployeeGraph_Performer_MyBusinessUnits" xml:space="preserve">
+    <value>Моей организации</value>
+  </data>
+  <data name="WidgetParameter_TopLoadedDepartmentsGraph_Performer" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="Enum_TopLoadedDepartmentsGraph_Performer_MyDepartments" xml:space="preserve">
+    <value>Моих подразделений с дочерними</value>
+  </data>
+  <data name="Enum_TopLoadedDepartmentsGraph_Performer_MyDirectDepts" xml:space="preserve">
+    <value>Моих подразделений</value>
+  </data>
+  <data name="Enum_TopLoadedDepartmentsGraph_Performer_MyBusinessUnits" xml:space="preserve">
+    <value>Моей организации</value>
+  </data>
+  <data name="Enum_TopLoadedDepartmentsGraph_Performer_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="WidgetParameter_AssignmentCompletionDepartmentGraph_Performer" xml:space="preserve">
+    <value>Сотрудники</value>
+  </data>
+  <data name="Enum_AssignmentCompletionDepartmentGraph_Performer_MyDepartments" xml:space="preserve">
+    <value>Моих подразделений с дочерними</value>
+  </data>
+  <data name="Enum_AssignmentCompletionDepartmentGraph_Performer_MyDirectDepts" xml:space="preserve">
+    <value>Моих подразделений</value>
+  </data>
+  <data name="Enum_AssignmentCompletionDepartmentGraph_Performer_MyBusinessUnits" xml:space="preserve">
+    <value>Моей организации</value>
+  </data>
+  <data name="Enum_AssignmentCompletionDepartmentGraph_Performer_All" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="WidgetAction_TopLoadedPerformersGraph_OpenReport" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_CarriedObjects_MyDirectDepts" xml:space="preserve">
+    <value>Моих подразделений</value>
+  </data>
+  <data name="Enum_ActiveAssignmentsDynamic_CarriedObjects_MyBusinessUnits" xml:space="preserve">
+    <value>Моей организации</value>
+  </data>
+</root>

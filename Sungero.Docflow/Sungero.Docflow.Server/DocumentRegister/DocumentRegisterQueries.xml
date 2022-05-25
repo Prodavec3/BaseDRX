@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="HasRegisteredDocuments">
+    <default><![CDATA[-- Получить число зарегестрированных документов журнала.
+select
+  count(*)
+from
+  Sungero_Content_EDoc
+where
+  DocRegister_Docflow_Sungero = {0}]]></default>
+  </query>
+  <query key="GetCurrentNumber">
+    <default><![CDATA[select
+  CurrentNumber
+from
+  Sungero_DocRegister_CurrentNumbers
+where
+  DocRegisterId = {0}
+  and Month = {1}
+  and Year = {2}
+  and LeadDocument = {3}
+  and Quarter = {4}
+  and Department = {5}
+  and BUnit = {6}
+  and Day = {7}]]></default>
+  </query>
+  <query key="SetCurrentNumber">
+    <mssql><![CDATA[if exists (select
+             * 
+           from
+             Sungero_DocRegister_CurrentNumbers
+           where
+             DocRegisterId = {0}
+             and Month = {2}
+             and Year = {3}
+             and LeadDocument = {4}
+             and Quarter = {5}
+             and Department = {6}
+             and BUnit = {7}
+             and Day = {8})
+  update
+    Sungero_DocRegister_CurrentNumbers
+  set
+    CurrentNumber = {1}
+  where
+    DocRegisterId = {0}
+    and Month = {2}
+    and Year = {3}
+    and LeadDocument = {4}
+    and Quarter = {5}
+    and Department = {6}
+    and BUnit = {7}
+    and Day = {8}
+else
+  insert into
+    Sungero_DocRegister_CurrentNumbers (DocRegisterId, CurrentNumber, Month, Year, LeadDocument, Quarter, Department, BUnit, Day)
+  values
+    ({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})]]></mssql>
+    <postgres><![CDATA[select Sungero_DocRegister_SetCurrentNumber({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8});]]></postgres>
+  </query>
+</queries>

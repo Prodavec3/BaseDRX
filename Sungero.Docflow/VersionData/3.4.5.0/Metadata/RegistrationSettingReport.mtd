@@ -1,0 +1,108 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "8afc6640-7bfc-4eba-952e-0d17deac9d8f",
+  "Name": "RegistrationSettingReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer",
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "DataSources",
+    "DefaultExportFormat",
+    "ExportFormats",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "d8158429-708b-4947-a03d-770c775601de",
+      "Name": "ParamsDescriprion",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "c20d9088-3955-454c-ad68-b28e306911f9",
+      "Name": "SourceDataTableName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "4f7d857e-ed19-4205-bf2f-de14c49f8398",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IOurCompany, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "d6b64f07-bb6c-4293-af08-41488afa9119",
+      "Name": "Direction",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "4d2a3728-1c3f-4bcf-a4ba-413035b4d0b0",
+      "Name": "DirectionLabel",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "9d0fe12a-488b-4d86-a407-9c269212759a",
+      "Name": "HyperlinkServer",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "4a857abd-d7da-410a-90d0-c89a4f0ba166",
+      "Name": "SettingType",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "5ed07b75-162e-40d8-980b-05e3b58f8fb9",
+      "Name": "FilterDepartmentsForBusinessUnits",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "71312a6d-ad5b-400d-a7cc-31dfb8160a15",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "7f417eb9-602f-4ba0-ad2f-50435a5f078a",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "AutoNumeration",
+    "RegisterNotFound",
+    "DefaultSetting",
+    "SettingNotFound",
+    "OtherDepartmentString",
+    "AllDepartmentString",
+    "BusinessUnit",
+    "DocumentFlow",
+    "FilterDepartmentsForBusinessUnits",
+    "Yes",
+    "No",
+    "RegistrationSetting",
+    "Departments",
+    "SettingType",
+    "DocumentRegister",
+    "NumberExample",
+    "ReportName",
+    "InternalDocuments",
+    "IncomingDocuments",
+    "OutgoingDocuments",
+    "ContractualDocuments"
+  ],
+  "Versions": []
+}

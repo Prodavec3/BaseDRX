@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="DataSource">
+    <default><![CDATA[select Id, ToName, FromName, ToZipCode, FromZipCode, ToPlace, FromPlace from  Sungero_Reports_Envelopes where ReportSessionId = @ReportSessionId order by Id]]></default>
+  </query>
+</queries>

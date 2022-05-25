@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SelectDataFromTable">
+    <default><![CDATA[select *
+from  Sungero_Reports_Acquaintance temp
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+  <query key="CreateAcquaintanceReportTable">
+    <mssql><![CDATA[create table {0}
+  ([ReportSessionId] varchar(256) NOT NULL,
+   [TaskDisplayName] nvarchar(max),
+   [TaskId] int,
+   [TaskHyperlink] nvarchar(max),
+   [RowNumber] int,
+   [ShortName] nvarchar(max),
+   [LastName] nvarchar(max),
+   [JobTitle] nvarchar(max),
+   [Department] nvarchar(max),
+   [AcquaintanceDate] nvarchar(max),
+   [State] nvarchar(max),
+   [Note] nvarchar(max),
+   [AssignmentId] nvarchar(max),
+   [AssignmentHyperlink] nvarchar(max))]]></mssql>
+    <postgres><![CDATA[create table {0}
+(ReportSessionId citext NOT NULL,
+ TaskDisplayName citext,
+ TaskId int,
+ TaskHyperlink citext,
+ RowNumber int,
+ ShortName citext,
+ LastName citext,
+ JobTitle citext,
+ Department citext,
+ AcquaintanceDate citext,
+ State citext,
+ Note citext,
+ AssignmentId citext,
+ AssignmentHyperlink citext)]]></postgres>
+  </query>
+</queries>

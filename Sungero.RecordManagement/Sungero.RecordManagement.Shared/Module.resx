@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="DocumentKind" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="Registered" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="ConsiderationText" xml:space="preserve">
+    <value>Please review the document.</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Date registered from</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Date registered to</value>
+  </data>
+  <data name="IncomingDocumentsReport" xml:space="preserve">
+    <value>Incoming Documents Register</value>
+  </data>
+  <data name="InternalDocumentsReport" xml:space="preserve">
+    <value>Internal Documents Register</value>
+  </data>
+  <data name="OutgoingDocumentsReport" xml:space="preserve">
+    <value>Outgoing Documents Register</value>
+  </data>
+  <data name="ActionItemsExecutionReport" xml:space="preserve">
+    <value>Follow Up Action Item Execution Deadline</value>
+  </data>
+  <data name="DocumentReturnReport" xml:space="preserve">
+    <value>Check Document Return</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="DeliveredFrom" xml:space="preserve">
+    <value>Date delivered from</value>
+  </data>
+  <data name="DeliveredTo" xml:space="preserve">
+    <value>Date delivered to</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineLessThanToday" xml:space="preserve">
+    <value>The deadline must be greater or equal to the current date.</value>
+  </data>
+  <data name="FailedGetSettings" xml:space="preserve">
+    <value>Cannot retrieve settings. Contact your system administrator.</value>
+  </data>
+  <data name="IncomingDocumentsProcessingReportName" xml:space="preserve">
+    <value>Incoming Documents Processing</value>
+  </data>
+  <data name="AllReportsTitle" xml:space="preserve">
+    <value>Reports "Records Management"</value>
+  </data>
+  <data name="PeriodFrom" xml:space="preserve">
+    <value>Deadline date from</value>
+  </data>
+  <data name="PeriodTo" xml:space="preserve">
+    <value>Deadline date to</value>
+  </data>
+  <data name="AssignedBy" xml:space="preserve">
+    <value>Assigned by</value>
+  </data>
+  <data name="ResponsiblePerformer" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="AssignmentCompletion" xml:space="preserve">
+    <value>Percent of performance discipline</value>
+  </data>
+  <data name="ActionItemCompletion" xml:space="preserve">
+    <value>Percent of action items executed on time</value>
+  </data>
+  <data name="IncomingLetterTypeName" xml:space="preserve">
+    <value>Incoming letter</value>
+  </data>
+  <data name="OutgoingLetterTypeName" xml:space="preserve">
+    <value>Outgoing letter</value>
+  </data>
+  <data name="OrderTypeName" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="IncomingLetterKindName" xml:space="preserve">
+    <value>Incoming letter</value>
+  </data>
+  <data name="IncomingLetterKindShortName" xml:space="preserve">
+    <value>Inc. letter</value>
+  </data>
+  <data name="OutgoingLetterKindName" xml:space="preserve">
+    <value>Outgoing letter</value>
+  </data>
+  <data name="OutgoingLetterKindShortName" xml:space="preserve">
+    <value>Outg. letter</value>
+  </data>
+  <data name="OrderKindName" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="OrderKindShortName" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="ConfirmDeleteDraftResolutionAssignment" xml:space="preserve">
+    <value>Action items will be deleted from the draft resolution.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ActionItemsExecutionReportForMeetings" xml:space="preserve">
+    <value>Follow Up Execution Deadline of Meeting Action Item</value>
+  </data>
+  <data name="SignatorySubstitute" xml:space="preserve">
+    <value>Signed by {0} for {1}</value>
+  </data>
+  <data name="SignatureValidationMessage" xml:space="preserve">
+    <value>Signed by {0} as of {1}. {2}.</value>
+  </data>
+  <data name="SignatureValidationErrorMessage" xml:space="preserve">
+    <value>The approving document signature is not valid. Contact your system administrator.</value>
+  </data>
+  <data name="CompanyDirectiveTypeName" xml:space="preserve">
+    <value>Company Directive</value>
+  </data>
+  <data name="CompanyDirectiveKindName" xml:space="preserve">
+    <value>Company Directive</value>
+  </data>
+  <data name="CompanyDirectiveKindShortName" xml:space="preserve">
+    <value>Company Directive</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineForAssignee" xml:space="preserve">
+    <value>The deadline for the performer has already expired.</value>
+  </data>
+  <data name="TwoSpotTemplate" xml:space="preserve">
+    <value>{0}:</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineLessThanTodayCorrectIt" xml:space="preserve">
+    <value>Change action item deadlines in the draft resolution. The deadlines must be greater than or equal to the current date.</value>
+  </data>
+  <data name="UnsupportedAccessRightsTypeMessage" xml:space="preserve">
+    <value>Argument '{0}' exception. Access rights type '{1}' sended. Only instance access rights types supported.</value>
+  </data>
+  <data name="CoAssignees" xml:space="preserve">
+    <value>(co-assignees)</value>
+  </data>
+  <data name="ActionItemIndefiniteDeadline" xml:space="preserve">
+    <value>no deadline</value>
+  </data>
+</root>

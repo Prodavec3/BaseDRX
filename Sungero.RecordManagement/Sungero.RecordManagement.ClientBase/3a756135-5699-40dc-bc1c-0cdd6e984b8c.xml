@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <ViewName>Default</ViewName>
+
+    <Folder>
+      <XtraSerializer version="1.0" application="GridControl">
+        <property name="#LayoutVersion" isnull="true" />
+        <property name="$GridControl" iskey="true" value="GridControl">
+          <property name="GroupCount">0</property>
+          <property name="TotalSummary" iskey="true" value="0" />
+          <property name="View" isnull="true" iskey="true">
+            <property name="ShowTotalSummary">false</property>
+            <property name="WaitIndicatorType">Panel</property>
+            <property name="ColumnChooserState" isnull="true" iskey="true">
+              <property name="Location">982,-35</property>
+              <property name="Size">220,250</property>
+            </property>
+            <property name="ShowGroupPanel">false</property>
+            <property name="AutoWidth">true</property>
+            <property name="ShowAutoFilterRow">false</property>
+          </property>
+          <property name="Columns" iskey="true" value="0" />
+          <property name="SortInfo" iskey="true" value="0" />
+          <property name="GroupSummary" iskey="true" value="0" />
+          <property name="MRUFilters" iskey="true" value="0" />
+          <property name="FilterString" isnull="true" />
+          <property name="GroupSummarySortInfo" iskey="true" value="0" />
+        </property>
+      </XtraSerializer>
+    </Folder>
+    
+</settings>

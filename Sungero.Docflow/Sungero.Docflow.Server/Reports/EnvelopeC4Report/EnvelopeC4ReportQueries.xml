@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="DataSource">
+    <default><![CDATA[select Id, ToName, FromName, ToZipCode, FromZipCode, ToPlace, FromPlace from  Sungero_Reports_Envelopes where ReportSessionId = @ReportSessionId order by Id]]></default>
+  </query>
+  <query key="CreateEnvelopesTable">
+    <mssql><![CDATA[create table {0}
+([ReportSessionId] varchar(256),
+ [Id] int NOT NULL,
+ [ToName] nvarchar(max) NOT NULL,
+ [FromName] nvarchar(max) NOT NULL,
+ [ToZipCode] nvarchar(max) NOT NULL,
+ [FromZipCode] nvarchar(max) NOT NULL,
+ [ToPlace] nvarchar(max) NOT NULL,
+ [FromPlace] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table if not exists {0}
+(ReportSessionId citext,
+ Id int NOT NULL,
+ ToName citext NOT NULL,
+ FromName citext NOT NULL,
+ ToZipCode citext NOT NULL,
+ FromZipCode citext NOT NULL,
+ ToPlace citext NOT NULL,
+ FromPlace citext NOT NULL)]]></postgres>
+  </query>
+</queries>

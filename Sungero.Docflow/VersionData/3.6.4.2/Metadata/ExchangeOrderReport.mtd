@@ -1,0 +1,85 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "eb8f1b91-7142-42e7-8168-b90729df6459",
+  "Name": "ExchangeOrderReport",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "AccessRightsMode",
+    "DataSources",
+    "Parameters",
+    "HandledEvents",
+    "PublicConstants",
+    "PublicStructures",
+    "DisplayName"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1bfd6cab-d751-43e8-82e0-d2e9102edf72",
+      "Name": "Entity",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces",
+      "IsRequired": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "e84687b4-1ceb-491e-ba82-9cc727f398be",
+      "Name": "SessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "a2f86a43-2a50-4923-bf97-567c61f86e3f",
+      "Name": "CompletationString",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "23150dfe-bdfd-44dc-a1fc-d859e24a647a",
+      "Name": "DocumentName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "SendedBy",
+    "SignedBy",
+    "MessageSended",
+    "MessageAccepted",
+    "MessageCreated",
+    "Operator",
+    "TitleSended",
+    "TitleAccepted",
+    "AnnulmentSigned",
+    "AnnulmentWait",
+    "AnnulmentSign",
+    "Signature",
+    "BuyerTitle",
+    "SignatureNotSended",
+    "SignatureNotAccepted",
+    "SignatureSended",
+    "SignatureAccepted",
+    "TitleNotSended",
+    "TitleNotAccepted",
+    "Completed",
+    "NotCompleted",
+    "Docflow",
+    "ReportName",
+    "Number",
+    "Document",
+    "Date"
+  ],
+  "Versions": []
+}

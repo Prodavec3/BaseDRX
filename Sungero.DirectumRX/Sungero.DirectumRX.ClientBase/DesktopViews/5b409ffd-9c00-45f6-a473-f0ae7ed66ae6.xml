@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Desktop>
+    <Widgets>
+      <Widget Column="0" Row="0" ActionListGuid="934ade0c-19f4-4a06-947c-03fb99b5fbcc" />
+      <Widget Column="1" Row="0" ActionListGuid="790204fb-6926-4d0f-a470-0f9721b156a9" />
+      <Widget Column="1" Row="3" ActionListGuid="500c642e-c168-4d24-94a2-54a02b5adccd" />
+      <Widget Column="2" Row="0" ActionListGuid="087ec236-6052-4a73-889f-5ba54d416704" />
+    </Widgets>
+  </Desktop>
+</settings>

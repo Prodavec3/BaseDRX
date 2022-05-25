@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateDraftResolutionReportTable">
+    <mssql><![CDATA[CREATE TABLE {0}(
+  [ReportSessionId] [varchar](256) NOT NULL,
+  [PerformersLabel] [varchar](max),
+  [Deadline] [varchar](max),
+  [ResolutionLabel] [varchar](max),
+  [SupervisorLabel] [varchar](max)
+)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0}(
+  ReportSessionId citext NOT NULL,
+  PerformersLabel citext,
+  Deadline citext,
+  ResolutionLabel citext,
+  SupervisorLabel citext
+)]]></postgres>
+  </query>
+  <query key="SelectData">
+    <default><![CDATA[select * 
+from Sungero_Reports_DraftResolutionReport
+where ReportSessionId = @reportSessionId]]></default>
+  </query>
+</queries>

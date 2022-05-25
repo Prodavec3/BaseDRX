@@ -1,0 +1,146 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "593dcc11-15ee-49f2-b4ef-bf4cf7867055",
+  "Name": "Meetings",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.Meetings.Client",
+  "ClientBaseAssemblyName": "Sungero.Meetings.ClientBase",
+  "ClientBaseNamespace": "Sungero.Meetings.ClientBase",
+  "ClientNamespace": "Sungero.Meetings.Client",
+  "Code": "Meeting",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "fcf78972-29e9-48ac-ab25-a7614c7e22f2",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "e25f4439-26d2-437a-965b-b1ba9efdd7fb",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "69a727db-3971-414a-a880-0e6fc7e1d522",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c"
+    },
+    {
+      "ItemId": "5261da93-7879-4210-b3db-c92fa894ab4d",
+      "PreviousItemId": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c"
+    },
+    {
+      "ItemId": "bb4780ff-b2c3-4044-a390-e9e110791bf6",
+      "PreviousItemId": "5261da93-7879-4210-b3db-c92fa894ab4d"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Meetings",
+  "IsVisible": false,
+  "Libraries": [
+    {
+      "NameGuid": "ebb41899-5911-4406-9b78-ec057ec5157b",
+      "Name": "AsposeExtensions",
+      "Scope": "Both"
+    }
+  ],
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "AgendaKind",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"68B6FB25-7F78-4AB9-AE0C-D8947B99FA24\")"
+    },
+    {
+      "Name": "MeetingsUIGuid",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"6ea9a047-b597-42eb-8f90-da8c559dd057\")"
+    },
+    {
+      "Name": "MinutesKind",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"75D45529-60AE-4D95-9C8F-B1016B766253\")"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetMeetingActionItemExecutionTasks",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.RecordManagement.IActionItemExecutionTask>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetResponsibilitiesReportData",
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Company.Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Meetings",
+  "ResourcesKeys": [
+    "NameMeetingResponsibleRole",
+    "DescriptionMeetingResponsibleRole",
+    "AgendaTypeName",
+    "AgendaKindName",
+    "AgendaKindShortName",
+    "MinutesTypeName",
+    "MinutesKindName",
+    "MinutesKindShortName",
+    "RegistersAndSettingsMinutesIndex",
+    "RegistersAndSettingsMinutesName",
+    "MeetingsPresident",
+    "MeetingsSecretary"
+  ],
+  "ServerAssemblyName": "Sungero.Meetings.Server",
+  "ServerNamespace": "Sungero.Meetings.Server",
+  "SharedAssemblyName": "Sungero.Meetings.Shared",
+  "SharedNamespace": "Sungero.Meetings.Shared",
+  "SpecialFolders": [],
+  "Version": "3.4.5.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

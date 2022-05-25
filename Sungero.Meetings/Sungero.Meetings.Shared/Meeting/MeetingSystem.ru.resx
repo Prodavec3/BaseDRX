@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Совещание</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Совещание</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Реестр совещаний</value>
+  </data>
+  <data name="Property_DateTime" xml:space="preserve">
+    <value>Дата и время</value>
+  </data>
+  <data name="Property_Location" xml:space="preserve">
+    <value>Место</value>
+  </data>
+  <data name="Property_Secretary" xml:space="preserve">
+    <value>Секретарь</value>
+  </data>
+  <data name="Property_President" xml:space="preserve">
+    <value>Председатель</value>
+  </data>
+  <data name="Property_Members" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="ControlGroup_de3a35f0d02f491a9feb28b9ddef6626" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+  <data name="ControlGroup_76a419a0ea3d4a7ca3350ba03c92a0ac" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Action_CreateOrShowAgenda" xml:space="preserve">
+    <value>Повестка</value>
+  </data>
+  <data name="Action_CreateOrShowAgendaDescription" xml:space="preserve">
+    <value>Открытие повестки совещания. Если повестки еще не было, то она будет создана.</value>
+  </data>
+  <data name="Action_CreateOrShowAgendaHint" xml:space="preserve">
+    <value>Повестка совещания</value>
+  </data>
+  <data name="Action_CreateOrShowMinutes" xml:space="preserve">
+    <value>Протокол</value>
+  </data>
+  <data name="Action_CreateOrShowMinutesDescription" xml:space="preserve">
+    <value>Открытие протокола совещания. Если протокола еще не было, то он будет создан.</value>
+  </data>
+  <data name="Action_CreateOrShowMinutesHint" xml:space="preserve">
+    <value>Протокол совещания</value>
+  </data>
+  <data name="Action_OpenActionItemExecutionReport" xml:space="preserve">
+    <value>Контроль исполнения</value>
+  </data>
+  <data name="Action_OpenActionItemExecutionReportDescription" xml:space="preserve">
+    <value>Открытие списка всех поручений по совещанию.</value>
+  </data>
+  <data name="Action_OpenActionItemExecutionReportHint" xml:space="preserve">
+    <value>Контроль исполнения поручений</value>
+  </data>
+  <data name="Ribbon_Documents_a3c250b804f84b87bdb7d91f0218310b" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Ribbon_Execution_f63df8389fbf4e139931ad15a83eca9b" xml:space="preserve">
+    <value>Исполнение</value>
+  </data>
+  <data name="Enum_Status_Active" xml:space="preserve">
+    <value>Действующая</value>
+  </data>
+  <data name="FilterPanel_Status_b8863bfafd4245188da908b8e9b64bdd" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Main_93da40f37fa6419b860723af5c19bd79" xml:space="preserve">
+    <value>Совещания</value>
+  </data>
+  <data name="FilterPanel_All_1606a9f739094c258d741dbd30f5db26" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_My_45934cda66504ec3bb56658f3f017de5" xml:space="preserve">
+    <value>Мои</value>
+  </data>
+  <data name="FilterPanel_Period_aaf66733823946749fb7b0154a9524a2" xml:space="preserve">
+    <value>Дата проведения</value>
+  </data>
+  <data name="FilterPanel_ShowEmployee_d83f0e37ca974f03a8f56f01e9229344" xml:space="preserve">
+    <value>Сотрудник</value>
+  </data>
+  <data name="FilterPanel_Today_7269e9b3f166439db2f7bb856f12242a" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="FilterPanel_ShowPeriod_0de6d6a3300c4285ace31147ec8a0d5b" xml:space="preserve">
+    <value>Произвольный период</value>
+  </data>
+  <data name="Action_MeetingDocuments" xml:space="preserve">
+    <value>Документы по совещанию</value>
+  </data>
+  <data name="Action_MeetingDocumentsDescription" xml:space="preserve">
+    <value>Открытие документов по совещанию: повестки, протокола и связанных с ними документов.</value>
+  </data>
+  <data name="Action_MeetingDocumentsHint" xml:space="preserve">
+    <value>Документы по совещанию</value>
+  </data>
+  <data name="Form_35cfd56b8d4c4dacaa90bf650763870c" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="Property_DisplayName" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="FilterPanel_Planing_e9b7e845990f4079ad77f220048a797b" xml:space="preserve">
+    <value>Запланировано</value>
+  </data>
+  <data name="FilterPanel_CreateDocument_b016eec105e24250b54bb9bd060d3da3" xml:space="preserve">
+    <value>Оформление протокола</value>
+  </data>
+  <data name="FilterPanel_ExecuteActionItems_1deba6432e624e67921309e92a3a714e" xml:space="preserve">
+    <value>Исполнение поручений</value>
+  </data>
+  <data name="FilterPanel_Concluded_126617e71b234ddba6fe7bfac4a6ffd3" xml:space="preserve">
+    <value>Проведено</value>
+  </data>
+  <data name="FilterPanel_CurrentWeek_7ebaf87ee6a54461a646a248a9dfdc54" xml:space="preserve">
+    <value>Текущая неделя</value>
+  </data>
+  <data name="FilterPanel_CurrentMounth_9afe84cbdcc24b9a8c09ebf74e6e67c2" xml:space="preserve">
+    <value>Текущий месяц</value>
+  </data>
+  <data name="Action_OpenActionItems" xml:space="preserve">
+    <value>Поручения по совещанию</value>
+  </data>
+  <data name="Action_OpenActionItemsDescription" xml:space="preserve">
+    <value>Открытие списка поручений по протоколу совещания.</value>
+  </data>
+  <data name="Action_OpenActionItemsHint" xml:space="preserve">
+    <value>Показать поручения по совещанию</value>
+  </data>
+  <data name="Ribbon_ActionItemsGroup_40ac64c0a5584e3bac10fcedfcabb78a" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="Ribbon_ActionItemsGroup_e153a01dad224926a87126f8cab8f33e" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="Property_Duration" xml:space="preserve">
+    <value>Длительность, ч.</value>
+  </data>
+  <data name="Ribbon_CalendarCommands_bde205b6faec4591b555f3be2fa415de" xml:space="preserve">
+    <value>Календарь</value>
+  </data>
+  <data name="Action_AddToCalendar" xml:space="preserve">
+    <value>Добавить в календарь</value>
+  </data>
+  <data name="Action_AddToCalendarHint" xml:space="preserve">
+    <value>Добавить в календарь</value>
+  </data>
+  <data name="Action_AddToCalendarDescription" xml:space="preserve">
+    <value>Создание файла в формате iCalendar для добавления встречи в календарь</value>
+  </data>
+  <data name="Action_AddMember" xml:space="preserve">
+    <value>Добавить участников</value>
+  </data>
+  <data name="Action_AddMemberHint" xml:space="preserve">
+    <value>Добавить участников совещания</value>
+  </data>
+  <data name="Action_AddMemberDescription" xml:space="preserve">
+    <value>Массовое заполнение участников совещания из ролей, подразделений и других групп.
+
+Сотрудники, которые уже указаны в качестве участников, не будут добавлены.</value>
+  </data>
+  <data name="Ribbon_Members_3385d2ee50074c6abb2f87da08213605" xml:space="preserve">
+    <value>Участники</value>
+  </data>
+</root>

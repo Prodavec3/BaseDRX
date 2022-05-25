@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="RoleNameFinancialArchiveResponsible" xml:space="preserve">
+    <value>Employees responsible for financial archive</value>
+  </data>
+  <data name="DescriptionFinancialArchiveResponsible" xml:space="preserve">
+    <value>Employees who are authorized to work with financial documents.</value>
+  </data>
+  <data name="Counterparty" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="RegistrationDateFrom" xml:space="preserve">
+    <value>Document date from</value>
+  </data>
+  <data name="RegistrationDateTo" xml:space="preserve">
+    <value>Document date to</value>
+  </data>
+  <data name="WaybillDocumentKindName" xml:space="preserve">
+    <value>Waybill</value>
+  </data>
+  <data name="WaybillDocumentKindShortName" xml:space="preserve">
+    <value>Waybill</value>
+  </data>
+  <data name="WaybillDocumentTypeName" xml:space="preserve">
+    <value>Waybill</value>
+  </data>
+  <data name="IncomingTaxInvoiceTypeName" xml:space="preserve">
+    <value>Tax Invoice Received</value>
+  </data>
+  <data name="OutgoingTaxInvoiceTypeName" xml:space="preserve">
+    <value>Tax Invoice Issued</value>
+  </data>
+  <data name="IncomingTaxInvoiceKindName" xml:space="preserve">
+    <value>Tax invoice received</value>
+  </data>
+  <data name="OutgoingTaxInvoiceKindName" xml:space="preserve">
+    <value>Tax invoice issued</value>
+  </data>
+  <data name="OutgoingTaxInvoiceKindShortName" xml:space="preserve">
+    <value>Tax inv. issued</value>
+  </data>
+  <data name="IncomingTaxInvoiceKindShortName" xml:space="preserve">
+    <value>Tax inv. received</value>
+  </data>
+  <data name="BuyerTitleVersionNote" xml:space="preserve">
+    <value>Buyer's details</value>
+  </data>
+  <data name="RegistersAndSettingsOutgoingTaxInvoiceName" xml:space="preserve">
+    <value>Tax invoices issued</value>
+  </data>
+  <data name="RegistersAndSettingsOutgoingTaxInvoiceIndex" xml:space="preserve">
+    <value>TII</value>
+  </data>
+  <data name="RegistersAndSettingsWaybillName" xml:space="preserve">
+    <value>Waybills</value>
+  </data>
+  <data name="RegistersAndSettingsWaybillIndex" xml:space="preserve">
+    <value>WB</value>
+  </data>
+  <data name="RegistersAndSettingsActIndex" xml:space="preserve">
+    <value>CS</value>
+  </data>
+  <data name="RegistersAndSettingsActName" xml:space="preserve">
+    <value>Contract statements</value>
+  </data>
+  <data name="ContractStatementKindName" xml:space="preserve">
+    <value>Contract statement</value>
+  </data>
+  <data name="ContractStatementKindShortName" xml:space="preserve">
+    <value>Statement</value>
+  </data>
+  <data name="ContractStatementTypeName" xml:space="preserve">
+    <value>Contract Statement</value>
+  </data>
+  <data name="SellerTitleVersionNote" xml:space="preserve">
+    <value>Seller's details</value>
+  </data>
+  <data name="UniversalTransferDocumentTypeName" xml:space="preserve">
+    <value>Universal transfer document</value>
+  </data>
+  <data name="UniversalTaxInvoiceAndBasicKindName" xml:space="preserve">
+    <value>Tax invoice and document confirming goods shipment (work completion)</value>
+  </data>
+  <data name="UniversalTaxInvoiceAndBasicKindShortName" xml:space="preserve">
+    <value>Tax inv. and goods shipment (work completion)</value>
+  </data>
+  <data name="UniversalBasicKindName" xml:space="preserve">
+    <value>Document confirming goods shipment (work completion)</value>
+  </data>
+  <data name="UniversalBasicKindShortName" xml:space="preserve">
+    <value>Goods shipment (work completion)</value>
+  </data>
+  <data name="RegistersAndSettingsIncomingTaxInvoiceIndex" xml:space="preserve">
+    <value>TIR</value>
+  </data>
+  <data name="RegistersAndSettingsIncomingTaxInvoiceName" xml:space="preserve">
+    <value>Tax invoices received</value>
+  </data>
+  <data name="RegistersAndSettingsUniversalName" xml:space="preserve">
+    <value>Universal transfer document</value>
+  </data>
+  <data name="RegistersAndSettingsUniversalIndex" xml:space="preserve">
+    <value>UTD</value>
+  </data>
+  <data name="DefaultApprovalRuleNameFinancial" xml:space="preserve">
+    <value>Default approval rule for financial documents</value>
+  </data>
+  <data name="ImportDialog_CannotImportDocument" xml:space="preserve">
+    <value>Cannot import XML file.</value>
+  </data>
+  <data name="ImportDialog_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="ImportDialog_CannotRecognizeDocument" xml:space="preserve">
+    <value>Select one of the supported formats: universal transfer document, universal corrective document, goods transfer document, work results transfer document.</value>
+  </data>
+  <data name="ImportDialog_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="ImportDialog_NoBusinessUnitWithFTSId" xml:space="preserve">
+    <value>To import XML file, there must be our company {0} with TIN/TRRC {1}/{2} and ID of electronic exchange participant {3}.</value>
+  </data>
+  <data name="ImportDialog_NoBusinessUnitWithTIN" xml:space="preserve">
+    <value>To import XML file, there must be our company {0} with TIN/TRRC {1}/{2}.</value>
+  </data>
+  <data name="ImportDialog_NoCounterpartyWithFTSId" xml:space="preserve">
+    <value>To import XML file, there must be counterparty {0} with TIN/TRRC {1}/{2} and ID of electronic exchange participant {3}.</value>
+  </data>
+  <data name="ImportDialog_NoCounterpartyWithTIN" xml:space="preserve">
+    <value>To import XML file, there must be counterparty {0} with TIN/TRRC {1}/{2}.</value>
+  </data>
+  <data name="ImportDialog_Title" xml:space="preserve">
+    <value>Import Document for Sending</value>
+  </data>
+  <data name="NoRightsToCreateDocument" xml:space="preserve">
+    <value>You are not authorized to create a document with type {0}.</value>
+  </data>
+  <data name="ImportDialog_NoExchangeWithCounterparty" xml:space="preserve">
+    <value>Electronic exchange must be set up with counterparty {0} (TIN/TRRC {1}/{2}).</value>
+  </data>
+</root>

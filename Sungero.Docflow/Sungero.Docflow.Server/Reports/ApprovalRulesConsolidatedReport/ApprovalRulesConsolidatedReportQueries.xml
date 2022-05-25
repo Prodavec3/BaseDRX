@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+([ReportSessionId] varchar(256) NOT NULL,
+ [BusinessUnit] nvarchar(max) NULL,
+ [Department] nvarchar(max) NULL,
+ [ApprovalRule] nvarchar(max) NULL,
+ [ApprovalRuleId] int NULL,
+ [ApprovalRuleUrl] nvarchar(max) NULL,
+ [ApprovalRulePriority] int NULL,
+ [Status] nvarchar(max) NULL,
+ [Category] nvarchar(max) NULL,
+ [DocumentKind] nvarchar(max) NULL,
+ [DocumentFlow] nvarchar(max) NULL,
+ [DocumentParentType] nvarchar(max) NULL,
+ [Relation] nvarchar(max) NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+(ReportSessionId citext NOT NULL,
+ BusinessUnit citext NULL,
+ Department citext NULL,
+ ApprovalRule citext NULL,
+ ApprovalRuleId int NULL,
+ ApprovalRuleUrl citext NULL,
+ ApprovalRulePriority int NULL,
+ Status citext NULL,
+ Category citext NULL,
+ DocumentKind citext NULL,
+ DocumentFlow citext NULL,
+ DocumentParentType citext NULL,
+ Relation citext NULL)]]></postgres>
+  </query>
+  <query key="SelectFromTempTable">
+    <mssql><![CDATA[select *
+from Sungero_Reports_ApprovalRulesConsolidated temp
+where ReportSessionId = @ReportSessionId
+order by businessUnit, department, documentFlow, documentKind, category, ApprovalRuleId ASC;]]></mssql>
+    <postgres><![CDATA[select *
+from Sungero_Reports_ApprovalRulesConsolidated temp
+where ReportSessionId = @ReportSessionId
+order by businessUnit, department, documentFlow, documentKind, category, ApprovalRuleId ASC;]]></postgres>
+  </query>
+</queries>

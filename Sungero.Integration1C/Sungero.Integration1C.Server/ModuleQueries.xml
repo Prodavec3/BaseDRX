@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SelectLastNotificationDate">
+    <mssql><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE (Key = '{0}')]]></postgres>
+  </query>
+  <query key="InsertLastNotificationDate">
+    <mssql><![CDATA[INSERT [Sungero_Docflow_Params] ([Key],Value) values ('{0}', '{1}')]]></mssql>
+    <postgres><![CDATA[insert into Sungero_Docflow_Params (Key,Value) values ('{0}', '{1}')]]></postgres>
+  </query>
+  <query key="UpdateLastNotificationDate">
+    <mssql><![CDATA[UPDATE Sungero_Docflow_Params SET Value = '{1}' WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[UPDATE Sungero_Docflow_Params SET Value = '{1}' WHERE (Key = '{0}')]]></postgres>
+  </query>
+</queries>

@@ -1,0 +1,266 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "f7b1d5b7-5af1-4a9f-b4d7-4e18840d7195",
+  "Name": "Integration1C",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.Integration1C.Client",
+  "ClientBaseAssemblyName": "Sungero.Integration1C.ClientBase",
+  "ClientBaseNamespace": "Sungero.Integration1C.ClientBase",
+  "ClientNamespace": "Sungero.Integration1C.Client",
+  "Code": "Int1C",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "1c4f34fe-bc13-4b32-b369-5aef2c89094a",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "9cebe257-629c-42d7-bffa-4f17a1afb05c",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "335ef5f5-358c-41e9-bdd2-2a32fe91a04c",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "ec7b606a-21ee-4f16-aba8-ab8c2af76d12",
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    },
+    {
+      "Id": "92491aa6-c4df-4f46-a807-ebdd337bda74",
+      "MaxVersion": "",
+      "MinVersion": "1.1.0.0"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Integration1C",
+  "IsLicensed": true,
+  "IsVisible": false,
+  "Overridden": [
+    "IsLicensed",
+    "IsVisible"
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetChangedBankAccountsFromSyncDate",
+      "Parameters": [
+        {
+          "Name": "entityTypeGuids",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Guid>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "processedEntitiesCount",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "entitiesCountForProcessing",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "extEntityType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "systemId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Domain.Shared.IEntity>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetChangedBankAccountsFromSyncDateCount",
+      "Parameters": [
+        {
+          "Name": "entityTypeGuids",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Guid>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "extEntityType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "systemId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32"
+    },
+    {
+      "Name": "GetChangedEntitiesFromSyncDate",
+      "Parameters": [
+        {
+          "Name": "entityTypeGuids",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Guid>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "processedEntitiesCount",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "entitiesCountForProcessing",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "extEntityType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "systemId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Domain.Shared.IEntity>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetChangedEntitiesFromSyncDateCount",
+      "Parameters": [
+        {
+          "Name": "entityTypeGuids",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Guid>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "extEntityType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "systemId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32"
+    },
+    {
+      "Name": "GetLastNotificationDateRemote",
+      "Parameters": [
+        {
+          "Name": "systemId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetTodayDocument",
+      "Parameters": [
+        {
+          "Name": "fileExists",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Docflow.ISimpleDocument",
+      "ReturnTypeFullName": "Sungero.Docflow.ISimpleDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "IsSummaryProtocolExist",
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "SendNotificationBySimpleTaskRemote",
+      "Parameters": [
+        {
+          "Name": "title",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "UpdateLastNotificationDateRemote",
+      "Parameters": [
+        {
+          "Name": "date",
+          "ParameterType": "global::System.DateTime",
+          "ParameterTypeFullName": "System.DateTime"
+        },
+        {
+          "Name": "systemId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Integration1C",
+  "ResourcesKeys": [
+    "Synchronization1CResponsibleRoleName",
+    "Synchronization1CResponsibleRoleDescription"
+  ],
+  "ServerAssemblyName": "Sungero.Integration1C.Server",
+  "ServerNamespace": "Sungero.Integration1C.Server",
+  "SharedAssemblyName": "Sungero.Integration1C.Shared",
+  "SharedNamespace": "Sungero.Integration1C.Shared",
+  "SpecialFolders": [],
+  "Version": "4.3.27.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

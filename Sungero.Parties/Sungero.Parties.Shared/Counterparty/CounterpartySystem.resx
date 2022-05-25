@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Counterparties</value>
+  </data>
+  <data name="Property_TIN" xml:space="preserve">
+    <value>TIN</value>
+  </data>
+  <data name="Property_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="Property_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Property_LegalAddress" xml:space="preserve">
+    <value>Legal address</value>
+  </data>
+  <data name="Property_PostalAddress" xml:space="preserve">
+    <value>Postal address</value>
+  </data>
+  <data name="Property_Phones" xml:space="preserve">
+    <value>Phone numbers</value>
+  </data>
+  <data name="Property_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Property_Homepage" xml:space="preserve">
+    <value>Homepage</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Action_WriteLetter" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Action_WriteLetterDescription" xml:space="preserve">
+    <value>Create a new email message addressed to this contact.</value>
+  </data>
+  <data name="Action_WriteLetterHint" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Action_WriteLetterConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_GoToWebsite" xml:space="preserve">
+    <value>Open Homepage</value>
+  </data>
+  <data name="Action_GoToWebsiteDescription" xml:space="preserve">
+    <value>Open website of the counterparty in a browser window.</value>
+  </data>
+  <data name="Action_GoToWebsiteHint" xml:space="preserve">
+    <value>Open homepage</value>
+  </data>
+  <data name="Action_GoToWebsiteConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_149a02ccc0af4bec8a1b8d6c0bab1d81" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a4203bd178814b25bef4e70576f0d4dd_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Contacts_7ef0a3c576ac4fedb79e26827b7bf183" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Enum_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Enum_Status_Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Property_Nonresident" xml:space="preserve">
+    <value>Non-resident</value>
+  </data>
+  <data name="FilterPanel_CounterpartyType_a275dde3082948dba476c2ee6e2c0087" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_Company_70c78d285565449db132a5ac47ef0e80" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="FilterPanel_Person_351049c0fabc4e9089a455f31285f889" xml:space="preserve">
+    <value>Person</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>[City], TIN [TIN]</value>
+  </data>
+  <data name="Property_PSRN" xml:space="preserve">
+    <value>PSRN</value>
+  </data>
+  <data name="Property_NCEO" xml:space="preserve">
+    <value>NCEO</value>
+  </data>
+  <data name="Property_NCEA" xml:space="preserve">
+    <value>NCEA</value>
+  </data>
+  <data name="Action_SearchDocuments" xml:space="preserve">
+    <value>Counterparty Documents</value>
+  </data>
+  <data name="Action_SearchDocumentsDescription" xml:space="preserve">
+    <value>Show incoming, outgoing correspondence, financial documents related to this counterparty (contracts, supplemental agreements, primary accounting documents, etc.)</value>
+  </data>
+  <data name="Action_SearchDocumentsHint" xml:space="preserve">
+    <value>Counterparty Documents</value>
+  </data>
+  <data name="Action_SearchDocumentsConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Account" xml:space="preserve">
+    <value>Account number</value>
+  </data>
+  <data name="Property_Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="ControlGroup_9e3df66a01e8408aaa4ca5c92a1227fb" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="ControlGroup_4b9defe5f46d4581b50a5c0be4a80a50" xml:space="preserve">
+    <value>Bank details</value>
+  </data>
+  <data name="ControlGroup_69a4139490424b338d9ce5253d0a8c27" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="FilterPanel_Bank_64a4eb7cee5241c1b64cc6c33740bef0" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="Property_ExchangeBoxes" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="Form_7fdc0378de564ad7864191aae797d1ec" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="ControlGroup_1876358f75e34b29bcff19fb7e44c187" xml:space="preserve">
+    <value>Electronic Exchange with Counterparty Exchange Boxes</value>
+  </data>
+  <data name="Action_SendInvitation" xml:space="preserve">
+    <value>Send Invitation</value>
+  </data>
+  <data name="Action_SendInvitationDescription" xml:space="preserve">
+    <value>Send document exchange invitation to the counterparty.</value>
+  </data>
+  <data name="Action_SendInvitationHint" xml:space="preserve">
+    <value>Send Invitation to Counterparty</value>
+  </data>
+  <data name="Action_SendInvitationConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendInvitationConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Invitation_5640d1dc94a04cb495c520cdad8f0368" xml:space="preserve">
+    <value>Invitations</value>
+  </data>
+  <data name="Ribbon_ExchangeBoxes_1d6bd8b0f5514372a47978dfc81c6745" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="Ribbon_ExchangeBoxesActions_ce79d9bc9e72451dbec4bbf8110b8ece" xml:space="preserve">
+    <value>ExchangeBoxesActions</value>
+  </data>
+  <data name="Ribbon_ExchangeBoxesOverridenTab_12c3d0bb950049a998282c2eab1bee66" xml:space="preserve">
+    <value>ExchangeBoxesOverridenTab</value>
+  </data>
+  <data name="Ribbon_Page_0fcc6dc7fe0f4f32b42be7ae99592181" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Ribbon_Group_e77755ffb460464b9ceb9d1d386c48e7" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="Action_AcceptInvitation" xml:space="preserve">
+    <value>Start Exchange</value>
+  </data>
+  <data name="Action_AcceptInvitationDescription" xml:space="preserve">
+    <value>Accept invitation or resume document exchange with the selected counterparty exchange box</value>
+  </data>
+  <data name="Action_AcceptInvitationHint" xml:space="preserve">
+    <value>Start Exchange with Selected Counterparty Exchange Box</value>
+  </data>
+  <data name="Action_AcceptInvitationConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_AcceptInvitationConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_RejectInvitation" xml:space="preserve">
+    <value>Stop Exchange</value>
+  </data>
+  <data name="Action_RejectInvitationDescription" xml:space="preserve">
+    <value>Decline invitation or stop document exchange with the selected counterparty exchange box</value>
+  </data>
+  <data name="Action_RejectInvitationHint" xml:space="preserve">
+    <value>Stop Exchange with Selected Counterparty Exchange Box</value>
+  </data>
+  <data name="Action_RejectInvitationConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_RejectInvitationConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Relation_98408b2b5a874ef08366115fe6e746ef" xml:space="preserve">
+    <value>Commands</value>
+  </data>
+  <data name="Action_CanExchange" xml:space="preserve">
+    <value>Check Exchangeability</value>
+  </data>
+  <data name="Action_CanExchangeDescription" xml:space="preserve">
+    <value>Check ability to exchange legal documents with the counterparty via exchange services.</value>
+  </data>
+  <data name="Action_CanExchangeHint" xml:space="preserve">
+    <value>Check Exchangeability</value>
+  </data>
+  <data name="Action_CanExchangeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CanExchangeConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_CanExchange" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="Enum_CanExchange_Yes" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="Enum_CanExchange_No" xml:space="preserve">
+    <value><![CDATA[ ]]></value>
+  </data>
+  <data name="Operation_SetExchange" xml:space="preserve">
+    <value>Establish exchange</value>
+  </data>
+  <data name="Operation_ChangeCard" xml:space="preserve">
+    <value>Change card</value>
+  </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Show Duplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Open the list to view duplicates.</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Show Duplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Duplicates_9ebc8a1f68a94412861f769ed7331e53" xml:space="preserve">
+    <value>Duplicates</value>
+  </data>
+  <data name="Property_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Ribbon_CounterpartyDocuments_8027263514d84043a4f87521b30b5b7b" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Action_ShowCounterpartyDocuments" xml:space="preserve">
+    <value>Open Dossier</value>
+  </data>
+  <data name="Action_ShowCounterpartyDocumentsDescription" xml:space="preserve">
+    <value>Show package of documents to check reliability of the counterparty (charter, certificate of incorporation, extracts from the Unified State Register of Legal Entities, etc.)
+</value>
+  </data>
+  <data name="Action_ShowCounterpartyDocumentsHint" xml:space="preserve">
+    <value>Show Package of Documents to Check Counterparty's Reliability</value>
+  </data>
+  <data name="Action_ShowCounterpartyDocumentsConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowCounterpartyDocumentsConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Documents_c549bd4aa35d4259a573d779467749b3" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Ribbon_Information_aa25262be7824a70829e0856dd1e2b57" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="FilterPanel_Navigation_2635e0992ecd48b39ec0877e42d8ea61" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_CounterpartyType_57749e2fdf7b4d8b9cae3bab5b8fb35e" xml:space="preserve">
+    <value>Responsible</value>
+  </data>
+  <data name="FilterPanel_Responsible_57749e2fdf7b4d8b9cae3bab5b8fb35e" xml:space="preserve">
+    <value>Responsible</value>
+  </data>
+  <data name="Property_Responsible" xml:space="preserve">
+    <value>Responsible</value>
+  </data>
+  <data name="Action_ForceDuplicateSave" xml:space="preserve">
+    <value>Save Duplicate</value>
+  </data>
+  <data name="Action_ForceDuplicateSaveDescription" xml:space="preserve">
+    <value>Save the organization duplicate. The warning will reappear when you open the card next time.</value>
+  </data>
+  <data name="Action_ForceDuplicateSaveHint" xml:space="preserve">
+    <value>Save Duplicate</value>
+  </data>
+  <data name="Action_ForceDuplicateSaveConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ForceDuplicateSaveConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+</root>

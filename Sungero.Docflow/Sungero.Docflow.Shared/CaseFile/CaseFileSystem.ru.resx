@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Title" xml:space="preserve">
+    <value>Заголовок</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Дело</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Дело</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Номенклатура дел</value>
+  </data>
+  <data name="Property_Index" xml:space="preserve">
+    <value>Индекс</value>
+  </data>
+  <data name="Property_StartDate" xml:space="preserve">
+    <value>Дата начала</value>
+  </data>
+  <data name="Property_EndDate" xml:space="preserve">
+    <value>Дата окончания</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_Department" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="Property_RetentionPeriod" xml:space="preserve">
+    <value>Срок хранения</value>
+  </data>
+  <data name="Property_LongTerm" xml:space="preserve">
+    <value>Переходящее</value>
+  </data>
+  <data name="Property_Location" xml:space="preserve">
+    <value>Местонахождение</value>
+  </data>
+  <data name="Property_RegistrationGroup" xml:space="preserve">
+    <value>Группа регистрации</value>
+  </data>
+  <data name="FilterPanel_Status_8eda3dbaf74c41c583f43abdc1471bfc" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Active_79991c87d83e43998f11c53c6e5bd5a6" xml:space="preserve">
+    <value>Действующие</value>
+  </data>
+  <data name="FilterPanel_Closed_091bb5c007c64c4fb4adbc17ad6a2716" xml:space="preserve">
+    <value>Закрытые</value>
+  </data>
+  <data name="FilterPanel_Properties_f2c6ab1df619415198ad69205f27e1d0" xml:space="preserve">
+    <value>Свойства</value>
+  </data>
+  <data name="FilterPanel_Transient_6325bb2045654ea1a5f95ba8471de90e" xml:space="preserve">
+    <value>Переходящие</value>
+  </data>
+  <data name="FilterPanel_Period_615243980e3a42e1b063eb1f5e65f88d" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="FilterPanel_CurrentYear_40a226fe7dad40c79863a1f1b52c65ca" xml:space="preserve">
+    <value>Текущий год</value>
+  </data>
+  <data name="FilterPanel_PreviousYear_b1d9b60f79dd4dadbcd4e0edb6a7d85d" xml:space="preserve">
+    <value>Предыдущий год</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_16aaaf42a23f42eaa13da501c09c42e8" xml:space="preserve">
+    <value>По годам:</value>
+  </data>
+  <data name="FilterPanel_Department_5da55ae60c0640d6b11d459afc13fc11" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_AllYears_5b340f99f503403095f216853d5b01c0" xml:space="preserve">
+    <value>Все года</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>[BusinessUnit], [Department]</value>
+  </data>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Наименование</value>
+  </data>
+  <data name="Ribbon_Documents_63579a8ac8dd468fb8dd33f1a83c889d" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Action_ShowDocuments" xml:space="preserve">
+    <value>Внутренняя опись</value>
+  </data>
+  <data name="Action_ShowDocumentsDescription" xml:space="preserve">
+    <value>Отобразить все документы, которые находятся в деле.</value>
+  </data>
+  <data name="Action_ShowDocumentsHint" xml:space="preserve">
+    <value>Внутренняя опись</value>
+  </data>
+  <data name="Property_BusinessUnit" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_9c7134cf0a8d4ed08ce81fa2ffe90e21" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_NextYear_1d03c61b9bb64e2192e9c2fbde1f082d" xml:space="preserve">
+    <value>Следующий год</value>
+  </data>
+</root>

@@ -1,0 +1,68 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "30083842-5a15-4efb-9cab-0b61b1760157",
+  "Name": "ExchangeCoreDiadoc",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.ExchangeCoreDiadoc.Client",
+  "ClientBaseAssemblyName": "Sungero.ExchangeCoreDiadoc.ClientBase",
+  "ClientBaseNamespace": "Sungero.ExchangeCoreDiadoc.ClientBase",
+  "ClientNamespace": "Sungero.ExchangeCoreDiadoc.Client",
+  "Code": "ExDiado",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "4d771b40-c708-470e-a771-19043adc1725",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "d8ae14cc-b2a0-44fa-b939-64a9f0d850c4",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "4f5448c6-6ba4-456c-9b6b-69b2dbc74ef9",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.ExchangeCoreDiadoc",
+  "IsLicensed": true,
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible",
+    "IsLicensed"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.ExchangeCoreDiadoc",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "Sungero.ExchangeCoreDiadoc.Server",
+  "ServerNamespace": "Sungero.ExchangeCoreDiadoc.Server",
+  "SharedAssemblyName": "Sungero.ExchangeCoreDiadoc.Shared",
+  "SharedNamespace": "Sungero.ExchangeCoreDiadoc.Shared",
+  "SpecialFolders": [],
+  "Version": "4.3.27.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+                          ([ReportSessionId] varchar(256) NOT NULL,
+                           [ToName] nvarchar(max) NOT NULL,
+                           [PostAddress] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+                          (ReportSessionId citext NOT NULL,
+                           ToName citext NOT NULL,
+                           PostAddress citext NOT NULL)]]></postgres>
+  </query>
+  <query key="SelectFromTempTable">
+    <default><![CDATA[select *
+  from Sungero_Reports_MailRegister temp
+  where temp.ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

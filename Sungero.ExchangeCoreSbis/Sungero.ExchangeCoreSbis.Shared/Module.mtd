@@ -1,0 +1,65 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "d764569f-fa35-48be-aec9-d337b185d47a",
+  "Name": "ExchangeCoreSbis",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.ExchangeCoreSbis.Client",
+  "ClientBaseAssemblyName": "Sungero.ExchangeCoreSbis.ClientBase",
+  "ClientBaseNamespace": "Sungero.ExchangeCoreSbis.ClientBase",
+  "ClientNamespace": "Sungero.ExchangeCoreSbis.Client",
+  "Code": "ExSbis",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "0a6fd698-aecf-44e1-a602-1ab403c8e2e1",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "ee5fb619-489e-4be8-b7c8-b3db10bc9070",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "5e4d2c5e-65c1-4157-a057-e63bcdf521a3",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.ExchangeCoreSbis",
+  "IsLicensed": true,
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible",
+    "IsLicensed"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.ExchangeCoreSbis",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "Sungero.ExchangeCoreSbis.Server",
+  "ServerNamespace": "Sungero.ExchangeCoreSbis.Server",
+  "SharedAssemblyName": "Sungero.ExchangeCoreSbis.Shared",
+  "SharedNamespace": "Sungero.ExchangeCoreSbis.Shared",
+  "SpecialFolders": [],
+  "Version": "4.3.27.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

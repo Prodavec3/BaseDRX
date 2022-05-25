@@ -1,0 +1,65 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "df6387b8-9209-411e-8192-d9eabd494afd",
+  "Name": "DistributionSheetReport",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "f5f104fb-52e4-422b-9de1-a36937d85a2d",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "AccessRightsMode",
+    "DisplayName",
+    "Description",
+    "HandledEvents",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "8479d652-3afd-459e-83e4-5ea58885c009",
+      "Name": "OutgoingDocument",
+      "EntityType": "f5f104fb-52e4-422b-9de1-a36937d85a2d",
+      "InternalDataTypeName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "a9933ecf-c3f6-47f4-88ff-afae5451cb5a",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "a75a617e-544a-4ffa-8ac7-b1efbbf41e9c",
+      "Name": "LetterSubject",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "CompanyName",
+    "DistributionSheet",
+    "Number",
+    "AddresseHeader",
+    "DeliveryMethod",
+    "AddresseFooter",
+    "ContactsInformation",
+    "ContactsInformationPostalAddressTemplate",
+    "ContactsInformationFaxTemplate",
+    "ContactsInformationEmailTemplate"
+  ],
+  "Versions": []
+}

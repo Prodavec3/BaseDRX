@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SelectData">
+    <default><![CDATA[select * 
+from Sungero_Reports_ActionItemPrintReport
+where ReportSessionId = @reportSessionId]]></default>
+  </query>
+  <query key="CreateActionItemPrintReportTable">
+    <mssql><![CDATA[CREATE TABLE {0}(
+  [ReportSessionId] [varchar](256) NOT NULL,
+  [Performer] [varchar](500),
+  [ActionItemText] [varchar](max),
+  [Deadline] [varchar](max),
+  [CoAssigneesDeadline] [varchar](max),
+  [FromAuthor] [varchar](500),
+  [Supervisor] [varchar](500)
+)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0}(
+  ReportSessionId citext NOT NULL,
+  Performer citext,
+  ActionItemText citext,
+  Deadline citext,
+  CoAssigneesDeadline citext,
+  FromAuthor citext,
+  Supervisor citext
+)]]></postgres>
+  </query>
+</queries>

@@ -1,0 +1,68 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "9c4a7356-509e-4e63-bc4f-f2fae3350447",
+  "Name": "OutgoingTaxInvoiceVersions",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "fd8ac5de-440e-451f-9d12-0213f4fd59ba",
+  "CanBeAncestor": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "8cc0db4d-d33e-4631-ad19-01e80fc8f71b",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9db5ead2-a918-4f50-8aa4-f75a44cfce07",
+      "Name": "ElectronicDocument",
+      "EntityGuid": "f50c4d8a-56bc-43ef-bac3-856f57ca70be",
+      "IsAncestorMetadata": true,
+      "IsReferenceToRootEntity": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "a1d0f296-7ace-4cda-b8b1-d6e63ff3588e",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "46da8e4a-823b-4011-aab5-849abaa29d81",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

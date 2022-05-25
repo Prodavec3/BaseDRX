@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmptyScanPackage" xml:space="preserve">
+    <value>Комплект документов не существует.</value>
+  </data>
+  <data name="InvalidSenderLineName" xml:space="preserve">
+    <value>Не найдены настройки для линии {0}. Настройте источники поступления документов корректно.</value>
+  </data>
+  <data name="CheckPackageTaskName" xml:space="preserve">
+    <value>Проверка комплекта документов: {0}</value>
+  </data>
+  <data name="CheckDocumentTaskName" xml:space="preserve">
+    <value>Проверка документа: {0}</value>
+  </data>
+  <data name="DocumentName" xml:space="preserve">
+    <value>Документ №{0}</value>
+  </data>
+  <data name="SimpleDocumentName" xml:space="preserve">
+    <value>Простой документ</value>
+  </data>
+  <data name="AttachmentName" xml:space="preserve">
+    <value>Приложение №{0}</value>
+  </data>
+  <data name="EmailBodyDocumentName" xml:space="preserve">
+    <value>Эл. письмо от {0}</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>документа</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>документов</value>
+  </data>
+  <data name="Kind" xml:space="preserve">
+    <value>видом</value>
+  </data>
+  <data name="Kinds" xml:space="preserve">
+    <value>видами</value>
+  </data>
+  <data name="DocumentsWithRegistrationFailureTaskText" xml:space="preserve">
+    <value>Для {0} с {1} {2} не удалось подобрать настройку регистрации или документ с таким номером уже существует:</value>
+  </data>
+  <data name="FailedClassifyDocumentsTaskText" xml:space="preserve">
+    <value>Службе ввода не удалось классифицировать документы:</value>
+  </data>
+  <data name="FailedClassifyDocumentTaskText" xml:space="preserve">
+    <value>Службе ввода не удалось классифицировать документ:</value>
+  </data>
+  <data name="DocumentFoundByBarcodeTaskText" xml:space="preserve">
+    <value>В системе найден документ по штрихкоду. Создана новая версия:</value>
+  </data>
+  <data name="DocumentWasLockedTaskText" xml:space="preserve">
+    <value>редактировался в момент обработки</value>
+  </data>
+  <data name="DocumentLockedByEmployeeTaskText" xml:space="preserve">
+    <value>уже редактируется пользователем {0}</value>
+  </data>
+  <data name="FailedCreateVersionsTaskText" xml:space="preserve">
+    <value>Службе ввода не удалось занести документы в новую версию:</value>
+  </data>
+  <data name="FailedCreateVersionTaskText" xml:space="preserve">
+    <value>Службе ввода не удалось занести документ в новую версию:</value>
+  </data>
+  <data name="DocumentsFoundByBarcodeTaskText" xml:space="preserve">
+    <value>В системе найдены документы по штрихкоду. Для каждого документа создана новая версия:</value>
+  </data>
+  <data name="RequiredPropertyIsEmpty" xml:space="preserve">
+    <value>required property is empty</value>
+  </data>
+  <data name="WithoutNumberWithSlash" xml:space="preserve">
+    <value>б/н</value>
+  </data>
+  <data name="WithoutNumber" xml:space="preserve">
+    <value>бн</value>
+  </data>
+  <data name="WithoutNumberWithDash" xml:space="preserve">
+    <value>б-н</value>
+  </data>
+  <data name="DocumentSkippedByReason" xml:space="preserve">
+    <value>VerificationTask Verification is not completed. (id = {0}, reason = {1}).</value>
+  </data>
+  <data name="VerificationTaskThreadSubject" xml:space="preserve">
+    <value>Верификация комплекта документов</value>
+  </data>
+  <data name="VerificationAssignmentThreadSubject" xml:space="preserve">
+    <value>Верификация</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeleteButtonName" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="DeleteDocumentsDialogCancelButtonName1" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="DeleteDocumentsDialogCancelButtonName2" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="DeleteDocumentDialogDeletingExceptionDocumentsHyperlinkTitle" xml:space="preserve">
+    <value>Документы, которые не были удалены</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeletionTotals" xml:space="preserve">
+    <value>Документы для удаления - {0}{1}</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeletionSuccess" xml:space="preserve">
+    <value> - удалено - {0}{1}</value>
+  </data>
+  <data name="DeleteDocumentsDialogDeletionFailed" xml:space="preserve">
+    <value> - возникли ошибки - {0}{1}</value>
+  </data>
+  <data name="TaxInvoiceCorrects" xml:space="preserve">
+    <value>Корректирует счет-фактуру № {0} от {1}.</value>
+  </data>
+  <data name="UTDCorrects" xml:space="preserve">
+    <value>Корректирует отгрузку товаров (выполнение работ) № {0} от {1}.</value>
+  </data>
+  <data name="FailedCreateDocumentTaskText" xml:space="preserve">
+    <value>ошибка обработки документа, классифицированного Ario как "{0}"</value>
+  </data>
+  <data name="FailedArioProcessDocumentTaskText" xml:space="preserve">
+    <value>ошибка в сервисе Ario</value>
+  </data>
+  <data name="OrderAndLinkErrorsTaskText" xml:space="preserve">
+    <value>Возникли ошибки при присвоении имени документам или установлении связей между ними.</value>
+  </data>
+  <data name="CreateDocumentFromEmailBodyErrorsTaskText" xml:space="preserve">
+    <value>Системе не удалось создать документ с текстом электронного письма от {0} "{1}".</value>
+  </data>
+  <data name="ArioErrorsNotificationTitle" xml:space="preserve">
+    <value>Обработка комплекта документов: ошибки в сервисе Ario ({0})</value>
+  </data>
+  <data name="ArioErrorsNotificationPrefix" xml:space="preserve">
+    <value>При обработке пакета документов из папки или со сканера в сервисе Ario возникли ошибки. Обратитесь к администратору.</value>
+  </data>
+  <data name="ArioErrorsNotificationText" xml:space="preserve">
+    <value>{3}
+Информация о пакете документов:
+  Источник поступления документов: {0}
+  Идентификатор пакета: {1}
+  Время начала обработки службой ввода: {2}</value>
+  </data>
+  <data name="ContactSysAdminIfNeeded" xml:space="preserve">
+    <value>При необходимости обратитесь к администратору системы.</value>
+  </data>
+  <data name="DocumentPackageHasErrors" xml:space="preserve">
+    <value>При обработке документов возникли ошибки:</value>
+  </data>
+</root>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+  ([RowIndex] int NOT NULL,
+   [ReportSessionId] varchar(256) NOT NULL,
+   [Employee] int NOT NULL,
+   [EmployeeName] nvarchar(max) NOT NULL,
+   [IsActiveEmployee] bit NOT NULL,
+   [JobTitle] nvarchar(max) NULL,
+   [Department] nvarchar(max) NULL,
+   [AssignmentCompletion] int NULL,
+   [AssignmentsCount] int NOT NULL,
+   [AffectDisciplineAssignmentsCount] int NOT NULL,
+   [CompletedInTimeAssignmentsCount] int NOT NULL,
+   [OverdueAssignmentsCount] int NOT NULL,
+   [OverdueCompletedAssignmentsCount] int NOT NULL,
+   [OverdueInWorkAssignmentsCount] int NOT NULL
+  )]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (RowIndex int NOT NULL,
+   ReportSessionId citext NOT NULL,
+   Employee int NOT NULL,
+   EmployeeName citext NOT NULL,
+   IsActiveEmployee boolean NOT NULL,
+   JobTitle citext NULL,
+   Department citext NULL,
+   AssignmentCompletion int NULL,
+   AssignmentsCount int NOT NULL,
+   AffectDisciplineAssignmentsCount int NOT NULL,
+   CompletedInTimeAssignmentsCount int NOT NULL,
+   OverdueAssignmentsCount int NOT NULL,
+   OverdueCompletedAssignmentsCount int NOT NULL,
+   OverdueInWorkAssignmentsCount int NOT NULL
+  )]]></postgres>
+  </query>
+  <query key="SelectEmployeesFromTempTable">
+    <default><![CDATA[select EmployeeName,
+       Employee,
+       IsActiveEmployee,
+       JobTitle,
+       Department,
+       AssignmentCompletion,
+       AssignmentsCount,
+       AffectDisciplineAssignmentsCount,
+       AssignmentsCount,
+       CompletedInTimeAssignmentsCount,
+       OverdueAssignmentsCount
+  from Sungero_Reports_EmplAsgCompletion
+  where ReportSessionId = @ReportSessionId
+  order by RowIndex;]]></default>
+  </query>
+</queries>

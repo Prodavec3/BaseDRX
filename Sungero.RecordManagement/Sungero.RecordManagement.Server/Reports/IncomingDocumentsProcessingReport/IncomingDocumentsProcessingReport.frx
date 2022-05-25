@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.RecordManagement.Shared&#13;&#10;Sungero.RecordManagement.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.RecordManagement.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="documents" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SourceQuery}">
+        <Column Name="docId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="docNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="docDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="counterparty" DataType="System.String" PropName="Column"/>
+        <Column Name="subject" DataType="System.String" PropName="Column"/>
+        <Column Name="state" DataType="System.String" PropName="Column"/>
+        <Column Name="assignees" DataType="System.String" PropName="Column"/>
+        <Column Name="copy" DataType="System.String" PropName="Column"/>
+        <Column Name="hyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="completed" DataType="System.DateTime" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="6edc0550-ad90-436b-81c2-4b5713de6687" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BeginDate" Id="cfec4bb6-c67a-407d-a7c0-33d13ab9700f" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="19b93996-c49a-4304-b46d-96140355672d" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentsTableName" Id="d0722344-c9d3-41b6-9ce7-68b5252e7ecb" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="TasksTableName" Id="c96181b1-c20c-4ff8-99c0-def08626f009" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportDate" Id="fd5fb69c-9b33-4f23-9375-00302468fbee" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AvailableIdsTableName" Id="91de68ab-7814-4e4b-a617-04b0a7d08a9a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="HyperlinksTableName" Id="fd1086f7-2922-44c4-8d5a-1ab5c2afed89" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="7b767bc3-14cc-4ec9-9c62-97075282df68" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ViewDataTableName" Id="621360ce-7234-4297-af19-61ab3f15b967" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Empty" Id="d7926d24-9de3-426e-87dc-42a86faf54d6" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="141.75">
+      <TextObject Name="Text19" Width="1048.95" Height="18.9" Text="[Empty][ReportDate]" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text20" Top="18.9" Width="1048.95" Height="37.8" Text="[Sungero.RecordManagement.Resources.IncomingDocumentsProcessingReportName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text21" Top="56.7" Width="1048.95" Height="18.9" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.PeriodLabel] [Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.PeriodFrom] [BeginDate] [Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.PeriodTo] [EndDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text1" Top="94.5" Width="85.05" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.DocumentDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text2" Left="85.05" Top="94.5" Width="103.95" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.RegNumber]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text3" Left="189" Top="94.5" Width="122.85" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.Correspondent]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="311.85" Top="94.5" Width="132.3" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.Subject]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text5" Left="444.15" Top="94.5" Width="122.85" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.ExecutionState]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="567" Top="94.5" Width="217.35" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.Assignees]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text7" Left="784.35" Top="94.5" Width="94.5" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.ExecutionDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="878.85" Top="94.5" Width="113.4" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.Copy]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text9" Left="992.25" Top="94.5" Width="56.7" Height="47.25" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsProcessingReport.DocumentId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="145.75" Width="1047.06" Height="37.8" CanGrow="true" CanShrink="true" DataSource="Table">
+      <TextObject Name="Text10" Width="85.05" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Empty][documents.docDate]" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text11" Left="85.05" Width="103.95" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[documents.docNumber]" Font="Arial, 10pt"/>
+      <TextObject Name="Text12" Left="189" Width="122.85" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[documents.counterparty]" Font="Arial, 10pt"/>
+      <TextObject Name="Text13" Left="311.85" Width="132.3" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[documents.subject]" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Left="444.15" Width="122.85" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[documents.state]" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="567" Width="217.35" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[documents.assignees]" Font="Arial, 10pt"/>
+      <TextObject Name="Text16" Left="784.35" Width="94.5" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Empty][IIf(Year([documents.completed]) == 1, &quot;&quot;, [documents.completed])]" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text17" Left="878.85" Width="113.4" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[documents.copy]" Font="Arial, 10pt"/>
+      <TextObject Name="Text18" Left="992.25" Width="56.7" Height="37.8" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[documents.hyperlink]" CanGrow="true" GrowToBottom="true" Text="[documents.docId]" HorzAlign="Center" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue"/>
+      <Sort>
+        <Sort Expression="[documents.docDate]" Descending="true"/>
+        <Sort Expression="[documents.docNumber]" Descending="true"/>
+      </Sort>
+    </DataBand>
+  </ReportPage>
+</Report>

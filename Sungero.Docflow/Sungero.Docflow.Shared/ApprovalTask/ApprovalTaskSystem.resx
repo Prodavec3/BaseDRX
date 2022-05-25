@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Rule-based approval task</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Rule-based approval task</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Rule-based approval tasks</value>
+  </data>
+  <data name="Property_ReqApprovers" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="Property_AddApprovers" xml:space="preserve">
+    <value>Additional</value>
+  </data>
+  <data name="Property_Signatory" xml:space="preserve">
+    <value>To sign by</value>
+  </data>
+  <data name="Property_StageNumber" xml:space="preserve">
+    <value>Stage number</value>
+  </data>
+  <data name="Property_ApprovalRule" xml:space="preserve">
+    <value>Approval rule</value>
+  </data>
+  <data name="ControlGroup_992f3927db6f435da87b3581c43f747c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b5b71d13e783420d8d4d4916dd2b80f0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_787ba8b7315b44aaa4414d8b4c4d0cfb" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_f400b355c4ff493584383bc7bfb48a2a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AttachmentGroup_DocumentGroupTitle" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="AttachmentGroup_DocumentGroupInformationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AttachmentGroup_AddendaGroupTitle" xml:space="preserve">
+    <value>Addenda</value>
+  </data>
+  <data name="AttachmentGroup_AddendaGroupInformationMessage" xml:space="preserve">
+    <value>There are no addenda to document</value>
+  </data>
+  <data name="AttachmentGroup_OtherGroupTitle" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="AttachmentGroup_OtherGroupInformationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_21c21d997a5d4f98a4a4cf07b9ff27f2" xml:space="preserve">
+    <value>Approvers</value>
+  </data>
+  <data name="Control_5ad7d1dfa5494ca2a75f92fff58ccdaa_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Form_Page" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="ControlGroup_ad0b5da79e93460a98b32dbf9149f4cb" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_23622581b97d4ea5bb86ad9463a500c6_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_15f9016511bf45479fe80534c6ff71d3" xml:space="preserve">
+    <value>Other participants</value>
+  </data>
+  <data name="Property_Observers" xml:space="preserve">
+    <value>CC</value>
+  </data>
+  <data name="Footer_ActiveEmptyText" xml:space="preserve">
+    <value>Type the task text…</value>
+  </data>
+  <data name="Action_StartHint" xml:space="preserve">
+    <value>Send Document for Approval</value>
+  </data>
+  <data name="Action_Start" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Action_StartDescription" xml:space="preserve">
+    <value>Send document for approval and close task card</value>
+  </data>
+  <data name="Action_StartConfirmationMessage" xml:space="preserve">
+    <value>Send the document for approval?</value>
+  </data>
+  <data name="Action_Abort" xml:space="preserve">
+    <value>Abort</value>
+  </data>
+  <data name="Action_AbortDescription" xml:space="preserve">
+    <value>Stop document approval and abort all assignments on approval</value>
+  </data>
+  <data name="Action_AbortHint" xml:space="preserve">
+    <value>Abort Task for Approval</value>
+  </data>
+  <data name="Action_AbortConfirmationMessage" xml:space="preserve">
+    <value>Abort document approval?</value>
+  </data>
+  <data name="Action_Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="Action_RestartDescription" xml:space="preserve">
+    <value>Restart the task for approval and open task card</value>
+  </data>
+  <data name="Action_RestartHint" xml:space="preserve">
+    <value>Restart Task</value>
+  </data>
+  <data name="Action_RestartConfirmationMessage" xml:space="preserve">
+    <value>Restart document approval?</value>
+  </data>
+  <data name="Ribbon_TaskCommands_e4e6fdd481594a37a25d70ee43c07975" xml:space="preserve">
+    <value>Approval</value>
+  </data>
+  <data name="Property_ControlReturnStartDate" xml:space="preserve">
+    <value>Control return start date</value>
+  </data>
+  <data name="Property_Iteration" xml:space="preserve">
+    <value>Iteration</value>
+  </data>
+  <data name="Property_MaxDeadline" xml:space="preserve">
+    <value>Expected date</value>
+  </data>
+  <data name="Form_9592daf2ec2b4477812b6e2aed084643" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="ControlGroup_0bbbcc8b6744402f891b5c2502236f66" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_8b99cf466c9a4920bc1ab1f2481a00de" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="Property_AbortingReason" xml:space="preserve">
+    <value>Reason to abort task</value>
+  </data>
+  <data name="Property_Addressee" xml:space="preserve">
+    <value>Addressee</value>
+  </data>
+  <data name="Property_ResolutionText" xml:space="preserve">
+    <value>Resolution text</value>
+  </data>
+  <data name="Property_ReworkReason" xml:space="preserve">
+    <value>Reason to rework task</value>
+  </data>
+  <data name="Enum_Status_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Enum_Status_InProcess" xml:space="preserve">
+    <value>In process</value>
+  </data>
+  <data name="Control_6ed6ac17ade74155b16ad48304172170_EmptyText" xml:space="preserve">
+    <value>Specify additional approvers…</value>
+  </data>
+  <data name="Control_a8d21b6bd26b44b685f87d3bcd507b76_EmptyText" xml:space="preserve">
+    <value>Specify observers…</value>
+  </data>
+  <data name="Property_DeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Property_ExchangeService" xml:space="preserve">
+    <value>Exchange service</value>
+  </data>
+  <data name="ControlGroup_93dbe86017f4436aaa0690e310422029" xml:space="preserve">
+    <value>Send Documents to Counterparty</value>
+  </data>
+  <data name="Property_AddApproversExpanded" xml:space="preserve">
+    <value>Expanded additional approvers</value>
+  </data>
+  <data name="Property_StartedBy" xml:space="preserve">
+    <value>Sent by</value>
+  </data>
+  <data name="Property_Author" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="Property_IsStageAssigneeNotFound" xml:space="preserve">
+    <value>Performer of stage is not defined</value>
+  </data>
+  <data name="Action_ApprovalForm" xml:space="preserve">
+    <value>Approval Form</value>
+  </data>
+  <data name="Action_ApprovalFormDescription" xml:space="preserve">
+    <value>View approval form for the document</value>
+  </data>
+  <data name="Action_ApprovalFormHint" xml:space="preserve">
+    <value>View Approval Form</value>
+  </data>
+  <data name="Action_ApprovalFormConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ApprovalFormConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Report_0d480d4f632446adaf8340b2334894c8" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Property_DocumentExternalApprovalState" xml:space="preserve">
+    <value>External approval</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_OnApproval" xml:space="preserve">
+    <value>On approval</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_Signed" xml:space="preserve">
+    <value>Signed</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_Unsigned" xml:space="preserve">
+    <value>Unsigned</value>
+  </data>
+  <data name="Enum_DocumentExternalApprovalState_Empty" xml:space="preserve">
+    <value>Not defined</value>
+  </data>
+  <data name="Property_ReworkPerformer" xml:space="preserve">
+    <value>Send for rework to</value>
+  </data>
+  <data name="Action_StartByForceHint" xml:space="preserve">
+    <value>Send the task forcibly</value>
+  </data>
+  <data name="Property_RevokedDocumentsRights" xml:space="preserve">
+    <value>Access rights to documents before limitation</value>
+  </data>
+  <data name="Property_Addressees" xml:space="preserve">
+    <value>Addressees</value>
+  </data>
+  <data name="Property_IsManyAddressees" xml:space="preserve">
+    <value>Several addressees</value>
+  </data>
+  <data name="Property_AddedAddenda" xml:space="preserve">
+    <value>Documents added to the Addenda group</value>
+  </data>
+  <data name="Property_RemovedAddenda" xml:space="preserve">
+    <value>Documents removed from the Addenda group</value>
+  </data>
+</root>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.CoreEntities.Server&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.RecordManagement.Shared&#13;&#10;Sungero.RecordManagement.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.RecordManagement.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    
+    public static string GetIncomingInfo(string correspondentName,
+                                         string personName, 
+                                         string contactName,
+                                         string registrationDate,
+                                         string registrationNumber)
+    {
+      var result = string.Empty;
+      result += string.IsNullOrEmpty(correspondentName) ? correspondentName : personName;
+      if (!string.IsNullOrEmpty(contactName))
+        result += &quot;@\n&quot; + contactName;
+      if (!string.IsNullOrEmpty(registrationDate) || !string.IsNullOrEmpty(registrationNumber))
+        result += &quot;@\n&quot;;
+      if (!string.IsNullOrEmpty(registrationDate))
+        result += registrationDate;
+      if (!string.IsNullOrEmpty(registrationNumber))
+        result += &quot; № &quot; + registrationNumber;
+      return result;
+    }
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Documents1" DataType="System.Int32" PropName="Letters1" Enabled="true" CanEdit="true" SelectCommand="${GetDocuments}">
+        <Column Name="RegistrationDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="RegistrationNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="Subject" DataType="System.String" PropName="Column"/>
+        <Column Name="recordId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="DocId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Resolution" DataType="System.String" PropName="Column"/>
+        <Column Name="Performer" DataType="System.String" PropName="Column"/>
+        <Column Name="Document" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Author" DataType="System.String" PropName="Column"/>
+        <Column Name="Correspondent" DataType="System.String" PropName="Column"/>
+        <Column Name="CorrespondentDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="CorrespondentNumber" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+        <CommandParameter Name="Filter" DataType="11" IsDbType="true" DefaultValue="0"/>
+      </TableDataSource>
+      <TableDataSource Name="Documents2" DataType="System.Int32" PropName="Letters2" Enabled="true" CanEdit="true" SelectCommand="${GetDocuments}">
+        <Column Name="RegistrationDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="RegistrationNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="Subject" DataType="System.String" PropName="Column"/>
+        <Column Name="recordId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="DocId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Resolution" DataType="System.String" PropName="Column"/>
+        <Column Name="Performer" DataType="System.String" PropName="Column1"/>
+        <Column Name="Document" DataType="System.Int32" PropName="Column3"/>
+        <Column Name="Author" DataType="System.String" PropName="Column"/>
+        <Column Name="Correspondent" DataType="System.String" PropName="Column"/>
+        <Column Name="CorrespondentDate" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="CorrespondentNumber" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+        <CommandParameter Name="Filter" DataType="11" IsDbType="true" DefaultValue="1"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <Relation Name="Letters1_Letters2" ParentDataSource="Documents1" ChildDataSource="Documents2" ParentColumns="recordId" ChildColumns="recordId" Enabled="true"/>
+    <SungeroParameter Name="BeginDate" Id="cef354cc-7c2c-46d7-a54d-9f06e96051ff" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="5b67a9a9-cb70-4451-a3d0-3fb77de01faa" IsRequired="true" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentRegister" Id="d2361e02-2cc4-40a3-bc0f-57be2811cce2" IsRequired="true" IsCollection="false" InternalDataType="Sungero.RecordManagement.ILog, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="d7800dd5-a9d2-41e9-bbc4-a39292ac1eeb"/>
+    <SungeroParameter Name="DocumentsDataTableName" Id="2eae8039-33b6-468b-a2af-679cb57c2306" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="JobsDataTableName" Id="d08dcf74-0b28-48f2-bafe-54613bdccda6" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AvailableDocumentsIdsTableName" Id="d7fbd7d0-1ecb-47f4-be09-b2f0fae46be7" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="7e1d7288-7a19-4c1f-9060-0a486270f8a9" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="122.85" CanGrow="true">
+      <TextObject Name="Text1" Left="18.9" Top="28.35" Width="1011.15" Height="28.35" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.ReportHeader]" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text2" Left="18.9" Top="56.7" Width="1011.15" Height="28.35" CanGrow="true" Text="[[DocumentRegister].Index]. [[DocumentRegister].Name]" HorzAlign="Center" VertAlign="Center" Font="Arial, 14pt, style=Bold"/>
+      <TextObject Name="Text3" Left="18.9" Top="85.05" Width="1011.15" Height="28.35" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.ByPeriod] [Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.PeriodFrom] [[BeginDate].ToString(&quot;d&quot;)] [Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.PeriodTo] [[EndDate].ToString(&quot;d&quot;)]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text4" Left="18.9" Top="9.45" Width="1011.15" Height="18.9" Text="[Sungero.Core.Calendar.Now]" Format="Date" Format.Format="d" HorzAlign="Right" Font="Arial, 12pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="126.85" Width="1047.06" Height="66.16">
+      <TableObject Name="Table2" Width="1048.95" Height="66.16" Border.Lines="All" Border.Color="DimGray" Border.Width="0.25">
+        <TableColumn Name="Column5" Width="94.5"/>
+        <TableColumn Name="Column6" Width="141.75"/>
+        <TableColumn Name="Column7" Width="245.7"/>
+        <TableColumn Name="Column8" Width="264.6"/>
+        <TableColumn Name="Column9" Width="151.2"/>
+        <TableColumn Name="Column10" Width="151.2"/>
+        <TableRow Name="Row2" Height="33.08">
+          <TableCell Name="Cell5" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.Document]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell6" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.CorrespondentNameDateNumber]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.Subject]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.ActionItem]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.Assignees]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold" RowSpan="2"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="33.08">
+          <TableCell Name="Cell10" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.RegistrationDate]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell11" Border.Lines="All" Text="[Sungero.RecordManagement.Reports.Resources.IncomingDocumentsReport.RegistrationNumber]" HorzAlign="Center" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="197.01" Width="1047.06" Height="28.35" CanGrow="true" CanShrink="true" DataSource="Documents1" PrintIfDetailEmpty="true">
+      <TextObject Name="Text5" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.RegistrationDate]" Padding="2, 2, 2, 2" Duplicates="Merge" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="94.5" Width="141.75" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.RegistrationNumber]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="236.25" Width="245.7" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Correspondent][!string.IsNullOrEmpty([Documents1.Correspondent]) ? &quot;\n&quot; : &quot;&quot;;][IIf(Year([Documents1.CorrespondentDate]) == 1, &quot;&quot;, [Documents1.CorrespondentDate])][IIf(Year([Documents1.CorrespondentDate]) == 1, &quot;&quot;, &quot; &quot;)][!string.IsNullOrEmpty([Documents1.CorrespondentNumber]) ? &quot;№ &quot; + [Documents1.CorrespondentNumber] : &quot;&quot;;]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <DateFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text11" Left="481.95" Width="264.6" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Subject]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt"/>
+      <TextObject Name="Text13" Left="746.55" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Author]&#13;&#10;[Documents1.Resolution]" Padding="2, 2, 2, 2" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="897.75" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Performer]" Font="Arial, 10pt"/>
+      <DataBand Name="Data2" Top="229.36" Width="1047.06" Height="28.35" CanGrow="true" CanShrink="true" CanBreak="true" DataSource="Documents2">
+        <TextObject Name="Text8" Width="94.5" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.RegistrationDate]" Padding="2, 2, 2, 2" Duplicates="Merge" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+        <TextObject Name="Text9" Left="94.5" Width="141.75" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.RegistrationNumber]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt"/>
+        <TextObject Name="Text10" Left="236.25" Width="245.7" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Correspondent][!string.IsNullOrEmpty([Documents2.Correspondent]) ? &quot;\n&quot; : &quot;&quot;;][IIf(Year([Documents2.CorrespondentDate]) == 1, &quot;&quot;, [Documents2.CorrespondentDate])][IIf(Year([Documents2.CorrespondentDate]) == 1, &quot;&quot;, &quot; &quot;)][!string.IsNullOrEmpty([Documents2.CorrespondentNumber]) ? &quot;№ &quot; + [Documents2.CorrespondentNumber] : &quot;&quot;;]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt">
+          <Formats>
+            <GeneralFormat/>
+            <GeneralFormat/>
+            <DateFormat/>
+            <GeneralFormat/>
+            <GeneralFormat/>
+          </Formats>
+        </TextObject>
+        <TextObject Name="Text12" Left="481.95" Width="264.6" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Subject]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt"/>
+        <TextObject Name="Text14" Left="746.55" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Author]&#13;&#10;[Documents2.Resolution]" Padding="2, 2, 2, 2" Font="Arial, 10pt"/>
+        <TextObject Name="Text16" Left="897.75" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Performer]" Font="Arial, 10pt"/>
+      </DataBand>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="261.71" Width="1047.06" Height="18.9"/>
+  </ReportPage>
+</Report>

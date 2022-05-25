@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Records Management</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Records Management</value>
+  </data>
+  <data name="CoverGroup_Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="CoverAction_CreateDocument" xml:space="preserve">
+    <value>New Document</value>
+  </data>
+  <data name="CoverDescription_CreateDocument" xml:space="preserve">
+    <value>Create a new letter, order, official note or another kind of document.</value>
+  </data>
+  <data name="CoverAction_AllIncomingDocuments" xml:space="preserve">
+    <value>All Incoming Documents</value>
+  </data>
+  <data name="CoverDescription_AllIncomingDocuments" xml:space="preserve">
+    <value>Show all incoming documents</value>
+  </data>
+  <data name="CoverAction_AllOutgoingDocuments" xml:space="preserve">
+    <value>All Outgoing Documents</value>
+  </data>
+  <data name="CoverDescription_AllOutgoingDocuments" xml:space="preserve">
+    <value>Show all outgoing documents</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>The module is designed to automate legal documents processing.</value>
+  </data>
+  <data name="CoverAction_AllInternalDocuments" xml:space="preserve">
+    <value>All Internal Documents</value>
+  </data>
+  <data name="CoverDescription_AllInternalDocuments" xml:space="preserve">
+    <value>Show all internal documents</value>
+  </data>
+  <data name="CoverGroup_Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="CoverAction_IncomingLog" xml:space="preserve">
+    <value>Incoming Documents Register</value>
+  </data>
+  <data name="CoverDescription_IncomingLog" xml:space="preserve">
+    <value>List of all registered documents related to the incoming document flow.</value>
+  </data>
+  <data name="CoverAction_OutgoingLog" xml:space="preserve">
+    <value>Outgoing Documents Register</value>
+  </data>
+  <data name="CoverDescription_OutgoingLog" xml:space="preserve">
+    <value>List of all registered documents related to the outgoing document flow.</value>
+  </data>
+  <data name="CoverAction_InnerLog" xml:space="preserve">
+    <value>Internal Documents Register</value>
+  </data>
+  <data name="CoverDescription_InnerLog" xml:space="preserve">
+    <value>List of all registered documents related to the internal document flow.</value>
+  </data>
+  <data name="CoverAction_ControlJobExecution" xml:space="preserve">
+    <value>Follow Up Action Item Execution Deadline</value>
+  </data>
+  <data name="CoverDescription_ControlJobExecution" xml:space="preserve">
+    <value>List of action items with planned deadline coming within a specified period.</value>
+  </data>
+  <data name="CoverAction_ControlDocumentReturn" xml:space="preserve">
+    <value>Check Document Return</value>
+  </data>
+  <data name="CoverDescription_ControlDocumentReturn" xml:space="preserve">
+    <value>List of documents that were not returned from departments.</value>
+  </data>
+  <data name="CoverAction_SkippedNumbers" xml:space="preserve">
+    <value>Document Numbering Skips</value>
+  </data>
+  <data name="CoverDescription_SkippedNumbers" xml:space="preserve">
+    <value>List of the document numbering skips in the document register with an allowance for the period and the numbering separator.</value>
+  </data>
+  <data name="CoverAction_ShowAllReports" xml:space="preserve">
+    <value>All Reports</value>
+  </data>
+  <data name="CoverDescription_ShowAllReports" xml:space="preserve">
+    <value>List of all module reports.</value>
+  </data>
+  <data name="CoverGroup_Search" xml:space="preserve">
+    <value>Document Search</value>
+  </data>
+  <data name="CoverAction_SearchByRegistrationData" xml:space="preserve">
+    <value>Search by Registration Data</value>
+  </data>
+  <data name="CoverDescription_SearchByRegistrationData" xml:space="preserve">
+    <value>Search documents by common registration data</value>
+  </data>
+  <data name="CoverAction_OfficialCorrespondenceWithCounterparty" xml:space="preserve">
+    <value>Business Correspondence</value>
+  </data>
+  <data name="CoverDescription_OfficialCorrespondenceWithCounterparty" xml:space="preserve">
+    <value>Show all incoming and outgoing documents related to the specified counterparty</value>
+  </data>
+  <data name="CoverGroup_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="CoverGroup_Control" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="CoverAction_PerformerJobExecutions" xml:space="preserve">
+    <value>Action Items</value>
+  </data>
+  <data name="CoverDescription_PerformerJobExecutions" xml:space="preserve">
+    <value>Control of assigned action items </value>
+  </data>
+  <data name="CoverAction_PaperDocumentsTracking" xml:space="preserve">
+    <value>Paper documents tracking</value>
+  </data>
+  <data name="CoverDescription_PaperDocumentsTracking" xml:space="preserve">
+    <value>Control location of documents</value>
+  </data>
+  <data name="sf_bd7ced8f_379e_4cda_9f18_a28193b8d53b" xml:space="preserve">
+    <value>Documents to return</value>
+  </data>
+  <data name="FilterPanel_Status_5df417d1ffab4edba8a17f6a3208c1e3" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_600735806e2d47119b29813edd1ff42e" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Located_c3fd22693f1d498b90a7c0e0b1491ff2" xml:space="preserve">
+    <value>Located</value>
+  </data>
+  <data name="FilterPanel_Employee_48ba7a7d7d3e4b3c88e3e9b991c1a8b4" xml:space="preserve">
+    <value>At employee</value>
+  </data>
+  <data name="FilterPanel_Department_f69581a5799c4469be63b664ced740f3" xml:space="preserve">
+    <value>In department</value>
+  </data>
+  <data name="FilterPanel_Parametrs_51e7251b733e45d9bab4bfbe40f8c796" xml:space="preserve">
+    <value>Received from</value>
+  </data>
+  <data name="FilterPanel_RegistrationGroup_694e73f2d52748ef9b34764133ae9cd7" xml:space="preserve">
+    <value>Registration group</value>
+  </data>
+  <data name="FilterPanel_Filelist_1da1454421004908a00ae73fd6eaefc7" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FilterPanel_OverdueGroup_32d0991bf39941deabb38a1870daea56" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Overdue_5b04efdbc23d4e55ba119f296d2c0151" xml:space="preserve">
+    <value>Only overdue</value>
+  </data>
+  <data name="FilterPanel_ReturnPeriod_2666f5cd675f4d76ba997fff94f2741a" xml:space="preserve">
+    <value>Scheduled return date</value>
+  </data>
+  <data name="FilterPanel_EndDay_8a02e40155614abfa98c5a832373629e" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="FilterPanel_EndWeek_824fc05a2ba54828baa68090fbe48479" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="FilterPanel_EndMonth_5af752aa725c4be190d2eebbf3488b7c" xml:space="preserve">
+    <value>This month</value>
+  </data>
+  <data name="FilterPanel_Manual_d90b56fa01274c78838e01c63a599160" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="CoverAction_AcquaintanceList" xml:space="preserve">
+    <value>Acquaintance and Review Lists</value>
+  </data>
+  <data name="CoverDescription_AcquaintanceList" xml:space="preserve">
+    <value>Lists of employees to review or acquaint with documents.</value>
+  </data>
+  <data name="CoverAction_DistributionList" xml:space="preserve">
+    <value>Distribution Lists</value>
+  </data>
+  <data name="CoverDescription_DistributionList" xml:space="preserve">
+    <value>Distribution lists of the outgoing letters.</value>
+  </data>
+  <data name="CoverAction_RecordManagementSetting" xml:space="preserve">
+    <value>Additional Settings</value>
+  </data>
+  <data name="CoverDescription_RecordManagementSetting" xml:space="preserve">
+    <value>Configure additional module settings.</value>
+  </data>
+</root>

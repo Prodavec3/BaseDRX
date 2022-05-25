@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeliveryConfirmationError" xml:space="preserve">
+    <value>При отправке документа произошла ошибка</value>
+  </data>
+  <data name="DocumentEndorseError" xml:space="preserve">
+    <value>Документ не подписан</value>
+  </data>
+  <data name="DeliveryConfirmation" xml:space="preserve">
+    <value>Извещение о получении</value>
+  </data>
+  <data name="AssociatedApplication" xml:space="preserve">
+    <value>Обработчик {0}</value>
+  </data>
+  <data name="AmendmentRequest" xml:space="preserve">
+    <value>Уведомление об уточнении</value>
+  </data>
+  <data name="AmendmentRequestError" xml:space="preserve">
+    <value>При отказе в подписании документа произошла ошибка</value>
+  </data>
+  <data name="CertificateNotFound" xml:space="preserve">
+    <value>Не найден действующий сертификат для подписания документов в сервисе обмена.</value>
+  </data>
+  <data name="FormalizedDocumentName" xml:space="preserve">
+    <value>- {0}</value>
+  </data>
+  <data name="NoticeSubject" xml:space="preserve">
+    <value>Получение: Вх. документы от {0} для {1} (получено {2} через сервис обмена {3})</value>
+  </data>
+  <data name="NoticeActiveText" xml:space="preserve">
+    <value>Некоторые документы не поддерживаются в системе. Обработайте их в сервисе обмена или другим удобным способом.{0}
+{1}</value>
+  </data>
+  <data name="FormalizedDocumentTemplateName" xml:space="preserve">
+    <value>{0} №{1} от {2}</value>
+  </data>
+  <data name="LinkToPersonalData" xml:space="preserve">
+    <value>Личный кабинет в {0}: {1}</value>
+  </data>
+  <data name="DocumentsList" xml:space="preserve">
+    <value>Документы:
+{0}</value>
+  </data>
+  <data name="OtherDocuments" xml:space="preserve">
+    <value>и другие</value>
+  </data>
+  <data name="RejectCertificateNotFoundReadressToResponsible" xml:space="preserve">
+    <value>Для отказа требуется сертификат сервиса обмена. Обратитесь к администратору или переадресуйте задание ответственному за внешний электронный документооборот.</value>
+  </data>
+  <data name="CannotSendAmendmentNotice" xml:space="preserve">
+    <value>Не удается отправить уведомление об уточнении. Попробуйте выполнить задание позже.</value>
+  </data>
+  <data name="SendCounterpartySendButton" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="SendCounterpartySignAndSendButton" xml:space="preserve">
+    <value>Подписать и отправить</value>
+  </data>
+  <data name="NoExchangeThroughThisService" xml:space="preserve">
+    <value>Для возврата документа необходимо установить обмен с контрагентом.</value>
+  </data>
+  <data name="SendCounterpartyCertificateNotSelected" xml:space="preserve">
+    <value>Выберите подписывающего</value>
+  </data>
+  <data name="SendCounterpartyCanNotSign" xml:space="preserve">
+    <value>Для отправки контрагенту документ необходимо подписать сертификатом, зарегистрированным в сервисе обмена.</value>
+  </data>
+  <data name="SendCounterpartySignAndSendQuestion" xml:space="preserve">
+    <value>Подписать и отправить документ?</value>
+  </data>
+  <data name="SendToCounterpartyNote" xml:space="preserve">
+    <value>Отправлен через сервис обмена {0}</value>
+  </data>
+  <data name="BoxesNotFound" xml:space="preserve">
+    <value>Для отправки документа необходимо установить обмен с контрагентом через действующий ящик нашей организации.</value>
+  </data>
+  <data name="NeedSetExchangeForCounterparty" xml:space="preserve">
+    <value>Для отправки документа необходимо установить обмен с контрагентом.</value>
+  </data>
+  <data name="ErrorWhileSendingDocToCounterparty" xml:space="preserve">
+    <value>Произошла ошибка при отправке документа контрагенту.</value>
+  </data>
+  <data name="SendCounterpartyAddendaNotSigned" xml:space="preserve">
+    <value>Для отправки приложений контрагенту подпишите их сертификатом, зарегистрированным в сервисе обмена.</value>
+  </data>
+  <data name="SendCounterpartyWithAddendaWhenDocumentNotSigned" xml:space="preserve">
+    <value>Для отправки документа и приложений контрагенту, подпишите их сертификатом, зарегистрированным в сервисе обмена.</value>
+  </data>
+  <data name="SendCounterpartyDialogTitle" xml:space="preserve">
+    <value>Отправка документа контрагенту</value>
+  </data>
+  <data name="SendCounterpartyReceiver" xml:space="preserve">
+    <value>Получатель</value>
+  </data>
+  <data name="SendCounterpartySender" xml:space="preserve">
+    <value>Отправитель</value>
+  </data>
+  <data name="SendCounterpartyAddenda" xml:space="preserve">
+    <value>Приложения</value>
+  </data>
+  <data name="SendCounterpartyNeedSign" xml:space="preserve">
+    <value>Запросить подпись получателя</value>
+  </data>
+  <data name="SendCounterpartyComment" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="SendCounterpartySuccessfully" xml:space="preserve">
+    <value>Документ отправлен контрагенту</value>
+  </data>
+  <data name="SendCounterpartyResult" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="SendCounterpartyPositiveResult" xml:space="preserve">
+    <value>Подписан</value>
+  </data>
+  <data name="SendCounterpartyNegativeResult" xml:space="preserve">
+    <value>Отказано в подписании</value>
+  </data>
+  <data name="ErrorWhileSendingSignToCounterparty" xml:space="preserve">
+    <value>Произошла ошибка при отправке подписи контрагенту.</value>
+  </data>
+  <data name="SendAnswerCounterpartySuccessfully" xml:space="preserve">
+    <value>Документ возвращен контрагенту</value>
+  </data>
+  <data name="RejectCertificateNotFound" xml:space="preserve">
+    <value>Для отправки отказа по документу требуется сертификат сервиса обмена.</value>
+  </data>
+  <data name="NotificationNoCertificates" xml:space="preserve">
+    <value>Для возврата документа контрагенту подпишите его сертификатом, зарегистрированным в сервисе обмена.</value>
+  </data>
+  <data name="BoxIsNotValid" xml:space="preserve">
+    <value>Для возврата документа контрагенту необходимо подключить наши организации к сервисам обмена.</value>
+  </data>
+  <data name="AnswerIsAlreadySent" xml:space="preserve">
+    <value>Документ не требует подписания, либо он уже был возвращен контрагенту.</value>
+  </data>
+  <data name="SendAnswerToCounterpartyDialogTitle" xml:space="preserve">
+    <value>Возврат документа контрагенту</value>
+  </data>
+  <data name="RejectDocumentVersion" xml:space="preserve">
+    <value>Контрагент отказал в подписании документа {0} (версия {1}).</value>
+  </data>
+  <data name="RejectDocumentBy" xml:space="preserve">
+    <value>Отказал: {0}</value>
+  </data>
+  <data name="RejectDocumentComment" xml:space="preserve">
+    <value>Комментарий контрагента: {0}</value>
+  </data>
+  <data name="RejectDocumentSubject" xml:space="preserve">
+    <value>Отказано в подписании контрагентом</value>
+  </data>
+  <data name="AssignDocumentVersion" xml:space="preserve">
+    <value>Документ {0} (версия {1}) подписан контрагентом в сервисе обмена {2}.</value>
+  </data>
+  <data name="AssignDocumentSubject" xml:space="preserve">
+    <value>Подписан контрагентом</value>
+  </data>
+  <data name="AssignDocumentBy" xml:space="preserve">
+    <value>Подписал: {0}</value>
+  </data>
+  <data name="DocumentHasChangedAfterSendToCounterparty" xml:space="preserve">
+    <value>Документ был изменен после отправки контрагенту. Отправленная версия восстановлена в версию {0}</value>
+  </data>
+  <data name="SendCounterpartySignAndSendHint" xml:space="preserve">
+    <value>Документ будет подписан при отправке.</value>
+  </data>
+  <data name="DocumentIsAlreadySentToCounterparty" xml:space="preserve">
+    <value>Последняя версия документа уже отправлена выбранному контрагенту.</value>
+  </data>
+  <data name="RevocationNoticeSubjectTerminate" xml:space="preserve">
+    <value>Отозван контрагентом</value>
+  </data>
+  <data name="RevocationNoticeSubjectObsolete" xml:space="preserve">
+    <value>Аннулирован контрагентом</value>
+  </data>
+  <data name="RevocationNoticeActiveTextObsolete" xml:space="preserve">
+    <value>Документ {0} был аннулирован контрагентом.</value>
+  </data>
+  <data name="RevocationNoticeActiveTextTerminate" xml:space="preserve">
+    <value>Документ {0} был отозван контрагентом.</value>
+  </data>
+  <data name="RevocationNoticeReason" xml:space="preserve">
+    <value>Причина: {0}</value>
+  </data>
+  <data name="RevocationNoticeActiveTextInProcess" xml:space="preserve">
+    <value>Получено соглашение об аннулировании по документу {0}.</value>
+  </data>
+  <data name="RevocationNoticeSubjectInProcess" xml:space="preserve">
+    <value>Обработайте: Соглашение об аннулировании "{0}"</value>
+  </data>
+  <data name="RevocationNoticeInProcessComment" xml:space="preserve">
+    <value>Обработайте соглашение об аннулировании в сервисе обмена или другим удобным способом.
+Личный кабинет в {0}: {1}</value>
+  </data>
+  <data name="GetMessageFailed" xml:space="preserve">
+    <value>При получении сообщения из сервиса обмена произошла ошибка.</value>
+  </data>
+  <data name="DocumentOversized" xml:space="preserve">
+    <value>Размер документа не должен превышать 30 МБ.</value>
+  </data>
+  <data name="AddendaOversized" xml:space="preserve">
+    <value>Общий размер документа и его приложений не должен превышать 30 МБ.</value>
+  </data>
+  <data name="RevocationNoticeOurSubjectTerminate" xml:space="preserve">
+    <value>Отозван документ</value>
+  </data>
+  <data name="RevocationNoticeOurSubjectObsolete" xml:space="preserve">
+    <value>Аннулирован документ</value>
+  </data>
+  <data name="RevocationNoticeOurActiveTextObsolete" xml:space="preserve">
+    <value>Документ {0} был аннулирован нашей организацией.</value>
+  </data>
+  <data name="RevocationNoticeOurActiveTextTerminate" xml:space="preserve">
+    <value>Документ {0} был отозван нашей организацией.</value>
+  </data>
+  <data name="RejectNoticeSubjectObsolete" xml:space="preserve">
+    <value>Отправлен отказ</value>
+  </data>
+  <data name="RejectNoticeActiveTextObsolete" xml:space="preserve">
+    <value>По документу {0} был отправлен отказ в подписании от нашей организации в сервисе обмена.</value>
+  </data>
+  <data name="SignNoticeSubjectObsolete" xml:space="preserve">
+    <value>Подписан: {0} </value>
+  </data>
+  <data name="SignNoticeActiveTextObsolete" xml:space="preserve">
+    <value>Документ {0} был подписан нашей организацией в сервисе обмена.</value>
+  </data>
+  <data name="NoticeOurBoundDocument" xml:space="preserve">
+    <value>Документы были связаны при отправке в сервисе обмена.</value>
+  </data>
+  <data name="NoticeCounterpartyBoundDocument" xml:space="preserve">
+    <value>Полученные документы были связаны контрагентом при отправке в сервисе обмена.</value>
+  </data>
+  <data name="SendCounterpartyNotApproved" xml:space="preserve">
+    <value>Через сервис обмена можно отправлять только утвержденные документы.</value>
+  </data>
+  <data name="CannotDeliveryDocumentToCounterparty" xml:space="preserve">
+    <value>Документ {0} не был доставлен контрагенту через сервис обмена {1}, так как подпись не прошла проверку.</value>
+  </data>
+  <data name="RevocationTrackingNote" xml:space="preserve">
+    <value>Отозван нашей организацией в сервисе обмена {0}</value>
+  </data>
+  <data name="CheckReturnRevocationResult" xml:space="preserve">
+    <value>Документ был отозван нашей организацией.</value>
+  </data>
+  <data name="ErrorSendingDocumentToCounterparty" xml:space="preserve">
+    <value>Ошибка при отправке документа: {0}</value>
+  </data>
+  <data name="DocumentIsSignedByBothSides" xml:space="preserve">
+    <value>Документ {0} уже подписан обеими сторонами в сервисе обмена.</value>
+  </data>
+  <data name="MessageHasDocumentWithReceiptRequire" xml:space="preserve">
+    <value>Отправитель запросил уведомление о получении некоторых документов. Подтвердите получение документов в личном кабинете сервиса обмена.</value>
+  </data>
+  <data name="ConfirmReceiptSubject" xml:space="preserve">
+    <value>Подтвердите получение: Вх. документы от {0} для {1} (получено {2} через сервис обмена {3})</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Документы:</value>
+  </data>
+  <data name="SendSignToCounterparty" xml:space="preserve">
+    <value>Контрагенту отправлен подписанный экземпляр через сервис обмена {0}</value>
+  </data>
+  <data name="SendRejectToCounterparty" xml:space="preserve">
+    <value>Контрагенту отправлен отказ в подписании через сервис обмена {0}</value>
+  </data>
+  <data name="BoxesNotConnected" xml:space="preserve">
+    <value>Произошла ошибка при соединении с сервисом обмена. Обратитесь к администратору.</value>
+  </data>
+  <data name="DocumentComment" xml:space="preserve">
+    <value>Комментарий: {0}</value>
+  </data>
+  <data name="TaxInvoiceRevision" xml:space="preserve">
+    <value>Исправление № {0} от {1}.</value>
+  </data>
+  <data name="IncomingNotNumeratedDocumentNote" xml:space="preserve">
+    <value>Дата документа {0}, номер документа {1} </value>
+  </data>
+  <data name="TaxInvoiceCorrection" xml:space="preserve">
+    <value>Корректировочный счет-фактура № {0} от {1}.</value>
+  </data>
+  <data name="GeneratePublicBodyFailed" xml:space="preserve">
+    <value>При формировании тела документа произошла ошибка.</value>
+  </data>
+  <data name="ReceiptNeededActiveText" xml:space="preserve">
+    <value>Пакет документов от контрагента {0} получен {1} в {2}.</value>
+  </data>
+  <data name="AmendmentNoticeActiveTextObsolete" xml:space="preserve">
+    <value>По документу {0} нашей организацией было запрошено уточнение в сервисе обмена.</value>
+  </data>
+  <data name="AmendmentNoticeSubjectObsolete" xml:space="preserve">
+    <value>Запрошено уточнение</value>
+  </data>
+  <data name="NonFormalizedTaxInvoiceSendingError" xml:space="preserve">
+    <value>Через сервис обмена можно отправлять только формализованные счета-фактуры.</value>
+  </data>
+  <data name="TaxInvoice" xml:space="preserve">
+    <value>Счет-фактура № {0} от {1}.</value>
+  </data>
+  <data name="TaxInvoiceTo" xml:space="preserve">
+    <value>К счету-фактуре № {0} от {1}.</value>
+  </data>
+  <data name="SendCounterpartyRejectResult" xml:space="preserve">
+    <value>Уведомление об уточнении</value>
+  </data>
+  <data name="RejectInvoiceNotice" xml:space="preserve">
+    <value>Уведомление об уточнении: {0}</value>
+  </data>
+  <data name="RejectNotice" xml:space="preserve">
+    <value>Причина отказа: {0}</value>
+  </data>
+  <data name="AmendedDocumentVersion" xml:space="preserve">
+    <value>Контрагент запросил уточнение по документу {0} (версия {1}).</value>
+  </data>
+  <data name="AmendedDocumentBy" xml:space="preserve">
+    <value>Запросил уточнение: {0}</value>
+  </data>
+  <data name="AmendedDocumentSubject" xml:space="preserve">
+    <value>Получен запрос на уточнение</value>
+  </data>
+  <data name="NoticeCounterpartyBoundDocumentWithLinks" xml:space="preserve">
+    <value>При отправке через сервис обмена полученные документы были связаны контрагентом со следующими документами:{0}</value>
+  </data>
+  <data name="NoticeOurBoundDocumentWithLinks" xml:space="preserve">
+    <value>При отправке контрагенту через сервис обмена документы были связаны со следующими документами:{0}</value>
+  </data>
+  <data name="AllAnswersIsAlreadySent" xml:space="preserve">
+    <value>Документы не требуют подписания или отказа, либо они уже были возвращены контрагенту.</value>
+  </data>
+  <data name="SendCounterpartyAddendaNotRight" xml:space="preserve">
+    <value>Нет прав на отправку через сервис обмена документа {0}.</value>
+  </data>
+  <data name="SendDeliveryConfirmationBoxesNotFound" xml:space="preserve">
+    <value>Для полноценной работы необходимо настроить сертификат сотрудника {0} в настройках абонентских ящиков сервисов обмена.</value>
+  </data>
+  <data name="ReceiptNeededOutgoingActiveText" xml:space="preserve">
+    <value>Пакет документов для контрагента {0} отправлен {1} в {2}.</value>
+  </data>
+  <data name="TaskSubjectTemplate" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="RevocationTaskThreadSubjectInProcess" xml:space="preserve">
+    <value>Получено соглашение об аннулировании</value>
+  </data>
+  <data name="DocumentSignedThreadSubject" xml:space="preserve">
+    <value>Документ подписан</value>
+  </data>
+  <data name="NoticeThreadSubject" xml:space="preserve">
+    <value>Получены документы неподдерживаемого формата</value>
+  </data>
+  <data name="ConfirmReceiptThreadSubject" xml:space="preserve">
+    <value>Получен запрос на подтверждение получения документов</value>
+  </data>
+  <data name="RevocationTaskThreadSubjectRequestedAnnulment" xml:space="preserve">
+    <value>Запрошено аннулирование</value>
+  </data>
+  <data name="RevocationNoticeActiveTextRequestedAnnulment" xml:space="preserve">
+    <value>По документу {0} подписано и отправлено соглашение об аннулировании нашей организацией.</value>
+  </data>
+  <data name="RequestedAnnulmentNoticeSubjectInProcess" xml:space="preserve">
+    <value>Запрошено аннулирование: "{0}"</value>
+  </data>
+  <data name="NoneCounterparty" xml:space="preserve">
+    <value>Неизвестного контрагента</value>
+  </data>
+  <data name="SendSetSignaturesToSbis" xml:space="preserve">
+    <value>Для отправки ответов через сервис обмена СБИС необходимо подписать все документы комплекта.</value>
+  </data>
+  <data name="NotFoundOrNoRightsToDocument" xml:space="preserve">
+    <value>Отсутствует документ комплекта, или у вас недостаточно прав на него. Обратитесь к администратору системы.</value>
+  </data>
+  <data name="NotFoundAuthority" xml:space="preserve">
+    <value>Не удалось определить область полномочий.</value>
+  </data>
+  <data name="Ellipsis_CutText" xml:space="preserve">
+    <value>{0}…</value>
+  </data>
+  <data name="AdditionalDocumentSend" xml:space="preserve">
+    <value>Полученные документы добавлены контрагентом к основному комплекту:</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerAcceptanceStatusRejected" xml:space="preserve">
+    <value>Реквизиты покупателя заполнены с результатом "Не принято".</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerAcceptanceStatusAccepted" xml:space="preserve">
+    <value>Реквизиты покупателя заполнены с результатом "Принято без разногласий".</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerAcceptanceStatusPartiallyAccepted" xml:space="preserve">
+    <value>Реквизиты покупателя заполнены с результатом "Принято с разногласиями".</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerTitleIsEmpty" xml:space="preserve">
+    <value>Реквизиты покупателя не заполнены.</value>
+  </data>
+  <data name="SendToCounterpartyDialog_AddendaWithBuyerAcceptanceStatusRejected" xml:space="preserve">
+    <value>Выбраны приложения с результатом "Не принято" в реквизитах покупателя.</value>
+  </data>
+  <data name="OneOrMoreDocumentAlreadyProcessing" xml:space="preserve">
+    <value>Часть документов не требуют подписания, либо по ним уже отправлен ответ контрагенту.</value>
+  </data>
+</root>

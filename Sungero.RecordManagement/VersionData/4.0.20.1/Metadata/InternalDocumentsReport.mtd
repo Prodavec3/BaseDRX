@@ -1,0 +1,63 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "25729a15-9367-4af9-b5cc-656e998b6475",
+  "Name": "InternalDocumentsReport",
+  "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [
+    {
+      "NameGuid": "86216e23-2a7b-4339-92f8-0a61ff102975",
+      "Name": "InternalDocuments",
+      "EntityType": "ce3e34ed-7be2-4426-a951-d5a70f966650",
+      "Versions": []
+    }
+  ],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "DefaultExportFormat",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "07811fa7-53aa-4f9c-aa7c-6c4ec3bfb750",
+      "Name": "BeginDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "ca41ada7-54d7-4842-b8f2-61ded21543d1",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "01f635b0-7770-4c27-a8f2-17f4863d9783",
+      "Name": "DocumentRegister",
+      "EntityType": "d7800dd5-a9d2-41e9-bbc4-a39292ac1eeb",
+      "InternalDataTypeName": "Sungero.RecordManagement.ILog, Sungero.Domain.Interfaces",
+      "IsRequired": true,
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ReportHeader",
+    "Notify"
+  ],
+  "Versions": []
+}

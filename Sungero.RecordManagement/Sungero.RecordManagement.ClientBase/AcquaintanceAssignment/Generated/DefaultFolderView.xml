@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Folder FormGuid="8dbb6507-6d7b-4ef2-9247-a64a15eb5dbb">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">1157,366</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+          <property name="WaitIndicatorType">Panel</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="15">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">T</property>
+            <property name="Visible">true</property>
+            <property name="VisibleIndex">0</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Id</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Id</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">String_Subject</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">AcquaintanceAssignment_Subject</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">49*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_From_c612fc4144a3428ba97c433c333d78e9</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">AcquaintanceAssignment_Author</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">19*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_To_c612fc4144a3428ba97c433c333d78e9</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Performer</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">Enumeration_Status_Status_ea683a63273e43aebcf17a443698008a</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Status</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">Enumeration_Importance_Importance_ea683a63273e43aebcf17a443698008a</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">AcquaintanceAssignment_Importance</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">3*</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">DateTime_Deadline</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">AcquaintanceAssignment_Deadline</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">DateTime_Created</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">true</property>
+            <property name="Name">AcquaintanceAssignment_Created</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">DateTime_Modified</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Modified</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_Task_d795d1f645c14e5e9677b53fb7280c7e</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Task</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">Navigation_Main_task_d795d1f645c14e5e9677b53fb7280c7e</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_MainTask</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="FieldName">CompletedBy.DisplayValue</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_CompletedBy</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="FieldName">Completed</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Completed</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="FieldName">Enumeration_Result_Result_91cbfdc85d5d465e95a43235b8c01d5b</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="SortMode">Custom</property>
+            <property name="Visible">false</property>
+            <property name="Name">AcquaintanceAssignment_Result</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">DateTime_Created</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Folder>
+</settings>

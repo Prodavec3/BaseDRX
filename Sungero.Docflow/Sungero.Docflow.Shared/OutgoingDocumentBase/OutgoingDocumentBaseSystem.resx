@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Outgoing Document</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Outgoing Document</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Outgoing Documents</value>
+  </data>
+  <data name="Property_Correspondent" xml:space="preserve">
+    <value>Correspondent</value>
+  </data>
+  <data name="Property_InResponseTo" xml:space="preserve">
+    <value>In response to</value>
+  </data>
+  <data name="Property_Addressee" xml:space="preserve">
+    <value>Addressee</value>
+  </data>
+  <data name="Action_DocumentRegister" xml:space="preserve">
+    <value>Document Register</value>
+  </data>
+  <data name="Action_DocumentRegisterDescription" xml:space="preserve">
+    <value>Open list of all registered documents related to the outgoing document flow</value>
+  </data>
+  <data name="Action_DocumentRegisterHint" xml:space="preserve">
+    <value>Outgoing Documents Register</value>
+  </data>
+  <data name="Action_DocumentRegisterConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Reports_40e1a9a3197f41cead96e60e8b8d285a" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="FilterPanel_DocumentRegisterGroup_c9e68bc0629544cd9ede1b4e92fcc0a2" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="FilterPanel_CounterpartyGroup_c97851993a4b409fbf99eccf8bb6651b" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_Period_0efb676ea5824d969dacdf32691b0e5c" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_LastWeek_3b9e8ee3c5ee47c399da83f09f736200" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="FilterPanel_LastMonth_a21decaa7c0449d4bef266ab881dc911" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_Last90Days_7c329f643020496bafb6d6c2c0dbb49d" xml:space="preserve">
+    <value>Last 90 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_30471734153a49f4a0e296557a0827fd" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_Status_dc33a7febb604824a4c7897401b19404" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Registered_1d77e5b204c94b6c81a2c808f127fc49" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_4e85c9002dd8475e83f178e3b33d0793" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="FilterPanel_Reserved_7057b92ec3a64a1fb7172c4d57474fde" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="FilterPanel_DocumentKindGroup_d806ac63a71f4a1faee223e08e4df4b0" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="ControlGroup_5e1a61ccb14746089932da958641bf0b" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="ControlGroup_a6652cd2eb6049329e68bac89373e5b9" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="FilterPanel_DepartmentGroup_a0a2aed44cf943069abd9efbcca8c097" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Property_Assignee" xml:space="preserve">
+    <value>Assignee</value>
+  </data>
+  <data name="Enum_LifeCycleState_Obsolete" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="Property_Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Property_Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Action_PrintEnvelope" xml:space="preserve">
+    <value>Print Envelopes</value>
+  </data>
+  <data name="Action_PrintEnvelopeDescription" xml:space="preserve">
+    <value>Print envelopes for selected documents. Available sizes: С4, С5, С65, Е65.
+
+Hold the CTRL key and click the items in a list to choose them.
+</value>
+  </data>
+  <data name="Action_PrintEnvelopeHint" xml:space="preserve">
+    <value>Print Envelopes</value>
+  </data>
+  <data name="Action_PrintEnvelopeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_MailRegister" xml:space="preserve">
+    <value>Mail Items Register</value>
+  </data>
+  <data name="Action_MailRegisterDescription" xml:space="preserve">
+    <value>Create a list of postal items for selected documents (f. 103).
+
+Hold the CTRL key and click the items in a list to choose them.</value>
+  </data>
+  <data name="Action_MailRegisterHint" xml:space="preserve">
+    <value>Mail Items Register</value>
+  </data>
+  <data name="Action_MailRegisterConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintEnvelopeCard" xml:space="preserve">
+    <value>Print Envelope</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardDescription" xml:space="preserve">
+    <value>Print Envelope.
+Available sizes: С4, С5, С65, Е65.</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardHint" xml:space="preserve">
+    <value>Print Envelope</value>
+  </data>
+  <data name="Action_PrintEnvelopeCardConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_PostCommands_b09a758e0774412d83476d78e7e3abc3" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Ribbon_Post_537458c86298450b9cc44e0876977278" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="Property_IsManyAddressees" xml:space="preserve">
+    <value>Several addressees</value>
+  </data>
+  <data name="Property_Addressees" xml:space="preserve">
+    <value>Distribution list</value>
+  </data>
+  <data name="Ribbon_ManyAddressees_8473b69bcb12418f878ae30193cc1384" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Ribbon_StateToggleButton_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>StateToggleButton</value>
+  </data>
+  <data name="Ribbon_ManyAddresseesToggleButton_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>Several Addressees</value>
+  </data>
+  <data name="Form_cd8582a5250a436e85c35d77d9f42950" xml:space="preserve">
+    <value>Addressees</value>
+  </data>
+  <data name="ControlGroup_69e2f0d4c1704012b51015b0796cea33" xml:space="preserve">
+    <value>Distribution list</value>
+  </data>
+  <data name="Ribbon_ManyAddresseesToggleButtonHint_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>Specify Several Addressees</value>
+  </data>
+  <data name="Ribbon_ManyAddresseesToggleButtonDescription_0d5076a8a4a5459580e2d0f02900c6c2" xml:space="preserve">
+    <value>Several addressees mode. Fill in the distribution list on the "Addressees" tab.
+
+To send the letter to one addressee, click again</value>
+  </data>
+  <data name="Property_DistributionCorrespondent" xml:space="preserve">
+    <value>Correspondent</value>
+  </data>
+  <data name="Action_SaveToDistributionList" xml:space="preserve">
+    <value>Save List</value>
+  </data>
+  <data name="Action_SaveToDistributionListDescription" xml:space="preserve">
+    <value>Create a new distribution list with the current correspondents, addressees and delivery methods.</value>
+  </data>
+  <data name="Action_SaveToDistributionListHint" xml:space="preserve">
+    <value>Save List of Distribution Participants</value>
+  </data>
+  <data name="Action_SaveToDistributionListConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SaveToDistributionListConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillFromDistributionList" xml:space="preserve">
+    <value>Fill In from List</value>
+  </data>
+  <data name="Action_FillFromDistributionListDescription" xml:space="preserve">
+    <value>Fill in correspondents, addressees and delivery methods from the distribution list.</value>
+  </data>
+  <data name="Action_FillFromDistributionListHint" xml:space="preserve">
+    <value>Fill In from Distribution List</value>
+  </data>
+  <data name="Action_FillFromDistributionListConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillFromDistributionListConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintDistributionSheet" xml:space="preserve">
+    <value>Print Distribution Sheet</value>
+  </data>
+  <data name="Action_PrintDistributionSheetDescription" xml:space="preserve">
+    <value>Open the distribution sheet to print it.</value>
+  </data>
+  <data name="Action_PrintDistributionSheetHint" xml:space="preserve">
+    <value>Open Distribution Sheet</value>
+  </data>
+  <data name="Action_PrintDistributionSheetConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintDistributionSheetConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintDistributionSheetChild" xml:space="preserve">
+    <value>Print Distribution Sheet</value>
+  </data>
+  <data name="Action_PrintDistributionSheetChildDescription" xml:space="preserve">
+    <value>Open the distribution sheet to print it.</value>
+  </data>
+  <data name="Action_PrintDistributionSheetChildHint" xml:space="preserve">
+    <value>Open Distribution Sheet</value>
+  </data>
+  <data name="Action_PrintDistributionSheetChildConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintDistributionSheetChildConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeManyAddressees" xml:space="preserve">
+    <value>Several Addressees</value>
+  </data>
+  <data name="Action_ChangeManyAddresseesDescription" xml:space="preserve">
+    <value>Several addressees mode. Fill in the distribution list on the "Addressees" tab.
+
+To send the letter to one addressee, click again</value>
+  </data>
+  <data name="Action_ChangeManyAddresseesHint" xml:space="preserve">
+    <value>Specify Several Addressees</value>
+  </data>
+  <data name="Action_ChangeManyAddresseesConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChangeManyAddresseesConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+</root>

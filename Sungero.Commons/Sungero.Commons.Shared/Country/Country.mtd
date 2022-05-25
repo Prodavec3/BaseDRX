@@ -1,0 +1,218 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "1f612925-95fc-4662-807d-c92c810a62b1",
+  "Name": "Country",
+  "Actions": [
+    {
+      "NameGuid": "4a3b1c97-7504-4552-8004-93c3ffe5b6eb",
+      "Name": "ShowDuplicates",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowDuplicates_large_4a3b1c9775044552800493c3ffe5b6eb.png",
+      "SmallIconName": "Action_ShowDuplicates_small_4a3b1c9775044552800493c3ffe5b6eb.png",
+      "Versions": []
+    }
+  ],
+  "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
+  "CanBeNavigationPropertyType": true,
+  "CanBeSearch": false,
+  "CanBeUsedInIntegration": true,
+  "Code": "Country",
+  "CreationAreaMetadata": {
+    "NameGuid": "03c18819-3368-4b1a-bd3c-cd30e5775d28",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "5de6992a-e3b5-4134-adb5-0119b438db35",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "285e3c78-f7c2-4ca7-84ac-6bc2cbb437d1",
+          "Name": "Name",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "1e2ff284-90f2-48d6-9c38-08ed1e44245d",
+          "PropertyGuid": "cf2976ab-55e9-4956-a969-d8c130cbbbc6",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "639f3239-203f-4628-abb5-96c51ba1c68f",
+          "Name": "Status",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "1e2ff284-90f2-48d6-9c38-08ed1e44245d",
+          "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "1e2ff284-90f2-48d6-9c38-08ed1e44245d",
+          "Name": "Country",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 50.0
+            },
+            {
+              "Percentage": 50.0
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "29c1928e-af28-4953-b6da-be6929a869a0",
+          "Name": "Code",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "1e2ff284-90f2-48d6-9c38-08ed1e44245d",
+          "PropertyGuid": "a45535ab-aa90-4937-ad20-f70120ee7759",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        }
+      ],
+      "Overridden": [
+        "Controls"
+      ],
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "BeforeSaveServer"
+  ],
+  "IconName": "Country.ico",
+  "IconResourcesKeys": [],
+  "IsCacheable": true,
+  "IsStatusEnabled": true,
+  "LookupMode": "Popup",
+  "OperationsClass": "",
+  "Overridden": [
+    "LookupMode",
+    "IsCacheable",
+    "CanBeSearch",
+    "IconName",
+    "IsStatusEnabled",
+    "CanBeUsedInIntegration"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+      "Name": "Status",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList",
+        "IsVisibility",
+        "CanBeSearch"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cf2976ab-55e9-4956-a969-d8c130cbbbc6",
+      "Name": "Name",
+      "Code": "Name",
+      "IsDisplayValue": true,
+      "IsQuickSearchAllowed": true,
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d7319199-3333-49cc-a7b9-8467617ccf20",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a45535ab-aa90-4937-ad20-f70120ee7759",
+      "Name": "Code",
+      "Code": "Code",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsRequired": true,
+      "Length": 3,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "InvalidCountryCode"
+  ],
+  "RibbonCardMetadata": {
+    "NameGuid": "a6104647-5610-44c6-925e-edaa33ce8dc9",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "a4522cd5-1a6d-471a-9545-c12389b1c007",
+        "Name": "ActionButton",
+        "ActionGuid": "4a3b1c97-7504-4552-8004-93c3ffe5b6eb",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "ParentGuid": "94b410be-7c95-4e5c-a0e3-cdb7ff14bce3",
+        "Versions": []
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "94b410be-7c95-4e5c-a0e3-cdb7ff14bce3",
+        "Name": "Duplicates",
+        "IconName": "Ribbon_Duplicates_94b410be7c954e5ca0e3cdb7ff14bce3.png",
+        "Index": 21,
+        "ParentGuid": "1f08362f-6a13-44cb-9590-5a5b51c85c30",
+        "SmallIconName": "Ribbon_Duplicates_small_94b410be7c954e5ca0e3cdb7ff14bce3.png",
+        "Versions": []
+      }
+    ],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "06c1f385-9782-42e3-8af1-5295816ffaa3",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

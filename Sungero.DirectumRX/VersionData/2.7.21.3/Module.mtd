@@ -1,0 +1,146 @@
+{
+  "$type": "Sungero.Metadata.SolutionMetadata, Sungero.Metadata",
+  "NameGuid": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+  "Name": "DirectumRX",
+  "ClientAssemblyName": "Sungero.DirectumRX.Client",
+  "ClientBaseAssemblyName": "Sungero.DirectumRX.ClientBase",
+  "ClientBaseNamespace": "Sungero.DirectumRX.ClientBase",
+  "ClientNamespace": "Sungero.DirectumRX.Client",
+  "Code": "Directu",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "fa132fe9-c33a-4a77-ab9a-81d892ccbd7b",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "01a49a96-81c9-4f0f-a295-44b84f2af962",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "c517f337-d1c9-458c-a426-d96313e7b93f",
+      "BackgroundPosition": "Stretch"
+    }
+  },
+  "DesktopViews": [
+    {
+      "NameGuid": "40d84bc6-84f0-4f8c-929b-d943e9fac066",
+      "Name": "TopManager",
+      "HandledEvents": [
+        "CanApplyDesktopViewServer"
+      ]
+    },
+    {
+      "NameGuid": "9fec185e-7063-4f5c-aaac-d813c7fe305d",
+      "Name": "Manager",
+      "HandledEvents": [
+        "CanApplyDesktopViewServer"
+      ]
+    },
+    {
+      "NameGuid": "a8b20348-0788-416c-bbf5-08cd4e0a54b8",
+      "Name": "Secretary",
+      "HandledEvents": [
+        "CanApplyDesktopViewServer"
+      ]
+    },
+    {
+      "NameGuid": "7a504bb0-b7b1-4760-a07f-66affd78f74e",
+      "Name": "Employee"
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.DirectumRX",
+  "OrderedSpecialFolders": [
+    {
+      "NameGuid": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "ParentFolderId": "a2d39bb0-feb7-48d8-86f7-7e6631ac446c"
+    },
+    {
+      "NameGuid": "201bcad8-a5c4-4ef4-ba90-55334e02dd29",
+      "ParentFolderId": "a2d39bb0-feb7-48d8-86f7-7e6631ac446c",
+      "PreviousGuid": "eb72a985-606c-4647-ba0c-1389928a4e17"
+    },
+    {
+      "NameGuid": "669ff039-2f05-4eb3-9d6a-049dafee948f",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17"
+    },
+    {
+      "NameGuid": "0d61168d-1ae5-4570-a42e-bdd5f3b07b02",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "669ff039-2f05-4eb3-9d6a-049dafee948f"
+    },
+    {
+      "NameGuid": "aee5f0a0-8a5f-422f-bc40-e98db38e94ca",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "0d61168d-1ae5-4570-a42e-bdd5f3b07b02"
+    },
+    {
+      "NameGuid": "35d23c5e-9106-4068-bc3a-46b471928fa0",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "aee5f0a0-8a5f-422f-bc40-e98db38e94ca"
+    },
+    {
+      "NameGuid": "1ead1abe-1b7e-4833-9e01-ee7f8404537a",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "35d23c5e-9106-4068-bc3a-46b471928fa0"
+    },
+    {
+      "NameGuid": "852ea6a2-304e-48d1-88e5-1bcbb1fb69a2",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "1ead1abe-1b7e-4833-9e01-ee7f8404537a"
+    },
+    {
+      "NameGuid": "c21fa108-1570-4155-8a0c-0d04957bc72b",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "852ea6a2-304e-48d1-88e5-1bcbb1fb69a2"
+    },
+    {
+      "NameGuid": "a353a121-f96e-4842-8b80-bf77d074a0c2",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "c21fa108-1570-4155-8a0c-0d04957bc72b"
+    },
+    {
+      "NameGuid": "a584ebf5-f9b3-4e41-b7cf-15d8c2f96844",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "a353a121-f96e-4842-8b80-bf77d074a0c2"
+    },
+    {
+      "NameGuid": "1031e40e-2c3a-4964-92ce-92036cdcb3b9",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "a584ebf5-f9b3-4e41-b7cf-15d8c2f96844"
+    },
+    {
+      "NameGuid": "1440d1dc-6746-434a-908d-e596c2a1f849",
+      "ParentFolderId": "201bcad8-a5c4-4ef4-ba90-55334e02dd29"
+    },
+    {
+      "NameGuid": "4b30b2be-330e-42bd-833c-7ecf19b32e12",
+      "ParentFolderId": "201bcad8-a5c4-4ef4-ba90-55334e02dd29",
+      "PreviousGuid": "1440d1dc-6746-434a-908d-e596c2a1f849"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.DirectumRX",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "Sungero.DirectumRX.Server",
+  "ServerNamespace": "Sungero.DirectumRX.Server",
+  "SharedAssemblyName": "Sungero.DirectumRX.Shared",
+  "SharedNamespace": "Sungero.DirectumRX.Shared",
+  "SpecialFolders": [],
+  "Version": "2.7.21.3",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "SolutionMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    }
+  ]
+}

@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Folder FormGuid="8dbb6507-6d7b-4ef2-9247-a64a15eb5dbb">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">660.8,-37.2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowGrouping">true</property>
+          <property name="AllowSorting">true</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Modified</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+        </property>
+        <property name="Columns" iskey="true" value="44">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="VisibleIndex">0</property>
+            <property name="FieldName">T</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Id</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Name">SupAgreement_Id</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Name</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Name">SupAgreement_Name</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">35*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Author.DisplayValue</property>
+            <property name="VisibleIndex">4</property>
+            <property name="Name">SupAgreement_Author</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">17*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AllowColumnFiltering">False</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">HasRelations</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Name">SupAgreement_HasRelations</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">6*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Created</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_Created</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">Modified</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Name">SupAgreement_Modified</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">LastVersionApproved</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">SupAgreement_LastVersionApproved</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">LastVersionEndorsed</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">SupAgreement_LastVersionEndorsed</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">VersionsLocked</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">SupAgreement_VersionsLocked</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">RegistrationNumber</property>
+            <property name="Name">SupAgreement_RegistrationNumber</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">RegistrationDate</property>
+            <property name="Name">SupAgreement_RegistrationDate</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">DocumentRegister.DisplayValue</property>
+            <property name="Name">SupAgreement_DocumentRegister</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">DeliveryMethod.DisplayValue</property>
+            <property name="Name">SupAgreement_DeliveryMethod</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">File.DisplayValue</property>
+            <property name="Name">SupAgreement_File</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item16" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">DatePlacedToFile</property>
+            <property name="Name">SupAgreement_DatePlacedToFile</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item17" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ReturnRequired</property>
+            <property name="Name">SupAgreement_ReturnRequired</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item18" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ReturnFromCounterpartyRequired</property>
+            <property name="Name">SupAgreement_ReturnFromCounterpartyRequired</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item19" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">IssuedTo.DisplayValue</property>
+            <property name="Name">SupAgreement_IssuedTo</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item20" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ScheduledReturnDate</property>
+            <property name="Name">SupAgreement_ScheduledReturnDate</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item21" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ReturnDate</property>
+            <property name="Name">SupAgreement_ReturnDate</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item22" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">LifeCycleState</property>
+            <property name="Name">SupAgreement_LifeCycleState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item23" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">RegistrationState</property>
+            <property name="Name">SupAgreement_RegistrationState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item24" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">ApprovalState</property>
+            <property name="Name">SupAgreement_ApprovalState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item25" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">CounterpartyApprovalState</property>
+            <property name="Name">SupAgreement_CounterpartyApprovalState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item26" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">ExecutionState</property>
+            <property name="Name">SupAgreement_ExecutionState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item27" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">ControlExecutionState</property>
+            <property name="Name">SupAgreement_ControlExecutionState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item28" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">LocationState</property>
+            <property name="Name">SupAgreement_LocationState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item29" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">PersonResponsibleForReturn.DisplayValue</property>
+            <property name="Name">SupAgreement_PersonResponsibleForReturn</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item30" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ScheduledReturnDateFromCounterparty</property>
+            <property name="Name">SupAgreement_ScheduledReturnDateFromCounterparty</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item31" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">DocumentKind.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_DocumentKind</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item32" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">BusinessUnit.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_BusinessUnit</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item33" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Content</property>
+            <property name="Name">SupAgreement_Content</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item34" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Note</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_Note</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item35" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">OurSignatory.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_OurSignatory</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item36" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Counterparty.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_Counterparty</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item37" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">CounterpartySignatory.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_CounterpartySignatory</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item38" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Contact.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_Contact</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item39" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ValidFrom</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_ValidFrom</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item40" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">ValidTill</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_ValidTill</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item41" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">ResponsibleEmployee.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_ResponsibleEmployee</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item42" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Currency.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_Currency</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item43" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">Value</property>
+            <property name="AutoFilterCondition">Equals</property>
+            <property name="FieldName">TotalAmount</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_TotalAmount</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item44" isnull="true" iskey="true">
+            <property name="ColumnFilterMode">DisplayText</property>
+            <property name="AutoFilterCondition">Contains</property>
+            <property name="FieldName">Contract.DisplayValue</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">SupAgreement_Contract</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Folder>
+</settings>

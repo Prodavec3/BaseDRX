@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Message Sync Queue Item</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Message Sync Queue Item</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Message Sync Queue Items</value>
+  </data>
+  <data name="Enum_ProcessingStatus_Processed" xml:space="preserve">
+    <value>Processed</value>
+  </data>
+  <data name="Property_NoticeTask" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="Resource_f37f0ec494614105990ec4d943b06378" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c10ff1cd54794cdd9eb5f9586f736a34" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_87f48a35721b43149542182ac3b05a38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_42359c37bf954248bbd335e0a755a8b2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9268206f26b0427fb0a4232538e8afef" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Resource_fe65459f773f4e2bb2f3efeb23402c82" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fe65459f773f4e2bb2f3efeb23402c82_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_2a69b3b3ffde4dc9939d43034df1da77" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Property_ExternalId" xml:space="preserve">
+    <value>ID of message in ES</value>
+  </data>
+  <data name="Property_Created" xml:space="preserve">
+    <value>Upload date</value>
+  </data>
+  <data name="Property_CounterpartyExternalId" xml:space="preserve">
+    <value>ID of counterparty in ES</value>
+  </data>
+  <data name="Action_OpenInExchangeService" xml:space="preserve">
+    <value>Open in Service</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceDescription" xml:space="preserve">
+    <value>Open the document on website of the exchange service</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceHint" xml:space="preserve">
+    <value>Open Document in Exchange Service</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenInExchangeServiceConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_ProcessingStatus_Suspended" xml:space="preserve">
+    <value>Processing stopped</value>
+  </data>
+  <data name="Action_DoSuspended" xml:space="preserve">
+    <value>Stop Processing</value>
+  </data>
+  <data name="Action_DoSuspendedDescription" xml:space="preserve">
+    <value>Stop processing of the queue item. The item will be processed the next time the "Electronic exchange. Receive messages" job will run.</value>
+  </data>
+  <data name="Action_DoSuspendedHint" xml:space="preserve">
+    <value>Stop Processsing</value>
+  </data>
+  <data name="Action_DoSuspendedConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_DoSuspendedConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_Resume" xml:space="preserve">
+    <value>Resume Processing</value>
+  </data>
+  <data name="Action_ResumeDescription" xml:space="preserve">
+    <value>Resume processing of the queue item. The item will be processed the next time the "Electronic exchange. Receive messages" job will run.</value>
+  </data>
+  <data name="Action_ResumeHint" xml:space="preserve">
+    <value>Resume Processing</value>
+  </data>
+  <data name="Action_ResumeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ResumeConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_ProcessingCommands_456f978ecdcb437d832520ebd92974f2" xml:space="preserve">
+    <value>Processing</value>
+  </data>
+  <data name="Property_RootBox" xml:space="preserve">
+    <value>Leading box</value>
+  </data>
+  <data name="ControlGroup_7064165d24ed45388c2aba40a1ba5112" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+</root>

@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllKinds" xml:space="preserve">
+    <value>All document kinds (for docflow "{0}")</value>
+  </data>
+  <data name="Criterion" xml:space="preserve">
+    <value>Criterion</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="RuleVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="RulePriority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="RuleDocumentFlow" xml:space="preserve">
+    <value>Document flow</value>
+  </data>
+  <data name="RuleAllowSmallApproval" xml:space="preserve">
+    <value>Approval with decreasing number of approvers is allowed</value>
+  </data>
+  <data name="RuleStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ValueId" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="RuleNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="If" xml:space="preserve">
+    <value>&lt;b&gt;If:&lt;/b&gt;</value>
+  </data>
+  <data name="ShemaHeader" xml:space="preserve">
+    <value>Approval Rule Scheme</value>
+  </data>
+  <data name="StageType" xml:space="preserve">
+    <value>Stage type</value>
+  </data>
+  <data name="Performers" xml:space="preserve">
+    <value>Performers</value>
+  </data>
+  <data name="Deadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Rework" xml:space="preserve">
+    <value>Rework</value>
+  </data>
+  <data name="NeedStrongSign" xml:space="preserve">
+    <value>Require advanced electronic signature</value>
+  </data>
+  <data name="AllowAdditionalApprovers" xml:space="preserve">
+    <value>Initiator can specify additional approvers</value>
+  </data>
+  <data name="AllowSendToRework" xml:space="preserve">
+    <value>sending the document for rework is allowed</value>
+  </data>
+  <data name="ConfirmSinging" xml:space="preserve">
+    <value>Sign document in paper form only</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="ReslutSubmission" xml:space="preserve">
+    <value>Review document in paper form only</value>
+  </data>
+  <data name="EmptyString" xml:space="preserve">
+    <value>&lt;empty&gt;</value>
+  </data>
+  <data name="SignatureSettingsHeader" xml:space="preserve">
+    <value>Signature Settings</value>
+  </data>
+  <data name="ColumnRecipient" xml:space="preserve">
+    <value>Employee/Role</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="ColumnID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ColumnBusinessUnitsAndDepartments" xml:space="preserve">
+    <value>Business Units and Departments</value>
+  </data>
+  <data name="ColumnDocumentKindsAndCategories" xml:space="preserve">
+    <value>Document Kinds and Categories</value>
+  </data>
+  <data name="ColumnNote" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="ColumnLimits" xml:space="preserve">
+    <value>Limits</value>
+  </data>
+  <data name="ColumnValidTill" xml:space="preserve">
+    <value>Valid till</value>
+  </data>
+  <data name="ElseIf" xml:space="preserve">
+    <value>&lt;b&gt;Else If:&lt;/b&gt;</value>
+  </data>
+  <data name="EndIf" xml:space="preserve">
+    <value>&lt;b&gt;End If:&lt;/b&gt;</value>
+  </data>
+  <data name="Stage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>&lt;b&gt;and &lt;/b&gt;</value>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>&lt;b&gt; - Yes&lt;/b&gt;</value>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>&lt;b&gt; - No&lt;/b&gt;</value>
+  </data>
+  <data name="StartDelayDays" xml:space="preserve">
+    <value>Delayed start (days)</value>
+  </data>
+  <data name="SignatureSettingsEmpty" xml:space="preserve">
+    <value>There are no suitable signature settings.</value>
+  </data>
+  <data name="ReworkDeadline" xml:space="preserve">
+    <value>Rework deadline</value>
+  </data>
+  <data name="ReworkPerformer" xml:space="preserve">
+    <value>Employee resp. for document rework</value>
+  </data>
+  <data name="RuleNeedRestrictInitiatorAccessRights" xml:space="preserve">
+    <value>Access rights of the approval initiator will be limited to "Read"&lt;br&gt; </value>
+  </data>
+  <data name="AccessRightsForEmployee" xml:space="preserve">
+    <value>Assignee access rights</value>
+  </data>
+</root>

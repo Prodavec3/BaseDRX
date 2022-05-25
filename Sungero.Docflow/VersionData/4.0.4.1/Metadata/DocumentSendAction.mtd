@@ -1,0 +1,149 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "218ac7df-9b29-400a-b3fc-c2e22927f638",
+  "Name": "DocumentSendAction",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
+  "CanBeNavigationPropertyType": true,
+  "Code": "DocSendAction",
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "49630f6f-ea68-404a-b175-113ade49fdb0",
+      "Name": "Card",
+      "Controls": [],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "3faeea6e-bca8-450c-8053-342922af2489",
+      "Name": "Page",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "4144c3d9-d51b-48e9-9999-9764cc71b3c2",
+          "Name": "ControlGroup",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d652ddcd-9850-47e8-8650-144bf460dfc6",
+          "Name": "Name",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "4144c3d9-d51b-48e9-9999-9764cc71b3c2",
+          "PropertyGuid": "7d5bdd14-7690-47eb-84b7-e550b5e11258",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "dc0f9146-5682-4c58-9843-c8f3d1b53b24",
+          "Name": "Guid",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "4144c3d9-d51b-48e9-9999-9764cc71b3c2",
+          "PropertyGuid": "0ca045b1-44fb-467e-b67d-d09736e146fc",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        }
+      ],
+      "ParentFormGuid": "49630f6f-ea68-404a-b175-113ade49fdb0",
+      "Versions": []
+    }
+  ],
+  "IconResourcesKeys": [],
+  "IsAutoCreated": true,
+  "IsCacheable": true,
+  "IsVisible": false,
+  "NeedWriteHistory": true,
+  "OperationsClass": "",
+  "Overridden": [
+    "NeedWriteHistory",
+    "IsCacheable",
+    "IsAutoCreated",
+    "AccessRightsMode",
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7d5bdd14-7690-47eb-84b7-e550b5e11258",
+      "Name": "Name",
+      "Code": "Name",
+      "IsDisplayValue": true,
+      "IsLoadEagerly": true,
+      "IsQuickSearchAllowed": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0ca045b1-44fb-467e-b67d-d09736e146fc",
+      "Name": "ActionGuid",
+      "Code": "ActionGuid",
+      "IsEnabled": false,
+      "IsLoadEagerly": true,
+      "IsRequired": true,
+      "IsUnique": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "7d5bdd14-7690-47eb-84b7-e550b5e11258",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "95fae45a-544e-49a4-b115-9ba0291fa6ba",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "a286c4ed-3c12-4a00-895a-78abe245185a",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

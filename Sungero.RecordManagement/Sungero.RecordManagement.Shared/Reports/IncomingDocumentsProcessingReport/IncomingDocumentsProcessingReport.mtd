@@ -1,0 +1,114 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "50cd6eb3-ad77-4c3b-a681-6dc040964aaa",
+  "Name": "IncomingDocumentsProcessingReport",
+  "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient",
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "DisplayName",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters",
+    "Description",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "cfec4bb6-c67a-407d-a7c0-33d13ab9700f",
+      "Name": "BeginDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "19b93996-c49a-4304-b46d-96140355672d",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "d0722344-c9d3-41b6-9ce7-68b5252e7ecb",
+      "Name": "DocumentsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "c96181b1-c20c-4ff8-99c0-def08626f009",
+      "Name": "TasksTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "fd5fb69c-9b33-4f23-9375-00302468fbee",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "91de68ab-7814-4e4b-a617-04b0a7d08a9a",
+      "Name": "AvailableIdsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "fd1086f7-2922-44c4-8d5a-1ab5c2afed89",
+      "Name": "HyperlinksTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "7b767bc3-14cc-4ec9-9c62-97075282df68",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "621360ce-7234-4297-af19-61ab3f15b967",
+      "Name": "ViewDataTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d7926d24-9de3-426e-87dc-42a86faf54d6",
+      "Name": "Empty",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "OnReview",
+    "Sending",
+    "WithoutExecut",
+    "OnExecution",
+    "Executed",
+    "Aborted",
+    "DocumentDate",
+    "RegNumber",
+    "Correspondent",
+    "Subject",
+    "ExecutionState",
+    "Assignees",
+    "ExecutionDate",
+    "Copy",
+    "DocumentId",
+    "PeriodLabel",
+    "PeriodFrom",
+    "PeriodTo"
+  ],
+  "Versions": []
+}

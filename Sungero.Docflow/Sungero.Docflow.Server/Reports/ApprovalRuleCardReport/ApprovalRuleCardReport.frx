@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Docflow.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    private void Data5_AfterData(object sender, EventArgs e)
+    {
+      bool isCondition = (bool)Report.GetColumnValue(&quot;ConditionTable.IsCondition&quot;);
+      if (isCondition)
+      {
+        Text24.FillColor = System.Drawing.Color.LightGray;
+        Text24.Width = Units.Centimeters * 27.75f;
+        Text43.Visible = false;
+        Text44.Visible = false;
+        Text45.Visible = false;
+        Text46.Visible = false;
+        Text25.Visible = false;
+      }  
+    }
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="SourceTable" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectCriteriaDataFromTable}">
+        <Column Name="GroupName" DataType="System.String" PropName="Column"/>
+        <Column Name="Criterion" DataType="System.String" PropName="Column"/>
+        <Column Name="Value" DataType="System.String" PropName="Column"/>
+        <Column Name="ValueId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="ValueHyperlink" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table1" Alias="ConditionTable" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectConditionsDataFromTable}">
+        <Column Name="Header" DataType="System.String" PropName="Column"/>
+        <Column Name="Text" DataType="System.String" PropName="Column"/>
+        <Column Name="RuleId" DataType="System.String" PropName="Column"/>
+        <Column Name="Hyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="Level" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Item" DataType="System.String" PropName="Column"/>
+        <Column Name="Prefix" DataType="System.String" PropName="Column"/>
+        <Column Name="Id" DataType="System.Int32" PropName="Column"/>
+        <Column Name="TableLineId" DataType="System.Int32" PropName="Column"/>
+        <Column Name="IsCondition" DataType="System.Boolean" PropName="Column"/>
+        <Column Name="StageType" DataType="System.String" PropName="Column"/>
+        <Column Name="Performers" DataType="System.String" PropName="Column"/>
+        <Column Name="Deadline" DataType="System.String" PropName="Column"/>
+        <Column Name="Parameters" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+      <TableDataSource Name="Table2" Alias="SignSettTable" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectSignatureSettingsDataFromTable}">
+        <Column Name="Name" DataType="System.String" PropName="Column"/>
+        <Column Name="Id" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Hyperlink" DataType="System.String" PropName="Column"/>
+        <Column Name="OrderNumber" DataType="System.Int32" PropName="Column"/>
+        <Column Name="UnitsAndDeps" DataType="System.String" PropName="Column"/>
+        <Column Name="KindsAndCategories" DataType="System.String" PropName="Column"/>
+        <Column Name="Priority" DataType="System.Int32" PropName="Column"/>
+        <Column Name="Limits" DataType="System.String" PropName="Column"/>
+        <Column Name="ValidTill" DataType="System.String" PropName="Column"/>
+        <Column Name="Note" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="f6ac1431-fa41-4c5c-8aa9-c523e33a5bf3" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ApprovalRule" Restrictions="DontModify, DontEdit, DontDelete" Id="1bfd6cab-d751-43e8-82e0-d2e9102edf72" IsRequired="true" IsCollection="false" InternalDataType="Sungero.Docflow.IApprovalRuleBase, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="42a6a084-6828-47d9-95bb-50b0538a6037"/>
+    <SungeroParameter Name="ReportSessionId" Id="fe3a6b39-fb27-42de-9405-a83be631e91d" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="CurrentDate" Id="1606192a-8fb0-435e-b404-84707617b30d" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RuleStatusLocalized" Id="65a06c10-1958-4172-87f8-6692e2576e2f" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="RuleFlowLocalized" Id="aefadcbb-6522-4800-8674-9c03a2de48b9" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="SignSettHeader" Id="6d983b71-1313-4ace-8586-01e06898c1a1" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="SignSettEmpty" Id="27493c7c-56ad-404e-a47c-3dea62d591cf" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReworkPerformer" Id="8f27950f-bce8-4b4f-839c-de66d9d339c8" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReworkDeadline" Id="7036bfc2-1806-4a41-a86b-2e2948685259" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="294.05" CanGrow="true" CanShrink="true">
+      <TextObject Name="Text1" Left="897.75" Width="151.2" Height="18.9" Text="[CurrentDate]" HorzAlign="Right" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text2" Top="28.35" Width="1048.95" Height="18.9" CanGrow="true" CanShrink="true" Text="[[ApprovalRule].Name]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text3" Top="47.25" Width="1048.95" Height="18.9" Text="([Resources.ApprovalRuleCardReport.RuleVersion]: [[ApprovalRule].VersionNumber], [Resources.ApprovalRuleCardReport.RulePriority]: [[ApprovalRule].Priority], [Resources.ApprovalRuleCardReport.ValueId]: [[ApprovalRule].Id])" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Top="85.05" Width="1048.95" Height="18.9" Text="&lt;b&gt;[Resources.ApprovalRuleCardReport.RuleDocumentFlow]:&lt;/b&gt; [RuleFlowLocalized]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text6" Top="151.2" Width="1048.95" Height="18.9" Text="&lt;b&gt;[Resources.ApprovalRuleCardReport.ReworkDeadline]:&lt;/b&gt; [ReworkDeadline]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text12" Top="66.15" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Top="170.1" Width="1048.95" Height="18.9" CanShrink="true" Text="[[ApprovalRule].IsSmallApprovalAllowed == true ? Resources.ApprovalRuleCardReport.RuleAllowSmallApproval : string.Empty;]" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Top="132.3" Width="1048.95" Height="18.9" Text="&lt;b&gt;[Resources.ApprovalRuleCardReport.ReworkPerformer]:&lt;/b&gt; [ReworkPerformer]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text14" Top="227.45" Width="1048.95" Height="18.9" CanGrow="true" CanShrink="true" Text="&lt;b&gt;[Resources.ApprovalRuleCardReport.RuleNote]:&lt;/b&gt; [string.IsNullOrEmpty([ApprovalRule].Note) ? &quot;-&quot; : [ApprovalRule].Note;]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text15" Top="103.95" Width="529.2" Height="18.9" Text="&lt;b&gt;[Resources.ApprovalRuleCardReport.RuleStatus]:&lt;/b&gt; [RuleStatusLocalized]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text8" Left="-9.45" Top="245.35" Width="94.5" Height="18.9" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Top="265.35" Width="198.45" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.Criterion]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text16" Left="198.45" Top="265.35" Width="774.9" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.Value]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text17" Left="973.35" Top="265.35" Width="75.6" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.ValueId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text23" Width="9.45" Height="294.05" Dock="Left" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Padding="2, 3, 2, 0" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text49" Top="189" Width="94.5" Height="9.45" Font="Arial, 10pt"/>
+      <TextObject Name="Text50" Top="122.85" Width="94.5" Height="9.45" Font="Arial, 10pt"/>
+      <TextObject Name="Text53" Top="198.45" Width="1048.95" Height="28.35" CanShrink="true" Text="[[ApprovalRule].NeedRestrictInitiatorRights == true ? Resources.ApprovalRuleCardReport.RuleNeedRestrictInitiatorAccessRights : string.Empty;]" Font="Arial, 10pt, style=Bold" TextRenderType="HtmlTags"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="298.05" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text9" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SourceTable.Criterion]" Duplicates="Merge" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="198.45" Width="774.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SourceTable.Value]" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="973.35" Width="75.6" Height="18.9" Border.Lines="All" Hyperlink.Expression="[SourceTable.ValueHyperlink]" CanGrow="true" GrowToBottom="true" Text="[SourceTable.ValueId]" HideValue="0" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue"/>
+    </DataBand>
+    <DataBand Name="Data6" Top="320.95" Width="1047.06" Height="37.8">
+      <TextObject Name="Text21" Width="1048.95" Height="37.8" CanBreak="false" Text="[Resources.ApprovalRuleCardReport.ShemaHeader]" Padding="2, 0, 2, 5" VertAlign="Bottom" Font="Arial, 12pt, style=Bold"/>
+    </DataBand>
+    <DataBand Name="Data5" Top="395.1" Width="1047.06" Height="18.9" CanGrow="true" AfterDataEvent="Data5_AfterData" DataSource="Table1">
+      <TextObject Name="Text24" Width="330.75" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ConditionTable.Header]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text45" Left="727.65" Width="274.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ConditionTable.Parameters]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text25" Left="1001.7" Width="47.25" Height="18.9" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[ConditionTable.Hyperlink]" CanGrow="true" GrowToBottom="true" Text="[ConditionTable.RuleId]" HorzAlign="Center" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue"/>
+      <TextObject Name="Text43" Left="444.15" Width="217.35" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ConditionTable.Performers]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text44" Left="661.5" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ConditionTable.Deadline]" HorzAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text46" Left="330.75" Width="113.4" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[ConditionTable.StageType]" HorzAlign="Center" Font="Arial, 10pt"/>
+      <DataHeaderBand Name="DataHeader3" Top="362.75" Width="1047.06" Height="28.35" KeepWithData="true" RepeatOnEveryPage="true">
+        <TextObject Name="Text18" Width="330.75" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.Stage]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text47" Left="330.75" Width="113.4" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.StageType]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text19" Left="444.15" Width="217.35" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.Performers]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text20" Left="661.5" Width="66.15" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.Deadline]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text22" Left="727.65" Width="274.05" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.Parameters]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text32" Left="1001.7" Width="47.25" Height="28.35" Border.Lines="All" Fill.Color="DarkGray" Text="[Resources.ApprovalRuleCardReport.ColumnID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      </DataHeaderBand>
+    </DataBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="418" Width="1047.06" Height="56.7" CanGrow="true" CanShrink="true" KeepWithData="true" Condition="[SignSettTable.Id] &gt; 0" SortOrder="None" KeepTogether="true">
+      <TextObject Name="Text26" Width="1048.95" Height="37.8" Text="[SignSettHeader]" Padding="2, 0, 2, 5" VertAlign="Bottom" Font="Arial, 12pt, style=Bold"/>
+      <TextObject Name="Text48" Top="37.8" Width="1048.95" Height="18.9" CanGrow="true" CanShrink="true" Text="[SignSettEmpty]" Font="Arial, 10pt"/>
+      <DataBand Name="Data4" Top="501.6" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table2">
+        <TextObject Name="Text28" Left="207.9" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.UnitsAndDeps]" Font="Arial, 10pt" TextFill.Color="50, 50, 50" TextRenderType="HtmlTags"/>
+        <TextObject Name="Text41" Left="1001.7" Width="47.25" Height="18.9" Border.Lines="All" Cursor="Hand" Hyperlink.Expression="[SignSettTable.Hyperlink]" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.Id]" Duplicates="Merge" HorzAlign="Center" Font="Arial, 10pt, style=Underline" TextFill.Color="Blue"/>
+        <TextObject Name="Text31" Left="822.15" Width="179.55" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.Note]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+        <TextObject Name="Text34" Left="689.85" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.Limits]" Padding="2, 0, 5, 0" HorzAlign="Right" Font="Arial, 10pt"/>
+        <TextObject Name="Text42" Left="604.8" Width="85.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.ValidTill]" HorzAlign="Center" Font="Arial, 10pt"/>
+        <TextObject Name="Text29" Left="406.35" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.KindsAndCategories]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+        <TextObject Name="Text30" Width="207.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[SignSettTable.Name]" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+        <DataHeaderBand Name="DataHeader1" Top="478.7" Width="1047.06" Height="18.9" CanGrow="true" KeepWithData="true" RepeatOnEveryPage="true">
+          <TextObject Name="Text38" Left="207.9" Width="198.45" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnBusinessUnitsAndDepartments]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="Text37" Left="1001.7" Width="47.25" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="Text39" Left="406.35" Width="198.45" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnDocumentKindsAndCategories]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="Text40" Left="822.15" Width="179.55" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnNote]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="Text33" Left="689.85" Width="132.3" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnLimits]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="Text36" Left="604.8" Width="85.05" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnValidTill]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="Text27" Width="207.9" Height="18.9" Border.Lines="All" Fill.Color="DarkGray" CanGrow="true" GrowToBottom="true" Text="[Resources.ApprovalRuleCardReport.ColumnRecipient]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </DataHeaderBand>
+      </DataBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="524.5" Width="1047.06" Height="18.9">
+      <TextObject Name="Text35" Left="897.75" Width="151.2" Height="18.9" Text="[Page]" HorzAlign="Right" Font="Arial, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Incoming Invoice</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Incoming Invoice</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Incoming Invoices</value>
+  </data>
+  <data name="Property_Contract" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+  <data name="Property_TotalAmount" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="Enum_LifeCycleState_Obsolete" xml:space="preserve">
+    <value>Payment denied</value>
+  </data>
+  <data name="Enum_LifeCycleState_Active" xml:space="preserve">
+    <value>Accepted for payment</value>
+  </data>
+  <data name="FilterPanel_State_49eca44c91864deb9b57393e57a9cd72" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Draft_4f9cd2a82a264208b0bf4f4ebbb8a50d" xml:space="preserve">
+    <value>New invoice</value>
+  </data>
+  <data name="FilterPanel_OnApproval_f865d6e3b5df479f97289a6f27ff458b" xml:space="preserve">
+    <value>On approval</value>
+  </data>
+  <data name="FilterPanel_StateFlagsList_afad2103abb242d5b0a19fc2d1ba4fcf" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_PayAccepted_f47a5aed247b4518b5108bd34625695b" xml:space="preserve">
+    <value>Accepted for payment</value>
+  </data>
+  <data name="FilterPanel_PayRejected_8683680ee6cf45b4a8a6f3d3b1e97db9" xml:space="preserve">
+    <value>Payment denied</value>
+  </data>
+  <data name="FilterPanel_PeriodInvoice_06f538a2cf9e416386bdf6e855319932" xml:space="preserve">
+    <value>Invoice date</value>
+  </data>
+  <data name="FilterPanel_Last7daysInvoice_2157714007884e24be83fb3293ceea1f" xml:space="preserve">
+    <value>Last 7 days</value>
+  </data>
+  <data name="FilterPanel_Last30daysInvoice_8bf97dd0e92b43339ffc4d66da5cdd03" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriodInvoice_d014eb5c14984fe68f487ebf47c4d960" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="Property_DocumentKind" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="Enum_LifeCycleState_Draft" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Show Duplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Show incoming invoices with the same requisites: Number, Date, Total amount, Currency, Counterparty.</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Show Duplicate Incoming Invoices</value>
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Duplicates_e1457845fda94e9e9e6772569ccd819b" xml:space="preserve">
+    <value>Duplicates</value>
+  </data>
+  <data name="Form_a1ced6b8fe174f6183100fb8faf6b263" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="ControlGroup_01dd99f5db49480eb69928488f2653fb" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_406e14dc17444a7f85d8f6eef8abaa3f" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Resource_fc50c88831554ff196e8ff7064894ead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fc50c88831554ff196e8ff7064894ead_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ddf41ead829a4a3f8d12d40a52b7440c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f0607051ea774af2b7966d11cd8a7374" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f0607051ea774af2b7966d11cd8a7374_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a915c070568d4f08a7365fbdabe9e559" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b8017e2288d643da8d6d8d11917b1dd6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_86bc6ac8f1014c25b56262751b8e5223" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="Resource_8b4b3ad371ee4e2d830664be1f98b540" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_27ba841b94a8491faf0965d42985729a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c0c854dd53074637befaf884af877f6d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7af90172fc104a3b8d9fa9fecded6c2e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_a549655787f44e62a0975a9e48878e5c" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="ControlGroup_51f9d51559f74999bb6187796e7a87cb" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Resource_311b3af5835b4b69b04be13955327407" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_1da57f37cb124bf3ab4ad338fd62897c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_42612188cf984a66a4cc5c674787d208" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Resource_0e47ae684ffc4acb80bf3d6f715ce7c2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_0e47ae684ffc4acb80bf3d6f715ce7c2_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_28a6d4a8a26a467b8fe6da426092ec4a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_4e1d78fc6f6c4c81bf9aa1fa2031a46b" xml:space="preserve">
+    <value>Date and number</value>
+  </data>
+  <data name="Resource_91cff7df37834f868122f6238e9ba7c0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_670056d3a80d41c290537ace73f8c3e3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ec742a73eb834925a43ca0a7cf42eae0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7df27ccda54245dfb05240089a659cbf" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_696a8bb83e1244c8927a37d955cfbf0f" xml:space="preserve">
+    <value>Retention</value>
+  </data>
+  <data name="Resource_dcb9c4394f4f42d287de6f225f4a2812" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_20e94ab7b35542b7b03e10bba9c2e85c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_1b194ce3c44048879f0d1cdc4303c583" xml:space="preserve">
+    <value>Lifecycle</value>
+  </data>
+  <data name="Resource_e300028a5e1f485d806917e121bb9ba9" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_e81f0c5eb58a4007aeebb672ea52875b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c45cfe6a44c043689482e4b0a91c3e05" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_4ebb565bb94d465295fba553ba4900b8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_6db130988df540968fd5ffc5f9d4dfc5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_2574d8e0ddb04af7a692711434658d6a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_174ad90c64a4439eaa4f0c7286c511df" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_72e492251e834e65bb33ea838a458e43" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Resource_4628212b0304439ab3fb29f0a1ea289e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="FilterPanel_CurrentMonth_3dc1a68838b3418498f8636a14a27844" xml:space="preserve">
+    <value>Current month</value>
+  </data>
+  <data name="ControlGroup_9c0e981c710f4665bcbc2d8f5d8084d3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_fd86ec670272447fbe4580324ca8a699" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="ControlGroup_8f91b21ba3744bd5807bb01130dff98f" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="Resource_9ad3461d21c94da4b0898738dbfe6076" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_812fa7c1ee734284a3458e74ae533761" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ControlGroup_be2e7b3b0c934025bd189aa01ba7f66c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b6b8a84b12bf4dfca14371690f1ae498" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Resource_3653e8a6c90940d29bc4de985ef7c3ac" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3653e8a6c90940d29bc4de985ef7c3ac_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_3b8b809f288240f88f7e7446096e1ed8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3b8b809f288240f88f7e7446096e1ed8_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_132ee2a30e9c4614b8a1df223dedad31" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_132ee2a30e9c4614b8a1df223dedad31_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_842a9477e5f2479eacb79fbbe56ccd2a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_842a9477e5f2479eacb79fbbe56ccd2a_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_8b050f363a594f4ca5bd78314ab6d183" xml:space="preserve">
+    <value>Lifecycle</value>
+  </data>
+  <data name="Resource_83f2f039ecf94529be545847e6564b38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_6795a4a4bde5412dbe6431fdc0469fd3" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="Resource_4d9adc92d0624508a75cb09823074efd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_4d9adc92d0624508a75cb09823074efd_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_70a66773c92a417699a968592ae9e9f6" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="Resource_f7de5f695ce14ba3b298995ab250eee6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f7de5f695ce14ba3b298995ab250eee6_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_5e7a31c55428488c9de84505262da630" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_5e7a31c55428488c9de84505262da630_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_543894bf22eb4d7fa83543da872d15f7" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="Property_PaymentDueDate" xml:space="preserve">
+    <value>Payment due date</value>
+  </data>
+  <data name="Enum_LifeCycleState_Paid" xml:space="preserve">
+    <value>Payment complete</value>
+  </data>
+  <data name="FilterPanel_PayComplete_b82e0579d1534690a083df9d4b2b2bcb" xml:space="preserve">
+    <value>Payment complete</value>
+  </data>
+</root>

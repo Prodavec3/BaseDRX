@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collectiona0aea708b7c7472dbf125ad8268a9df9 FormGuid="266b9a1a-b7ca-4636-98e2-a073c180eaad">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">398,-102</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Recipient</property>
+            <property name="Visible">true</property>
+            <property name="Name">VisibilityRule_Recipients_Recipient</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">160</property>
+            <property name="ActualWidth">27*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Recipient</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collectiona0aea708b7c7472dbf125ad8268a9df9>
+  <Collectionfa57d3cd317f427aa1ec4b9235492ff8 FormGuid="266b9a1a-b7ca-4636-98e2-a073c180eaad">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">399,-102</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Recipient</property>
+            <property name="Visible">true</property>
+            <property name="Name">VisibilityRule_VisibleMembers_Recipient</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">208</property>
+            <property name="ActualWidth">35*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Recipient</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collectionfa57d3cd317f427aa1ec4b9235492ff8>
+</settings>

@@ -1,0 +1,114 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "f60421dc-601d-41d5-bb59-e3079e9ca971",
+  "Name": "DocumentConvertToPdfQueueItem",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "4e09273f-8b3a-489e-814e-a4ebfbba3e6c",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true
+  },
+  "IconResourcesKeys": [],
+  "IsAutoCreated": true,
+  "OperationsClass": "",
+  "Overridden": [
+    "IsAutoCreated",
+    "NeedWriteHistory"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c84e0a36-f024-4fe1-abbe-d377cd00fec5",
+      "Name": "DocumentId",
+      "CanBeSearch": false,
+      "Code": "ConvMarkDocId",
+      "IsLoadEagerly": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "86dd7602-3ca0-45fc-b623-52ebb1efc92e"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1d21ec65-ed38-4805-96eb-e17e4dab8406",
+      "Name": "VersionId",
+      "CanBeSearch": false,
+      "Code": "VersionId",
+      "IsLoadEagerly": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "c84e0a36-f024-4fe1-abbe-d377cd00fec5"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "f97d29ac-f430-4b6d-89f4-b0b4675f0dbb",
+      "Name": "ErrorType",
+      "CanBeSearch": false,
+      "Code": "ErrorType",
+      "DirectValues": [
+        {
+          "NameGuid": "bd7d3ec0-dc69-4940-9ae4-dc5975ac8bca",
+          "Name": "Locks",
+          "Code": "Locks"
+        },
+        {
+          "NameGuid": "573a5ec7-64e6-455e-ae29-492eb4cfa517",
+          "Name": "Convertion",
+          "Code": "Convertion"
+        },
+        {
+          "NameGuid": "6cdde437-2d43-4edf-b250-5ed5cc3c4599",
+          "Name": "NoError",
+          "Code": "NoError"
+        }
+      ],
+      "IsLoadEagerly": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "1d21ec65-ed38-4805-96eb-e17e4dab8406"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "5bc73de8-5c97-4df1-82f8-75ce79dfc557",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "ac878031-0bab-409e-841e-e603e828456f",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

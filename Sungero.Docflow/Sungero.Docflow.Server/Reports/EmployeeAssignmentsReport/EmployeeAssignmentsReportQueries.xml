@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+ ([ReportSessionId] varchar(256) NOT NULL,
+  [AssignmentId] int NOT NULL,
+  [Subject] nvarchar(max) NOT NULL,
+  [AuthorName] nvarchar(max) NOT NULL,
+  [Created] datetime NOT NULL,
+  [Deadline] datetime NULL,
+  [Completed] datetime NULL,
+  [Delay] int NULL,
+  [RealPerformerName] varchar(max) NULL,
+  [AffectDiscipline] bit NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+ (ReportSessionId citext NOT NULL,
+  AssignmentId int NOT NULL,
+  Subject citext NOT NULL,
+  AuthorName citext NOT NULL,
+  Created timestamp NOT NULL,
+  Deadline timestamp NULL,
+  Completed timestamp NULL,
+  Delay int NULL,
+  RealPerformerName citext NULL,
+  AffectDiscipline boolean NOT NULL)]]></postgres>
+  </query>
+  <query key="SelectAssignmentsFromTempTable">
+    <default><![CDATA[select Subject,
+  AuthorName,
+  Created,
+  Deadline,
+  Completed,
+  Delay,
+  RealPerformerName,
+  AffectDiscipline,
+  AssignmentId
+  from Sungero_Reports_EmployeeAssignments
+  where ReportSessionId = @ReportSessionId
+  order by case when Completed is null then 0 else 1 end, Deadline desc, Created, AffectDiscipline desc;]]></default>
+  </query>
+</queries>

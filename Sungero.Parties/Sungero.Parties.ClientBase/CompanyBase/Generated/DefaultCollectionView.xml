@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection FormGuid="cddd4c25-da1e-45d4-ab4b-0250a22ce940">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="AutoWidth">true</property>
+          <property name="AllowGrouping">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">604,12</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowSorting">true</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="22">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">T</property>
+            <property name="Visible">true</property>
+            <property name="VisibleIndex">0</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">TIN</property>
+            <property name="Visible">true</property>
+            <property name="Name">CompanyBase_TIN</property>
+            <property name="VisibleIndex">3</property>
+            <property name="ActualWidth">10*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">CanExchange</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_CanExchange</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">Region.DisplayValue</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_Region</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">LegalAddress</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_LegalAddress</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">PostalAddress</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_PostalAddress</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">Phones</property>
+            <property name="Visible">true</property>
+            <property name="Name">CompanyBase_Phones</property>
+            <property name="VisibleIndex">4</property>
+            <property name="ActualWidth">11*</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">Email</property>
+            <property name="Visible">true</property>
+            <property name="Name">CompanyBase_Email</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">Homepage</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_Homepage</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">Note</property>
+            <property name="Visible">true</property>
+            <property name="Name">CompanyBase_Note</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">PSRN</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_PSRN</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">NCEO</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_NCEO</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="FieldName">NCEA</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_NCEA</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="FieldName">Account</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_Account</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="FieldName">Bank.DisplayValue</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_Bank</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item16" isnull="true" iskey="true">
+            <property name="FieldName">Id</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_Id</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item17" isnull="true" iskey="true">
+            <property name="FieldName">Status</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_Status</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item18" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="Visible">true</property>
+            <property name="Name">CompanyBase_Name</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">30*</property>
+          </property>
+          <property name="Item19" isnull="true" iskey="true">
+            <property name="FieldName">City.DisplayValue</property>
+            <property name="Visible">true</property>
+            <property name="Name">CompanyBase_City</property>
+            <property name="VisibleIndex">2</property>
+            <property name="ActualWidth">23*</property>
+          </property>
+          <property name="Item20" isnull="true" iskey="true">
+            <property name="FieldName">HeadCompany.DisplayValue</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_HeadCompany</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item21" isnull="true" iskey="true">
+            <property name="FieldName">TRRC</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_TRRC</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item22" isnull="true" iskey="true">
+            <property name="FieldName">LegalName</property>
+            <property name="Visible">false</property>
+            <property name="Name">CompanyBase_LegalName</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection>
+</settings>

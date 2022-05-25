@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Workflow.Server&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Workflow.Shared&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.RecordManagement.Shared&#13;&#10;Sungero.RecordManagement.Server&#13;&#10;Sungero.CoreEntities.Server&#13;&#10;Sungero.Company.Shared&#13;&#10;Sungero.Company.Server&#13;&#10;Sungero.Content&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" DoublePass="true" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.RecordManagement;
+using Sungero.Company;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.RecordManagement.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="DraftResolutionReport" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectData}">
+        <Column Name="PerformersLabel" DataType="System.String" PropName="Column"/>
+        <Column Name="ResolutionLabel" DataType="System.String" PropName="Column"/>
+        <Column Name="SupervisorLabel" DataType="System.String" PropName="Column"/>
+        <Column Name="Deadline" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="reportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="1f6f5732-4e44-4d68-9afa-f73217aac36a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="585c32bb-ec6b-4024-8ab8-b5f320e7de62" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Resolution" Id="a195ae45-a025-42cd-939d-d0198aa67dba" IsRequired="false" IsCollection="true" InternalDataType="Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="c290b098-12c7-487d-bb38-73e2c98f9789"/>
+    <SungeroParameter Name="AuthorJobTitle" Id="7ba8aca1-286f-42c5-9e4a-8f68a607112f" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AuthorShortName" Id="e866c70e-fa23-47b4-a1d9-21dd9ddcef3b" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentShortName" Id="986fa2c7-9e56-453b-ae4a-acf7248feaad" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Author" Id="ecb9ebf0-842a-4e5c-8c93-7228e26f3d6d" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="b7905516-2be5-4931-961c-cb38d5677565"/>
+    <SungeroParameter Name="Document" Id="fe7ee71b-1a8a-4434-b994-e7e3cd78baca" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="58cca102-1e97-4f07-b6ac-fd866a8b7cb1"/>
+    <SungeroParameter Name="TextResolution" Id="d81ad9d1-6eeb-47a4-bf70-fcc1139db6c3" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnit" Id="b12dbfd3-d53d-495a-bd36-567cdf8fc9df" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="104.9" PaperHeight="148.1" RawPaperSize="70" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="320.92" Height="37.8" CanGrow="true">
+      <TextObject Name="Text5" Width="321.3" Height="18.9" CanGrow="true" CanShrink="true" Text="[BusinessUnit]" Padding="2, 0, 2, 4" HorzAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text1" Top="18.9" Width="321.3" Height="18.9" CanGrow="true" Text="[AuthorJobTitle]" Padding="2, 0, 2, 15" HorzAlign="Center" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="41.8" Width="320.92" Height="56.7" CanGrow="true" CanShrink="true" DataSource="Table" KeepDetail="true">
+      <TextObject Name="PerformersLabel" Left="85.05" Width="236.25" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="false" Text="[DraftResolutionReport.PerformersLabel]" Font="Arial, 10pt" TextRenderType="HtmlTags">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <GeneralFormat/>
+          <DateFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="SupervisorLabel" Left="85.05" Top="18.9" Width="236.25" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="false" Text="[DraftResolutionReport.Deadline]" HideZeros="true" Font="Arial, 10pt"/>
+      <TextObject Name="Text10" Left="85.05" Top="37.8" Width="236.25" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="false" Text="[DraftResolutionReport.SupervisorLabel]" HideZeros="true" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Top="37.8" Width="85.05" Height="18.9" CanShrink="true" CanBreak="false" Text="[[DraftResolutionReport.SupervisorLabel] == string.Empty ? string.Empty : Resources.DraftResolutionReport.OnControlPrefix;]" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Top="18.9" Width="85.05" Height="18.9" Text="[Resources.DraftResolutionReport.Deadline]" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Width="85.05" Height="18.9" Text="[Resources.DraftResolutionReport.AssigneePrefix]" Font="Arial, 10pt, style=Bold"/>
+      <ChildBand Name="Child1" Top="102.5" Width="320.92" Height="56.7" CanGrow="true" CanShrink="true" CanBreak="true">
+        <TextObject Name="FreeSpace" Width="85.05" Height="18.9" CanBreak="false" Text="[Resources.DraftResolutionReport.ResolutionPrefix]" VertAlign="Bottom" Font="Arial, 10pt, style=Bold"/>
+        <TextObject Name="Text7" Left="85.05" Width="236.25" Height="18.9" BreakTo="Text8" Text="[DraftResolutionReport.ResolutionLabel]" VertAlign="Bottom" Font="Arial, 10pt"/>
+        <TextObject Name="Text8" Top="18.9" Width="320.92" Height="18.9" CanGrow="true" CanShrink="true" AllowExpressions="false" Font="Arial, 10pt"/>
+        <TextObject Name="Text14" Top="37.8" Width="320.92" Height="18.9" CanGrow="true" CanShrink="true" Text=" " AllowExpressions="false" Font="Arial, 10pt"/>
+      </ChildBand>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="163.2" Width="320.92" Height="37.8" CanShrink="true" PrintOnBottom="true">
+      <TextObject Name="Text3" Width="113.4" Height="18.9" CanShrink="true" Text="[Sungero.Core.Calendar.Now]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="113.4" Width="207.52" Height="18.9" CanShrink="true" Text="[AuthorShortName]" HorzAlign="Right" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Top="18.9" Width="321.3" Height="18.9" CanShrink="true" Text=" " Font="Arial, 10pt"/>
+    </ReportSummaryBand>
+    <PageFooterBand Name="PageFooter1" Top="205" Width="320.92" Height="56.7" CanGrow="true">
+      <TextObject Name="Text2" Width="245.7" Height="37.8" CanGrow="true" CanShrink="true" ShiftMode="Never" CanBreak="false" Text="[Resources.DraftResolutionReport.DocumentShortNamePrefix][DocumentShortName]" VertAlign="Bottom" Font="Arial, 9pt" TextFill.Color="DimGray"/>
+      <TextObject Name="Text6" Left="245.7" Top="37.8" Width="75.6" Height="18.9" CanShrink="true" Text="[[TotalPages] == 1 ? string.Empty : Sungero.Docflow.Resources.PageShort + &quot; &quot; + [Page] + &quot; &quot; + Sungero.Docflow.Resources.PageOf + &quot; &quot; + [TotalPages];]" HorzAlign="Right" VertAlign="Bottom" Font="Arial, 9pt" TextFill.Color="DimGray"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Элемент очереди синхронизации сообщений</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Элемент очереди синхронизации сообщений</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Элементы очереди синхронизации сообщений</value>
+  </data>
+  <data name="Enum_ProcessingStatus_Processed" xml:space="preserve">
+    <value>Обработано</value>
+  </data>
+  <data name="Property_NoticeTask" xml:space="preserve">
+    <value>Уведомление</value>
+  </data>
+  <data name="ControlGroup_9268206f26b0427fb0a4232538e8afef" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Property_Documents" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Property_ExternalId" xml:space="preserve">
+    <value>ИД сообщения в CO</value>
+  </data>
+  <data name="Property_Created" xml:space="preserve">
+    <value>Дата загрузки</value>
+  </data>
+  <data name="Property_CounterpartyExternalId" xml:space="preserve">
+    <value>ИД контрагента в СО</value>
+  </data>
+  <data name="Action_OpenInExchangeService" xml:space="preserve">
+    <value>Открыть в сервисе</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceDescription" xml:space="preserve">
+    <value>Открытие документа на сайте сервиса электронного обмена.</value>
+  </data>
+  <data name="Action_OpenInExchangeServiceHint" xml:space="preserve">
+    <value>Открыть документ в сервисе обмена</value>
+  </data>
+  <data name="Enum_ProcessingStatus_Suspended" xml:space="preserve">
+    <value>Обработка остановлена</value>
+  </data>
+  <data name="Action_DoSuspended" xml:space="preserve">
+    <value>Остановить обработку</value>
+  </data>
+  <data name="Action_DoSuspendedDescription" xml:space="preserve">
+    <value>Остановка обработки элемента очереди. Элемент не будет обрабатываться фоновым процессом "Электронный обмен. Получение сообщений".</value>
+  </data>
+  <data name="Action_DoSuspendedHint" xml:space="preserve">
+    <value>Остановить обработку</value>
+  </data>
+  <data name="Action_Resume" xml:space="preserve">
+    <value>Возобновить обработку</value>
+  </data>
+  <data name="Action_ResumeDescription" xml:space="preserve">
+    <value>Возобновление обработки элемента очереди. Элемент будет обработан при следующем запуске фонового процесса "Электронный обмен. Получение сообщений".</value>
+  </data>
+  <data name="Action_ResumeHint" xml:space="preserve">
+    <value>Возобновить обработку</value>
+  </data>
+  <data name="Ribbon_ProcessingCommands_456f978ecdcb437d832520ebd92974f2" xml:space="preserve">
+    <value>Обработка</value>
+  </data>
+  <data name="Property_RootBox" xml:space="preserve">
+    <value>Ведущий аб. ящик</value>
+  </data>
+  <data name="ControlGroup_7064165d24ed45388c2aba40a1ba5112" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+</root>

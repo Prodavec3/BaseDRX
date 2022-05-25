@@ -1,0 +1,93 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "a9e935d5-3b72-4e3a-9e43-711d8f32b84e",
+  "Name": "DepartmentRecipientLinks",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "20784da1-10a0-4ce1-97de-8a075142c47a",
+  "CanBeAncestor": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "7bc470db-69c6-4277-9bca-b3e611961859",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1dab57e3-a543-4ac4-bf85-947c588119b7",
+      "Name": "Member",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid",
+        "NeedPassEntityToLookupEvent",
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "e8985065-ff60-4d4b-9309-724366552ffd",
+      "Name": "Sid",
+      "IsAncestorMetadata": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsVisibility",
+        "IsShowedInList"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "75c0daf6-68bf-4140-b41d-ca537c0ed1c5",
+      "Name": "Group",
+      "EntityGuid": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "IsAncestorMetadata": true,
+      "IsReferenceToRootEntity": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "2f705bde-305a-4ca9-9adf-fc58c4fd798b",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "6aa11a8e-971b-4bdd-8f42-5d2c1a55ff5f",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 9
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

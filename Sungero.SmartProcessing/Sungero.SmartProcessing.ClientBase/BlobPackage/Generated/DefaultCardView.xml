@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection792937b87c7d477b9a643e79fa7c705b FormGuid="2e94dd6f-5676-4851-8ae6-09d75331309c">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">134,37</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">None</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="Visible">true</property>
+            <property name="Name">BlobPackage_To_Name</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">335</property>
+            <property name="ActualWidth">47*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Address</property>
+            <property name="Visible">true</property>
+            <property name="Name">BlobPackage_To_Address</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">364</property>
+            <property name="ActualWidth">51*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection792937b87c7d477b9a643e79fa7c705b>
+  <Collectiondb6659c354c54811ab151658c1bd54c4 FormGuid="2e94dd6f-5676-4851-8ae6-09d75331309c">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">525,-91</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">None</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="Visible">true</property>
+            <property name="Name">BlobPackage_CC_Name</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">342</property>
+            <property name="ActualWidth">48*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Address</property>
+            <property name="Visible">true</property>
+            <property name="Name">BlobPackage_CC_Address</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">349</property>
+            <property name="ActualWidth">49*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collectiondb6659c354c54811ab151658c1bd54c4>
+</settings>

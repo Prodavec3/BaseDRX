@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Property_Recipient" xml:space="preserve">
+    <value>Подписывающий</value>
+  </data>
+  <data name="Property_Document" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="Property_ValidTill" xml:space="preserve">
+    <value>Действует по</value>
+  </data>
+  <data name="Property_ValidFrom" xml:space="preserve">
+    <value>Действует с</value>
+  </data>
+  <data name="Property_Reason" xml:space="preserve">
+    <value>Основание</value>
+  </data>
+  <data name="Property_BusinessUnits" xml:space="preserve">
+    <value>Наши организации</value>
+  </data>
+  <data name="Property_DocumentKinds" xml:space="preserve">
+    <value>Виды документов</value>
+  </data>
+  <data name="Property_Limit" xml:space="preserve">
+    <value>Лимит</value>
+  </data>
+  <data name="Enum_Limit_NoLimit" xml:space="preserve">
+    <value>Без ограничений</value>
+  </data>
+  <data name="Enum_Limit_Amount" xml:space="preserve">
+    <value>Сумма документа</value>
+  </data>
+  <data name="Property_Amount" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="Property_Currency" xml:space="preserve">
+    <value>Валюта</value>
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="ControlGroup_cbd55b09dcb04271b1fdb736d16c8e55" xml:space="preserve">
+    <value>Критерии</value>
+  </data>
+  <data name="ControlGroup_1f26d2ea1d20432fbfbf1e019464401b" xml:space="preserve">
+    <value>Ограничения</value>
+  </data>
+  <data name="ControlGroup_5565fb365ce1434b9804772848b9331f" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Право подписи</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Право подписи</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Право подписи</value>
+  </data>
+  <data name="FilterPanel_State_70546a139e5a43bd8a5609a406ed6383" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Active_04bcff192d6c487cb75716675fd116f0" xml:space="preserve">
+    <value>Действующие</value>
+  </data>
+  <data name="FilterPanel_Closed_cfc6dbbc577149e79faffdae44e546de" xml:space="preserve">
+    <value>Закрытые</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_5d03311f26eb4b71b473de91955178cc" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Recipient_e317cac4dc054c6c8ab744ad8a059368" xml:space="preserve">
+    <value>Подписывающий</value>
+  </data>
+  <data name="FilterPanel_Today_28a627a604cb45cf8b890d07cfd84387" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="FilterPanel_Period_37d1b2c4abf64b39b372631639f67905" xml:space="preserve">
+    <value>В периоде:</value>
+  </data>
+  <data name="Property_IsSystem" xml:space="preserve">
+    <value>Системное</value>
+  </data>
+  <data name="FilterPanel_Main_472bfd60c66b419f855d9bbcec3e4759" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_3643b2d4d8264fecb122e76ea9b2c746" xml:space="preserve">
+    <value>Действует</value>
+  </data>
+  <data name="Enum_Reason_Duties" xml:space="preserve">
+    <value>Должностные обязанности</value>
+  </data>
+  <data name="Enum_Reason_PowerOfAttorney" xml:space="preserve">
+    <value>Доверенность</value>
+  </data>
+  <data name="Enum_Reason_Other" xml:space="preserve">
+    <value>Другой документ</value>
+  </data>
+  <data name="Property_DocumentInfo" xml:space="preserve">
+    <value>Инф. о док-те</value>
+  </data>
+  <data name="Property_DocumentFlow" xml:space="preserve">
+    <value>Документопоток</value>
+  </data>
+  <data name="Enum_DocumentFlow_All" xml:space="preserve">
+    <value>Любой</value>
+  </data>
+  <data name="Enum_DocumentFlow_Incoming" xml:space="preserve">
+    <value>Входящий</value>
+  </data>
+  <data name="Enum_DocumentFlow_Outgoing" xml:space="preserve">
+    <value>Исходящий</value>
+  </data>
+  <data name="Enum_DocumentFlow_Inner" xml:space="preserve">
+    <value>Внутренний</value>
+  </data>
+  <data name="Enum_DocumentFlow_Contracts" xml:space="preserve">
+    <value>Договоры</value>
+  </data>
+  <data name="FilterPanel_DocumentFlow_af1461d48ee44530855d2aec9993743d" xml:space="preserve">
+    <value>Документопоток</value>
+  </data>
+  <data name="FilterPanel_Incoming_8123f38223ac484ab049dd36fa07690b" xml:space="preserve">
+    <value>Входящий</value>
+  </data>
+  <data name="FilterPanel_Outgoing_62c2c3e7af8f418f9c1ee87054ace9e9" xml:space="preserve">
+    <value>Исходящий</value>
+  </data>
+  <data name="FilterPanel_Inner_20f4e36edbb14ab6b0ea0f22cf23bd32" xml:space="preserve">
+    <value>Внутренний</value>
+  </data>
+  <data name="FilterPanel_Contracts_90ef20a0653544789602edae062c56cc" xml:space="preserve">
+    <value>Договоры</value>
+  </data>
+  <data name="Property_Departments" xml:space="preserve">
+    <value>Подразделения</value>
+  </data>
+  <data name="Property_Categories" xml:space="preserve">
+    <value>Категории</value>
+  </data>
+  <data name="Property_Priority" xml:space="preserve">
+    <value>Приоритет</value>
+  </data>
+  <data name="Property_Certificate" xml:space="preserve">
+    <value>Сертификат</value>
+  </data>
+</root>

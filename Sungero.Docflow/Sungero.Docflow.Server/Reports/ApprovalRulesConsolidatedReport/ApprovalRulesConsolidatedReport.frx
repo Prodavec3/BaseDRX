@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Company.Shared&#13;&#10;Sungero.Company.Server&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Company;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Docflow.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="ApprovalRules" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectFromTempTable}">
+        <Column Name="ApprovalRule" DataType="System.String" PropName="Column"/>
+        <Column Name="ApprovalRuleUrl" DataType="System.String" PropName="Column"/>
+        <Column Name="ApprovalRulePriority" DataType="System.String" PropName="Column"/>
+        <Column Name="Status" DataType="System.String" PropName="Column"/>
+        <Column Name="DocumentKind" DataType="System.String" PropName="Column"/>
+        <Column Name="DocumentFlow" DataType="System.String" PropName="Column"/>
+        <Column Name="ApprovalRuleId" DataType="System.String" PropName="Column"/>
+        <Column Name="BusinessUnit" DataType="System.String" PropName="Column"/>
+        <Column Name="Department" DataType="System.String" PropName="Column"/>
+        <Column Name="Category" DataType="System.String" PropName="Column"/>
+        <Column Name="DocumentParentType" DataType="System.String" PropName="Column"/>
+        <Column Name="Relation" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="ReportSessionId"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="1b255a9c-56ae-4b5c-af29-570b4d3a0dcb" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="3e97a320-0738-475e-80c5-efadd2aea968" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BusinessUnit" Id="7803b58b-496a-453c-8f03-8f3d14c349ed" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="eff95720-181f-4f7d-892d-dec034c7b2ab"/>
+    <SungeroParameter Name="Department" Id="7b851bda-c2d0-4da7-9593-0f416053343b" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Company.IDepartment, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="61b1c19f-26e2-49a5-b3d3-0d3618151e12"/>
+    <SungeroParameter Name="IncludeSubsidiary" Id="1683a189-d40c-4532-bde5-07c42a99ca73" IsRequired="false" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="FilterDepartmentsForBusinessUnits" Id="d5b23962-30fb-4521-b721-35c82b5b7dd8" IsRequired="false" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentFlow" Id="df531695-f555-423f-825f-133f5cfc0fef" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentKind" Id="eac656be-55c9-4e76-a057-195a1c90dfbf" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IDocumentKind, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="14a59623-89a2-4ea8-b6e9-2ad4365f358c"/>
+    <SungeroParameter Name="Category" Id="1b45f85c-0b4d-4dbe-b7cf-29dd4f20895d" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IDocumentGroupBase, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="f5061291-4ac6-428f-b091-d53acdbe9ae5"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="580" PaperHeight="210" RawPaperSize="0" FirstPageSource="15" OtherPagesSource="15" Guides="1729.35" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="2116.8" Height="47.25" CanGrow="true" Guides="28.35">
+      <TextObject Name="Text10" Width="264.6" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.BusinessUnit]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text15" Left="264.6" Width="264.6" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.Department]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text17" Left="670.95" Width="132.3" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.DocumentFlow]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text18" Left="992.25" Width="302.4" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.DocumentKind]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text16" Left="1294.65" Width="245.7" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.ContractCategory]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text19" Left="1540.35" Width="94.5" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.Status]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text20" Left="1634.85" Width="94.5" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.Priority]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text21" Left="1729.35" Width="330.75" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.ApprovalRule]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text1" Left="2060.1" Width="47.25" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.ApprovalRuleId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text30" Left="803.25" Width="189" Height="47.25" Border.Lines="All" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.DocumentParentType]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+      <TextObject Name="Text32" Left="529.2" Width="141.75" Height="47.25" Border.Lines="All" CanGrow="true" Text="[Sungero.Docflow.Reports.Resources.ApprovalRulesConsolidatedReport.HasRelation]" HorzAlign="Center" VertAlign="Center" Font="Arial, 9.75pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="51.25" Width="2116.8" Height="18.9" CanGrow="true" CanShrink="true" Guides="9.45,9.45,18.9,9.45" DataSource="Table">
+      <TextObject Name="Text22" Top="1.89" Width="264.6" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.BusinessUnit]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text23" Left="264.6" Top="1.89" Width="264.6" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.Department]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text24" Left="670.95" Top="1.89" Width="132.3" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.DocumentFlow]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text25" Left="992.25" Top="1.89" Width="302.4" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.DocumentKind]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text26" Left="1294.65" Top="1.89" Width="245.7" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.Category]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text27" Left="1540.35" Top="1.89" Width="94.5" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.Status]" HorzAlign="Center" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text28" Left="1634.85" Top="1.89" Width="94.5" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.ApprovalRulePriority]" HorzAlign="Center" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text2" Left="2060.1" Top="1.89" Width="47.25" Height="17.01" Border.Lines="All" Hyperlink.Expression="[ApprovalRules.ApprovalRuleUrl]" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.ApprovalRuleId]" HorzAlign="Center" Font="Arial, 9.75pt, style=Underline" TextFill.Color="Blue"/>
+      <TextObject Name="Text29" Left="1729.35" Top="1.89" Width="330.75" Height="17.01" Border.Lines="All" Cursor="Hand" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.ApprovalRule]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text31" Left="803.25" Top="1.89" Width="189" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.DocumentParentType]" Font="Arial, 9.75pt"/>
+      <TextObject Name="Text33" Left="529.2" Top="1.89" Width="141.75" Height="17.01" Border.Lines="All" CanGrow="true" GrowToBottom="true" CanBreak="false" Text="[ApprovalRules.Relation]" Font="Arial, 9.75pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

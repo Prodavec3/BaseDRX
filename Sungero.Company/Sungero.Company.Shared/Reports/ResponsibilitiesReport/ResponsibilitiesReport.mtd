@@ -1,0 +1,152 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "b8aa8f84-7488-43c7-9e0d-7050eb5ea6af",
+  "Name": "ResponsibilitiesReport",
+  "AssociatedGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "Parameters",
+    "HandledEvents",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "Description"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "4654e36b-1c27-4aae-8ccb-433fd374e9cb",
+      "Name": "Employee",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "7e5bbe89-6073-42a9-964b-2dbe29c94258",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d916c502-ea51-4d58-a4b3-52f85f491f2f",
+      "Name": "CurrentDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "CompanyPriority",
+      "ParentClasses": [
+        "ResponsibilitiesReport"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "1000"
+    },
+    {
+      "Name": "CounterpartyPriority",
+      "ParentClasses": [
+        "ResponsibilitiesReport"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "4000"
+    },
+    {
+      "Name": "DocflowPriority",
+      "ParentClasses": [
+        "ResponsibilitiesReport"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "2000"
+    },
+    {
+      "Name": "ExchangePriority",
+      "ParentClasses": [
+        "ResponsibilitiesReport"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "1500"
+    },
+    {
+      "Name": "MeetingsPriority",
+      "ParentClasses": [
+        "ResponsibilitiesReport"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "3000"
+    },
+    {
+      "Name": "ProjectsPriority",
+      "ParentClasses": [
+        "ResponsibilitiesReport"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "2500"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "ResponsibilitiesReportTableLine",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "ModuleName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Responsibility",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Record",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "RecordId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Int32>"
+        },
+        {
+          "Name": "RecordHyperlink",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Priority",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Company.Structures.ResponsibilitiesReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "ReportName",
+    "Responsibility",
+    "Record",
+    "RecordId",
+    "CertificateResponsibility",
+    "BoxResponsibility"
+  ],
+  "Versions": []
+}

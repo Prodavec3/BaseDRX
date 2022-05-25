@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Документооборот</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Документооборот</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для настройки документооборота компании</value>
+  </data>
+  <data name="CoverGroup_Docflow" xml:space="preserve">
+    <value>Настройки документов</value>
+  </data>
+  <data name="CoverAction_DocumentKinds" xml:space="preserve">
+    <value>Виды документов</value>
+  </data>
+  <data name="CoverDescription_DocumentKinds" xml:space="preserve">
+    <value>Классификация документов, определяющая документопоток, тип нумерации и порядок обработки документа.</value>
+  </data>
+  <data name="CoverAction_DocumentRegisters" xml:space="preserve">
+    <value>Журналы регистрации</value>
+  </data>
+  <data name="CoverDescription_DocumentRegisters" xml:space="preserve">
+    <value>Перечень журналов, используемых для учета, нумерации и регистрации документов.</value>
+  </data>
+  <data name="CoverAction_RegistrationGroups" xml:space="preserve">
+    <value>Группы регистрации</value>
+  </data>
+  <data name="CoverDescription_RegistrationGroups" xml:space="preserve">
+    <value>Группы сотрудников, которыми производится регистрация, учет и хранение документов в определенных журналах регистрации.</value>
+  </data>
+  <data name="CoverAction_RegistrationSettings" xml:space="preserve">
+    <value>Настройки регистрации</value>
+  </data>
+  <data name="CoverDescription_RegistrationSettings" xml:space="preserve">
+    <value>Правила автоматического подбора журнала регистрации в соответствии с реквизитами документа.</value>
+  </data>
+  <data name="CoverAction_MailDeliveryMethods" xml:space="preserve">
+    <value>Способы доставки документов</value>
+  </data>
+  <data name="CoverGroup_Approval" xml:space="preserve">
+    <value>Настройки согласования</value>
+  </data>
+  <data name="CoverAction_ApprovalRules" xml:space="preserve">
+    <value>Правила согласования</value>
+  </data>
+  <data name="CoverDescription_ApprovalRules" xml:space="preserve">
+    <value>Справочник содержит регламенты обработки документов в компании.</value>
+  </data>
+  <data name="CoverAction_ApprovalStages" xml:space="preserve">
+    <value>Этапы согласования</value>
+  </data>
+  <data name="CoverDescription_ApprovalStages" xml:space="preserve">
+    <value>Этапы обработки, из которых состоят правила согласования документов.</value>
+  </data>
+  <data name="CoverGroup_RetentionDocument" xml:space="preserve">
+    <value>Номенклатура дел</value>
+  </data>
+  <data name="CoverAction_FileList" xml:space="preserve">
+    <value>Номенклатура дел</value>
+  </data>
+  <data name="CoverDescription_FileList" xml:space="preserve">
+    <value>Систематизированный перечень дел. В дела помещаются документы, относящиеся к одному вопросу или участку деятельности.</value>
+  </data>
+  <data name="CoverAction_FileRetentionPeriods" xml:space="preserve">
+    <value>Сроки хранения дел</value>
+  </data>
+  <data name="CoverDescription_FileRetentionPeriods" xml:space="preserve">
+    <value>Перечень регламентированных сроков хранения дел.</value>
+  </data>
+  <data name="CoverGroup_Reports" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="CoverAction_RegistrationSettingsReport" xml:space="preserve">
+    <value>Настройки регистрации</value>
+  </data>
+  <data name="CoverDescription_RegistrationSettingsReport" xml:space="preserve">
+    <value>Порядок нумерации и регистрации документов в разрезе классификаторов документа.</value>
+  </data>
+  <data name="CoverAction_ShowAllReports" xml:space="preserve">
+    <value>Все отчеты</value>
+  </data>
+  <data name="CoverGroup_ApplicationSettings" xml:space="preserve">
+    <value>Настройки приложений-обработчиков</value>
+  </data>
+  <data name="CoverAction_FileTypes" xml:space="preserve">
+    <value>Типы файлов</value>
+  </data>
+  <data name="CoverDescription_FileTypes" xml:space="preserve">
+    <value>Типы файлов предназначены для группировки приложений-обработчиков.</value>
+  </data>
+  <data name="CoverAction_AssociatedApplications" xml:space="preserve">
+    <value>Приложения-обработчики</value>
+  </data>
+  <data name="CoverDescription_AssociatedApplications" xml:space="preserve">
+    <value>Справочник определяет расширения файлов, которые можно использовать в документах.</value>
+  </data>
+  <data name="CoverGroup_Registration" xml:space="preserve">
+    <value>Регистрация и нумерация</value>
+  </data>
+  <data name="CoverAction_RelationsTypes" xml:space="preserve">
+    <value>Типы связей</value>
+  </data>
+  <data name="CoverDescription_RelationsTypes" xml:space="preserve">
+    <value>Справочник содержит типы связей, группирующие документы по их назначению.</value>
+  </data>
+  <data name="CoverAction_PersonalSettings" xml:space="preserve">
+    <value>Мои настройки</value>
+  </data>
+  <data name="CoverGroup_PersonalSettings" xml:space="preserve">
+    <value>Персональные настройки</value>
+  </data>
+  <data name="CoverAction_ContractCategories" xml:space="preserve">
+    <value>Категории договоров</value>
+  </data>
+  <data name="CoverDescription_ContractCategories" xml:space="preserve">
+    <value>Дополнительная классификация договоров в рамках видов документов.</value>
+  </data>
+  <data name="CoverAction_SignatureSetting" xml:space="preserve">
+    <value>Право подписи</value>
+  </data>
+  <data name="CoverDescription_SignatureSetting" xml:space="preserve">
+    <value>Справочник сотрудников, имеющих право подписи документов.</value>
+  </data>
+  <data name="CoverDescription_PersonalSettings" xml:space="preserve">
+    <value>Личные настройки отдельных параметров работы системы.</value>
+  </data>
+  <data name="sf_113427f5_1683_4bb8_980c_ba4bcef50e66" xml:space="preserve">
+    <value>Правила согласования</value>
+  </data>
+  <data name="FilterPanel_Status_63c542ab8c3d434483eb51a12adfd4b9" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Draft_afb61c31a1284641a535dba81b12790d" xml:space="preserve">
+    <value>Черновик</value>
+  </data>
+  <data name="FilterPanel_Active_e4cb9f5ca0bf4c9c8096a7c2073d7b0f" xml:space="preserve">
+    <value>Действующая</value>
+  </data>
+  <data name="FilterPanel_Closed_cb3c02c09e3d45948ed6d6a7922f0714" xml:space="preserve">
+    <value>Закрытая</value>
+  </data>
+  <data name="FilterPanel_Criteria_6008fb4ce5264b0ebc1fdccb6a185e15" xml:space="preserve">
+    <value>Критерии</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_794ec2ce6a964da8b7cf8e5dd67ff0f6" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_5712df35e3b74e9cbd71d8299bd677ef" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Department_aa30e05091ce415982d1591535b9dc78" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="CoverDescription_MailDeliveryMethods" xml:space="preserve">
+    <value>Перечень способов, используемых для доставки документов в компанию и их отправки контрагентам.</value>
+  </data>
+  <data name="JobDisplayName_d7044e4489bc4fb39e445491514d9b05" xml:space="preserve">
+    <value>Документооборот. Рассылка электронных писем о заданиях</value>
+  </data>
+  <data name="JobDescription_d7044e4489bc4fb39e445491514d9b05" xml:space="preserve">
+    <value>Отправка уведомления о заданиях</value>
+  </data>
+  <data name="JobDisplayName_1e83711cfc184a4883aa124d8ef9b690" xml:space="preserve">
+    <value>Документооборот. Автоматическое назначение прав на документы</value>
+  </data>
+  <data name="JobDescription_1e83711cfc184a4883aa124d8ef9b690" xml:space="preserve">
+    <value>Автоматическое назначение прав на документы</value>
+  </data>
+  <data name="CoverAction_AccessRightsRule" xml:space="preserve">
+    <value>Правила назначения прав</value>
+  </data>
+  <data name="CoverDescription_AccessRightsRule" xml:space="preserve">
+    <value>Правила автоматического назначения прав в соответствии с реквизитами документа.</value>
+  </data>
+  <data name="CoverDescription_ShowAllReports" xml:space="preserve">
+    <value>Список всех отчетов модуля.</value>
+  </data>
+  <data name="CoverAction_ApprovalRuleConsolidatedReport" xml:space="preserve">
+    <value>Сводный отчет по правилам согласования</value>
+  </data>
+  <data name="CoverDescription_ApprovalRuleConsolidatedReport" xml:space="preserve">
+    <value>Контроль настройки правил согласования в разрезе организационной структуры, документопотоков и видов документов.</value>
+  </data>
+  <data name="AsyncHandlerDescription_767ae28bd04348b39e31e54c288bde75" xml:space="preserve">
+    <value>Автоматическое назначение прав на документ</value>
+  </data>
+  <data name="AsyncHandler_Description_767ae28bd04348b39e31e54c288bde75" xml:space="preserve">
+    <value>Автоматическое назначение прав на документы</value>
+  </data>
+  <data name="AsyncHandler_Description_c43527606439484b9e006c878427d64e" xml:space="preserve">
+    <value>Автоматическое назначение прав на документы при создании/изменении правила</value>
+  </data>
+  <data name="CoverAction_DocumentTemplatesNew" xml:space="preserve">
+    <value>Шаблоны документов</value>
+  </data>
+  <data name="JobDisplayName_2ff6172c79644df7a29488c77bc97ef2" xml:space="preserve">
+    <value>Делопроизводство. Рассылка задач об окончании срока доверенностей</value>
+  </data>
+  <data name="CoverDescription_DocumentTemplatesNew" xml:space="preserve">
+    <value>Перечень унифицированных форм, используемых при создании документов.</value>
+  </data>
+  <data name="JobDescription_2ff6172c79644df7a29488c77bc97ef2" xml:space="preserve">
+    <value>Рассылка уведомлений об окончании срока действия доверенностей</value>
+  </data>
+  <data name="CoverAction_DocumentStoragePolicy" xml:space="preserve">
+    <value>Политики хранения документов</value>
+  </data>
+  <data name="CoverDescription_DocumentStoragePolicy" xml:space="preserve">
+    <value>Правила распределения документов по файловым хранилищам согласно критериям.</value>
+  </data>
+  <data name="JobDisplayName_0df1dbd48cd1407d90ba537a251d4f7c" xml:space="preserve">
+    <value>Документооборот. Перемещение документов между хранилищами</value>
+  </data>
+  <data name="JobDescription_0df1dbd48cd1407d90ba537a251d4f7c" xml:space="preserve">
+    <value>Перемещение содержимого документов в соответствии с политиками хранения.</value>
+  </data>
+  <data name="AsyncHandler_Description_4f03b0d0f0f545edb1c598d32b864503" xml:space="preserve">
+    <value>Перенос содержимого документа в хранилище.</value>
+  </data>
+  <data name="sf_371c81c3_d2c8_4bfb_8e86_39470d456c62" xml:space="preserve">
+    <value>Политики хранения</value>
+  </data>
+  <data name="FilterPanel_Status_44a38bd69fc9455c929b1e5307083d1a" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Active_5bb2c61d64e04f9da3498d8ea30ed507" xml:space="preserve">
+    <value>Действующая</value>
+  </data>
+  <data name="FilterPanel_Closed_0ae349923f924f928bf439c47d44cefd" xml:space="preserve">
+    <value>Закрытая</value>
+  </data>
+  <data name="FilterPanel_DocumentKindGroup_7bd428f9c7474f729b9be1c332133d83" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_PolicyType_89e5b1a657e34365b615c0187e38f8e7" xml:space="preserve">
+    <value>Тип политики</value>
+  </data>
+  <data name="FilterPanel_StoragePolicy_934914bd4fe84b1f906ed7d99609abbb" xml:space="preserve">
+    <value>Хранения</value>
+  </data>
+  <data name="FilterPanel_RetentionPolicy_3ee03aaf32d24c8fa5cd32d2dbb57f29" xml:space="preserve">
+    <value>Перемещения</value>
+  </data>
+  <data name="CoverGroup_SmartProcessingSettings" xml:space="preserve">
+    <value>Интеллектуальная обработка документов</value>
+  </data>
+  <data name="CoverAction_ShowSmartProcessingSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="CoverDescription_ShowSmartProcessingSettings" xml:space="preserve">
+    <value>Параметры подключения к сервису Directum Ario.</value>
+  </data>
+  <data name="AsyncHandler_Description_a416fcc6b36148dea665d19de3c5379d" xml:space="preserve">
+    <value>Преобразование документов (исключая документы электронного обмена) в PDF с отметкой об электронной подписи</value>
+  </data>
+  <data name="AsyncHandler_Description_accf7175912e48e7aa12c7288559f709" xml:space="preserve">
+    <value>Копирование номенклатуры дел за период</value>
+  </data>
+  <data name="CoverAction_CopyFiles" xml:space="preserve">
+    <value>Создание номенклатуры дел</value>
+  </data>
+  <data name="CoverDescription_CopyFiles" xml:space="preserve">
+    <value>Копирование дел за определенный период.</value>
+  </data>
+  <data name="AsyncHandler_Description_1a9bf2e447784fdb8edc1f8b5777416b" xml:space="preserve">
+    <value>Смена статуса документа при прекращении задачи на согласование.</value>
+  </data>
+  <data name="AsyncHandler_Description_0dafb1e3152040a8ab6e09deeae72e8f" xml:space="preserve">
+    <value>Выполнение сценария в согласовании по регламенту</value>
+  </data>
+</root>

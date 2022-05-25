@@ -1,0 +1,112 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "aaccef11-d184-4225-9861-2e6578ae54de",
+  "Name": "DocumentReturnReport",
+  "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient",
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "69e4f2a9-e147-4a72-a184-2588cc41f49e",
+      "Name": "AvailableIdsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "37aec550-a713-4591-b81f-c07d39325e5c",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IOurCompany, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "0a98e8f2-c74a-4c56-b8ca-1f4641db1b44",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "efd3f543-3394-4ccf-a054-498164f4abf3",
+      "Name": "Employee",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "a183750d-3fc5-4af1-8d24-78658f7abef3",
+      "Name": "DeliveryDateFrom",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "e5870dd8-2d85-47cc-8e2d-4fef93f8da37",
+      "Name": "DeliveryDateTo",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "c4818623-0c7f-4bd1-897a-d338d1650a06",
+      "Name": "NeedShowDialog",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "f0d01ad4-5ae0-4d24-884f-91675a4400d9",
+      "Name": "MinDeliveryDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "2c185053-c738-43c2-87a4-4656e82de0e4",
+      "Name": "MaxDeliveryDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "2197e5a8-208c-4a89-a70a-896d2cd6370a",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "DocumentName",
+    "ReportName",
+    "ID",
+    "OriginalOrCopy",
+    "IssueDate",
+    "ReturnDeadline",
+    "Issued",
+    "Original",
+    "Copy",
+    "PeriodFrom",
+    "PeriodTo",
+    "Employee",
+    "Delay"
+  ],
+  "Versions": []
+}

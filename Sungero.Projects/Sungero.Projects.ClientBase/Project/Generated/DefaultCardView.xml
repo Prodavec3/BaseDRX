@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection581b6689dfaf45f19e933da3f1b4d18e FormGuid="9b10a477-66fb-4c59-8132-bc8d29cb09f2">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">818,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">None</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="Columns" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Member</property>
+            <property name="Visible">true</property>
+            <property name="Name">Project_TeamMembers_Member</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">403</property>
+            <property name="ActualWidth">72*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Group</property>
+            <property name="Visible">true</property>
+            <property name="Name">Project_TeamMembers_Group</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">246</property>
+            <property name="ActualWidth">44*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection581b6689dfaf45f19e933da3f1b4d18e>
+  <Collectionfdd0690dd1144298b8abdc819981a7ef FormGuid="4523887d-c1e3-468e-aef7-7dbe96a408cf">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">812,-2</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="LinesPerRowMode">None</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="Columns" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">FolderName</property>
+            <property name="Visible">true</property>
+            <property name="Name">Project_Classifier_FolderName</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">557</property>
+            <property name="ActualWidth">49*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">DocumentKind</property>
+            <property name="Visible">true</property>
+            <property name="Name">Project_Classifier_DocumentKind</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">511</property>
+            <property name="ActualWidth">45*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collectionfdd0690dd1144298b8abdc819981a7ef>
+</settings>

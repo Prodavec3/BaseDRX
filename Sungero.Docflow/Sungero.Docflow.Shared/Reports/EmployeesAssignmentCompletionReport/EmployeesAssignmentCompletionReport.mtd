@@ -1,0 +1,229 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "319f5c6a-ae19-4775-a169-dc60b2a360fa",
+  "Name": "EmployeesAssignmentCompletionReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel",
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient",
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "Description",
+    "HandledEvents",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "7811c2d1-6973-496d-b95e-130cd2fd5a34",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "647ca2f5-644d-46dd-929d-beb6afd9092a",
+      "Name": "DepartmentIds",
+      "InternalDataTypeName": "System.Int32",
+      "IsCollection": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "c11850f7-c658-40d4-bc07-189aea663b60",
+      "Name": "PeriodBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "2d96935a-108c-415e-80ff-cc10818837c2",
+      "Name": "PeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "cc20e308-7ccb-454a-9e2b-8a56972f0dae",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "11d92047-f73d-436d-9281-42211bb1424d",
+      "Name": "ParamsDescription",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "73066281-86b6-4e1d-8ffa-a7c2b2a7b1e9",
+      "Name": "DetailedReportLink",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "575e6265-dded-4ed6-89a9-a829dbd6b66f",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "5fb1d501-ec0c-4faa-b390-70c2689c2b5f",
+      "Name": "Unwrap",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "654af3f8-dde8-4274-89dc-fd5dbfc97056",
+      "Name": "WithSubstitution",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "0aef639a-a75f-43fb-b985-4558c0a46ab7",
+      "Name": "AssignmentCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "dda75165-3d3a-4fb4-af52-c43262d6c886",
+      "Name": "CompletedInTimeCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "6e757dcd-af61-41a2-85f3-76e6bb97c9d0",
+      "Name": "AffectDisciplineCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "5922d9a5-e9b3-4912-bcc1-b68b352d1c5e",
+      "Name": "SortByAssignmentCompletion",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "f8c5b8b8-a022-4c58-a5cd-413935f98888",
+      "Name": "OverdueAssignmentsCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "82d4c10a-8a54-4d5a-aa6f-1420ae212076",
+      "Name": "WidgetParameter",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "9ad32e47-ef5c-4a57-9a40-d5b6644a2b2a",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "bae21102-bdd5-4dc1-9703-f50a6d535ecb",
+      "Name": "BusinessUnitIds",
+      "InternalDataTypeName": "System.Int32",
+      "IsCollection": true,
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "TableLine",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "RowIndex",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Employee",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "EmployeeName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "IsActiveEmployee",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "JobTitle",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Department",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "AssignmentCompletion",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Int32>"
+        },
+        {
+          "Name": "AssignmentsCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "AffectDisciplineAssignmentsCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "CompletedInTimeAssignmentsCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "OverdueAssignmentsCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "OverdueCompletedAssignmentsCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "OverdueInWorkAssignmentsCount",
+          "TypeFullName": "global::System.Int32"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.EmployeesAssignmentCompletionReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "EmployeeName",
+    "JobTitle",
+    "AssignmentCompletion",
+    "AssignmentsCount",
+    "OverdueAssignmentsCount",
+    "ReportName",
+    "Period",
+    "PeriodTo",
+    "DialogTitle",
+    "ClosedRecord",
+    "Department",
+    "AffectDiscipline",
+    "CompletedInTime",
+    "TitleAssignmentsCount",
+    "TitleCompletedInTimeCount",
+    "TitleAffectDisciplineCount",
+    "TitleOverdueAssignmentsCount"
+  ],
+  "Versions": []
+}

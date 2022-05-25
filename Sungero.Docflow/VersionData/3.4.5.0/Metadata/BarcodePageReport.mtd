@@ -1,0 +1,41 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "96070918-90b8-431a-a72c-b37800fedbea",
+  "Name": "BarcodePageReport",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "AccessRightsMode",
+    "PublicConstants",
+    "PublicStructures",
+    "Parameters",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "Description",
+    "DisplayName",
+    "HandledEvents"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "096c51f2-efb2-4a96-a68c-8cd4f920e2f8",
+      "Name": "barcode",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "4af5c72f-b973-4865-9ef2-8ff8ad65ebb4",
+      "Name": "barcodeName",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

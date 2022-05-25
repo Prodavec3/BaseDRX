@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ReportCommentIsEmpty" xml:space="preserve">
+    <value>Report comment is empty.</value>
+  </data>
+  <data name="JobAccepted" xml:space="preserve">
+    <value>Work accepted.</value>
+  </data>
+  <data name="SendForRework" xml:space="preserve">
+    <value>For Rework.</value>
+  </data>
+  <data name="NewDeadlineLessThenToday" xml:space="preserve">
+    <value>Set a new action item deadline that is greater than or equal to the current date.</value>
+  </data>
+  <data name="ImpossibleSpecifyDeadlineLessActionItemDeadline" xml:space="preserve">
+    <value>The new deadline must be greater than or equal to the planned deadline.</value>
+  </data>
+  <data name="EmptyNewDeadline" xml:space="preserve">
+    <value>Fill in new action item deadline.</value>
+  </data>
+  <data name="NewDeadlineLessThenTodayDescription" xml:space="preserve">
+    <value>New action item deadline is less than the current date.</value>
+  </data>
+  <data name="CompleteParentAssignmentDialogTitle" xml:space="preserve">
+    <value>What to do with parent action item after completing assignment to accept work?</value>
+  </data>
+  <data name="CompleteParentAssignmentDialogCompleteButtonTitle" xml:space="preserve">
+    <value>Complete</value>
+  </data>
+  <data name="CompleteParentAssignmentDialogOpenButtonTitle" xml:space="preserve">
+    <value>Go to Action Item</value>
+  </data>
+  <data name="Forwarded" xml:space="preserve">
+    <value>Forwarded.</value>
+  </data>
+  <data name="AbortAssignmentWhenSupervisorChanged" xml:space="preserve">
+    <value>Supervisor of the action item was changed. Your assignment will be aborted after you close the card.</value>
+  </data>
+  <data name="CompleteParentAssignmentDialogNotCompleteButtonTitle" xml:space="preserve">
+    <value>Do Not Abort</value>
+  </data>
+  <data name="ShowParentAssignmentHyperlinkTitle" xml:space="preserve">
+    <value>Action item card</value>
+  </data>
+  <data name="AbortAssignmentWhenTaskWasAborted" xml:space="preserve">
+    <value>The action item was aborted. Your assignment will be aborted after you close the card.</value>
+  </data>
+</root>

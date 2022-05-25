@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Personal settings</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Personal settings</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Personal settings</value>
+  </data>
+  <data name="Property_Period" xml:space="preserve">
+    <value>Default period</value>
+  </data>
+  <data name="Property_IncomingDocRegister" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="Property_OutgoingDocRegister" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="Property_InnerDocRegister" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="ControlGroup_7b8d6c3aee0b4fa1aca6e7ceb5a1d4e3" xml:space="preserve">
+    <value>Records Management</value>
+  </data>
+  <data name="Property_Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Property_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="Property_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="Enum_Period_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Enum_Period_CurrentMonth" xml:space="preserve">
+    <value>Current month</value>
+  </data>
+  <data name="Enum_Period_CurrentYear" xml:space="preserve">
+    <value>Current year</value>
+  </data>
+  <data name="Property_Supervisor" xml:space="preserve">
+    <value>Supervisor by default</value>
+  </data>
+  <data name="Form_Incoming" xml:space="preserve">
+    <value>Incoming</value>
+  </data>
+  <data name="ControlGroup_dec07ed53ab84fe1b407dff6eb14646d" xml:space="preserve">
+    <value>Incoming Correspondence</value>
+  </data>
+  <data name="Property_IncomingCaseFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Property_OutgoingCaseFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Property_InnerCaseFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Property_IncomingDeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Property_OutgoingDeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Property_InnerDeliveryMethod" xml:space="preserve">
+    <value>Delivery method</value>
+  </data>
+  <data name="Form_Outgoing" xml:space="preserve">
+    <value>Outgoing</value>
+  </data>
+  <data name="Form_Inner" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="ControlGroup_2264f438d3d041f284f7bf4de6a7b1d1" xml:space="preserve">
+    <value>Records Management</value>
+  </data>
+  <data name="ControlGroup_87571f970cb94a14afb7093ea9a0057a" xml:space="preserve">
+    <value>Records Management</value>
+  </data>
+  <data name="ControlGroup_fe39f9ff5c9d46d7b50212456863d9f5" xml:space="preserve">
+    <value>Outgoing documents settings</value>
+  </data>
+  <data name="ControlGroup_f3a5bc418de24e618c79eac99bda1ce5" xml:space="preserve">
+    <value>Internal documents settings</value>
+  </data>
+  <data name="Property_ResolutionAuthor" xml:space="preserve">
+    <value>Resolution author</value>
+  </data>
+  <data name="Property_CalculateAutomaticaly" xml:space="preserve">
+    <value>Calculate automatically</value>
+  </data>
+  <data name="Property_IsAutoCalcResolutionAuthor" xml:space="preserve">
+    <value>Specify the manager I assist as a resolution author. If such manager is missing, specify me</value>
+  </data>
+  <data name="Property_BusinessUnit" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="Property_ContractDocRegister" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="Form_Contract" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="ControlGroup_101b66e24bf640c18773a8a528654ad0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_037e53f5328942aa9d08c8b06182b2b1" xml:space="preserve">
+    <value>Contract settings</value>
+  </data>
+  <data name="Action_ShowHistoryDescription" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Action_ShowHistoryHint" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Property_ShowRegPane" xml:space="preserve">
+    <value>Show registration pane in documents</value>
+  </data>
+  <data name="ControlGroup_7ce3f237929a494c8e0e9c832e039702" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Property_IsAutoCalcSupervisor" xml:space="preserve">
+    <value>Specify my assistant as a supervisor. If the assistant is missing, specify me</value>
+  </data>
+  <data name="Form_8aa9eec0223b435dafea964741cf0852" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Property_FollowUpActionItem" xml:space="preserve">
+    <value>Follow up</value>
+  </data>
+  <data name="Property_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Property_MyContractsNotification" xml:space="preserve">
+    <value>For my contracts</value>
+  </data>
+  <data name="Property_MySubordinatesContractsNotification" xml:space="preserve">
+    <value>For contracts of my subordinates</value>
+  </data>
+  <data name="ControlGroup_71ff3e7568de4cb3bbcf8e19149205f5" xml:space="preserve">
+    <value>Notification of approaching expiration date</value>
+  </data>
+  <data name="ControlGroup_ca9591245c15453e853ecb2fb2f4ee3e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_EnvelopeFormat" xml:space="preserve">
+    <value>Envelope format</value>
+  </data>
+  <data name="Enum_EnvelopeFormat_DL" xml:space="preserve">
+    <value>E65 (DL, euro, 110х220 mm)</value>
+  </data>
+  <data name="Enum_EnvelopeFormat_C4" xml:space="preserve">
+    <value>C4 (A4, 229х324 mm)</value>
+  </data>
+  <data name="Enum_EnvelopeFormat_C5" xml:space="preserve">
+    <value>C5 (A5, 162х229 mm)</value>
+  </data>
+  <data name="Enum_EnvelopeFormat_C65" xml:space="preserve">
+    <value>С65 (А4/3, 114х229 mm)</value>
+  </data>
+  <data name="Property_PrintSender" xml:space="preserve">
+    <value>Print return address</value>
+  </data>
+  <data name="ControlGroup_cde975123276491db4dc6d20b072bce9" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_c5d7265c5f634f0bac053ae653c4db9e" xml:space="preserve">
+    <value>Envelopes Printing</value>
+  </data>
+  <data name="Property_FinArchiveExportPath" xml:space="preserve">
+    <value>Export to folder</value>
+  </data>
+  <data name="Property_ShowNotApproveSign" xml:space="preserve">
+    <value>Show signatures with result "Do not endorse"</value>
+  </data>
+  <data name="Property_CompanyService" xml:space="preserve">
+    <value>Service to check counterparty</value>
+  </data>
+  <data name="Enum_CompanyService_HonestBusiness" xml:space="preserve">
+    <value>Honest business</value>
+  </data>
+  <data name="Enum_CompanyService_ForFairBusiness" xml:space="preserve">
+    <value>For honest business</value>
+  </data>
+  <data name="Enum_CompanyService_KonturFocus" xml:space="preserve">
+    <value>Kontur.Focus</value>
+  </data>
+  <data name="Form_a174724b84bf40a089821017d1a17973" xml:space="preserve">
+    <value>Action Items</value>
+  </data>
+  <data name="ControlGroup_697f230e486c4bbaa420a57cade06796" xml:space="preserve">
+    <value>Create Action Items</value>
+  </data>
+  <data name="ControlGroup_7b2e0cb457f54e89b9e2e593fb47dedf" xml:space="preserve">
+    <value>Notification of approaching contract expiration date</value>
+  </data>
+  <data name="Form_0860647a500242ee8ab0eebcb08b7350" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="ControlGroup_9d713ad139594cb08e6b684400386441" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="ControlGroup_c967e87a983e4d4d89141a41e8cc3a4f" xml:space="preserve">
+    <value>Envelopes Printing</value>
+  </data>
+  <data name="ControlGroup_235fe7a686a243518e168ee14b87b018" xml:space="preserve">
+    <value>Approval Form</value>
+  </data>
+  <data name="ControlGroup_aeed98c06ec14f1985bd495756598f3f" xml:space="preserve">
+    <value>Outgoing Correspondence</value>
+  </data>
+  <data name="ControlGroup_ff16f7a5fd734754934c6b985128dfb3" xml:space="preserve">
+    <value>Internal Documents</value>
+  </data>
+  <data name="ControlGroup_5baf4ce5f5bf43ccb6073f41a51d6e62" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="ControlGroup_e1bc0e704b1241b69602faa8e2b2f1d4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_CompanyService_OwnerOnline" xml:space="preserve">
+    <value>Vladelets.Online</value>
+  </data>
+  <data name="Enum_CompanyService_Sbis" xml:space="preserve">
+    <value>SBIS Everything about companies and their owners</value>
+  </data>
+  <data name="Property_MyPowersOfAttorneyNotification" xml:space="preserve">
+    <value>For my powers of attorney</value>
+  </data>
+  <data name="Property_MySubordinatesPowersOfAttorneyNotification" xml:space="preserve">
+    <value>For powers of attorney of my subordinates</value>
+  </data>
+  <data name="ControlGroup_cc2beee0919e48429a15a394a7cfdb32" xml:space="preserve">
+    <value>Notification of approaching power of attorney expiration date</value>
+  </data>
+  <data name="Property_IsAutoExecLeadingActionItem" xml:space="preserve">
+    <value>Enable autocompletion of my assignment in card of child action item</value>
+  </data>
+</root>

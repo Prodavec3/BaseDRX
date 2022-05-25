@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Folder FormGuid="8dbb6507-6d7b-4ef2-9247-a64a15eb5dbb">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="Columns" iskey="true" value="35">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="VisibleIndex">0</property>
+            <property name="FieldName">T</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Id</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Id</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="FieldName">LifeCycleState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_LifeCycleState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="FieldName">ExecutionState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_ExecutionState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="FieldName">DeliveryMethod.DisplayValue</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Name">Memo_DeliveryMethod</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="FieldName">CaseFile.DisplayValue</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Name">Memo_CaseFile</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="FieldName">PlacedToCaseFileDate</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Name">Memo_PlacedToCaseFileDate</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item8" isnull="true" iskey="true">
+            <property name="FieldName">IsReturnRequired</property>
+            <property name="VisibleIndex">4</property>
+            <property name="Name">Memo_IsReturnRequired</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item9" isnull="true" iskey="true">
+            <property name="FieldName">IsHeldByCounterParty</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">Memo_IsHeldByCounterParty</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item10" isnull="true" iskey="true">
+            <property name="FieldName">DeliveredTo.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_DeliveredTo</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item11" isnull="true" iskey="true">
+            <property name="FieldName">ReturnDeadline</property>
+            <property name="VisibleIndex">7</property>
+            <property name="Name">Memo_ReturnDeadline</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item12" isnull="true" iskey="true">
+            <property name="FieldName">ReturnDate</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_ReturnDate</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item13" isnull="true" iskey="true">
+            <property name="FieldName">RegistrationState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_RegistrationState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item14" isnull="true" iskey="true">
+            <property name="FieldName">InternalApprovalState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_InternalApprovalState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item15" isnull="true" iskey="true">
+            <property name="FieldName">ExternalApprovalState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_ExternalApprovalState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item16" isnull="true" iskey="true">
+            <property name="FieldName">ControlExecutionState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_ControlExecutionState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item17" isnull="true" iskey="true">
+            <property name="FieldName">LocationState</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_LocationState</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item18" isnull="true" iskey="true">
+            <property name="FieldName">ResponsibleForReturnEmployee.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_ResponsibleForReturnEmployee</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item19" isnull="true" iskey="true">
+            <property name="FieldName">ScheduledReturnDateFromCounterparty</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_ScheduledReturnDateFromCounterparty</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item20" isnull="true" iskey="true">
+            <property name="FieldName">Name</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Name</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item21" isnull="true" iskey="true">
+            <property name="FieldName">Author.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Author</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item22" isnull="true" iskey="true">
+            <property name="AllowColumnFiltering">False</property>
+            <property name="FieldName">HasRelations</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Name">Memo_HasRelations</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">4*</property>
+          </property>
+          <property name="Item23" isnull="true" iskey="true">
+            <property name="FieldName">Created</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Created</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item24" isnull="true" iskey="true">
+            <property name="FieldName">Modified</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Modified</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item25" isnull="true" iskey="true">
+            <property name="FieldName">RegistrationNumber</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Name">Memo_RegistrationNumber</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">12*</property>
+          </property>
+          <property name="Item26" isnull="true" iskey="true">
+            <property name="FieldName">RegistrationDate</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Name">Memo_RegistrationDate</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">12*</property>
+          </property>
+          <property name="Item27" isnull="true" iskey="true">
+            <property name="FieldName">DocumentRegister.DisplayValue</property>
+            <property name="VisibleIndex">8</property>
+            <property name="Name">Memo_DocumentRegister</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item28" isnull="true" iskey="true">
+            <property name="FieldName">DocumentKind.DisplayValue</property>
+            <property name="VisibleIndex">7</property>
+            <property name="Name">Memo_DocumentKind</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item29" isnull="true" iskey="true">
+            <property name="FieldName">BusinessUnit.DisplayValue</property>
+            <property name="VisibleIndex">4</property>
+            <property name="Name">Memo_BusinessUnit</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item30" isnull="true" iskey="true">
+            <property name="FieldName">Subject</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Name">Memo_Subject</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">15*</property>
+          </property>
+          <property name="Item31" isnull="true" iskey="true">
+            <property name="FieldName">Note</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Note</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item32" isnull="true" iskey="true">
+            <property name="FieldName">OurSignatory.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_OurSignatory</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item33" isnull="true" iskey="true">
+            <property name="FieldName">Assignee.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Assignee</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item34" isnull="true" iskey="true">
+            <property name="FieldName">Department.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Department</property>
+            <property name="Visible">false</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item35" isnull="true" iskey="true">
+            <property name="FieldName">Adressee.DisplayValue</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Name">Memo_Adressee</property>
+            <property name="Visible">true</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">RegistrationDate</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">RegistrationNumber</property>
+            <property name="SortOrder">Descending</property>
+          </property>
+        </property>
+        <property name="GroupCount">0</property>
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="AllowSorting">true</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">650.4,-170</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowGrouping">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="AutoWidth">true</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="LinesPerRowMode">OneLineMode</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Folder>
+</settings>

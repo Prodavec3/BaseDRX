@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DeliveryConfirmationError" xml:space="preserve">
+    <value>An error occurred while sending the document</value>
+  </data>
+  <data name="DocumentEndorseError" xml:space="preserve">
+    <value>Document not signed</value>
+  </data>
+  <data name="DeliveryConfirmation" xml:space="preserve">
+    <value>Receipt notification</value>
+  </data>
+  <data name="AssociatedApplication" xml:space="preserve">
+    <value>Associated application {0}</value>
+  </data>
+  <data name="AmendmentRequest" xml:space="preserve">
+    <value>Notification of clarification</value>
+  </data>
+  <data name="AmendmentRequestError" xml:space="preserve">
+    <value>An error occurred while rejecting the document</value>
+  </data>
+  <data name="CertificateNotFound" xml:space="preserve">
+    <value>No valid certificates are available to sign documents in exchange service.</value>
+  </data>
+  <data name="FormalizedDocumentName" xml:space="preserve">
+    <value>- {0}</value>
+  </data>
+  <data name="NoticeSubject" xml:space="preserve">
+    <value>Receive: Inc. documents from {0} for {1} (received {2} via {3} exchange service )</value>
+  </data>
+  <data name="NoticeActiveText" xml:space="preserve">
+    <value>Some documents are not supported in the system. Process them via exchange service or in any convenient way.{0}
+{1}</value>
+  </data>
+  <data name="FormalizedDocumentTemplateName" xml:space="preserve">
+    <value>{0} No.{1} from {2}</value>
+  </data>
+  <data name="LinkToPersonalData" xml:space="preserve">
+    <value>Personal account in {0}: {1}</value>
+  </data>
+  <data name="DocumentsList" xml:space="preserve">
+    <value>Documents:
+{0}</value>
+  </data>
+  <data name="OtherDocuments" xml:space="preserve">
+    <value>and others</value>
+  </data>
+  <data name="RejectCertificateNotFoundReadressToResponsible" xml:space="preserve">
+    <value>To reject on documents, you need an exchange certificate. Contact your system administrator or forward the assignment to an employee responsible for external document management.</value>
+  </data>
+  <data name="CannotSendAmendmentNotice" xml:space="preserve">
+    <value>Cannot send the notification of clarification. Try to complete the assignment later.</value>
+  </data>
+  <data name="SendCounterpartySendButton" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendCounterpartySignAndSendButton" xml:space="preserve">
+    <value>Sign and Send</value>
+  </data>
+  <data name="NoExchangeThroughThisService" xml:space="preserve">
+    <value>To return the document, initiate exchange with the counterparty.</value>
+  </data>
+  <data name="SendCounterpartyCertificateNotSelected" xml:space="preserve">
+    <value>Select signatory</value>
+  </data>
+  <data name="SendCounterpartyCanNotSign" xml:space="preserve">
+    <value>To send the document to counterparty, sign it with a certificate registered in the exchange service.</value>
+  </data>
+  <data name="SendCounterpartySignAndSendQuestion" xml:space="preserve">
+    <value>Sign and send the document?</value>
+  </data>
+  <data name="SendToCounterpartyNote" xml:space="preserve">
+    <value>Sent via {0} exchange service</value>
+  </data>
+  <data name="BoxesNotFound" xml:space="preserve">
+    <value>To send the document, set up exchange with the counterparty via an active business unit exchange box.</value>
+  </data>
+  <data name="NeedSetExchangeForCounterparty" xml:space="preserve">
+    <value>To send the document, initiate exchange with the counterparty.</value>
+  </data>
+  <data name="ErrorWhileSendingDocToCounterparty" xml:space="preserve">
+    <value>An error occurred while sending the document to counterparty.</value>
+  </data>
+  <data name="SendCounterpartyAddendaNotSigned" xml:space="preserve">
+    <value>To send the addenda to counterparty, sign them with a certificate registered in the exchange service.</value>
+  </data>
+  <data name="SendCounterpartyWithAddendaWhenDocumentNotSigned" xml:space="preserve">
+    <value>To send the document and its addenda to counterparty, sign them with a certificate registered in the exchange service.</value>
+  </data>
+  <data name="SendCounterpartyDialogTitle" xml:space="preserve">
+    <value>Send Document to Counterparty</value>
+  </data>
+  <data name="SendCounterpartyReceiver" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="SendCounterpartySender" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="SendCounterpartyAddenda" xml:space="preserve">
+    <value>Addenda</value>
+  </data>
+  <data name="SendCounterpartyNeedSign" xml:space="preserve">
+    <value>Require recipient's signature</value>
+  </data>
+  <data name="SendCounterpartyComment" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="SendCounterpartySuccessfully" xml:space="preserve">
+    <value>Document was sent to counterparty</value>
+  </data>
+  <data name="SendCounterpartyResult" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="SendCounterpartyPositiveResult" xml:space="preserve">
+    <value>Signed</value>
+  </data>
+  <data name="SendCounterpartyNegativeResult" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="ErrorWhileSendingSignToCounterparty" xml:space="preserve">
+    <value>An error occurred while sending the signature to counterparty.</value>
+  </data>
+  <data name="SendAnswerCounterpartySuccessfully" xml:space="preserve">
+    <value>Document was returned to counterparty</value>
+  </data>
+  <data name="RejectCertificateNotFound" xml:space="preserve">
+    <value>To send rejection on document, you need an exchange service certificate.</value>
+  </data>
+  <data name="NotificationNoCertificates" xml:space="preserve">
+    <value>To return the document to counterparty, sign it with a certificate registered in the exchange service.</value>
+  </data>
+  <data name="BoxIsNotValid" xml:space="preserve">
+    <value>Cannot return the document to counterparty. Connection to exchange service is required.</value>
+  </data>
+  <data name="AnswerIsAlreadySent" xml:space="preserve">
+    <value>Document does not require a signature, or it has been already returned to counterparty.</value>
+  </data>
+  <data name="SendAnswerToCounterpartyDialogTitle" xml:space="preserve">
+    <value>Return Document to Counterparty</value>
+  </data>
+  <data name="RejectDocumentVersion" xml:space="preserve">
+    <value>Counterparty rejected the document {0} (version {1}).</value>
+  </data>
+  <data name="RejectDocumentBy" xml:space="preserve">
+    <value>Rejected by: {0}</value>
+  </data>
+  <data name="RejectDocumentComment" xml:space="preserve">
+    <value>Counterparty's note: {0}</value>
+  </data>
+  <data name="RejectDocumentSubject" xml:space="preserve">
+    <value>Rejected by counterparty</value>
+  </data>
+  <data name="AssignDocumentVersion" xml:space="preserve">
+    <value>Counterparty signed the document {0} (version {1}) via {2} exchange service.</value>
+  </data>
+  <data name="AssignDocumentSubject" xml:space="preserve">
+    <value>Signed by counterparty</value>
+  </data>
+  <data name="AssignDocumentBy" xml:space="preserve">
+    <value>Signed by: {0}</value>
+  </data>
+  <data name="DocumentHasChangedAfterSendToCounterparty" xml:space="preserve">
+    <value>Document has been changed since it was sent to counterparty. The sent version is recovered into version {0}</value>
+  </data>
+  <data name="SendCounterpartySignAndSendHint" xml:space="preserve">
+    <value>Document will be signed upon sending.</value>
+  </data>
+  <data name="DocumentIsAlreadySentToCounterparty" xml:space="preserve">
+    <value>The latest document version has already been sent to the counterparty.</value>
+  </data>
+  <data name="RevocationNoticeSubjectTerminate" xml:space="preserve">
+    <value>Revoked by counterparty</value>
+  </data>
+  <data name="RevocationNoticeSubjectObsolete" xml:space="preserve">
+    <value>Cancelled by counterparty</value>
+  </data>
+  <data name="RevocationNoticeActiveTextObsolete" xml:space="preserve">
+    <value>Document {0} was cancelled by the counterparty.</value>
+  </data>
+  <data name="RevocationNoticeActiveTextTerminate" xml:space="preserve">
+    <value>Document {0} was revoked by the counterparty.</value>
+  </data>
+  <data name="RevocationNoticeReason" xml:space="preserve">
+    <value>Reason: {0}</value>
+  </data>
+  <data name="RevocationNoticeActiveTextInProcess" xml:space="preserve">
+    <value>Cancellation agreement received for document {0}.</value>
+  </data>
+  <data name="RevocationNoticeSubjectInProcess" xml:space="preserve">
+    <value>Process: Cancellation agreement "{0}"</value>
+  </data>
+  <data name="RevocationNoticeInProcessComment" xml:space="preserve">
+    <value>Process the cancellation agreement in the exchange service or in any way you see fit.
+Personal account at {0}: {1}</value>
+  </data>
+  <data name="GetMessageFailed" xml:space="preserve">
+    <value>An error occurred while getting the message from service.</value>
+  </data>
+  <data name="DocumentOversized" xml:space="preserve">
+    <value>The document size must not exceed 30 MB.</value>
+  </data>
+  <data name="AddendaOversized" xml:space="preserve">
+    <value>Total size of the document and its addenda must not exceed 30 MB.</value>
+  </data>
+  <data name="RevocationNoticeOurSubjectTerminate" xml:space="preserve">
+    <value>Document revoked</value>
+  </data>
+  <data name="RevocationNoticeOurSubjectObsolete" xml:space="preserve">
+    <value>Document cancelled</value>
+  </data>
+  <data name="RevocationNoticeOurActiveTextObsolete" xml:space="preserve">
+    <value>Document {0} was cancelled by our company.</value>
+  </data>
+  <data name="RevocationNoticeOurActiveTextTerminate" xml:space="preserve">
+    <value>Document {0} was revoked by our company.</value>
+  </data>
+  <data name="RejectNoticeSubjectObsolete" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="RejectNoticeActiveTextObsolete" xml:space="preserve">
+    <value>Document {0} was rejected by our company in the exchange service.</value>
+  </data>
+  <data name="SignNoticeSubjectObsolete" xml:space="preserve">
+    <value>Signed: {0} </value>
+  </data>
+  <data name="SignNoticeActiveTextObsolete" xml:space="preserve">
+    <value>Document {0} was signed by our company in the exchange service.</value>
+  </data>
+  <data name="NoticeOurBoundDocument" xml:space="preserve">
+    <value>The documents were related to one another when they were sent via the exchange service.</value>
+  </data>
+  <data name="NoticeCounterpartyBoundDocument" xml:space="preserve">
+    <value>The received documents were related to one another when the counterparty sent them via the exchange service.</value>
+  </data>
+  <data name="SendCounterpartyNotApproved" xml:space="preserve">
+    <value>You can only send documents via exchange service if they are approved within your company.</value>
+  </data>
+  <data name="CannotDeliveryDocumentToCounterparty" xml:space="preserve">
+    <value>Document {0} was not delivered to the counterparty via {1} exchange service as the signature was not validated. </value>
+  </data>
+  <data name="RevocationTrackingNote" xml:space="preserve">
+    <value>Revoked by our company in {0} exchange service</value>
+  </data>
+  <data name="CheckReturnRevocationResult" xml:space="preserve">
+    <value>The document was revoked by our company.</value>
+  </data>
+  <data name="ErrorSendingDocumentToCounterparty" xml:space="preserve">
+    <value>An error occurred while sending document: {0}</value>
+  </data>
+  <data name="DocumentIsSignedByBothSides" xml:space="preserve">
+    <value>Document {0} has been already signed by both parties in the exchange service.</value>
+  </data>
+  <data name="MessageHasDocumentWithReceiptRequire" xml:space="preserve">
+    <value>The sender requested receipt notification for some documents. Confirm receipt of documents by using personal account in exchange service.</value>
+  </data>
+  <data name="ConfirmReceiptSubject" xml:space="preserve">
+    <value>Confirm receipt: Inc. documents from {0} to {1} (received {2} via {3} exchange service)</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents:</value>
+  </data>
+  <data name="SendSignToCounterparty" xml:space="preserve">
+    <value>Signed copy was sent to counterparty via {0} exchange service</value>
+  </data>
+  <data name="SendRejectToCounterparty" xml:space="preserve">
+    <value>Rejection of the document was sent to counterparty via {0} exchange service</value>
+  </data>
+  <data name="BoxesNotConnected" xml:space="preserve">
+    <value>An error occurred while connecting to exchange service. Contact your system administrator.</value>
+  </data>
+  <data name="DocumentComment" xml:space="preserve">
+    <value>Note: {0}</value>
+  </data>
+  <data name="TaxInvoiceRevision" xml:space="preserve">
+    <value>Revision No. {0} dated {1}.</value>
+  </data>
+  <data name="IncomingNotNumeratedDocumentNote" xml:space="preserve">
+    <value>Document date {0}, document number {1} </value>
+  </data>
+  <data name="TaxInvoiceCorrection" xml:space="preserve">
+    <value>Corrective tax invoice No. {0} dated {1}.</value>
+  </data>
+  <data name="GeneratePublicBodyFailed" xml:space="preserve">
+    <value>An error occurred while generating the document body.</value>
+  </data>
+  <data name="ReceiptNeededActiveText" xml:space="preserve">
+    <value>Document package from counterparty {0} received {1} in {2}.</value>
+  </data>
+  <data name="AmendmentNoticeActiveTextObsolete" xml:space="preserve">
+    <value>Our company requested clarification on document {0} in exchange service.</value>
+  </data>
+  <data name="AmendmentNoticeSubjectObsolete" xml:space="preserve">
+    <value>Clarification requested by</value>
+  </data>
+  <data name="NonFormalizedTaxInvoiceSendingError" xml:space="preserve">
+    <value>You can send only formalized tax invoices via exchange service.</value>
+  </data>
+  <data name="TaxInvoice" xml:space="preserve">
+    <value>Tax invoice No. {0} dated {1}.</value>
+  </data>
+  <data name="TaxInvoiceTo" xml:space="preserve">
+    <value>To tax invoice No. {0} dated {1}.</value>
+  </data>
+  <data name="SendCounterpartyRejectResult" xml:space="preserve">
+    <value>Notification of clarification</value>
+  </data>
+  <data name="RejectInvoiceNotice" xml:space="preserve">
+    <value>Notification of clarification: {0}</value>
+  </data>
+  <data name="RejectNotice" xml:space="preserve">
+    <value>Reason for rejection: {0}</value>
+  </data>
+  <data name="AmendedDocumentVersion" xml:space="preserve">
+    <value>Counterparty requested clarification for document {0} (version {1}).</value>
+  </data>
+  <data name="AmendedDocumentBy" xml:space="preserve">
+    <value>Clarification requested by: {0}</value>
+  </data>
+  <data name="AmendedDocumentSubject" xml:space="preserve">
+    <value>Request for clarification received</value>
+  </data>
+  <data name="NoticeCounterpartyBoundDocumentWithLinks" xml:space="preserve">
+    <value>When the counterparty sent documents you received via the exchange service, they were related to the following documents:{0}</value>
+  </data>
+  <data name="NoticeOurBoundDocumentWithLinks" xml:space="preserve">
+    <value>When the documents were sent to the counterparty via the exchange service, they were related to the following documents:{0}</value>
+  </data>
+  <data name="AllAnswersIsAlreadySent" xml:space="preserve">
+    <value>The documents do not require a signature or rejection, or they might already have been returned to the counterparty.</value>
+  </data>
+  <data name="SendCounterpartyAddendaNotRight" xml:space="preserve">
+    <value>You are not authorized to send this document via exchange service {0}.</value>
+  </data>
+  <data name="SendDeliveryConfirmationBoxesNotFound" xml:space="preserve">
+    <value>To work properly, configure a certificate for employee {0} in the settings of exchange service boxes.</value>
+  </data>
+  <data name="ReceiptNeededOutgoingActiveText" xml:space="preserve">
+    <value>Document package for counterparty {0} sent {1} in {2}.</value>
+  </data>
+  <data name="TaskSubjectTemplate" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="RevocationTaskThreadSubjectInProcess" xml:space="preserve">
+    <value>Cancellation agreement received</value>
+  </data>
+  <data name="DocumentSignedThreadSubject" xml:space="preserve">
+    <value>Document signed</value>
+  </data>
+  <data name="NoticeThreadSubject" xml:space="preserve">
+    <value>Documents in unsupported format received</value>
+  </data>
+  <data name="ConfirmReceiptThreadSubject" xml:space="preserve">
+    <value>Request to confirm document receipt received</value>
+  </data>
+  <data name="RevocationTaskThreadSubjectRequestedAnnulment" xml:space="preserve">
+    <value>Revocation requested</value>
+  </data>
+  <data name="RevocationNoticeActiveTextRequestedAnnulment" xml:space="preserve">
+    <value>Revocation agreement to document {0} has been signed and sent by the business unit.</value>
+  </data>
+  <data name="RequestedAnnulmentNoticeSubjectInProcess" xml:space="preserve">
+    <value>Revocation requested: "{0}"</value>
+  </data>
+  <data name="NoneCounterparty" xml:space="preserve">
+    <value>Unknown counterparty</value>
+  </data>
+  <data name="SendSetSignaturesToSbis" xml:space="preserve">
+    <value>To send replies via the SBIS exchange service, sign all documents in the set.</value>
+  </data>
+  <data name="NotFoundOrNoRightsToDocument" xml:space="preserve">
+    <value>A document from set is missing, or you don’t have access rights to it. Contact your system administrator.</value>
+  </data>
+  <data name="NotFoundAuthority" xml:space="preserve">
+    <value>Cannot determine authority.</value>
+  </data>
+  <data name="Ellipsis_CutText" xml:space="preserve">
+    <value>{0}…</value>
+  </data>
+  <data name="AdditionalDocumentSend" xml:space="preserve">
+    <value>The counterparty added the following documents to the main package:</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerAcceptanceStatusRejected" xml:space="preserve">
+    <value>The buyer information contains the "Not accepted" result.</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerAcceptanceStatusAccepted" xml:space="preserve">
+    <value>The buyer information contains the "Accepted" result.</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerAcceptanceStatusPartiallyAccepted" xml:space="preserve">
+    <value>The buyer information contains the "Partially accepted" result.</value>
+  </data>
+  <data name="SendToCounterpartyDialog_BuyerTitleIsEmpty" xml:space="preserve">
+    <value>The buyer information is not filled in.</value>
+  </data>
+  <data name="SendToCounterpartyDialog_AddendaWithBuyerAcceptanceStatusRejected" xml:space="preserve">
+    <value>Addenda with the "Not accepted" result in buyer information are selected.</value>
+  </data>
+  <data name="OneOrMoreDocumentAlreadyProcessing" xml:space="preserve">
+    <value>Some documents do not require signing, or a response on them has already been sent to the counterparty.</value>
+  </data>
+</root>

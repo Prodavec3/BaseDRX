@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection545157b7471d4046acd03b241e618bcf FormGuid="7fdc0378-de56-4ad7-8641-91aae797d1ec">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">525.6,-2.80000000000001</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="IsRowCellMenuEnabled">true</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="Columns" iskey="true" value="2">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">Box</property>
+            <property name="Visible">true</property>
+            <property name="Name">Counterparty_ExchangeBoxes_Box</property>
+            <property name="VisibleIndex">0</property>
+            <property name="ActualWidth">60*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="FieldName">Status</property>
+            <property name="Visible">true</property>
+            <property name="Name">Counterparty_ExchangeBoxes_Status</property>
+            <property name="VisibleIndex">1</property>
+            <property name="ActualWidth">40*</property>
+          </property>
+        </property>
+        <property name="SortInfo" iskey="true" value="0" />
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection545157b7471d4046acd03b241e618bcf>
+</settings>

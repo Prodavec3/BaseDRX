@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Делопроизводственные документы</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Делопроизводство</value>
+  </data>
+  <data name="CoverGroup_Assignments" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="CoverAction_AllIncomingCorrespondence" xml:space="preserve">
+    <value>Входящие документы</value>
+  </data>
+  <data name="CoverAction_CreateAssignmentFromTemplate" xml:space="preserve">
+    <value>Создать поручение из шаблона</value>
+  </data>
+  <data name="CoverAction_OnMyControl" xml:space="preserve">
+    <value>У меня на контроле</value>
+  </data>
+  <data name="CoverAction_OnMyExecution" xml:space="preserve">
+    <value>У меня на исполнении</value>
+  </data>
+  <data name="CoverAction_AllAssinments" xml:space="preserve">
+    <value>Все поручения</value>
+  </data>
+  <data name="CoverAction_RCSearch" xml:space="preserve">
+    <value>Поиск РК</value>
+  </data>
+  <data name="CoverAction_SearchAssignments" xml:space="preserve">
+    <value>Поиск поручений</value>
+  </data>
+  <data name="CoverAction_RegisteredDocuments" xml:space="preserve">
+    <value>Зарегистрированные документы</value>
+  </data>
+  <data name="CoverDescription_RegisteredDocuments" xml:space="preserve">
+    <value>Список всех зарегистрированных документов</value>
+  </data>
+  <data name="CoverAction_ReturnableDocuments" xml:space="preserve">
+    <value>Документы, подлежащие возврату</value>
+  </data>
+  <data name="CoverAction_OverdueAssignments" xml:space="preserve">
+    <value>Просроченные поручения</value>
+  </data>
+  <data name="CoverAction_OutstandingAssignments" xml:space="preserve">
+    <value>Невыполненные поручения</value>
+  </data>
+  <data name="CoverAction_FileList" xml:space="preserve">
+    <value>Номенклатура дел</value>
+  </data>
+  <data name="CoverAction_RCNotFiledToFileLists" xml:space="preserve">
+    <value>Неподшитые в дела РК</value>
+  </data>
+  <data name="CoverDescription_FileList" xml:space="preserve">
+    <value>Открытие справочника номенклатуры дел</value>
+  </data>
+  <data name="CoverDescription_RCNotFiledToFileLists" xml:space="preserve">
+    <value>Список зарегистрированных документов без номенклатуры дел</value>
+  </data>
+  <data name="CoverDescription_ReturnableDocuments" xml:space="preserve">
+    <value>Список всех документов, у которых установлен признак возврата в местоположении</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для автоматизации работы с официальными документами</value>
+  </data>
+  <data name="CoverAction_SearcByDetail" xml:space="preserve">
+    <value>Поиск по реквизитам</value>
+  </data>
+  <data name="CoverAction_SearchByRegistrationNumber" xml:space="preserve">
+    <value>Поиск по рег. номеру</value>
+  </data>
+  <data name="CoverDescription_SearchByRegistrationNumber" xml:space="preserve">
+    <value>Быстрый поиск документов только по рег. номеру</value>
+  </data>
+  <data name="CoverAction_DocumentsWithoutFileLists" xml:space="preserve">
+    <value>Документы, не помещенные в дела</value>
+  </data>
+  <data name="CoverDescription_DocumentsWithoutFileLists" xml:space="preserve">
+    <value>Список зарегистрированных документов, не вложенных в дела</value>
+  </data>
+  <data name="CoverGroup_Initilization" xml:space="preserve">
+    <value>Настройка</value>
+  </data>
+  <data name="CoverAction_ShowIncomingDocumentsLog" xml:space="preserve">
+    <value>Журнал регистрации входящих документов.</value>
+  </data>
+  <data name="sf_e91c8894_eda9_432c_aee3_e54f8a85b057" xml:space="preserve">
+    <value>Входящие документы</value>
+  </data>
+  <data name="sf_2c887659_2ee6_4e71_96af_20c8b85aa139" xml:space="preserve">
+    <value>Внутренние документы</value>
+  </data>
+  <data name="sf_a1151a78_dbb2_487b_9a63_85aa9ed449e8" xml:space="preserve">
+    <value>Исходящие документы</value>
+  </data>
+  <data name="CoverGroup_DocumentLogs" xml:space="preserve">
+    <value>Журналы документов</value>
+  </data>
+  <data name="CoverAction_IncomingDocumentsLog" xml:space="preserve">
+    <value>Журнал регистрации входящих документов</value>
+  </data>
+  <data name="CoverGroup_Jobs" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="CoverAction_TestAction" xml:space="preserve">
+    <value>Тест</value>
+  </data>
+  <data name="sf_bd7ced8f_379e_4cda_9f18_a28193b8d53b" xml:space="preserve">
+    <value>Документы к возврату</value>
+  </data>
+  <data name="FilterPanel_Parametrs_51e7251b733e45d9bab4bfbe40f8c796" xml:space="preserve">
+    <value>Получен из</value>
+  </data>
+  <data name="FilterPanel_RegistrationGroup_694e73f2d52748ef9b34764133ae9cd7" xml:space="preserve">
+    <value>Группа регистрации</value>
+  </data>
+  <data name="FilterPanel_Department_f69581a5799c4469be63b664ced740f3" xml:space="preserve">
+    <value>В подразделении</value>
+  </data>
+  <data name="FilterPanel_Employee_48ba7a7d7d3e4b3c88e3e9b991c1a8b4" xml:space="preserve">
+    <value>У сотрудника</value>
+  </data>
+  <data name="FilterPanel_ReturnPeriod_2666f5cd675f4d76ba997fff94f2741a" xml:space="preserve">
+    <value>Должен быть возвращен</value>
+  </data>
+  <data name="FilterPanel_Flag_f8be518804c04d9b931dfeb0d0f6cf95" xml:space="preserve">
+    <value>Выданы мной</value>
+  </data>
+  <data name="FilterPanel_Period_ddb819a0dc094fe0a3c39c1c2dfd4dc7" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_LastWeek_d549ee8443a64231a2075bd6f86c102f" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_ab95f56f992f4679af4dd6557c7dabac" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_827da7643b2a464482f5824a6f08a17d" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Log_082a5f7402304aaab050f94b62ac078f" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="FilterPanel_Status_4537dd79bc894c3b97ed40812aa91003" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Registered_e7fcfb48e2424b00b56fe9b8a5711269" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_c8e92a1fb9bc4fea9ea667a7ef581e66" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Correspondent_d1db9ffe30ed41979c2bfead75936492" xml:space="preserve">
+    <value>От кого</value>
+  </data>
+  <data name="FilterPanel_Organization_144cf2a9dbc5439bb47b2c216753daf5" xml:space="preserve">
+    <value>Организация</value>
+  </data>
+  <data name="FilterPanel_Person_2ae1405b61dc48b291a52295082f6b34" xml:space="preserve">
+    <value>Физическое лицо</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_d7ee910f4f724b1592aafc46876b04e3" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Log_c9e68bc0629544cd9ede1b4e92fcc0a2" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_d806ac63a71f4a1faee223e08e4df4b0" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Status_dc33a7febb604824a4c7897401b19404" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Correspondent_c97851993a4b409fbf99eccf8bb6651b" xml:space="preserve">
+    <value>Кому</value>
+  </data>
+  <data name="FilterPanel_Period_0efb676ea5824d969dacdf32691b0e5c" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_LastWeek_3b9e8ee3c5ee47c399da83f09f736200" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_a21decaa7c0449d4bef266ab881dc911" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_30471734153a49f4a0e296557a0827fd" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Organization_1099337fbbab456fb43efc8cb99beed6" xml:space="preserve">
+    <value>Организация</value>
+  </data>
+  <data name="FilterPanel_Person_12750cd0d42a4a2c9834ce010e89f985" xml:space="preserve">
+    <value>Физическое лицо</value>
+  </data>
+  <data name="FilterPanel_Registered_1d77e5b204c94b6c81a2c808f127fc49" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_4e85c9002dd8475e83f178e3b33d0793" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Reserved_7057b92ec3a64a1fb7172c4d57474fde" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="FilterPanel_Log_9968476ffa314585afe3c3996f7be771" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_e7aba2850bda48e4806d5747d92c961e" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Status_8e282a3739d74835a50573f7a06375db" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Registered_1fcb3ea054704a83bc54a10322f40105" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_45b781fad44a4bd498e88e69d70e1183" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Reserved_9652941628364b4ca3751d704487ffaf" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="FilterPanel_Flag_8b39e4fadedb47bc959f480b31746c4b" xml:space="preserve">
+    <value>Неделю назад</value>
+  </data>
+  <data name="FilterPanel_LastMonth_bfb6d4056ba1408b87e4aa583dbe4e4d" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_LastWeek_8b39e4fadedb47bc959f480b31746c4b" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_e16ecd21eb4242928369defc66531763" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Period_1d11f5c1abcf4c5590f9abbeb378963b" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_OurCompany_748114917dc74444a6ee53c253b84937" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_Located_c3fd22693f1d498b90a7c0e0b1491ff2" xml:space="preserve">
+    <value>Находится</value>
+  </data>
+  <data name="FilterPanel_EndWeek_824fc05a2ba54828baa68090fbe48479" xml:space="preserve">
+    <value>До конца недели</value>
+  </data>
+  <data name="FilterPanel_Manual_d90b56fa01274c78838e01c63a599160" xml:space="preserve">
+    <value>В период:</value>
+  </data>
+  <data name="FilterPanel_EndMonth_5af752aa725c4be190d2eebbf3488b7c" xml:space="preserve">
+    <value>До конца месяца</value>
+  </data>
+  <data name="FilterPanel_Filelist_1da1454421004908a00ae73fd6eaefc7" xml:space="preserve">
+    <value>Дело</value>
+  </data>
+  <data name="FilterPanel_Status_5df417d1ffab4edba8a17f6a3208c1e3" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="FilterPanel_EndDay_8a02e40155614abfa98c5a832373629e" xml:space="preserve">
+    <value>До конца дня</value>
+  </data>
+  <data name="FilterPanel_AllTime_de8f7e7451534da98d3dec28c6b6c22f" xml:space="preserve">
+    <value>За все время</value>
+  </data>
+  <data name="FilterPanel_Last90Days_baa19d08a4a04316a4d671f3526ff9a8" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_c5c0badcfc2a4da1a2e18daf21e617c0" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_7c329f643020496bafb6d6c2c0dbb49d" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_600735806e2d47119b29813edd1ff42e" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_OverdueGroup_32d0991bf39941deabb38a1870daea56" xml:space="preserve">
+    <value>Просроченные</value>
+  </data>
+  <data name="FilterPanel_Overdue_5b04efdbc23d4e55ba119f296d2c0151" xml:space="preserve">
+    <value>Только просроченные</value>
+  </data>
+  <data name="sf_c21fa108_1570_4155_8a0c_0d04957bc72b" xml:space="preserve">
+    <value>На исполнение</value>
+  </data>
+  <data name="FilterPanel_StateGroup_1c3649251fa84a1196083b41439e535f" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcess_56d3477d60ea46bfb42f0e4169daae82" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_28a4b96d389940dcab1f4d043bf755cf" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_f63464d4fec54381b45019a886f66bfb" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_01848d256f724bba9064b0763566eb43" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_430ad03c84f041538091959419e728d9" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_0f9d211d466c48fba4a5dd070f48fbbc" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="sf_4b30b2be_330e_42bd_833c_7ecf19b32e12" xml:space="preserve">
+    <value>Поручения</value>
+  </data>
+  <data name="FilterPanel_StateGroup_887415fe435344488ce7165331d0dc30" xml:space="preserve">
+    <value>Задачи</value>
+  </data>
+  <data name="FilterPanel_InProcess_83bc0f71da5e49a1a3b4d1585894686e" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_All_ab3f7b8634294f6eb440dd60a16282a8" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_PeriodGroup_521a0b9f3d804ad2bd6b5ab581c83dd5" xml:space="preserve">
+    <value>Отправлены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Days_83b9f57b11e642dbad7c63d0897f62d3" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_406898df952f4ad6b2150720023277c0" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Days_5f837527813f4f598eb136df0e295b99" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
+  <data name="WidgetTitle_ActionItems" xml:space="preserve">
+    <value>Поручения на контроле</value>
+  </data>
+  <data name="WidgetDescription_ActionItems" xml:space="preserve">
+    <value>Сводная информация по поручениям, находящимся у вас на контроле.</value>
+  </data>
+  <data name="WidgetParameter_ActionItems_Substitution" xml:space="preserve">
+    <value>Учитывать замещение</value>
+  </data>
+  <data name="WidgetAction_ActionItems_UnderControl" xml:space="preserve">
+    <value>Проконтролировать</value>
+  </data>
+  <data name="WidgetAction_ActionItems_Overdue" xml:space="preserve">
+    <value>Просроченные</value>
+  </data>
+  <data name="WidgetTitle_ActionItemCompletionGraph" xml:space="preserve">
+    <value>Исполнение поручений в срок</value>
+  </data>
+  <data name="WidgetDescription_ActionItemCompletionGraph" xml:space="preserve">
+    <value>Процент выполненных в срок поручений по месяцам.</value>
+  </data>
+  <data name="WidgetParameter_ActionItemCompletionGraph_Performer" xml:space="preserve">
+    <value>Отображать</value>
+  </data>
+  <data name="Enum_ActionItemCompletionGraph_Performer_Author" xml:space="preserve">
+    <value>Выданные мной поручения</value>
+  </data>
+  <data name="Enum_ActionItemCompletionGraph_Performer_All" xml:space="preserve">
+    <value>Все поручения</value>
+  </data>
+  <data name="AsyncHandler_Description_fb88010446734410a4d221ad2e17656d" xml:space="preserve">
+    <value>Выполнение ведущего задания на исполнение поручения.</value>
+  </data>
+  <data name="AsyncHandler_Description_2fbfc87b31d24c6bac46d6d8cb5b2498" xml:space="preserve">
+    <value>Корректировка составного поручения</value>
+  </data>
+  <data name="AsyncHandler_Description_55ddaa850e924619994b2211545f06b2" xml:space="preserve">
+    <value>Действия по корректировке поручений, которые не связаны с ожиданием разблокировки заданий текущего поручения</value>
+  </data>
+  <data name="AsyncHandler_Description_16102ef88cb046c29281c3234fd704fb" xml:space="preserve">
+    <value>Действия по корректировке поручений, которые связаны с ожиданием разблокировки заданий текущего поручения</value>
+  </data>
+</root>

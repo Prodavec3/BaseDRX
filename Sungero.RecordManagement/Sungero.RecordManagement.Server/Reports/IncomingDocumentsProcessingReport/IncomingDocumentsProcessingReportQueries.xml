@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SourceQuery">
+    <default><![CDATA[select * 
+from Sungero_Reports_IncDocProcessing
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+  <query key="DataQuery">
+    <mssql><![CDATA[insert into {1}
+select
+ doc.Id as docId,
+ doc.RegNumber_Docflow_Sungero as docNumber,
+ doc.RegDate_Docflow_Sungero as docDate,
+ cor.Name as counterparty,
+ doc.Subject_Docflow_Sungero as subject,
+ case doc.ExecutionState_Docflow_Sungero
+   when 'OnReview'      then '{3}'
+   when 'Sending'       then '{4}'
+   when 'WithoutExecut' then '{5}'
+   when 'OnExecution'   then '{6}'
+   when 'Executed'      then '{7}'
+   when 'Aborted'       then '{8}'
+   else ''
+ end as state,
+ (select top 1 his.HistoryDate
+    from Sungero_Content_DocHistory his
+    where his.EntityId = doc.Id
+      and his.Operation = case doc.ExecutionState_Docflow_Sungero
+                            when 'WithoutExecut' then 'ExWithoutExecut'
+                            when 'Executed' then 'ExExecuted'
+                            else ''
+                          end
+    order by his.HistoryDate) as completed,
+ replace(replace(
+ (select assigneesTable.ShortName +
+    case
+      when assigneesTable.viewDate is not null then ' (' + convert(varchar(10), assigneesTable.viewDate, {10}) + ')'
+      else ''
+    end + 'char(10)' as 'data()'
+  from
+    (select
+       tasks.docId,
+       tasks.empId,
+       tasks.ShortName,
+       tasks.viewDate,
+       MIN(tasks.Created) as created
+     from
+       {2} as tasks
+     where tasks.docId = doc.Id
+     group by tasks.docId, tasks.empId, tasks.ShortName, tasks.viewDate
+    ) as assigneesTable
+  order by assigneesTable.created
+  for xml path ('')), 'char(10) ', char(10)), 'char(10)', char(10)) as assignees,
+  replace(replace(
+    (select 
+	     coalesce(persCopy.ShortName, empCopy.Name) + 'char(10)' as 'data()'
+	   from Sungero_Core_Recipient empCopy
+	     left join Sungero_Parties_Counterparty persCopy on
+		     persCopy.Id = empCopy.Person_Company_Sungero
+	   where empCopy.Id in  
+	    (select distinct
+		   isnull(obs.Observer, reviewObs.Observer)
+	     from Sungero_WF_Attachment attCopy
+		     left join Sungero_RecMan_TAIObservers obs on
+		       obs.Task = attCopy.Task
+		     left join Sungero_RecMan_TRevObservers reviewObs on
+		       reviewObs.Task = attCopy.Task
+	     where attCopy.AttachmentId = doc.Id
+		     and not exists
+		       (select * 
+					  from {2} tasksCopy
+					  where tasksCopy.docId = attCopy.AttachmentId
+					    and tasksCopy.empId = isnull(obs.Observer, reviewObs.Observer)))
+   for xml path ('')), 'char(10) ', char(10)), 'char(10)', char(10)) as copy,
+   CAST('' as varchar(1000)) as hyperlink,
+   '{9}' as reportSessionId
+from
+  Sungero_Content_EDoc as doc
+  join {0} adocs on
+    adocs.Id = doc.Id
+  join Sungero_Docflow_DocumentKind dockind on
+    dockind.Id = doc.DocumentKind_Docflow_Sungero
+  left join Sungero_Parties_Counterparty cor on
+    cor.Id = doc.InCorr_Docflow_Sungero
+where
+  dockind.DocumentFlow = 'incoming']]></mssql>
+    <postgres><![CDATA[insert into {1}
+select
+  doc.Id as docId,
+ doc.RegNumber_Docflow_Sungero as docNumber,
+ doc.RegDate_Docflow_Sungero as docDate,
+ cor.Name as counterparty,
+ doc.Subject_Docflow_Sungero as subject,
+ case doc.ExecutionState_Docflow_Sungero
+   when 'OnReview'      then '{3}'
+   when 'Sending'       then '{4}'
+   when 'WithoutExecut' then '{5}'
+   when 'OnExecution'   then '{6}'
+   when 'Executed'      then '{7}'
+   when 'Aborted'       then '{8}'
+   else ''
+ end as state,
+ (select 
+	his.HistoryDate
+  from Sungero_Content_DocHistory his
+  where his.EntityId = doc.Id
+      and his.Operation = case doc.ExecutionState_Docflow_Sungero
+  when 'WithoutExecut' then 'ExWithoutExecut'
+  when 'Executed' then 'ExExecuted'
+  else ''
+  end
+  order by his.HistoryDate
+  limit 1) as completed,
+  (select
+	string_agg(assignees, E'\r\n')
+	from
+	(select
+		assigneesTable.ShortName ||
+		case
+		when assigneesTable.viewDate is not null then ' (' || to_char(assigneesTable.viewDate, '{11}') || ')'
+		else ''
+		end  as assignees 
+	   from
+		(select
+			tasks.docId,
+			tasks.empId,
+			tasks.ShortName,
+			tasks.viewDate,
+			MIN(tasks.Created) as created
+		from
+			{2} as tasks
+		where tasks.docId = doc.Id
+		group by tasks.docId, tasks.empId, tasks.ShortName, tasks.viewDate
+		) as assigneesTable
+		order by assigneesTable.created)  t) as assignees,
+  (select
+    string_agg(shortname, E'\r\n')
+    from
+	(select 
+	   coalesce(persCopy.ShortName, empCopy.Name) as shortname
+     from Sungero_Core_Recipient empCopy
+	   left join Sungero_Parties_Counterparty persCopy on
+         persCopy.Id = empCopy.Person_Company_Sungero
+	 where empCopy.Id in
+      (select distinct
+         coalesce(obs.Observer, reviewObs.Observer)
+       from Sungero_WF_Attachment attCopy
+         left join Sungero_RecMan_TAIObservers obs on
+           obs.Task = attCopy.Task
+         left join Sungero_RecMan_TRevObservers reviewObs on
+           reviewObs.Task = attCopy.Task
+       where attCopy.AttachmentId = doc.Id
+         and not exists
+	       (select * 
+            from {2} tasksCopy
+            where tasksCopy.docId = attCopy.AttachmentId
+              and tasksCopy.empId = coalesce(obs.Observer, reviewObs.Observer)))) as copyTable) as copy,		
+  '' as hyperlink,
+  '{9}' as ReportSessionId
+	  						 
+from
+  Sungero_Content_EDoc as doc
+  join {0} adocs on
+    adocs.Id = doc.Id  
+  join Sungero_Docflow_DocumentKind dockind on
+    dockind.Id = doc.DocumentKind_Docflow_Sungero
+  left join Sungero_Parties_Counterparty cor on
+    cor.Id = doc.InCorr_Docflow_Sungero
+where
+  dockind.DocumentFlow = 'incoming'
+ order by doc.id ;]]></postgres>
+  </query>
+  <query key="CreateHyperlinksTableQuery">
+    <mssql><![CDATA[create table {0}
+  (DocId int NOT NULL,
+   Hyperlink nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (DocId int NOT NULL,
+   Hyperlink citext NOT NULL)]]></postgres>
+  </query>
+  <query key="DocIdSelectQuery">
+    <default><![CDATA[select docId from {0} where ReportSessionId = '{1}']]></default>
+  </query>
+  <query key="UpdateHyperlinksQuery">
+    <mssql><![CDATA[update {0}
+set {0}.hyperlink = hyperlinks.Hyperlink
+from {1} hyperlinks
+where {0}.docId = hyperlinks.DocId
+  and {0}.ReportSessionId = '{2}']]></mssql>
+    <postgres><![CDATA[update {0} docs
+set hyperlink = hyperlinks.Hyperlink
+from {1} hyperlinks
+where docs.docId = hyperlinks.DocId
+  and ReportSessionId = '{2}']]></postgres>
+  </query>
+  <query key="CreateIncomingDocumentsProcessingReportSourceTable">
+    <mssql><![CDATA[create table {0}
+([docId] int NOT NULL,
+ [docNumber] nvarchar(max),
+ [docDate] datetime,
+ [counterparty] nvarchar(max) NOT NULL,
+ [subject] nvarchar(max) NOT NULL,
+ [state] nvarchar(max) NOT NULL,
+ [completed] nvarchar(max),
+ [assignees] nvarchar(max),
+ [copy] nvarchar(max),
+ [hyperlink] nvarchar(max),
+ [ReportSessionId] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+(docId int NOT NULL,
+ docNumber citext,
+ docDate timestamp,
+ counterparty citext NOT NULL,
+ subject citext NOT NULL,
+ state citext NOT NULL,
+ completed citext,
+ assignees citext,
+ copy citext,
+ hyperlink citext,
+ ReportSessionId citext NOT NULL)]]></postgres>
+  </query>
+  <query key="ViewDataQuery">
+    <default><![CDATA[select AssignmentId,
+       ViewDate
+  from {0} 
+  where viewDate is not null]]></default>
+  </query>
+  <query key="TasksQuery">
+    <mssql><![CDATA[select assignments.Id as assignmentId, 
+  att.AttachmentId as docId,
+  emp.Id as empId,
+  pers.ShortName,
+  assignments.Created,
+  (select top 1 his.HistoryDate
+   from Sungero_Content_DocHistory his
+   where his.EntityId = att.AttachmentId
+     and emp.Id = his.[User]
+     and (his.Operation in ('CreateVersion', 'ReadVerBody', 'UpdateVerBody')
+          or not exists(select top 1 * 
+                        from Sungero_Content_EDocVersion ver
+                        where ver.EDoc = his.EntityId)
+             and his.Action in ('Create', 'Read', 'Update'))
+   order by his.HistoryDate)
+   as viewDate
+into {1}
+from Sungero_WF_Attachment att
+  join {0} adocs on
+    adocs.Id = att.AttachmentId
+  left join Sungero_WF_Assignment assignments on
+    assignments.Task = att.Task
+    and assignments.Discriminator in ('d238ef51-607e-46a5-b86a-ede4482f7f19', 'f44faafc-cd55-4c5b-b16d-93b6fc966ffb',
+                                      '69ac657a-0e74-46be-acba-f6bbbbd2bc73', '018e582e-5b0e-4e4f-af57-be1e0a468efa',
+                                      '7cca016a-80f0-4562-9042-57bb748d5b30', 'e2dd5bf3-54c8-4846-b158-9c42d09fbc33')
+  left join Sungero_Core_Recipient emp on
+    assignments.Performer = emp.Id
+  left join Sungero_Parties_Counterparty pers on
+    pers.Id = emp.Person_Company_Sungero]]></mssql>
+    <postgres><![CDATA[select assignments.Id as assignmentId,
+  att.AttachmentId as docId,
+  emp.Id as empId,
+  pers.ShortName,
+  assignments.Created,
+  (select 
+			his.HistoryDate
+		from Sungero_Content_DocHistory his
+		where his.EntityId = att.AttachmentId
+			and emp.Id = his.User
+			and (his.Operation in ('CreateVersion', 'ReadVerBody', 'UpdateVerBody')
+			or not exists
+				(
+					select * 
+					from Sungero_Content_EDocVersion ver
+					where ver.EDoc = his.EntityId
+					limit 1
+				)
+			and his.Action in ('Create', 'Read', 'Update'))
+		order by his.HistoryDate
+		limit 1) as viewDate
+into {1}
+from Sungero_WF_Attachment att
+  join {0} adocs on
+    adocs.Id = att.AttachmentId
+  left join Sungero_WF_Assignment assignments on
+    assignments.Task = att.Task
+    and assignments.Discriminator in ('d238ef51-607e-46a5-b86a-ede4482f7f19', 'f44faafc-cd55-4c5b-b16d-93b6fc966ffb',
+                                      '69ac657a-0e74-46be-acba-f6bbbbd2bc73', '018e582e-5b0e-4e4f-af57-be1e0a468efa',
+                                      '7cca016a-80f0-4562-9042-57bb748d5b30', 'e2dd5bf3-54c8-4846-b158-9c42d09fbc33')
+  left join Sungero_Core_Recipient emp on
+    assignments.Performer = emp.Id
+  left join Sungero_Parties_Counterparty pers on
+    pers.Id = emp.Person_Company_Sungero
+ order by docId;]]></postgres>
+  </query>
+  <query key="UpdateViewDateQuery">
+    <mssql><![CDATA[update {0}
+set {0}.ViewDate = tasks.viewDate
+from {1} tasks
+where {0}.AssignmentId = tasks.assignmentId]]></mssql>
+    <postgres><![CDATA[update {0} tasks
+set ViewDate = dates.viewDate
+from {1} dates
+where tasks.AssignmentId = dates.assignmentId]]></postgres>
+  </query>
+  <query key="CreateViewDateQuery">
+    <mssql><![CDATA[create table {0}
+  (AssignmentId int NOT NULL,
+   ViewDate datetime NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (AssignmentId int NOT NULL,
+   ViewDate timestamp NULL)]]></postgres>
+  </query>
+</queries>

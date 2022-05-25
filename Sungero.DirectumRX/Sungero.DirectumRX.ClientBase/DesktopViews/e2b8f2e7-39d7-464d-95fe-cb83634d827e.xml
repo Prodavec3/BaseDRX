@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Desktop>
+    <Widgets>
+      <Widget Column="0" Row="0" ActionListGuid="5cbed7ba-99c0-47f4-9ceb-b8046d8b4073" />
+      <Widget Column="1" Row="0" ActionListGuid="b85ffba9-6c17-4919-8894-4f625be25812" />
+      <Widget Column="0" Row="4" ActionListGuid="790204fb-6926-4d0f-a470-0f9721b156a9" />
+      <Widget Column="1" Row="4" ActionListGuid="500c642e-c168-4d24-94a2-54a02b5adccd" />
+      <Widget Column="2" Row="0" ActionListGuid="b6b2ec29-09c7-426e-96c3-852b2b5c4180" />
+    </Widgets>
+  </Desktop>
+</settings>

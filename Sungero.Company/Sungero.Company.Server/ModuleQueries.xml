@@ -1,0 +1,817 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateProcedureGetHeadRecipientsByEmployee">
+    <mssql><![CDATA[if exists (select * from sys.objects WHERE type = 'P' AND name = '{0}')
+  drop procedure {0};
+exec('create procedure {0}
+  @currentEmployee int
+
+as
+begin
+  set nocount on;
+    declare @allMyRecipients table (Id int primary key clustered)
+    
+    -- Получить список подразделений сотрудника.
+    insert into @allMyRecipients (Id) 
+    select distinct r.Id
+      from Sungero_Core_Recipient r
+      join Sungero_Core_RecipientLink l
+        on r.Id = l.Recipient
+      where r.Status = ''Active''
+        and l.Member = @currentEmployee 
+     
+	 insert into @allMyRecipients values (@currentEmployee)
+	    
+    -- Добавить подразделения, в которых сотрудник руководитель.
+    insert @allMyRecipients
+    select r.Id
+        from Sungero_Core_Recipient r
+        where r.Manager_Company_Sungero = @currentEmployee
+        and not exists (select 1 from @allMyRecipients dd where dd.Id = r.Id)
+    
+	declare @allMyRecipientsCount int = 0
+    -- Поднять вверх по иерархии до головных подразделений. 
+    while ((select count(1) from @allMyRecipients) <> @allMyRecipientsCount)
+    begin
+	    set @allMyRecipientsCount = (select count(1) from @allMyRecipients)
+
+	    -- Вверх по RecipientLink
+        insert @allMyRecipients
+        select distinct l.Recipient
+          from Sungero_Core_RecipientLink l
+          join @allMyRecipients d
+            on d.Id= l.Member
+          where not exists (select 1 from @allMyRecipients dd where dd.Id = l.Recipient)
+
+		-- Вверх по Parent
+        insert @allMyRecipients
+        select distinct r.Parent
+          from Sungero_Core_Recipient r
+          join @allMyRecipients d
+            on d.Id= r.Id
+          where r.Parent is not null
+            and not exists (select 1 from @allMyRecipients dd where dd.Id = r.Parent)
+
+		-- Вверх по HeadOffice (головные подразделение)
+        insert @allMyRecipients
+        select distinct r.HeadOffice_Company_Sungero
+          from Sungero_Core_Recipient r
+          join @allMyRecipients d
+            on d.Id= r.Id
+          where r.HeadOffice_Company_Sungero is not null
+            and not exists (select 1 from @allMyRecipients dd where dd.Id = r.HeadOffice_Company_Sungero)
+
+		-- Вверх по НОР
+        insert @allMyRecipients
+        select distinct r.BusinessUnit_Company_Sungero
+          from Sungero_Core_Recipient r
+          join @allMyRecipients d
+            on d.Id= r.Id
+          where r.BusinessUnit_Company_Sungero is not null
+            and not exists (select 1 from @allMyRecipients dd where dd.Id = r.BusinessUnit_Company_Sungero)
+
+    end
+    
+    -- Добавить НОРы, в которых сотрудник руководитель.
+    insert into @allMyRecipients
+    select r.Id
+      from Sungero_Core_Recipient r
+      where r.CEO_Company_Sungero = @currentEmployee
+        and not exists (select 1 from @allMyRecipients bb where bb.Id = r.Id)
+
+    -- Добавить Всех пользователей
+	insert into @allMyRecipients 
+	select top 1 Id from Sungero_Core_Recipient
+	 where Sid = ''440103EA-A766-47A8-98AD-5260CA32DE46''
+
+  select Id from @allMyRecipients
+end')]]></mssql>
+    <postgres><![CDATA[create or replace function public.{0}(
+    currentemployee integer)
+    returns setof integer 
+    language 'plpgsql'
+as $body$
+declare 
+   allMyRecipients integer array;
+	 allMyRecipientsCount int = 0;
+begin    
+    -- Получить список подразделений сотрудника.
+    allMyRecipients := array( 
+    select distinct r.Id
+      from Sungero_Core_Recipient r
+      join Sungero_Core_RecipientLink l
+        on r.Id = l.Recipient
+      where r.Status = 'Active'
+        and l.Member = currentEmployee);
+     
+	 allMyRecipients := array_cat(allMyRecipients, array[currentEmployee]);
+	    
+    -- Добавить подразделения, в которых сотрудник руководитель.
+    allMyRecipients := array_cat(allMyRecipients, array(
+    select r.Id
+        from Sungero_Core_Recipient r
+        where r.Manager_Company_Sungero = currentEmployee
+        and not exists (select 1 from unnest(allMyRecipients) dd where dd = r.Id)));
+    
+	
+    -- Поднять вверх по иерархии до головных подразделений. 
+    while ((select count(1) from unnest(allMyRecipients)) <> allMyRecipientsCount) loop
+    begin
+	    allMyRecipientsCount = (select count(1) from unnest(allMyRecipients));
+
+	    -- Вверх по RecipientLink
+        allMyRecipients := array_cat(allMyRecipients, array(
+        select distinct l.Recipient
+          from Sungero_Core_RecipientLink l
+          join unnest(allMyRecipients) d
+            on d = l.Member
+          where not exists (select 1 from unnest(allMyRecipients) dd where dd = l.Recipient)));
+
+		-- Вверх по Parent
+        allMyRecipients := array_cat(allMyRecipients, array(
+        select distinct r.Parent
+          from Sungero_Core_Recipient r
+          join unnest(allMyRecipients) d
+            on d= r.Id
+          where r.Parent is not null
+            and not exists (select 1 from unnest(allMyRecipients) dd where dd = r.Parent)));
+
+		-- Вверх по HeadOffice (головные подразделение)
+        allMyRecipients := array_cat(allMyRecipients, array(
+        select distinct r.HeadOffice_Company_Sungero
+          from Sungero_Core_Recipient r
+          join unnest(allMyRecipients) d
+            on d= r.Id
+          where r.HeadOffice_Company_Sungero is not null
+            and not exists (select 1 from unnest(allMyRecipients) dd where dd = r.HeadOffice_Company_Sungero)));
+
+		-- Вверх по НОР
+        allMyRecipients := array_cat(allMyRecipients, array(
+        select distinct r.BusinessUnit_Company_Sungero
+          from Sungero_Core_Recipient r
+          join unnest(allMyRecipients) d
+            on d= r.Id
+          where r.BusinessUnit_Company_Sungero is not null
+            and not exists (select 1 from unnest(allMyRecipients) dd where dd = r.BusinessUnit_Company_Sungero)));
+
+    end;
+	end loop;
+    
+    -- Добавить НОРы, в которых сотрудник руководитель.
+    allMyRecipients := array_cat(allMyRecipients, array(
+    select r.Id
+      from Sungero_Core_Recipient r
+      where r.CEO_Company_Sungero = currentEmployee
+        and not exists (select 1 from unnest(allMyRecipients) bb where bb = r.Id)));
+
+    -- Добавить Всех пользователей
+	allMyRecipients := array_cat(allMyRecipients, array(
+	select Id from Sungero_Core_Recipient
+	 where Sid = '440103EA-A766-47A8-98AD-5260CA32DE46' limit 1));
+
+  return query select * from unnest(allMyRecipients);
+end;
+$body$;]]></postgres>
+  </query>
+  <query key="CreateProcedureGetAllVisibleRecipients">
+    <mssql><![CDATA[if exists (select * from sys.objects WHERE type = 'P' AND name = '{0}')
+  drop procedure {0};
+exec('
+create procedure {0}
+  @recipientId int,
+  @resultRecipientsTypeGuid uniqueidentifier
+as
+begin
+  set nocount on
+  
+  create table #headRecipients (Id int primary key clustered)
+  create table #ruleRecipients (Id int, ruleId int, primary key clustered (Id, ruleId))
+  create table #EmployeeRules (Id int, ruleId int)
+  create table #ExcudeEmployeeRules (Id int, ruleId int)
+  create table #rules (Id int primary key clustered)
+  create table #ruleExcludeRecipients (Id int, ruleId int, primary key clustered (Id, ruleId))
+  
+  declare @ruleRecipientsCount int = 0
+  declare @ruleExcludeRecipientsCount int = 0
+  create table  #rulestepRecipients (Id int, ruleId int)
+  
+  -- Разворачиваем вышестоящие группы.
+  insert into #headRecipients (Id) 
+    exec Sungero_Company_GetHeadRecipientsByEmployee @recipientId
+  
+  -- Добавляем моноправило с ид = 0.
+  insert into #ruleRecipients
+    select distinct h.Id, 0
+      from #headRecipients h
+      join Sungero_Core_Recipient r
+        on r.Id = h.Id
+      where r.Discriminator in (''EFF95720-181F-4F7D-892D-DEC034C7B2AB'', ''61B1C19F-26E2-49A5-B3D3-0D3618151E12'')
+  
+  -- Исключить "невидимок".
+  insert into #ruleExcludeRecipients
+    select distinct e.Recipient, 0 
+      from Sungero_Company_VSHidden e
+      where e.Recipient != @recipientId
+    order by e.Recipient 
+  
+  insert into #rules
+    select distinct vr.Id
+      from Sungero_Company_VisibRule vr
+      join Sungero_Company_RuleRecipients r
+        on r.VisibRule = vr.Id
+      join #headRecipients h
+        on h.Id = r.Recipient
+      where vr.Status = ''Active''
+  
+  -- Подгружаем правила видимости.
+  insert into #ruleRecipients
+    select distinct v.Recipient, v.VisibRule 
+      from Sungero_Company_RuleVisblMembs v
+      join #rules r
+        on r.Id = v.VisibRule
+    order by v.Recipient, v.VisibRule
+  
+  -- Подгружаем исключения из правил видимости.
+  insert into #ruleExcludeRecipients
+    select distinct e.Recipient, e.VisibRule 
+      from Sungero_Company_RuleExcldMembs e
+      join #rules r
+        on r.Id = e.VisibRule
+    order by e.Recipient, e.VisibRule  
+  
+  -- В цикле разворачиваем до конечных групп.
+  while (select count(1) from #ruleRecipients) <> @ruleRecipientsCount
+  begin
+    set @ruleRecipientsCount = (select count(1) from #ruleRecipients)
+  
+    -- RecipientLinks.
+    insert into #rulestepRecipients
+      select l.Member, rr.ruleId
+        from Sungero_Core_RecipientLink l
+        join #ruleRecipients rr
+          on l.Recipient = rr.Id
+        join Sungero_Core_Recipient r
+          on l.Member = r.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+       
+    -- Parent.  
+    insert into #rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join #ruleRecipients rr
+          on r.Parent = rr.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+    
+    -- НОР. 
+    insert into #rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join #ruleRecipients rr
+          on r.BusinessUnit_Company_Sungero = rr.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+  
+    -- Подчиненные подразделения. 
+    insert into #rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join #ruleRecipients rr
+          on r.HeadOffice_Company_Sungero = rr.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+    
+    insert into #ruleRecipients
+      select distinct Id, ruleId
+        from #rulestepRecipients rs
+        where not exists (select 1 from #ruleRecipients rr where rr.Id = rs.Id and rr.ruleId = rs.ruleId)
+  
+    delete from #rulestepRecipients
+  end
+  
+  
+  while (select count(1) from #ruleExcludeRecipients) <> @ruleExcludeRecipientsCount
+  begin
+    set @ruleExcludeRecipientsCount = (select count(1) from #ruleExcludeRecipients)
+  
+    -- RecipientLinks.
+    insert into #rulestepRecipients
+      select l.Member, rr.ruleId
+        from Sungero_Core_RecipientLink l
+        join #ruleExcludeRecipients rr
+          on l.Recipient = rr.Id
+        join Sungero_Core_Recipient r
+         on l.Member = r.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+       
+    -- Parent.  
+    insert into #rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join #ruleExcludeRecipients rr
+          on r.Parent = rr.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+    
+    -- НОР.
+    insert into #rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join #ruleExcludeRecipients rr
+          on r.BusinessUnit_Company_Sungero = rr.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+  
+    -- Подчиненные подразделения.
+    insert into #rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join #ruleExcludeRecipients rr
+          on r.HeadOffice_Company_Sungero = rr.Id
+        where r.Discriminator <> ''B7905516-2BE5-4931-961C-CB38D5677565''
+    
+    insert into #ruleExcludeRecipients
+      select distinct Id, ruleId
+        from #rulestepRecipients rs
+        where not exists (select 1 from #ruleExcludeRecipients rr where rr.Id = rs.Id and rr.ruleId = rs.ruleId)
+  
+    delete from #rulestepRecipients
+  end
+  
+  -- Если запрашивали только НОР или подразделения, то разворачивать не нужно.
+  if (@resultRecipientsTypeGuid = ''EFF95720-181F-4F7D-892D-DEC034C7B2AB'' or @resultRecipientsTypeGuid = ''61B1C19F-26E2-49A5-B3D3-0D3618151E12'')
+  begin
+    select distinct rr.Id
+      from #ruleRecipients rr
+      join Sungero_Core_Recipient r
+        on r.Id = rr.Id
+      where r.Discriminator = @resultRecipientsTypeGuid
+        and not exists (select 1 from #ruleExcludeRecipients e where e.Id = rr.Id and e.ruleId = rr.RuleId)
+  end
+  else
+  begin  
+    declare @AllRecipientsId int = (select t.Id from Sungero_Core_Recipient t where t.Sid = ''440103EA-A766-47A8-98AD-5260CA32DE46'') 
+  
+    insert into #EmployeeRules
+      select l.Member as Id, rr.RuleId as RuleId
+        from Sungero_Core_RecipientLink l
+        join #ruleRecipients rr
+          on rr.Id = l.Recipient
+        join Sungero_Core_Recipient r
+          on r.Id = l.Member
+        where r.Discriminator = @resultRecipientsTypeGuid
+  
+    insert into #EmployeeRules
+      select rr.Id as Id, rr.RuleId as RuleId
+        from #ruleRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Discriminator = @resultRecipientsTypeGuid
+    
+    insert into #EmployeeRules
+      select r.Manager_Company_Sungero as Id, rr.RuleId as RuleId
+        from #ruleRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Manager_Company_Sungero is not null
+      
+    insert into #EmployeeRules
+      select r.CEO_Company_Sungero as Id, rr.RuleId as RuleId
+        from #ruleRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.CEO_Company_Sungero is not null
+      
+    if exists (select 1 from #ruleRecipients where Id = @AllRecipientsId)
+    begin
+      insert into #EmployeeRules  
+        select r.Id as Id, rr.RuleId as RuleId
+          from #ruleRecipients rr
+          join Sungero_Core_Recipient r
+            on rr.Id = @AllRecipientsId
+          where r.Discriminator = ''B7905516-2BE5-4931-961C-CB38D5677565''
+    end
+  
+    insert into #ExcudeEmployeeRules
+      select l.Member as Id, rr.RuleId as RuleId
+        from Sungero_Core_RecipientLink l
+        join #ruleExcludeRecipients rr
+          on rr.Id = l.Recipient
+        join Sungero_Core_Recipient r
+          on r.Id = l.Member
+        where r.Discriminator = @resultRecipientsTypeGuid
+    
+    insert into #ExcudeEmployeeRules
+      select rr.Id as Id, rr.RuleId as RuleId
+        from #ruleExcludeRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Discriminator = @resultRecipientsTypeGuid
+     
+    insert into #ExcudeEmployeeRules
+      select r.Manager_Company_Sungero as Id, rr.RuleId as RuleId
+        from #ruleExcludeRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Manager_Company_Sungero is not null
+          
+    insert into #ExcudeEmployeeRules
+      select r.CEO_Company_Sungero as Id, rr.RuleId as RuleId
+        from #ruleExcludeRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.CEO_Company_Sungero is not null
+     
+    if exists (select 1 from #ruleExcludeRecipients where Id = @AllRecipientsId)
+    begin
+      insert into #ExcudeEmployeeRules
+        select r.Id as Id, rr.RuleId as RuleId
+          from #ruleExcludeRecipients rr
+          join Sungero_Core_Recipient r
+            on rr.Id  = @AllRecipientsId
+          where r.Discriminator = ''B7905516-2BE5-4931-961C-CB38D5677565''
+    end
+  
+    select distinct em.Id
+      from #EmployeeRules em
+      where not exists (select 1 from #ExcudeEmployeeRules ex where ex.Id = em.Id and ex.RuleId = em.RuleId)
+       
+  end
+
+end')]]></mssql>
+    <postgres><![CDATA[create or replace function public.{0}(
+	  recipientid integer,
+	  resultrecipientstypeguid uuid)
+    returns setof integer 
+    language 'plpgsql'
+as $body$
+declare 
+  ruleRecipientsCount integer = 0;
+  ruleExcludeRecipientsCount integer = 0;
+  AllRecipientsId integer; 
+begin	
+  create temp table headRecipients (Id int primary key);
+  create temp table ruleRecipients (Id int, ruleId int, primary key (Id, ruleId));
+  create temp table EmployeeRules (Id int, ruleId int);
+  create temp table ExcudeEmployeeRules (Id int, ruleId int);
+  create temp table rules (Id int primary key);
+  create temp table ruleExcludeRecipients (Id int, ruleId int, primary key (Id, ruleId)); 
+  create temp table rulestepRecipients (Id int, ruleId int);
+  
+  -- Разворачиваем вышестоящие группы.
+  insert into headRecipients
+    select * from {1}(recipientid);
+  
+  -- Добавляем моноправило с ид = 0.
+  insert into ruleRecipients
+    select distinct h.Id, 0
+      from headRecipients h
+      join Sungero_Core_Recipient r
+        on r.Id = h.Id
+      where r.Discriminator in ('EFF95720-181F-4F7D-892D-DEC034C7B2AB', '61B1C19F-26E2-49A5-B3D3-0D3618151E12');
+  
+  -- Исключить "невидимок".
+  insert into ruleExcludeRecipients
+    select distinct e.Recipient, 0 
+      from Sungero_Company_VSHidden e
+      where e.Recipient != recipientid
+    order by e.Recipient;
+  
+  insert into rules
+    select distinct vr.Id
+      from Sungero_Company_VisibRule vr
+      join Sungero_Company_RuleRecipients r
+        on r.VisibRule = vr.Id
+      join headRecipients h
+        on h.Id = r.Recipient
+      where vr.Status = 'Active';
+  
+  -- Подгружаем правила видимости.
+  insert into ruleRecipients
+    select distinct v.Recipient, v.VisibRule 
+      from Sungero_Company_RuleVisblMembs v
+      join rules r
+        on r.Id = v.VisibRule
+    order by v.Recipient, v.VisibRule;
+  
+  -- Подгружаем исключения из правил видимости.
+  insert into ruleExcludeRecipients
+    select distinct e.Recipient, e.VisibRule 
+      from Sungero_Company_RuleExcldMembs e
+      join rules r
+        on r.Id = e.VisibRule
+    order by e.Recipient, e.VisibRule;  
+  
+  -- В цикле разворачиваем до конечных групп.
+  while ((select count(1) from ruleRecipients) <> ruleRecipientsCount) loop
+  begin
+    ruleRecipientsCount = (select count(1) from ruleRecipients);
+  
+    -- RecipientLinks.
+    insert into rulestepRecipients
+      select l.Member, rr.ruleId
+        from Sungero_Core_RecipientLink l
+        join ruleRecipients rr
+          on l.Recipient = rr.Id
+        join Sungero_Core_Recipient r
+          on l.Member = r.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+       
+    -- Parent.  
+    insert into rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join ruleRecipients rr
+          on r.Parent = rr.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+    
+    -- НОР. 
+    insert into rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join ruleRecipients rr
+          on r.BusinessUnit_Company_Sungero = rr.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+  
+    -- Подчиненные подразделения. 
+    insert into rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join ruleRecipients rr
+          on r.HeadOffice_Company_Sungero = rr.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+    
+    insert into ruleRecipients
+      select distinct Id, ruleId
+        from rulestepRecipients rs
+        where not exists (select 1 from ruleRecipients rr where rr.Id = rs.Id and rr.ruleId = rs.ruleId);
+  
+    delete from rulestepRecipients;
+  end;
+  end loop;
+  
+  
+  while ((select count(1) from ruleExcludeRecipients) <> ruleExcludeRecipientsCount) loop
+    ruleExcludeRecipientsCount = (select count(1) from ruleExcludeRecipients);
+  
+    -- RecipientLinks.
+    insert into rulestepRecipients
+      select l.Member, rr.ruleId
+        from Sungero_Core_RecipientLink l
+        join ruleExcludeRecipients rr
+          on l.Recipient = rr.Id
+        join Sungero_Core_Recipient r
+         on l.Member = r.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+       
+    -- Parent.  
+    insert into rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join ruleExcludeRecipients rr
+          on r.Parent = rr.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+    
+    -- НОР.
+    insert into rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join ruleExcludeRecipients rr
+          on r.BusinessUnit_Company_Sungero = rr.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+  
+    -- Подчиненные подразделения.
+    insert into rulestepRecipients
+      select r.Id, rr.ruleId
+        from Sungero_Core_Recipient r
+        join ruleExcludeRecipients rr
+          on r.HeadOffice_Company_Sungero = rr.Id
+        where r.Discriminator <> 'B7905516-2BE5-4931-961C-CB38D5677565';
+    
+    insert into ruleExcludeRecipients
+      select distinct Id, ruleId
+        from rulestepRecipients rs
+        where not exists (select 1 from ruleExcludeRecipients rr where rr.Id = rs.Id and rr.ruleId = rs.ruleId);
+  
+    delete from rulestepRecipients;
+  end loop;
+  
+  -- Если запрашивали только НОР или подразделения, то разворачивать не нужно.
+  if (resultRecipientsTypeGuid = 'EFF95720-181F-4F7D-892D-DEC034C7B2AB' or resultRecipientsTypeGuid = '61B1C19F-26E2-49A5-B3D3-0D3618151E12')
+  then
+    return query select distinct rr.Id
+      from ruleRecipients rr
+      join Sungero_Core_Recipient r
+        on r.Id = rr.Id
+      where r.Discriminator = resultRecipientsTypeGuid
+        and not exists (select 1 from ruleExcludeRecipients e where e.Id = rr.Id and e.ruleId = rr.RuleId);
+  else
+  begin  
+    AllRecipientsId = (select t.Id from Sungero_Core_Recipient t where t.Sid = '440103EA-A766-47A8-98AD-5260CA32DE46');
+  
+    insert into EmployeeRules
+      select l.Member as Id, rr.RuleId as RuleId
+        from Sungero_Core_RecipientLink l
+        join ruleRecipients rr
+          on rr.Id = l.Recipient
+        join Sungero_Core_Recipient r
+          on r.Id = l.Member
+        where r.Discriminator = resultRecipientsTypeGuid;
+  
+    insert into EmployeeRules
+      select rr.Id as Id, rr.RuleId as RuleId
+        from ruleRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Discriminator = resultRecipientsTypeGuid;
+    
+    insert into EmployeeRules
+      select r.Manager_Company_Sungero as Id, rr.RuleId as RuleId
+        from ruleRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Manager_Company_Sungero is not null;
+      
+    insert into EmployeeRules
+      select r.CEO_Company_Sungero as Id, rr.RuleId as RuleId
+        from ruleRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.CEO_Company_Sungero is not null;
+      
+    if exists (select 1 from ruleRecipients where Id = AllRecipientsId)
+	then
+      insert into EmployeeRules  
+        select r.Id as Id, rr.RuleId as RuleId
+          from ruleRecipients rr
+          join Sungero_Core_Recipient r
+            on rr.Id = AllRecipientsId
+          where r.Discriminator = 'B7905516-2BE5-4931-961C-CB38D5677565';
+    end if;
+  
+    insert into ExcudeEmployeeRules
+      select l.Member as Id, rr.RuleId as RuleId
+        from Sungero_Core_RecipientLink l
+        join ruleExcludeRecipients rr
+          on rr.Id = l.Recipient
+        join Sungero_Core_Recipient r
+          on r.Id = l.Member
+        where r.Discriminator = resultRecipientsTypeGuid;
+    
+    insert into ExcudeEmployeeRules
+      select rr.Id as Id, rr.RuleId as RuleId
+        from ruleExcludeRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Discriminator = resultRecipientsTypeGuid;
+     
+    insert into ExcudeEmployeeRules
+      select r.Manager_Company_Sungero as Id, rr.RuleId as RuleId
+        from ruleExcludeRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.Manager_Company_Sungero is not null;
+          
+    insert into ExcudeEmployeeRules
+      select r.CEO_Company_Sungero as Id, rr.RuleId as RuleId
+        from ruleExcludeRecipients rr
+        join Sungero_Core_Recipient r
+          on r.Id = rr.Id
+        where r.CEO_Company_Sungero is not null;
+     
+    if exists (select 1 from ruleExcludeRecipients where Id = AllRecipientsId)
+    then
+      insert into ExcudeEmployeeRules
+        select r.Id as Id, rr.RuleId as RuleId
+          from ruleExcludeRecipients rr
+          join Sungero_Core_Recipient r
+            on rr.Id  = AllRecipientsId
+          where r.Discriminator = 'B7905516-2BE5-4931-961C-CB38D5677565';
+    end if;
+  
+    return query select distinct em.Id
+      from EmployeeRules em
+      where not exists (select 1 from ExcudeEmployeeRules ex where ex.Id = em.Id and ex.RuleId = em.RuleId);
+       
+  end;
+  end if;
+  drop table headrecipients;
+  drop table rulerecipients;
+  drop table employeerules;
+  drop table excudeemployeerules;
+  drop table rules;
+  drop table ruleexcluderecipients; 
+  drop table rulesteprecipients;  
+end;
+$body$;]]></postgres>
+  </query>
+  <query key="ExecuteStoredProcedure">
+    <mssql><![CDATA[exec {0} {1}]]></mssql>
+    <postgres><![CDATA[select {0}({1})]]></postgres>
+  </query>
+  <query key="CreateIndexForRecipientVisibility">
+    <mssql><![CDATA[if (not exists (select 1 from sys.indexes
+                where object_id = (select object_id from sys.objects where name = 'Sungero_Company_RuleExcldMembs')
+                and name = 'idx_RuleExcldMembs_Recipient_VisibRule'))
+begin
+  create nonclustered index idx_RuleExcldMembs_Recipient_VisibRule ON Sungero_Company_RuleExcldMembs
+  (
+  	Recipient ASC
+  )
+  include (VisibRule) 
+end;
+
+if (not exists (select 1 from sys.indexes
+                where object_id = (select object_id from sys.objects where name = 'Sungero_Company_RuleRecipients')
+                and name = 'idx_RuleRecipients_Recipient_VisibRule'))
+begin
+  create nonclustered index idx_RuleRecipients_Recipient_VisibRule ON Sungero_Company_RuleRecipients
+  (
+  	Recipient ASC
+  )
+  include (VisibRule) 
+end;
+
+if (not exists (select 1 from sys.indexes
+                where object_id = (select object_id from sys.objects where name = 'Sungero_Company_RuleVisblMembs')
+                and name = 'idx_RuleVisblMembs_Recipient_VisibRule'))
+begin
+  create nonclustered index idx_RuleVisblMembs_Recipient_VisibRule ON Sungero_Company_RuleVisblMembs
+  (
+  	Recipient ASC
+  )
+  include (VisibRule) 
+end;
+
+if (not exists (select 1 from sys.indexes
+                where object_id = (select object_id from sys.objects where name = 'Sungero_Company_VisibRule')
+                and name = 'idx_VisibRule_Status_Id'))
+begin
+  create nonclustered index idx_VisibRule_Status_Id ON Sungero_Company_VisibRule
+  (
+  	Status ASC
+  )
+  include (Id) 
+end;]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS  idx_RuleExcldMembs_Recipient_VisibRule ON Sungero_Company_RuleExcldMembs
+  (
+  	Recipient ASC,
+  	VisibRule
+  );
+
+CREATE INDEX IF NOT EXISTS idx_RuleRecipients_Recipient_VisibRule ON Sungero_Company_RuleRecipients
+  (
+  	Recipient ASC,
+  	VisibRule
+  );
+
+CREATE INDEX IF NOT EXISTS idx_RuleVisblMembs_Recipient_VisibRule ON Sungero_Company_RuleVisblMembs
+  (
+  	Recipient ASC,
+  	VisibRule
+  );
+
+CREATE INDEX IF NOT EXISTS idx_VisibRule_Status_Id ON Sungero_Company_VisibRule
+  (
+  	Status ASC,
+  	Id
+  );]]></postgres>
+  </query>
+  <query key="CreateIndexDiscriminatorParentId">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  Discriminator,
+  Parent
+)
+INCLUDE (Id)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0}
+(
+  Discriminator,
+  Parent,
+  Id
+)]]></postgres>
+  </query>
+  <query key="CreateIndexDiscriminatorBusinessUnitId">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  Discriminator,
+  BusinessUnit_Company_Sungero
+)
+INCLUDE (Id)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0}
+(
+  Discriminator,
+  BusinessUnit_Company_Sungero,
+  Id
+)]]></postgres>
+  </query>
+  <query key="CreateIndexDiscriminatorHeadOfficeId">
+    <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
+(
+  Discriminator,
+  HeadOffice_Company_Sungero
+)
+INCLUDE (Id)]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0}
+(
+  Discriminator,
+  HeadOffice_Company_Sungero,
+  Id
+)]]></postgres>
+  </query>
+</queries>

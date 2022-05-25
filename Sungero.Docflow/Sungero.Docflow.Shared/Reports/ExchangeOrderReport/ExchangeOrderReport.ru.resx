@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SendedBy" xml:space="preserve">
+    <value>от:</value>
+  </data>
+  <data name="SignedBy" xml:space="preserve">
+    <value>подписал:</value>
+  </data>
+  <data name="MessageSended" xml:space="preserve">
+    <value>Отправлено</value>
+  </data>
+  <data name="MessageAccepted" xml:space="preserve">
+    <value>Получено</value>
+  </data>
+  <data name="MessageCreated" xml:space="preserve">
+    <value>Создано</value>
+  </data>
+  <data name="Operator" xml:space="preserve">
+    <value>Оператор</value>
+  </data>
+  <data name="TitleSended" xml:space="preserve">
+    <value>Отправлен</value>
+  </data>
+  <data name="TitleAccepted" xml:space="preserve">
+    <value>Получен</value>
+  </data>
+  <data name="AnnulmentSigned" xml:space="preserve">
+    <value>Подписано</value>
+  </data>
+  <data name="AnnulmentWait" xml:space="preserve">
+    <value>Ожидается</value>
+  </data>
+  <data name="AnnulmentSign" xml:space="preserve">
+    <value>подпись соглашения об аннулировании</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>подпись</value>
+  </data>
+  <data name="BuyerTitle" xml:space="preserve">
+    <value>титул покупателя</value>
+  </data>
+  <data name="SignatureNotSended" xml:space="preserve">
+    <value>Не отправлена</value>
+  </data>
+  <data name="SignatureNotAccepted" xml:space="preserve">
+    <value>Не получена</value>
+  </data>
+  <data name="SignatureSended" xml:space="preserve">
+    <value>Отправлена</value>
+  </data>
+  <data name="SignatureAccepted" xml:space="preserve">
+    <value>Получена</value>
+  </data>
+  <data name="TitleNotSended" xml:space="preserve">
+    <value>Не отправлен</value>
+  </data>
+  <data name="TitleNotAccepted" xml:space="preserve">
+    <value>Не получен</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>завершен</value>
+  </data>
+  <data name="NotCompleted" xml:space="preserve">
+    <value>не завершен</value>
+  </data>
+  <data name="Docflow" xml:space="preserve">
+    <value>Документооборот</value>
+  </data>
+  <data name="ReportName" xml:space="preserve">
+    <value>Протокол электронного обмена</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Document" xml:space="preserve">
+    <value>Документ</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата/Время</value>
+  </data>
+  <data name="RejectSended" xml:space="preserve">
+    <value>Отправлен</value>
+  </data>
+  <data name="RejectAccepted" xml:space="preserve">
+    <value>Получен</value>
+  </data>
+  <data name="BuyerTitleRejected" xml:space="preserve">
+    <value>титул покупателя с результатом "Не принято"</value>
+  </data>
+  <data name="BuyerTitlePartiallyAccepted" xml:space="preserve">
+    <value>титул покупателя с результатом "Принято с разногласиями"</value>
+  </data>
+</root>

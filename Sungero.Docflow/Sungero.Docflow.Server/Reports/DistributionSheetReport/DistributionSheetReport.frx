@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Content&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = Sungero.Docflow.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" Alias="sourceData" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectFromTempTable}">
+        <Column Name="CompanyName" DataType="System.String" PropName="Column"/>
+        <Column Name="NameWithJobTitle" DataType="System.String" PropName="Column"/>
+        <Column Name="DeliveryMethod" DataType="System.String" PropName="Column"/>
+        <Column Name="ContactsInformation" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="674542cd-506c-49b8-9e4b-a1fb7af9f55e" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="OutgoingDocument" Id="8479d652-3afd-459e-83e4-5ea58885c009" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="f5f104fb-52e4-422b-9de1-a36937d85a2d"/>
+    <SungeroParameter Name="ReportSessionId" Id="a9933ecf-c3f6-47f4-88ff-afae5451cb5a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="LetterSubject" Id="a75a617e-544a-4ffa-8ac7-b1efbbf41e9c" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" LeftMargin="20" TopMargin="20" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="680.4" Height="85.05">
+      <TextObject Name="Text9" Width="680.4" Height="37.8" Text="[Sungero.Docflow.Reports.Resources.DistributionSheetReport.DistributionSheet]" HorzAlign="Center" Font="Arial, 14pt"/>
+      <TextObject Name="Text11" Left="56.7" Top="43.47" Width="557.55" Height="18.9" CanGrow="true" CanBreak="false" Text="[LetterSubject]" HorzAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="89.05" Width="680.4" Height="56.7" Guides="0">
+      <TextObject Name="Text5" Left="37.8" Width="170.1" Height="56.7" Border.Lines="All" Fill.Color="Gainsboro" CanGrow="true" GrowToBottom="true" Text="[Sungero.Docflow.Reports.Resources.DistributionSheetReport.CompanyName]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="207.9" Width="179.55" Height="56.7" Border.Lines="All" Fill.Color="Gainsboro" CanGrow="true" GrowToBottom="true" Text="&lt;b&gt;[Sungero.Docflow.Reports.Resources.DistributionSheetReport.AddresseHeader]&lt;/b&gt;&#13;&#10;[Sungero.Docflow.Reports.Resources.DistributionSheetReport.AddresseFooter]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text8" Left="481.95" Width="198.45" Height="56.7" Border.Lines="All" Fill.Color="Gainsboro" CanGrow="true" GrowToBottom="true" Text="[Sungero.Docflow.Reports.Resources.DistributionSheetReport.ContactsInformation]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text12" Width="37.8" Height="56.7" Border.Lines="All" Fill.Color="Gainsboro" CanGrow="true" GrowToBottom="true" Text="[Sungero.Docflow.Reports.Resources.DistributionSheetReport.Number]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Left="387.45" Width="94.5" Height="56.7" Border.Lines="All" Fill.Color="Gainsboro" CanGrow="true" GrowToBottom="true" Text="[Sungero.Docflow.Reports.Resources.DistributionSheetReport.DeliveryMethod]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="149.75" Width="680.4" Height="37.8" CanGrow="true" CanShrink="true" DataSource="Table">
+      <TextObject Name="Text1" Left="37.8" Width="170.1" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[sourceData.CompanyName]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text2" Left="207.9" Width="179.55" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[sourceData.NameWithJobTitle]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text4" Left="481.95" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[sourceData.ContactsInformation]" VertAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text13" Width="37.8" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="387.45" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[sourceData.DeliveryMethod]" VertAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="191.55" Width="680.4" Height="18.9">
+      <TextObject Name="Text10" Left="548.1" Width="132.3" Height="18.9" Anchor="Bottom, Left" Text="[Sungero.Docflow.Resources.PageShort] [Page#] [Sungero.Docflow.Resources.PageOf] [TotalPages#]" HorzAlign="Right" Font="Arial, 10pt"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

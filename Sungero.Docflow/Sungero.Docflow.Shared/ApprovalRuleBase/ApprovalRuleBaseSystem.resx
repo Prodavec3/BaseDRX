@@ -1,0 +1,634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Property_DocumentKinds" xml:space="preserve">
+    <value>Document kinds</value>
+  </data>
+  <data name="Property_Departments" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="Property_Stages" xml:space="preserve">
+    <value>Stages</value>
+  </data>
+  <data name="ControlGroup_ab1f1ac5282540fa9639ce9bc18ec02f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Approval Rule</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Approval Rule</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Approval Rules</value>
+  </data>
+  <data name="ControlGroup_3d80013ae426483dbe7750ef1e6b0710" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_f3590c8082b048218ed94b7ba0e72b53" xml:space="preserve">
+    <value>Criteria</value>
+  </data>
+  <data name="Property_Status" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Enum_Status_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Enum_Status_Closed" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="Property_Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Property_BusinessUnits" xml:space="preserve">
+    <value>Business units</value>
+  </data>
+  <data name="Ribbon_Reports_5981ad88b8714f3d8b4d9ae68ac77c83" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Action_ShowActiveTasks" xml:space="preserve">
+    <value>Tasks by Rule</value>
+  </data>
+  <data name="Action_ShowActiveTasksDescription" xml:space="preserve">
+    <value>Show actual tasks created by rule</value>
+  </data>
+  <data name="Action_ShowActiveTasksHint" xml:space="preserve">
+    <value>Search Tasks by Rule</value>
+  </data>
+  <data name="Action_ShowActiveTasksConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowDuplicate" xml:space="preserve">
+    <value>Show Duplicates</value>
+  </data>
+  <data name="Action_ShowDuplicateDescription" xml:space="preserve">
+    <value>Show rules with the same criteria: Business units, Document kinds, Departments.</value>
+  </data>
+  <data name="Action_ShowDuplicateHint" xml:space="preserve">
+    <value>Show Duplicate Rules</value>
+  </data>
+  <data name="Action_ShowDuplicateConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Search_1f08362f6a1344cb95905a5b51c85c30" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Property_DocumentGroups" xml:space="preserve">
+    <value>Document groups</value>
+  </data>
+  <data name="Property_DocumentFlow" xml:space="preserve">
+    <value>Document flow</value>
+  </data>
+  <data name="Enum_DocumentFlow_Outgoing" xml:space="preserve">
+    <value>Outgoing</value>
+  </data>
+  <data name="Enum_DocumentFlow_Inner" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="Property_IsDefaultRule" xml:space="preserve">
+    <value>Is default rule?</value>
+  </data>
+  <data name="Property_Transitions" xml:space="preserve">
+    <value>Transitions</value>
+  </data>
+  <data name="ControlGroup_cb7b427181b7421c8193ac8ca1086c4f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_DocumentFlow_Incoming" xml:space="preserve">
+    <value>Incoming</value>
+  </data>
+  <data name="Enum_DocumentFlow_Contracts" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="Property_Conditions" xml:space="preserve">
+    <value>Conditions</value>
+  </data>
+  <data name="ControlGroup_d151a059977f4ad5b7f10de34600dec7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_ca8b386b94724613882b615b428778d2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Form_6efafdcbdf404bbd9f84f1897d5f2659" xml:space="preserve">
+    <value>Schema</value>
+  </data>
+  <data name="ControlGroup_4ffa80d5619641a6b4575184ee8b8077" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FakeToStagesStateViewCo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FakeToStagesStateViewCoDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FakeToStagesStateViewCoHint" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FakeToStagesStateViewCoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="ControlGroup_e3e0198fbf844301890bf6df3a35c616" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Control_44de09ab87e7452fbc87b3a12319d102_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddManagerStageHint" xml:space="preserve">
+    <value>Approval by manager</value>
+  </data>
+  <data name="Action_ChartAddManagerStage" xml:space="preserve">
+    <value>By manager</value>
+  </data>
+  <data name="Action_ChartAddManagerStageDescription" xml:space="preserve">
+    <value>Approval by manager</value>
+  </data>
+  <data name="Action_ChartAddManagerStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddSignStage" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="Action_ChartAddSignStageDescription" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="Action_ChartAddSignStageHint" xml:space="preserve">
+    <value>Sign</value>
+  </data>
+  <data name="Action_ChartAddSignStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddApproversStage" xml:space="preserve">
+    <value>Approval</value>
+  </data>
+  <data name="Action_ChartAddApproversStageDescription" xml:space="preserve">
+    <value>Approval by required approvers</value>
+  </data>
+  <data name="Action_ChartAddApproversStageHint" xml:space="preserve">
+    <value>Approval by required approvers</value>
+  </data>
+  <data name="Action_ChartAddApproversStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddRegisterStage" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Action_ChartAddRegisterStageDescription" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Action_ChartAddRegisterStageHint" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Action_ChartAddRegisterStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddSendingStage" xml:space="preserve">
+    <value>Send to counterparty</value>
+  </data>
+  <data name="Action_ChartAddSendingStageDescription" xml:space="preserve">
+    <value>Send to counterparty</value>
+  </data>
+  <data name="Action_ChartAddSendingStageHint" xml:space="preserve">
+    <value>Send to counterparty</value>
+  </data>
+  <data name="Action_ChartAddSendingStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddSimpleAgrStage" xml:space="preserve">
+    <value>Assignment</value>
+  </data>
+  <data name="Action_ChartAddSimpleAgrStageDescription" xml:space="preserve">
+    <value>Assignment</value>
+  </data>
+  <data name="Action_ChartAddSimpleAgrStageHint" xml:space="preserve">
+    <value>Assignment</value>
+  </data>
+  <data name="Action_ChartAddSimpleAgrStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddPrintStage" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Action_ChartAddPrintStageDescription" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Action_ChartAddPrintStageHint" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Action_ChartAddPrintStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddControlReturnStage" xml:space="preserve">
+    <value>Check return</value>
+  </data>
+  <data name="Action_ChartAddControlReturnStageDescription" xml:space="preserve">
+    <value>Check return</value>
+  </data>
+  <data name="Action_ChartAddControlReturnStageHint" xml:space="preserve">
+    <value>Check return</value>
+  </data>
+  <data name="Action_ChartAddControlReturnStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddNoticeStage" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="Action_ChartAddNoticeStageDescription" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="Action_ChartAddNoticeStageHint" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="Action_ChartAddNoticeStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddReviewStage" xml:space="preserve">
+    <value>Review by addressee</value>
+  </data>
+  <data name="Action_ChartAddReviewStageDescription" xml:space="preserve">
+    <value>Review by addressee</value>
+  </data>
+  <data name="Action_ChartAddReviewStageHint" xml:space="preserve">
+    <value>Review by addressee</value>
+  </data>
+  <data name="Action_ChartAddReviewStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddExecutionStage" xml:space="preserve">
+    <value>Create action item</value>
+  </data>
+  <data name="Action_ChartAddExecutionStageDescription" xml:space="preserve">
+    <value>Create action item</value>
+  </data>
+  <data name="Action_ChartAddExecutionStageHint" xml:space="preserve">
+    <value>Create action item</value>
+  </data>
+  <data name="Action_ChartAddExecutionStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddCondition" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="Action_ChartAddConditionDescription" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="Action_ChartAddConditionHint" xml:space="preserve">
+    <value>Condition</value>
+  </data>
+  <data name="Action_ChartAddConditionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartDeleteStage" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Action_ChartDeleteStageDescription" xml:space="preserve">
+    <value>Delete the stage permanently</value>
+  </data>
+  <data name="Action_ChartDeleteStageHint" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Action_ChartDeleteStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartSelectStage" xml:space="preserve">
+    <value>Select Stage</value>
+  </data>
+  <data name="Action_ChartSelectStageDescription" xml:space="preserve">
+    <value>Select the stage from the list</value>
+  </data>
+  <data name="Action_ChartSelectStageHint" xml:space="preserve">
+    <value>Select Stage</value>
+  </data>
+  <data name="Action_ChartSelectStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartConfigStage" xml:space="preserve">
+    <value>Open card</value>
+  </data>
+  <data name="Action_ChartConfigStageDescription" xml:space="preserve">
+    <value>Open the stage card</value>
+  </data>
+  <data name="Action_ChartConfigStageHint" xml:space="preserve">
+    <value>Open card</value>
+  </data>
+  <data name="Action_ChartConfigStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartConfigCondition" xml:space="preserve">
+    <value>Customize</value>
+  </data>
+  <data name="Action_ChartConfigConditionDescription" xml:space="preserve">
+    <value>Configure the approval condition</value>
+  </data>
+  <data name="Action_ChartConfigConditionHint" xml:space="preserve">
+    <value>Customize</value>
+  </data>
+  <data name="Action_ChartConfigConditionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartDeleteCondition" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Action_ChartDeleteConditionDescription" xml:space="preserve">
+    <value>Delete the condition permanently</value>
+  </data>
+  <data name="Action_ChartDeleteConditionHint" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Action_ChartDeleteConditionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TakeScreenshot" xml:space="preserve">
+    <value>Open as Image</value>
+  </data>
+  <data name="Action_TakeScreenshotDescription" xml:space="preserve">
+    <value>Open an approval scheme in an image viewer application</value>
+  </data>
+  <data name="Action_TakeScreenshotHint" xml:space="preserve">
+    <value>Open Approval Scheme as Image</value>
+  </data>
+  <data name="Action_TakeScreenshotConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Scheme_7abb704e4e5240b0b52127d77c13a0f9" xml:space="preserve">
+    <value>Scheme</value>
+  </data>
+  <data name="Enum_Status_Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="Property_ParentRule" xml:space="preserve">
+    <value>Previous version</value>
+  </data>
+  <data name="Action_CreateVersion" xml:space="preserve">
+    <value>Create Version</value>
+  </data>
+  <data name="Action_CreateVersionDescription" xml:space="preserve">
+    <value>Create new version of approval rule for edits.</value>
+  </data>
+  <data name="Action_CreateVersionHint" xml:space="preserve">
+    <value>Create New Version of Approval Rule</value>
+  </data>
+  <data name="Action_CreateVersionConfirmationMessage" xml:space="preserve">
+    <value>Create new version of approval rule for edits?</value>
+  </data>
+  <data name="Action_CreateVersionConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Version_82debe6cd3ef4796b03ef145372b40df" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="Action_DoActive" xml:space="preserve">
+    <value>Make Active</value>
+  </data>
+  <data name="Action_DoActiveDescription" xml:space="preserve">
+    <value>Make rule available for selecting in rule-based approval tasks. The previous version of the rule will be closed.</value>
+  </data>
+  <data name="Action_DoActiveHint" xml:space="preserve">
+    <value>Make Approval Rule Active</value>
+  </data>
+  <data name="Action_DoActiveConfirmationMessage" xml:space="preserve">
+    <value>Make approval rule active?</value>
+  </data>
+  <data name="Action_DoActiveConfirmationDescription" xml:space="preserve">
+    <value>The rule will be available for selecting in rule-based approval tasks.</value>
+  </data>
+  <data name="Action_DoClose" xml:space="preserve">
+    <value>Close Rule</value>
+  </data>
+  <data name="Action_DoCloseDescription" xml:space="preserve">
+    <value>Make the rule not available for selecting in rule-based approval tasks. Actual tasks created by the rule will continue.</value>
+  </data>
+  <data name="Action_DoCloseHint" xml:space="preserve">
+    <value>Close Approval Rule</value>
+  </data>
+  <data name="Action_DoCloseConfirmationMessage" xml:space="preserve">
+    <value>Close approval rule?</value>
+  </data>
+  <data name="Action_DoCloseConfirmationDescription" xml:space="preserve">
+    <value>The rule will be not available for selecting in rule-based approval tasks.
+Actual tasks created by the rule will continue.</value>
+  </data>
+  <data name="Property_VersionNumber" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowAllVersions" xml:space="preserve">
+    <value>Show Rule Versions</value>
+  </data>
+  <data name="Action_ShowAllVersionsDescription" xml:space="preserve">
+    <value>Show all versions of the current approval rule</value>
+  </data>
+  <data name="Action_ShowAllVersionsHint" xml:space="preserve">
+    <value>Show All Rule Versions</value>
+  </data>
+  <data name="Action_ShowAllVersionsConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowAllVersionsConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_IsSmallApprovalAllowed" xml:space="preserve">
+    <value>Allow approval with decreasing number of approvers</value>
+  </data>
+  <data name="Action_ShowApprovalRulesConsolidatedReport" xml:space="preserve">
+    <value>Summary Report</value>
+  </data>
+  <data name="Action_ShowApprovalRulesConsolidatedReportDescription" xml:space="preserve">
+    <value>View the report about approval rules settings broken down by company structure, docflows and document kinds.</value>
+  </data>
+  <data name="Action_ShowApprovalRulesConsolidatedReportHint" xml:space="preserve">
+    <value>Approval Rules Summary Report</value>
+  </data>
+  <data name="Action_ShowApprovalRulesConsolidatedReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowApprovalRulesConsolidatedReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Reports_5ff9cc5eb9e14886bf71fe47c1add152" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Action_PrintApprovalRule" xml:space="preserve">
+    <value>Print Approval Rule</value>
+  </data>
+  <data name="Action_PrintApprovalRuleDescription" xml:space="preserve">
+    <value>View scheme and summary information about properties and criteria of the approval rule.</value>
+  </data>
+  <data name="Action_PrintApprovalRuleHint" xml:space="preserve">
+    <value>Print Approval Rule</value>
+  </data>
+  <data name="Action_PrintApprovalRuleConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintApprovalRuleConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ReworkPerformerType" xml:space="preserve">
+    <value>Resp. employee</value>
+  </data>
+  <data name="Enum_ReworkPerformerType_Author" xml:space="preserve">
+    <value>Approval initiator</value>
+  </data>
+  <data name="Enum_ReworkPerformerType_EmployeeRole" xml:space="preserve">
+    <value>Employee/Role</value>
+  </data>
+  <data name="Property_ReworkPerformer" xml:space="preserve">
+    <value>Employee/Role</value>
+  </data>
+  <data name="Property_ReworkDeadline" xml:space="preserve">
+    <value>Deadline, days</value>
+  </data>
+  <data name="ControlGroup_0429c1605cd04244a9e5fdb5a80cba72" xml:space="preserve">
+    <value>Document Rework</value>
+  </data>
+  <data name="Enum_ReworkPerformerType_ApprovalRole" xml:space="preserve">
+    <value>Approval role</value>
+  </data>
+  <data name="Property_ReworkApprovalRole" xml:space="preserve">
+    <value>Approval role</value>
+  </data>
+  <data name="Property_NeedRestrictInitiatorRights" xml:space="preserve">
+    <value>Limit access rights of approval initiator to "Read"</value>
+  </data>
+  <data name="ControlGroup_1ad6b6a5457f4d188578ffde5a756506" xml:space="preserve">
+    <value>Access Rights to Documents</value>
+  </data>
+  <data name="Action_ChartAddFunctionStage" xml:space="preserve">
+    <value>Script</value>
+  </data>
+  <data name="Action_ChartAddFunctionStageDescription" xml:space="preserve">
+    <value>Script execution</value>
+  </data>
+  <data name="Action_ChartAddFunctionStageHint" xml:space="preserve">
+    <value>Execute Script</value>
+  </data>
+  <data name="Action_ChartAddFunctionStageConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ChartAddFunctionStageConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+</root>

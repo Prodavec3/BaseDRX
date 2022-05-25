@@ -1,0 +1,135 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "b3c50de9-0a56-42bb-a52a-48309c5ccef3",
+  "Name": "ActionItemPrintReport",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "c290b098-12c7-487d-bb38-73e2c98f9789",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "AccessRightsMode",
+    "PublicConstants",
+    "PublicStructures",
+    "HandledEvents",
+    "Parameters",
+    "ExportFormats",
+    "DefaultExportFormat"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1bfd6cab-d751-43e8-82e0-d2e9102edf72",
+      "Name": "Task",
+      "EntityType": "c290b098-12c7-487d-bb38-73e2c98f9789",
+      "InternalDataTypeName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces",
+      "IsRequired": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "190e0121-7d1f-4651-b4c2-f61f92ee2abe",
+      "Name": "Supervisor",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "83256663-b792-4c38-b477-c0fcc7ccc86e",
+      "Name": "DocumentShortName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "efe2fbab-a224-41a4-94e4-0b34e0be0e37",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "beca8847-3d01-486b-a2a0-d9492054a8c3",
+      "Name": "Assignment",
+      "EntityType": "91cbfdc8-5d5d-465e-95a4-3235b8c01d5b",
+      "InternalDataTypeName": "Sungero.Workflow.IAssignment, Sungero.Workflow.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "fe3c0468-83b4-40a3-9fae-12f03cd682c2",
+      "Name": "Author",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "159b0e13-9c1d-45ed-933f-ac1988604632",
+      "Name": "PrintedBy",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "ActionItemPrintReportParameters",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Performer",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Deadline",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "CoAssigneesDeadline",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "FromAuthor",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "ActionItemText",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Supervisor",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.RecordManagement.Structures.ActionItemPrintReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "Destination",
+    "ActionItem",
+    "PerformerReport",
+    "Deadline",
+    "From",
+    "Text",
+    "PerformerSignatureAndName",
+    "ExecutionDate",
+    "Printed",
+    "ActionItemID",
+    "SupervisorPrefix",
+    "ToDocument",
+    "DocumentID",
+    "ForCoAssignees"
+  ],
+  "Versions": []
+}

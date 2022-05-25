@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateReportTable">
+    <mssql><![CDATA[create table {0}
+([ReportSessionId] [varchar](256) NULL,
+ [EmployeeName] [varchar](max) NOT NULL,
+ [SignType] [varchar](100) NOT NULL,
+ [Comment] [varchar](max) NULL,
+ [SignErrors] [varchar](max) NULL,
+ [Version] [int] NOT NULL,
+ [Date] [datetime] NOT NULL)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE IF NOT EXISTS {0}
+(reportsessionid varchar(256) NULL,
+ employeename citext NOT NULL,
+ signtype varchar(100) NOT NULL,
+ comment citext NULL,
+ signerrors citext NULL,
+ version int NOT NULL,
+ date timestamp NOT NULL)]]></postgres>
+  </query>
+  <query key="DataSource">
+    <default><![CDATA[select EmployeeName, SignType, Comment, SignErrors, Version, Date from Sungero_Reports_ApprSheet where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+  <query key="InsertIntoApprovalSheetReportTable">
+    <default><![CDATA[insert into Sungero_Reports_ApprSheet(ReportSessionId, EmployeeName, SignType, Comment, SignErrors, Version, Date) values (@reportSessionId, @employeeName, @resultString, @comment, @signErrors, @versionNumber, @SignatureDate)]]></default>
+  </query>
+</queries>

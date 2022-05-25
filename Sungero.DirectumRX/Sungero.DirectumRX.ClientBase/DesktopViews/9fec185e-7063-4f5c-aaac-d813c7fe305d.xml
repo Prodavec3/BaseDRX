@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Desktop>
+    <Widgets SettingsVersion="4">
+      <Widget Column="0" Row="13" ZIndex="0" ActionListGuid="790204fb-6926-4d0f-a470-0f9721b156a9">
+        <Parameters>
+          <Parameter Id="6c0c8f8c-533e-453e-ba35-e48be332990b" Value="false" />
+        </Parameters>
+      </Widget>
+      <Widget Column="12" Row="13" ZIndex="1" ActionListGuid="087ec236-6052-4a73-889f-5ba54d416704">
+        <Parameters>
+          <Parameter Id="c011d9ef-d54a-478f-9f3f-c39a9613867a" Value="3ed2898a-d409-4e06-960e-5c9155f4c9f0" />
+          <Parameter Id="3b305e97-1ca2-4a53-bb01-14dcbd669dc7" Value="false" />
+        </Parameters>
+        <LocalizedTitles>
+          <LocalizedTitle Localization="en" Title="Department contracts" />
+          <LocalizedTitle Localization="ru" Title="Договоры подразделения" />
+        </LocalizedTitles>
+      </Widget>
+      <Widget Column="0" Row="22" ZIndex="2" ActionListGuid="59e381ae-d54c-49ed-9896-bd33d08d7a7a">
+        <Parameters>
+          <Parameter Id="fb6ffa0e-33dd-41bb-aed9-c0a67489efc2" Value="false" />
+        </Parameters>
+      </Widget>
+      <Widget Column="12" Row="0" ZIndex="3" ActionListGuid="07cae475-76e5-4fdb-b8dd-72a3b4fca75e">
+        <Parameters>
+          <Parameter Id="0ce12b17-ecd6-48ee-af85-dcc26aba65cb" Value="00ed3dd9-2e75-469d-9539-c4d00189f298" />
+          <Parameter Id="cb9bd71a-6874-4c49-9fc6-d8214077c426" Value="28e9860e-cc64-4352-85ea-f12cb24fd161" />
+        </Parameters>
+        <LocalizedTitles>
+          <LocalizedTitle Localization="en" Title="Department Assignment Completion" />
+          <LocalizedTitle Localization="ru" Title="Исполнительская дисциплина подразделения" />
+        </LocalizedTitles>
+      </Widget>
+      <Widget Column="24" Row="0" ZIndex="4" ActionListGuid="0894b7dd-4e24-40c9-9c02-4ed8c3aa6aa0">
+        <Parameters>
+          <Parameter Id="d5f33093-0940-4f18-862e-73f027e2562e" Value="6193af60-892e-4ab4-9d27-4efc18a41498" />
+          <Parameter Id="3546d6b0-6f92-4d13-af80-9b0ff29afac7" Value="f7d78169-d2b6-4517-8612-7eff07a16ec2" />
+        </Parameters>
+        <LocalizedTitles>
+          <LocalizedTitle Localization="ru" Title="Сотрудники подразделения с высокой загрузкой" />
+        </LocalizedTitles>
+      </Widget>
+      <Widget Column="0" Row="0" ZIndex="5" ActionListGuid="c1491b3d-4085-4e59-8553-963b4b72ddeb" />
+      <Widget Column="12" Row="20" ZIndex="6" ActionListGuid="0a50b572-9cb1-40cf-9307-dc760bd0485d">
+        <Parameters>
+          <Parameter Id="a99d9384-adf9-414e-8a88-0b77fe520710" Value="7fb82776-df17-4af0-a528-729f970ac90d" />
+        </Parameters>
+        <LocalizedTitles>
+          <LocalizedTitle Localization="en" Title="Department projects" />
+          <LocalizedTitle Localization="ru" Title="Проекты подразделения" />
+        </LocalizedTitles>
+      </Widget>
+    </Widgets>
+  </Desktop>
+</settings>

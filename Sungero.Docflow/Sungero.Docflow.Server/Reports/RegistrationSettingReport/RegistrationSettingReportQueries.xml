@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+                                              ([ReportSessionId] varchar(256) NOT NULL,
+                                               [Id] int NOT NULL,
+                                               [BusinessUnit] nvarchar(max) NOT NULL,
+                                               [DocumentFlow] nvarchar(max) NOT NULL,
+                                               [DocumentFlowIndex] int NOT NULL,
+                                               [DocumentKind] nvarchar(max) NOT NULL,
+                                               [RegistrationSetting] nvarchar(max) NULL,
+                                               [RegistrationSettingUri] nvarchar(max) NULL,
+                                               [Priority] int NULL,
+                                               [Departments] nvarchar(max) NULL,
+                                               [SettingType] varchar(20) NULL,
+                                               [DocumentRegister] nvarchar(max) NULL,
+                                               [DocumentRegisterUri] nvarchar(max) NULL,
+                                               [NumberExample] nvarchar(max) NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+                                              (ReportSessionId citext NOT NULL,
+                                               Id int NOT NULL,
+                                               BusinessUnit citext NOT NULL,
+                                               DocumentFlow citext NOT NULL,
+                                               DocumentFlowIndex int NOT NULL,
+                                               DocumentKind citext NOT NULL,
+                                               RegistrationSetting citext NULL,
+                                               RegistrationSettingUri citext NULL,
+                                               Priority int NULL,
+                                               Departments citext NULL,
+                                               SettingType citext NULL,
+                                               DocumentRegister citext NULL,
+                                               DocumentRegisterUri citext NULL,
+                                               NumberExample citext NULL)]]></postgres>
+  </query>
+  <query key="SourceQuery">
+    <default><![CDATA[select * 
+from Sungero_Reports_RegSettings
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

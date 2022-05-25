@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="Documents">
+    <mssql><![CDATA[SELECT
+  documents.RegistrationDate,
+  documents.RegistrationNumber,
+  case when documents.NumberOnFormat is null then 1 else documents.NumberOnFormat end NumberOnFormat,
+  case when documents.CanRead is null then 1 else documents.CanRead end CanRead,
+  case when documents.InCorrectOrder is null then 1 else documents.InCorrectOrder end InCorrectOrder,
+  documents.RegistrationState,
+  documents.DocumentRegister,
+  documents.DocumentId,
+  documents.DocumentName,
+  documents.Note as Note,
+  documents.HyperLink,
+  documents.OrdinalNumber,
+  documents.SortOrder
+FROM
+  (
+    SELECT
+      doc.RegDate_Docflow_Sungero AS RegistrationDate,
+      doc.RegNumber_Docflow_Sungero AS RegistrationNumber,
+      availableDocs.NumberOnFormat AS NumberOnFormat,
+      availableDocs.CanRead AS CanRead,
+      availableDocs.InCorrectOrder AS InCorrectOrder,
+      doc.Note_Docflow_Sungero AS Note,
+      doc.RegState_Docflow_Sungero AS RegistrationState,
+      doc.DocRegister_Docflow_Sungero AS DocumentRegister,
+      doc.Id as DocumentId,
+      doc.Name as DocumentName,
+      REPLACE(REPLACE(@hyperlinkMask,'DocGUID',doc.Discriminator),'DocId', doc.Id) as HyperLink,
+      CONVERT(varchar(max), doc.Index_Docflow_Sungero) AS OrdinalNumber,
+	  doc.Index_Docflow_Sungero as SortOrder	      
+    FROM
+      Sungero_Content_EDoc doc 
+      JOIN
+        Sungero_Reports_SkipNum_Rights availableDocs 
+        ON availableDocs.Id = doc.Id 
+    WHERE
+      availableDocs.ReportSessionId = @ReportSessionId 
+    UNION
+    SELECT
+      NULL AS RegistrationDate,
+      [RegistrationNumber] AS RegistrationNumber,
+      NULL AS NumberOnFormat,
+      NULL AS CanRead,
+      NULL AS InCorrectOrder,
+      NULL AS Note,
+      NULL AS RegistrationState,
+      NULL AS DocumentRegister,
+      NULL AS Id,
+      NULL AS Name,
+      NULL AS HyperLink,
+      [OrdinalNumber] AS OrdinalNumber,
+      [Index] as SortOrder
+    FROM
+      Sungero_Reports_SkipNum_Skips
+    WHERE
+      ReportSessionId = @ReportSessionId
+  )
+  AS documents 
+ORDER BY
+  [SortOrder] DESC]]></mssql>
+    <postgres><![CDATA[SELECT
+  documents.RegistrationDate,
+  documents.RegistrationNumber,
+  case when documents.NumberOnFormat is null then 'true' else documents.NumberOnFormat end as NumberOnFormat,
+  case when documents.CanRead is null then 'true' else documents.CanRead end as CanRead,
+  case when documents.InCorrectOrder is null then 'true' else documents.InCorrectOrder end as InCorrectOrder,
+  documents.RegistrationState,
+  documents.DocumentRegister,
+  documents.DocumentId,
+  documents.DocumentName,
+  documents.Note as Note,
+  documents.HyperLink,
+  documents.OrdinalNumber,
+  documents.SortOrder 
+FROM
+  (
+    SELECT
+      doc.RegDate_Docflow_Sungero AS RegistrationDate,
+      doc.RegNumber_Docflow_Sungero AS RegistrationNumber,
+      availableDocs.NumberOnFormat AS NumberOnFormat,
+      availableDocs.CanRead AS CanRead,
+      availableDocs.InCorrectOrder AS InCorrectOrder,
+      doc.Note_Docflow_Sungero AS Note,
+      doc.RegState_Docflow_Sungero AS RegistrationState,
+      doc.DocRegister_Docflow_Sungero AS DocumentRegister,
+      doc.Id as DocumentId,
+      doc.Name as DocumentName,
+      replace(replace(@hyperlinkMask,'DocGUID', cast(doc.Discriminator as text)),'DocId', cast(doc.Id as text)) as HyperLink,
+      cast(doc.Index_Docflow_Sungero as text) AS OrdinalNumber,
+	  doc.Index_Docflow_Sungero as SortOrder      
+    FROM
+      Sungero_Content_EDoc doc 
+      JOIN
+        Sungero_Reports_SkipNum_Rights availableDocs
+        ON availableDocs.Id = doc.Id 
+    WHERE
+      availableDocs.ReportSessionId = @ReportSessionId 
+    UNION
+    SELECT
+      NULL AS RegistrationDate,
+      RegistrationNumber AS RegistrationNumber,
+      NULL AS NumberOnFormat,
+      NULL AS CanRead,
+      NULL AS InCorrectOrder,
+      NULL AS Note,
+      NULL AS RegistrationState,
+      NULL AS DocumentRegister,
+      NULL AS Id,
+      NULL AS Name,
+      NULL AS HyperLink,
+      OrdinalNumber AS OrdinalNumber,
+      Index AS SortOrder 
+    FROM
+      Sungero_Reports_SkipNum_Skips 
+    WHERE
+      ReportSessionId = @ReportSessionId 
+  )
+  AS documents
+ORDER BY
+  SortOrder DESC]]></postgres>
+  </query>
+  <query key="SkippedIndexes">
+    <mssql><![CDATA[CREATE TABLE {0} (
+RegistrationNumber varchar(MAX),
+OrdinalNumber varchar(MAX) NOT NULL,
+[Index] int NOT NULL,
+ReportSessionId varchar(256) NOT NULL )]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0} (
+RegistrationNumber citext,
+OrdinalNumber citext NOT NULL,
+Index int NOT NULL,
+ReportSessionId citext NOT NULL)]]></postgres>
+  </query>
+  <query key="AvaliableDocuments">
+    <mssql><![CDATA[CREATE TABLE {0} (
+[Id] [int] NOT NULL,
+[NumberOnFormat] [bit] NOT NULL DEFAULT(1),
+[CanRead] [bit] NOT NULL DEFAULT(1),
+[InCorrectOrder] [bit] NOT NULL DEFAULT(1),
+[ReportSessionId] varchar(256) NULL)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0} (
+Id int NOT NULL,
+NumberOnFormat boolean NOT NULL DEFAULT TRUE,
+CanRead boolean NOT NULL DEFAULT TRUE,
+InCorrectOrder boolean NOT NULL DEFAULT TRUE,
+ReportSessionId citext NULL)]]></postgres>
+  </query>
+  <query key="GetSkippedIndexes">
+    <default><![CDATA[WITH skippedIndexdt as
+(
+	select
+		ROW_Number() OVER(ORDER By t.indx) AS rowNumber,
+		t.indx
+	from
+	(
+		SELECT 		      
+			Index_Docflow_Sungero as indx
+		FROM 
+			Sungero_Content_EDoc
+		WHERE 
+			DocRegister_Docflow_Sungero = {0} and
+			Index_Docflow_Sungero > {1} and
+			Index_Docflow_Sungero < {2} and
+			(not '{3}' = 'True' or BusinessUnit_Docflow_Sungero = {4}) and
+			(not '{5}' = 'True' or Department_Docflow_Sungero = {6}) and
+			(not '{7}' = 'True' or LeadDocument_Docflow_Sungero = {8}) and
+			(not '{9}' = 'True' or (RegDate_Docflow_Sungero >= '{10}' and RegDate_Docflow_Sungero <= '{11}'))			
+		union
+		(select {1})
+		union
+		(select {2})
+	) as t
+ )
+ 
+select
+ t1.indx-1 as endInterval,
+ t2.indx+1 as startInterval
+ from skippedIndexdt as t1
+ inner join skippedIndexdt as t2
+ on t1.rowNumber = t2.rowNumber + 1 and t1.indx - t2.indx > 1]]></default>
+  </query>
+</queries>

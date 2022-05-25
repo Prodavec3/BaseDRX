@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ForFairBusinessWebsiteName" xml:space="preserve">
+    <value>За честный бизнес</value>
+  </data>
+  <data name="HonestBusinessWebsiteName" xml:space="preserve">
+    <value>Честный бизнес</value>
+  </data>
+  <data name="KonturFocusWebsiteName" xml:space="preserve">
+    <value>Контур.Фокус</value>
+  </data>
+  <data name="OwnerOnlineWebsiteName" xml:space="preserve">
+    <value>Контрагентио</value>
+  </data>
+  <data name="SbisWebsiteName" xml:space="preserve">
+    <value>СБИС Все о компаниях и владельцах</value>
+  </data>
+  <data name="InfoSetDefaultDueDiligenceWebsite" xml:space="preserve">
+    <value>Сайт проверки контрагента будет выбран системой</value>
+  </data>
+  <data name="ErrorInvalidUrl" xml:space="preserve">
+    <value>Введите корректный шаблон адреса</value>
+  </data>
+  <data name="ErrorDefaultDueDiligenceWebsiteNotFound" xml:space="preserve">
+    <value>Для проверки контрагента необходимо настроить сайты проверки. Обратитесь к администратору</value>
+  </data>
+  <data name="ErrorInvalidMask" xml:space="preserve">
+    <value>Введите корректную маску поиска. Для ОГРН - {0}, для ИНН - {1}</value>
+  </data>
+  <data name="ErrorUrlNotSet" xml:space="preserve">
+    <value>Заполните шаблон адреса сайта проверки контрагента</value>
+  </data>
+  <data name="SbisNote" xml:space="preserve">
+    <value>Сайт позволяет получить реквизиты организации, контактную информацию, оценку надежности, выписки из ЕГРЮЛ/ЕГРИП, посмотреть финансовое состояние организации и стоимость бизнеса. 
+
+На сайте можно узнать, в каких торгах и госконтрактах принимала участие организация, а также получить информацию о ее владельцах и аффилированных организациях. 
+
+Для полноценной работы требуется покупка лицензии "СБИС Всё о компаниях и владельцах".</value>
+  </data>
+  <data name="OwnerOnlineNote" xml:space="preserve">
+    <value>Сайт позволяет получить реквизиты организации и финансовую отчетность, оценку надежности, сформировать справку о должной осмотрительности, заказать выписку из ЕГРЮЛ  и ЕГРИП.
+
+Доступна платная подписка для получения дополнительной информации (например, отчет по надежности).</value>
+  </data>
+  <data name="KonturFocusNote" xml:space="preserve">
+    <value>Сайт позволяет получить реквизиты организации, контактную информацию, сведения об участии в арбитражных делах, выписки из ЕГРЮЛ/ЕГРИП, финансовый анализ и отчетность по данным Росстата. 
+
+Предоставляет информацию о залогах, государственных закупках, наличии сообщений о банкротстве, плановых проверках, товарных знаках, лицензиях и разрешениях, упоминаниях в интернете.
+
+Осуществляет поиск и анализ связей, формирует экспресс-отчет по контрагентам. Предоставляет возможность выгрузить полученные данные.
+
+Для полноценной работы требуется покупка лицензии "Контур.Фокус".</value>
+  </data>
+  <data name="HonestBusinessNote" xml:space="preserve">
+    <value>Сайт позволяет получить реквизиты организации, контактную информацию, оценку надежности по признакам риска и критериям благонадежности, финансовую отчетность, сведения об участии в арбитражных делах. 
+
+Предоставляет информацию об исполнительных производствах, товарных знаках, дисквалифицированных лицах, массовых адресах, лицензируемых видах деятельности, лицензиях. Проверка индивидуальных предпринимателей не поддерживается.
+
+Для получения полной информации требуется регистрация.</value>
+  </data>
+  <data name="ForFairBusinessNote" xml:space="preserve">
+    <value>Сайт позволяет получить реквизиты организации, сведения об участии в арбитражных делах, финансовую отчетность, сформировать реквизиты договора.  
+
+Для использования сайта не требуется регистрация или оплата.</value>
+  </data>
+</root>

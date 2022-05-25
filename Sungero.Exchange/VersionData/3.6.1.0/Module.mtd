@@ -1,0 +1,1043 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "cec41b99-da21-422f-9332-0fbc423e95c0",
+  "Name": "Exchange",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.Exchange.Client",
+  "ClientBaseAssemblyName": "Sungero.Exchange.ClientBase",
+  "ClientBaseNamespace": "Sungero.Exchange.ClientBase",
+  "ClientNamespace": "Sungero.Exchange.Client",
+  "Code": "ExCh",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "5f308d3c-b813-4b4d-9434-efbac45cf040",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "74ec58d5-13b5-4486-ba60-00fd340f7a00",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "1d70db12-ceb7-4237-9747-22ec525a67b2",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "2.5.18.0"
+    },
+    {
+      "Id": "ec7b606a-21ee-4f16-aba8-ab8c2af76d12",
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "ae03c598-ab50-4781-b1b2-968510b338b9",
+      "Versions": []
+    },
+    {
+      "ItemId": "0917ca0b-898f-429d-be37-c12da50c5a95",
+      "PreviousItemId": "ae03c598-ab50-4781-b1b2-968510b338b9",
+      "Versions": []
+    },
+    {
+      "ItemId": "ee04eb99-cc71-4a97-b532-fd05b31cf7b2",
+      "PreviousItemId": "0917ca0b-898f-429d-be37-c12da50c5a95",
+      "Versions": []
+    },
+    {
+      "ItemId": "ad88c31d-5ae1-4821-9615-7d2fa575726b",
+      "PreviousItemId": "ee04eb99-cc71-4a97-b532-fd05b31cf7b2",
+      "Versions": []
+    },
+    {
+      "ItemId": "490e66a0-8618-4eb9-aab8-2dbc8a884d98",
+      "PreviousItemId": "ad88c31d-5ae1-4821-9615-7d2fa575726b",
+      "Versions": []
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Exchange",
+  "IsVisible": false,
+  "Jobs": [
+    {
+      "NameGuid": "65fa7815-170d-489c-b613-c2c2366161a4",
+      "Name": "BodyConverterJob",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T00:00:00",
+      "TimePeriod": 10,
+      "Versions": []
+    },
+    {
+      "NameGuid": "13f61e21-8bb9-4a3d-b72b-e92da64c60b4",
+      "Name": "GetMessages",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T00:00:00",
+      "TimePeriod": 10,
+      "Versions": []
+    },
+    {
+      "NameGuid": "e7b6f44d-78eb-4c9f-b6e5-ffa66a262e91",
+      "Name": "SendReceiptNotificationTasks",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T14:00:00",
+      "Versions": []
+    },
+    {
+      "NameGuid": "b54f0e86-0cac-49bf-b99b-30ffd8030d9b",
+      "Name": "CreateReceiptNotifications",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "TimePeriod": 10,
+      "Versions": []
+    },
+    {
+      "NameGuid": "a050e9dc-ac0a-40c2-a322-7f1832e53f36",
+      "Name": "SendSignedReceiptNotifications",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "TimePeriod": 10,
+      "Versions": []
+    }
+  ],
+  "Libraries": [
+    {
+      "NameGuid": "8afc00b9-ff69-4efe-b800-1d7c065f63d8",
+      "Name": "DCX",
+      "Scope": "Server",
+      "Versions": []
+    }
+  ],
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "Act",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1175006\""
+    },
+    {
+      "Name": "CreateReceiptNotifications",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"b54f0e86-0cac-49bf-b99b-30ffd8030d9b\""
+    },
+    {
+      "Name": "DetailedInvoiceReject",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchInvReject\""
+    },
+    {
+      "Name": "DetailedReject",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchReject\""
+    },
+    {
+      "Name": "DetailedSign",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchSign\""
+    },
+    {
+      "Name": "GetAnswer",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchGetAnswer\""
+    },
+    {
+      "Name": "GetReadMark",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchReadFrom\""
+    },
+    {
+      "Name": "GoodsTransferSeller",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1175010\""
+    },
+    {
+      "Name": "ObsoletedByCounterparty",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchObsoleteCP\""
+    },
+    {
+      "Name": "ObsoleteOur",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchObsoletOur\""
+    },
+    {
+      "Name": "SendAnswer",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchSendAnswer\""
+    },
+    {
+      "Name": "SendDocument",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchSendDoc\""
+    },
+    {
+      "Name": "SendReadMark",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchReadTo\""
+    },
+    {
+      "Name": "SendSignedReceiptNotificationsId",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"a050e9dc-ac0a-40c2-a322-7f1832e53f36\""
+    },
+    {
+      "Name": "SimpleRelationRelationName",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Simple relation\""
+    },
+    {
+      "Name": "TerminatedByCounterparty",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchTerminCP\""
+    },
+    {
+      "Name": "TerminateOur",
+      "ParentClasses": [
+        "Module",
+        "Exchange"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"ExchTerminOur\""
+    },
+    {
+      "Name": "UniversalCorrectionDocumentSeller",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1115127\""
+    },
+    {
+      "Name": "UniversalTransferDocumentSeller",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1115131\""
+    },
+    {
+      "Name": "UniversalTransferDocumentSeller155",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1115125\""
+    },
+    {
+      "Name": "Waybill",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1175004\""
+    },
+    {
+      "Name": "WorksTransferSeller",
+      "ParentClasses": [
+        "Module",
+        "TaxDocumentClassifier"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"1175012\""
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "CreateReceiptNotificationSendingTask",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Exchange.IReceiptNotificationSendingTask",
+      "ReturnTypeFullName": "Sungero.Exchange.IReceiptNotificationSendingTask, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "CutText",
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "maxLength",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "EnqueueXmlToPdfBodyConverter",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "versionId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "exchangeStatus",
+          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
+          "ParameterTypeFullName": "System.Nullable"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "GenerateBuyerTitle",
+      "Parameters": [
+        {
+          "Name": "statement",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "buyerTitle",
+          "ParameterType": "global::Sungero.Docflow.Structures.AccountingDocumentBase.IBuyerTitle",
+          "ParameterTypeFullName": "Sungero.Docflow.Structures.AccountingDocumentBase.IBuyerTitle"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "GetDocumentHyperlink",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetDocumentInfosWithoutReceiptNotification",
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "withoutGenerated",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Exchange.IExchangeDocumentInfo>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetDocumentInfosWithoutReceiptNotificationPart",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "skip",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "take",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "withoutGenerated",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Exchange.IExchangeDocumentInfo>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetLastIncomingMessageId",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetLastOutgoingMessageId",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetOrCreateAssociatedApplicationByDocumentName",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "documentName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Content.IAssociatedApplication",
+      "ReturnTypeFullName": "Sungero.Content.IAssociatedApplication, Sungero.Content.Shared"
+    },
+    {
+      "Name": "GetTaxDocumentClassifierByContent",
+      "Parameters": [
+        {
+          "Name": "content",
+          "ParameterType": "System.IO.Stream"
+        }
+      ],
+      "ReturnType": "global::Sungero.Exchange.Structures.Module.ITaxDocumentClassifier",
+      "ReturnTypeFullName": "Sungero.Exchange.Structures.Module.ITaxDocumentClassifier"
+    },
+    {
+      "Name": "GetUserExchangeCertificate",
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBoxBase",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBoxBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::Sungero.CoreEntities.ICertificate",
+      "ReturnTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+    },
+    {
+      "Name": "HasUnsignedBuyerTitle",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "statement",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "IsJobEnabled",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "id",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "RemoveNamespaces",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "System.Xml.Linq.XDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "RequeueBodyConverterJob",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "RequeueGenerateServiceDocuments",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "RequeueMessagesGet",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "RequeueSendSignedReceiptNotifications",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendAmendmentRequest",
+      "Parameters": [
+        {
+          "Name": "documents",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IOfficialDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "receiver",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "note",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "throwError",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBoxBase",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBoxBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "isInvoiceAmendmentRequest",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "SendAnswers",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "documents",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IOfficialDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "isAgent",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendAnswerToNonformalizedDocument",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "isAgent",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendBuyerTitle",
+      "Parameters": [
+        {
+          "Name": "waybill",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "isAgent",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendDeliveryConfirmation",
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBoxBase",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBoxBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "bulkMode",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "SendDocuments",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "addenda",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IOfficialDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "receiver",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "needSign",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "comment",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendResultToCounterparty",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SendResultToCounterparty",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "service",
+          "ParameterType": "global::Sungero.ExchangeCore.IExchangeService",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IExchangeService, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "addenda",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IOfficialDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SignAndSendDeliveryConfirmation",
+      "Placement": "Client",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "UpdateLastIncomingMessageId",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "incomingMessageId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "UpdateLastOutgoingMessageId",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "box",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "outgoingMessageId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "TaxDocumentClassifier",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "TaxDocumentClassifierCode",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "TaxDocumentClassifierFunction",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Exchange.Structures.Module"
+    }
+  ],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Exchange",
+  "ResourcesKeys": [
+    "DeliveryConfirmationError",
+    "DocumentEndorseError",
+    "DeliveryConfirmation",
+    "AssociatedApplication",
+    "AmendmentRequest",
+    "AmendmentRequestError",
+    "CertificateNotFound",
+    "FormalizedDocumentName",
+    "NoticeSubject",
+    "NoticeActiveText",
+    "FormalizedDocumentTemplateName",
+    "LinkToPersonalData",
+    "DocumentsList",
+    "OtherDocuments",
+    "RejectCertificateNotFoundReadressToResponsible",
+    "CannotSendAmendmentNotice",
+    "SendCounterpartySendButton",
+    "SendCounterpartySignAndSendButton",
+    "NoExchangeThroughThisService",
+    "SendCounterpartyCertificateNotSelected",
+    "SendCounterpartyCanNotSign",
+    "SendCounterpartySignAndSendQuestion",
+    "SendToCounterpartyNote",
+    "BoxesNotFound",
+    "NeedSetExchangeForCounterparty",
+    "ErrorWhileSendingDocToCounterparty",
+    "SendCounterpartyAddendaNotSigned",
+    "SendCounterpartyWithAddendaWhenDocumentNotSigned",
+    "SendCounterpartyDialogTitle",
+    "SendCounterpartyReceiver",
+    "SendCounterpartySender",
+    "SendCounterpartyAddenda",
+    "SendCounterpartyNeedSign",
+    "SendCounterpartyComment",
+    "SendCounterpartySuccessfully",
+    "SendCounterpartyResult",
+    "SendCounterpartyPositiveResult",
+    "SendCounterpartyNegativeResult",
+    "ErrorWhileSendingSignToCounterparty",
+    "SendAnswerCounterpartySuccessfully",
+    "RejectCertificateNotFound",
+    "NotificationNoCertificates",
+    "BoxIsNotValid",
+    "AnswerIsAlreadySent",
+    "SendAnswerToCounterpartyDialogTitle",
+    "RejectDocumentVersion",
+    "RejectDocumentBy",
+    "RejectDocumentComment",
+    "RejectDocumentSubject",
+    "AssignDocumentVersion",
+    "AssignDocumentSubject",
+    "AssignDocumentBy",
+    "DocumentHasChangedAfterSendToCounterparty",
+    "SendCounterpartySignAndSendHint",
+    "DocumentIsAlreadySentToCounterparty",
+    "RevocationNoticeSubjectTerminate",
+    "RevocationNoticeSubjectObsolete",
+    "RevocationNoticeActiveTextObsolete",
+    "RevocationNoticeActiveTextTerminate",
+    "RevocationNoticeReason",
+    "RevocationNoticeActiveTextInProcess",
+    "RevocationNoticeSubjectInProcess",
+    "RevocationNoticeInProcessComment",
+    "GetMessageFailed",
+    "DocumentOversized",
+    "AddendaOversized",
+    "RevocationNoticeOurSubjectTerminate",
+    "RevocationNoticeOurSubjectObsolete",
+    "RevocationNoticeOurActiveTextObsolete",
+    "RevocationNoticeOurActiveTextTerminate",
+    "RejectNoticeSubjectObsolete",
+    "RejectNoticeActiveTextObsolete",
+    "SignNoticeSubjectObsolete",
+    "SignNoticeActiveTextObsolete",
+    "NoticeOurBoundDocument",
+    "NoticeCounterpartyBoundDocument",
+    "SendCounterpartyNotApproved",
+    "CannotDeliveryDocumentToCounterparty",
+    "RevocationTrackingNote",
+    "CheckReturnRevocationResult",
+    "ErrorSendingDocumentToCounterparty",
+    "DocumentIsSignedByBothSides",
+    "MessageHasDocumentWithReceiptRequire",
+    "ConfirmReceiptSubject",
+    "Documents",
+    "SendSignToCounterparty",
+    "SendRejectToCounterparty",
+    "BoxesNotConnected",
+    "DocumentComment",
+    "TaxInvoiceRevision",
+    "IncomingNotNumeratedDocumentNote",
+    "TaxInvoiceCorrection",
+    "GeneratePublicBodyFailed",
+    "ReceiptNeededActiveText",
+    "AmendmentNoticeActiveTextObsolete",
+    "AmendmentNoticeSubjectObsolete",
+    "NonFormalizedTaxInvoiceSendingError",
+    "TaxInvoice",
+    "TaxInvoiceTo",
+    "SendCounterpartyRejectResult",
+    "RejectInvoiceNotice",
+    "RejectNotice",
+    "AmendedDocumentVersion",
+    "AmendedDocumentBy",
+    "AmendedDocumentSubject",
+    "NoticeCounterpartyBoundDocumentWithLinks",
+    "NoticeOurBoundDocumentWithLinks",
+    "AllAnswersIsAlreadySent",
+    "SendCounterpartyAddendaNotRight",
+    "SendDeliveryConfirmationBoxesNotFound",
+    "ReceiptNeededOutgoingActiveText",
+    "TaskSubjectTemplate",
+    "RevocationTaskThreadSubjectInProcess",
+    "DocumentSignedThreadSubject",
+    "NoticeThreadSubject",
+    "ConfirmReceiptThreadSubject"
+  ],
+  "ServerAssemblyName": "Sungero.Exchange.Server",
+  "ServerNamespace": "Sungero.Exchange.Server",
+  "SharedAssemblyName": "Sungero.Exchange.Shared",
+  "SharedNamespace": "Sungero.Exchange.Shared",
+  "SpecialFolders": [],
+  "Version": "3.6.1.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

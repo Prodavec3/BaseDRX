@@ -1,0 +1,161 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "47007468-7f22-4f94-8f69-19d33ada3657",
+  "Name": "AssignmentCompletionReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient",
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "542acc51-0379-47a8-9de4-3638995d61d9",
+      "Name": "PeriodBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "1527edcf-346e-4830-8a28-bb481077eb86",
+      "Name": "PeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "2b9b07de-af9b-4017-b8cf-8b6c5ccf2c0c",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "a584c1ef-334f-40ef-8da8-68006bf5e56e",
+      "Name": "AssignmentViewTableName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "85760dd4-3bac-4a32-9f15-02320a8a51c4",
+      "Name": "DepartmentId",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "5c1a38aa-0139-4eda-8f96-48db2e5b4f9e",
+      "Name": "ClientPeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "bd4748b5-7115-42b9-b4b8-3bd907f26ca1",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "31a78519-cd05-4bed-8bf7-170e9f515543",
+      "Name": "LoadOldAssignments",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "aa8e45a9-1c9e-4d87-ac3c-0f17d4132ee3",
+      "Name": "Performer",
+      "EntityType": "243c2d26-f5f7-495f-9faf-951d91215c77",
+      "InternalDataTypeName": "Sungero.CoreEntities.IUser, Sungero.Domain.Shared"
+    },
+    {
+      "NameGuid": "59c06d13-36e0-4ec2-8b13-0e50c192d587",
+      "Name": "PerformerId",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "8d2f2c57-92bc-4e36-b213-e479f83234ed",
+      "Name": "TaskTypeGuid2",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "445737fa-e272-4412-803b-d8aa08bb77d0",
+      "Name": "IncludeTask",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "84248e50-94f0-4bc8-8812-ee14671358c7",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "efc69c52-054c-45c0-a290-6df46f15e2df",
+      "Name": "BusinessUnitId",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "eecbf4af-8f12-44d2-93b0-2b4b066a9a45",
+      "Name": "ParamsDescription",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "1b4da781-70db-4f69-9ae1-e020553f9c45",
+      "Name": "DoneAndNotOverdue",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "6f9b0e57-ea80-4e3b-8ac8-728c48d2dbd3",
+      "Name": "DoneAndOverdue",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "bf46d14e-6199-4eff-91bd-fa0b3174d2f9",
+      "Name": "UndoneAndNotOverdue",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "263b93e2-b69d-4f5a-a02d-401499c55ecb",
+      "Name": "UndoneAndOverdue",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "d87c1862-1c37-413f-80c0-281af3e03def",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ReportName",
+    "Period",
+    "PeriodTo",
+    "Employee",
+    "AssignmentCompletion",
+    "Subject",
+    "TaskAuthor",
+    "Created",
+    "Deadline",
+    "Completed",
+    "Delay",
+    "AssignmentID",
+    "NoAssignments",
+    "No",
+    "WithoutDeadline",
+    "PeriodFrom"
+  ],
+  "Versions": []
+}

@@ -1,0 +1,120 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "25780677-4969-4ff0-8dbd-69c21c5fd399",
+  "Name": "DraftResolutionReport",
+  "AssociatedGuid": "4ef03457-8b42-4239-a3c5-d4d05e61f0b6",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "HandledEvents": [
+    "AfterExecuteServer",
+    "BeforeExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "Parameters",
+    "HandledEvents",
+    "DisplayName"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "585c32bb-ec6b-4024-8ab8-b5f320e7de62",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "a195ae45-a025-42cd-939d-d0198aa67dba",
+      "Name": "Resolution",
+      "EntityType": "c290b098-12c7-487d-bb38-73e2c98f9789",
+      "InternalDataTypeName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces",
+      "IsCollection": true
+    },
+    {
+      "NameGuid": "7ba8aca1-286f-42c5-9e4a-8f68a607112f",
+      "Name": "AuthorJobTitle",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "e866c70e-fa23-47b4-a1d9-21dd9ddcef3b",
+      "Name": "AuthorShortName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "986fa2c7-9e56-453b-ae4a-acf7248feaad",
+      "Name": "DocumentShortName",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "ecb9ebf0-842a-4e5c-8c93-7228e26f3d6d",
+      "Name": "Author",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "fe7ee71b-1a8a-4434-b994-e7e3cd78baca",
+      "Name": "Document",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "d81ad9d1-6eeb-47a4-bf70-fcc1139db6c3",
+      "Name": "TextResolution",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "b12dbfd3-d53d-495a-bd36-567cdf8fc9df",
+      "Name": "BusinessUnit",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "DraftResolutionReportParameters",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "PerformersLabel",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Deadline",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "ResolutionLabel",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "SupervisorLabel",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.RecordManagement.Structures.DraftResolutionReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "DocumentShortNamePrefix",
+    "AssigneePrefix",
+    "ResolutionPrefix",
+    "OnControlPrefix",
+    "Deadline",
+    "IDPrefix"
+  ],
+  "Versions": []
+}

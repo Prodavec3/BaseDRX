@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Enum_Result_Done" xml:space="preserve">
+    <value>Executed</value>
+  </data>
+  <data name="Action_Done" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="Action_DoneHint" xml:space="preserve">
+    <value>Execute Action item</value>
+  </data>
+  <data name="Action_DoneDescription" xml:space="preserve">
+    <value>Execute the current action item</value>
+  </data>
+  <data name="Action_DoneConfirmationMessage" xml:space="preserve">
+    <value>Execute the action item?</value>
+  </data>
+  <data name="Action_CreateChildActionItem" xml:space="preserve">
+    <value>Create Child Action Item</value>
+  </data>
+  <data name="Action_CreateChildActionItemDescription" xml:space="preserve">
+    <value>Create a child action item from the current one</value>
+  </data>
+  <data name="Action_CreateChildActionItemHint" xml:space="preserve">
+    <value>Create Child Action Item</value>
+  </data>
+  <data name="Action_CreateChildActionItemConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ActionItem" xml:space="preserve">
+    <value>Action item</value>
+  </data>
+  <data name="Action_ExtendDeadline" xml:space="preserve">
+    <value>Deadline Extension Request</value>
+  </data>
+  <data name="Action_ExtendDeadlineDescription" xml:space="preserve">
+    <value>Send request for deadline extension of action item.</value>
+  </data>
+  <data name="Action_ExtendDeadlineHint" xml:space="preserve">
+    <value>Request for Deadline Extension</value>
+  </data>
+  <data name="Action_ExtendDeadlineConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_23bc4bb048724e98b2ba75e9072a2cf0" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="Ribbon_Executing_3c558f6eb5fa4bc2b21a1f751e3da397" xml:space="preserve">
+    <value>Action Item</value>
+  </data>
+  <data name="Ribbon_AsgGroup_ac82503a7a4749d0b90c9bb512c4559c" xml:space="preserve">
+    <value>Execution</value>
+  </data>
+  <data name="Property_AssignedBy" xml:space="preserve">
+    <value>Assigned by</value>
+  </data>
+  <data name="Property_ScheduledDate" xml:space="preserve">
+    <value>Scheduled date</value>
+  </data>
+  <data name="Footer_ActiveEmptyText" xml:space="preserve">
+    <value>Action item status report…</value>
+  </data>
+  <data name="Action_RequireReport" xml:space="preserve">
+    <value>Require Report</value>
+  </data>
+  <data name="Action_RequireReportDescription" xml:space="preserve">
+    <value>Require action item status report from co-assignees</value>
+  </data>
+  <data name="Action_RequireReportHint" xml:space="preserve">
+    <value>Require Report from Co-assignees</value>
+  </data>
+  <data name="Action_RequireReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_JobControl_255d43b227b947ffb228e46610369804" xml:space="preserve">
+    <value>Control</value>
+  </data>
+  <data name="Control_f2fa16259c7d4f8ca19287ec6375af3f_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_bd78fd1f00144cb3b86277e3ddfc7609_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Execution of action item</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Execution of action item</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Assignments to perform action item</value>
+  </data>
+  <data name="Property_NeedAbortChildActionItems" xml:space="preserve">
+    <value>Abort execution of child action items</value>
+  </data>
+  <data name="Property_Deadline" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="Form_c4e57967ac04483d99c71002c4610e1f" xml:space="preserve">
+    <value>Action item</value>
+  </data>
+  <data name="ControlGroup_a1cb2e6fe813407e9c1e4e1fc176bd54" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_8474eea3a99c4c2c9fe2086d9ca84a5e" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Ribbon_DocumentPackage_c42b6a36d87e4fa3989efe1564655efd" xml:space="preserve">
+    <value>Document Package</value>
+  </data>
+  <data name="Action_CreateReplyLetter" xml:space="preserve">
+    <value>Create Letter</value>
+  </data>
+  <data name="Action_CreateReplyLetterDescription" xml:space="preserve">
+    <value>Create an outgoing response letter.
+The document will be added to the "Result" group.</value>
+  </data>
+  <data name="Action_CreateReplyLetterHint" xml:space="preserve">
+    <value>Create Outgoing Letter</value>
+  </data>
+  <data name="Action_CreateReplyLetterConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateReplyLetterConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintActionItem" xml:space="preserve">
+    <value>Print Action Item</value>
+  </data>
+  <data name="Action_PrintActionItemDescription" xml:space="preserve">
+    <value>Print the action item to submit it to the employee who does not work in the system.</value>
+  </data>
+  <data name="Action_PrintActionItemHint" xml:space="preserve">
+    <value>Print Action Item</value>
+  </data>
+  <data name="Action_PrintActionItemConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_PrintActionItemConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_Result_Forwarded" xml:space="preserve">
+    <value>Forwarded</value>
+  </data>
+  <data name="Action_Forwarded" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="Action_ForwardedHint" xml:space="preserve">
+    <value>Forward Action Item Execution</value>
+  </data>
+  <data name="Action_ForwardedConfirmationMessage" xml:space="preserve">
+    <value>Forward the assignment to execute the action item?</value>
+  </data>
+  <data name="Action_ForwardedDescription" xml:space="preserve">
+    <value>Send the assignment to execute action item to another employee.</value>
+  </data>
+</root>
