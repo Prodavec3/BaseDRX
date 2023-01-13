@@ -19,6 +19,7 @@ namespace Sungero.FinancialArchive
         
       // Отключить проброс полей, которых нет в выставленных СФ.
       e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.CounterpartySignatory);
+      e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.CounterpartySigningReason);
       e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.ResponsibleEmployee);
     }
   }

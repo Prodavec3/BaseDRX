@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Sungero.ClientExtensions;
 using Sungero.Company;
 using Sungero.Content;
 using Sungero.Core;
@@ -386,7 +385,7 @@ namespace Sungero.Docflow.Client
     /// <param name="document">Документ, по которому создается поручение.</param>
     /// <returns>Поручение.</returns>
     [Public]
-    public static ITask CreateActionItemExecution(IOfficialDocument document)
+    public virtual ITask CreateActionItemExecution(IOfficialDocument document)
     {
       return RecordManagement.PublicFunctions.Module.Remote.CreateActionItemExecution(document);
     }
@@ -397,7 +396,7 @@ namespace Sungero.Docflow.Client
     /// <param name="document">Документ, по которому создается поручение.</param>
     /// <param name="parentAssignmentId">Id задания, от которого создается поручение.</param>
     /// <returns>Поручение.</returns>
-    public static ITask CreateActionItemExecution(IOfficialDocument document, int parentAssignmentId)
+    public virtual ITask CreateActionItemExecution(IOfficialDocument document, int parentAssignmentId)
     {
       return RecordManagement.PublicFunctions.Module.Remote.CreateActionItemExecution(document, parentAssignmentId);
     }
@@ -410,7 +409,7 @@ namespace Sungero.Docflow.Client
     /// <param name="resolution">Текст резолюции.</param>
     /// <param name="assignedBy">Пользователь - автор резолюции.</param>
     /// <returns>Поручение.</returns>
-    public static ITask CreateActionItemExecutionWithResolution(IOfficialDocument document, int parentAssignmentId, string resolution, Sungero.Company.IEmployee assignedBy)
+    public virtual ITask CreateActionItemExecutionWithResolution(IOfficialDocument document, int parentAssignmentId, string resolution, Sungero.Company.IEmployee assignedBy)
     {
       return RecordManagement.PublicFunctions.Module.Remote.CreateActionItemExecutionWithResolution(document, parentAssignmentId, resolution, assignedBy);
     }
@@ -458,7 +457,7 @@ namespace Sungero.Docflow.Client
     /// <summary>
     /// Проверить даты диалога отчета.
     /// </summary>
-    /// <param name="args">Аргументы.</param>
+    /// <param name="args">Аргументы события нажатия на кнопку диалога.</param>
     /// <param name="dialogPeriodBegin">Параметр даты начала.</param>
     /// <param name="dialogPeriodEnd">Параметр даты конца.</param>
     [Public]
@@ -484,7 +483,7 @@ namespace Sungero.Docflow.Client
     /// <summary>
     /// Проверить даты диалога.
     /// </summary>
-    /// <param name="args">Аргументы.</param>
+    /// <param name="args">Аргументы события нажатия на кнопку диалога.</param>
     /// <param name="dialogPeriodBegin">Параметр даты начала.</param>
     /// <param name="dialogPeriodEnd">Параметр даты конца.</param>
     [Public]
@@ -495,6 +494,13 @@ namespace Sungero.Docflow.Client
       CheckDialogPeriod(args, dialogPeriodBegin, dialogPeriodEnd, Sungero.Docflow.Resources.WrongPeriod);
     }
     
+    /// <summary>
+    /// Проверить даты диалога.
+    /// </summary>
+    /// <param name="args">Аргументы события нажатия на кнопку диалога.</param>
+    /// <param name="dialogPeriodBegin">Параметр даты начала.</param>
+    /// <param name="dialogPeriodEnd">Параметр даты конца.</param>
+    /// <param name="wrongPeriodError">Текст ошибки о неверной дате.</param>
     private static void CheckDialogPeriod(CommonLibrary.InputDialogButtonClickEventArgs args,
                                           CommonLibrary.IDateDialogValue dialogPeriodBegin,
                                           CommonLibrary.IDateDialogValue dialogPeriodEnd,
@@ -590,12 +596,11 @@ namespace Sungero.Docflow.Client
     public static bool ShowConfirmationDialogCreationActionItem(IAssignment assignment, IOfficialDocument document, Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
       var documentApprovalTask = ApprovalTasks.As(assignment.Task);
-      var hasSubActionItem = Functions.Module.HasSubActionItems(assignment.Task, Workflow.Task.Status.InProcess, documentApprovalTask.Addressee);
+      var hasSubActionItem = Functions.Module.HasSubActionItems(assignment.Task, Workflow.Task.Status.InProcess);
       if (hasSubActionItem)
         return false;
-      
-      var isExecutionAssignment = ApprovalExecutionAssignments.Is(assignment);
-      var dialogText = isExecutionAssignment ? Resources.ExecuteWithoutCreatingActionItemFromAddressee : Resources.ExecuteWithoutCreatingActionItem;
+
+      var dialogText = Resources.ExecuteWithoutCreatingActionItem;
       var dialog = Dialogs.CreateTaskDialog(dialogText, MessageType.Question);
       dialog.Buttons.AddYes();
       dialog.Buttons.Default = DialogButtons.Yes;
@@ -618,13 +623,14 @@ namespace Sungero.Docflow.Client
       else if (stages.Any(s => s.StageType == Docflow.ApprovalRuleBaseStages.StageType.Sign))
         assignedBy = documentApprovalTask.Signatory;
       
+      var isExecutionAssignment = ApprovalExecutionAssignments.Is(assignment);
       var resolution = assignment.ActiveText;
       if (isExecutionAssignment)
         resolution = ApprovalExecutionAssignments.As(assignment).ResolutionText;
       
       assignment.Save();
       
-      var actionItem = RecordManagement.ActionItemExecutionTasks.As(CreateActionItemExecutionWithResolution(document, assignment.Id, resolution, assignedBy));
+      var actionItem = RecordManagement.ActionItemExecutionTasks.As(Functions.Module.CreateActionItemExecutionWithResolution(document, assignment.Id, resolution, assignedBy));
       
       if (actionItem != null)
       {
@@ -632,11 +638,11 @@ namespace Sungero.Docflow.Client
         actionItem.ShowModal();
       }
 
-      hasSubActionItem = Functions.Module.HasSubActionItems(assignment.Task, Workflow.Task.Status.InProcess, assignedBy);
+      hasSubActionItem = Functions.Module.HasSubActionItems(assignment.Task, Workflow.Task.Status.InProcess);
       if (hasSubActionItem)
         return true;
       
-      var hasDraftSubActionItem = Functions.Module.HasSubActionItems(assignment.Task, Workflow.Task.Status.Draft, assignedBy);
+      var hasDraftSubActionItem = Functions.Module.HasSubActionItems(assignment.Task, Workflow.Task.Status.Draft);
       e.AddError(hasDraftSubActionItem ? Resources.AllCreatedActionItemsShouldBeStarted : Resources.CreatedActionItemExecutionNeeded);
       e.Cancel();
       return true;
@@ -871,10 +877,11 @@ namespace Sungero.Docflow.Client
                                         Company.IEmployee substituted, bool needStrongSign, string comment,
                                         Sungero.Domain.Client.ExecuteActionArgs eventArgs)
     {
-      var signatories = Functions.OfficialDocument.Remote.GetSignatories(document);
       var currentEmployee = Company.Employees.Current;
-      var canSubstitutedApprove = signatories.Any(s => Equals(s.EmployeeId, substituted.Id));
-      var canCurrentEmployeeApprove = signatories.Any(s => currentEmployee != null && Equals(s.EmployeeId, currentEmployee.Id));
+      var canSubstitutedApprove = Functions.OfficialDocument.Remote.CanSignByEmployee(document, substituted);
+      var canCurrentEmployeeApprove = currentEmployee != null
+        ? Functions.OfficialDocument.Remote.CanSignByEmployee(document, currentEmployee)
+        : false;
       var signatory = canSubstitutedApprove && canCurrentEmployeeApprove
         ? substituted
         : currentEmployee;
@@ -1048,6 +1055,7 @@ namespace Sungero.Docflow.Client
               Functions.AccountingDocumentBase.GenerateDefaultSellerTitle(accountingDocument);
               Functions.AccountingDocumentBase.GenerateDefaultBuyerTitle(accountingDocument);
             }
+            
             result = Signatures.Approve(document.LastVersion, certificate, comment, substituted);
           }
           else if (endorseWhenApproveFailed)
@@ -1155,6 +1163,20 @@ namespace Sungero.Docflow.Client
     {
       certificate = null;
       var certificates = PublicFunctions.Module.Remote.GetCertificates(document);
+      var ourSigningReason = document.OurSigningReason;
+      
+      // Взять сертификат из основания подписания, если он подходит по критериям.
+      // При рассмотрении адресатом поле "Основание" вернет сертификат подписавшего, а не рассматривающего, поэтому для рассмотрения автовыбор сертификата из "Основания" не делать.
+      if (!CallContext.CalledFrom(ApprovalReviewAssignments.Info) &&
+          ourSigningReason != null &&
+          ourSigningReason.Certificate != null &&
+          certificates.Contains(ourSigningReason.Certificate) &&
+          Equals(ourSigningReason.Certificate.Owner, Employees.Current) &&
+          !Functions.SignatureSetting.Remote.FormalizedPowerOfAttorneyIsExpired(ourSigningReason))
+      {
+        certificate = document.OurSigningReason.Certificate;
+        return true;
+      }
       
       if (certificates.Any())
       {
@@ -1369,9 +1391,7 @@ namespace Sungero.Docflow.Client
     [Public]
     public static void ExportFinancialDocumentDialogWithSearch()
     {
-      if (ClientApplication.ApplicationType == ApplicationType.Desktop)
-        ExportDocumentDialogWithSearch(null, false);
-      else
+      if (ClientApplication.ApplicationType == ApplicationType.Web)
         ExportDocumentDialogWithSearchInWeb(null, false);
     }
     
@@ -1383,7 +1403,7 @@ namespace Sungero.Docflow.Client
     public static IQueryable<IOfficialDocument> FinancialDocumentDialogSearch()
     {
       if (ClientApplication.ApplicationType == ApplicationType.Desktop)
-        return ExportDocumentDialogWithSearch(null, true);
+        return ExportDocumentDialogWithSearch();
       else
         return ExportDocumentDialogWithSearchInWeb(null, true);
     }
@@ -1395,390 +1415,8 @@ namespace Sungero.Docflow.Client
     [Public]
     public static void ExportDocumentDialog(List<IOfficialDocument> documents)
     {
-      if (ClientApplication.ApplicationType == ApplicationType.Desktop)
-        ExportDocumentDialogWithSearch(documents, false);
-      else
+      if (ClientApplication.ApplicationType == ApplicationType.Web)
         ExportDocumentDialogWithSearchInWeb(documents, false);
-    }
-    
-    private static IQueryable<IOfficialDocument> ExportDocumentDialogWithSearch(List<IOfficialDocument> documentList, bool onlySearch)
-    {
-      Docflow.Structures.Module.IExportDialogSearch filter = null;
-      var documents = documentList != null ? documentList.AsQueryable() : null;
-      var documentCount = documents != null ? documents.Count() : 0;
-      var canSearch = documents == null;
-      IQueryable<IOfficialDocument> returned = null;
-      var reportData = Structures.Module.AfterExportDialog.Create();
-      reportData.Documents = new List<Structures.Module.ExportedDocument>();
-      var documentsToPrepare = new List<int>();
-      
-      var isSingleExport = documentList != null && documentList.Count() == 1 &&
-        (Contracts.IncomingInvoices.Is(documentList.FirstOrDefault()) ||
-         Contracts.OutgoingInvoices.Is(documentList.FirstOrDefault()) ||
-         !AccountingDocumentBases.Is(documentList.FirstOrDefault())) &&
-        !Sungero.Contracts.ContractualDocuments.Is(documentList.FirstOrDefault());
-
-      var rootFolder = IO.GetMyDocumentsFolder();
-      var personalSettings = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(null);
-      if (personalSettings != null && !string.IsNullOrWhiteSpace(personalSettings.FinArchiveExportPath) &&
-          IO.ExistsDirectory(personalSettings.FinArchiveExportPath))
-      {
-        rootFolder = personalSettings.FinArchiveExportPath;
-      }
-      
-      var search = canSearch;
-      var start = !canSearch;
-      var end = false;
-      var step = 1;
-
-      var dialog = Dialogs.CreateInputDialog(onlySearch ?
-                                             Resources.ExportDialog_Search_Title :
-                                             Resources.ExportDialog_Title);
-      // Размеры подобраны на глаз.
-      dialog.Height = canSearch ? (onlySearch ? 0 : 242) : 200;
-      dialog.HelpCode = onlySearch ? Constants.AccountingDocumentBase.HelpCodes.Search : Constants.AccountingDocumentBase.HelpCodes.Export;
-      var type = dialog.AddSelect(Resources.ExportDialog_Format, true, Resources.ExportDialog_Format_Formalized)
-        .From(Resources.ExportDialog_Format_Formalized, Resources.ExportDialog_Format_Print);
-      var group = dialog.AddSelect(Resources.ExportDialog_Group, true, Resources.ExportDialog_Group_None)
-        .From(Resources.ExportDialog_Group_None,
-              Resources.ExportDialog_Group_Counterparty,
-              Resources.ExportDialog_Group_DocumentType);
-      var addAddendum = dialog.AddBoolean(Sungero.Docflow.Resources.ExportDialog_AddAddendum, true);
-      var path = dialog.AddString(Resources.ExportDialog_Path, false, rootFolder);
-      path.IsEnabled = false;
-      var changePath = dialog.AddHyperlink(Resources.ExportDialog_Hyperlink_ChangePath);
-      
-      var properties = AccountingDocumentBases.Info.Properties;
-      var unit = dialog.AddSelect(properties.BusinessUnit.LocalizedName, !onlySearch, Company.BusinessUnits.Null);
-      var counterparty = dialog.AddSelect(properties.Counterparty.LocalizedName, false, Parties.Counterparties.Null);
-      
-      var contract = dialog.AddSelect(Resources.ExportDialog_Search_Contract, false, Contracts.ContractualDocuments.Null)
-        .Where(c => (unit.Value == null || Equals(c.BusinessUnit, unit.Value)) && (counterparty.Value == null || Equals(c.Counterparty, counterparty.Value)));
-
-      var allowedKinds = new List<IDocumentKind>();
-      
-      var allowedAccountingDocumentKinds = Functions.DocumentKind.GetAvailableDocumentKinds(typeof(IAccountingDocumentBase))
-        .Where(k => !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.IncomingInvoiceGuid) &&
-                    !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.OutgoingInvoiceGuid));
-      allowedKinds.AddRange(allowedAccountingDocumentKinds);
-      
-      var allowedContractualDocumentKinds = Functions.DocumentKind.GetAvailableDocumentKinds(typeof(IContractualDocumentBase));
-      allowedKinds.AddRange(allowedContractualDocumentKinds);
-      allowedKinds = allowedKinds.OrderBy(k => k.Name).ToList();
-      
-      var kinds = dialog.AddSelectMany(Resources.ExportDialog_Search_DocumentKinds, false, Docflow.DocumentKinds.Null)
-        .From(allowedKinds);
-      var dateFrom = dialog.AddDate(Resources.ExportDialog_Search_DateFrom, false);
-      var dateTo = dialog.AddDate(Resources.ExportDialog_Search_DateTo, false);
-      
-      var showDocs = dialog.Buttons.AddCustom(Resources.ExportDialog_Search_Show);
-      var back = dialog.Buttons.AddCustom(Resources.ExportDialog_Back);
-      back.IsVisible = canSearch;
-      var next = dialog.Buttons.AddCustom(Resources.ExportDialog_StartExport);
-      var cancel = dialog.Buttons.AddCustom(Resources.ExportDialog_Close);
-      
-      Action showAllDocuments = () => documents.Show();
-      
-      // Фильтрация договоров по НОР и контрагентам.
-      unit.SetOnValueChanged(u =>
-                             {
-                               if (u.NewValue != null && contract.Value != null && !Equals(contract.Value.BusinessUnit, u.NewValue))
-                                 contract.Value = null;
-                             });
-      counterparty.SetOnValueChanged(cp =>
-                                     {
-                                       if (cp.NewValue != null && contract.Value != null && !Equals(contract.Value.Counterparty, cp.NewValue))
-                                         contract.Value = null;
-                                     });
-      contract.SetOnValueChanged(c =>
-                                 {
-                                   if (c.NewValue != null)
-                                   {
-                                     unit.Value = c.NewValue.BusinessUnit;
-                                     counterparty.Value = c.NewValue.Counterparty;
-                                   }
-                                 });
-
-      changePath.SetOnExecute(() =>
-                              {
-                                var newPath = WinApiDialogs.SelectFolder(path.Value);
-                                if (newPath != path.Value)
-                                {
-                                  path.Value = newPath;
-                                  if (personalSettings != null)
-                                  {
-                                    personalSettings.FinArchiveExportPath = newPath;
-                                    personalSettings.Save();
-                                  }
-                                }
-                              });
-      
-      var resultFolder = string.Empty;
-      var errorInInitialize = false;
-      
-      Action<CommonLibrary.InputDialogRefreshEventArgs> refresh = (r) =>
-      {
-        if (!onlySearch)
-        {
-          if (search)
-          {
-            dialog.Text = Resources.ExportDialog_Step_SearchFormat(step);
-            dialog.Text += Environment.NewLine;
-          }
-          else if (start)
-          {
-            dialog.Text = Resources.ExportDialog_Step_ConfigFormat(step);
-            dialog.Text += Environment.NewLine + Environment.NewLine;
-            
-            dialog.Text += Resources.ExportDialog_OpenDocumentsFormat(documentCount);
-          }
-          else if (end)
-          {
-            dialog.Text = Resources.ExportDialog_Step_EndFormat(step);
-            dialog.Text += Environment.NewLine + Environment.NewLine;
-            if (reportData.Documents.Any(d => !d.IsFaulted))
-              dialog.Text += Resources.ExportDialog_CompletedFormat(resultFolder);
-            else if (reportData.Documents.Any(d => d.IsFaulted))
-              dialog.Text += Resources.ExportDialog_CompletedNotExported;
-            else if (errorInInitialize)
-              dialog.Text += Resources.ExportDialog_Error_Client_NoReason;
-            else
-              dialog.Text += Resources.ExportDialog_CompletedNotFound;
-            
-            dialog.Text += Environment.NewLine + Environment.NewLine;
-            dialog.Text += Resources.ExportDialog_End_AllDocsFormat(reportData.Documents.Count(d => !d.IsAddendum));
-            dialog.Text += Environment.NewLine;
-            dialog.Text += Resources.ExportDialog_End_FormalizedDocsFormat(reportData.Documents.Count(d => !d.IsAddendum && !d.IsFaulted && d.IsFormalized));
-            dialog.Text += Environment.NewLine;
-            dialog.Text += Resources.ExportDialog_End_NonformalizedDocsFormat(reportData.Documents.Count(d => !d.IsAddendum && !d.IsFaulted && !d.IsFormalized));
-            if (reportData.Documents.Any(d => !d.IsAddendum && d.IsFaulted))
-            {
-              dialog.Text += Environment.NewLine;
-              dialog.Text += Resources.ExportDialog_End_NotExportedDocsFormat(reportData.Documents.Count(d => !d.IsAddendum && d.IsFaulted));
-            }
-            
-            if (reportData.Documents.Any(d => d.IsAddendum))
-            {
-              dialog.Text += Environment.NewLine + Environment.NewLine;
-              dialog.Text += Resources.ExportDialog_End_AllAddendumsFormat(reportData.Documents.Count(d => d.IsAddendum));
-              dialog.Text += Environment.NewLine;
-              dialog.Text += Resources.ExportDialog_End_FormalizedDocsFormat(reportData.Documents.Count(d => d.IsAddendum && !d.IsFaulted && d.IsFormalized));
-              dialog.Text += Environment.NewLine;
-              dialog.Text += Resources.ExportDialog_End_NonformalizedDocsFormat(reportData.Documents.Count(d => d.IsAddendum && !d.IsFaulted && !d.IsFormalized));
-              if (reportData.Documents.Any(d => d.IsAddendum && d.IsFaulted))
-              {
-                dialog.Text += Environment.NewLine;
-                dialog.Text += Resources.ExportDialog_End_NotExportedDocsFormat(reportData.Documents.Count(d => d.IsAddendum && d.IsFaulted));
-              }
-            }
-          }
-        }
-
-        group.IsVisible = start && !isSingleExport;
-        type.IsVisible = start;
-        addAddendum.IsVisible = start;
-        path.IsVisible = start;
-        changePath.IsVisible = start;
-        
-        unit.IsVisible = search;
-        counterparty.IsVisible = search;
-        dateFrom.IsVisible = search;
-        dateTo.IsVisible = search;
-        kinds.IsVisible = search;
-        contract.IsVisible = search;
-        showDocs.IsVisible = (search && onlySearch || start) && !isSingleExport || end;
-        showDocs.IsEnabled = start ? documentCount != 0 : (end ? !errorInInitialize : true);
-        
-        next.IsVisible = !onlySearch;
-        back.IsVisible = start && canSearch;
-        next.IsEnabled = start ? documentCount != 0 : (end ? reportData.Documents.Any(d => !d.IsFaulted) : true);
-        
-        back.Name = Resources.ExportDialog_Back;
-        next.Name = end ? Resources.ExportDialog_OpenExplorer :
-          (search ? Resources.ExportDialog_ConfigExport : Resources.ExportDialog_StartExport);
-        cancel.Name = end ? Resources.ExportDialog_Close : Resources.ExportDialog_Cancel;
-        showDocs.Name = search ? Resources.ExportDialog_Search_OnlySearch :
-          (start ? Resources.ExportDialog_Search_Show : Resources.ExportDialog_End_Report);
-      };
-      
-      dialog.SetOnRefresh(refresh);
-      
-      dialog.SetOnButtonClick(
-        (h) =>
-        {
-          if (h.Button == next || h.Button == back || (h.Button == showDocs && !onlySearch))
-            h.CloseAfterExecute = false;
-          
-          #region Экран с результатами выгрузки
-
-          if (end)
-          {
-            if (h.Button == next)
-            {
-              if (!string.IsNullOrWhiteSpace(resultFolder))
-                System.Diagnostics.Process.Start(resultFolder);
-            }
-            
-            if (h.Button == showDocs)
-            {
-              var generated = FinancialArchive.Reports.GetFinArchiveExportReport();
-              generated.CurrentTime = reportData.DateTime ?? Calendar.UserNow;
-              generated.Exported = reportData.Documents.Count(d => !d.IsFaulted);
-              generated.NotExported = reportData.Documents.Count(d => d.IsFaulted);
-              generated.ReportSessionId = Functions.Module.Remote.GenerateFinArchiveExportReport(reportData.Documents, reportData.PathToRoot);
-              generated.Open();
-            }
-          }
-          
-          #endregion
-          
-          #region Экран параметров выгрузки
-          
-          if (start)
-          {
-            if (h.Button == next && h.IsValid)
-            {
-              var parameters = Structures.Module.ExportDialogParams
-                .Create(group.Value == Resources.ExportDialog_Group_Counterparty,
-                        group.Value == Resources.ExportDialog_Group_DocumentType,
-                        type.Value == Resources.ExportDialog_Format_Print,
-                        isSingleExport, addAddendum.Value.Value);
-              var partSize = parameters.ForPrint ? 3 : 5;
-              var initialize = Structures.Module.AfterExportDialog
-                .Create(string.Empty, string.Empty, Calendar.UserNow, new List<Structures.Module.ExportedDocument>());
-              try
-              {
-                initialize = filter != null ?
-                  Functions.Module.Remote.PrepareExportDocumentDialogDocuments(documentsToPrepare, parameters) :
-                  Functions.Module.Remote.PrepareExportDocumentDialogDocuments(documentList.Select(x => x.Id).ToList(), parameters);
-              }
-              catch (Exception ex)
-              {
-                errorInInitialize = true;
-                Logger.Error("Не удалось подготовить данные для выгрузки", ex);
-              }
-              documentCount = initialize.Documents.Count;
-              for (int i = 0; i < documentCount; i = i + partSize)
-              {
-                var docsAddedToResult = false;
-                List<Structures.Module.ExportedDocument> part = null;
-                List<Structures.Module.ExportedDocument> result = null;
-                try
-                {
-                  part = initialize.Documents.Skip(i).Take(partSize).ToList();
-                  result = Functions.Module.Remote.AfterExportDocumentDialog(part);
-                  if (result.Any())
-                  {
-                    var faultedDocuments = reportData.Documents.Where(d => d.IsFaulted).Select(d => d.Id);
-                    var addendaFaulted = result.Where(d => !d.IsFaulted && d.IsAddendum && d.LeadDocumentId != null && faultedDocuments.Contains(d.LeadDocumentId.Value));
-                    foreach (var addendum in addendaFaulted)
-                    {
-                      addendum.IsFaulted = true;
-                      addendum.Error = Resources.ExportDialog_Error_LeadDocumentNoVersion;
-                    }
-                    if (string.IsNullOrWhiteSpace(resultFolder))
-                    {
-                      resultFolder = IO.CreateDirectory(IO.Combine(path.Value, initialize.RootFolder));
-                      reportData.PathToRoot = resultFolder;
-                      reportData.DateTime = initialize.DateTime;
-                    }
-                    foreach (var doc in result.Where(d => !d.IsFaulted))
-                    {
-                      if (!result.Any(r => Equals(r.Id, doc.LeadDocumentId) && r.IsFaulted))
-                        ExtractDocument(doc, resultFolder);
-                      else
-                      {
-                        doc.IsFaulted = true;
-                        doc.Error = Resources.ExportDialog_Error_LeadDocumentNoVersion;
-                      }
-                    }
-                    reportData.Documents.AddRange(result);
-                    docsAddedToResult = true;
-                  }
-                }
-                catch (Exception ex)
-                {
-                  Logger.Debug(ex.ToString());
-                  if (!docsAddedToResult)
-                  {
-                    foreach (var document in part)
-                    {
-                      document.Error = Resources.ExportDialog_Error_ClientFormat(ex.Message.TrimEnd('.'));
-                      document.IsFaulted = true;
-                      reportData.Documents.Add(document);
-                    }
-                  }
-                }
-              }
-              IO.DeleteFileAndEmptyDirectory(string.Empty, resultFolder);
-              back.IsEnabled = false;
-              end = true;
-              step += 1;
-              start = false;
-              refresh.Invoke(null);
-            }
-            
-            if (h.Button == back)
-            {
-              search = true;
-              start = false;
-              step -= 1;
-              refresh.Invoke(null);
-            }
-            
-            if (h.Button == showDocs)
-            {
-              showAllDocuments();
-            }
-          }
-          
-          #endregion
-          
-          #region Экран поиска
-          
-          if (search)
-          {
-            if ((h.Button == next || h.Button == showDocs) &&
-                dateTo.Value != null && dateFrom.Value != null && dateTo.Value < dateFrom.Value)
-            {
-              h.AddError(Sungero.Docflow.Resources.ExportDialog_Error_WrongDatePeriod);
-              return;
-            }
-            
-            if (h.Button == cancel)
-            {
-              unit.IsRequired = false;
-              return;
-            }
-            
-            filter = Docflow.Structures.Module.ExportDialogSearch
-              .Create(unit.Value, counterparty.Value, contract.Value, dateFrom.Value, dateTo.Value, kinds.Value.ToList());
-            if (h.Button == showDocs)
-            {
-              returned = Functions.Module.Remote.SearchByRequisites(filter);
-            }
-            
-            if (h.Button == next)
-            {
-              if (h.IsValid)
-              {
-                var newDocuments = Functions.Module.Remote.SearchByRequisites(filter);
-                documents = newDocuments;
-                documentsToPrepare = newDocuments.Select(x => x.Id).ToList();
-                documentCount = documents.Count();
-                search = false;
-                start = true;
-                step += 1;
-                refresh.Invoke(null);
-              }
-            }
-          }
-          
-          #endregion
-        });
-      dialog.Show();
-      
-      return returned;
     }
     
     /// <summary>
@@ -1850,7 +1488,7 @@ namespace Sungero.Docflow.Client
       
       var allowedAccountingDocumentKinds = Functions.DocumentKind.GetAvailableDocumentKinds(typeof(IAccountingDocumentBase))
         .Where(k => !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.IncomingInvoiceGuid) &&
-                    !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.OutgoingInvoiceGuid));
+               !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.OutgoingInvoiceGuid));
       allowedKinds.AddRange(allowedAccountingDocumentKinds);
       
       var allowedContractualDocumentKinds = Functions.DocumentKind.GetAvailableDocumentKinds(typeof(IContractualDocumentBase));
@@ -2191,82 +1829,93 @@ namespace Sungero.Docflow.Client
     }
     
     /// <summary>
-    /// Распаковать документ в папку.
+    /// Поиск документов в архиве.
     /// </summary>
-    /// <param name="document">Документ с сервера.</param>
-    /// <param name="systemFolder">Путь к папке на жестком диске.</param>
-    public static void ExtractDocument(Structures.Module.ExportedDocument document, string systemFolder)
+    /// <returns>Кверик документов для выгрузки.</returns>
+    private static IQueryable<IOfficialDocument> ExportDocumentDialogWithSearch()
     {
-      var folder = document.Folder;
-      try
-      {
-        ExtractFolder(folder, systemFolder, document.Id);
-      }
-      catch (Exception ex)
-      {
-        document.IsFaulted = true;
-        document.Error = ex.Message;
-      }
-    }
-    
-    /// <summary>
-    /// Распаковать папку.
-    /// </summary>
-    /// <param name="folder">Папка с сервера.</param>
-    /// <param name="systemFolder">Путь к папке на жестком диске.</param>
-    /// <param name="id">ИД выгружаемого документа (для игнорирования приложений).</param>
-    public static void ExtractFolder(Structures.Module.ExportedFolder folder, string systemFolder, int id)
-    {
-      if (folder.Files.Any())
-      {
-        try
-        {
-          foreach (var file in folder.Files.Where(f => f.Id <= 0 || f.Id == id))
-          {
-            var folderInfo = IO.CreateDirectory(systemFolder);
-            var filePath = IO.Combine(folderInfo, file.FileName);
-            if (file.Body != null)
-              IO.WriteAllBytes(filePath, file.Body);
-            else
-            {
-              #warning Нелегал на сервис хранилищ, см 62340
-              var tokenRefresherConstructor = Type.GetType("Sungero.StorageServices.Shared.TokenRefresher, Sungero.StorageServices.Shared")
-                .GetConstructors().Single(c => c.GetParameters().Length == 2);
-              var tokenRefresher = tokenRefresherConstructor.Invoke(new[] { file.Token, null });
-              
-              var storageServiceReadStreamConstructor = Type.GetType("Sungero.StorageServices.Shared.StorageServiceReadStream, Sungero.StorageServices.Shared")
-                .GetConstructors().Single(c => c.GetParameters().Length == 2);
-              
-              using (var storageStream = (System.IO.Stream)storageServiceReadStreamConstructor.Invoke(new[] { file.ServicePath, tokenRefresher }))
-              {
-                using (var fileStream = System.IO.File.Create(filePath))
-                {
-                  storageStream.CopyTo(fileStream);
-                }
-              }
-            }
-            Logger.DebugFormat("File containing document with id {0} has been extracted to folder", file.Id);
-          }
-        }
-        catch
-        {
-          foreach (var file in folder.Files.Where(f => f.Id <= 0 || f.Id == id))
-          {
-            var filePath = IO.Combine(systemFolder, file.FileName);
-            IO.DeleteFileAndEmptyDirectory(filePath, systemFolder);
-          }
-          throw;
-        }
-      }
+      Docflow.Structures.Module.IExportDialogSearch filter = null;
+      IQueryable<IOfficialDocument> returned = null;
+
+      var dialog = Dialogs.CreateInputDialog(Resources.ExportDialog_Search_Title);
+      // Размеры подобраны на глаз.
+      dialog.Height = 0;
+      dialog.HelpCode = Constants.AccountingDocumentBase.HelpCodes.Search;
       
-      if (folder.Folders.Any())
-      {
-        foreach (var subFolder in folder.Folders)
+      var properties = AccountingDocumentBases.Info.Properties;
+      var unit = dialog.AddSelect(properties.BusinessUnit.LocalizedName, false, Company.BusinessUnits.Null);
+      var counterparty = dialog.AddSelect(properties.Counterparty.LocalizedName, false, Parties.Counterparties.Null);
+      
+      var contract = dialog.AddSelect(Resources.ExportDialog_Search_Contract, false, Contracts.ContractualDocuments.Null)
+        .Where(c => (unit.Value == null || Equals(c.BusinessUnit, unit.Value)) && (counterparty.Value == null || Equals(c.Counterparty, counterparty.Value)));
+
+      var allowedKinds = new List<IDocumentKind>();
+      
+      var allowedAccountingDocumentKinds = Functions.DocumentKind.GetAvailableDocumentKinds(typeof(IAccountingDocumentBase))
+        .Where(k => !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.IncomingInvoiceGuid) &&
+               !Equals(k.DocumentType.DocumentTypeGuid, Constants.AccountingDocumentBase.OutgoingInvoiceGuid));
+      allowedKinds.AddRange(allowedAccountingDocumentKinds);
+      
+      var allowedContractualDocumentKinds = Functions.DocumentKind.GetAvailableDocumentKinds(typeof(IContractualDocumentBase));
+      allowedKinds.AddRange(allowedContractualDocumentKinds);
+      allowedKinds = allowedKinds.OrderBy(k => k.Name).ToList();
+      
+      var kinds = dialog.AddSelectMany(Resources.ExportDialog_Search_DocumentKinds, false, Docflow.DocumentKinds.Null)
+        .From(allowedKinds);
+      var dateFrom = dialog.AddDate(Resources.ExportDialog_Search_DateFrom, false);
+      var dateTo = dialog.AddDate(Resources.ExportDialog_Search_DateTo, false);
+      
+      var showDocs = dialog.Buttons.AddCustom(Resources.ExportDialog_Search_OnlySearch);
+      var cancel = dialog.Buttons.AddCustom(Resources.ExportDialog_Cancel);
+      
+      // Фильтрация договоров по НОР и контрагентам.
+      unit.SetOnValueChanged(u =>
+                             {
+                               if (u.NewValue != null && contract.Value != null && !Equals(contract.Value.BusinessUnit, u.NewValue))
+                                 contract.Value = null;
+                             });
+      counterparty.SetOnValueChanged(cp =>
+                                     {
+                                       if (cp.NewValue != null && contract.Value != null && !Equals(contract.Value.Counterparty, cp.NewValue))
+                                         contract.Value = null;
+                                     });
+      contract.SetOnValueChanged(c =>
+                                 {
+                                   if (c.NewValue != null)
+                                   {
+                                     unit.Value = c.NewValue.BusinessUnit;
+                                     counterparty.Value = c.NewValue.Counterparty;
+                                   }
+                                 });
+      
+      dialog.SetOnButtonClick(
+        (h) =>
         {
-          var subFolderPath = IO.Combine(systemFolder, subFolder.FolderName);
-          ExtractFolder(subFolder, subFolderPath, id);
-        }
-      }
+          #region Экран поиска
+          if (h.Button == showDocs && dateTo.Value != null && dateFrom.Value != null && dateTo.Value < dateFrom.Value)
+          {
+            h.AddError(Sungero.Docflow.Resources.ExportDialog_Error_WrongDatePeriod);
+            return;
+          }
+          
+          if (h.Button == cancel)
+          {
+            unit.IsRequired = false;
+            return;
+          }
+          
+          filter = Docflow.Structures.Module.ExportDialogSearch
+            .Create(unit.Value, counterparty.Value, contract.Value, dateFrom.Value, dateTo.Value, kinds.Value.ToList());
+          if (h.Button == showDocs)
+          {
+            returned = Functions.Module.Remote.SearchByRequisites(filter);
+          }
+          #endregion
+        });
+      
+      dialog.Show();
+      
+      return returned;
     }
     
     /// <summary>
@@ -2591,5 +2240,6 @@ namespace Sungero.Docflow.Client
     }
     
     #endregion
+
   }
 }

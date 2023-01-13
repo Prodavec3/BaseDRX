@@ -75,7 +75,7 @@ namespace Sungero.Docflow.Client
     /// <returns>True - разрешить отправку, иначе false.</returns>
     public static bool ValidateBeforeRework(IAssignment assignment, string errorMessage, Sungero.Domain.Client.ExecuteActionArgs eventArgs)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(assignment.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(assignment.Task)))
       {
         eventArgs.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return false;
@@ -122,8 +122,16 @@ namespace Sungero.Docflow.Client
     {
       var dialog = Dialogs.CreateInputDialog(ApprovalTasks.Resources.Confirmation);
       var abortingReason = dialog.AddMultilineString(_obj.Info.Properties.AbortingReason.LocalizedName, true, activeText);
-      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
       CommonLibrary.IBooleanDialogValue isDocumentClosed = null;
+      IOfficialDocument document = null;
+
+      if (Functions.ApprovalTask.HasDocumentAndCanRead(_obj))
+      {
+        document = _obj.DocumentGroup.OfficialDocuments.First();
+        var textToMarkDocumentAsObsolete = Functions.OfficialDocument.GetTextToMarkDocumentAsObsolete(document);
+        var defaultMarkDocumentAsObsoleteValue = Functions.OfficialDocument.MarkDocumentAsObsolete(document);
+        isDocumentClosed = dialog.AddBoolean(textToMarkDocumentAsObsolete, defaultMarkDocumentAsObsoleteValue);
+      }
       
       dialog.SetOnButtonClick(args =>
                               {
@@ -141,12 +149,6 @@ namespace Sungero.Docflow.Client
                                   }
                                 }
                               });
-      
-      if (document != null)
-      {
-        var textToMarkDocumentAsObsolete = Functions.OfficialDocument.GetTextToMarkDocumentAsObsolete(document);
-        isDocumentClosed = dialog.AddBoolean(textToMarkDocumentAsObsolete, false);
-      }
       
       if (dialog.Show() == DialogButtons.Ok)
       {
@@ -276,6 +278,9 @@ namespace Sungero.Docflow.Client
     /// </summary>
     public virtual void AbortAsyncProcessingNotify()
     {
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(_obj))
+        return;
+      
       var document = _obj.DocumentGroup.OfficialDocuments.First();
       var needGrantAccessRightsOnDocumentAsync = Functions.ApprovalTask.NeedGrantAccessRightsOnDocument(_obj);
       var needSetStateAsync = !document.AccessRights.CanUpdate();
@@ -285,6 +290,22 @@ namespace Sungero.Docflow.Client
         Dialogs.NotifyMessage(Sungero.Docflow.ApprovalTasks.Resources.DocumentStateWillBeUpdatedLater);
       else if (needGrantAccessRightsOnDocumentAsync)
         Dialogs.NotifyMessage(Sungero.Docflow.ApprovalTasks.Resources.DocumentAccessRightsWillBeUpdatedLater);
+    }
+    
+    /// <summary>
+    /// Получить ошибку согласования основного документа.
+    /// </summary>
+    /// <param name="needStrongSign">Признак того, что согласование требует усиленную подпись.</param>
+    /// <returns>Текст ошибки. Null - если ошибки нет.</returns>
+    public virtual CommonLibrary.LocalizedString GetPrimaryDocumentApproveValidationError(bool needStrongSign)
+    {
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(_obj))
+        return ApprovalTasks.Resources.NoRightsToDocument;
+      
+      var document = _obj.DocumentGroup.OfficialDocuments.First();
+      if (document.HasVersions && needStrongSign && !PublicFunctions.Module.Remote.GetCertificates(document).Any())
+        return ApprovalTasks.Resources.CertificateNeeded;
+      return null;
     }
   }
 }

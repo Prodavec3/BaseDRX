@@ -14,20 +14,82 @@ namespace Sungero.RecordManagement.Server
 {
   partial class DocumentReviewTaskRouteHandlers
   {
-    #region 26. Удаление ненужных проектов резолюции.
+
+    #region 30. Удаление проектов резолюции
+    
+    public virtual void Script30Execute()
+    {
+      Logger.DebugFormat("DocumentReviewTask({0}) Script30Execute", _obj.Id);
+      
+      // Удалить проекты резолюции, если в "Выдал" указан не адресат.
+      Functions.DocumentReviewTask.DeleteDraftActionItems(_obj);
+    }
+    
+    #endregion
+    
+    #region 27. Задание на доработку рассмотрения
+    
+    public virtual void StartBlock27(Sungero.RecordManagement.Server.ReviewReworkAssignmentArguments e)
+    {
+      Logger.DebugFormat("DocumentReviewTask({0}) StartBlock27", _obj.Id);
+      
+      // Добавить инициатора в качестве исполнителя.
+      e.Block.Performers.Add(_obj.Author);
+      
+      // Вычислить дедлайн задания - 4 часа.
+      e.Block.RelativeDeadlineHours = 4;
+      
+      var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
+      e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.NeedToRework, document.Name);
+      
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
+      Functions.DocumentReviewTask.RelateAddedAddendaToPrimaryDocument(_obj);
+      
+      // Выдать исполнителю права на вложения.
+      Functions.DocumentReviewTask.GrantRightForAttachmentsToAssignees(_obj, e.Block.Performers.ToList());
+    }
+    
+    public virtual void StartAssignment27(Sungero.RecordManagement.IReviewReworkAssignment assignment, Sungero.RecordManagement.Server.ReviewReworkAssignmentArguments e)
+    {
+      Logger.DebugFormat("DocumentReviewTask({0}) StartAssignment27", _obj.Id);
+      
+      var lastAssignmentSentForRework = Functions.DocumentReviewTask.GetLastAssignmentSentForRework(_obj);
+      if (lastAssignmentSentForRework != null)
+        assignment.Author = lastAssignmentSentForRework.Performer;
+    }
+    
+    public virtual void CompleteAssignment27(Sungero.RecordManagement.IReviewReworkAssignment assignment, Sungero.RecordManagement.Server.ReviewReworkAssignmentArguments e)
+    {
+      Logger.DebugFormat("DocumentReviewTask({0}) CompleteAssignment27", _obj.Id);
+      
+      // Заполнить нового адресата в задаче.
+      if (assignment.Result == RecordManagement.ReviewReworkAssignment.Result.Forward)
+        Functions.DocumentReviewTask.UpdateReviewTaskAfterForward(_obj, assignment.Addressee);
+      
+      // Заполнить коллекции добавленных и удаленных вручную документов в задаче.
+      Functions.DocumentReviewTask.AddedAddendaAppend(_obj);
+      Functions.DocumentReviewTask.RemovedAddendaAppend(_obj);
+    }
+    
+    public virtual void EndBlock27(Sungero.RecordManagement.Server.ReviewReworkAssignmentEndBlockEventArguments e)
+    {
+      Logger.DebugFormat("DocumentReviewTask({0}) EndBlock27", _obj.Id);
+    }
+    
+    #endregion
+    
+    #region 26. Удаление ненужных проектов резолюции
     
     public virtual void Script26Execute()
     {
       Logger.DebugFormat("DocumentReviewTask({0}) Script26Execute", _obj.Id);
       
       // Удалить проекты резолюции, если их создал не помощник одного из адресатов или его замещающий.
-      _obj.NeedDeleteActionItems = _obj.ResolutionGroup.ActionItemExecutionTasks.Any() &&
-        !Functions.DocumentReviewTask.CanAuthorPrepareResolution(_obj);
-      
       if (_obj.NeedDeleteActionItems == true)
       {
         Logger.DebugFormat("DocumentReviewTask({0}) Script26Execute NeedDeleteActionItems", _obj.Id);
-        Functions.Module.DeleteActionItemExecutionTasks(_obj.ResolutionGroup.ActionItemExecutionTasks.ToList());
+        Functions.DocumentReviewTask.DeleteDraftActionItems(_obj);
       }
     }
     
@@ -63,7 +125,8 @@ namespace Sungero.RecordManagement.Server
       Logger.DebugFormat("DocumentReviewTask({0}) Script22Execute Create as subtask {1}", _obj.Id, documentReviewTask.Id);
       
       documentReviewTask.Importance = _obj.Importance;
-      Functions.DocumentReviewTask.SynchronizeAttachmentsToReviewTask(_obj, documentReviewTask);
+      Functions.Module.SynchronizeAttachmentsToDocumentReview(_obj, documentReviewTask);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
       
       // Задать тему, текст задачи.
       documentReviewTask.Subject = string.Format(">> {0}", _obj.Subject);
@@ -79,10 +142,10 @@ namespace Sungero.RecordManagement.Server
       documentReviewTask.Author = _obj.Author;
       
       // Синхронизировать вложенные проекты резолюции.
+      var canAuthorPrepareResolution = Functions.DocumentReviewTask.CanAuthorPrepareResolution(documentReviewTask);
       foreach (var resolution in _obj.ResolutionGroup.ActionItemExecutionTasks)
       {
-        if (Functions.DocumentReviewTask.CanAuthorPrepareResolution(documentReviewTask) &&
-            documentReviewTask.Addressees.Any(x => Equals(resolution.AssignedBy, x.Addressee)))
+        if (canAuthorPrepareResolution && documentReviewTask.Addressees.Any(x => Equals(resolution.AssignedBy, x.Addressee)))
           documentReviewTask.ResolutionGroup.ActionItemExecutionTasks.Add(resolution);
       }
       
@@ -120,13 +183,15 @@ namespace Sungero.RecordManagement.Server
     {
       Logger.DebugFormat("DocumentReviewTask({0}) Decision17Result", _obj.Id);
       
-      var lastAssignment = Assignments.GetAll(x => Equals(x.Task, _obj)).ToList().LastOrDefault();
+      var lastAssignment = Assignments.GetAll(x => Equals(x.Task, _obj)).OrderByDescending(x => x.Created).FirstOrDefault();
       var isForwarded = lastAssignment != null &&
-        lastAssignment.Result == Sungero.RecordManagement.ReviewManagerAssignment.Result.Forward;
-      Logger.DebugFormat("DocumentReviewTask({0}) Decision17Result (isForwarded = {1})", _obj.Id, isForwarded);
-      var canAutorPrepareResolution = Functions.DocumentReviewTask.CanAuthorPrepareResolution(_obj);
-      Logger.DebugFormat("DocumentReviewTask({0}) Decision17Result (canAutorPrepareResolution = {1})", _obj.Id, canAutorPrepareResolution);
-      var result = !isForwarded && canAutorPrepareResolution;
+        (lastAssignment.Result == Sungero.RecordManagement.ReviewManagerAssignment.Result.Forward ||
+         lastAssignment.Result == Sungero.RecordManagement.ReviewReworkAssignment.Result.Forward);
+      
+      var isRework = Sungero.RecordManagement.ReviewReworkAssignments.Is(lastAssignment);
+      var canAuthorPrepareResolution = Functions.DocumentReviewTask.CanAuthorPrepareResolution(_obj);
+      
+      var result = (!isForwarded || isForwarded && isRework) && canAuthorPrepareResolution;
       Logger.DebugFormat("DocumentReviewTask({0}) Decision17Result {1}", _obj.Id, result);
       return result;
     }
@@ -172,12 +237,13 @@ namespace Sungero.RecordManagement.Server
       var subject = DocumentReviewTasks.Resources.DocumentConsiderationStartedFormat(document.Name);
       e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(subject);
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
 
       // Выдать наблюдателям права на вложения.
       Logger.DebugFormat("DocumentReviewTask({0}). GrantReadAccessRightsForAttachments.", _obj.Id);
       Docflow.PublicFunctions.Module.GrantReadAccessRightsForAttachmentsConsideringCurrentRights(_obj.DocumentForReviewGroup.All.Concat(_obj.AddendaGroup.All).ToList(),
-                                                                         e.Block.Performers);
+                                                                                                 e.Block.Performers);
     }
 
     public virtual void StartNotice9(Sungero.RecordManagement.IReviewObserversNotification notice, Sungero.RecordManagement.Server.ReviewObserversNotificationArguments e)
@@ -207,12 +273,16 @@ namespace Sungero.RecordManagement.Server
       {
         var deadline = Docflow.PublicFunctions.Module.GetDateWithTime(_obj.Deadline.Value, _obj.Author);
         var deadlineInHour = WorkingTime.GetDurationInWorkingHours(_obj.Started.Value, deadline, _obj.Author);
+        Logger.DebugFormat("DocumentReviewTask({0}) deadline in author timezone: {1}", _obj.Id, _obj.Deadline.Value.ToUserTime(_obj.Author));
+        Logger.DebugFormat("DocumentReviewTask({0}) deadline in performer timezone: {1}", _obj.Id, _obj.Deadline.Value.ToUserTime(_obj.Addressee));
         e.Block.RelativeDeadlineHours = deadlineInHour > 0 ? deadlineInHour : 1;
       }
       var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
       e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.ReviewDocument, document.Name);
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
+      Functions.DocumentReviewTask.RelateAddedAddendaToPrimaryDocument(_obj);
 
       // Выдать исполнителю права на вложения.
       Functions.DocumentReviewTask.GrantRightForAttachmentsToAssignees(_obj, e.Block.Performers.ToList());
@@ -283,7 +353,8 @@ namespace Sungero.RecordManagement.Server
       // Задать тему.
       e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.AcquaintanceWithDocumentComplete, document.Name);
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
 
       // Выдать наблюдателям права на вложения.
       Logger.DebugFormat("DocumentReviewTask({0}). GrantReadAccessRightsForAttachments.", _obj.Id);
@@ -322,7 +393,8 @@ namespace Sungero.RecordManagement.Server
         var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
         e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.AcquaintanceWithDocumentComplete, document.Name);
         
-        Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+        Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+        Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
 
         // Выдать наблюдателям права на вложения.
         Logger.DebugFormat("DocumentReviewTask({0}). GrantReadAccessRightsForAttachments.", _obj.Id);
@@ -365,7 +437,8 @@ namespace Sungero.RecordManagement.Server
         var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
         e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.AcquaintanceWithDocumentComplete, document.Name);
         
-        Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+        Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+        Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
 
         // Выдать наблюдателям права на вложения.
         Logger.DebugFormat("DocumentReviewTask({0}). GrantReadAccessRightsForAttachments.", _obj.Id);
@@ -415,7 +488,8 @@ namespace Sungero.RecordManagement.Server
       // Установить срок на оформление поручений 4 часа.
       e.Block.RelativeDeadlineHours = 4;
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
 
       // Исключаем автора так как требуется не повышать ему права (147926).
       var performers = e.Block.Performers.Where(x => !Equals(x, _obj.Author)).ToList();
@@ -466,7 +540,7 @@ namespace Sungero.RecordManagement.Server
       
       var addressee = Employees.As(_obj.Addressee);
       var assistant = Docflow.PublicFunctions.Module.GetSecretary(addressee);
-      // Добавить адресата в качестве исполнителя.
+      // Добавить помощника адресата в качестве исполнителя.
       e.Block.Performers.Add(assistant);
       
       // Вычислить дедлайн задания.
@@ -485,15 +559,23 @@ namespace Sungero.RecordManagement.Server
       var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
       
       var result = Functions.DocumentReviewTask.GetLastAssignmentResult(_obj);
+      var addresseeShortName = Company.PublicFunctions.Employee.GetShortName(addressee, false);
       if (result != RecordManagement.ReviewDraftResolutionAssignment.Result.AddResolution)
-        e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.PrepareDraftResolution, document.Name);
+        e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.PrepareDraftResolutionFormat(document.Name,
+                                                                                                                                       addresseeShortName));
       else
-        e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.ReworkPrepareDraftResolution, document.Name);
+        e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.ReworkPrepareDraftResolutionFormat(document.Name,
+                                                                                                                                             addresseeShortName));
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
+      Functions.DocumentReviewTask.RelateAddedAddendaToPrimaryDocument(_obj);
 
       // Выдать исполнителю права на вложения.
       Functions.DocumentReviewTask.GrantRightForAttachmentsToAssignees(_obj, e.Block.Performers.ToList());
+      
+      // Выдать права помощнику руководителя, чтобы он мог удалять приложения в задании на подготовку/доработку проекта резолюции.
+      Functions.DocumentReviewTask.GrantRightsOnTaskForSecretary(_obj);
     }
 
     public virtual void StartAssignment11(Sungero.RecordManagement.IPreparingDraftResolutionAssignment assignment, Sungero.RecordManagement.Server.PreparingDraftResolutionAssignmentArguments e)
@@ -520,8 +602,17 @@ namespace Sungero.RecordManagement.Server
       // Заполнить нового адресата в задаче.
       if (assignment.Result == Sungero.RecordManagement.PreparingDraftResolutionAssignment.Result.Forward)
         Functions.DocumentReviewTask.UpdateReviewTaskAfterForward(_obj, assignment.Addressee);
+      
+      // Удалить проект резолюции.
       if (assignment.NeedDeleteActionItems == true)
-        Functions.Module.DeleteActionItemExecutionTasks(_obj.ResolutionGroup.ActionItemExecutionTasks.ToList());
+      {
+        // Для всех адресатов.
+        if (assignment.Result == Sungero.RecordManagement.PreparingDraftResolutionAssignment.Result.Explored)
+          Functions.Module.DeleteActionItemExecutionTasks(_obj.ResolutionGroup.ActionItemExecutionTasks.ToList());
+        // Для неактуальных адресатов.
+        else if (assignment.Result == Sungero.RecordManagement.PreparingDraftResolutionAssignment.Result.SendForReview)
+          Functions.Module.DeleteActionItemExecutionTasks(_obj.ResolutionGroup.ActionItemExecutionTasks.Where(x => _obj.Addressees.All(a => !Equals(a.Addressee, x.AssignedBy))).ToList());
+      }
       
       // Обновить статус исполнения - не требует исполнения.
       var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
@@ -530,6 +621,14 @@ namespace Sungero.RecordManagement.Server
         Functions.Module.SetDocumentExecutionState(_obj, document, ExecutionState.WithoutExecut);
         Functions.Module.SetDocumentControlExecutionState(document);
       }
+      
+      // Заполнить коллекции добавленных и удаленных вручную документов в задаче.
+      Functions.DocumentReviewTask.AddedAddendaAppend(_obj);
+      Functions.DocumentReviewTask.RemovedAddendaAppend(_obj);
+      
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
+      Functions.DocumentReviewTask.RelateAddedAddendaToPrimaryDocument(_obj);
     }
 
     public virtual void EndBlock11(Sungero.RecordManagement.Server.PreparingDraftResolutionAssignmentEndBlockEventArguments e)
@@ -559,7 +658,9 @@ namespace Sungero.RecordManagement.Server
       var document = _obj.DocumentForReviewGroup.OfficialDocuments.First();
       e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.ReviewDocument, document.Name);
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
+      Functions.DocumentReviewTask.RelateAddedAddendaToPrimaryDocument(_obj);
 
       // Выдать исполнителю права на вложения.
       Functions.DocumentReviewTask.GrantRightForAttachmentsToAssignees(_obj, e.Block.Performers.ToList());
@@ -604,6 +705,8 @@ namespace Sungero.RecordManagement.Server
       // Заполнить нового адресата в задаче.
       if (assignment.Result == Sungero.RecordManagement.ReviewDraftResolutionAssignment.Result.Forward)
         Functions.DocumentReviewTask.UpdateReviewTaskAfterForward(_obj, assignment.Addressee);
+      
+      // Удалить проект резолюции для предыдущего адресата.
       if (assignment.NeedDeleteActionItems == true)
       {
         var actionItems = _obj.ResolutionGroup.ActionItemExecutionTasks.ToList();
@@ -638,8 +741,9 @@ namespace Sungero.RecordManagement.Server
       else if (document.ExecutionState == ExecutionState.WithoutExecut)
         e.Block.Subject = Docflow.PublicFunctions.Module.TrimSpecialSymbols(DocumentReviewTasks.Resources.ManagerIsInformed, document.Name);
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
-
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      Functions.DocumentReviewTask.SynchronizeAddendaToDraftResolution(_obj);
+      
       // Выдать помощнику права на вложения.
       Logger.DebugFormat("DocumentReviewTask({0}). GrantReadAccessRightsForAttachments.", _obj.Id);
       Docflow.PublicFunctions.Module.GrantReadAccessRightsForAttachmentsConsideringCurrentRights(_obj.AddendaGroup.All.ToList(), e.Block.Performers);

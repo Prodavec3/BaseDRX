@@ -342,5 +342,160 @@ namespace Sungero.Parties.Server
     }
     
     #endregion
+    
+    #region Работа с ElasticSearch
+    
+    /// <summary>
+    /// Переиндексация сущностей модуля.
+    /// </summary>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void Reindex()
+    {
+      if (Commons.PublicFunctions.Module.IsElasticsearchEnabled())
+      {
+        this.ReindexCompanyBases();
+        this.ReindexContacts();
+      }
+    }
+    
+    /// <summary>
+    /// Переиндексация компаний.
+    /// </summary>
+    public virtual void ReindexCompanyBases()
+    {
+      Logger.Debug("Parties. ReindexCompanyBases. Start.");
+      
+      Logger.Debug("Parties. ReindexCompanyBases. Recreate index...");
+      var indexName = Commons.PublicFunctions.Module.GetIndexName(CompanyBases.Info.Name);
+      var synonyms = Commons.PublicFunctions.Module.GetLegalFormSynonyms();
+      Commons.PublicFunctions.Module.ElasticsearchCreateIndex(indexName, string.Format(Constants.CompanyBase.ElasticsearchIndexConfig, synonyms));
+      
+      var lastId = 0;
+      while (true)
+      {
+        var companies = CompanyBases.GetAll(l => l.Id > lastId)
+          .OrderBy(l => l.Id)
+          .Take(Commons.PublicConstants.Module.MaxQueryIds)
+          .ToList();
+        
+        if (!companies.Any())
+          break;
+        
+        lastId = companies.Last().Id;
+        Logger.DebugFormat("Parties. ReindexCompanyBases. Indexing companies. Entity id from {0} to {1}...", companies.First().Id, lastId);
+        
+        var jsonStrings = companies
+          .Select(company => string.Format("{0}{1}{2}", Commons.PublicConstants.Module.BulkOperationIndexToTarget,
+                                           Environment.NewLine,
+                                           Parties.Functions.CompanyBase.GetIndexingJson(company)));
+
+        var bulkJson = string.Format("{0}{1}", string.Join(Environment.NewLine, jsonStrings), Environment.NewLine);
+        
+        Commons.PublicFunctions.Module.ElasticsearchBulk(indexName, bulkJson);
+      }
+      Logger.Debug("Parties. ReindexCompanyBases. Finish.");
+    }
+    
+    /// <summary>
+    /// Переиндексация контактов.
+    /// </summary>
+    public virtual void ReindexContacts()
+    {
+      Logger.Debug("Parties. ReindexContacts. Start.");
+      
+      Logger.Debug("Parties. ReindexContacts. Recreate index...");
+      var indexName = Commons.PublicFunctions.Module.GetIndexName(Contacts.Info.Name);
+      Commons.PublicFunctions.Module.ElasticsearchCreateIndex(indexName, Constants.Contact.ElasticsearchIndexConfig);
+      
+      var lastId = 0;
+      while (true)
+      {
+        var contacts = Contacts.GetAll(l => l.Id > lastId)
+          .OrderBy(l => l.Id)
+          .Take(Commons.PublicConstants.Module.MaxQueryIds)
+          .ToList();
+        
+        if (!contacts.Any())
+          break;
+        
+        lastId = contacts.Last().Id;
+        Logger.DebugFormat("Parties. ReindexContacts. Indexing contacts. Entity id from {0} to {1}...", contacts.First().Id, lastId);
+        
+        var jsonStrings = contacts
+          .Select(contact => string.Format("{0}{1}{2}", Commons.PublicConstants.Module.BulkOperationIndexToTarget,
+                                           Environment.NewLine,
+                                           Parties.Functions.Contact.GetIndexingJson(contact)));
+
+        var bulkJson = string.Format("{0}{1}", string.Join(Environment.NewLine, jsonStrings), Environment.NewLine);
+        
+        Commons.PublicFunctions.Module.ElasticsearchBulk(indexName, bulkJson);
+      }
+      Logger.Debug("Parties. ReindexContacts. Finish.");
+    }
+    
+    /// <summary>
+    /// Обновить синонимы в индексе компаний.
+    /// </summary>
+    /// <param name="synonyms">Список синонимов.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void UpdateCompanyIndexSynonyms(string synonyms)
+    {
+      if (Commons.PublicFunctions.Module.IsElasticsearchEnabled())
+      {
+        Logger.Debug("Parties. UpdateСompanyIndexSynonyms start.");
+        
+        var companyIndexName = Commons.PublicFunctions.Module.GetIndexName(CompanyBases.Info.Name);
+        synonyms = Commons.PublicFunctions.Module.SynonymsParse(synonyms);
+        var companyIndexConfig = string.Format(Constants.CompanyBase.ElasticsearchIndexConfig, synonyms);
+        
+        Commons.PublicFunctions.Module.ElasticsearchCloseIndex(companyIndexName);
+        Commons.PublicFunctions.Module.ElasticsearchUpdateIndexSettings(companyIndexName, companyIndexConfig);
+        Commons.PublicFunctions.Module.ElasticsearchOpenIndex(companyIndexName);
+        
+        Logger.Debug("Parties. UpdateСompanyIndexSynonyms finish.");
+      }
+    }
+    
+    /// <summary>
+    /// Нормализовать запись телефона.
+    /// </summary>
+    /// <param name="phone">Телефон.</param>
+    /// <returns>Нормализованный телефон.</returns>
+    [Public]
+    public virtual string NormalizePhone(string phone)
+    {
+      var result = System.Text.RegularExpressions.Regex.Replace(phone, @"(?!^\+)[^\d]", string.Empty);
+      if (result.StartsWith("+7"))
+        result = string.Format("8{0}", result.Substring(2));
+      
+      return result;
+    }
+    
+    /// <summary>
+    /// Нормализовать запись сайта.
+    /// </summary>
+    /// <param name="site">Сайт.</param>
+    /// <returns>Нормализованный сайт.</returns>
+    [Public]
+    public virtual string NormalizeSite(string site)
+    {
+      var result = string.Empty;
+      
+      // В абсолютном Uri должно содержаться "://".
+      if (!site.Contains(@"://"))
+        site = string.Format(@"http://{0}", site);
+      
+      if (System.Uri.IsWellFormedUriString(site, UriKind.Absolute))
+      {
+        var urlObj = new Uri(site);
+        result = urlObj.Host;
+        if (result.StartsWith("www."))
+          result = result.Substring(4);
+      }
+      
+      return result;
+    }
+
+    #endregion
   }
 }

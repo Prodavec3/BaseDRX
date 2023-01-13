@@ -392,15 +392,31 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "117977e7-6f82-47d0-a434-a42f670a0e5f",
+          "Name": "OurSigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "3d411ab8-967c-43b4-ab77-0240b19d9921",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
-      "Overridden": [],
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
       "Versions": []
     }
   ],
   "HandledEvents": [
-    "FilteringServer"
+    "FilteringServer",
+    "ConvertingFromServer"
   ],
   "IconName": "InternalDocumentBase.ico",
   "IconResourcesKeys": [],
@@ -415,6 +431,16 @@
     "IsVisible"
   ],
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+      "Name": "OurSigningReason",
+      "IsAncestorMetadata": true,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsVisibility"
+      ]
+    },
     {
       "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
       "NameGuid": "61d8201e-906c-4d63-b96d-843c38de13c4",
@@ -753,6 +779,16 @@
         "Index": 0,
         "ParentGuid": "f7d6c536-12d1-48d8-aace-36c39d3a4391",
         "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8929554f-478a-44b3-a43b-4a89f550b964",
+        "Name": "ShowOurSigningReason",
+        "ActionGuid": "94c8ea34-943f-43cc-90a7-9b96bde80f85",
+        "ButtonSize": "Large",
+        "Index": 32,
+        "IsVisible": false,
+        "ParentGuid": "52099269-7fc8-4a2c-b6bf-20a19fb11d09"
       }
     ],
     "Groups": [

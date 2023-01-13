@@ -29,7 +29,7 @@ namespace Sungero.Company.Server
       if (Functions.ManagersAssistant.HasDuplicatesAssistants(_obj))
         e.AddError(ManagersAssistants.Resources.ExecutiveSecretaryIsAppointed);
       
-      if (_obj.IsAssistant != true && _obj.PreparesResolution != true && _obj.PreparesAssignmentCompletion != true)
+      if (_obj.IsAssistant != true && _obj.PreparesResolution != true && _obj.PreparesAssignmentCompletion != true && _obj.SendActionItems != true)
         e.AddError(ManagersAssistants.Resources.NoAuthoritiesError);
     }
     

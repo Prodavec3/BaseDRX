@@ -472,21 +472,26 @@
     "CreatingFromServer",
     "DeletingServer",
     "SavingServer",
-    "BeforeSaveServer"
+    "BeforeSaveServer",
+    "ShowingClient"
   ],
   "IconName": "ApprovalTask.ico",
   "IconResourcesKeys": [
     "Approve",
-    "Notapprove",
+    "Sign",
     "Print",
     "Send",
     "Completed",
     "Rework",
-    "OldApprove",
     "ApproveStage",
     "WaitControl",
-    "Sign",
-    "Function"
+    "Notapprove",
+    "Function",
+    "SignWithRemarks",
+    "ExternalSignatureIcon",
+    "SignatureAttributeChanged",
+    "SignedDataChanged",
+    "OldApprove"
   ],
   "IsCreateVersionsOnLayerForbidden": true,
   "IsVisible": false,
@@ -1070,6 +1075,32 @@
       "ReturnTypeFullName": "System.Boolean"
     },
     {
+      "Name": "GetAddedAddenda",
+      "Parameters": [
+        {
+          "Name": "approvalTask",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetAddendaGroupAttachments",
+      "Parameters": [
+        {
+          "Name": "approvalTask",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IOfficialDocument>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetAllApproversAndSignatories",
       "Parameters": [
         {
@@ -1097,6 +1128,19 @@
       ],
       "ReturnType": "global::System.Nullable<global::System.DateTime>",
       "ReturnTypeFullName": "System.Nullable"
+    },
+    {
+      "Name": "GetRemovedAddenda",
+      "Parameters": [
+        {
+          "Name": "approvalTask",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
       "Name": "GetReworkPerformers",
@@ -1253,7 +1297,12 @@
     "DocumentStateAndAccessRightsWillBeUpdatedLater",
     "DocumentAccessRightsWillBeUpdatedLater",
     "Ellipsis_RegisterName",
-    "CantUpdateTask"
+    "CantUpdateTask",
+    "CommentNeeded",
+    "EndorsedWithSuggestions",
+    "ApprovalFormEndorsedWithSuggestions",
+    "StateViewEndorsedWithSuggestions",
+    "AbortApprovalTask"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "323652e9-7870-4520-b13a-a2f4d2262b36",
@@ -1300,7 +1349,7 @@
   "Scheme": {
     "NameGuid": "c7ae4ee8-f2a6-4784-8e61-7f7f642dbcd1",
     "Name": "RouteScheme",
-    "CurrentVersionGuid": "9b47647d-edd2-4852-a5ff-94ad69ae237a",
+    "CurrentVersionGuid": "8b22b7a1-cf3f-4ffd-9ec0-98dbb98740e3",
     "IsAncestorMetadata": true,
     "Overridden": [
       "CurrentVersionGuid",
@@ -1323,9 +1372,14 @@
         "NameGuid": "9b47647d-edd2-4852-a5ff-94ad69ae237a",
         "Name": "V4",
         "Version": 4
+      },
+      {
+        "NameGuid": "8b22b7a1-cf3f-4ffd-9ec0-98dbb98740e3",
+        "Name": "V5",
+        "Version": 5
       }
     ],
-    "VersionsCounter": 4
+    "VersionsCounter": 5
   },
   "ShowTypeNameInThread": true,
   "Versions": [

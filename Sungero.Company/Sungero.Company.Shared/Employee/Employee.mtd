@@ -459,6 +459,19 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b70c726b-4c8c-48f9-9167-ed32c2057858",
+          "Name": "SummaryNotify",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "2c0826c8-92f3-4f64-9c8a-a320b064db91",
+          "PropertyGuid": "c28bcc9d-5ab2-41cd-8117-2552ca0ab576",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "Overridden": [
@@ -478,7 +491,9 @@
     "SavedServer",
     "FilteringServer",
     "UiFilteringServer",
-    "GetDigestServer"
+    "GetDigestServer",
+    "AfterSaveServer",
+    "AfterDeleteServer"
   ],
   "HideFromNavigationEditorCreationArea": true,
   "IconName": "Employee.ico",
@@ -644,7 +659,6 @@
       "HandledEvents": [
         "ChangedShared"
       ],
-      "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "Versions": []
     },
@@ -657,7 +671,6 @@
       "HandledEvents": [
         "ChangedShared"
       ],
-      "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "Versions": []
     },
@@ -670,6 +683,18 @@
       "Length": 25,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c28bcc9d-5ab2-41cd-8117-2552ca0ab576",
+      "Name": "NeedNotifyAssignmentsSummary",
+      "CanBeSearch": false,
+      "Code": "NeedNotifySumA",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "b1e1a563-ac9e-479f-915c-e53bacb53883"
     }
   ],
   "PublicFunctions": [
@@ -733,11 +758,56 @@
       "ReturnTypeFullName": "System.Linq.IQueryable"
     },
     {
+      "Name": "GetEmployeesByINILA",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "inila",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetEmployeesByName",
       "IsRemote": true,
       "Parameters": [
         {
           "Name": "name",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetEmployeesByNameFuzzy",
+      "Parameters": [
+        {
+          "Name": "name",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "businesUnitId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetEmployeesByTIN",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "tin",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
         }

@@ -23,6 +23,10 @@ namespace Sungero.Docflow
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
       _obj.State.Properties.Subject.IsEnabled = false;
+      if (_obj.Status != Workflow.Task.Status.Draft &&
+          _obj.Status != Workflow.Task.Status.Aborted &&
+          !Functions.FreeApprovalTask.HasDocumentAndCanRead(_obj))
+        e.AddError(Docflow.Resources.NoRightsToDocument);
     }
 
   }

@@ -19,7 +19,7 @@ namespace Sungero.Docflow.Shared
     [Public]
     public static List<IRegistrationSetting> GetByDocumentRegister(IDocumentRegister documentRegister)
     {
-      return RegistrationSettings.GetAllCached(s => s.Status == CoreEntities.DatabookEntry.Status.Active && Equals(s.DocumentRegister, documentRegister)).ToList();
+      return Functions.Module.Remote.GetRegistrationSettingByDocumentRegister(documentRegister).ToList();
     }
     
     /// <summary>
@@ -82,24 +82,7 @@ namespace Sungero.Docflow.Shared
                                                                                 IDocumentKind documentKind,
                                                                                 IDepartment department)
     {
-      var activeStatus = CoreEntities.DatabookEntry.Status.Active;
-      var settings = RegistrationSettings.GetAllCached(r => r.Status == activeStatus &&
-                                                       r.SettingType == settingType &&
-                                                       r.DocumentRegister.Status == activeStatus);
-      
-      settings = businessUnit != null ?
-        settings.Where(r => r.BusinessUnits.Any(o => o.BusinessUnit.Equals(businessUnit)) || !r.BusinessUnits.Any()) :
-        settings.Where(r => !r.BusinessUnits.Any());
-      
-      settings = documentKind != null ?
-        settings.Where(r => r.DocumentKinds.Any(o => o.DocumentKind.Equals(documentKind)) || !r.DocumentKinds.Any()) :
-        settings.Where(r => !r.DocumentKinds.Any());
-      
-      settings = department != null ?
-        settings.Where(r => r.Departments.Any(o => o.Department.Equals(department)) || !r.Departments.Any()) :
-        settings.Where(r => !r.Departments.Any());
-      
-      return settings;
+      return Functions.Module.Remote.GetAvailableRegistrationSettings(settingType, businessUnit, documentKind, department);
     }
     
     /// <summary>

@@ -427,4 +427,7 @@
   <data name="AsyncHandler_Description_16102ef88cb046c29281c3234fd704fb" xml:space="preserve">
     <value>Действия по корректировке поручений, которые связаны с ожиданием разблокировки заданий текущего поручения</value>
   </data>
+  <data name="AsyncHandler_Description_266cdf0020434667a0dda8e62c341f0e" xml:space="preserve">
+    <value>Исключить участников из ознакомления</value>
+  </data>
 </root>

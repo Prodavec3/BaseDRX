@@ -40,6 +40,7 @@ namespace Sungero.Shell.Server
       Sungero.Shell.SpecialFolders.OnSigning.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
       Sungero.Shell.SpecialFolders.ExchangeDocumentProcessing.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
       Sungero.Shell.SpecialFolders.OnVerification.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+      Sungero.Shell.SpecialFolders.OnAcquaintance.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
       
       Sungero.Shell.SpecialFolders.Approval.AccessRights.Save();
       Sungero.Shell.SpecialFolders.Notices.AccessRights.Save();
@@ -53,6 +54,7 @@ namespace Sungero.Shell.Server
       Sungero.Shell.SpecialFolders.OnSigning.AccessRights.Save();
       Sungero.Shell.SpecialFolders.ExchangeDocumentProcessing.AccessRights.Save();
       Sungero.Shell.SpecialFolders.OnVerification.Save();
+      Sungero.Shell.SpecialFolders.OnAcquaintance.Save();
     }
   }
 }

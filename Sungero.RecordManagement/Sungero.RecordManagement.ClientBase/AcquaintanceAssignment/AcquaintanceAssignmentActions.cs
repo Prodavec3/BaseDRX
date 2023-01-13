@@ -19,27 +19,24 @@ namespace Sungero.RecordManagement.Client
     {
       return _obj.Status == Workflow.AssignmentBase.Status.InProcess &&
         _obj.AccessRights.CanUpdate() &&
-        _obj.DocumentGroup.OfficialDocuments.Any();
+        Functions.AcquaintanceTask.HasDocumentAndCanRead(AcquaintanceTasks.As(_obj.Task));
     }
 
     public virtual void Acquainted(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      if (!_obj.DocumentGroup.OfficialDocuments.Any())
+      if (!Functions.AcquaintanceTask.HasDocumentAndCanRead(AcquaintanceTasks.As(_obj.Task)))
       {
-        e.AddError(Docflow.ApprovalTasks.Resources.NoRightsToDocument);
+        e.AddError(Docflow.Resources.NoRightsToDocument);
         return;
       }
-      
+
       // Проверка прав на выполнение по замещению.
       var isCurrentUserPerformer = Equals(_obj.Performer, Users.Current);
       if (!isCurrentUserPerformer)
       {
-        // Задание может выполнить только замещающий, и только за виртуальных или уволенных сотрудников.
-        var isCurrentUserSubstitute = Functions.AcquaintanceAssignment.Remote.IsSubstituteOf(_obj, Users.Current, _obj.Performer);
-        var isPerformerActive = _obj.Performer.Status == CoreEntities.DatabookEntry.Status.Active;
-        var isPerformerAutomated = _obj.Performer.Login != null;
-        if (!isCurrentUserSubstitute || isCurrentUserSubstitute && isPerformerActive && isPerformerAutomated)
+        // Задание может выполнить только замещающий, и только за виртуальных или уволенных сотрудников,
+        // либо за действующего сотрудника, если это разрешено соответствующей настройкой.
+        if (!Functions.AcquaintanceAssignment.CanUserCompleteAcquaintanceBySubstitute(_obj))
         {
           e.AddError(Sungero.RecordManagement.AcquaintanceAssignments.Resources.EmployeeMustPersonallyConfirmAcquaintance);
           return;
@@ -60,6 +57,7 @@ namespace Sungero.RecordManagement.Client
         if (isElectronicAcquaintance)
         {
           // Требовать прочтение отправленной версии документа.
+          var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
           var acquaintanceVersion = task.AcquaintanceVersions.FirstOrDefault(x => x.IsMainDocument.Value);
           var acquaintanceVersionNumber = acquaintanceVersion.Number.Value;
           if (!Functions.AcquaintanceTask.Remote.IsDocumentVersionReaded(document, acquaintanceVersionNumber))

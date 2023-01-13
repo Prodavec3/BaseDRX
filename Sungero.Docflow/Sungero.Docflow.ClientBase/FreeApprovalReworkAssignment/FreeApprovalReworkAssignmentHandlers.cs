@@ -21,6 +21,15 @@ namespace Sungero.Docflow
   partial class FreeApprovalReworkAssignmentClientHandlers
   {
 
+    public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
+    {
+      var canReadDocument = Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
+      _obj.State.Properties.Approvers.IsVisible = canReadDocument;
+      _obj.State.Properties.NewDeadline.IsVisible = canReadDocument;
+      if (!canReadDocument)
+        e.AddError(Docflow.Resources.NoRightsToDocument);
+    }
+
     public virtual void NewDeadlineValueInput(Sungero.Presentation.DateTimeValueInputEventArgs e)
     {
       var warnMessage = Docflow.Functions.Module.CheckDeadlineByWorkCalendar(e.NewValue);

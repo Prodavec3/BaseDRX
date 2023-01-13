@@ -53,6 +53,7 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "Dependencies": [
@@ -284,6 +285,17 @@
       "Value": "\"CorrectionRevisionNumber\""
     },
     {
+      "Name": "Correspondent",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact",
+        "CorrespondentTypes"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"CORRESPONDENT\""
+    },
+    {
       "Name": "CorrespondentLegalFormField",
       "ParentClasses": [
         "Module",
@@ -424,6 +436,16 @@
       "Value": "\"DocumentBaseNumber\""
     },
     {
+      "Name": "EmailField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Email\""
+    },
+    {
       "Name": "EndTag",
       "ParentClasses": [
         "Module",
@@ -440,6 +462,16 @@
       ],
       "TypeName": "System.Int32",
       "Value": "3"
+    },
+    {
+      "Name": "HeadCompanyNameField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"CorrHeadCompanyName\""
     },
     {
       "Name": "Html",
@@ -695,6 +727,16 @@
       "Value": "\"PAYER\""
     },
     {
+      "Name": "PhoneField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Phone\""
+    },
+    {
       "Name": "PriceField",
       "ParentClasses": [
         "Module",
@@ -703,6 +745,37 @@
       ],
       "TypeName": "System.String",
       "Value": "\"Price\""
+    },
+    {
+      "Name": "PsrnField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"PSRN\""
+    },
+    {
+      "Name": "PsrnField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "CounterpartyFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"PSRN\""
+    },
+    {
+      "Name": "Recipient",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact",
+        "CorrespondentTypes"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"RECIPIENT\""
     },
     {
       "Name": "ResponseToDateField",
@@ -872,10 +945,30 @@
       "ParentClasses": [
         "Module",
         "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"TIN\""
+    },
+    {
+      "Name": "TinField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
         "CounterpartyFact"
       ],
       "TypeName": "System.String",
       "Value": "\"TIN\""
+    },
+    {
+      "Name": "TinIsValidField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"TinIsValid\""
     },
     {
       "Name": "TinIsValidField",
@@ -901,6 +994,16 @@
       "ParentClasses": [
         "Module",
         "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"TRRC\""
+    },
+    {
+      "Name": "TrrcField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
         "CounterpartyFact"
       ],
       "TypeName": "System.String",
@@ -914,6 +1017,16 @@
       ],
       "TypeName": "System.String",
       "Value": "\"body.txt\""
+    },
+    {
+      "Name": "TypeField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Type\""
     },
     {
       "Name": "TypeField",
@@ -973,6 +1086,16 @@
       ],
       "TypeName": "System.String",
       "Value": "\"VatAmount\""
+    },
+    {
+      "Name": "WebsiteField",
+      "ParentClasses": [
+        "Module",
+        "ArioGrammars",
+        "LetterFact"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Website\""
     },
     {
       "Name": "WithDot",
@@ -1420,6 +1543,23 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillAccountingDocumentLeadingDocumentFuzzy",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillAccountingDocumentParties",
       "Parameters": [
         {
@@ -1476,7 +1616,51 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillContractPropertiesFuzzy",
+      "Parameters": [
+        {
+          "Name": "contract",
+          "ParameterType": "global::Sungero.Contracts.IContract",
+          "ParameterTypeFullName": "Sungero.Contracts.IContract, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillContractStatementProperties",
+      "Parameters": [
+        {
+          "Name": "contractStatement",
+          "ParameterType": "global::Sungero.FinancialArchive.IContractStatement",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IContractStatement, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillContractStatementPropertiesFuzzy",
       "Parameters": [
         {
           "Name": "contractStatement",
@@ -1516,6 +1700,28 @@
     },
     {
       "Name": "FillContractualDocumentParties",
+      "Parameters": [
+        {
+          "Name": "contractualDocument",
+          "ParameterType": "global::Sungero.Contracts.IContractualDocument",
+          "ParameterTypeFullName": "Sungero.Contracts.IContractualDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillContractualDocumentPartiesFuzzy",
       "Parameters": [
         {
           "Name": "contractualDocument",
@@ -1593,6 +1799,46 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillDocumentNumberAndDateFuzzy",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        },
+        {
+          "Name": "factName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "numberPropertyInfo",
+          "ParameterType": "Sungero.Domain.Shared.IStringPropertyInfo"
+        },
+        {
+          "Name": "numberFieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "datePropertyInfo",
+          "ParameterType": "Sungero.Domain.Shared.IDateTimePropertyInfo"
+        },
+        {
+          "Name": "dateFieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillDocumentRegistrationData",
       "Parameters": [
         {
@@ -1620,7 +1866,46 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillIncomingInvoiceContractFuzzy",
+      "Parameters": [
+        {
+          "Name": "incomingInvoice",
+          "ParameterType": "global::Sungero.Contracts.IIncomingInvoice",
+          "ParameterTypeFullName": "Sungero.Contracts.IIncomingInvoice, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillIncomingInvoiceProperties",
+      "Parameters": [
+        {
+          "Name": "incomingInvoice",
+          "ParameterType": "global::Sungero.Contracts.IIncomingInvoice",
+          "ParameterTypeFullName": "Sungero.Contracts.IIncomingInvoice, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillIncomingInvoicePropertiesFuzzy",
       "Parameters": [
         {
           "Name": "incomingInvoice",
@@ -1664,6 +1949,40 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillIncomingLetterContactsFuzzy",
+      "Parameters": [
+        {
+          "Name": "letter",
+          "ParameterType": "global::Sungero.RecordManagement.IIncomingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IIncomingLetter, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillIncomingLetterCorrespondentFuzzy",
+      "Parameters": [
+        {
+          "Name": "letter",
+          "ParameterType": "global::Sungero.RecordManagement.IIncomingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IIncomingLetter, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillIncomingLetterProperties",
       "Parameters": [
         {
@@ -1686,6 +2005,67 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillIncomingLetterPropertiesFuzzy",
+      "Parameters": [
+        {
+          "Name": "letter",
+          "ParameterType": "global::Sungero.RecordManagement.IIncomingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IIncomingLetter, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillIncomingLetterRecipientFuzzy",
+      "Parameters": [
+        {
+          "Name": "letter",
+          "ParameterType": "global::Sungero.RecordManagement.IIncomingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IIncomingLetter, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillIncomingLetterResponseToFuzzy",
+      "Parameters": [
+        {
+          "Name": "letter",
+          "ParameterType": "global::Sungero.RecordManagement.IIncomingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IIncomingLetter, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillIncomingLetterSignedBy",
       "Parameters": [
         {
@@ -1702,6 +2082,23 @@
           "Name": "facts",
           "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
           "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillIncomingLetterSubject",
+      "Parameters": [
+        {
+          "Name": "letter",
+          "ParameterType": "global::Sungero.RecordManagement.IIncomingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IIncomingLetter, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
         }
       ],
       "ReturnType": "void",
@@ -1913,7 +2310,46 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillSupAgreementLeadingDocumentFuzzy",
+      "Parameters": [
+        {
+          "Name": "supAgreement",
+          "ParameterType": "global::Sungero.Contracts.ISupAgreement",
+          "ParameterTypeFullName": "Sungero.Contracts.ISupAgreement, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillSupAgreementProperties",
+      "Parameters": [
+        {
+          "Name": "supAgreement",
+          "ParameterType": "global::Sungero.Contracts.ISupAgreement",
+          "ParameterTypeFullName": "Sungero.Contracts.ISupAgreement, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillSupAgreementPropertiesFuzzy",
       "Parameters": [
         {
           "Name": "supAgreement",
@@ -1991,6 +2427,28 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "FillUniversalTransferDocumentPropertiesFuzzy",
+      "Parameters": [
+        {
+          "Name": "universalTransferDocument",
+          "ParameterType": "global::Sungero.FinancialArchive.IUniversalTransferDocument",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IUniversalTransferDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "FillUniversalTransferDocumentRevisionInfo",
       "Parameters": [
         {
@@ -2021,6 +2479,28 @@
     },
     {
       "Name": "FillWaybillProperties",
+      "Parameters": [
+        {
+          "Name": "waybill",
+          "ParameterType": "global::Sungero.FinancialArchive.IWaybill",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IWaybill, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentInfo",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IDocumentInfo",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IDocumentInfo"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "FillWaybillPropertiesFuzzy",
       "Parameters": [
         {
           "Name": "waybill",
@@ -2284,6 +2764,28 @@
           "Name": "counterpartyPropertyName",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedContract",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedContract"
+    },
+    {
+      "Name": "GetLeadingContractualDocumentFuzzy",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
         }
       ],
       "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedContract",
@@ -2571,6 +3073,23 @@
       "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
+      "Name": "GetRecognizedAccountingDocumentCounterpartiesFuzzy",
+      "Parameters": [
+        {
+          "Name": "allFacts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "arioCounterpartyTypes",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetRecognizedAmount",
       "Parameters": [
         {
@@ -2594,6 +3113,23 @@
           "Name": "responsible",
           "ParameterType": "global::Sungero.Company.IEmployee",
           "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty"
+    },
+    {
+      "Name": "GetRecognizedBusinessUnitFuzzy",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "counterpartyType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
         }
       ],
       "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty",
@@ -2659,6 +3195,50 @@
       "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial"
     },
     {
+      "Name": "GetRecognizedContactFuzzy",
+      "Parameters": [
+        {
+          "Name": "contactFact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "recognizedContactNaming",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedPersonNaming",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedPersonNaming"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial"
+    },
+    {
+      "Name": "GetRecognizedContactFuzzy",
+      "Parameters": [
+        {
+          "Name": "arioDocument",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IArioDocument",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioDocument"
+        },
+        {
+          "Name": "factType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "filterCounterpartyId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial"
+    },
+    {
       "Name": "GetRecognizedCounterparty",
       "Parameters": [
         {
@@ -2683,6 +3263,23 @@
         },
         {
           "Name": "counterpartyLegalFormField",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty"
+    },
+    {
+      "Name": "GetRecognizedCounterpartyFuzzy",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "counterpartyType",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
         }
@@ -2723,6 +3320,33 @@
       ],
       "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedDocumentDate",
       "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedDocumentDate"
+    },
+    {
+      "Name": "GetRecognizedDocumentFuzzy",
+      "Parameters": [
+        {
+          "Name": "orderedFacts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "filteredDocuments",
+          "ParameterType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IOfficialDocument>",
+          "ParameterTypeFullName": "System.Linq.IQueryable"
+        },
+        {
+          "Name": "numberFieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "dateFieldName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedDocument",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedDocument"
     },
     {
       "Name": "GetRecognizedNumber",
@@ -2773,6 +3397,28 @@
       "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial"
     },
     {
+      "Name": "GetRecognizedOurSignatoryForContractualDocumentFuzzy",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Contracts.IContractualDocument",
+          "ParameterTypeFullName": "Sungero.Contracts.IContractualDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "ourSignatoryFact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "recognizedOurSignatoryNaming",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedPersonNaming",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedPersonNaming"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial"
+    },
+    {
       "Name": "GetRecognizedPersonNaming",
       "Parameters": [
         {
@@ -2800,7 +3446,36 @@
       "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedPersonNaming"
     },
     {
+      "Name": "GetRecognizedRecipientsFuzzy",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.SmartProcessing.Structures.Module.IRecognizedRecipient>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetRecognizedTaxInvoiceParties",
+      "Parameters": [
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "responsible",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedDocumentParties",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedDocumentParties"
+    },
+    {
+      "Name": "GetRecognizedTaxInvoicePartiesFuzzy",
       "Parameters": [
         {
           "Name": "facts",
@@ -2842,6 +3517,38 @@
     },
     {
       "Name": "GetSignatoryForContractualDocument",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Contracts.IContractualDocument",
+          "ParameterTypeFullName": "Sungero.Contracts.IContractualDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "facts",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Commons.Structures.Module.IArioFact>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "recognizedOrganization",
+          "ParameterType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty",
+          "ParameterTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty"
+        },
+        {
+          "Name": "signatoryFieldNames",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "isOurSignatory",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial",
+      "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial"
+    },
+    {
+      "Name": "GetSignatoryForContractualDocumentFuzzy",
       "Parameters": [
         {
           "Name": "document",
@@ -3049,6 +3756,12 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "RemoveAllIndicesExistFromDocflowParams",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
       "Name": "RemoveImagesFromEmailBody",
       "Parameters": [
         {
@@ -3102,6 +3815,30 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "SearchBusinessUnitFuzzy",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.Structures.Module.IArioFactElasticsearchData",
+      "ReturnTypeFullName": "Sungero.Commons.Structures.Module.IArioFactElasticsearchData"
+    },
+    {
+      "Name": "SearchCounterpartyFuzzy",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.Structures.Module.IArioFactElasticsearchData",
+      "ReturnTypeFullName": "Sungero.Commons.Structures.Module.IArioFactElasticsearchData"
+    },
+    {
       "Name": "SearchDocumentBarcodeIds",
       "Parameters": [
         {
@@ -3111,6 +3848,30 @@
       ],
       "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
       "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "SearchLetterBusinessUnitFuzzy",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.Structures.Module.IArioFactElasticsearchData",
+      "ReturnTypeFullName": "Sungero.Commons.Structures.Module.IArioFactElasticsearchData"
+    },
+    {
+      "Name": "SearchLetterCorrespondentFuzzy",
+      "Parameters": [
+        {
+          "Name": "fact",
+          "ParameterType": "global::Sungero.Commons.Structures.Module.IArioFact",
+          "ParameterTypeFullName": "Sungero.Commons.Structures.Module.IArioFact"
+        }
+      ],
+      "ReturnType": "global::Sungero.Commons.Structures.Module.IArioFactElasticsearchData",
+      "ReturnTypeFullName": "Sungero.Commons.Structures.Module.IArioFactElasticsearchData"
     },
     {
       "Name": "SendToResponsible",
@@ -3147,6 +3908,12 @@
       ],
       "ReturnType": "global::Sungero.SmartProcessing.Structures.Module.IArioPackage",
       "ReturnTypeFullName": "Sungero.SmartProcessing.Structures.Module.IArioPackage"
+    },
+    {
+      "Name": "UpdateDocflowParamsIfAllIndicesExist",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
     },
     {
       "Name": "ValidateSettings",
@@ -3415,6 +4182,10 @@
         {
           "Name": "FailedArioProcessDocument",
           "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "IsFuzzySearchEnabled",
+          "TypeFullName": "global::System.Boolean"
         }
       ],
       "StructureNamespace": "Sungero.SmartProcessing.Structures.Module"
@@ -3650,6 +4421,29 @@
       "StructureNamespace": "Sungero.SmartProcessing.Structures.Module"
     },
     {
+      "Name": "RecognizedDocument",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Document",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Docflow.IOfficialDocument"
+        },
+        {
+          "Name": "Fact",
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Commons.Structures.Module.IArioFact"
+        },
+        {
+          "Name": "Probability",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Double>"
+        }
+      ],
+      "StructureNamespace": "Sungero.SmartProcessing.Structures.Module"
+    },
+    {
       "Name": "RecognizedDocumentDate",
       "IsPublic": true,
       "Properties": [
@@ -3766,6 +4560,24 @@
         }
       ],
       "StructureNamespace": "Sungero.SmartProcessing.Structures.Module"
+    },
+    {
+      "Name": "RecognizedRecipient",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "BusinessUnit",
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty"
+        },
+        {
+          "Name": "Addressees",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial>"
+        }
+      ],
+      "StructureNamespace": "Sungero.SmartProcessing.Structures.Module"
     }
   ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
@@ -3816,19 +4628,20 @@
     "ArioErrorsNotificationPrefix",
     "ArioErrorsNotificationText",
     "ContactSysAdminIfNeeded",
-    "DocumentPackageHasErrors"
+    "DocumentPackageHasErrors",
+    "ContractualBaseDocumentNamesPriority"
   ],
   "ServerAssemblyName": "Sungero.SmartProcessing.Server",
   "ServerNamespace": "Sungero.SmartProcessing.Server",
   "SharedAssemblyName": "Sungero.SmartProcessing.Shared",
   "SharedNamespace": "Sungero.SmartProcessing.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

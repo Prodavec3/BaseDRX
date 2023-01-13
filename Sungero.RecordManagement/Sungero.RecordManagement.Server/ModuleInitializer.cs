@@ -150,7 +150,9 @@ namespace Sungero.RecordManagement.Server
         }
         
         RecordManagementUI.SpecialFolders.DocumentsToReturn.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        RecordManagementUI.SpecialFolders.PowerOfAttorneyList.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
         RecordManagementUI.SpecialFolders.DocumentsToReturn.AccessRights.Save();
+        RecordManagementUI.SpecialFolders.PowerOfAttorneyList.AccessRights.Save();
       }
       finally
       {
@@ -314,6 +316,8 @@ namespace Sungero.RecordManagement.Server
       var acquaintanceFormReportTableName = Sungero.RecordManagement.Constants.AcquaintanceFormReport.SourceTableName;
       var draftResolutionReportTableName = Sungero.RecordManagement.Constants.DraftResolutionReport.SourceTableName;
       var actionItemPrintReportTableName = Sungero.RecordManagement.Constants.ActionItemPrintReport.SourceTableName;
+      var internalDocumentsReportTableName = Sungero.RecordManagement.Constants.InternalDocumentsReport.SourceTableName;
+      var outgoingDocumentsReportTableName = Sungero.RecordManagement.Constants.OutgoingDocumentsReport.SourceTableName;
       Docflow.PublicFunctions.Module.DropReportTempTables(new[] { incomingDocumentsProcessingReportTableName,
                                                             actionItemExecutionReportTableName,
                                                             incomingDocumentsReportTableName,
@@ -321,7 +325,9 @@ namespace Sungero.RecordManagement.Server
                                                             acquaintanceReportTableName,
                                                             acquaintanceFormReportTableName,
                                                             draftResolutionReportTableName,
-                                                            actionItemPrintReportTableName });
+                                                            actionItemPrintReportTableName,
+                                                            internalDocumentsReportTableName,
+                                                            outgoingDocumentsReportTableName });
 
       Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.IncomingDocumentsProcessingReport.CreateIncomingDocumentsProcessingReportSourceTable, new[] { incomingDocumentsProcessingReportTableName });
       Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.ActionItemsExecutionReport.CreateActionItemExecutionReportSourceTable, new[] { actionItemExecutionReportTableName });
@@ -331,6 +337,8 @@ namespace Sungero.RecordManagement.Server
       Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.AcquaintanceFormReport.CreateAcquaintanceFormReportTable, new[] { acquaintanceFormReportTableName });
       Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.DraftResolutionReport.CreateDraftResolutionReportTable, new[] { draftResolutionReportTableName });
       Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.ActionItemPrintReport.CreateActionItemPrintReportTable, new[] { actionItemPrintReportTableName });
+      Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.InternalDocumentsReport.CreateSourceTable, new[] { internalDocumentsReportTableName });
+      Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.OutgoingDocumentsReport.CreateSourceTable, new[] { outgoingDocumentsReportTableName });
     }
     
     #endregion

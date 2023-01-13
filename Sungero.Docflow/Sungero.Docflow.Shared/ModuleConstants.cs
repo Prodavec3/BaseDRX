@@ -39,6 +39,10 @@ namespace Sungero.Docflow.Constants
     
     // Имя параметра адреса веб-сервиса проверки контрагентов.
     public const string CompanyDataServiceDefaultURL = "https://companydata.directum24.ru";
+
+    // Имя параметра для управления рассылкой по умолчанию.
+    [Sungero.Core.PublicAttribute]
+    public const string DisableMailNotification = "DisableMailNotification";
     
     #region Предметное отображение
     
@@ -145,6 +149,8 @@ namespace Sungero.Docflow.Constants
       public static readonly Guid MemoRegister = Guid.Parse("425355B4-00CC-4417-8EE2-15DE460E034D");
       [Sungero.Core.Public]
       public static readonly Guid PowerOfAttorneyKind = Guid.Parse("0B8E3CF9-77E0-43D3-85E8-7746B41EB822");
+      [Sungero.Core.Public]
+      public static readonly Guid FormalizedPowerOfAttorneyKind = Guid.Parse("D1FD38A9-1BE7-475E-BF1E-2B2796301BF5");
       [Sungero.Core.Public]
       public static readonly Guid CounterpartyDocumentDefaultKind = Guid.Parse("07ADBF36-0E67-4772-B6C2-06D2CB52EA34");
     }
@@ -260,6 +266,11 @@ namespace Sungero.Docflow.Constants
       /// Изменение.
       /// </summary>
       public static readonly Guid Update = Guid.Parse("179af257-a60f-44b8-97b5-1d5bbd06716b");
+      
+      /// <summary>
+      /// Импорт электронной доверенности.
+      /// </summary>
+      public static readonly Guid ImportFormalizedPowerOfAttorney = Guid.Parse("f4fb494a-1a9e-44db-8ff2-22f0355f24ee");
     }
     
     #endregion
@@ -487,5 +498,82 @@ namespace Sungero.Docflow.Constants
     /// Разделитель элементов в комментарии записи в истории.
     /// </summary>
     public const char HistoryCommentDelimiter = '|';
+    
+    /// <summary>
+    /// Пробел нулевой ширины.
+    /// </summary>
+    public const char ZeroWidthSpace = '\u200b';
+    
+    public const string ApprovalSignatureType = "Approval";
+    
+    public const string EndorsingSignatureType = "Endorsing";
+    
+    /// <summary>
+    /// Отступ справа для простановки отметки о поступлении, в сантиметрах.
+    /// </summary>
+    [Sungero.Core.PublicAttribute]
+    public const double RegistrationStampDefaultRightIndent = 1.0;
+    
+    /// <summary>
+    /// Отступ снизу для простановки отметки о поступлении, в сантиметрах.
+    /// </summary>
+    [Sungero.Core.PublicAttribute]
+    public const double RegistrationStampDefaultBottomIndent = 0.3;
+    
+    /// <summary>
+    /// Отступ справа для простановки отметки о поступлении в центре страницы, в сантиметрах.
+    /// </summary>
+    [Sungero.Core.PublicAttribute]
+    public const double RegistrationStampDefaultPageCenterIndent = 8.5;
+    
+    /// <summary>
+    /// Имя параметра с датой последнего запуска ФП "Документооборот. Рассылка электронных писем о заданиях".
+    /// </summary>
+    public const string LastNotificationOfAssignment = "LastNotificationOfAssignment";
+    
+    /// <summary>
+    /// Имя параметра "Количество писем в пакете".
+    /// </summary>
+    public const string SummaryMailNotificationsBunchCountParamName = "SummaryMailNotificationsBunchCount";
+    
+    /// <summary>
+    /// Имя параметра "Количество документов в пакете для массовой выдачи прав".
+    /// </summary>
+    public const string DocsForAccessRightsRuleProcessingBatchSizeParamName = "DocsForAccessRightsRuleProcessingBatchSize";
+    
+    /// <summary>
+    /// Количество рабочих дней, которые считаются как ближайшее время для выполнения заданий.
+    /// </summary>
+    public const int SummaryMailNotificationClosestDaysCount = 3;
+    
+    /// <summary>
+    /// Количество писем в пакете.
+    /// </summary>
+    public const int SummaryMailNotificationsBunchCount = 50;
+    
+    /// <summary>
+    /// Имя параметра "Количество документов в пакете для массовой выдачи прав".
+    /// </summary>
+    public const int DocsForAccessRightsRuleProcessingBatchSize = 100;
+    
+    /// <summary>
+    /// Размер отступа для шаблона письма.
+    /// </summary>
+    public const int SummaryMailLeftMarginSize = 12;
+    
+    // Разделители UnsignedAdditionalInfo в подписи документа.
+    [Sungero.Core.Public]
+    public static class UnsignedAdditionalInfoSeparator
+    {
+      [Sungero.Core.Public]
+      public const char Attribute = '|';
+      
+      [Sungero.Core.Public]
+      public const char KeyValue = '=';
+    }
+    
+    // Ключ для поля Единый рег. № эл. доверенности в UnsignedAdditionalInfo подписи документа.
+    [Sungero.Core.Public]
+    public const string UnsignedAdditionalInfoKeyFPoA = "FPOA";
   }
 }

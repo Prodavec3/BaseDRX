@@ -101,7 +101,7 @@ namespace Sungero.Company.Shared
     [Public]
     public void SetRequiredProperties()
     {
-      var isEmailRequired = _obj.NeedNotifyExpiredAssignments == true || _obj.NeedNotifyNewAssignments == true;
+      var isEmailRequired = _obj.NeedNotifyExpiredAssignments == true || _obj.NeedNotifyNewAssignments == true || _obj.NeedNotifyAssignmentsSummary == true;
       
       _obj.State.Properties.Email.IsRequired = isEmailRequired;
     }
@@ -210,6 +210,28 @@ namespace Sungero.Company.Shared
       return Functions.Module.GetActiveManagersAssistants()
         .Where(m => Equals(_obj, m.Assistant))
         .ToList();
+    }
+    
+    /// <summary>
+    /// Получить JSON-строку для индексирования в поисковой системе.
+    /// </summary>
+    /// <returns>JSON-строка.</returns>
+    public virtual string GetIndexingJson()
+    {
+      var lastName = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.Person.LastName);
+      var firstName = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.Person.FirstName);
+      var middleName = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.Person.MiddleName);
+      return string.Format(Constants.Employee.ElasticsearchIndexTemplate,
+                           _obj.Id,
+                           Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.Name),
+                           lastName,
+                           firstName,
+                           middleName,
+                           string.IsNullOrEmpty(firstName) ? string.Empty : firstName.Substring(0, 1),
+                           string.IsNullOrEmpty(middleName) ? string.Empty : middleName.Substring(0, 1),
+                           _obj.Department != null && _obj.Department.BusinessUnit != null ? _obj.Department.BusinessUnit.Id : 0,
+                           Sungero.Core.Calendar.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                           _obj.Status.Value.Value);
     }
   }
 }

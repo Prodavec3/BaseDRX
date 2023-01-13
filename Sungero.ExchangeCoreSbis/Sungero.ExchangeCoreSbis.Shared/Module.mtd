@@ -21,7 +21,8 @@
     "Header": {
       "NameGuid": "5e4d2c5e-65c1-4157-a057-e63bcdf521a3",
       "BackgroundPosition": "Stretch"
-    }
+    },
+    "Tabs": []
   },
   "Dependencies": [
     {
@@ -50,12 +51,12 @@
   "SharedAssemblyName": "Sungero.ExchangeCoreSbis.Shared",
   "SharedNamespace": "Sungero.ExchangeCoreSbis.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

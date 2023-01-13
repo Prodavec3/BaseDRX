@@ -10,7 +10,7 @@ using ReportResources = Sungero.Docflow.Reports.Resources;
 namespace Sungero.Docflow
 {
   partial class ExchangeOrderReportServerHandlers
-  {    
+  {
     public override void AfterExecute(Sungero.Reporting.Server.AfterExecuteEventArgs e)
     {
       Docflow.PublicFunctions.Module.DeleteReportData(Constants.ExchangeOrderReport.SourceTableName, ExchangeOrderReport.SessionId);
@@ -26,7 +26,7 @@ namespace Sungero.Docflow
       
       var exchangeInfo = Functions.Module.GetExchangeOrderInfo(reportSessionId, document);
       
-      var dataTable = exchangeInfo.ExchangeOrderInfo;      
+      var dataTable = exchangeInfo.ExchangeOrderInfo;
       ExchangeOrderReport.CompletationString = Reports.Resources.ExchangeOrderReport.Docflow + " ";
       var completionString = exchangeInfo.IsComplete ? Reports.Resources.ExchangeOrderReport.Completed : Reports.Resources.ExchangeOrderReport.NotCompleted;
       ExchangeOrderReport.CompletationString += completionString;

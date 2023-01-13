@@ -103,6 +103,7 @@ namespace Sungero.Docflow.Shared
        * Разрешить доп. согласующих                       +
        * Разрешить отправку на доработку:                                                            +             +           +                                        +                   +
        * Разрешить выбор отв. за доработку:     +         +              +              +            +             +           +                                        +        +          +
+       * Разрешить согласование с замечаниями:  +         +              +
        * ----Срок и прочее--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
        * Срок дней:                             +         +              +              +             +            +           +             +                          +        +          +
        * Срок часов:                            +         +              +              +             +            +           +             +                          +        +          +
@@ -153,6 +154,7 @@ namespace Sungero.Docflow.Shared
       properties.AllowSendToRework.IsVisible = isSimpleAssignment || isSending || isRegistering || isPrinting || isExecution;
       properties.IsConfirmSigning.IsVisible = isSign;
       properties.AllowAdditionalApprovers.IsVisible = isApprovers;
+      properties.AllowApproveWithSuggestions.IsVisible = isManager || isApprovers;
       
       // Срок и прочее.
       properties.DeadlineInDays.IsVisible = !isNotice;

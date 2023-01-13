@@ -12,7 +12,7 @@ namespace Sungero.Docflow
 
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
-      if (!_obj.DocumentGroup.OfficialDocuments.Any())
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
     }
 

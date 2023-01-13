@@ -134,5 +134,101 @@ namespace Sungero.Parties.Shared
         ? string.Empty
         : CompanyBases.Resources.IncorrectTrrcLength;
     }
+    
+    /// <summary>
+    /// Получить JSON-строку для индексирования в поисковой системе.
+    /// </summary>
+    /// <returns>JSON-строка.</returns>
+    [Public]
+    public virtual string GetIndexingJson()
+    {
+      var emails = this.PrepareEmailForIndex(_obj.Email);
+      var homepages = this.PrepareHomepageForIndex(_obj.Homepage);
+      var phones = this.PreparePhonesForIndex(_obj.Phones);
+      
+      return string.Format(Constants.CompanyBase.ElasticsearchIndexTemplate,
+                           _obj.Id,
+                           Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.LegalName),
+                           Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.Name),
+                           _obj.HeadCompany != null ? Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.HeadCompany.DisplayValue) : string.Empty,
+                           _obj.TIN,
+                           _obj.TRRC,
+                           _obj.PSRN,
+                           homepages,
+                           emails,
+                           phones,
+                           Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.LegalAddress),
+                           Sungero.Core.Calendar.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                           _obj.Status.Value.Value);
+    }
+    
+    /// <summary>
+    /// Подготовить и отформатировать email для индексирования.
+    /// </summary>
+    /// <param name="email">Email.</param>
+    /// <returns>Отформатированный email.</returns>
+    public virtual string PrepareEmailForIndex(string email)
+    {
+      var result = string.Empty;
+      if (!string.IsNullOrWhiteSpace(email))
+      {
+        var emails = new List<string>();
+        var emailsMatch = Regex.Matches(email, @"^\S+@\S+.\S+");
+        foreach (Match emailMatch in emailsMatch)
+        {
+          if (PublicFunctions.Module.EmailIsValid(emailMatch.Value))
+            emails.Add(emailMatch.Value);
+        }
+        result = string.Join(" ", emails);
+      }
+      return result;
+    }
+    
+    /// <summary>
+    /// Подготовить и отформатировать сайт для индексирования.
+    /// </summary>
+    /// <param name="homepage">Сайт.</param>
+    /// <returns>Отформатированный сайт.</returns>
+    public virtual string PrepareHomepageForIndex(string homepage)
+    {
+      var result = string.Empty;
+      if (!string.IsNullOrWhiteSpace(homepage))
+      {
+        var sites = new List<string>();
+        foreach (var siteValue in homepage.Split(new char[] { ' ', ';', ',' }))
+        {
+          var site = Parties.PublicFunctions.Module.NormalizeSite(siteValue);
+          if (!string.IsNullOrEmpty(site))
+            sites.Add(site);
+        }
+        result = string.Join(" ", sites);
+      }
+      return result;
+    }
+    
+    /// <summary>
+    /// Подготовить и отформатировать телефоны для индексирования.
+    /// </summary>
+    /// <param name="phones">Телефоны.</param>
+    /// <returns>Отформатированные телефоны.</returns>
+    public virtual string PreparePhonesForIndex(string phones)
+    {
+      var result = string.Empty;
+      if (!string.IsNullOrWhiteSpace(phones))
+      {
+        var phonesProcessed = new List<string>();
+        var phonesMatch = Regex.Matches(phones, @"((8|\+7)[\- ]?)?(\(?\d{3,4}\)?[\- ]?)?[\d\- ]{5,10}");
+        
+        foreach (Match phoneMatch in phonesMatch)
+        {
+          var phone = Parties.PublicFunctions.Module.NormalizePhone(phoneMatch.Value);
+          if (!string.IsNullOrEmpty(phone))
+            phonesProcessed.Add(phone);
+        }
+        result = string.Join(" ", phonesProcessed);
+      }
+      return result;
+    }
+
   }
 }

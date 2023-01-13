@@ -223,4 +223,7 @@
   <data name="PropertiesFillingDialog_Result_NotAccepted" xml:space="preserve">
     <value>Not accepted</value>
   </data>
+  <data name="PropertiesFillingDialog_Error_ConsigneePowersBaseGreaterMaxLength" xml:space="preserve">
+    <value>Signing authority in the signature setting is more than {0} characters. Contact your system administrator.</value>
+  </data>
 </root>

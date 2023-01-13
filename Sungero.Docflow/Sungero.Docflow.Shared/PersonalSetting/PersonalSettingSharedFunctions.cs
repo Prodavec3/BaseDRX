@@ -109,7 +109,7 @@ namespace Sungero.Docflow.Shared
       if (employee == null)
         return null;
       
-      return Functions.PersonalSetting.Remote.GetOrCreatePersonalSettings(employee);
+      return Functions.PersonalSetting.Remote.CreatePersonalSettings(employee);
     }
     
     /// <summary>

@@ -13,7 +13,17 @@ namespace Sungero.Docflow
     {
       base.ConvertingFrom(e);
       
+      if (Sungero.Docflow.Addendums.Is(_source))
+        e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.LeadingDocument);
+      
       e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.Corrected);
+
+      var counterparty = Exchange.PublicFunctions.ExchangeDocumentInfo.GetDocumentCounterparty(_source, _source.LastVersion);
+      if (counterparty != null)
+      {
+        var accountingDocument = AccountingDocumentBases.As(e.Entity);
+        accountingDocument.Counterparty = counterparty;
+      }
     }
   }
 
@@ -217,7 +227,10 @@ namespace Sungero.Docflow
       // Выдать ответственному права на изменение документа.
       var responsible = _obj.ResponsibleEmployee;
       if (responsible != null && !Equals(_obj.State.Properties.ResponsibleEmployee.OriginalValue, responsible) &&
-          !Equals(responsible, Sungero.Company.Employees.Current))
+          !Equals(responsible, Sungero.Company.Employees.Current) &&
+          !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, responsible) &&
+          !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, responsible) &&
+          _obj.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced)
         _obj.AccessRights.Grant(responsible, DefaultAccessRightsTypes.Change);
       
       if (_obj.LeadingDocument != null && _obj.LeadingDocument.AccessRights.CanRead() &&

@@ -10,6 +10,18 @@ using Sungero.Metadata;
 
 namespace Sungero.Docflow
 {
+  partial class OfficialDocumentOurSigningReasonPropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> OurSigningReasonFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      var now = Calendar.Now;
+      var availableSettings = Functions.OfficialDocument.GetSignatureSettingsWithCertificateByEmployee(_obj, _obj.OurSignatory);
+      query = query.Where(x => availableSettings.Contains(x));
+      return query;
+    }
+  }
+
   partial class OfficialDocumentCaseFilePropertyFilteringServerHandler<T>
   {
 
@@ -38,9 +50,14 @@ namespace Sungero.Docflow
     {
       base.ConvertingFrom(e);
       
+      var sourceOfficialDocument = OfficialDocuments.As(_source);
+      
+      // Не копировать порядковый номер.
+      e.Without(_info.Properties.Index);
+      
       // Не копируем состояние ЖЦ для Вх. документа эл. обмена.
       if (ExchangeDocuments.Is(_source) &&
-          OfficialDocuments.As(_source).LifeCycleState != OfficialDocument.LifeCycleState.Obsolete)
+          sourceOfficialDocument.LifeCycleState != OfficialDocument.LifeCycleState.Obsolete)
         e.Without(_info.Properties.LifeCycleState);
       
       // Добавить параметр того, что документ меняет тип.
@@ -53,8 +70,12 @@ namespace Sungero.Docflow
         .OrderByDescending(r => r.Id)
         .FirstOrDefault();
       
-      if (recognitionInfo != null && OfficialDocuments.As(_source).VerificationState == OfficialDocument.VerificationState.InProcess)
+      if (recognitionInfo != null && sourceOfficialDocument.VerificationState == OfficialDocument.VerificationState.InProcess)
         Sungero.Commons.PublicFunctions.EntityRecognitionInfo.Remote.Clone(recognitionInfo, e.Entity);
+      
+      var businessUnit = Exchange.PublicFunctions.ExchangeDocumentInfo.GetDocumentBusinessUnit(_source, _source.LastVersion);
+      if (businessUnit != null)
+        e.Map(_info.Properties.BusinessUnit, businessUnit);
     }
   }
 
@@ -73,7 +94,12 @@ namespace Sungero.Docflow
     public virtual IQueryable<T> OurSignatoryFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
       e.DisableUiFiltering = true;
-      var signatories = Functions.OfficialDocument.GetSignatories(_obj).Select(s => s.EmployeeId).Distinct().ToList();
+
+      if (Functions.OfficialDocument.SignatorySettingWithAllUsersExist(_obj))
+        return query;
+      
+      var signatories = Functions.OfficialDocument.GetSignatoriesIds(_obj);
+      
       return query.Where(s => signatories.Contains(s.Id));
     }
   }
@@ -100,8 +126,8 @@ namespace Sungero.Docflow
     {
       if (_obj.DocumentKind != null)
       {
-        var availableDocumentRegisters = Functions.OfficialDocument.GetDocumentRegistersByDocument(_obj);
-        query = query.Where(l => availableDocumentRegisters.Contains(l));
+        var availableDocumentRegistersIds = Functions.OfficialDocument.GetDocumentRegistersByDocument(_obj);
+        query = query.Where(l => availableDocumentRegistersIds.Contains(l.Id));
       }
       return query;
     }
@@ -148,11 +174,14 @@ namespace Sungero.Docflow
       e.Without(_info.Properties.LocationState);
       e.Without(_info.Properties.ExchangeState);
       
-      // Свойство "Подписал".
+      // Свойства "Подписал" и "Основание".
       e.Without(_info.Properties.OurSignatory);
+      e.Without(_info.Properties.OurSigningReason);
       
       // Свойство "Исполнитель".
       e.Without(_info.Properties.Assignee);
+      
+      e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
     }
   }
 
@@ -177,14 +206,16 @@ namespace Sungero.Docflow
       // TODO: удалить код после исправления бага платформы 100433.
       var isTransferring = _obj.Versions.Any(v => (v.Body != null && v.Body.Size > 0 && ((Sungero.Domain.BinaryData)v.Body).IsTransferring) ||
                                              (v.PublicBody != null && v.PublicBody.Size > 0 && ((Sungero.Domain.BinaryData)v.PublicBody).IsTransferring));
-      if (!e.Params.Contains(Docflow.PublicConstants.OfficialDocument.DontUpdateModified) && !isTransferring)
+
+      if (e.Params.Contains(Docflow.PublicConstants.OfficialDocument.GrantAccessRightsToDocumentAsync) && !isTransferring)
       {
         if (e.Params.Contains(Constants.OfficialDocument.GrantAccessRightsToProjectDocument))
         {
           Sungero.Projects.Jobs.GrantAccessRightsToProjectDocuments.Enqueue();
           e.Params.Remove(Constants.OfficialDocument.GrantAccessRightsToProjectDocument);
         }
-        PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(_obj.Id, null, true);
+        PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(_obj.Id, new List<int>(), true);
+        e.Params.Remove(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync);
       }
       
       // Интеллектуальная обработка. Сохранить подтверждённые пользователем значения.
@@ -246,14 +277,21 @@ namespace Sungero.Docflow
       var lockInfo = Locks.GetLockInfo(_obj);
       if (lockInfo == null || !lockInfo.IsLockedByOther || !canSignLockedDocument)
       {
-        // TODO После того как добавят признак внешней подписи, переделать проверку с e.Signature.Signatory != null на !External.
         if (e.Signature.SignatureType == SignatureType.Approval && e.Signature.Signatory != null)
         {
           // Заполнить статус согласования "Подписан".
           Functions.OfficialDocument.SetInternalApprovalStateToSigned(_obj);
           
+          var changedSignatory = !Equals(_obj.OurSignatory, Company.Employees.Current);
+          
           // Заполнить подписывающего в карточке документа.
           Functions.OfficialDocument.SetDocumentSignatory(_obj, Company.Employees.Current);
+
+          // Заполнить основание в карточке документа.
+          Functions.OfficialDocument.SetOurSigningReason(_obj, Company.Employees.Current, e, changedSignatory);
+          
+          // Заполнить Единый рег. № из эл. доверенности в подпись.
+          Functions.OfficialDocument.SetUnifiedRegistrationNumber(_obj, Company.Employees.Current, e.Signature, e.Certificate);
         }
       }
       
@@ -289,8 +327,13 @@ namespace Sungero.Docflow
       if (isVersionCreateAction && documentParams.ContainsKey(Docflow.PublicConstants.OfficialDocument.FindByBarcodeParamName))
         e.Comment = Sungero.Docflow.OfficialDocuments.Resources.VersionCreatedByCaptureService;
       
-      // Изменять историю для изменения, создания и смены типа документа. Историю для создания версии не изменять.
-      if ((!isUpdateAction || isVersionCreateAction) && !isCreateAction && !isChangeTypeAction)
+      var isAddRegistrationStampAction = isVersionCreateAction && documentParams.ContainsKey(Docflow.PublicConstants.OfficialDocument.AddHistoryCommentAboutRegistrationStamp);
+      if (isAddRegistrationStampAction)
+        e.Comment = Sungero.Docflow.OfficialDocuments.Resources.VersionWithRegistrationStamp;
+      
+      // Изменять историю для изменения, создания и смены типа документа. Историю для создания версии не изменять,
+      // кроме случая, когда версия создана с отметкой о регистрации.
+      if ((!isUpdateAction || isVersionCreateAction && !isAddRegistrationStampAction) && !isCreateAction && !isChangeTypeAction)
         return;
       
       var historyRecordOverwritten = false;
@@ -484,9 +527,22 @@ namespace Sungero.Docflow
 
       #endregion
       
-      if (e.Operation == Content.DocumentHistory.Operation.UpdateVerBody && documentParams.ContainsKey(Docflow.PublicConstants.OfficialDocument.AddHistoryCommentAboutPDFConvert) &&
-          string.IsNullOrEmpty(e.Comment))
-        e.Comment = Sungero.Docflow.OfficialDocuments.Resources.ConvertToPDFHistoryComment;
+      var isConvertToPdfAction = e.Operation == Content.DocumentHistory.Operation.UpdateVerBody &&
+        documentParams.ContainsKey(Docflow.PublicConstants.OfficialDocument.AddHistoryCommentAboutPDFConvert);
+      if (isConvertToPdfAction)
+      {
+        var comment = Sungero.Docflow.OfficialDocuments.Resources.ConvertToPdfHistoryComment;
+        if (string.IsNullOrEmpty(e.Comment))
+        {
+          e.Comment = comment;
+        }
+        else
+        {
+          var operation = new Enumeration(Constants.OfficialDocument.Operation.ContentChange);
+          var version = e.VersionNumber;
+          e.Write(operation, null, comment, version);
+        }
+      }
     }
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
@@ -498,7 +554,8 @@ namespace Sungero.Docflow
         // Выдать права группе регистрации. Заодно обновить кешированную проверку на доступность поля "Исполнитель".
         if (registrationGroup != null)
         {
-          _obj.AccessRights.Grant(registrationGroup, DefaultAccessRightsTypes.Change);
+          if (_obj.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced)
+            _obj.AccessRights.Grant(registrationGroup, DefaultAccessRightsTypes.Change);
           e.Params.AddOrUpdate(Constants.OfficialDocument.CanChangeAssignee, Functions.OfficialDocument.CanChangeAssignee(_obj));
         }
       }
@@ -586,19 +643,21 @@ namespace Sungero.Docflow
 
       if (isAutoNumbering && _obj.VerificationState != VerificationState.InProcess)
       {
-        var documentRegisters = Functions.OfficialDocument.GetDocumentRegistersByDocument(_obj, Docflow.RegistrationSetting.SettingType.Numeration);
-        if (!documentRegisters.Any())
+        var documentRegistersIds = Functions.OfficialDocument.GetDocumentRegistersIdsByDocument(_obj, Docflow.RegistrationSetting.SettingType.Numeration);
+        if (!documentRegistersIds.Any())
         {
           e.AddError(Docflow.Resources.NumberingSettingsRequiredForSave);
           return;
         }
         
+        var register = DocumentRegisters.Get(documentRegistersIds.First());
+        
         // Заполнить дело, если оно будет заполнено после регистрации.
         if (_obj.CaseFile == null)
-          Functions.OfficialDocument.FillCaseFileAndDeliveryMethod(_obj, documentRegisters.First());
+          Functions.OfficialDocument.FillCaseFileAndDeliveryMethod(_obj, register);
         caseIndex = _obj.CaseFile == null ? string.Empty : _obj.CaseFile.Index;
         
-        Functions.OfficialDocument.RegisterDocument(_obj, documentRegisters.First(), Calendar.UserToday, null, false, false);
+        Functions.OfficialDocument.RegisterDocument(_obj, register, Calendar.UserToday, null, false, false);
         
         // Добавить параметр о необходимости валидации.
         e.Params.AddOrUpdate(Sungero.Docflow.Constants.OfficialDocument.NeedValidateRegisterFormat, true);
@@ -614,7 +673,7 @@ namespace Sungero.Docflow
             Users.Current.IsSystem != true)
         {
           var documentRegisters = Functions.OfficialDocument.GetDocumentRegistersByDocument(_obj);
-          if (!documentRegisters.Contains(_obj.DocumentRegister))
+          if (!documentRegisters.Contains(_obj.DocumentRegister.Id))
           {
             e.AddError(Docflow.Resources.NoRightToRegistrationInDocumentRegister);
             return;
@@ -729,7 +788,7 @@ namespace Sungero.Docflow
       #region Выдача прав
 
       // Вывести предупреждение о том, что права для группы регистрации будут восстановлены, если они были удалены.
-      if (_obj.DocumentRegister != null)
+      if (_obj.DocumentRegister != null && _obj.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced)
       {
         var registrationGroup = _obj.DocumentRegister.RegistrationGroup;
         
@@ -1002,20 +1061,11 @@ namespace Sungero.Docflow
         var needValidateOurSignatory = Functions.OfficialDocument.NeedValidateOurSignatorySignatureSetting(_obj);
         var isVisualMode = ((Domain.Shared.IExtendedEntity)_obj).Params.ContainsKey(Constants.OfficialDocument.IsVisualModeParamName);
         
-        if (needValidateOurSignatory &&
-            isVisualMode &&
-            _obj.OurSignatory != null)
+        if (needValidateOurSignatory && isVisualMode && _obj.OurSignatory != null
+            && !Functions.OfficialDocument.CanSignByEmployee(_obj, _obj.OurSignatory))
         {
-          var ourSignatoryId = _obj.OurSignatory.Id;
-          var signatoryIds = Functions.OfficialDocument.GetSignatories(_obj)
-            .Select(s => s.EmployeeId)
-            .ToList();
-          
-          if (!signatoryIds.Any(x => x == ourSignatoryId))
-          {
-            var message = Sungero.Docflow.OfficialDocuments.Resources.IncorrectOurSignatoryFormat(_obj.OurSignatory.Name);
-            e.AddError(_obj.Info.Properties.OurSignatory, message);
-          }
+          var message = Sungero.Docflow.OfficialDocuments.Resources.IncorrectOurSignatoryFormat(_obj.OurSignatory.Name);
+          e.AddError(_obj.Info.Properties.OurSignatory, message);
         }
       }
       

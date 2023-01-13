@@ -116,7 +116,7 @@ namespace Sungero.RecordManagementUI.Client
     /// Показать параметры модуля.
     /// </summary>
     public virtual void ShowRecordManagementSettings()
-    {      
+    {
       RecordManagement.PublicFunctions.Module.GetSettings().Show();
     }
   }

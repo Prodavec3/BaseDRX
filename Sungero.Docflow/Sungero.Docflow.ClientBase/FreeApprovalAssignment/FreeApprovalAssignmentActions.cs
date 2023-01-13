@@ -36,7 +36,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForward(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Status == Status.InProcess;
+      return _obj.Status == Status.InProcess && Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
     public virtual void AddApprover(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -86,7 +86,8 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanAddApprover(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.Status == Status.InProcess && _obj.AccessRights.CanUpdate();
+      return _obj.Status == Status.InProcess && _obj.AccessRights.CanUpdate() && 
+        Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
     public virtual void ExtendDeadline(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -97,7 +98,8 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanExtendDeadline(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.Status == Workflow.AssignmentBase.Status.InProcess && _obj.AccessRights.CanUpdate() && _obj.Deadline != null;
+      return _obj.Status == Workflow.AssignmentBase.Status.InProcess && _obj.AccessRights.CanUpdate() && _obj.Deadline != null && 
+        Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
     public virtual void Approved(Sungero.Workflow.Client.ExecuteResultActionArgs e)
@@ -116,7 +118,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanApproved(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Addressee == null;
+      return _obj.Addressee == null && Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
     public virtual void ForRework(Sungero.Workflow.Client.ExecuteResultActionArgs e)
@@ -135,7 +137,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForRework(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Addressee == null;
+      return _obj.Addressee == null && Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
   }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sungero.Content;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.RecordManagement.AcquaintanceTask;
@@ -9,6 +10,36 @@ namespace Sungero.RecordManagement
 {
   partial class AcquaintanceTaskSharedHandlers
   {
+
+    public virtual void AddendaGroupDeleted(Sungero.Workflow.Interfaces.AttachmentDeletedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.AcquaintanceTask.RemovedAddendaAppend(_obj, addendum);
+      Functions.AcquaintanceTask.AddedAddendaRemove(_obj, addendum);
+    }
+
+    public virtual void AddendaGroupAdded(Sungero.Workflow.Interfaces.AttachmentAddedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.AcquaintanceTask.AddedAddendaAppend(_obj, addendum);
+      Functions.AcquaintanceTask.RemovedAddendaRemove(_obj, addendum);
+    }
+
+    public virtual void AddendaGroupCreated(Sungero.Workflow.Interfaces.AttachmentCreatedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.AcquaintanceTask.AddedAddendaAppend(_obj, addendum);
+      Functions.AcquaintanceTask.RemovedAddendaRemove(_obj, addendum);
+    }
 
     public override void SubjectChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
     {
@@ -28,6 +59,8 @@ namespace Sungero.RecordManagement
       var document = Docflow.OfficialDocuments.As(e.Attachment);
       if (Docflow.OfficialDocuments.Is(document))
         Docflow.PublicFunctions.OfficialDocument.RemoveRelatedDocumentsFromAttachmentGroup(Docflow.OfficialDocuments.As(document), _obj.OtherGroup);
+      
+      Functions.AcquaintanceTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
     }
 
     public virtual void DocumentGroupAdded(Sungero.Workflow.Interfaces.AttachmentAddedEventArgs e)
@@ -35,12 +68,9 @@ namespace Sungero.RecordManagement
       _obj.Subject = AcquaintanceTasks.Resources.AcquaintanceTaskSubjectFormat(e.Attachment.DisplayValue);
 
       // Добавление вложений.
-      var document = _obj.DocumentGroup.OfficialDocuments.First();
+      var document = Docflow.OfficialDocuments.As(e.Attachment);
       if (!_obj.State.IsCopied)
-      {
-        Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
-        Docflow.PublicFunctions.OfficialDocument.AddRelatedDocumentsToAttachmentGroup(document, _obj.OtherGroup);
-      }
+        Functions.AcquaintanceTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
       
       Docflow.PublicFunctions.OfficialDocument.DocumentAttachedInMainGroup(document, _obj);
     }

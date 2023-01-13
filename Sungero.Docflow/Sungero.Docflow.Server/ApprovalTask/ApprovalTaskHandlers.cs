@@ -62,7 +62,11 @@ namespace Sungero.Docflow
     {
       e.DisableUiFiltering = true;
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      var signatories = Functions.OfficialDocument.GetSignatories(document).Select(s => s.EmployeeId).Distinct().ToList();
+
+      if (Functions.OfficialDocument.SignatorySettingWithAllUsersExist(document))
+        return query;
+      
+      var signatories = Functions.OfficialDocument.GetSignatoriesIds(document);
       
       return query.Where(s => signatories.Contains(s.Id));
     }
@@ -150,52 +154,29 @@ namespace Sungero.Docflow
       if (_obj.State.Properties.Status.OriginalValue == Workflow.Task.Status.Draft)
         return;
       
-      var document = _obj.DocumentGroup.OfficialDocuments.First();
+      Functions.ApprovalTask.SendApprovalAbortNotice(_obj);
       
-      var subject = string.Empty;
-      var threadSubject = string.Empty;
-      // Отправить уведомления о прекращении.
-      using (TenantInfo.Culture.SwitchTo())
-      {
-        threadSubject = ApprovalTasks.Resources.AbortNoticeSubject;
-        subject = string.Format(Sungero.Exchange.Resources.TaskSubjectTemplate, threadSubject, Docflow.PublicFunctions.Module.TrimSpecialSymbols(document.Name));
-      }
-      
-      var allApprovers = ApprovalAssignments.GetAll(asg => asg.Task == _obj && asg.IsRead.Value).Select(app => app.Performer).ToList();
-      allApprovers.AddRange(ApprovalManagerAssignments.GetAll(asg => asg.Task == _obj && asg.IsRead.Value).Select(app => app.Performer).ToList());
-      allApprovers.AddRange(ApprovalSigningAssignments.GetAll(asg => asg.Task == _obj && asg.IsRead.Value).Select(app => app.Performer).ToList());
-      var author = _obj.Author;
-      var reworkAssignment = Functions.ApprovalTask.GetLastReworkAssignment(_obj);
-      if (reworkAssignment != null)
-      {
-        allApprovers.Add(reworkAssignment.Performer);
-        if (!Equals(_obj.Author, reworkAssignment.Performer))
-        {
-          allApprovers.Add(_obj.Author);
-          author = reworkAssignment.Performer;
-        }
-      }
-      allApprovers.Remove(Users.Current);
-      if (allApprovers.Any())
-        Functions.Module.SendNoticesAsSubtask(subject, allApprovers, _obj, _obj.AbortingReason, author, threadSubject);
-      
-      bool setObsolete;
-      e.Params.TryGetValue(Constants.ApprovalTask.NeedSetDocumentObsolete, out setObsolete);
+      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
       
       // Обновить статус согласования - аннулирован и сделать его устаревшим при необходимости.
-      var needSetState = false;
-      if (document.AccessRights.CanUpdate())
-        Functions.ApprovalTask.SetDocumentStateAborted(_obj, setObsolete);
-      else
-        needSetState = true;
-      
-      var needGrantAccessRightsOnDocument = Functions.ApprovalTask.NeedGrantAccessRightsOnDocument(_obj);
-      if (needSetState || needGrantAccessRightsOnDocument)
-        Functions.ApprovalTask.SetDocumentStateAbortedAsync(_obj, setObsolete, needSetState, needGrantAccessRightsOnDocument);
+      if (document != null)
+      {
+        bool setObsolete;
+        e.Params.TryGetValue(Constants.ApprovalTask.NeedSetDocumentObsolete, out setObsolete);
+        
+        var needSetState = false;
+        if (document.AccessRights.CanUpdate())
+          Functions.ApprovalTask.SetDocumentStateAborted(_obj, setObsolete);
+        else
+          needSetState = true;
+        
+        var needGrantAccessRightsOnDocument = Functions.ApprovalTask.NeedGrantAccessRightsOnDocument(_obj);
+        if (needSetState || needGrantAccessRightsOnDocument)
+          Functions.ApprovalTask.SetDocumentStateAbortedAsync(_obj, setObsolete, needSetState, needGrantAccessRightsOnDocument);
+      }
       
       // Прекратить процессы, запущенные сценариями.
       Functions.ApprovalTask.AbortPassedFunctionStages(_obj);
-
     }
 
     public override void BeforeStart(Sungero.Workflow.Server.BeforeStartEventArgs e)
@@ -208,6 +189,7 @@ namespace Sungero.Docflow
         return;
       
       var refreshParameters = Functions.ApprovalTask.GetFullStagesInfoForRefresh(_obj);
+      Functions.ApprovalTask.SetRefreshParams(_obj, (Domain.Shared.IExtendedEntity)_obj, refreshParameters);
       // Могли измениться условия, влияющие на обязательность полей.
       Functions.ApprovalTask.SetRequiredProperties(_obj, refreshParameters);
       
@@ -219,9 +201,6 @@ namespace Sungero.Docflow
       
       // Синхронизация приложений для заполнения коллекции добавленных и удаленных вручную документов.
       Functions.ApprovalTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
-      
-      // Выдать наблюдателям права на просмотр.
-      Functions.Module.GrantReadAccessRightsForAttachments(_obj.DocumentGroup.All.Concat(_obj.AddendaGroup.All).ToList(), _obj.Observers.Select(o => o.Observer).ToList());
       
       // Обновить обязательных согласующих.
       Functions.ApprovalTask.UpdateReglamentApprovers(_obj, _obj.ApprovalRule);

@@ -24,6 +24,7 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "Dependencies": [
@@ -112,6 +113,10 @@
     {
       "ItemId": "83d1dcdf-fb2c-4cd9-9246-e57d641b0a48",
       "PreviousItemId": "1031e40e-2c3a-4964-92ce-92036cdcb3b9"
+    },
+    {
+      "ItemId": "471e68ad-7f9d-43d7-b4db-93eb660cde7f",
+      "PreviousItemId": "83d1dcdf-fb2c-4cd9-9246-e57d641b0a48"
     }
   ],
   "HandledEvents": [
@@ -131,6 +136,149 @@
     "NeedResetTags"
   ],
   "PublicFunctions": [
+    {
+      "Name": "AbortTask",
+      "Parameters": [
+        {
+          "Name": "taskId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CheckCreatingDocumentFromTemplate",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "CheckExchange",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CheckModulesVersion",
+      "Parameters": [
+        {
+          "Name": "version",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "CheckReadingDocumentBody",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "CheckRegistration",
+      "Parameters": [
+        {
+          "Name": "documentId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "registrationSettingId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "CheckReportService",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "CheckSigning",
+      "Parameters": [
+        {
+          "Name": "documentId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "certificateId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CheckTaskAbort",
+      "Parameters": [
+        {
+          "Name": "taskId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CheckTaskDelete",
+      "Parameters": [
+        {
+          "Name": "taskId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CheckTaskStart",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "CheckWorker",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CreateDocumentToRegister",
+      "Parameters": [
+        {
+          "Name": "registrationSettingId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "GetActiveRegistrationSetting",
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Get"
+    },
     {
       "Name": "GetRespondingEmployeeDocuments",
       "IsRemote": true,
@@ -653,7 +801,8 @@
         "db516acc-0f02-4ea7-960a-08f3f734db4f",
         "b0931934-7981-4139-a398-f0e39abbb981",
         "7cca016a-80f0-4562-9042-57bb748d5b30",
-        "018e582e-5b0e-4e4f-af57-be1e0a468efa"
+        "018e582e-5b0e-4e4f-af57-be1e0a468efa",
+        "1d5433e5-b285-4310-9a63-fc4e76f0a9b7"
       ],
       "Versions": []
     },
@@ -909,7 +1058,6 @@
       "NeedShowMarkedCount": true,
       "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
       "SupportedDescendantsTypes": [
-        "e04a433b-5b48-40c2-993a-41370b9ebb8a",
         "f44faafc-cd55-4c5b-b16d-93b6fc966ffb",
         "8a5b9f7b-0c69-455f-95b2-8b525b4e7bb1",
         "5f794b11-e700-4fba-9021-39006a567729",
@@ -1627,9 +1775,102 @@
       "SupportedDescendantsTypes": [
         "e825fc6a-c82b-4b89-a9fc-33fb181cb161"
       ]
+    },
+    {
+      "NameGuid": "471e68ad-7f9d-43d7-b4db-93eb660cde7f",
+      "Name": "OnAcquaintance",
+      "DefaultContentType": "ea683a63-273e-43ae-bcf1-7a443698008a",
+      "DisplayType": "Inbox",
+      "FilterPanel": {
+        "NameGuid": "84510432-910e-49bb-9870-40a3ed69dc52",
+        "Name": "FilterPanel",
+        "Controls": [
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "cd84b9c6-ed5f-44ef-ae30-d42c9463f6ed",
+            "Name": "StateGroup",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "be0f6af9-1718-43fd-837a-eb37ae0245b5",
+            "Name": "PeriodGroup",
+            "PreviousGuid": "cd84b9c6-ed5f-44ef-ae30-d42c9463f6ed",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "a0c383bb-e09a-4c50-b340-916f76d24cd2",
+            "Name": "State",
+            "ParentGuid": "cd84b9c6-ed5f-44ef-ae30-d42c9463f6ed",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "c218f834-beae-472d-8fbf-e9d2375e7850",
+            "Name": "Period",
+            "MasterControlId": "bab49f86-fe33-470e-96d1-90d290b1bbbd",
+            "ParentGuid": "be0f6af9-1718-43fd-837a-eb37ae0245b5",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "7aa05ad7-d12c-4d3f-affd-36f0e0d6d132",
+            "Name": "InProcess",
+            "IsSelected": true,
+            "ParentGuid": "a0c383bb-e09a-4c50-b340-916f76d24cd2",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "bab49f86-fe33-470e-96d1-90d290b1bbbd",
+            "Name": "All",
+            "ParentGuid": "a0c383bb-e09a-4c50-b340-916f76d24cd2",
+            "PreviousGuid": "7aa05ad7-d12c-4d3f-affd-36f0e0d6d132",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "609f99d4-6d8e-4db4-b7a0-c2b92849b66e",
+            "Name": "Last30Days",
+            "ParentGuid": "c218f834-beae-472d-8fbf-e9d2375e7850",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "9474d364-8d1c-4f06-b568-27d61ece85e1",
+            "Name": "Last90Days",
+            "IsSelected": true,
+            "ParentGuid": "c218f834-beae-472d-8fbf-e9d2375e7850",
+            "PreviousGuid": "609f99d4-6d8e-4db4-b7a0-c2b92849b66e",
+            "Versions": []
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "c31ade17-2a07-44ff-bf0c-19f7a22bf707",
+            "Name": "Last180Days",
+            "ParentGuid": "c218f834-beae-472d-8fbf-e9d2375e7850",
+            "PreviousGuid": "9474d364-8d1c-4f06-b568-27d61ece85e1",
+            "Versions": []
+          }
+        ]
+      },
+      "HandledEvents": [
+        "VisibilityHandlerServer",
+        "DataQueryServer"
+      ],
+      "IconPath": "OnAcquaintance_471e68ad7f9d43d7b4db93eb660cde7f.ico",
+      "IsShow": true,
+      "IsViewSettingsByFolder": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": true,
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "SupportedDescendantsTypes": [
+        "8fee99ee-b3fd-49dd-9b48-e51b83597227"
+      ]
     }
   ],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [
     {
       "NameGuid": "0894b7dd-4e24-40c9-9c02-4ed8c3aa6aa0",
@@ -2246,7 +2487,7 @@
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

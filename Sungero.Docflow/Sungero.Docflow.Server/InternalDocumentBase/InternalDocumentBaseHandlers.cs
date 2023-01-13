@@ -7,6 +7,37 @@ using Sungero.Docflow.InternalDocumentBase;
 
 namespace Sungero.Docflow
 {
+  partial class InternalDocumentBaseConvertingFromServerHandler
+  {
+
+    public override void ConvertingFrom(Sungero.Domain.ConvertingFromEventArgs e)
+    {
+      base.ConvertingFrom(e);
+      
+      e.Without(Sungero.Docflow.Addendums.Info.Properties.LeadingDocument);
+      
+      // При смене типа с вх. документа эл. обмена, а также с финансовых и договорных документов
+      // дополнить примечание информацией об основании подписания со стороны контрагента.
+      var sourceOfficialDocument = OfficialDocuments.As(_source);
+      if (sourceOfficialDocument != null)
+      {
+        var note = sourceOfficialDocument.Note;
+        
+        // Получить основание подписания со стороны контрагента.
+        var counterpartySigningReason = Docflow.PublicFunctions.OfficialDocument.GetCounterpartySigningReason(sourceOfficialDocument);
+        if (!string.IsNullOrWhiteSpace(counterpartySigningReason))
+        {
+          if (!string.IsNullOrWhiteSpace(note))
+            note += Environment.NewLine;
+          
+          note += SimpleDocuments.Resources.CounterpartySigningReasonTitleFormat(counterpartySigningReason);
+        }
+        
+        e.Map(_info.Properties.Note, note);
+      }
+    }
+  }
+
   partial class InternalDocumentBaseFilteringServerHandler<T>
   {
     

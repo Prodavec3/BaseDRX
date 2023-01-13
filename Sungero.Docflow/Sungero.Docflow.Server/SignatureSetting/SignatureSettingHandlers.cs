@@ -47,10 +47,22 @@ namespace Sungero.Docflow
       
       if (_obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney)
       {
-        query = query.Where(d => PowerOfAttorneys.Is(d) && PowerOfAttorneys.As(d).ValidTill >= Calendar.UserToday);
+        query = query.Where(d => PowerOfAttorneys.Is(d) &&
+                            PowerOfAttorneys.As(d).ValidTill >= Calendar.UserToday &&
+                            d.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Draft);
 
         if (_obj.Recipient != null)
           query = query.Where(d => Equals(_obj.Recipient, PowerOfAttorneys.As(d).IssuedTo));
+      }
+      
+      if (_obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA)
+      {
+        query = query.Where(d => FormalizedPowerOfAttorneys.Is(d) &&
+                            FormalizedPowerOfAttorneys.As(d).ValidTill >= Calendar.UserToday &&
+                            d.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Draft);
+
+        if (_obj.Recipient != null)
+          query = query.Where(d => Equals(_obj.Recipient, FormalizedPowerOfAttorneys.As(d).IssuedTo));
       }
       
       return query;
@@ -137,12 +149,49 @@ namespace Sungero.Docflow
         e.AddError(_obj.Info.Properties.ValidTill, SignatureSettings.Resources.IncorrectValidDates, _obj.Info.Properties.ValidFrom);
       }
       
-      if (_obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney)
+      if (_obj.Reason == SignatureSetting.Reason.PowerOfAttorney)
       {
         if (!Docflow.PowerOfAttorneys.Is(_obj.Document))
           e.AddError(SignatureSettings.Info.Properties.Document, Docflow.SignatureSettings.Resources.IncorrectDocumentType);
         else if (_obj.ValidTill > Docflow.PowerOfAttorneys.As(_obj.Document).ValidTill)
           e.AddError(Docflow.SignatureSettings.Resources.IncorrectValidTill);
+      }
+      
+      if (_obj.Reason == SignatureSetting.Reason.FormalizedPoA)
+      {
+        // В праве подписи на основании электронной доверенности нужно указать ровно одну НОР.
+        if (_obj.BusinessUnits.Count > 1)
+          e.AddError(SignatureSettings.Info.Properties.BusinessUnits, SignatureSettings.Resources.FormalizedPoATooManyBusinessUnits);
+        
+        var powerOfAttorney = FormalizedPowerOfAttorneys.As(_obj.Document);
+        
+        var settingValidFrom = _obj.ValidFrom.HasValue ? _obj.ValidFrom.Value : Calendar.Today;
+        // Дата начала действия доверенности - либо Действует с, либо Дата регистрации, либо дата создания.
+        DateTime powerOfAttorneyValidFrom;
+        if (powerOfAttorney.ValidFrom.HasValue)
+          powerOfAttorneyValidFrom = powerOfAttorney.ValidFrom.Value;
+        else if (powerOfAttorney.RegistrationDate.HasValue)
+          powerOfAttorneyValidFrom = powerOfAttorney.RegistrationDate.Value;
+        else
+          powerOfAttorneyValidFrom = powerOfAttorney.Created.Value;
+        
+        if (settingValidFrom < powerOfAttorneyValidFrom || _obj.ValidTill > powerOfAttorney.ValidTill)
+        {
+          e.AddError(_obj.Info.Properties.ValidFrom, SignatureSettings.Resources.SettingValidityPeriodShouldNotExtendDocumentValidityPeriod, _obj.Info.Properties.ValidTill);
+          e.AddError(_obj.Info.Properties.ValidTill, SignatureSettings.Resources.SettingValidityPeriodShouldNotExtendDocumentValidityPeriod, _obj.Info.Properties.ValidFrom);
+        }
+        
+        if (!_obj.BusinessUnits.Select(x => x.BusinessUnit).Contains(powerOfAttorney.BusinessUnit))
+        {
+          e.AddError(_obj.Info.Properties.Document, SignatureSettings.Resources.SignatoryDataDoesNotMatchWithDocument, _obj.Info.Properties.BusinessUnits);
+          e.AddError(_obj.Info.Properties.BusinessUnits, SignatureSettings.Resources.SignatoryDataDoesNotMatchWithDocument, _obj.Info.Properties.Document);
+        }
+        
+        if (!Equals(powerOfAttorney.IssuedTo, _obj.Recipient))
+        {
+          e.AddError(_obj.Info.Properties.Document, SignatureSettings.Resources.SignatoryDataDoesNotMatchWithDocument, _obj.Info.Properties.Recipient);
+          e.AddError(_obj.Info.Properties.Recipient, SignatureSettings.Resources.SignatoryDataDoesNotMatchWithDocument, _obj.Info.Properties.Document);
+        }
       }
     }
 
@@ -155,9 +204,24 @@ namespace Sungero.Docflow
         if (CallContext.CalledFrom(PowerOfAttorneys.Info))
         {
           _obj.Reason = Sungero.Docflow.SignatureSetting.Reason.PowerOfAttorney;
-          var powerOfAttorney = PowerOfAttorneys.Get(CallContext.GetCallerEntityId(PowerOfAttorneys.Info));
-          if (powerOfAttorney.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Obsolete && powerOfAttorney.ValidTill >= Calendar.UserToday)
+          var powerOfAttorney = PowerOfAttorneyBases.Get(CallContext.GetCallerEntityId(PowerOfAttorneys.Info));
+          if (powerOfAttorney.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Obsolete &&
+              powerOfAttorney.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Draft &&
+              powerOfAttorney.ValidTill >= Calendar.UserToday)
+          {
             _obj.Document = powerOfAttorney;
+          }
+        }
+        else if (CallContext.CalledFrom(FormalizedPowerOfAttorneys.Info))
+        {
+          _obj.Reason = Sungero.Docflow.SignatureSetting.Reason.FormalizedPoA;
+          var formalizedPowerOfAttorney = PowerOfAttorneyBases.Get(CallContext.GetCallerEntityId(FormalizedPowerOfAttorneys.Info));
+          if (formalizedPowerOfAttorney.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Obsolete &&
+              formalizedPowerOfAttorney.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Draft &&
+              formalizedPowerOfAttorney.ValidTill >= Calendar.UserToday)
+          {
+            _obj.Document = formalizedPowerOfAttorney;
+          }
         }
         else
           _obj.Reason = Sungero.Docflow.SignatureSetting.Reason.Duties;

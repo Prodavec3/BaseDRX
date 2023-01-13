@@ -9,6 +9,58 @@ namespace Sungero.RecordManagement.Client
 {
   partial class AcquaintanceTaskActions
   {
+    public virtual void ExcludeFromAcquaintance(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      if (!Functions.AcquaintanceTask.Remote.AllAcquaintanceAssignmentsCreated(_obj))
+      {
+        Dialogs.ShowMessage(Sungero.RecordManagement.AcquaintanceTasks.Resources.AcquaintanceInCreatingProcess, MessageType.Warning);
+        return;
+      }
+      
+      var dialog = Dialogs.CreateInputDialog(AcquaintanceTasks.Resources.ExcludeFromAcquaintanceDialogTitle);
+      dialog.HelpCode = Constants.AcquaintanceTask.ExcludeFromAcquaintanceHelpCode;
+      var selectedPerformersText = dialog.AddMultilineString(AcquaintanceTasks.Resources.ExcludeFromAcquaintanceDialogPerformers, false, string.Empty)
+        .RowsCount(3);
+      var selectPerformersLink = dialog.AddHyperlink(AcquaintanceTasks.Resources.ExcludeFromAcquaintanceDialogExcludePerformers);
+      var exсludeButton = dialog.Buttons.AddCustom(AcquaintanceTasks.Resources.ExcludeFromAcquaintanceDialogExcludeButton);
+      selectedPerformersText.IsEnabled = false;
+      exсludeButton.IsEnabled = false;
+      dialog.Buttons.AddCancel();
+      
+      var assignmentsToAbort = new List<IAcquaintanceAssignment>();
+      
+      // Выбрать исполнителей, которых нужно исключить.
+      selectPerformersLink.SetOnExecute(
+        () =>
+        {
+          var performers = Functions.AcquaintanceTask.Remote.GetAcquaintancePerformers(_obj).ToList();
+          var employeesToExclude = performers.ShowSelectMany(AcquaintanceTasks.Resources.ExcludeFromAcquaintanceDialogSelectPerformers);
+          if (employeesToExclude.Any())
+          {
+            selectedPerformersText.Value = string.Join("; ", employeesToExclude.Select(x => x.Person.ShortName));
+            assignmentsToAbort = Functions.AcquaintanceTask.Remote.GetAcquaintanceAssignments(_obj, employeesToExclude.ToList());
+            exсludeButton.IsEnabled = true;
+          }
+        });
+      
+      if (dialog.Show() == exсludeButton)
+      {
+        // Создать и запустить асинхронный обработчик исключения участников из ознакомления.
+        var excludeFromAcquaintanceHandler = RecordManagement.AsyncHandlers.ExcludeFromAcquaintance.Create();
+        excludeFromAcquaintanceHandler.AssignmentIds = string.Join(",", assignmentsToAbort.Select(x => x.Id).ToList());
+        var completedNotificationText = AcquaintanceTasks.Resources.ExcludeFromAcquaintanceCompletedNotificationFormat(Hyperlinks.Get(_obj.DocumentGroup.All.FirstOrDefault()));
+        excludeFromAcquaintanceHandler.ExecuteAsync(completedNotificationText);
+      }
+    }
+
+    public virtual bool CanExcludeFromAcquaintance(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return _obj.AccessRights.CanUpdate() &&
+        _obj.Status == Sungero.Workflow.Task.Status.InProcess &&
+        ClientApplication.ApplicationType != ApplicationType.Desktop &&
+        Functions.AcquaintanceTask.HasDocumentAndCanRead(_obj);
+    }
+
     public override void Start(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       if (!e.Validate())
@@ -53,7 +105,7 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanShowAcquaintanceFormReport(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsChanged;
+      return !_obj.State.IsChanged && Functions.AcquaintanceTask.HasDocumentAndCanRead(_obj);
     }
 
     public virtual void FillFromAcquaintanceList(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -101,7 +153,7 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanShowAcquaintanceReport(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsChanged;
+      return !_obj.State.IsChanged && Functions.AcquaintanceTask.HasDocumentAndCanRead(_obj);
     }
 
   }

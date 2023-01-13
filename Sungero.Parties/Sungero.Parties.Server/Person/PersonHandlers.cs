@@ -15,6 +15,7 @@ namespace Sungero.Parties
       base.AfterSave(e);
       
       Sungero.Company.PublicFunctions.Employee.CreateUpdateEmployeeNameAsyncHandler(_obj.Id);
+      Sungero.Parties.PublicFunctions.Contact.CreateUpdateContactNameAsyncHandler(_obj.Id);
     }
     
     public override void Created(Sungero.Domain.CreatedEventArgs e)

@@ -7,6 +7,182 @@ using Sungero.CoreEntities;
 
 namespace Sungero.Docflow.Structures.Module
 {
+  /// <summary>
+  /// Ид сотрудников, получающих сводку по заданиям (используется для SQL запроса).
+  /// </summary>
+  partial class PerformerIds
+  {
+    /// <summary>
+    /// Ид сотрудника.
+    /// </summary>
+    public int Id { get; set; }
+  }
+  
+  /// <summary>
+  /// Информация о задачах, заданиях и уведомлениях для построения сводки по сотруднику.
+  /// </summary>
+  [Public]
+  partial class WorkflowEntityMailInfo
+  {
+    /// <summary>
+    /// Ид сущности.
+    /// </summary>
+    public int Id { get; set; }
+    
+    /// <summary>
+    /// Дата создания.
+    /// </summary>
+    public DateTime? Created { get; set; }
+    
+    /// <summary>
+    /// Срок.
+    /// </summary>
+    public DateTime? Deadline { get; set; }
+    
+    /// <summary>
+    /// Отображаемое значение срока.
+    /// </summary>
+    public string DeadlineDisplayValue { get; set; }
+    
+    /// <summary>
+    /// Признак просроченности.
+    /// </summary>
+    public bool IsOverdue { get; set; }
+    
+    /// <summary>
+    /// Признак новой сущности.
+    /// </summary>
+    public bool IsNew { get; set; }
+    
+    /// <summary>
+    /// Тема.
+    /// </summary>
+    public string Subject { get; set; }
+    
+    /// <summary>
+    /// Ид исполнителя.
+    /// </summary>
+    public int PerformerId { get; set; }
+    
+    /// <summary>
+    /// Имя автора.
+    /// </summary>
+    public string AuthorName { get; set; }
+    
+    /// <summary>
+    /// Гиперссылка.
+    /// </summary>
+    public string Hyperlink { get; set; }
+    
+    /// <summary>
+    /// Признак исходящих задач в работе.
+    /// </summary>
+    public bool IsTasks { get; set; }
+    
+    /// <summary>
+    /// Признак того, что сущность является уведомлением.
+    /// </summary>
+    public bool IsNotice { get; set; }
+    
+    /// <summary>
+    /// Признак поручений.
+    /// </summary>
+    public bool IsActionItems { get; set; }
+    
+    /// <summary>
+    /// Признак контейнера составного поручения.
+    /// </summary>
+    public bool IsCompoundActionItem { get; set; }
+  }
+  
+  /// <summary>
+  /// Информация по сотруднику для отправки ему писем сводки по заданиям.
+  /// </summary>
+  [Public]
+  partial class EmployeeMailInfo
+  {
+    /// <summary>
+    /// Ид сотрудника.
+    /// </summary>
+    public int Id { get; set; }
+    
+    /// <summary>
+    /// E-mail сотрудника.
+    /// </summary>
+    public string Email { get; set; }
+    
+    /// <summary>
+    /// Короткое имя сотрудника.
+    /// </summary>
+    public string EmployeeShortName { get; set; }
+    
+    /// <summary>
+    /// Дата последнего рабочего дня сотрудника.
+    /// </summary>
+    public DateTime? LastWorkingDay { get; set; }
+    
+    /// <summary>
+    /// Дата срока задания, после которой задание не должно попадать в сводку.
+    /// </summary>
+    public DateTime? PeriodLastDay { get; set; }
+    
+    /// <summary>
+    /// Дата создания задания/уведомления, начиная с которой оно должно попасть в сводку сотрудника.
+    /// </summary>
+    public DateTime? PeriodFirstDay { get; set; }
+    
+    /// <summary>
+    /// Список email-ов заместителей.
+    /// </summary>
+    public List<string> SubstitutorEmails { get; set; }
+    
+    /// <summary>
+    /// Признак того, нужно ли отправлять сводку по заданиям сотруднику.
+    /// </summary>
+    public bool NeedNotifyAssignmentsSummary { get; set; }
+    
+    /// <summary>
+    /// Текущая дата в часовом поясе сотрудника.
+    /// </summary>
+    public DateTime? EmployeeCurrentDate { get; set; }
+    
+    /// <summary>
+    /// Информация по заданиям и уведомлениям.
+    /// </summary>
+    public List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> AssignmentsAndNotices { get; set; }
+    
+    /// <summary>
+    /// Информация по поручениям.
+    /// </summary>
+    public List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> ActionItems { get; set; }
+    
+    /// <summary>
+    /// Информация по задачам.
+    /// </summary>
+    public List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> Tasks { get; set; }
+  }
+  
+  /// <summary>
+  /// Замещения по сотрудникам.
+  /// </summary>
+  [Public]
+  partial class EmployeeSubstitutions
+  {
+    /// <summary>
+    /// Замещаемый.
+    /// </summary>
+    public int SubstitutedId { get; set; }
+    
+    /// <summary>
+    /// Замещающий.
+    /// </summary>
+    public int SubstitutorId { get; set; }
+    
+    /// <summary>
+    /// E-mail замещающего.
+    /// </summary>
+    public string SubstitutorEmail { get; set; }
+  }
 
   /// <summary>
   /// Результаты почтовой рассылки.
@@ -489,4 +665,66 @@ namespace Sungero.Docflow.Structures.Module
     
     public bool NeedFilter { get; set; }
   }
+  
+  /// <summary>
+  /// Подпись и версия документа.
+  /// </summary>
+  partial class DocumentSignature
+  {
+    public int SignatureId { get; set; }
+    
+    public DateTime SigningDate { get; set; }
+    
+    public int? VersionNumber { get; set; }
+  }
+
+  /// <summary>
+  /// Список подписей.
+  /// </summary>
+  partial class SignaturesInfo
+  {
+    public IUser Signatory { get; set; }
+    
+    public IUser SubstitutedUser { get; set; }
+    
+    public string SignatoryType { get; set; }
+  }
+  
+  /// <summary>
+  /// Результаты поиска строки в документе.
+  /// </summary>
+  [Public]
+  partial class PdfStringSearchResult
+  {
+    /// <summary>
+    /// Отступ слева до найденной строки в сантиметрах.
+    /// </summary>
+    public double XIndent { get; set; }
+    
+    /// <summary>
+    /// Отступ снизу до найденной строки в сантиметрах.
+    /// </summary>
+    public double YIndent { get; set; }
+    
+    /// <summary>
+    /// Номер страницы, на которой была найдена строка.
+    /// </summary>
+    public int PageNumber { get; set; }
+    
+    /// <summary>
+    /// Ширина страницы, на которой была найдена строка, в сантиметрах.
+    /// </summary>
+    public double PageWidth { get; set; }
+    
+    /// <summary>
+    /// Высота страницы, на которой была найдена строка, в сантиметрах.
+    /// </summary>
+    public double PageHeight { get; set; }
+    
+    /// <summary>
+    /// Количество страниц в документе.
+    /// </summary>
+    public int PageCount { get; set; }
+  }
+  
 }

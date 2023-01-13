@@ -10,6 +10,18 @@ namespace Sungero.Docflow
   partial class ContractualDocumentBaseSharedHandlers
   {
 
+    public virtual void CounterpartySigningReasonChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
+    {
+       if (e.NewValue == e.OldValue || e.NewValue == null)
+        return;
+      
+      var trimmedReason = e.NewValue.Trim();
+      if (e.NewValue == trimmedReason)
+        return;
+      
+      _obj.CounterpartySigningReason = trimmedReason;
+    }
+
     public override void OurSignatoryChanged(Sungero.Docflow.Shared.OfficialDocumentOurSignatoryChangedEventArgs e)
     {
       base.OurSignatoryChanged(e);

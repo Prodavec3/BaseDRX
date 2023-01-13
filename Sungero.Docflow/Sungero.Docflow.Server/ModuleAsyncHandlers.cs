@@ -8,6 +8,57 @@ namespace Sungero.Docflow.Server
 {
   public class ModuleAsyncHandlers
   {
+    public virtual void AddRegistrationStamp(Sungero.Docflow.Server.AsyncHandlerInvokeArgs.AddRegistrationStampInvokeArgs args)
+    {
+      int documentId = args.DocumentId;
+      int versionId = args.VersionId;
+      double rightIndent = args.RightIndent;
+      double bottomIndent = args.BottomIndent;
+      
+      Logger.DebugFormat("AddRegistrationStamp: start convert document to pdf. Document id - {0}.", documentId);
+      
+      var document = OfficialDocuments.GetAll(x => x.Id == documentId).FirstOrDefault();
+      if (document == null)
+      {
+        Logger.DebugFormat("AddRegistrationStamp: not found document with id {0}.", documentId);
+        return;
+      }
+      
+      var version = document.Versions.SingleOrDefault(v => v.Id == versionId);
+      if (version == null)
+      {
+        Logger.DebugFormat("AddRegistrationStamp: not found version. Document id - {0}, version number - {1}.", documentId, versionId);
+        return;
+      }
+      
+      if (!Locks.TryLock(version.Body))
+      {
+        Logger.DebugFormat("AddRegistrationStamp: version is locked. Document id - {0}, version number - {1}.", documentId, versionId);
+        args.Retry = true;
+        return;
+      }
+      
+      var registrationStamp = Docflow.Functions.OfficialDocument.GetRegistrationStampAsHtml(document);
+      var result = Docflow.Functions.Module.ConvertToPdfWithStamp(document, versionId, registrationStamp, false, rightIndent, bottomIndent);
+      Locks.Unlock(version.Body);
+      
+      if (result.HasErrors)
+      {
+        Logger.DebugFormat("AddRegistrationStamp: {0}", result.ErrorMessage);
+        if (result.HasLockError)
+        {
+          args.Retry = true;
+        }
+        else
+        {
+          var operation = new Enumeration(Constants.OfficialDocument.Operation.ConvertToPdf);
+          document.History.Write(operation, operation, string.Empty, version.Number);
+          document.Save();
+        }
+      }
+      
+      Logger.DebugFormat("AddRegistrationStamp: convert document {0} to pdf successfully.", documentId);
+    }
 
     public virtual void ExecuteApprovalFunction(Sungero.Docflow.Server.AsyncHandlerInvokeArgs.ExecuteApprovalFunctionInvokeArgs args)
     {
@@ -233,9 +284,31 @@ namespace Sungero.Docflow.Server
         args.Retry = true;
         return;
       }
+      
+      var versions = document.Versions.Where(v => !Equals(v.Body.Storage, storage) || !Equals(v.PublicBody.Storage, storage));
+      var retry = false;
+      foreach (var version in versions)
+      {
+        if (Locks.GetLockInfo(version.Body).IsLockedByOther)
+        {
+          Logger.DebugFormat("SetDocumentStorage: cannot change storage, body is locked. Document {0} (version id {1}).", documentId, version.Id);
+          retry = true;
+        }
+        if (Locks.GetLockInfo(version.PublicBody).IsLockedByOther)
+        {
+          Logger.DebugFormat("SetDocumentStorage: cannot change storage, public body is locked. Document {0} (version id {1}).", documentId, version.Id);
+          retry = true;
+        }
+      }
+      if (retry)
+      {
+        args.Retry = true;
+        return;
+      }
+      
       try
       {
-        foreach (var version in document.Versions.Where(v => !Equals(v.Body.Storage, storage) || !Equals(v.PublicBody.Storage, storage)))
+        foreach (var version in versions)
         {
           if (!Equals(version.Body.Storage, storage))
             version.Body.SetStorage(storage);
@@ -266,20 +339,38 @@ namespace Sungero.Docflow.Server
     public virtual void GrantAccessRightsToDocumentsByRule(Sungero.Docflow.Server.AsyncHandlerInvokeArgs.GrantAccessRightsToDocumentsByRuleInvokeArgs args)
     {
       int ruleId = args.RuleId;
-      
-      Logger.DebugFormat("GrantAccessRightsToDocumentsByRule: start create documents queue for rule {0}", ruleId);
+      var logMessagePrefix = string.Format("GrantAccessRightsToDocumentsByRuleAsync. Rule(ID={0}).", ruleId);
+      Logger.DebugFormat("{0} Start creating documents queue", logMessagePrefix);
       
       var rule = AccessRightsRules.GetAll(r => r.Id == ruleId).FirstOrDefault();
       if (rule == null)
-        return;
-      
-      foreach (var ruleDocument in GetDocumentsByRule(rule))
       {
-        PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(ruleDocument, rule.Id, true);
-        Logger.DebugFormat("GrantAccessRightsToDocumentsByRule: create document queue for document {0}, rule {1}", ruleDocument, ruleId);
+        Logger.DebugFormat("{0} No rule with this id found", logMessagePrefix);
+        return;
       }
       
-      Logger.DebugFormat("GrantAccessRightsToDocumentsByRule: success create documents queue for rule {0}", ruleId);
+      var documents = GetDocumentsByRule(rule).ToList();
+      
+      if (documents.Any())
+      {
+        if (rule.GrantRightsOnLeadingDocument.GetValueOrDefault())
+          documents.AddRange(Functions.Module.GetAllChildDocuments(documents));
+        
+        var batchSize = Functions.Module.GetDocsForAccessRightsRuleProcessingBatchSize();
+        Logger.DebugFormat("{0} Documents for processing: {1}. Max batch size: {2}", logMessagePrefix, documents.Count, batchSize);
+        
+        var docsProcessed = 0;
+        while (docsProcessed < documents.Count)
+        {
+          var batch = documents.Skip(docsProcessed).Take(batchSize).ToList();
+          PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandlerBulk(rule.Id, batch);
+          docsProcessed += batch.Count;
+        }
+        
+        Logger.DebugFormat("{0} Documents queue created successfully", logMessagePrefix);
+      }
+      else
+        Logger.DebugFormat("{0} No documents found", logMessagePrefix);
     }
     
     /// <summary>
@@ -288,20 +379,118 @@ namespace Sungero.Docflow.Server
     /// <param name="args">Параметры вызова асинхронного обработчика.</param>
     public virtual void GrantAccessRightsToDocument(Sungero.Docflow.Server.AsyncHandlerInvokeArgs.GrantAccessRightsToDocumentInvokeArgs args)
     {
-
       int documentId = args.DocumentId;
-      int ruleId = args.RuleId;
+      string stringRuleIds = args.RuleIds;
       
-      Logger.DebugFormat("GrantAccessRightsToDocument: start grant rights for document {0}, rule {1}", documentId, ruleId);
+      var document = OfficialDocuments.GetAll(d => d.Id == documentId).FirstOrDefault();
+      if (document == null)
+      {
+        Logger.DebugFormat("GrantAccessRightsToDocument: no document with id {0}", documentId);
+        return;
+      }
+
+      if (Locks.GetLockInfo(document).IsLockedByOther)
+      {
+        Logger.DebugFormat("GrantAccessRightsToDocument: document with id {0} is blocked", documentId);
+        args.Retry = true;
+        return;
+      }
+
+      var ruleIds = new List<int>();
+      if (!string.IsNullOrWhiteSpace(stringRuleIds))
+      {
+        try
+        {
+          ruleIds = stringRuleIds.Split(new string[] { Constants.AccessRightsRule.DocumentIdsSeparator }, StringSplitOptions.None)
+            .Select(r => int.Parse(r)).ToList();
+        }
+        catch
+        {
+          Logger.DebugFormat("GrantAccessRightsToDocument: incorrect right ids for document {0}", documentId);
+          return;
+        }
+      }
       
-      var isGranted = Docflow.Functions.Module.GrantAccessRightsToDocumentByRule(documentId, ruleId, args.GrantRightToChildDocuments);
+      var availableRuleIds = Docflow.Functions.Module.GetAvailableRuleIds(document, ruleIds);
+      if (!availableRuleIds.Any())
+      {
+        Logger.DebugFormat("GrantAccessRightsToDocument: no suitable rules for document {0}", documentId);
+        return;
+      }
+      
+      Logger.DebugFormat("GrantAccessRightsToDocument: start grant rights for document {0}", documentId);
+      
+      var isGranted = Docflow.Functions.Module.GrantAccessRightsToDocumentByRule(document, availableRuleIds, args.GrantRightToChildDocuments);
       if (!isGranted)
       {
-        Logger.DebugFormat("GrantAccessRightsToDocument: cannot grant rights for document {0}, rule {1}", documentId, ruleId);
+        Logger.DebugFormat("GrantAccessRightsToDocument: cannot grant rights for document {0}", documentId);
         args.Retry = true;
       }
       else
-        Logger.DebugFormat("GrantAccessRightsToDocument: success grant rights for document {0}, rule {1}", documentId, ruleId);
+        Logger.DebugFormat("GrantAccessRightsToDocument: done for document {0}", documentId);
+    }
+    
+    /// <summary>
+    /// Асинхронная пакетная выдача прав на документы.
+    /// </summary>
+    /// <param name="args">Параметры вызова асинхронного обработчика.</param>
+    public virtual void GrantAccessRightsToDocumentsBulk(Sungero.Docflow.Server.AsyncHandlerInvokeArgs.GrantAccessRightsToDocumentsBulkInvokeArgs args)
+    {
+      int ruleId = args.RuleId;
+      var logMessagePrefix = string.Format("GrantAccessRightsToDocumentsBulkAsync. Rule(ID={0}). RetryIteration({1}).", ruleId, args.RetryIteration);
+      Logger.DebugFormat("{0} Start granting access rights", logMessagePrefix);
+      
+      var documentIds = new List<int>();
+      if (string.IsNullOrWhiteSpace(args.DocumentIds))
+      {
+        Logger.DebugFormat("{0} No document ids passed to async handler", logMessagePrefix);
+        return;
+      }
+      
+      try
+      {
+        documentIds = args.DocumentIds.Split(new string[] { Constants.AccessRightsRule.DocumentIdsSeparator }, StringSplitOptions.None).Select(x => int.Parse(x)).ToList();
+      }
+      catch
+      {
+        Logger.DebugFormat("{0} Incorrect document ids", logMessagePrefix);
+        return;
+      }
+      
+      var documents = OfficialDocuments.GetAll(x => documentIds.Contains(x.Id));
+      var documentsForRetry = new List<IOfficialDocument>();
+      foreach (var document in documents)
+      {
+        Logger.DebugFormat("{0} Start processing for document {1}", logMessagePrefix, document.Id);
+        if (Locks.GetLockInfo(document).IsLockedByOther)
+        {
+          documentsForRetry.Add(document);
+          Logger.DebugFormat("{0} Document with id {1} is blocked", logMessagePrefix, document.Id);
+          continue;
+        }
+        
+        var ruleIds = new List<int> { ruleId };
+        var availableRuleIds = Docflow.Functions.Module.GetAvailableRuleIds(document, ruleIds);
+        if (!availableRuleIds.Any())
+        {
+          Logger.DebugFormat("{0} No suitable rules for document {1}", logMessagePrefix, document.Id);
+          continue;
+        }
+        
+        var isGranted = Docflow.Functions.Module.GrantAccessRightsToDocumentByRule(document, ruleIds, false);
+        if (!isGranted)
+          documentsForRetry.Add(document);
+      }
+      
+      if (documentsForRetry.Any())
+      {
+        args.RuleId = ruleId;
+        args.DocumentIds = string.Join(Constants.AccessRightsRule.DocumentIdsSeparator, documentsForRetry.Select(x => x.Id).ToList());
+        args.Retry = true;
+        Logger.DebugFormat("{0} Some documents ({1}) have been sent for re-processing", logMessagePrefix, documentsForRetry.Count());
+      }
+
+      Logger.DebugFormat("{0} End granting access rights", logMessagePrefix);
     }
     
     /// <summary>

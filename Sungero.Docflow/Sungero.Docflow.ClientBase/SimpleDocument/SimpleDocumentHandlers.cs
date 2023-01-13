@@ -10,11 +10,23 @@ namespace Sungero.Docflow
   partial class SimpleDocumentClientHandlers
   {
 
+    public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
+    {
+      base.Showing(e);
+      
+      // Показать хинт о том, что при удалении связи с ведущим документов, приложение было преобразовано в простой документ.
+      if (e.Params.Contains(Constants.Addendum.UnbindAddendumParamName))
+        e.AddInformation(Sungero.Docflow.SimpleDocuments.Resources.UnbindAddendumHint);
+    }
+    
     public override void Closing(Sungero.Presentation.FormClosingEventArgs e)
     {
       base.Closing(e);
-      
       _obj.State.Properties.Subject.IsRequired = false;
+      
+      // При отмене восстанавливаем связь, которая была удалена действием "Удалить связь".
+      if (e.Params.Contains(Constants.Addendum.UnbindAddendumParamName))
+        Functions.Addendum.Remote.RestoreAddendumRelationToLeadingDocument(_obj.Id);
     }
 
     public override void DocumentKindValueInput(Sungero.Docflow.Client.OfficialDocumentDocumentKindValueInputEventArgs e)

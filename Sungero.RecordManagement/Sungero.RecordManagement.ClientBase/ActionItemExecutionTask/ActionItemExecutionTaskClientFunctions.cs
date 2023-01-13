@@ -971,7 +971,7 @@ namespace Sungero.RecordManagement.Client
           isActionItemTextChanges = !Equals(args.NewValue, actionItemPartDefault ?? string.Empty);
         });
       
-      #region Гиперссылки на добавление и удаление соисполнителей.
+      #region Гиперссылки на добавление и удаление соисполнителей
       
       addCoAssignees.SetOnExecute(
         () =>
@@ -1100,11 +1100,22 @@ namespace Sungero.RecordManagement.Client
       return Docflow.PublicFunctions.Module.ShowDialogGrantAccessRights(task, attachments, newPerformers);
     }
     
+    /// <summary>
+    /// Получить строковое представление списка сотрудников.
+    /// </summary>
+    /// <param name="employees">Сотрудники.</param>
+    /// <returns>Строковое представление списка сотрудников.</returns>
     private static string GetEmployeesText(IEnumerable<IEmployee> employees)
     {
       return string.Join("; ", employees.Select(x => x.Person.ShortName));
     }
     
+    /// <summary>
+    /// Получить текстовое представление пунктов составного поручения для корректировки.
+    /// </summary>
+    /// <param name="selectedActionItemTasks">Подзадачи, выбранные для исключения из корректировки.</param>
+    /// <param name="mainActionItemExecutionTask">Основное составное поручение.</param>
+    /// <returns>Текстовое представление пунктов.</returns>
     private static string GetActionItemPartsText(IEnumerable<IActionItemExecutionTask> selectedActionItemTasks,
                                                  IActionItemExecutionTask mainActionItemExecutionTask)
     {
@@ -1142,6 +1153,12 @@ namespace Sungero.RecordManagement.Client
       return string.Empty;
     }
     
+    /// <summary>
+    /// Получить описание пунктов составного поручения, которые были изменены.
+    /// </summary>
+    /// <param name="selectedActionItemTasks">Выбранные для корректировки пункты.</param>
+    /// <param name="mainActionItemExecutionTask">Основное составное поручение.</param>
+    /// <returns>Описание пунктов, которые были изменены.</returns>
     private static string GetActionItemPartsNotifyText(IEnumerable<IActionItemExecutionTask> selectedActionItemTasks,
                                                        IActionItemExecutionTask mainActionItemExecutionTask)
     {
@@ -1179,6 +1196,12 @@ namespace Sungero.RecordManagement.Client
       return string.Empty;
     }
     
+    /// <summary>
+    /// Получить текстовое представление списка пунктов составного поручения.
+    /// </summary>
+    /// <param name="actionItemTasks">Подзадачи, чьи пункты нужно получить.</param>
+    /// <param name="mainActionItemExecutionTask">Основное составное поручение.</param>
+    /// <returns>Текстовое представление списка пунктов.</returns>
     private static List<string> GetActionItemPartListText(IEnumerable<IActionItemExecutionTask> actionItemTasks,
                                                           IActionItemExecutionTask mainActionItemExecutionTask)
     {

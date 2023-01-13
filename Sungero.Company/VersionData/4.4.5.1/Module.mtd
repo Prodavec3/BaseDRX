@@ -1,0 +1,823 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "d534e107-a54d-48ec-85ff-bc44d731a82f",
+  "Name": "Company",
+  "AsyncHandlers": [
+    {
+      "NameGuid": "dbbabb31-4c23-4551-8687-c153d2051620",
+      "Name": "UpdateEmployeeName",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "3c07eb9e-b2e7-4961-afe8-cef592ab8e48",
+          "Name": "PersonId",
+          "ParameterType": "Integer"
+        }
+      ]
+    }
+  ],
+  "ClientAssemblyName": "Sungero.Company.Client",
+  "ClientBaseAssemblyName": "Sungero.Company.ClientBase",
+  "ClientBaseNamespace": "Sungero.Company.ClientBase",
+  "ClientNamespace": "Sungero.Company.Client",
+  "Code": "Company",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "a52a7382-131e-4cb5-9a18-28898b8b1f49",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "0be177c2-849a-47a2-bc5d-d7777c9b5488",
+        "Name": "ShowEmployees",
+        "EntityTypeId": "b7905516-2be5-4931-961c-cb38d5677565",
+        "GroupId": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "PreviousItemGuid": "71309558-cf0b-4f51-9bff-64d76f9900ef",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "1796ee3b-33c1-4ac8-a634-f8dda72b6600",
+        "Name": "ShowManagersAssistants",
+        "EntityTypeId": "c2200a86-5d5d-47d6-930d-c3ce8b11f04b",
+        "GroupId": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "PreviousItemGuid": "276e7e31-f545-4a24-b6fd-a4db7c20af11",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "1bd3bba1-a75c-44b1-ad6d-71533f3d17ca",
+        "Name": "ShowDepartments",
+        "EntityTypeId": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+        "GroupId": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "PreviousItemGuid": "8f7c1116-b2be-4bb5-a6ca-039bda2462d3",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "276e7e31-f545-4a24-b6fd-a4db7c20af11",
+        "Name": "ShowPositions",
+        "EntityTypeId": "4a37aec4-764c-4c14-8887-e1ecafa5b4c5",
+        "GroupId": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "PreviousItemGuid": "0be177c2-849a-47a2-bc5d-d7777c9b5488",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "41a33574-f755-4fa7-b335-d65308155266",
+        "Name": "VisibilitySettings",
+        "FunctionName": "ShowVisibilitySettings",
+        "GroupId": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "PreviousItemGuid": "1bd3bba1-a75c-44b1-ad6d-71533f3d17ca",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "4d97abc2-ede1-4c32-bae1-1c24bc5fe9a9",
+        "Name": "Certificates",
+        "EntityTypeId": "afa0c3aa-50ff-453e-87a1-39a696f8917b",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "PreviousItemGuid": "b26c6980-848a-4ba3-8208-5a801574ffd7",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "71309558-cf0b-4f51-9bff-64d76f9900ef",
+        "Name": "CreateEmployee",
+        "FunctionName": "CreateEmployee",
+        "GroupId": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "75660810-1587-47fb-9b41-d24695f5288e",
+        "Name": "ShowOrganizations",
+        "EntityTypeId": "593e143c-616c-4d95-9457-fd916c4aa7f8",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "8f7c1116-b2be-4bb5-a6ca-039bda2462d3",
+        "Name": "CreateDepartment",
+        "FunctionName": "CreateDepartment",
+        "GroupId": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "PreviousItemGuid": "fe4acfac-74cc-4b86-8984-985fa69aeed3",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "98d80342-5bdb-4e88-9608-02ece218ea40",
+        "Name": "Substitution",
+        "EntityTypeId": "cf369908-9587-45e0-937c-206efa109d23",
+        "GroupId": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "PreviousItemGuid": "1796ee3b-33c1-4ac8-a634-f8dda72b6600",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "9ebcf6d5-cd2e-4c6f-a110-9d5d304e3e9d",
+        "Name": "ShowRecipientAccessRules",
+        "EntityTypeId": "023eab79-c456-46bb-97b5-fbc764be9308",
+        "GroupId": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "PreviousItemGuid": "41a33574-f755-4fa7-b335-d65308155266",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "b26c6980-848a-4ba3-8208-5a801574ffd7",
+        "Name": "TimeZone",
+        "EntityTypeId": "96d026d3-0224-4cc8-b633-67a30679b1e5",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "PreviousItemGuid": "daad05d5-f5e6-4d31-ae8a-b3b0ea04d1c5",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "b83fe3bf-b980-44c7-9b93-832c5296518d",
+        "Name": "Account",
+        "EntityTypeId": "55f542e9-4645-4f8d-999e-73cc71df62fd",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "PreviousItemGuid": "f8f5985d-0a65-4e7d-8f8c-4b7931dd151e",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "c5c29d30-c354-4b94-bfc9-80ef630488a2",
+        "Name": "Boxes",
+        "EntityTypeId": "f91dcce6-a914-4c04-aba1-0f940475696b",
+        "GroupId": "7ec69dba-e056-46e1-8b62-c3f460b22884",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "d4913667-776f-499f-89ed-50478378aad4",
+        "Name": "ShowPesons",
+        "EntityTypeId": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "PreviousItemGuid": "75660810-1587-47fb-9b41-d24695f5288e",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "daad05d5-f5e6-4d31-ae8a-b3b0ea04d1c5",
+        "Name": "WorkingTimeCalendars",
+        "EntityTypeId": "02720bfa-107b-4d7e-baac-0cd146a4b527",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "PreviousItemGuid": "d4913667-776f-499f-89ed-50478378aad4",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "f4a4d7a1-8d68-4f9a-ba15-ba7309b220f9",
+        "Name": "CreateBusinessUnit",
+        "FunctionName": "CreateBusinessUnit",
+        "GroupId": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "f8f5985d-0a65-4e7d-8f8c-4b7931dd151e",
+        "Name": "Roles",
+        "EntityTypeId": "5e9b55c2-c1f5-4e4f-aa09-7b6d461d87ed",
+        "GroupId": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "PreviousItemGuid": "4d97abc2-ede1-4c32-bae1-1c24bc5fe9a9",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "fe4acfac-74cc-4b86-8984-985fa69aeed3",
+        "Name": "ShowBusinessUnits",
+        "EntityTypeId": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+        "GroupId": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "PreviousItemGuid": "f4a4d7a1-8d68-4f9a-ba15-ba7309b220f9",
+        "Versions": []
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "65b7dcb2-77c8-4b7e-99a2-1eb836f20599",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [
+      {
+        "NameGuid": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "Name": "Employees",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconEmployees_81281d6c7b9342fabf28103d0e3419e3.png",
+        "Versions": []
+      },
+      {
+        "NameGuid": "fcc83272-e661-4c8f-9c55-8df60f71d9d7",
+        "Name": "Group2",
+        "BackgroundPosition": "Stretch",
+        "PreviousItemGuid": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "Versions": []
+      },
+      {
+        "NameGuid": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "Name": "OrganizationalStructure",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconOrganizationalStructure_9778efad0f26415086b0b539e9fa468f.png",
+        "PreviousItemGuid": "fcc83272-e661-4c8f-9c55-8df60f71d9d7",
+        "Versions": []
+      },
+      {
+        "NameGuid": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "Name": "Links",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconLinks_741ff20346fc4676b6d7a474dd9fefa4.png",
+        "PreviousItemGuid": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "Versions": []
+      },
+      {
+        "NameGuid": "56c9171b-dc25-443a-a05f-6522ba936885",
+        "Name": "Group3",
+        "BackgroundPosition": "Stretch",
+        "PreviousItemGuid": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "Versions": []
+      },
+      {
+        "NameGuid": "7ec69dba-e056-46e1-8b62-c3f460b22884",
+        "Name": "Integration",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconIntegration_7ec69dbae05646e18b62c3f460b22884.png",
+        "PreviousItemGuid": "56c9171b-dc25-443a-a05f-6522ba936885",
+        "Versions": []
+      }
+    ],
+    "Header": {
+      "NameGuid": "73fc832c-fada-4cc1-a9d3-d51ba747ea3f",
+      "BackgroundPosition": "Stretch",
+      "IconName": "",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
+      "MaxVersion": "",
+      "MinVersion": "3.4.0.0"
+    },
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": "0.0.1.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "b7905516-2be5-4931-961c-cb38d5677565",
+      "Versions": []
+    },
+    {
+      "ItemId": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "PreviousItemId": "b7905516-2be5-4931-961c-cb38d5677565",
+      "Versions": []
+    },
+    {
+      "ItemId": "4a37aec4-764c-4c14-8887-e1ecafa5b4c5",
+      "PreviousItemId": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "Versions": []
+    },
+    {
+      "ItemId": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "PreviousItemId": "4a37aec4-764c-4c14-8887-e1ecafa5b4c5",
+      "Versions": []
+    },
+    {
+      "ItemId": "c2200a86-5d5d-47d6-930d-c3ce8b11f04b",
+      "PreviousItemId": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "Versions": []
+    },
+    {
+      "IsVisible": false,
+      "ItemId": "023eab79-c456-46bb-97b5-fbc764be9308",
+      "PreviousItemId": "c2200a86-5d5d-47d6-930d-c3ce8b11f04b",
+      "Versions": []
+    },
+    {
+      "IsVisible": false,
+      "ItemId": "435ba4a4-ee0a-4c43-b334-c243257f400f",
+      "PreviousItemId": "023eab79-c456-46bb-97b5-fbc764be9308",
+      "Versions": []
+    },
+    {
+      "ItemId": "b8aa8f84-7488-43c7-9e0d-7050eb5ea6af",
+      "PreviousItemId": "435ba4a4-ee0a-4c43-b334-c243257f400f",
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Company",
+  "PublicConstants": [
+    {
+      "Name": "BusinessUnitHeadsRole",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"03C7A126-83DE-4F8F-908B-3ACB868E30C5\")"
+    },
+    {
+      "Name": "DepartmentManagersRole",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"EA04AA41-9BD8-45D5-A479-A986137A509C\")"
+    },
+    {
+      "Name": "ModuleGuid",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"d534e107-a54d-48ec-85ff-bc44d731a82f\")"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "AppendResponsibilitiesReportResult",
+      "Parameters": [
+        {
+          "Name": "source",
+          "ParameterType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        },
+        {
+          "Name": "moduleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "modulePriority",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "sectionName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "AppendResponsibilitiesReportResult",
+      "Parameters": [
+        {
+          "Name": "source",
+          "ParameterType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "entities",
+          "ParameterType": "System.Collections.Generic.IEnumerable<global::Sungero.Domain.Shared.IEntity>"
+        },
+        {
+          "Name": "moduleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "modulePriority",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "sectionName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "mainEntity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "AppendResponsibilitiesReportResult",
+      "Parameters": [
+        {
+          "Name": "source",
+          "ParameterType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "entitiesWithPresentation",
+          "ParameterType": "System.Collections.Generic.IDictionary<global::Sungero.Domain.Shared.IEntity, global::System.String>"
+        },
+        {
+          "Name": "moduleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "responsibilityPriority",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "sectionName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "mainEntity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "CreateLogin",
+      "Parameters": [
+        {
+          "Name": "loginName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "password",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "CreateResponsibilitiesReportTableLine",
+      "Parameters": [
+        {
+          "Name": "moduleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "responsibility",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "record",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "element",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine"
+    },
+    {
+      "Name": "GetActiveManagerAssistants",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Company.IManagersAssistant>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetAllActiveNoSystemGroups",
+      "Placement": "Client",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.CoreEntities.IRecipient>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetAllResponsibilitiesReportData",
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetAllVisisbleRecipientsIds",
+      "Parameters": [
+        {
+          "Name": "currentRecipientId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "recipientTypeGuid",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetAssistants",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Company.IManagersAssistant>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetCertificatesOfEmployee",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.CoreEntities.ICertificate>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetCountResponsibilitiesReportData",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetDepartmentById",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "id",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Company.IDepartment",
+      "ReturnTypeFullName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEmployeeById",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "id",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Company.IEmployee",
+      "ReturnTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEmployeePopup",
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "Sungero.Core.IDigestModel"
+    },
+    {
+      "Name": "GetEmployeesByIds",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "ids",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetEmployeesFromRecipients",
+      "Parameters": [
+        {
+          "Name": "recipients",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetEmployeesFromRecipientsRemote",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "recipients",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetHeadRecipientsByEmployee",
+      "Parameters": [
+        {
+          "Name": "currentEmployeeId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetNotAutomatedEmployees",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "employees",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetNotSystemEmployees",
+      "Parameters": [
+        {
+          "Name": "recipients",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetResolutionPreparers",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Company.IManagersAssistant>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetResponsibilitiesReportData",
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetSystemRecipientsSidWithoutAllUsers",
+      "Parameters": [
+        {
+          "Name": "fullSystemRecipientList",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Guid>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetUsersSubstitutedBy",
+      "Parameters": [
+        {
+          "Name": "substitute",
+          "ParameterType": "global::Sungero.CoreEntities.IUser",
+          "ParameterTypeFullName": "Sungero.CoreEntities.IUser, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IUser>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetVisibleRecipientIds",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "recipientTypeGuid",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "IsRecipientRestrict",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "IsRecipientRestrictModeOn",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "SetLoginPassword",
+      "Parameters": [
+        {
+          "Name": "loginId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "password",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Company",
+  "ResourcesKeys": [
+    "NoSpacesInCode",
+    "Jobtitle",
+    "Departments",
+    "BusinessUnits",
+    "ManagerOfDepartmens",
+    "BusinessUnitsCEO",
+    "Roles",
+    "ManagersAssistants",
+    "Substitutions",
+    "Manager",
+    "Assistant",
+    "Substitute",
+    "Employee",
+    "Period",
+    "Permanently",
+    "From",
+    "To",
+    "VisibilitySettingsNotAvailable"
+  ],
+  "ServerAssemblyName": "Sungero.Company.Server",
+  "ServerNamespace": "Sungero.Company.Server",
+  "SharedAssemblyName": "Sungero.Company.Shared",
+  "SharedNamespace": "Sungero.Company.Shared",
+  "SpecialFolders": [],
+  "Version": "4.4.5.1",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

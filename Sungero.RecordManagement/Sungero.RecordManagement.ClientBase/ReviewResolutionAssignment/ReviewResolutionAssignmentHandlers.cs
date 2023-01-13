@@ -10,5 +10,11 @@ namespace Sungero.RecordManagement
   partial class ReviewResolutionAssignmentClientHandlers
   {
 
+    public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
+    {
+      if (!Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task)))
+        e.AddError(Docflow.Resources.NoRightsToDocument);
+    }
+
   }
 }

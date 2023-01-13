@@ -141,4 +141,7 @@
   <data name="Property_IsNoticeSended" xml:space="preserve">
     <value>Отправлено уведомление об истечении срока выполнения сценария</value>
   </data>
+  <data name="Enum_ProcessingStatus_Started" xml:space="preserve">
+    <value>Запущен</value>
+  </data>
 </root>

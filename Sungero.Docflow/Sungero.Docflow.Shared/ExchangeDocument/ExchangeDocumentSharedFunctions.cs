@@ -10,6 +10,28 @@ namespace Sungero.Docflow.Shared
   partial class ExchangeDocumentFunctions
   {
     /// <summary>
+    /// Получить контрагентов по документу.
+    /// </summary>
+    /// <returns>Контрагенты.</returns>
+    public override List<Sungero.Parties.ICounterparty> GetCounterparties()
+    {
+      if (_obj.Counterparty == null)
+        return null;
+      
+      return new List<Sungero.Parties.ICounterparty>() { _obj.Counterparty };
+    }
+    
+    /// <summary>
+    /// Получить основание подписания со стороны контрагента.
+    /// </summary>
+    /// <returns>Основание подписания со стороны контрагента.</returns>
+    [Public]
+    public override string GetCounterpartySigningReason()
+    {
+      return _obj.CounterpartySigningReason;
+    }
+    
+    /// <summary>
     /// Заполнить имя.
     /// </summary>
     public override void FillName()
@@ -46,12 +68,24 @@ namespace Sungero.Docflow.Shared
       _obj.Name = Functions.OfficialDocument.AddClosingQuote(name, _obj);
     }
     
-    public override List<Sungero.Parties.ICounterparty> GetCounterparties()
+    /// <summary>
+    /// Заполнить подписывающего.
+    /// </summary>
+    /// <param name="signatory">Подписывающий со стороны контрагента.</param>
+    public override void FillCounterpartySignatory(Parties.IContact signatory)
     {
-      if (_obj.Counterparty == null)
-        return null;
-      
-      return new List<Sungero.Parties.ICounterparty>() { _obj.Counterparty };
+      _obj.CounterpartySignatory = signatory;
+    }
+    
+    /// <summary>
+    /// Заполнить основание со стороны контрагента.
+    /// </summary>
+    /// <param name="signingReason">Основание контрагента.</param>
+    public override void FillCounterpartySigningReason(string signingReason)
+    {
+      if (!string.IsNullOrEmpty(signingReason) && signingReason.Length > _obj.Info.Properties.CounterpartySigningReason.Length)
+        signingReason = signingReason.Substring(0, _obj.Info.Properties.CounterpartySigningReason.Length);
+      _obj.CounterpartySigningReason = signingReason;
     }
     
     // Перекрываем ф-ю OfficialDocument, т.к. входящий документ эл. системы обмена не нумеруемый, но д.б. черновиком, а не действующим.

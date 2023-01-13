@@ -46,5 +46,6 @@ namespace Sungero.Commons.Shared
       
       return ((Domain.Shared.IExtendedEntity)entity).Params.ContainsKey(paramName);
     }
+    
   }
 }

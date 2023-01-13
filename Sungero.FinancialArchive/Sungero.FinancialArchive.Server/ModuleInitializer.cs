@@ -118,6 +118,10 @@ namespace Sungero.FinancialArchive.Server
         // Права на папку "Ожидают подписания".
         FinancialArchiveUI.SpecialFolders.SignAwaitedDocuments.AccessRights.Grant(role, DefaultAccessRightsTypes.Read);
         FinancialArchiveUI.SpecialFolders.SignAwaitedDocuments.AccessRights.Save();
+        
+        // Права на папку "Реестр доверенностей".
+        FinancialArchiveUI.SpecialFolders.PowerOfAttorneyList.AccessRights.Grant(role, DefaultAccessRightsTypes.Read);
+        FinancialArchiveUI.SpecialFolders.PowerOfAttorneyList.AccessRights.Save();
       }
       finally
       {

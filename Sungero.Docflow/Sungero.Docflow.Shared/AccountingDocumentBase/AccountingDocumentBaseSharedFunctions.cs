@@ -23,6 +23,28 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
+    /// Получить контрагентов по документу.
+    /// </summary>
+    /// <returns>Контрагенты.</returns>
+    public override List<Sungero.Parties.ICounterparty> GetCounterparties()
+    {
+      if (_obj.Counterparty == null)
+        return null;
+      
+      return new List<Sungero.Parties.ICounterparty>() { _obj.Counterparty };
+    }
+    
+    /// <summary>
+    /// Получить основание подписания со стороны контрагента.
+    /// </summary>
+    /// <returns>Основание подписания со стороны контрагента.</returns>
+    [Public]
+    public override string GetCounterpartySigningReason()
+    {
+      return _obj.CounterpartySigningReason;
+    }
+    
+    /// <summary>
     /// Поведение панели по умолчанию.
     /// </summary>
     /// <returns>True, если панель должна быть отображена при создании документа.</returns>
@@ -39,14 +61,6 @@ namespace Sungero.Docflow.Shared
     public override bool NeedShowRegistrationPane(bool conditions)
     {
       return base.NeedShowRegistrationPane(true);
-    }
-    
-    public override List<Sungero.Parties.ICounterparty> GetCounterparties()
-    {
-      if (_obj.Counterparty == null)
-        return null;
-      
-      return new List<Sungero.Parties.ICounterparty>() { _obj.Counterparty };
     }
     
     /// <summary>
@@ -93,6 +107,26 @@ namespace Sungero.Docflow.Shared
       _obj.State.Properties.Corrected.IsEnabled = _obj.IsAdjustment == true;
       
       this.EnableRegistrationNumberAndDate();
+    }
+    
+    /// <summary>
+    /// Заполнить подписывающего.
+    /// </summary>
+    /// <param name="signatory">Подписывающий со стороны контрагента.</param>
+    public override void FillCounterpartySignatory(Parties.IContact signatory)
+    {
+      _obj.CounterpartySignatory = signatory;
+    }
+    
+    /// <summary>
+    /// Заполнить основание со стороны контрагента.
+    /// </summary>
+    /// <param name="signingReason">Основание контрагента.</param>
+    public override void FillCounterpartySigningReason(string signingReason)
+    {
+      if (!string.IsNullOrEmpty(signingReason) && signingReason.Length > _obj.Info.Properties.CounterpartySigningReason.Length)
+        signingReason = signingReason.Substring(0, _obj.Info.Properties.CounterpartySigningReason.Length);
+      _obj.CounterpartySigningReason = signingReason;
     }
     
     /// <summary>
@@ -278,6 +312,21 @@ namespace Sungero.Docflow.Shared
       
       var rateValue = Math.Round((double)vatRate.Rate.Value / 100, 2);
       return Math.Round(totalAmount * rateValue / (1 + rateValue), 2);
-    }    
+    }
+    
+    /// <summary>
+    /// Заполнить свойство "Ведущий документ" в зависимости от типа документа.
+    /// </summary>
+    /// <param name="leadingDocument">Ведущий документ.</param>
+    /// <remarks>Используется при смене типа.</remarks>
+    [Public]
+    public override void FillLeadingDocument(IOfficialDocument leadingDocument)
+    {
+      var contractualDocument = ContractualDocumentBases.As(leadingDocument);
+      if (contractualDocument != null && (_obj.Counterparty == null || Equals(_obj.Counterparty, contractualDocument.Counterparty)))
+        _obj.LeadingDocument = contractualDocument;
+      else
+        _obj.LeadingDocument = null;
+    }
   }
 }

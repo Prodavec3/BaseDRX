@@ -509,6 +509,20 @@
       "ReturnTypeFullName": "System.Boolean"
     },
     {
+      "Name": "CheckConnection",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "businessUnitBox",
+          "ParameterType": "global::Sungero.ExchangeCore.IBusinessUnitBox",
+          "ParameterTypeFullName": "Sungero.ExchangeCore.IBusinessUnitBox, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "CheckResponsibleServiceCertificates",
       "IsRemote": true,
       "Parameters": [
@@ -796,12 +810,10 @@
     "FindDocumentDialogHyperlink",
     "FindDocumentDialogInvalidHyperlink",
     "FindDocumentDialogInvalidExchangeProvider",
-    "DocumentFullInfoDialogTitle",
     "DocumentFullInfoDialogForbiddenDocuments",
     "DocumentFullInfoDialogDocuments",
     "DocumentFullInfoDialogDocumentInfos",
     "DocumentFullInfoDialogMessages",
-    "DocumentFullInfoDialogNoResult",
     "DocumentFullInfoDialogAllDocumentsCount",
     "DocumentFullInfoDialogForbiddenDocumentsCount",
     "FindDocumentDialogNext",

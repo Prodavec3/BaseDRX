@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sungero.ClientExtensions;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Docflow.AccountingDocumentBase;
@@ -37,22 +36,40 @@ namespace Sungero.Docflow.Client
         dialog.HelpCode = Constants.AccountingDocumentBase.HelpCodes.SellerUniversalCorrectionTransfer;
 
       Action<CommonLibrary.InputDialogRefreshEventArgs> refresh = null;
-      var signatories = Functions.OfficialDocument.Remote.GetSignatories(_obj);
       
       dialog.Text = AccountingDocumentBases.Resources.PropertiesFillingDialog_Text_SellerTitle;
       
-      var defaultSignatory = Company.Employees.Null;
-      if (signatories.Any(s => _obj.OurSignatory != null && Equals(s.EmployeeId, _obj.OurSignatory.Id)))
-        defaultSignatory = _obj.OurSignatory;
-      else if (signatories.Any(s => Company.Employees.Current != null && Equals(s.EmployeeId, Company.Employees.Current.Id)))
-        defaultSignatory = Company.Employees.Current;
-      else if (signatories.Select(s => s.EmployeeId).Distinct().Count() == 1)
-        defaultSignatory = Functions.AccountingDocumentBase.Remote.GetEmployeesByIds(signatories.Select(s => s.EmployeeId).ToList()).FirstOrDefault();
-      
       // Поле Подписал.
-      var defaultEmployees = Functions.AccountingDocumentBase.Remote.GetEmployeesByIds(signatories.Select(s => s.EmployeeId).ToList());
-      var signedBy = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_SignedBy, true, Company.Employees.Null)
-        .From(defaultEmployees.Distinct());
+      var showSaveAndSignButton = false;
+      var defaultSignatory = Company.Employees.Null;
+      var signedBy = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_SignedBy, true, Company.Employees.Null);
+      
+      if (Functions.OfficialDocument.Remote.SignatorySettingWithAllUsersExist(_obj))
+      {
+        if (_obj.OurSignatory != null)
+          defaultSignatory = _obj.OurSignatory;
+        else if (Company.Employees.Current != null)
+          defaultSignatory = Company.Employees.Current;
+        
+        showSaveAndSignButton = Users.Current != null;
+      }
+      else
+      {
+        var signatoriesIds = Functions.OfficialDocument.Remote.GetSignatoriesIds(_obj);
+        
+        if (signatoriesIds.Any(s => _obj.OurSignatory != null && Equals(s, _obj.OurSignatory.Id)))
+          defaultSignatory = _obj.OurSignatory;
+        else if (signatoriesIds.Any(s => Company.Employees.Current != null && Equals(s, Company.Employees.Current.Id)))
+          defaultSignatory = Company.Employees.Current;
+        else if (signatoriesIds.Count() == 1)
+          defaultSignatory = Company.PublicFunctions.Module.Remote.GetEmployeeById(signatoriesIds.First());
+        
+        var defaultEmployees = Functions.AccountingDocumentBase.Remote.GetEmployeesByIds(signatoriesIds);
+        
+        signedBy.From(defaultEmployees);
+        
+        showSaveAndSignButton = signatoriesIds.Any(s => Users.Current != null && Equals(s, Users.Current.Id));
+      }
       
       // Поле Полномочия.
       CommonLibrary.IDropDownDialogValue hasAuthority = null;
@@ -71,29 +88,20 @@ namespace Sungero.Docflow.Client
         hasAuthority.IsEnabled = false;
       }
 
-      // Поле Основание и связанные с ним Доверенность/Документ.
-      CommonLibrary.IDropDownDialogValue basis = null;
-      INavigationDialogValue<IPowerOfAttorney> attorney = null;
-      CommonLibrary.IDropDownDialogValue basisDocument = null;
-      basis = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_Basis, true, 0);
-      attorney = dialog.AddSelect(PowerOfAttorneys.Info.LocalizedName, false, PowerOfAttorneys.Null);
-      basisDocument = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_Document, false, null);
+      // Поле Основание.
+      INavigationDialogValue<ISignatureSetting> basis = null;
+      basis = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_Basis, true, SignatureSettings.Null);
 
       CommonLibrary.CustomDialogButton saveAndSignButton = null;
-      if (signatories.Any(s => Users.Current != null && Equals(s.EmployeeId, Users.Current.Id)))
+      if (showSaveAndSignButton)
         saveAndSignButton = dialog.Buttons.AddCustom(AccountingDocumentBases.Resources.PropertiesFillingDialog_SaveAndSign);
       
       var saveButton = dialog.Buttons.AddCustom(AccountingDocumentBases.Resources.PropertiesFillingDialog_Save);
       dialog.Buttons.Default = saveAndSignButton ?? saveButton;
       var cancelButton = dialog.Buttons.AddCancel();
       
-      string[] basisValues = null;
-      IPowerOfAttorney[] attorneyValues = null;
-      string[] basisDocumentValues = null;
+      IQueryable<ISignatureSetting> basisValues = null;
       List<ISignatureSetting> settings = null;
-
-      if (basis != null)
-        basis.SetOnValueChanged(bv => FillBasisDocuments(bv.NewValue, attorney, basisDocument, attorneyValues, basisDocumentValues));
       
       signedBy.SetOnValueChanged(
         (sc) =>
@@ -101,29 +109,13 @@ namespace Sungero.Docflow.Client
           settings = Functions.OfficialDocument.Remote.GetSignatureSettings(_obj, sc.NewValue);
           if (basis != null)
           {
-            basisValues = settings.Select(s => s.Reason).Distinct()
-              .OrderBy(r => r != SignatureSetting.Reason.Duties)
-              .ThenBy(r => r != SignatureSetting.Reason.PowerOfAttorney)
-              .Select(r => SignatureSettings.Info.Properties.Reason.GetLocalizedValue(r)).ToArray();
+            basisValues = Functions.OfficialDocument.Remote.GetSignatureSettingsWithCertificateByEmployee(_obj, sc.NewValue);
             basis.From(basisValues);
             basis.IsEnabled = sc.NewValue != null;
             basis.IsRequired = sc.NewValue != null;
-          }
-          if (attorney != null)
-          {
-            attorneyValues = settings.Where(s => s.Reason == SignatureSetting.Reason.PowerOfAttorney)
-              .Select(s => s.Document).OfType<IPowerOfAttorney>().Where(d => d.AccessRights.CanRead(Users.Current)).ToArray();
-            attorney.From(attorneyValues);
-          }
-          if (basisDocument != null)
-          {
-            basisDocumentValues = settings.Where(s => s.Reason == SignatureSetting.Reason.Other).Select(s => s.DocumentInfo).ToArray();
-            basisDocument.From(basisDocumentValues);
-          }
-          if (basis != null)
-          {
-            basis.Value = basisValues.FirstOrDefault();
-            FillBasisDocuments(basis.Value, attorney, basisDocument, attorneyValues, basisDocumentValues);
+            basis.Value = _obj.OurSigningReason != null && basisValues.Contains(_obj.OurSigningReason)
+              ? _obj.OurSigningReason
+              : Functions.OfficialDocument.Remote.GetDefaultSignatureSetting(_obj, sc.NewValue);
           }
         });
       signedBy.Value = defaultSignatory;
@@ -137,33 +129,26 @@ namespace Sungero.Docflow.Client
             if (!b.IsValid)
               return;
           }
-          var signatoryAttorneyValue = attorney != null ? attorney.Value : null;
-          var signatoryOtherReasonValue = basisDocument != null ? basisDocument.Value : null;
           
           var errorList = Functions.AccountingDocumentBase.Remote
-            .TitleDialogValidationErrors(_obj, signedBy.Value, null,
-                                         signatoryAttorneyValue, null,
-                                         signatoryOtherReasonValue, null);
+            .TitleDialogValidationErrors(_obj, signedBy.Value, null, null, null, basis != null ? basis.Value : null);
           foreach (var errors in errorList.GroupBy(e => e.Text))
           {
             var controls = new List<CommonLibrary.IDialogControl>();
             foreach (var error in errors)
             {
               if (error.Type == Constants.AccountingDocumentBase.GenerateTitleTypes.Signatory)
-                controls.Add(signedBy);
-              if (error.Type == Constants.AccountingDocumentBase.GenerateTitleTypes.SignatoryPowerOfAttorney)
-                controls.Add(attorney);
+                controls.Add(basis);
             }
             b.AddError(errors.Key, controls.ToArray());
           }
           
           if (b.IsValid)
           {
-            var basisValue = basis != null ? basis.Value : string.Empty;
+            var basisValue = basis != null ? SignatureSettings.Info.Properties.Reason.GetLocalizedValue(basis.Value.Reason) : string.Empty;
             var hasAuthorityValue = hasAuthority != null ? hasAuthority.Value : string.Empty;
-            var signatoryAttorney = Structures.AccountingDocumentBase.Attorney.Create(signatoryAttorneyValue, signatoryOtherReasonValue);
-            var title = Structures.AccountingDocumentBase.SellerTitle.Create(signedBy.Value, basisValue, hasAuthorityValue,
-                                                                             signatoryAttorney.Document, signatoryAttorney.OtherReason);
+            var signatureSetting = basis != null ? basis.Value : null;
+            var title = Structures.AccountingDocumentBase.SellerTitle.Create(signedBy.Value, basisValue, hasAuthorityValue, signatureSetting);
             
             try
             {
@@ -221,7 +206,6 @@ namespace Sungero.Docflow.Client
       var isOldUtdCorrection = isUtdCorrection && (taxDocumentClassifier == Exchange.PublicConstants.Module.TaxDocumentClassifier.UniversalCorrectionDocumentSeller);
       var isWaybill = isTorg12 || isDpt;
       var isContractStatement = isAct || isDprr;
-      var exchangeProvider = _obj.BusinessUnitBox.ExchangeService.ExchangeProvider;
       
       if (!isUtdAny && !isWaybill && !isContractStatement)
         return;
@@ -242,8 +226,7 @@ namespace Sungero.Docflow.Client
         dialog.HelpCode = Constants.AccountingDocumentBase.HelpCodes.UniversalCorrectionTransfer;
 
       Action<CommonLibrary.InputDialogRefreshEventArgs> refresh = null;
-      var signatories = Functions.OfficialDocument.Remote.GetSignatories(_obj);
-      
+
       var dialogText = string.Empty;
       
       if (isUtdNotCorrection)
@@ -260,18 +243,37 @@ namespace Sungero.Docflow.Client
       
       dialog.Text = dialogText;
       
-      var defaultSignatory = Company.Employees.Null;
-      if (signatories.Any(s => _obj.OurSignatory != null && Equals(s.EmployeeId, _obj.OurSignatory.Id)))
-        defaultSignatory = _obj.OurSignatory;
-      else if (signatories.Any(s => Company.Employees.Current != null && Equals(s.EmployeeId, Company.Employees.Current.Id)))
-        defaultSignatory = Company.Employees.Current;
-      else if (signatories.Select(s => s.EmployeeId).Distinct().Count() == 1)
-        defaultSignatory = Functions.AccountingDocumentBase.Remote.GetEmployeesByIds(signatories.Select(s => s.EmployeeId).ToList()).FirstOrDefault();
-      
       // Поле Подписал.
-      var defaultEmployees = Functions.AccountingDocumentBase.Remote.GetEmployeesByIds(signatories.Select(s => s.EmployeeId).ToList());
-      var signatory = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_SignedBy, true, Company.Employees.Null)
-        .From(defaultEmployees.Distinct());
+      var showSaveAndSignButton = false;
+      var defaultSignatory = Company.Employees.Null;
+      var signatory = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_SignedBy, true, defaultSignatory);
+
+      if (Functions.OfficialDocument.Remote.SignatorySettingWithAllUsersExist(_obj))
+      {
+        if (_obj.OurSignatory != null)
+          defaultSignatory = _obj.OurSignatory;
+        else if (Company.Employees.Current != null)
+          defaultSignatory = Company.Employees.Current;
+        
+        showSaveAndSignButton = Users.Current != null;
+      }
+      else
+      {
+        var signatoriesIds = Functions.OfficialDocument.Remote.GetSignatoriesIds(_obj);
+        
+        if (signatoriesIds.Any(s => _obj.OurSignatory != null && Equals(s, _obj.OurSignatory.Id)))
+          defaultSignatory = _obj.OurSignatory;
+        else if (signatoriesIds.Any(s => Company.Employees.Current != null && Equals(s, Company.Employees.Current.Id)))
+          defaultSignatory = Company.Employees.Current;
+        else if (signatoriesIds.Count() == 1)
+          defaultSignatory = Company.PublicFunctions.Module.Remote.GetEmployeeById(signatoriesIds.First());
+        
+        var defaultEmployees = Functions.AccountingDocumentBase.Remote.GetEmployeesByIds(signatoriesIds);
+        
+        signatory.From(defaultEmployees);
+        
+        showSaveAndSignButton = signatoriesIds.Any(s => Users.Current != null && Equals(s, Users.Current.Id));
+      }
       
       // Поле Полномочия.
       CommonLibrary.IDropDownDialogValue hasAuthority = null;
@@ -279,11 +281,6 @@ namespace Sungero.Docflow.Client
       {
         hasAuthority = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority, true, 0);
         if (isOldUtdCorrection)
-        {
-          hasAuthority.From(AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority_Register);
-          hasAuthority.IsEnabled = false;
-        }
-        else if (isUtdCorrection && exchangeProvider == ExchangeCore.ExchangeService.ExchangeProvider.Synerdocs)
         {
           hasAuthority.From(AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority_Register);
           hasAuthority.IsEnabled = false;
@@ -299,18 +296,10 @@ namespace Sungero.Docflow.Client
                             AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority_DealAndRegister);
       }
 
-      // Поле Основание и связанные с ним Доверенность/Документ.
-      CommonLibrary.IDropDownDialogValue basis = null;
-      INavigationDialogValue<IPowerOfAttorney> powerOfAttorney = null;
-      CommonLibrary.IDropDownDialogValue basisDocument = null;
+      // Поле Основание.
+      INavigationDialogValue<ISignatureSetting> basis = null;
       if (!isTorg12)
-      {
-        basis = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_Basis, true, 0);
-        powerOfAttorney = dialog.AddSelect(PowerOfAttorneys.Info.LocalizedName, false, PowerOfAttorneys.Null);
-
-        if (!isAct)
-          basisDocument = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_Document, false, null);
-      }
+        basis = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_Basis, true, SignatureSettings.Null);
 
       // Дата подписания (Дата согласования, если УКД).
       var signingLabel = isUtdCorrection ?
@@ -353,55 +342,33 @@ namespace Sungero.Docflow.Client
         consigneeBasis = dialog.AddSelect(AccountingDocumentBases.Resources.PropertiesFillingDialog_ConsigneeBasis, false, 0);
         consigneeAttorney = dialog.AddSelect(PowerOfAttorneys.Info.LocalizedName, false, PowerOfAttorneys.Null);
         consigneeDocument = dialog.AddString(AccountingDocumentBases.Resources.PropertiesFillingDialog_Document, false);
+        consigneeDocument.MaxLength(Constants.AccountingDocumentBase.PowersBaseConsigneeMaxLength);
       }
 
       CommonLibrary.CustomDialogButton saveAndSignButton = null;
-      if (signatories.Any(s => Users.Current != null && Equals(s.EmployeeId, Users.Current.Id)))
+      
+      if (showSaveAndSignButton)
         saveAndSignButton = dialog.Buttons.AddCustom(AccountingDocumentBases.Resources.PropertiesFillingDialog_SaveAndSign);
       
       var saveButton = dialog.Buttons.AddCustom(AccountingDocumentBases.Resources.PropertiesFillingDialog_Save);
       dialog.Buttons.Default = saveAndSignButton ?? saveButton;
       var cancelButton = dialog.Buttons.AddCancel();
       
-      string[] basisValues = null;
-      IPowerOfAttorney[] powerOfAttorneyValues = null;
-      string[] basisDocumentValues = null;
-      List<ISignatureSetting> settings = null;
+      IQueryable<ISignatureSetting> settings = null;
       IPowerOfAttorney[] consigneePowerOfAttorneyValues = null;
-
-      if (basis != null)
-        basis.SetOnValueChanged(bv => FillBasisDocuments(bv.NewValue, powerOfAttorney, basisDocument, powerOfAttorneyValues, basisDocumentValues));
       
       signatory.SetOnValueChanged(
         (sc) =>
         {
-          settings = Functions.OfficialDocument.Remote.GetSignatureSettings(_obj, sc.NewValue);
           if (basis != null)
           {
-            basisValues = settings.Select(s => s.Reason).Distinct()
-              .Where(r => !isAct || r != SignatureSetting.Reason.Other)
-              .OrderBy(r => r != SignatureSetting.Reason.Duties)
-              .ThenBy(r => r != SignatureSetting.Reason.PowerOfAttorney)
-              .Select(r => SignatureSettings.Info.Properties.Reason.GetLocalizedValue(r)).ToArray();
-            basis.From(basisValues);
+            settings = Functions.OfficialDocument.Remote.GetSignatureSettingsWithCertificateByEmployee(_obj, sc.NewValue);
+            basis.From(settings);
             basis.IsEnabled = sc.NewValue != null;
             basis.IsRequired = sc.NewValue != null;
-          }
-          if (powerOfAttorney != null)
-          {
-            powerOfAttorneyValues = settings.Where(s => s.Reason == SignatureSetting.Reason.PowerOfAttorney)
-              .Select(s => s.Document).OfType<IPowerOfAttorney>().Where(d => d.AccessRights.CanRead(Users.Current)).ToArray();
-            powerOfAttorney.From(powerOfAttorneyValues);
-          }
-          if (basisDocument != null)
-          {
-            basisDocumentValues = settings.Where(s => s.Reason == SignatureSetting.Reason.Other).Select(s => s.DocumentInfo).ToArray();
-            basisDocument.From(basisDocumentValues);
-          }
-          if (basis != null)
-          {
-            basis.Value = basisValues.FirstOrDefault();
-            FillBasisDocuments(basis.Value, powerOfAttorney, basisDocument, powerOfAttorneyValues, basisDocumentValues);
+            basis.Value = _obj.OurSigningReason != null && settings.Contains(_obj.OurSigningReason)
+              ? _obj.OurSigningReason
+              : Functions.OfficialDocument.Remote.GetDefaultSignatureSetting(_obj, sc.NewValue);
           }
         });
       signatory.Value = defaultSignatory;
@@ -482,7 +449,7 @@ namespace Sungero.Docflow.Client
             if (string.Equals(r.NewValue, AccountingDocumentBases.Resources.PropertiesFillingDialog_Result_Accepted) && disagreement != null)
               disagreement.Value = string.Empty;
           });
-      
+
       refresh = (r) =>
       {
         if (disagreement != null)
@@ -513,16 +480,32 @@ namespace Sungero.Docflow.Client
           {
             if (!b.IsValid)
               return;
-            
+
             var consigneeValue = isSameConsignee != null ? (isSameConsignee.Value == true ? signatory.Value : consignee.Value) : null;
-            var signatoryPowerOfAttorneyValue = powerOfAttorney != null ? powerOfAttorney.Value : null;
-            var signatoryOtherReasonValue = basisDocument != null ? basisDocument.Value : null;
-            var consigneePowerOfAttorneyValue = consigneeAttorney != null ? consigneeAttorney.Value : null;
-            var consigneeOtherReasonValue = consigneeDocument != null ? consigneeDocument.Value : null;
+            IPowerOfAttorneyBase consigneePowerOfAttorneyValue = null;
+            var consigneeOtherReasonValue = string.Empty;
+            if (isSameConsignee != null && isSameConsignee.Value != true)
+            {
+              consigneePowerOfAttorneyValue = consigneeAttorney != null ? consigneeAttorney.Value : null;
+              consigneeOtherReasonValue = consigneeDocument != null ? consigneeDocument.Value : null;
+            }
+
             var errorList = Functions.AccountingDocumentBase.Remote
               .TitleDialogValidationErrors(_obj, signatory.Value, consignee != null ? consignee.Value : null,
-                                           signatoryPowerOfAttorneyValue, consigneePowerOfAttorneyValue,
-                                           signatoryOtherReasonValue, consigneeOtherReasonValue);
+                                           consigneePowerOfAttorneyValue, consigneeOtherReasonValue, basis != null ? basis.Value : null);
+            
+            if (isSameConsignee != null && isSameConsignee.Value != null && isSameConsignee.Value == true && basis != null && basis.Value != null)
+            {
+              var powersBase = Functions.Module.GetSigningReason(basis.Value);
+              
+              if (!string.IsNullOrEmpty(powersBase) && powersBase.Length > Constants.AccountingDocumentBase.PowersBaseConsigneeMaxLength)
+              {
+                var error = string.Format(Sungero.Docflow.AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_ConsigneePowersBaseGreaterMaxLength, 
+                                          Constants.AccountingDocumentBase.PowersBaseConsigneeMaxLength);
+                errorList.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(Constants.AccountingDocumentBase.GenerateTitleTypes.SignatoryPowersBase, error));
+              }
+            }
+            
             foreach (var errors in errorList.GroupBy(e => e.Text))
             {
               var controls = new List<CommonLibrary.IDialogControl>();
@@ -532,26 +515,26 @@ namespace Sungero.Docflow.Client
                   controls.Add(signatory);
                 if (error.Type == Constants.AccountingDocumentBase.GenerateTitleTypes.Consignee)
                   controls.Add(consignee);
-                if (error.Type == Constants.AccountingDocumentBase.GenerateTitleTypes.SignatoryPowerOfAttorney)
-                  controls.Add(powerOfAttorney);
                 if (error.Type == Constants.AccountingDocumentBase.GenerateTitleTypes.ConsigneePowerOfAttorney)
                   controls.Add(consigneeAttorney);
+                if (error.Type == Constants.AccountingDocumentBase.GenerateTitleTypes.SignatoryPowersBase)
+                  controls.Add(basis);
               }
               b.AddError(errors.Key, controls.ToArray());
             }
             
             if (b.IsValid)
             {
-              var consigneeBasisValue = isSameConsignee != null && basis != null ? (isSameConsignee.Value == true ? basis.Value : consigneeBasis.Value) : string.Empty;
+              var basisValue = basis != null ? Functions.Module.GetSigningReason(basis.Value) : string.Empty;
+              var consigneeBasisValue = isSameConsignee != null ? (isSameConsignee.Value == true ? basisValue : consigneeBasis.Value) : string.Empty;
               var disagreementValue = disagreement != null ? disagreement.Value : string.Empty;
-              var basisValue = basis != null ? basis.Value : string.Empty;
               var hasAuthorityValue = hasAuthority != null ? hasAuthority.Value : string.Empty;
-              var signatoryPowerOfAttorney = Structures.AccountingDocumentBase.Attorney.Create(signatoryPowerOfAttorneyValue, signatoryOtherReasonValue);
-              var consigneePowerOfAttorney = Structures.AccountingDocumentBase.Attorney.Create(consigneePowerOfAttorneyValue, consigneeOtherReasonValue);
+              
               var title = Structures.AccountingDocumentBase.BuyerTitle.Create();
               title.ActOfDisagreement = disagreementValue;
               title.Signatory = signatory.Value;
               title.SignatoryPowersBase = basisValue;
+              title.SignatureSetting = basis != null ? basis.Value : null;
               title.Consignee = consigneeValue;
               title.ConsigneePowersBase = consigneeBasisValue;
               
@@ -566,10 +549,8 @@ namespace Sungero.Docflow.Client
               
               title.SignatoryPowers = hasAuthorityValue;
               title.AcceptanceDate = signingDate.Value;
-              title.SignatoryPowerOfAttorney = signatoryPowerOfAttorney.Document;
-              title.SignatoryOtherReason = signatoryPowerOfAttorney.OtherReason;
-              title.ConsigneePowerOfAttorney = consigneePowerOfAttorney.Document;
-              title.ConsigneeOtherReason = consigneePowerOfAttorney.OtherReason;
+              title.ConsigneePowerOfAttorney = consigneePowerOfAttorneyValue;
+              title.ConsigneeOtherReason = consigneeOtherReasonValue;
               
               try
               {
@@ -667,6 +648,15 @@ namespace Sungero.Docflow.Client
       {
         Docflow.PublicFunctions.AccountingDocumentBase.Remote.GenerateDefaultSellerTitle(_obj, Sungero.Company.Employees.Current);
       }
+    }
+    
+    /// <summary>
+    /// Дополнительное условие доступности действия "Сменить тип".
+    /// </summary>
+    /// <returns>True - если действие "Сменить тип" доступно, иначе - false.</returns>
+    public override bool CanChangeDocumentType()
+    {
+      return _obj.IsFormalized != true && base.CanChangeDocumentType();
     }
   }
 }

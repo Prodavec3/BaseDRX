@@ -124,7 +124,7 @@
     <value>Accept</value>
   </data>
   <data name="Action_AgreeHint" xml:space="preserve">
-    <value>Accept Work on Action Item </value>
+    <value>Accept Work on Action Item</value>
   </data>
   <data name="Action_AgreeDescription" xml:space="preserve">
     <value>Accept work on action item and close the card.</value>

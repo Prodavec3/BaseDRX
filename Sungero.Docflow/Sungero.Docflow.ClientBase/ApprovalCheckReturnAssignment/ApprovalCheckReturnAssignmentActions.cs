@@ -11,7 +11,7 @@ namespace Sungero.Docflow.Client
   {
     public virtual void ExtendDeadline(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -28,7 +28,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void NotSigned(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -51,7 +51,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void Signed(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;

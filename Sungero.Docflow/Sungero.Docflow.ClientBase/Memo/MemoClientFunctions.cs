@@ -9,6 +9,5 @@ namespace Sungero.Docflow.Client
 {
   partial class MemoFunctions
   {
-    
   }
 }

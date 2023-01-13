@@ -19,6 +19,9 @@ namespace Sungero.SmartProcessing
     {
       _obj.State.Properties.NewDeadline.IsEnabled = _obj.Addressee != null;
       _obj.State.Properties.NewDeadline.IsRequired = _obj.Addressee != null;
+      var canRead = Functions.VerificationTask.HasDocumentAndCanRead(VerificationTasks.As(_obj.Task));
+      _obj.State.Properties.NewDeadline.IsVisible = canRead;
+      _obj.State.Properties.Addressee.IsVisible = canRead;
 
       e.Params.AddOrUpdate(Sungero.SmartProcessing.PublicConstants.VerificationAssignment.CanDeleteParamName,
                            Sungero.Docflow.OfficialDocuments.AccessRights.CanDelete());

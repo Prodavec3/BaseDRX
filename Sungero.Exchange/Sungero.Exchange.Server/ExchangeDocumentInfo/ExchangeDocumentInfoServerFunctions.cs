@@ -149,6 +149,70 @@ namespace Sungero.Exchange.Server
     }
     
     /// <summary>
+    /// Получить контрагента по документу.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="version">Версия документа.</param>
+    /// <returns>Контрагент, от которого пришел документ.</returns>
+    [Public]
+    public static Parties.ICounterparty GetDocumentCounterparty(Content.IElectronicDocument document, Content.IElectronicDocumentVersions version)
+    {     
+      var info = GetEchangeDocumentInfo(document, version);
+      return info != null ? info.Counterparty : null;
+    }
+    
+    /// <summary>
+    /// Получить НОР для документа.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="version">Версия документа.</param>
+    /// <returns>Наша организация, на которую пришел документ.</returns>
+    [Public]
+    public static Company.IBusinessUnit GetDocumentBusinessUnit(Content.IElectronicDocument document, Content.IElectronicDocumentVersions version)
+    {
+      var info = GetEchangeDocumentInfo(document, version);
+      return info != null ? ExchangeCore.PublicFunctions.BoxBase.GetBusinessUnit(info.Box) : null;
+    }
+    
+    /// <summary>
+    /// Получить сведения о документе обмена.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="version">Версия документа.</param>
+    /// <returns>Сведения о документе обмена.</returns>
+    public static IExchangeDocumentInfo GetEchangeDocumentInfo(Content.IElectronicDocument document, Content.IElectronicDocumentVersions version)
+    {
+      if (document == null)
+        return null;
+      if (version == null)
+        return null;
+      
+      return ExchangeDocumentInfos.GetAll(x => Equals(x.Document, document) && Equals(x.VersionId, version.Id)).FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Получить сведения об организации, подписавшей документ, из сведений о документе обмена и подписи.
+    /// </summary>
+    /// <param name="signature">Подпись.</param>
+    /// <returns>Наименование и ИНН организации.</returns>
+    [Public]
+    public virtual Structures.Module.IOrganizationInfo GetSigningOrganizationInfo(Sungero.Domain.Shared.ISignature signature)
+    {
+      if (signature == null)
+        return Structures.Module.OrganizationInfo.Create();
+      
+      var isOurSignature = false;
+      if (_obj.MessageType == Exchange.ExchangeDocumentInfo.MessageType.Incoming)
+        isOurSignature = _obj.ReceiverSignId == signature.Id;
+      else
+        isOurSignature = _obj.SenderSignId == signature.Id;
+      
+      var companyName = isOurSignature ? _obj.RootBox.BusinessUnit.Name : _obj.Counterparty.Name;
+      var companyTin = isOurSignature ? _obj.RootBox.BusinessUnit.TIN : _obj.Counterparty.TIN;
+      return Structures.Module.OrganizationInfo.Create(companyName, companyTin, isOurSignature);
+    }
+    
+    /// <summary>
     /// Отпралять задания/уведомления ответственному.
     /// </summary>
     /// <returns>Признак отправки задания ответственному за ящик.</returns>

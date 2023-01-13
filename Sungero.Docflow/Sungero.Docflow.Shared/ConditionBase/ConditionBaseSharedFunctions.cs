@@ -38,7 +38,7 @@ namespace Sungero.Docflow.Shared
                                   ConditionType.DeliveryMethod,
                                   ConditionType.SignedByCParty,
                                   ConditionType.HasAddenda,
-                                  ConditionType.EmployeeInRole 
+                                  ConditionType.EmployeeInRole
                                 });
     }
     
@@ -217,6 +217,11 @@ namespace Sungero.Docflow.Shared
       return Structures.ConditionBase.ConditionResult.Create(null, ConditionBases.Resources.FillTotalAmountInContractCard);
     }
     
+    /// <summary>
+    /// Проверить соответствие суммы документа условию.
+    /// </summary>
+    /// <param name="documentAmount">Сумма документа.</param>
+    /// <returns>True, если сумма соответствует условию. False, если не соответствует. Null, если условие не определено.</returns>
     private bool? CheckAmount(double? documentAmount)
     {
       if (_obj.AmountOperator == AmountOperator.GreaterThan)
@@ -239,7 +244,7 @@ namespace Sungero.Docflow.Shared
     private Structures.ConditionBase.ConditionResult CheckProjectDocument(IOfficialDocument document)
     {
       if (document != null)
-        return Structures.ConditionBase.ConditionResult.Create(Functions.OfficialDocument.IsProjectDocument(document), string.Empty);
+        return Structures.ConditionBase.ConditionResult.Create(Functions.OfficialDocument.IsProjectDocument(document, new List<int>()), string.Empty);
       return Structures.ConditionBase.ConditionResult.Create(null, string.Empty);
     }
     
@@ -265,7 +270,7 @@ namespace Sungero.Docflow.Shared
         var nonresident = counterparty != null ? counterparty.Nonresident : true;
         return Structures.ConditionBase.ConditionResult.Create(nonresident, string.Empty);
       }
-              
+      
       if (AccountingDocumentBases.Is(document))
       {
         var counterparty = AccountingDocumentBases.As(document).Counterparty;

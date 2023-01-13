@@ -98,9 +98,18 @@ namespace Sungero.RecordManagement.Server
       
       // Блок "Задания в работе".
       var inProcessAssignments = assignments
-        .Where(a => a.Status != Workflow.AssignmentBase.Status.Completed)
+        .Where(a => a.Status != Workflow.AssignmentBase.Status.Completed && a.Status != Workflow.AssignmentBase.Status.Aborted)
         .ToList();
       this.AddInProcessAssignmentsBlock(taskBlock, inProcessAssignments);
+      
+      // Блок "Прекращенные задания".
+      if (_obj.Status == Workflow.Task.Status.Aborted)
+      {
+        var abortedAssignments = assignments
+          .Where(a => a.Status == Workflow.AssignmentBase.Status.Aborted)
+          .ToList();
+        this.AddInProcessAssignmentsBlock(taskBlock, abortedAssignments);
+      }
       
       // Блок "Задание-контроль".
       var finishAssignments = AcquaintanceFinishAssignments.GetAll()
@@ -189,7 +198,7 @@ namespace Sungero.RecordManagement.Server
     /// Добавить задания на ознакомление.
     /// </summary>
     /// <param name="taskBlock">Блок задачи.</param>
-    /// <param name="assignments">Лично выполненые задания на ознакомление.</param>
+    /// <param name="assignments">Лично выполненные задания на ознакомление.</param>
     /// <param name="isElectronicAcquaintance">Признак электронного ознакомления.</param>
     public void AddSelfCompletedAssignmentsBlocks(Sungero.Core.StateBlock taskBlock,
                                                   List<IAcquaintanceAssignment> assignments,
@@ -377,9 +386,16 @@ namespace Sungero.RecordManagement.Server
     [Remote(IsPure = true)]
     public virtual List<StartValidationMessage> GetStartValidationMessage()
     {
-      var document = _obj.DocumentGroup.OfficialDocuments.First();
       var errors = new List<StartValidationMessage>();
       
+      // Проверить наличие документа в задаче и наличие прав на него.
+      if (!Functions.AcquaintanceTask.HasDocumentAndCanRead(_obj))
+      {
+        errors.Add(StartValidationMessage.Create(Docflow.Resources.NoRightsToDocument, false, false));
+        return errors;
+      }
+      
+      var document = _obj.DocumentGroup.OfficialDocuments.First();
       var authorIsNonEmployeeMessage = Docflow.PublicFunctions.Module.ValidateTaskAuthor(_obj);
       if (!string.IsNullOrWhiteSpace(authorIsNonEmployeeMessage))
         errors.Add(StartValidationMessage.Create(authorIsNonEmployeeMessage, false, true));
@@ -496,8 +512,8 @@ namespace Sungero.RecordManagement.Server
     {
       var documentVersion = document.Versions.FirstOrDefault(x => x.Number == version);
       
-      // Проверяем только согласующую и утверждающую подпись. Не согласовано = отсутствие подписи.
-      var signatures = Signatures.Get(documentVersion).Where(x => x.SignatureType != SignatureType.NotEndorsing);
+      // Проверяем только утверждающую подпись. Не утверждено = отсутствие подписи.
+      var signatures = Signatures.Get(documentVersion).Where(x => x.SignatureType == SignatureType.Approval);
       var hasAnySignature = signatures.Any();
       var hasAnyValidSignature = signatures.Any(x => x.IsValid && !x.ValidationErrors.Any());
       return !hasAnySignature || hasAnyValidSignature;
@@ -509,11 +525,14 @@ namespace Sungero.RecordManagement.Server
     /// <returns> Версия документа, если документ без тела - 0.</returns>
     public int GetDocumentVersion()
     {
-      // Если задача запущена
-      if (_obj.Status == Status.InProcess ||
-          _obj.Status == Status.Suspended ||
-          _obj.Status == Status.Completed)
-        return _obj.AcquaintanceVersions.First(v => v.IsMainDocument == true).Number.Value;
+      // Вернуть номер версии только если у документа есть версии, и статус задачи не "Черновик", иначе - 0.
+      var acquaintanceVersion = _obj.AcquaintanceVersions.FirstOrDefault(v => v.IsMainDocument == true);
+      if (acquaintanceVersion != null &&
+          (_obj.Status == Status.InProcess ||
+           _obj.Status == Status.Suspended ||
+           _obj.Status == Status.Completed ||
+           _obj.Status == Status.Aborted))
+        return acquaintanceVersion.Number.Value;
       
       var document = _obj.DocumentGroup.OfficialDocuments.First();
       return document.HasVersions ? document.LastVersion.Number.Value : 0;
@@ -543,5 +562,80 @@ namespace Sungero.RecordManagement.Server
       participants.Save();
     }
     
+    /// <summary>
+    /// Получить активных исполнителей по ознакомлению.
+    /// </summary>
+    /// <returns>Исполнители.</returns>
+    [Remote(IsPure = true)]
+    public virtual IQueryable<Company.IEmployee> GetAcquaintancePerformers()
+    {
+      var performers = AcquaintanceAssignments.GetAll()
+        .Where(x => x.Task.Id == _obj.Id)
+        .Where(x => x.Status == Workflow.Assignment.Status.InProcess)
+        .Select(x => Company.Employees.As(x.Performer));
+      
+      return performers.AsQueryable();
+    }
+    
+    /// <summary>
+    /// Получить задания на ознакомление для указанных исполнителей.
+    /// </summary>
+    /// <param name="performers">Исполнители.</param>
+    /// <returns>Задания на ознакомление.</returns>
+    [Remote(IsPure = true)]
+    public virtual List<IAcquaintanceAssignment> GetAcquaintanceAssignments(List<Company.IEmployee> performers)
+    {
+      var assignments = AcquaintanceAssignments.GetAll()
+        .Where(x => x.Task.Id == _obj.Id)
+        .Where(x => x.Status == Workflow.Assignment.Status.InProcess)
+        .Where(x => performers.Contains(Company.Employees.As(x.Performer)));
+      
+      return assignments.ToList();
+    }
+    
+    /// <summary>
+    /// Проверить, что созданы все задания на ознакомление.
+    /// </summary>
+    /// <returns>True/False.</returns>
+    [Remote(IsPure = true)]
+    public virtual bool AllAcquaintanceAssignmentsCreated()
+    {
+      var storedParticipants = AcquaintanceTaskParticipants.GetAll().FirstOrDefault(x => x.TaskId == _obj.Id);
+      if (storedParticipants == null)
+        return false;
+      
+      var taskAcquainters = storedParticipants.Employees.Select(p => p.Employee);
+      if (!taskAcquainters.Any())
+        return false;
+      
+      var acquaintanceAssignmentsPerformers = AcquaintanceAssignments.GetAll()
+        .Where(x => Equals(x.Task, _obj))
+        .Select(x => x.Performer);
+      
+      var performersWithoutAssignments = taskAcquainters.Except(acquaintanceAssignmentsPerformers);
+      return !performersWithoutAssignments.Any();
+    }
+    
+    #region Синхронизация группы приложений
+    
+    /// <summary>
+    /// Связать с основным документом документы из группы Приложения, если они не были связаны ранее.
+    /// </summary>
+    public virtual void RelateAddedAddendaToPrimaryDocument()
+    {
+      var primaryDocument = _obj.DocumentGroup.OfficialDocuments.SingleOrDefault();
+      if (primaryDocument == null)
+        return;
+      
+      Logger.DebugFormat("AcquaintanceTask (ID = {0}). Add relation with type Addendum to primary document (ID = {1})",
+                         _obj.Id, primaryDocument.Id);
+      var taskAddenda = _obj.AddendaGroup.OfficialDocuments
+        .Where(x => !Equals(x, primaryDocument))
+        .Where(x => !Docflow.PublicFunctions.OfficialDocument.IsObsolete(x))
+        .ToList();
+      Docflow.PublicFunctions.OfficialDocument.RelateDocumentsToPrimaryDocumentAsAddenda(primaryDocument, taskAddenda);
+    }
+    
+    #endregion
   }
 }

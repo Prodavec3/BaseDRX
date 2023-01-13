@@ -478,7 +478,21 @@
     "NameGuid": "655dcbea-d5fe-4998-a7dc-36068b0703b3",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8929554f-478a-44b3-a43b-4a89f550b964",
+        "Name": "ShowOurSigningReason",
+        "ActionGuid": "94c8ea34-943f-43cc-90a7-9b96bde80f85",
+        "ButtonSize": "Large",
+        "Index": 32,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsVisible"
+        ],
+        "ParentGuid": "52099269-7fc8-4a2c-b6bf-20a19fb11d09"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

@@ -26,5 +26,33 @@ namespace Sungero.Docflow.Server
     }
     
     #endregion
+    
+    /// <summary>
+    /// Создать кеш параметров.
+    /// </summary>
+    [Remote(IsPure = true)]
+    public virtual void CreateParamsCache()
+    {
+      var refreshParameters = Functions.ApprovalTask.GetOrUpdateAssignmentRefreshParams(ApprovalTasks.As(_obj.Task), _obj, true);
+      
+      Functions.ApprovalReworkAssignment.UpdateDeliveryMethod(_obj);
+      
+      // Необходимость показывать хинт о возможности отправки документа через СО.
+      var lockInfo = Locks.GetLockInfo(_obj);
+      if (_obj.Status == Status.InProcess && !(lockInfo != null && lockInfo.IsLockedByOther) && _obj.AccessRights.CanUpdate())
+      {
+        var isVisibleAndEnabled = (_obj.State.Properties.DeliveryMethod.IsVisible || refreshParameters.DeliveryMethodIsVisible) 
+          && (_obj.State.Properties.DeliveryMethod.IsEnabled || refreshParameters.DeliveryMethodIsEnabled);
+        if (isVisibleAndEnabled && (_obj.DeliveryMethod == null || _obj.DeliveryMethod.Sid != Constants.MailDeliveryMethod.Exchange))
+        {
+          var param = ((Domain.Shared.IExtendedEntity)_obj).Params;
+          if (!param.ContainsKey(Constants.ApprovalTask.NeedShowExchangeServiceHint))
+          {
+            var show = Functions.ApprovalTask.GetExchangeServices(ApprovalTasks.As(_obj.Task)).DefaultService != null;
+            param[Constants.ApprovalTask.NeedShowExchangeServiceHint] = show;
+          }
+        }
+      }
+    }
   }
 }

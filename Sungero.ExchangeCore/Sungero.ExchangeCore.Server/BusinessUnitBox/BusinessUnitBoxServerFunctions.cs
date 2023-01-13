@@ -146,7 +146,7 @@ namespace Sungero.ExchangeCore.Server
     /// </summary>
     /// <returns>Текст проблемы, если она обнаружена.</returns>
     /// <remarks>Может менять статус подключения и сохранять сущность.</remarks>
-    [Remote]
+    [Public, Remote]
     public string CheckConnection()
     {
       var needSave = !_obj.State.IsChanged;

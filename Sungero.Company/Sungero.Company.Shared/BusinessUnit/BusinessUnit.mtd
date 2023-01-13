@@ -462,7 +462,8 @@
     "SavingServer",
     "ShowingClient",
     "UiFilteringServer",
-    "CreatedServer"
+    "CreatedServer",
+    "AfterSaveServer"
   ],
   "HideFromNavigationEditorCreationArea": true,
   "IconName": "BusinessUnit.ico",
@@ -787,6 +788,16 @@
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "d0b710d0-02e3-4105-b688-7cec76981075",
       "Versions": []
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "ElasticsearchMinScore",
+      "ParentClasses": [
+        "BusinessUnit"
+      ],
+      "TypeName": "System.Double",
+      "Value": "5"
     }
   ],
   "PublicFunctions": [

@@ -228,6 +228,26 @@
       "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "c026105d-16ed-4f59-97bd-6b0b275aee95"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "449d66b8-27c7-439a-9baa-a729aa25092e",
+      "Name": "FormalizedPoAUnifiedRegNo",
+      "CanBeSearch": false,
+      "Code": "FPoAUniRegNo",
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d42fafc4-22a3-4abc-83bc-9ba5ba7a8872"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9c3aad8b-7801-4623-9e51-84932f8d5a2c",
+      "Name": "SecondFormalizedPoAUnifiedRegNo",
+      "CanBeSearch": false,
+      "Code": "SFPoAUniRegNo",
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "449d66b8-27c7-439a-9baa-a729aa25092e"
     }
   ],
   "PublicStructures": [],

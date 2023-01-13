@@ -67,7 +67,7 @@ namespace Sungero.Docflow.Constants
       
       // Создание версии.
       public const string CreateVersion = "CreateVersion";
-            
+      
       // Преобразование в pdf.
       public const string ConvertToPdf = "ConvertToPdf";
       
@@ -87,6 +87,9 @@ namespace Sungero.Docflow.Constants
       
       // Максимальная длина строки для перечисления.
       public const int OperationPropertyLength = 15;
+      
+      // Простановка отметки об ЭП (изменение содержимого).
+      public const string ContentChange = "ContentChange";
     }
 
     public static class HelpCode
@@ -103,8 +106,10 @@ namespace Sungero.Docflow.Constants
     }
 
     public const string ShowParam = "showParam";
+    public const string ShowOurSigningReasonParam = "showOurSigningReasonParam";
     public const string RepeatRegister = "repeatRegister";
     public const string HasReservationSetting = "hasReservationSetting";
+    public const string HasNumerationSetting = "hasNumerationSetting";
     public const string NeedValidateRegisterFormat = "NeedValidateRegisterFormat";
     public const string NumberRequired = "numberRequired";
     public const string RegistrationNumberPrefix = "registrationNumberPrefix";
@@ -115,6 +120,10 @@ namespace Sungero.Docflow.Constants
     
     [Sungero.Core.PublicAttribute]
     public const string DontUpdateModified = "DontUpdateModified";
+    
+    // Выдать права на документ асинхронно.
+    [Sungero.Core.PublicAttribute]
+    public const string GrantAccessRightsToDocumentAsync = "GrantAccessRightsToDocumentAsync";
     
     public const string TemplateIndexLeadingSymbol = "*";
     public const string DefaultIndexLeadingSymbol = "0";
@@ -132,10 +141,17 @@ namespace Sungero.Docflow.Constants
     
     // Признак возможности подписания заблокированного документа.
     [Sungero.Core.Public]
-    public const string CanSignLockedDocument = "CanSignLockedDocument";    
+    public const string CanSignLockedDocument = "CanSignLockedDocument";
     
     // Добавить комментарий в историю документа о конвертации.
     [Sungero.Core.Public]
     public const string AddHistoryCommentAboutPDFConvert = "AddHistoryCommentAboutPDFConvert";
+    
+    // Добавить комментарий в историю документа про добавление отметки о регистрации.
+    [Sungero.Core.Public]
+    public const string AddHistoryCommentAboutRegistrationStamp = "AddHistoryCommentAboutRegistrationStamp";
+    
+    // Длина, до которой сокращается имя документа в нотифайках.
+    public const int NameLengthForNotification = 145;
   }
 }

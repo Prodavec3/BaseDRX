@@ -47,6 +47,19 @@ namespace Sungero.Company
   partial class BusinessUnitServerHandlers
   {
 
+    public override void AfterSave(Sungero.Domain.AfterSaveEventArgs e)
+    {
+      // Запуск индексации, если Elasticsearch сконфигурирован и изменились индексируемые поля.
+      if (Commons.PublicFunctions.Module.IsElasticsearchConfigured() &&
+          e.Params.Contains(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey))
+      {
+        var allowCreateRecord = false;
+        e.Params.TryGetValue(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey, out allowCreateRecord);
+        e.Params.Remove(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey);
+        Sungero.Commons.PublicFunctions.Module.CreateIndexEntityAsyncHandler(BusinessUnits.Info.Name, _obj.Id, Functions.BusinessUnit.GetIndexingJson(_obj), allowCreateRecord);
+      }
+    }
+
     public override void Created(Sungero.Domain.CreatedEventArgs e)
     {
       _obj.Nonresident = false;
@@ -150,6 +163,10 @@ namespace Sungero.Company
         _obj.Company.IsCardReadOnly = false;
         Parties.CompanyBases.Delete(_obj.Company);
       }
+      
+      // Удаление из индекса Elasticsearch, если он сконфигурирован.
+      if (Commons.PublicFunctions.Module.IsElasticsearchConfigured())
+        Commons.PublicFunctions.Module.CreateRemoveEntityFromIndexAsyncHandler(BusinessUnits.Info.Name, _obj.Id);
     }
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
@@ -227,6 +244,11 @@ namespace Sungero.Company
       }
       
       #endregion
+      
+      // Выставить параметр необходимости индексации сущности, при изменении индексируемых полей.
+      var props = _obj.State.Properties;
+      if (props.Name.IsChanged || props.LegalName.IsChanged || props.TIN.IsChanged || props.TRRC.IsChanged || props.PSRN.IsChanged || props.Status.IsChanged)
+        e.Params.AddOrUpdate(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey, _obj.State.IsInserted);
     }
   }
 }

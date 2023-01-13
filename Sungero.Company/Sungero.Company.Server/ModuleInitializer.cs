@@ -87,7 +87,6 @@ namespace Sungero.Company.Server
       indexName = "idx_Recipient_Discriminator_HeadOffice_Id";
       indexQuery = string.Format(Queries.Module.CreateIndexDiscriminatorHeadOfficeId, tableName, indexName);
       Sungero.Docflow.PublicFunctions.Module.CreateIndexOnTable(tableName, indexName, indexQuery);
-  
     }
   }
 }

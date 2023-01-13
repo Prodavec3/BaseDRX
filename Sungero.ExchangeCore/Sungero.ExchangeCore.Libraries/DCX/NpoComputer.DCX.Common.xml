@@ -2175,6 +2175,11 @@
             Сопоставление локальных ИД документов с ИД сервиса.
             </summary>
         </member>
+        <member name="P:NpoComputer.DCX.Common.SentMessage.Signatures">
+            <summary>
+            Подписи документов.
+            </summary>
+        </member>
         <member name="P:NpoComputer.DCX.Common.SentMessage.ServiceMessageId">
             <summary>
             ИД сообщения.
@@ -2248,7 +2253,22 @@
             Тип подписи.
             </summary>
         </member>
-        <member name="M:NpoComputer.DCX.Common.Signature.CreateFromContent(System.Byte[],System.String,System.String,NpoComputer.DCX.Common.SignType)">
+        <member name="P:NpoComputer.DCX.Common.Signature.FormalizedPoAUnifiedRegNumber">
+            <summary>
+            Единый регистрационный номер эл. доверенности.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.FormalizedPoALink">
+            <summary>
+            Ссылка на эл. доверенность в сервисе.
+            </summary>
+        </member>
+        <member name="P:NpoComputer.DCX.Common.Signature.FormalizedPoALinkTitle">
+            <summary>
+            Текстовое описание ссылки на эл. доверенность. 
+            </summary>
+        </member>
+        <member name="M:NpoComputer.DCX.Common.Signature.CreateFromContent(System.Byte[],System.String,System.String,NpoComputer.DCX.Common.SignType,System.String)">
             <summary>
             Создать объект Signature из тела подписи.
             </summary>
@@ -2256,6 +2276,7 @@
             <param name="documentId">ИД подписанного документа</param>
             <param name="signerBoxId">ИД ящика подписанта.</param>
             <param name="signType">Тип подписи.</param>
+            <param name="formalizedPoAUnifiedRegNumber">Единый регистрационный номер доверенности.</param>
             <returns>Подпись.</returns>
         </member>
         <member name="M:NpoComputer.DCX.Common.Signature.GetCertificateFromSignature(System.Byte[])">

@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sungero.ElasticsearchExtensions</name>
+    </assembly>
+    <members>
+        <member name="T:Sungero.ElasticsearchExtensions.ElasticsearchConnector">
+            <summary>
+            Класс для выполнения запросов к сервису Elasticsearch.
+            </summary>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.CheckConnection">
+            <summary>
+            Проверить подключение к Elasticsearch.
+            </summary>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.CreateIndex(System.String,System.String)">
+            <summary>
+            Создать индекс.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="configJson">Настройки индекса в формате JSON.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.DeleteIndex(System.String)">
+            <summary>
+            Удалить индекс.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.IsIndexExist(System.String)">
+            <summary>
+            Проверить существование индекса.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <returns>True - индекс существует, иначе false.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.Bulk(System.String)">
+            <summary>
+            Массово загрузить данные.
+            </summary>
+            <param name="contentJson">Json строка c объектами для индексации.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.Bulk(System.String,System.String)">
+            <summary>
+            Массово загрузить данные в индекс.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="contentJson">Json строка c объектами для индексации.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.IndexEntity(System.String,System.String,System.Int32,System.DateTime,System.Boolean)">
+            <summary>
+            Индексировать сущность.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="contentJson">Json строка c объектами для индексации.</param>
+            <param name="entityId">ИД сущности.</param>
+            <param name="entityUpdated">Время обновления сущности.</param>
+            <param name="allowCreateRecord">Разрешить добавление записи, если она не существует.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.RemoveEntity(System.String,System.Int32)">
+            <summary>
+            Удалить сущность из индекса.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="entityId">ИД сущности.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.AddEntity(System.String,System.String)">
+            <summary>
+            Добавить сущность в индекс.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="contentJson">Json строка c объектами для индексации.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.UpdateEntityByInternalId(System.String,System.String,System.String)">
+            <summary>
+            Обновить сущность в индексе.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="contentJson">Json строка c объектами для индексации.</param>
+            <param name="internalId">ИД записи индекса.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.RemoveEntityByInternalId(System.String,System.String)">
+            <summary>
+            Удалить сущность из индекса.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="internalId">ИД записи индекса.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.UpdateIndexSettings(System.String,System.String)">
+            <summary>
+            Обновить настройки индекса.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="configJson">Настройки индекса в формате JSON.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.OpenIndex(System.String)">
+            <summary>
+            Открыть индекс.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.CloseIndex(System.String)">
+            <summary>
+            Закрыть индекс.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.Search(System.String,System.String)">
+            <summary>
+            Выполнить поиск по индексу.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="query">Запрос для поиска.</param>
+            <returns>Результат выполнения запроса.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.Search(System.String,System.String,System.Int32)">
+            <summary>
+            Выполнить поиск по индексу. С ограничением числа возвращаемых записей.
+            </summary>
+            <param name="indexName">Имя индекса.</param>
+            <param name="query">Запрос для поиска.</param>
+            <param name="size">Число возвращаемых записей.</param>
+            <returns>Результат выполнения запроса.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.Get(System.String)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:Sungero.ElasticsearchExtensions.ElasticsearchConnector"></see>.
+            </summary>
+            <param name="elasticsearchUrl">Адрес сервиса Elasticsearch.</param>
+            <returns>Коннектор.</returns>
+            <remarks>Используется для получения коннектора с таймаутом по умолчанию 10 мин.</remarks>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.ElasticsearchConnector.Get(System.String,System.Int32)">
+            <summary>
+            Инициализирует новый экземпляр класса <see cref="T:Sungero.ElasticsearchExtensions.ElasticsearchConnector"></see>.
+            </summary>
+            <param name="elasticsearchUrl">Адрес сервиса Elasticsearch.</param>
+            <param name="timeoutSeconds">Таймаут подключения, в секундах.</param>
+            <returns>Коннектор.</returns>
+            <remarks>Используется для получения коннектора с указанием таймаута подключения.</remarks>
+        </member>
+        <member name="T:Sungero.ElasticsearchExtensions.ElasticsearchConnectorException">
+            <summary>
+            Класс для обработки ошибок, возникающих при выполнении запросов к Elasticsearch.
+            </summary>
+        </member>
+        <member name="T:Sungero.ElasticsearchExtensions.Hit">
+            <summary>
+            Класс для возврата найденной сущности.
+            </summary>
+        </member>
+        <member name="P:Sungero.ElasticsearchExtensions.Hit.Id">
+            <summary>
+            Внутренний ИД записи Elasticsearch.
+            </summary>
+        </member>
+        <member name="P:Sungero.ElasticsearchExtensions.Hit.Score">
+            <summary>
+            Оценка поиска.
+            </summary>
+        </member>
+        <member name="P:Sungero.ElasticsearchExtensions.Hit.Source">
+            <summary>
+            Содержимое (список полей) записи Elasticsearch.
+            </summary>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.Hit.GetFieldValue(System.String)">
+            <summary>
+            Получить значение указанного поля.
+            </summary>
+            <param name="fieldName">Имя поля.</param>
+            <returns>Значение поля.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.Hit.GetEntityId">
+            <summary>
+            Получить ИД сущности.
+            </summary>
+            <returns>ИД сущности.</returns>
+        </member>
+        <member name="T:Sungero.ElasticsearchExtensions.QueryBuilder">
+            <summary>
+            Класс для получения json-запросов поиска.
+            </summary>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetQueryByType(System.String,System.String,System.String)">
+            <summary>
+            Получить строку поиска в зависимости от типа запроса.
+            </summary>
+            <param name="searchType">Тип запроса.</param>
+            <param name="fieldName">Имя поля.</param>
+            <param name="fieldValue">Значение поля.</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetBoolQuery(System.String,System.String,System.String)">
+            <summary>
+            Получить строку поиска по логическому условию.
+            </summary>
+            <param name="must">Json-строка поиска must (условия соединяются через логическое И).</param>
+            <param name="should">Json-строка поиска should (условия соединяются через логическое ИЛИ).</param>
+            <param name="filter">Json-строка фильтрации (найденные значения исключаются при оценке поиска).</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.AddComponentOfQuery(Newtonsoft.Json.Linq.JObject,System.String,System.String)">
+            <summary>
+            Добавить свойства в json-объект, при удачном парсинге значения.
+            </summary>
+            <param name="jsonObject">Целевой объект JSON.</param>
+            <param name="propertyName">Имя свойства.</param>
+            <param name="json">Строка для парсинга.</param>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetTermQuery(System.String,System.String)">
+            <summary>
+            Получить строку поиска по ключевому слову.
+            </summary>
+            <param name="termName">Имя поля.</param>
+            <param name="termValue">Значение поля.</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetTermsQuery(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Получить строку поиска по ключевым словам.
+            </summary>
+            <param name="termName">Имя поля.</param>
+            <param name="termValues">Значения полей.</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetMatchFuzzyQuery(System.String,System.String,System.Boolean)">
+            <summary>
+            Получить строку поиска по нечеткому вхождению строк.
+            </summary>
+            <param name="fieldName">Имя текстового поля.</param>
+            <param name="searchValue">Искомая строка.</param>
+            <param name="andOperator">Способ объединения результата поиска отдельных слов (true = И, false = ИЛИ).</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetMatchQuery(System.String,System.String,System.Boolean)">
+            <summary>
+            Получить строку поиска по четкому вхождению строк.
+            </summary>
+            <param name="fieldName">Имя текстового поля.</param>
+            <param name="searchValue">Искомая строка.</param>
+            <param name="andOperator">Способ объединения результата поиска отдельных слов (true = И, false = ИЛИ).</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.QueryBuilder.GetWildcardQuery(System.String,System.String)">
+            <summary>
+            Получить строку поиска по соответствию фразы шаблону.
+            </summary>
+            <param name="fieldName">Имя поля.</param>
+            <param name="fieldValue">Значение поля.</param>
+            <returns>Строка поиска.</returns>
+        </member>
+        <member name="T:Sungero.ElasticsearchExtensions.SearchResult">
+            <summary>
+            Класс для возврата общих результатов поиска.
+            </summary>
+        </member>
+        <member name="P:Sungero.ElasticsearchExtensions.SearchResult.Total">
+            <summary>
+            Общее количество найденных сущностей. 
+            </summary>
+        </member>
+        <member name="P:Sungero.ElasticsearchExtensions.SearchResult.Hits">
+            <summary>
+            Список всех возвращенных сервисом сущностей. 
+            </summary>
+            <remarks>Может не совпадать с количеством найденных сущностей.</remarks>
+        </member>
+        <member name="M:Sungero.ElasticsearchExtensions.SearchResult.Parse(System.String)">
+            <summary>
+            Распарсить ответ сервиса Elasticsearch.
+            </summary>
+            <param name="response">Json-строка, содержащая найденные данные.</param>
+        </member>
+    </members>
+</doc>

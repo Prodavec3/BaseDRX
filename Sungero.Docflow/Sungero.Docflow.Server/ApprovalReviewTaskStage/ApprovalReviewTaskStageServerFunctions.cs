@@ -52,7 +52,7 @@ namespace Sungero.Docflow.Server
                            reviewTask.Id, approvalTask.Id, approvalTask.StartId, approvalTask.Iteration, approvalTask.StageNumber, document.Id);
         // Указывать автором рассмотрения инициатора согласования (Author).
         reviewTask.Author = approvalTask.Author;
-        Sungero.RecordManagement.PublicFunctions.DocumentReviewTask.SynchronizeParentTaskAttachments(reviewTask, approvalTask);
+        Sungero.RecordManagement.PublicFunctions.Module.SynchronizeAttachmentsToDocumentReview(approvalTask, reviewTask);
         this.SetDocumentReviewTaskDeadline(reviewTask);
         reviewTask.Start();
         LinkApprovalTaskAndDocumentReviewTask(approvalTask, reviewTask);

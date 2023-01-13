@@ -15,7 +15,6 @@ namespace Sungero.Docflow.Shared
     /// <param name="group">Группа вложений.</param>
     public override void AddRelatedDocumentsToAttachmentGroup(Sungero.Workflow.Interfaces.IWorkflowEntityAttachmentGroup group)
     {
-      
       if (_obj.InResponseTo != null && !group.All.Contains(_obj.InResponseTo))
         group.All.Add(_obj.InResponseTo);
     }
@@ -98,10 +97,9 @@ namespace Sungero.Docflow.Shared
           .Where(b => b.Status == Sungero.Parties.CounterpartyExchangeBoxes.Status.Active)
           .Where(b => Equals(b.Box.BusinessUnit, document.BusinessUnit))
           .Select(b => b.Box.ExchangeService.Name).Distinct();
-        return boxes.Any()
-          ? string.Join(", ", boxes)
-          : string.Empty;
+        return boxes.Any() ? string.Join(", ", boxes) : string.Empty;
       }
+      
       var result = new List<string>();
       
       var postalAddress = string.IsNullOrEmpty(addresseesItem.Correspondent.PostalAddress)
@@ -122,9 +120,7 @@ namespace Sungero.Docflow.Shared
       if (!string.IsNullOrEmpty(email))
         result.Add(string.Format(Docflow.Reports.Resources.DistributionSheetReport.ContactsInformationEmailTemplate, email));
       
-      return result.Any()
-        ? string.Join(Environment.NewLine, result)
-        : string.Empty;
+      return result.Any() ? string.Join(Environment.NewLine, result) : string.Empty;
     }
     
     /// <summary>

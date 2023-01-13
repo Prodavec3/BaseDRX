@@ -85,7 +85,9 @@
         }
       ],
       "IsAncestorMetadata": true,
-      "Overridden": []
+      "Overridden": [
+        "SettingsResourceKey"
+      ]
     }
   ],
   "HandledEvents": [

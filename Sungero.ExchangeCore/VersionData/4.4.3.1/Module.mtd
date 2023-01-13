@@ -1,0 +1,261 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "bc0d1897-640a-4b4d-a43a-a23c5984a009",
+  "Name": "ExchangeCore",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.ExchangeCore.Client",
+  "ClientBaseAssemblyName": "Sungero.ExchangeCore.ClientBase",
+  "ClientBaseNamespace": "Sungero.ExchangeCore.ClientBase",
+  "ClientNamespace": "Sungero.ExchangeCore.Client",
+  "Code": "ExCore",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "095b2994-1739-4217-959f-488ebbd9233e",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "b2b74f2e-5fc6-4583-92d7-0bcd3e7e0f92",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "702a14d5-72e4-469d-ad26-a301d81a844f",
+      "BackgroundPosition": "Stretch",
+      "Versions": []
+    },
+    "Versions": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "d534e107-a54d-48ec-85ff-bc44d731a82f",
+      "MaxVersion": "",
+      "MinVersion": "3.4.0.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "f91dcce6-a914-4c04-aba1-0f940475696b",
+      "Versions": []
+    },
+    {
+      "ItemId": "d6c0fcaf-4ac9-4a6a-9e2c-8fed1e35c08a",
+      "PreviousItemId": "f91dcce6-a914-4c04-aba1-0f940475696b",
+      "Versions": []
+    },
+    {
+      "ItemId": "2dd7a803-8db7-40e1-9da6-b41c62d367c8",
+      "PreviousItemId": "d6c0fcaf-4ac9-4a6a-9e2c-8fed1e35c08a",
+      "Versions": []
+    },
+    {
+      "ItemId": "1e5b11de-bd28-4dc2-a03c-74b8db9ac1c4",
+      "PreviousItemId": "2dd7a803-8db7-40e1-9da6-b41c62d367c8",
+      "Versions": []
+    },
+    {
+      "ItemId": "cf5edde0-03df-4db3-9e1e-15b22cf3198c",
+      "PreviousItemId": "1e5b11de-bd28-4dc2-a03c-74b8db9ac1c4",
+      "Versions": []
+    },
+    {
+      "ItemId": "4e09273f-8b3a-489e-814e-a4ebfbba3e6c",
+      "PreviousItemId": "cf5edde0-03df-4db3-9e1e-15b22cf3198c",
+      "Versions": []
+    },
+    {
+      "ItemId": "50a0d7aa-1f04-4e4a-8f0c-044e0ba99949",
+      "PreviousItemId": "4e09273f-8b3a-489e-814e-a4ebfbba3e6c",
+      "Versions": []
+    },
+    {
+      "ItemId": "f9a3ec37-0fd4-4343-a295-9394ba830a0e",
+      "PreviousItemId": "50a0d7aa-1f04-4e4a-8f0c-044e0ba99949",
+      "Versions": []
+    },
+    {
+      "ItemId": "03a51b42-a322-4574-90bb-212ea03ed71e",
+      "PreviousItemId": "f9a3ec37-0fd4-4343-a295-9394ba830a0e",
+      "Versions": []
+    },
+    {
+      "ItemId": "d4870243-705a-483a-bcc2-89e53b80073f",
+      "PreviousItemId": "03a51b42-a322-4574-90bb-212ea03ed71e",
+      "Versions": []
+    },
+    {
+      "ItemId": "2d30e2aa-1d0b-45f0-8e4d-00318b3a5cfd",
+      "PreviousItemId": "d4870243-705a-483a-bcc2-89e53b80073f",
+      "Versions": []
+    },
+    {
+      "ItemId": "fd8945e2-e3b6-43f9-aac1-fb7ce4d984c6",
+      "PreviousItemId": "2d30e2aa-1d0b-45f0-8e4d-00318b3a5cfd",
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Low",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.ExchangeCore",
+  "IsVisible": false,
+  "Jobs": [
+    {
+      "NameGuid": "38c7d6eb-cd86-4a1a-8bdc-7c08e3615c13",
+      "Name": "SyncBoxes",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T00:00:00",
+      "TimePeriod": 10,
+      "Versions": []
+    },
+    {
+      "NameGuid": "56895f44-f5f9-4146-8774-35e1f2bc12f5",
+      "Name": "SyncCounterparties",
+      "Daily": "Repeat",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T00:00:00",
+      "TimePeriod": 30,
+      "Versions": []
+    }
+  ],
+  "Libraries": [
+    {
+      "NameGuid": "588908b1-205b-42cc-b442-c7868c6a0a6b",
+      "Name": "DCX",
+      "Scope": "Both"
+    }
+  ],
+  "Overridden": [
+    "Importance",
+    "IsVisible",
+    "NeedResetAppliedCache",
+    "NeedResetCache"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "CounterpartiesResponsibleRole",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"C719C823-C4BD-4434-A34B-D7E83E524414\")"
+    },
+    {
+      "Name": "ExchangeServiceUsersRoleGuid",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"5AFA06FB-3B66-4216-8681-56ACDEAC7FC1\")"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "FindOrganizationsInExchangeServices",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "tin",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "trrc",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "boxes",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.ExchangeCore.IBusinessUnitBox>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetEncryptedData",
+      "Parameters": [
+        {
+          "Name": "data",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String",
+      "WebApiRequestType": "Get"
+    },
+    {
+      "Name": "GetExchangeServiceUsersRole",
+      "ReturnType": "global::Sungero.CoreEntities.IRole",
+      "ReturnTypeFullName": "Sungero.CoreEntities.IRole, Sungero.Domain.Shared"
+    },
+    {
+      "Name": "GetResponsibilitiesReportData",
+      "Parameters": [
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<Company.Structures.ResponsibilitiesReport.ResponsibilitiesReportTableLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "RequeueBoxSync",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "RequeueCounterpartySync",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.ExchangeCore",
+  "ResourcesKeys": [
+    "WrongWebsite",
+    "ExchangeServiceUsersRoleName",
+    "ExchangeServiceUsersRoleDescription"
+  ],
+  "ServerAssemblyName": "Sungero.ExchangeCore.Server",
+  "ServerNamespace": "Sungero.ExchangeCore.Server",
+  "SharedAssemblyName": "Sungero.ExchangeCore.Shared",
+  "SharedNamespace": "Sungero.ExchangeCore.Shared",
+  "SpecialFolders": [],
+  "Version": "4.4.3.1",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 6
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

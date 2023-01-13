@@ -10,7 +10,7 @@
             </summary>
             <param name="inputStream">PDF документ.</param>
             <param name="barcodeType">Тип штрихкода.</param>
-            <returns>Список извлеченных штрихкодов</returns>
+            <returns>Список извлеченных штрихкодов.</returns>
             <remarks>Извлекает штрихкоды в формате Code128 только с первой страницы документа.</remarks>
         </member>
         <member name="M:Sungero.AsposeExtensions.BarcodeReader.Create">
@@ -61,6 +61,28 @@
             <returns>Поток с документом.</returns>
             <remarks>Если символов-якорей в документе нет, то отметка проставляется на последней странице.</remarks>
         </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.AddStampOnLastPage(System.IO.Stream,System.String,System.Double,System.Double)">
+            <summary>
+            Добавить штамп к документу по координатам.
+            </summary>
+            <param name="inputStream">Поток с входным документом.</param>
+            <param name="htmlMark">Строка, содержащая html для штампа.</param>
+            <param name="xIndentInCm">Отступ с правого края, в см.</param>
+            <param name="yIndentInCm">Отступ с нижнего края, в см.</param>
+            <returns>Поток с документом.</returns>
+            <remarks>Штамп будет добавлен на последнюю страницу документа.</remarks>
+        </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.AddRegistrationStamp(System.IO.Stream,System.String,System.Int32,System.Double,System.Double)">
+            <summary>
+            Добавить отметку о регистрации на заданную страницу документа.
+            </summary>
+            <param name="inputStream">Поток с входным документом.</param>
+            <param name="htmlStamp">Строка, содержащая html для отметки о регистрации.</param>
+            <param name="pageNumber">Страница, на которой необходимо проставить отметку.</param>
+            <param name="xIndentInCm">Отступ с правого края, в см.</param>
+            <param name="yIndentInCm">Отступ с нижнего края, в см.</param>
+            <returns>Поток с документом.</returns>
+        </member>
         <member name="M:Sungero.AsposeExtensions.Converter.AddSignatureMarkToDocumentPage(System.IO.Stream,System.Int32,Aspose.Pdf.PdfPageStamp)">
             <summary>
             Добавить отметку о подписи на страницу документа.
@@ -69,6 +91,15 @@
             <param name="pageNumber">Номер страницы документа, на которую нужно проставить отметку.</param>
             <param name="stamp">Отметка о подписи.</param>
             <returns>Страница документа с отметкой о подписи.</returns>
+        </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.AddStampToDocumentPage(System.IO.Stream,System.Int32,Aspose.Pdf.PdfPageStamp)">
+            <summary>
+            Добавить отметку на страницу документа.
+            </summary>
+            <param name="inputStream">Поток с входным документом.</param>
+            <param name="pageNumber">Номер страницы документа, на которую нужно проставить отметку.</param>
+            <param name="stamp">Отметка.</param>
+            <returns>Страница документа с отметкой.</returns>
         </member>
         <member name="M:Sungero.AsposeExtensions.Converter.ConvertHtmlToPdf(System.IO.MemoryStream)">
             <summary>
@@ -86,7 +117,7 @@
         </member>
         <member name="M:Sungero.AsposeExtensions.Converter.AddStampToDocument(Aspose.Pdf.Document,Aspose.Pdf.PdfPageStamp,System.Int32[])">
             <summary>
-            Поставить штамп на документе. 
+            Поставить штамп на документе.
             </summary>
             <param name="document">Документ.</param>
             <param name="stamp">Штамп.</param>
@@ -96,11 +127,48 @@
         </member>
         <member name="M:Sungero.AsposeExtensions.Converter.AddStampToDocument(Aspose.Pdf.Document,Aspose.Pdf.PdfPageStamp)">
             <summary>
-            Поставить штамп на каждой странице документа, координаты места простановки берутся из свойств штампа. 
+            Поставить штамп на каждой странице документа, координаты места простановки берутся из свойств штампа.
             </summary>
             <param name="document">Документ.</param>
             <param name="stamp">Штамп.</param>
-            <returns></returns>
+            <returns>Документ со штампом.</returns>
+        </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.GetPdfDocumentWithStamp(Aspose.Pdf.Document,Aspose.Pdf.PdfPageStamp,System.Boolean)">
+            <summary>
+            Получить документ с отметкой на всех страницах.
+            </summary>
+            <param name="document">Документ.</param>
+            <param name="stamp">Отметка.</param>
+            <param name="needUpgradePdfVersion">Признак того, что нужно повышать версию PDF перед простановкой отметки.</param>
+            <returns>Документ с проставленной отметкой.</returns>
+            <remarks>Координаты места простановки берутся из свойств отметки.</remarks>
+        </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.GetPdfDocumentWithStamp(Aspose.Pdf.Document,Aspose.Pdf.PdfPageStamp,System.Int32[],System.Boolean)">
+            <summary>
+            Получить документ с отметкой на заданных страницах.
+            </summary>
+            <param name="document">Документ.</param>
+            <param name="stamp">Отметка.</param>
+            <param name="pageNumbers">Массив номеров страниц, на которые нужно поставить отметку.</param>
+            <param name="needUpgradePdfVersion">Признак того, что нужно повышать версию PDF перед простановкой отметки.</param>
+            <returns>Документ с проставленной отметкой.</returns>
+            <remarks>Координаты места простановки берутся из свойств отметки.</remarks>
+        </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.GetUpgradedPdfForAddingStamp(Aspose.Pdf.Document)">
+            <summary>
+            Для документов версии ниже 1.4 поднять версию до 1.4 перед вставкой отметки.
+            </summary>
+            <param name="document">Документ.</param>
+            <returns>PDF документ, сконвертированный до версии 1.4, или исходный, если версию поднимать не требовалось.</returns>
+        </member>
+        <member name="M:Sungero.AsposeExtensions.Converter.SearchLastStringEntryInDocument(System.IO.Stream,System.Int32,System.String)">
+            <summary>
+            Получить последнее вхождение строки в документе.
+            </summary>
+            <param name="inputStream">Поток с входным документом формата PDF.</param>
+            <param name="searchablePagesNumber">Количество страниц для поиска строки.</param>
+            <param name="searchString">Строка для поиска.</param>
+            <returns>Результаты поиска строки в документе, либо null, если строка не найдена.</returns>
         </member>
         <member name="M:Sungero.AsposeExtensions.Converter.GetLastAnchorEntry(Aspose.Pdf.Page,System.String)">
             <summary>
@@ -185,6 +253,41 @@
             </summary>
             <param name="htmlBody">Тело письма.</param>
             <returns>Текст письма.</returns>
+        </member>
+        <member name="T:Sungero.AsposeExtensions.PdfStringSearchResult">
+            <summary>
+            Результаты поиска строки в документе PDF.
+            </summary>
+        </member>
+        <member name="P:Sungero.AsposeExtensions.PdfStringSearchResult.XIndent">
+            <summary>
+            Отступ слева до найденной строки в сантиметрах.
+            </summary>
+        </member>
+        <member name="P:Sungero.AsposeExtensions.PdfStringSearchResult.YIndent">
+            <summary>
+            Отступ снизу до найденной строки в сантиметрах.
+            </summary>
+        </member>
+        <member name="P:Sungero.AsposeExtensions.PdfStringSearchResult.PageNumber">
+            <summary>
+            Номер страницы, на которой была найдена строка.
+            </summary>
+        </member>
+        <member name="P:Sungero.AsposeExtensions.PdfStringSearchResult.PageWidth">
+            <summary>
+            Ширина страницы, на которой была найдена строка, в сантиметрах.
+            </summary>
+        </member>
+        <member name="P:Sungero.AsposeExtensions.PdfStringSearchResult.PageHeight">
+            <summary>
+            Высота страницы, на которой была найдена строка, в сантиметрах.
+            </summary>
+        </member>
+        <member name="P:Sungero.AsposeExtensions.PdfStringSearchResult.PageCount">
+            <summary>
+            Количество страниц в документе.
+            </summary>
         </member>
         <member name="M:Sungero.AsposeExtensions.TagReader.#ctor(System.IO.Stream)">
             <summary>

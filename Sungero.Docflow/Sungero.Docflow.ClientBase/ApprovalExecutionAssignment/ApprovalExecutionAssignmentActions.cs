@@ -29,7 +29,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForRevision(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.DocumentGroup.OfficialDocuments.Any();
+      return Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task));
     }
 
     public virtual void SendByMail(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -44,7 +44,8 @@ namespace Sungero.Docflow.Client
 
     public virtual void CreateAcquaintance(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      var approvalTask = ApprovalTasks.As(_obj.Task);
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(approvalTask))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -55,7 +56,15 @@ namespace Sungero.Docflow.Client
       
       var subTask = RecordManagement.PublicFunctions.Module.Remote.CreateAcquaintanceTaskAsSubTask(document, _obj);
       if (subTask != null)
+      {
+        RecordManagement.PublicFunctions.Module.SynchronizeAttachmentsToAcquaintance(_obj.DocumentGroup.OfficialDocuments.FirstOrDefault(),
+                                                                                     _obj.AddendaGroup.OfficialDocuments.Select(x => Sungero.Content.ElectronicDocuments.As(x)).ToList(),
+                                                                                     Functions.ApprovalTask.GetAddedAddenda(approvalTask),
+                                                                                     Functions.ApprovalTask.GetRemovedAddenda(approvalTask),
+                                                                                     _obj.OtherGroup.All.ToList(),
+                                                                                     subTask);
         subTask.ShowModal();
+      }
     }
 
     public virtual bool CanCreateAcquaintance(Sungero.Domain.Client.CanExecuteActionArgs e)
@@ -65,7 +74,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void SendViaExchangeService(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -83,7 +92,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void CreateActionItem(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -92,21 +101,13 @@ namespace Sungero.Docflow.Client
       _obj.Save();
       var parentAssignmentId = _obj.Id;
       var document = _obj.DocumentGroup.OfficialDocuments.First();
-      var documentApprovalTask = ApprovalTasks.As(_obj.Task);
-      var stages = Functions.ApprovalRuleBase.Remote.GetStages(documentApprovalTask.ApprovalRule, document, documentApprovalTask).Stages;
-      var assignedBy = Sungero.Company.Employees.Null;
+      var assignedBy = Functions.ApprovalExecutionAssignment.GetAssignedBy(_obj);
       
-      // Автором резолюции вычислить адресата, либо подписывающего.
-      if (stages.Any(s => s.StageType == Docflow.ApprovalRuleBaseStages.StageType.Review))
-        assignedBy = PublicFunctions.Module.Remote.GetResolutionAuthor(documentApprovalTask);
-      else if (stages.Any(s => s.StageType == Docflow.ApprovalRuleBaseStages.StageType.Sign))
-        assignedBy = documentApprovalTask.Signatory;
-      
-      var hackTask = Functions.Module.CreateActionItemExecutionWithResolution(document, parentAssignmentId, _obj.ResolutionText, assignedBy);
-      if (hackTask != null)
+      var actionItem = Functions.Module.CreateActionItemExecutionWithResolution(document, parentAssignmentId, _obj.ResolutionText, assignedBy);
+      if (actionItem != null)
       {
-        RecordManagement.ActionItemExecutionTasks.As(hackTask).AssignedBy = assignedBy;
-        hackTask.ShowModal();
+        RecordManagement.ActionItemExecutionTasks.As(actionItem).AssignedBy = assignedBy;
+        actionItem.ShowModal();
       }
     }
 
@@ -117,7 +118,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void Complete(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;

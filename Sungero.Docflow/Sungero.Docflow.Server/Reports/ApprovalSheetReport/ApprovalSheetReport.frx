@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Content&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server" ReportInfo.CreatorVersion="2020.2.12.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -63,16 +63,16 @@ namespace FastReport
     </ReportTitleBand>
     <PageHeaderBand Name="PageHeader1" Top="155.2" Width="680.4" Height="37.8">
       <TextObject Name="Text4" Width="160.65" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Approver]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text5" Left="160.65" Width="94.5" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Result]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text6" Left="255.15" Width="179.55" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="160.65" Width="103.95" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Result]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text6" Left="264.6" Width="170.1" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text7" Left="538.65" Width="56.7" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.Version]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text8" Left="595.35" Width="85.05" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.DateTime]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text20" Left="434.7" Width="103.95" Height="37.8" Border.Lines="All" Fill.Color="Gainsboro" Text="[Sungero.Docflow.Reports.Resources.ApprovalSheetReport.SignStatus]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
     </PageHeaderBand>
     <DataBand Name="Data1" Top="197" Width="680.4" Height="37.8" CanGrow="true" CanShrink="true" KeepChild="true" DataSource="Table" KeepTogether="true" KeepDetail="true">
       <TextObject Name="Text13" Width="160.65" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.EmployeeName]" Padding="3, 3, 3, 3" VertAlign="Center" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
-      <TextObject Name="Text14" Left="160.65" Width="94.5" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignType]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
-      <TextObject Name="Text15" Left="255.15" Width="179.55" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Comment]" Padding="3, 3, 3, 3" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text14" Left="160.65" Width="103.95" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignType]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Left="264.6" Width="170.1" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Comment]" Padding="3, 3, 3, 3" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text17" Left="595.35" Width="85.05" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Date]" Padding="3, 3, 3, 3" Format="Custom" Format.Format="dd.MM.yyyy   HH:mm" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text21" Left="434.7" Width="103.95" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignErrors]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
       <TextObject Name="Text16" Left="538.65" Width="56.7" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Version]" Padding="3, 3, 3, 3" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>

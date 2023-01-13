@@ -79,33 +79,41 @@ namespace Sungero.Docflow.Structures.ApprovalTask
   /// </summary>
   partial class RefreshParameters
   {
-    public bool AddresseeIsEnabled { get; set; }
+    public bool HasDocumentAndCanRead { get; set; }
     
-    public bool ExchangeServiceIsEnabled { get; set; }
-    
-    public bool DeliveryMethodIsEnabled { get; set; }
-    
-    public bool AddApproversIsVisible { get; set; }
-    
-    public bool AddresseeIsVisible { get; set; }
+    public bool ForwardPerformerIsVisible { get; set; }
     
     public bool SignatoryIsVisible { get; set; }
     
-    public bool DeliveryMethodIsVisible { get; set; }
-    
-    public bool ExchangeServiceIsVisible { get; set; }
-    
-    public bool AddresseeIsRequired { get; set; }
-    
     public bool SignatoryIsRequired { get; set; }
     
-    public bool ExchangeServiceIsRequired { get; set; }
+    public bool AddresseeIsEnabled { get; set; }
+    
+    public bool AddresseeIsVisible { get; set; }
+    
+    public bool AddresseeIsRequired { get; set; }
     
     public bool AddresseesIsEnabled { get; set; }
     
     public bool AddresseesIsVisible { get; set; }
     
     public bool AddresseesIsRequired { get; set; }
+    
+    public bool DeliveryMethodIsEnabled { get; set; }
+    
+    public bool DeliveryMethodIsVisible { get; set; }
+    
+    public bool ExchangeServiceIsEnabled { get; set; }
+    
+    public bool ExchangeServiceIsVisible { get; set; }
+    
+    public bool ExchangeServiceIsRequired { get; set; }
+    
+    public bool ApproversActionIsEnabled { get; set; }
+    
+    public bool ApproversIsVisible { get; set; }
+    
+    public bool AddApproversIsVisible { get; set; }
   }
   
   partial class ReworkParameters

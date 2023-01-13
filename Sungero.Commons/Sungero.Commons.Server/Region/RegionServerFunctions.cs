@@ -18,8 +18,8 @@ namespace Sungero.Commons.Server
     public static IRegion GetRegionFromAddress(string address)
     {
       if (string.IsNullOrWhiteSpace(address))
-          return null;
-          
+        return null;
+      
       var pattern = string.Format(@"(?i:(?<pref>{0}\s)?(?<region>[а-я-]+)(?<suf>\s{0})?)", Constants.Region.AddressTypesMask);
       var match = System.Text.RegularExpressions.Regex.Match(address, pattern);
       
@@ -28,7 +28,7 @@ namespace Sungero.Commons.Server
         // Нашли республику/округ/край/область.
         if (match.Groups["pref"].Success || match.Groups["suf"].Success)
           return Regions.GetAll().FirstOrDefault(r => r.Name.Contains(match.Groups["region"].Value));
-                                                 
+        
         match = match.NextMatch();
       }
       

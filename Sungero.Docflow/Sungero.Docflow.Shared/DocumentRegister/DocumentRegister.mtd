@@ -793,6 +793,20 @@
       "ReturnTypeFullName": "System.Int32"
     },
     {
+      "Name": "GetDocumentRegister",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "registerId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Docflow.IDocumentRegister",
+      "ReturnTypeFullName": "Sungero.Docflow.IDocumentRegister, Sungero.Domain.Interfaces"
+    },
+    {
       "Name": "GetDocumentRegistersByParams",
       "IsRemote": true,
       "Parameters": [
@@ -824,6 +838,40 @@
       ],
       "Placement": "Shared",
       "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.IDocumentRegister>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetDocumentRegistersIdsByParams",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "kind",
+          "ParameterType": "global::Sungero.Docflow.IDocumentKind",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentKind, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "unit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "department",
+          "ParameterType": "global::Sungero.Company.IDepartment",
+          "ParameterTypeFullName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "settingType",
+          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "forCurrentUser",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int32>",
       "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
@@ -923,6 +971,33 @@
       "ReturnTypeFullName": "System.Linq.IQueryable"
     },
     {
+      "Name": "GetSameIndexRegistrationNumbers",
+      "Parameters": [
+        {
+          "Name": "documentRegister",
+          "ParameterType": "global::Sungero.Docflow.IDocumentRegister",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentRegister, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "doc",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "registrationDate",
+          "ParameterType": "global::System.DateTime",
+          "ParameterTypeFullName": "System.DateTime"
+        },
+        {
+          "Name": "index",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Linq.IQueryable<global::System.String>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
       "Name": "GetSameNumberDocuments",
       "Parameters": [
         {
@@ -948,6 +1023,40 @@
       ],
       "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IOfficialDocument>",
       "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "HasDocumentRegistersByParams",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "kind",
+          "ParameterType": "global::Sungero.Docflow.IDocumentKind",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentKind, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "unit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "department",
+          "ParameterType": "global::Sungero.Company.IDepartment",
+          "ParameterTypeFullName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "settingType",
+          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "forCurrentUser",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     },
     {
       "Name": "IsRegistrationNumberUnique",

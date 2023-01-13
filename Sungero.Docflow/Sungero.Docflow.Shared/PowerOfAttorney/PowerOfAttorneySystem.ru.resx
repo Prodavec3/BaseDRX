@@ -1,64 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -126,53 +67,17 @@
   <data name="CollectionDisplayName" xml:space="preserve">
     <value>Доверенности</value>
   </data>
-  <data name="Property_ValidTill" xml:space="preserve">
-    <value>Действует по</value>
-  </data>
   <data name="Property_Assignee" xml:space="preserve">
     <value>Исполнитель</value>
   </data>
   <data name="Property_OurSignatory" xml:space="preserve">
     <value>Подписал</value>
   </data>
-  <data name="ControlGroup_1b194ce3c44048879f0d1cdc4303c583" xml:space="preserve">
-    <value>Жизненный цикл</value>
-  </data>
-  <data name="ControlGroup_696a8bb83e1244c8927a37d955cfbf0f" xml:space="preserve">
-    <value>Хранение</value>
-  </data>
-  <data name="ControlGroup_4e1d78fc6f6c4c81bf9aa1fa2031a46b" xml:space="preserve">
-    <value>Дата и номер</value>
-  </data>
-  <data name="ControlGroup_42612188cf984a66a4cc5c674787d208" xml:space="preserve">
-    <value>Примечание</value>
-  </data>
-  <data name="FilterPanel_Performer_b258719d3662492689200c3f7ce79347" xml:space="preserve">
-    <value>Кому выдана</value>
-  </data>
-  <data name="ControlGroup_406e14dc17444a7f85d8f6eef8abaa3f" xml:space="preserve">
-    <value>Основное</value>
-  </data>
   <data name="FilterPanel_Status_8e282a3739d74835a50573f7a06375db" xml:space="preserve">
     <value>Статус</value>
   </data>
   <data name="FilterPanel_Period_1d11f5c1abcf4c5590f9abbeb378963b" xml:space="preserve">
     <value>Действует</value>
-  </data>
-  <data name="FilterPanel_Today_e38c185b441d4e179c3940aeefead89b" xml:space="preserve">
-    <value>Сегодня</value>
-  </data>
-  <data name="ControlGroup_72e492251e834e65bb33ea838a458e43" xml:space="preserve">
-    <value>Местонахождение</value>
-  </data>
-  <data name="Action_FindSignatureSetting" xml:space="preserve">
-    <value>Показать права подписи</value>
-  </data>
-  <data name="Action_FindSignatureSettingDescription" xml:space="preserve">
-    <value>Показать список всех прав подписи на основании данной доверенности</value>
-  </data>
-  <data name="Action_FindSignatureSettingHint" xml:space="preserve">
-    <value>Показать все права подписи</value>
   </data>
   <data name="FilterPanel_Registered_1fcb3ea054704a83bc54a10322f40105" xml:space="preserve">
     <value>Зарегистрирован</value>
@@ -183,37 +88,7 @@
   <data name="FilterPanel_Reserved_9652941628364b4ca3751d704487ffaf" xml:space="preserve">
     <value>Зарезервирован</value>
   </data>
-  <data name="FilterPanel_DraftState_ecf1ee8e08a94b07ac19350a5d38acee" xml:space="preserve">
-    <value>В разработке</value>
-  </data>
-  <data name="FilterPanel_ActiveState_6aedffecddee4c7488731990fa8aff80" xml:space="preserve">
-    <value>Действующий</value>
-  </data>
-  <data name="FilterPanel_ObsoleteState_46921fa1cdcf4181a9d5a4176773fc1a" xml:space="preserve">
-    <value>Устаревший</value>
-  </data>
-  <data name="Property_IssuedTo" xml:space="preserve">
-    <value>Кому выдана</value>
-  </data>
-  <data name="Action_FindActiveSignatureSetting" xml:space="preserve">
-    <value>Показать право подписи</value>
-  </data>
-  <data name="Action_FindActiveSignatureSettingDescription" xml:space="preserve">
-    <value>Показать право подписи</value>
-  </data>
-  <data name="Action_FindActiveSignatureSettingHint" xml:space="preserve">
-    <value>Показать право подписи</value>
-  </data>
   <data name="FilterPanel_ManualPeriod_e16ecd21eb4242928369defc66531763" xml:space="preserve">
     <value>В периоде:</value>
-  </data>
-  <data name="FilterPanel_ManualPeriodPOA_103254b98e1248158ce7a633e50f2a84" xml:space="preserve">
-    <value>В периоде:</value>
-  </data>
-  <data name="Ribbon_NavigationCommands_bb467a8c740248ab88a0dd1c64963ce5" xml:space="preserve">
-    <value>Навигация</value>
-  </data>
-  <data name="Property_DaysToFinishWorks" xml:space="preserve">
-    <value>Дней для завершения</value>
   </data>
 </root>

@@ -25,16 +25,18 @@
     {
       "NameGuid": "7cf02e77-fc04-4767-ae15-69e77c4ef8f5",
       "Name": "DoSuspended",
-      "ActionArea": "Card",
+      "ActionArea": "CardAndCollection",
       "GenerateHandler": true,
+      "IsMultiSelectAction": true,
       "LargeIconName": "Action_DoSuspended_large_7cf02e77fc044767ae1569e77c4ef8f5.png",
       "SmallIconName": "Action_DoSuspended_small_7cf02e77fc044767ae1569e77c4ef8f5.png"
     },
     {
       "NameGuid": "3f6d6998-4ec0-42e3-8118-c00737c97e1d",
       "Name": "Resume",
-      "ActionArea": "Card",
+      "ActionArea": "CardAndCollection",
       "GenerateHandler": true,
+      "IsMultiSelectAction": true,
       "LargeIconName": "Action_Resume_large_3f6d69984ec042e38118c00737c97e1d.png",
       "SmallIconName": "Action_Resume_small_3f6d69984ec042e38118c00737c97e1d.png"
     }
@@ -440,7 +442,10 @@
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DoSuspendedError",
+    "ResumeError"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "4cfe59dc-38a8-4c60-931c-b8f2c70288d3",
     "Name": "RibbonCard",
@@ -493,8 +498,34 @@
     "NameGuid": "901c4b3b-9ea0-4da7-b16a-386ca04d1c1b",
     "Name": "RibbonCollection",
     "Categories": [],
-    "Elements": [],
-    "Groups": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e2c0dd03-f166-4474-8f96-0a5803b570a9",
+        "Name": "DoSuspended",
+        "ActionGuid": "7cf02e77-fc04-4767-ae15-69e77c4ef8f5",
+        "Index": 0,
+        "ParentGuid": "18052cb4-3296-4e8c-81d1-d3da99991553"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "3e1c01ba-c1f5-4fd5-b931-b942d5d5a1aa",
+        "Name": "Resume",
+        "ActionGuid": "3f6d6998-4ec0-42e3-8118-c00737c97e1d",
+        "Index": 1,
+        "ParentGuid": "18052cb4-3296-4e8c-81d1-d3da99991553"
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "18052cb4-3296-4e8c-81d1-d3da99991553",
+        "Name": "ProcessingCommands",
+        "IconName": null,
+        "Index": 21,
+        "ParentGuid": "3a9d7dc2-d662-4966-9fdc-c8004b9c83e2",
+        "SmallIconName": null
+      }
+    ],
     "IsAncestorMetadata": true,
     "Pages": [],
     "Versions": []

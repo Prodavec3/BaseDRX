@@ -46,7 +46,11 @@ namespace Sungero.Docflow
     {
       e.DisableUiFiltering = true;
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      var signatories = Functions.OfficialDocument.GetSignatories(document).Select(s => s.EmployeeId).Distinct().ToList();
+      
+      if (Functions.OfficialDocument.SignatorySettingWithAllUsersExist(document))
+        return query;
+      
+      var signatories = Functions.OfficialDocument.GetSignatoriesIds(document);
       
       return query.Where(s => signatories.Contains(s.Id));
     }
@@ -64,6 +68,8 @@ namespace Sungero.Docflow
     {
       if (_obj.Result == Result.Approved)
         e.Result = ApprovalTasks.Resources.Endorsed;
+      else if (_obj.Result == Result.WithSuggestions)
+        e.Result = ApprovalTasks.Resources.EndorsedWithSuggestions;
       else
         e.Result = ApprovalTasks.Resources.ForRework;
     }

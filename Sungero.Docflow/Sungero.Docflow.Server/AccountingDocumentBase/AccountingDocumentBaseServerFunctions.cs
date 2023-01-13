@@ -9,12 +9,13 @@ using Sungero.Domain;
 namespace Sungero.Docflow.Server
 {
   partial class AccountingDocumentBaseFunctions
-  {    
-  
+  {
+    
     /// <summary>
     /// Получить права подписания финансовых документов.
     /// </summary>
     /// <returns>Список подходящих правил.</returns>
+    [Obsolete("Используйте метод GetSignatureSettingsQuery")]
     public override List<ISignatureSetting> GetSignatureSettings()
     {
       var basedSettings = base.GetSignatureSettings()
@@ -28,6 +29,25 @@ namespace Sungero.Docflow.Server
         basedSettings = basedSettings
           .Where(s => !s.Categories.Any() || s.Categories.Any(c => Equals(c.Category, category)))
           .ToList();
+      }
+      return basedSettings;
+    }
+    
+    /// <summary>
+    /// Получить права подписания финансовых документов.
+    /// </summary>
+    /// <returns>Список подходящих правил.</returns>
+    public override IQueryable<ISignatureSetting> GetSignatureSettingsQuery()
+    {
+      var basedSettings = base.GetSignatureSettingsQuery()
+        .Where(s => s.Limit == Docflow.SignatureSetting.Limit.NoLimit || (s.Limit == Docflow.SignatureSetting.Limit.Amount &&
+                                                                          s.Amount >= _obj.TotalAmount && Equals(s.Currency, _obj.Currency)));
+      
+      if (_obj.DocumentKind != null && _obj.DocumentKind.DocumentFlow == Docflow.DocumentKind.DocumentFlow.Contracts)
+      {
+        var category = Docflow.PublicFunctions.OfficialDocument.GetDocumentGroup(_obj);
+        basedSettings = basedSettings
+          .Where(s => !s.Categories.Any() || s.Categories.Any(c => Equals(c.Category, category)));
       }
       return basedSettings;
     }
@@ -132,25 +152,8 @@ namespace Sungero.Docflow.Server
     [Remote, Public]
     public virtual void GenerateDefaultAnswer(Company.IEmployee signatory, bool isAgent)
     {
-      IPowerOfAttorney signatoryPowerOfAttorney = null;
-      IPowerOfAttorney consigneePowerOfAttorney = null;
-      var signatoryOtherReason = string.Empty;
-      
-      var signaturesSettings = Functions.OfficialDocument.GetSignatureSettings(_obj, signatory);
-      var signaturesSettingWithDuties = signaturesSettings.Where(o => Equals(o.Reason, Docflow.SignatureSetting.Reason.Duties)).FirstOrDefault();
-      var signaturesSettingWithPowerOfAttorney = signaturesSettings.Where(o => Equals(o.Reason, Docflow.SignatureSetting.Reason.PowerOfAttorney)).FirstOrDefault();
-      var signaturesSettingWithOtherDocument = signaturesSettings.Where(o => Equals(o.Reason, Docflow.SignatureSetting.Reason.Other)).FirstOrDefault();
-
-      if (signaturesSettingWithDuties == null && _obj.FormalizedServiceType != FormalizedServiceType.Waybill)
-      {
-        if (signaturesSettingWithPowerOfAttorney != null)
-          signatoryPowerOfAttorney = Docflow.PowerOfAttorneys.As(signaturesSettingWithPowerOfAttorney.Document);
-        else if (signaturesSettingWithOtherDocument != null)
-          signatoryOtherReason = signaturesSettingWithOtherDocument.DocumentInfo;
-      }
-
-      var errorlist = Functions.AccountingDocumentBase.TitleDialogValidationErrors(_obj, signatory, null, signatoryPowerOfAttorney,
-                                                                                   consigneePowerOfAttorney, signatoryOtherReason, null);
+      var signatureSetting = Functions.OfficialDocument.GetDefaultSignatureSetting(_obj, signatory);
+      var errorlist = Functions.AccountingDocumentBase.TitleDialogValidationErrors(_obj, signatory, null, null, null, signatureSetting);
       var validationText = string.Join(Environment.NewLine, errorlist.Select(l => l.Text));
       if (errorlist.Any())
         throw AppliedCodeException.Create(validationText);
@@ -160,7 +163,7 @@ namespace Sungero.Docflow.Server
       if (_obj.FormalizedServiceType == Docflow.AccountingDocumentBase.FormalizedServiceType.GeneralTransfer && _obj.IsAdjustment == true)
         authority = Docflow.AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority_Register;
       
-      var basis = SignatureSettings.Info.Properties.Reason.GetLocalizedValue(Docflow.SignatureSetting.Reason.Duties);
+      var basis = Functions.Module.GetSigningReason(signatureSetting);
       var buyerTitle = Docflow.Structures.AccountingDocumentBase.BuyerTitle.Create();
       buyerTitle.ActOfDisagreement = string.Empty;
       buyerTitle.Signatory = signatory;
@@ -170,10 +173,9 @@ namespace Sungero.Docflow.Server
       buyerTitle.BuyerAcceptanceStatus = Exchange.ExchangeDocumentInfo.BuyerAcceptanceStatus.Accepted;
       buyerTitle.SignatoryPowers = authority;
       buyerTitle.AcceptanceDate = Calendar.Now;
-      buyerTitle.SignatoryPowerOfAttorney = signatoryPowerOfAttorney;
-      buyerTitle.SignatoryOtherReason = signatoryOtherReason;
-      buyerTitle.ConsigneePowerOfAttorney = consigneePowerOfAttorney;
+      buyerTitle.ConsigneePowerOfAttorney = null;
       buyerTitle.ConsigneeOtherReason = null;
+      buyerTitle.SignatureSetting = signatureSetting;
 
       this.GenerateAnswer(buyerTitle, isAgent);
     }
@@ -188,45 +190,63 @@ namespace Sungero.Docflow.Server
     /// <param name="signatoryOtherReason">Документ подписывающего.</param>
     /// <param name="consigneeOtherReason">Документ груз принявшего.</param>
     /// <returns>Список ошибок.</returns>
-    [Remote]
+    [Remote, Obsolete("Используйте TitleDialogValidationErrors без параметров доверенность подписывающего и документ подписывающего.")]
     public virtual List<Structures.AccountingDocumentBase.GenerateTitleError> TitleDialogValidationErrors(Company.IEmployee signatory,
                                                                                                           Company.IEmployee consignee,
-                                                                                                          IPowerOfAttorney signatoryPowerOfAttorney,
+                                                                                                          IPowerOfAttorneyBase signatoryPowerOfAttorney,
                                                                                                           IPowerOfAttorney consigneePowerOfAttorney,
                                                                                                           string signatoryOtherReason,
                                                                                                           string consigneeOtherReason)
     {
+      return this.TitleDialogValidationErrors(signatory, consignee, consigneePowerOfAttorney, consigneeOtherReason, null);
+    }
+    
+    /// <summary>
+    /// Валидация диалога заполнения титула.
+    /// </summary>
+    /// <param name="signatory">Подписал.</param>
+    /// <param name="consignee">Груз получил.</param>
+    /// <param name="consigneePowerOfAttorney">Доверенность груз принявшего.</param>
+    /// <param name="consigneeOtherReason">Документ груз принявшего.</param>
+    /// <param name="signatorySetting">Право подписи подписавшего.</param>
+    /// <returns>Список ошибок.</returns>
+    [Remote]
+    public virtual List<Structures.AccountingDocumentBase.GenerateTitleError> TitleDialogValidationErrors(Company.IEmployee signatory,
+                                                                                                          Company.IEmployee consignee,
+                                                                                                          IPowerOfAttorneyBase consigneePowerOfAttorney,
+                                                                                                          string consigneeOtherReason,
+                                                                                                          ISignatureSetting signatorySetting)
+    {
       var errorlist = new List<Structures.AccountingDocumentBase.GenerateTitleError>();
       var signatoryType = Constants.AccountingDocumentBase.GenerateTitleTypes.Signatory;
       var consigneeType = Constants.AccountingDocumentBase.GenerateTitleTypes.Consignee;
-      var signatoryPoAType = Constants.AccountingDocumentBase.GenerateTitleTypes.SignatoryPowerOfAttorney;
       var consigneePoAType = Constants.AccountingDocumentBase.GenerateTitleTypes.ConsigneePowerOfAttorney;
       
       if (string.IsNullOrEmpty(_obj.BusinessUnit.TIN))
         errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(null, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_TIN));
       
-      if (signatory != null && signatory.JobTitle == null)
+      if (signatorySetting != null && signatorySetting.JobTitle == null && signatory != null && signatory.JobTitle == null)
         errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(signatoryType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_SignatoryJobTitle));
       
-      if (consignee != null && consignee.JobTitle == null)
+      if (consignee != null && consignee != signatory && consignee.JobTitle == null)
         errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(consigneeType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_ConsigneeJobTitle));
       
-      if (signatoryPowerOfAttorney != null && (signatoryPowerOfAttorney.RegistrationDate == null || string.IsNullOrWhiteSpace(signatoryPowerOfAttorney.RegistrationNumber)))
-        errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(signatoryPoAType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_AttorneyRegistration));
-      
-      if (signatoryPowerOfAttorney != null && signatoryPowerOfAttorney.OurSignatory.JobTitle == null)
-        errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(signatoryPoAType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_AttorneyJobTitle));
-      
-      if (consigneePowerOfAttorney != null && (consigneePowerOfAttorney.RegistrationDate == null || string.IsNullOrWhiteSpace(consigneePowerOfAttorney.RegistrationNumber)))
-        errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(consigneePoAType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_AttorneyRegistration));
-      
-      if (consigneePowerOfAttorney != null && consigneePowerOfAttorney.OurSignatory.JobTitle == null)
-        errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(consigneePoAType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_AttorneyJobTitle));
+      if (consigneePowerOfAttorney != null)
+      {
+        var number = string.Empty;
+        if (Docflow.FormalizedPowerOfAttorneys.Is(consigneePowerOfAttorney))
+          number = Docflow.FormalizedPowerOfAttorneys.As(consigneePowerOfAttorney).UnifiedRegistrationNumber;
+        else
+          number = consigneePowerOfAttorney.RegistrationNumber;
+        
+        if (consigneePowerOfAttorney.RegistrationDate == null || string.IsNullOrWhiteSpace(number))
+          errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(consigneePoAType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_AttorneyRegistration));
+        
+        if (consigneePowerOfAttorney.OurSignatory != null && consigneePowerOfAttorney.OurSignatory.JobTitle == null)
+          errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(consigneePoAType, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_AttorneyJobTitle));
+      }
       
       if (_obj.FormalizedServiceType == FormalizedServiceType.Waybill && !string.IsNullOrWhiteSpace(consigneeOtherReason))
-        errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(null, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_OtherDocument));
-      
-      if (_obj.FormalizedServiceType == FormalizedServiceType.Act && !string.IsNullOrWhiteSpace(signatoryOtherReason))
         errorlist.Add(Structures.AccountingDocumentBase.GenerateTitleError.Create(null, AccountingDocumentBases.Resources.PropertiesFillingDialog_Error_OtherDocument));
       
       return errorlist;
@@ -239,40 +259,23 @@ namespace Sungero.Docflow.Server
     [Remote, Public]
     public virtual void GenerateDefaultSellerTitle(Sungero.Company.IEmployee signatory)
     {
-      // Основание: Должностные обязанности.
-      var powerBase = SignatureSettings.Info.Properties.Reason.GetLocalizedValue(Docflow.SignatureSetting.Reason.Duties);
+      var signatureSetting = Functions.OfficialDocument.GetDefaultSignatureSetting(_obj, signatory);
+      var errorList = Functions.AccountingDocumentBase.TitleDialogValidationErrors(_obj, signatory, null, null, null, signatureSetting);
+      var validationText = string.Join(Environment.NewLine, errorList.Select(l => l.Text));
+      if (errorList.Any())
+        throw AppliedCodeException.Create(validationText);
+      
       // Полномочия: Лицо, совершившее сделку и отв. за оформление.
       var power = Docflow.AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority_DealAndRegister;
       // Для УКД: Лицо, ответственное за оформление свершившегося события.
       if (_obj.FormalizedServiceType == Docflow.AccountingDocumentBase.FormalizedServiceType.GeneralTransfer && _obj.IsAdjustment == true)
         power = Docflow.AccountingDocumentBases.Resources.PropertiesFillingDialog_HasAuthority_Register;
-      // Доверенность.
-      IPowerOfAttorney signatoryPowerOfAttorney = null;
-      // Другой документ.
-      var signatoryOtherReason = string.Empty;
       
-      var signaturesSettings = Functions.OfficialDocument.GetSignatureSettings(_obj, signatory);
-      var signaturesSettingWithDuties = signaturesSettings.Where(o => Equals(o.Reason, Docflow.SignatureSetting.Reason.Duties)).FirstOrDefault();
-      var signaturesSettingWithPowerOfAttorney = signaturesSettings.Where(o => Equals(o.Reason, Docflow.SignatureSetting.Reason.PowerOfAttorney)).FirstOrDefault();
-      var signaturesSettingWithOtherDocument = signaturesSettings.Where(o => Equals(o.Reason, Docflow.SignatureSetting.Reason.Other)).FirstOrDefault();
-
-      if (signaturesSettingWithDuties == null && _obj.FormalizedServiceType != FormalizedServiceType.Waybill)
-      {
-        if (signaturesSettingWithPowerOfAttorney != null)
-          signatoryPowerOfAttorney = Docflow.PowerOfAttorneys.As(signaturesSettingWithPowerOfAttorney.Document);
-        else if (signaturesSettingWithOtherDocument != null)
-          signatoryOtherReason = signaturesSettingWithOtherDocument.DocumentInfo;
-      }
-      
-      var errorList = Functions.AccountingDocumentBase.TitleDialogValidationErrors(_obj, signatory, null,
-                                                                                   signatoryPowerOfAttorney, null,
-                                                                                   signatoryOtherReason, null);
-      var validationText = string.Join(Environment.NewLine, errorList.Select(l => l.Text));
-      if (errorList.Any())
-        throw AppliedCodeException.Create(validationText);
-      
-      var sellerTitle = Docflow.Structures.AccountingDocumentBase.SellerTitle
-        .Create(signatory, powerBase, power, signatoryPowerOfAttorney, signatoryOtherReason);
+      var sellerTitle = Docflow.Structures.AccountingDocumentBase.SellerTitle.Create();
+      sellerTitle.Signatory = signatory;
+      sellerTitle.SignatoryPowersBase = SignatureSettings.Info.Properties.Reason.GetLocalizedValue(signatureSetting.Reason);
+      sellerTitle.SignatoryPowers = power;
+      sellerTitle.SignatureSetting = signatureSetting;
 
       Functions.AccountingDocumentBase.GenerateSellerTitle(_obj, sellerTitle);
     }
@@ -304,5 +307,20 @@ namespace Sungero.Docflow.Server
       return string.Empty;
     }
 
+    /// <summary>
+    /// Проверить, связан ли документ специализированной связью.
+    /// </summary>
+    /// <returns>True - если связан, иначе - false.</returns>
+    [Remote(IsPure = true)]
+    public override bool HasSpecifiedTypeRelations()
+    {
+      var hasSpecifiedTypeRelations = false;
+      AccessRights.AllowRead(
+        () =>
+        {
+          hasSpecifiedTypeRelations = AccountingDocumentBases.GetAll().Any(x => Equals(x.Corrected, _obj));
+        });
+      return base.HasSpecifiedTypeRelations() || hasSpecifiedTypeRelations;
+    }
   }
 }

@@ -26,12 +26,14 @@ namespace Sungero.Docflow
       _obj.State.Properties.AddresseeDeadline.IsEnabled = _obj.Addressee != null;
       _obj.State.Properties.AddresseeDeadline.IsRequired = _obj.Deadline.HasValue && _obj.Addressee != null;
       
+      var canReadDocument = Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
       var schemeVersion = _obj.Task.GetStartedSchemeVersion();
-      if (schemeVersion == LayerSchemeVersions.V1 || schemeVersion == LayerSchemeVersions.V2)
-      {
-        _obj.State.Properties.Addressee.IsVisible = false;
-        _obj.State.Properties.AddresseeDeadline.IsVisible = false;
-      }
+      var oldVersion = schemeVersion == LayerSchemeVersions.V1 || schemeVersion == LayerSchemeVersions.V2;
+      _obj.State.Properties.Addressee.IsVisible = !oldVersion && canReadDocument;
+      _obj.State.Properties.AddresseeDeadline.IsVisible = !oldVersion && canReadDocument;
+      
+      if (!canReadDocument)
+        e.AddError(Docflow.Resources.NoRightsToDocument);
     }
 
     public virtual void AddresseeDeadlineValueInput(Sungero.Presentation.DateTimeValueInputEventArgs e)

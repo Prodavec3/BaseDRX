@@ -66,7 +66,40 @@ namespace Sungero.Docflow
       
       // Для Входящих документов эл. обмена мапим Контрагента в Корреспондента.
       if (ExchangeDocuments.Is(_source))
+      {
         e.Map(_info.Properties.Correspondent, ExchangeDocuments.Info.Properties.Counterparty);
+      }
+      else
+      {
+        var counterparty = Exchange.PublicFunctions.ExchangeDocumentInfo.GetDocumentCounterparty(_source, _source.LastVersion);
+        if (counterparty != null)
+        {
+          var incomingDocument = IncomingDocumentBases.As(e.Entity);
+          incomingDocument.Correspondent = counterparty;
+        }
+      }
+      
+      // При смене типа с вх. документа эл. обмена, а также с финансовых и договорных документов
+      // дополнить примечание информацией об основании подписания со стороны контрагента.
+      var sourceOfficialDocument = OfficialDocuments.As(_source);
+      if (sourceOfficialDocument != null)
+      {
+        var note = sourceOfficialDocument.Note;
+        
+        // Получить основание подписания со стороны контрагента.
+        var counterpartySigningReason = Docflow.PublicFunctions.OfficialDocument.GetCounterpartySigningReason(sourceOfficialDocument);
+        if (!string.IsNullOrWhiteSpace(counterpartySigningReason))
+        {
+          if (!string.IsNullOrWhiteSpace(note))
+            note += Environment.NewLine;
+          
+          note += SimpleDocuments.Resources.CounterpartySigningReasonTitleFormat(counterpartySigningReason);
+        }
+        
+        e.Map(_info.Properties.Note, note);
+      }
+      
+      e.Without(Sungero.Docflow.Addendums.Info.Properties.LeadingDocument);
     }
   }
 

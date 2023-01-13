@@ -247,5 +247,19 @@ namespace Sungero.Contracts.Shared
       // если она изменилась в вызове текущего метода в базовой сущности.
       _obj.State.Properties.LeadingDocument.IsRequired = isVisualMode;
     }
+    
+    /// <summary>
+    /// Заполнить свойство "Ведущий документ" в зависимости от типа документа.
+    /// </summary>
+    /// <param name="leadingDocument">Ведущий документ.</param>
+    /// <remarks>Используется при смене типа.</remarks>
+    public override void FillLeadingDocument(Docflow.IOfficialDocument leadingDocument)
+    {
+      var contract = ContractBases.As(leadingDocument);
+      if (contract != null && (_obj.Counterparty == null || Equals(_obj.Counterparty, contract.Counterparty)))
+        _obj.LeadingDocument = contract;
+      else
+        _obj.LeadingDocument = null;
+    }
   }
 }

@@ -107,5 +107,22 @@ namespace Sungero.Company.Shared
       var coefficient12 = new int[] { 3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8 };
       return tin.Length == 10 ? CheckTinSum(tin, coefficient10) : (CheckTinSum(tin, coefficient11) && CheckTinSum(tin, coefficient12));
     }
+    
+    /// <summary>
+    /// Получить JSON-строку для индексирования в поисковой системе.
+    /// </summary>
+    /// <returns>JSON-строка.</returns>
+    public virtual string GetIndexingJson()
+    {
+      return string.Format(Constants.BusinessUnit.ElasticsearchIndexTemplate,
+                           _obj.Id,
+                           Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.LegalName),
+                           Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(_obj.Name),
+                           _obj.TIN,
+                           _obj.TRRC,
+                           _obj.PSRN,
+                           Sungero.Core.Calendar.Now.ToString("dd.MM.yyyy HH:mm:ss"),
+                           _obj.Status.Value.Value);
+    }
   }
 }

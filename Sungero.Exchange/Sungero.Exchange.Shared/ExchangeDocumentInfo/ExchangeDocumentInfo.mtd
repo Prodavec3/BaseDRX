@@ -810,6 +810,23 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "GetDocumentBusinessUnit",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Content.IElectronicDocument",
+          "ParameterTypeFullName": "Sungero.Content.IElectronicDocument, Sungero.Content.Shared"
+        },
+        {
+          "Name": "version",
+          "ParameterType": "global::Sungero.Content.IElectronicDocumentVersions",
+          "ParameterTypeFullName": "Sungero.Content.IElectronicDocumentVersions, Sungero.Content.Shared"
+        }
+      ],
+      "ReturnType": "global::Sungero.Company.IBusinessUnit",
+      "ReturnTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+    },
+    {
       "Name": "GetDocumentCounterparties",
       "Parameters": [
         {
@@ -820,6 +837,23 @@
       ],
       "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Parties.ICounterparty>",
       "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetDocumentCounterparty",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Content.IElectronicDocument",
+          "ParameterTypeFullName": "Sungero.Content.IElectronicDocument, Sungero.Content.Shared"
+        },
+        {
+          "Name": "version",
+          "ParameterType": "global::Sungero.Content.IElectronicDocumentVersions",
+          "ParameterTypeFullName": "Sungero.Content.IElectronicDocumentVersions, Sungero.Content.Shared"
+        }
+      ],
+      "ReturnType": "global::Sungero.Parties.ICounterparty",
+      "ReturnTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
     },
     {
       "Name": "GetExDocumentInfoByExternalId",
@@ -884,6 +918,22 @@
       "Placement": "Shared",
       "ReturnType": "global::Sungero.Exchange.IExchangeDocumentInfo",
       "ReturnTypeFullName": "Sungero.Exchange.IExchangeDocumentInfo, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetSigningOrganizationInfo",
+      "Parameters": [
+        {
+          "Name": "exchangeDocumentInfo",
+          "ParameterType": "global::Sungero.Exchange.IExchangeDocumentInfo",
+          "ParameterTypeFullName": "Sungero.Exchange.IExchangeDocumentInfo, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "signature",
+          "ParameterType": "Sungero.Domain.Shared.ISignature"
+        }
+      ],
+      "ReturnType": "global::Sungero.Exchange.Structures.Module.IOrganizationInfo",
+      "ReturnTypeFullName": "Sungero.Exchange.Structures.Module.IOrganizationInfo"
     },
     {
       "Name": "LastVersionSended",

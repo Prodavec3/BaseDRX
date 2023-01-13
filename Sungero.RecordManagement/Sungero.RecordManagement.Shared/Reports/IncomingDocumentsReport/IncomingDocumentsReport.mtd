@@ -73,6 +73,11 @@
       "InternalDataTypeName": "System.String",
       "IsRequired": true,
       "Versions": []
+    },
+    {
+      "NameGuid": "c7281f1e-cd00-4512-b64b-3ba23345b1d7",
+      "Name": "AllIncomingDocumentsIdsTableName",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],

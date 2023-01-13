@@ -20,6 +20,8 @@ namespace Sungero.RecordManagement
         e.Result = ReviewManagerAssignments.Resources.AssignmentCreated;
       if (_obj.Result.Value == Result.Forward)
         e.Result = DocumentReviewTasks.Resources.ForwardFormat(Company.PublicFunctions.Employee.GetShortName(_obj.Addressee, DeclensionCase.Dative, true));
+      if (_obj.Result.Value == Result.ForRework)
+        e.Result = ReviewDraftResolutionAssignments.Resources.ReworkResolution;
     }
   }
 }

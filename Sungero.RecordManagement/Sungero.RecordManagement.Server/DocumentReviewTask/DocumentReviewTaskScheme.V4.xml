@@ -435,12 +435,12 @@
           </Location>
           <Size>
             <Width>250</Width>
-            <Height>70</Height>
+            <Height>70.000000000000057</Height>
           </Size>
           <X>-364.98272440944896</X>
           <Y>477.45210827716477</Y>
           <Width>250</Width>
-          <Height>70</Height>
+          <Height>70.000000000000057</Height>
         </Bounds>
       </BlockLayout>
       <BlockLayout>
@@ -502,12 +502,12 @@
             <Y>1196.7506682771646</Y>
           </Location>
           <Size>
-            <Width>250</Width>
+            <Width>250.00000000000006</Width>
             <Height>70</Height>
           </Size>
           <X>427.18199999999996</X>
           <Y>1196.7506682771646</Y>
-          <Width>250</Width>
+          <Width>250.00000000000006</Width>
           <Height>70</Height>
         </Bounds>
       </BlockLayout>
@@ -571,12 +571,12 @@
           </Location>
           <Size>
             <Width>250</Width>
-            <Height>70</Height>
+            <Height>70.000000000000028</Height>
           </Size>
           <X>712.06199999999967</X>
           <Y>197.4521082771648</Y>
           <Width>250</Width>
-          <Height>70</Height>
+          <Height>70.000000000000028</Height>
         </Bounds>
       </BlockLayout>
       <BlockLayout>
@@ -588,12 +588,12 @@
           </Location>
           <Size>
             <Width>250</Width>
-            <Height>70</Height>
+            <Height>70.000000000000057</Height>
           </Size>
           <X>712.06199999999967</X>
           <Y>477.45210827716477</Y>
           <Width>250</Width>
-          <Height>70</Height>
+          <Height>70.000000000000057</Height>
         </Bounds>
       </BlockLayout>
       <BlockLayout>
@@ -622,12 +622,12 @@
           </Location>
           <Size>
             <Width>70</Width>
-            <Height>109</Height>
+            <Height>109.00000000000006</Height>
           </Size>
           <X>463.78199999999981</X>
           <Y>477.45210827716477</Y>
           <Width>70</Width>
-          <Height>109</Height>
+          <Height>109.00000000000006</Height>
         </Bounds>
       </BlockLayout>
       <BlockLayout>
@@ -656,12 +656,12 @@
           </Location>
           <Size>
             <Width>70</Width>
-            <Height>109</Height>
+            <Height>109.00000000000003</Height>
           </Size>
           <X>545.279</X>
           <Y>197.4521082771648</Y>
           <Width>70</Width>
-          <Height>109</Height>
+          <Height>109.00000000000003</Height>
         </Bounds>
       </BlockLayout>
       <BlockLayout>
@@ -1319,7 +1319,7 @@
         <Points>
           <Point>
             <X>962.06199999999967</X>
-            <Y>232.4521082771648</Y>
+            <Y>232.45210827716483</Y>
           </Point>
           <Point>
             <X>999.8572755905509</X>
@@ -1352,7 +1352,7 @@
         </Points>
         <StartPoint>
           <X>962.06199999999967</X>
-          <Y>232.4521082771648</Y>
+          <Y>232.45210827716483</Y>
         </StartPoint>
       </EdgeLayout>
       <EdgeLayout>
@@ -1476,7 +1476,7 @@
         <EdgeId>26</EdgeId>
         <EndPoint>
           <X>712.06199999999967</X>
-          <Y>232.4521082771648</Y>
+          <Y>232.45210827716483</Y>
         </EndPoint>
         <OriginAnchor>8</OriginAnchor>
         <Points>
@@ -1498,7 +1498,7 @@
           </Point>
           <Point>
             <X>712.06199999999967</X>
-            <Y>232.4521082771648</Y>
+            <Y>232.45210827716483</Y>
           </Point>
         </Points>
         <StartPoint>

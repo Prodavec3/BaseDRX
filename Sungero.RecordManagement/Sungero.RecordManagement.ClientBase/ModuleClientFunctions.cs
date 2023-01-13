@@ -159,7 +159,7 @@ namespace Sungero.RecordManagement.Client
         return true;
       
       var hasDraftSubActionItem = Functions.ActionItemExecutionTask.Remote.HasSubActionItems(assignment.Task, Workflow.Task.Status.Draft, reviewTask.Addressee);
-      e.AddError(hasDraftSubActionItem ? Docflow.Resources.AllCreatedActionItemsShouldBeStarted : Docflow.Resources.CreatedActionItemExecutionNeeded);
+      e.AddError(hasDraftSubActionItem ? Docflow.Resources.AllCreatedActionItemsShouldBeStarted : Resources.NeedCreatedActionItemExecutionFromAdressee);
       e.Cancel();
       return true;
     }

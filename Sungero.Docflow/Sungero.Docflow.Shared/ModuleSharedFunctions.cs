@@ -472,7 +472,7 @@ namespace Sungero.Docflow.Shared
     /// <param name="group">Группа вложения задачи.</param>
     /// <param name="document">Документ.</param>
     [Public]
-    public static void SynchronizeAddendaAndAttachmentsGroup(Sungero.Workflow.Interfaces.IWorkflowEntityAttachmentGroup group, IElectronicDocument document)
+    public virtual void SynchronizeAddendaAndAttachmentsGroup(Sungero.Workflow.Interfaces.IWorkflowEntityAttachmentGroup group, IElectronicDocument document)
     {
       if (document == null)
       {
@@ -481,10 +481,16 @@ namespace Sungero.Docflow.Shared
         return;
       }
 
-      var documentAddenda = document.Relations.GetRelated(Docflow.Constants.Module.AddendumRelationName);
+      // Получить все неустаревшие приложения документа.
+      var documentAddenda = document.Relations.GetRelated(Docflow.Constants.Module.AddendumRelationName)
+        .Where(x => OfficialDocuments.Is(x) &&
+               !Docflow.PublicFunctions.OfficialDocument.IsObsolete(OfficialDocuments.As(x)));
+      
+      // Удалить лишние приложения задачи.
       foreach (var addendum in group.All.Select(e => ElectronicDocuments.As(e)).Where(d => d != null && !documentAddenda.Contains(d)))
         group.All.Remove(addendum);
       
+      // Добавить в задачу недостающие приложения из документа.
       var newAddenda = documentAddenda.Where(d => !group.All.Contains(d)).ToList();
       foreach (var addendum in newAddenda)
         group.All.Add(addendum);
@@ -495,13 +501,17 @@ namespace Sungero.Docflow.Shared
     /// </summary>
     /// <param name="document">Документ.</param>
     /// <returns>Документы, связанные типом связи "Приложение".</returns>
+    /// <remarks>Возвращает только не устаревшие документы.</remarks>
     [Public]
     public virtual List<IElectronicDocument> GetAddenda(IElectronicDocument document)
     {
-      return document.Relations.GetRelated(Docflow.Constants.Module.AddendumRelationName)
-        .Where(x => ElectronicDocuments.Is(x))
-        .Select(x => ElectronicDocuments.As(x))
-        .ToList();
+      var result = document.Relations.GetRelated(Docflow.Constants.Module.AddendumRelationName)
+        .Where(x => OfficialDocuments.Is(x))
+        .Select(x => OfficialDocuments.As(x))
+        .Where(x => !Functions.OfficialDocument.IsObsolete(x))
+        .Select(x => ElectronicDocuments.As(x));
+      
+      return result.ToList();
     }
     
     #region TrimSpecialSymbols, TrimQuotes
@@ -960,6 +970,75 @@ namespace Sungero.Docflow.Shared
     #region Работа с историей
     
     /// <summary>
+    /// Получить список документов, удаленных из группы "Приложения" в заданиях.
+    /// </summary>
+    /// <param name="task">Задача.</param>
+    /// <param name="groupId">ИД группы вложений.</param>
+    /// <returns>Список документов.</returns>
+    [Public]
+    public virtual List<IElectronicDocument> GetRemovedAddendaFromAssignments(Sungero.Workflow.ITask task, Guid groupId)
+    {
+      var removedAddenda = new List<IElectronicDocument>();
+      if (task == null)
+        return removedAddenda;
+      
+      var addendaHistory = Functions.Module.Remote.GetAttachmentHistoryEntriesByGroupId(task, groupId);
+      var removedFromHistoryIds = addendaHistory.Removed
+        .Select(x => x.DocumentId)
+        .Distinct()
+        .ToList();
+      foreach (var id in removedFromHistoryIds)
+      {
+        var lastAddedDate = Docflow.Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Added, id);
+        var lastRemovedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Removed, id);
+        
+        if (lastRemovedDate.HasValue && (!lastAddedDate.HasValue || lastRemovedDate.Value > lastAddedDate.Value))
+        {
+          var attachment = Functions.Module.Remote.GetElectronicDocumentById(id);
+          if (attachment == null)
+            continue;
+          removedAddenda.Add(attachment);
+        }
+      }
+      
+      return removedAddenda;
+    }
+    
+    /// <summary>
+    /// Получить список документов, добавленных в группу "Приложения" в заданиях.
+    /// </summary>
+    /// <param name="task">Задача.</param>
+    /// <param name="groupId">ИД группы вложений.</param>
+    /// <returns>Список документов.</returns>
+    [Public]
+    public virtual List<IElectronicDocument> GetAddedAddendaFromAssignments(Sungero.Workflow.ITask task, Guid groupId)
+    {
+      var addedAddenda = new List<IElectronicDocument>();
+      
+      var addendaHistory = Functions.Module.Remote.GetAttachmentHistoryEntriesByGroupId(task, groupId);
+      var addedAttachmentIds = addendaHistory.Added
+        .Select(x => x.DocumentId)
+        .Distinct()
+        .ToList();
+      
+      foreach (var id in addedAttachmentIds)
+      {
+        var lastAddedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Added, id);
+        var lastRemovedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Removed, id);
+
+        if (lastAddedDate.HasValue && (!lastRemovedDate.HasValue || lastAddedDate.Value > lastRemovedDate.Value))
+        {
+          var attachment = Functions.Module.Remote.GetElectronicDocumentById(id);
+          if (attachment == null)
+            continue;
+          addedAddenda.Add(attachment);
+        }
+      }
+      
+      return addedAddenda;
+    }
+    
+    /// <summary>
     /// Получить структурированный список операций с вложениями по записям из истории.
     /// </summary>
     /// <param name="history">Записи истории.</param>
@@ -1003,6 +1082,7 @@ namespace Sungero.Docflow.Shared
     /// </summary>
     /// <param name="comment">Строка, содержащая комментарий из истории.</param>
     /// <returns>ИД документа или null, если ИД не удалось получить.</returns>
+    [Public]
     public virtual int? GetDocumentIdFromHistoryComment(string comment)
     {
       if (string.IsNullOrWhiteSpace(comment))
@@ -1024,6 +1104,7 @@ namespace Sungero.Docflow.Shared
     /// </summary>
     /// <param name="comment">Строка, содержащая комментарий из истории.</param>
     /// <returns>ИД группы вложений документа или null, если ИД не удалось получить.</returns>
+    [Public]
     public virtual Guid? GetAttachmentGroupIdFromHistoryComment(string comment)
     {
       if (string.IsNullOrWhiteSpace(comment))
@@ -1062,5 +1143,87 @@ namespace Sungero.Docflow.Shared
     }
     
     #endregion
+    
+    /// <summary>
+    /// Добавить в начало текста метку, указывающую на то, что задание было согласовано с замечаниями.
+    /// </summary>
+    /// <param name="text">Текст.</param>
+    /// <returns>Текст с меткой.</returns>
+    public virtual string AddApproveWithSuggestionsMark(string text)
+    {
+      var mark = this.GetApproveWithSuggestionsMark();
+      return string.Concat(mark, text);
+    }
+
+    /// <summary>
+    /// Удалить из начала текста метку, указывающую на то, что задание было согласовано с замечаниями.
+    /// </summary>
+    /// <param name="text">Текст.</param>
+    /// <returns>Текст без метки.</returns>
+    public virtual string RemoveApproveWithSuggestionsMark(string text)
+    {
+      if (string.IsNullOrEmpty(text) || !this.HasApproveWithSuggestionsMark(text))
+        return text;
+      
+      var mark = this.GetApproveWithSuggestionsMark();
+      // Удалить только первое вхождение метки. GetApproveWithSuggestionsMark проверяет наличие метки в начале текста.
+      return text.Remove(0, mark.Length);
+    }
+    
+    /// <summary>
+    /// Проверить, что в начале текста присутствует метка, указывающая на то, что задание было согласовано с замечаниями.
+    /// </summary>
+    /// <param name="text">Текст.</param>
+    /// <returns>True - если метка в начале текста есть, иначе - false.</returns>
+    public virtual bool HasApproveWithSuggestionsMark(string text)
+    {
+      if (string.IsNullOrEmpty(text))
+        return false;
+      
+      var mark = this.GetApproveWithSuggestionsMark();
+      // 185042 Используется данная перегрузка для корректной работы под Linux.
+      return text.StartsWith(mark, StringComparison.OrdinalIgnoreCase);
+    }
+    
+    /// <summary>
+    /// Получить метку, указывающую на то, что задание было согласовано с замечаниями.
+    /// </summary>
+    /// <returns>Метка.</returns>
+    public virtual string GetApproveWithSuggestionsMark()
+    {
+      var zeroWidthSpace = Constants.Module.ZeroWidthSpace;
+      return new string(new char[] { zeroWidthSpace, zeroWidthSpace, zeroWidthSpace });
+    }
+    
+    /// <summary>
+    /// Получить основание подписания из права подписи.
+    /// </summary>
+    /// <param name="signatureSetting">Право подписи.</param>
+    /// <returns>Основание подписания.</returns>
+    [Public, Obsolete("Используйте метод GetSigningReason.")]
+    public virtual string GetPowersBase(Docflow.ISignatureSetting signatureSetting)
+    {
+      if (signatureSetting == null)
+        return string.Empty;
+      var powersBase = this.GetSigningReason(signatureSetting);
+      powersBase = PublicFunctions.Module.CutText(powersBase, Constants.AccountingDocumentBase.PowersBaseConsigneeMaxLength);
+      return powersBase;
+    }
+    
+    /// <summary>
+    /// Получить основание подписания из права подписи.
+    /// </summary>
+    /// <param name="signatureSetting">Право подписи.</param>
+    /// <returns>Основание подписания.</returns>
+    [Public]
+    public virtual string GetSigningReason(Docflow.ISignatureSetting signatureSetting)
+    {
+      if (signatureSetting == null)
+        return string.Empty;
+      var signingReason = signatureSetting.Reason == Docflow.SignatureSetting.Reason.Duties
+        ? Docflow.SignatureSettings.Info.Properties.Reason.GetLocalizedValue(Docflow.SignatureSetting.Reason.Duties)
+        : signatureSetting.SigningReason;
+      return signingReason;
+    }
   }
 }

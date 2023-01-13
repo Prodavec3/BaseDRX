@@ -53,8 +53,10 @@ namespace Sungero.Docflow
             settingType = _obj.RegistrationState == RegistrationState.Registered ?
               Docflow.RegistrationSetting.SettingType.Registration :
               Docflow.RegistrationSetting.SettingType.Reservation;
-          var documentRegisters = Functions.RegistrationSetting.GetAvailableSettingsByParams(settingType, _obj.BusinessUnit, e.NewValue, _obj.Department).Select(s => s.DocumentRegister).ToList();
-          if (!documentRegisters.Contains(_obj.DocumentRegister))
+
+          var hasRegistrationSetting = Functions.RegistrationSetting.GetAvailableSettingsByParams(settingType, _obj.BusinessUnit, e.NewValue, _obj.Department)
+              .Any(s => Equals(s.DocumentRegister, _obj.DocumentRegister));
+          if (!hasRegistrationSetting)
             e.AddError(AccountingDocumentBases.Resources.NeedCancelRegistrationToChangeKind);
         }
       }

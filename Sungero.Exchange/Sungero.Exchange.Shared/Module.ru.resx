@@ -454,4 +454,16 @@
   <data name="OneOrMoreDocumentAlreadyProcessing" xml:space="preserve">
     <value>Часть документов не требуют подписания, либо по ним уже отправлен ответ контрагенту.</value>
   </data>
+  <data name="SbisFormalizedPoALinkTitle" xml:space="preserve">
+    <value>Дов. № {0}</value>
+  </data>
+  <data name="CounterpartyPowerOfAttorney" xml:space="preserve">
+    <value>Доверенность № {0} ({1})</value>
+  </data>
+  <data name="SigningReasonDisplayValue" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="NoRightsForDocument" xml:space="preserve">
+    <value>Для отправки документа через сервис обмена необходимы права на его изменение.</value>
+  </data>
 </root>

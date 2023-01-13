@@ -25,16 +25,6 @@ namespace Sungero.Contracts.Client
   partial class IncomingInvoiceActions
   {
 
-    public override void ChangeDocumentType(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      base.ChangeDocumentType(e);
-    }
-
-    public override bool CanChangeDocumentType(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return _obj.VerificationState == VerificationState.InProcess && base.CanChangeDocumentType(e);
-    }
-
     public virtual void ShowDuplicates(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var duplicates = Functions.IncomingInvoice.Remote.GetDuplicates(_obj,

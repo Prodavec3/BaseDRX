@@ -7,6 +7,25 @@ using Sungero.Docflow.OutgoingDocumentBase;
 
 namespace Sungero.Docflow
 {
+  partial class OutgoingDocumentBaseConvertingFromServerHandler
+  {
+
+    public override void ConvertingFrom(Sungero.Domain.ConvertingFromEventArgs e)
+    {
+      base.ConvertingFrom(e);
+      
+      e.Without(Sungero.Docflow.Addendums.Info.Properties.LeadingDocument);
+      
+      var counterparty = Exchange.PublicFunctions.ExchangeDocumentInfo.GetDocumentCounterparty(_source, _source.LastVersion);
+      if (counterparty != null)
+      {
+        var outgoingDocument = OutgoingDocumentBases.As(e.Entity);
+        outgoingDocument.IsManyAddressees = false;
+        outgoingDocument.Correspondent = counterparty;
+      }
+    }
+  }
+
   partial class OutgoingDocumentBaseCreatingFromServerHandler
   {
 

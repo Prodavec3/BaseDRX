@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -7,6 +7,7 @@ using Sungero.Docflow.ApprovalRuleBase;
 
 namespace Sungero.Docflow.Server
 {
+
   partial class StoragePolicyFolderHandlers
   {
 
@@ -23,10 +24,10 @@ namespace Sungero.Docflow.Server
         query = query.Where(r => !r.DocumentKinds.Any() || r.DocumentKinds.Any(u => Equals(u.DocumentKind, _filter.DocumentKind)));
       
       if (_filter.StoragePolicy || _filter.RetentionPolicy)
-        query = query.Where(r => StoragePolicies.Is(r) && _filter.StoragePolicy || 
+        query = query.Where(r => StoragePolicies.Is(r) && _filter.StoragePolicy ||
                             RetentionPolicies.Is(r) && _filter.RetentionPolicy);
 
-      return query;  
+      return query;
     }
   }
 
@@ -55,7 +56,7 @@ namespace Sungero.Docflow.Server
         query = query.Where(r => !r.DocumentKinds.Any() || r.DocumentKinds.Any(u => Equals(u.DocumentKind, _filter.DocumentKind)));
       }
       
-      return query;    
+      return query;
     }
 
     public virtual IQueryable<Sungero.Docflow.IDocumentKind> ApprovalRulesDocumentKindFiltering(IQueryable<Sungero.Docflow.IDocumentKind> query)
@@ -63,5 +64,5 @@ namespace Sungero.Docflow.Server
       var sendAction = Functions.Module.GetSendAction(OfficialDocuments.Info.Actions.SendForApproval);
       return query.Where(d => d.AvailableActions.Any(a => Equals(a.Action, sendAction)));
     }
-  }  
+  }
 }

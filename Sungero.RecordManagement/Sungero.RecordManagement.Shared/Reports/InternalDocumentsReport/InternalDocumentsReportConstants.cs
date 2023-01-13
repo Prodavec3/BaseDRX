@@ -6,5 +6,7 @@ namespace Sungero.RecordManagement.Constants
   {
     // Код диалога.
     public const string HelpCode = "Sungero_RecMan_DocumentsReportDialog";
+    
+    public const string SourceTableName = "Sungero_Reports_InternalDocuments";
   }
 }

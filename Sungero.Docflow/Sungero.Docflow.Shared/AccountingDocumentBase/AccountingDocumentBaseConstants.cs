@@ -16,6 +16,14 @@ namespace Sungero.Docflow.Constants
     public const int ExportedFilesCountMaxLimit = 5000;
     // Максимальная сумма размеров файлов в выгружаемом zip архиве в веб.
     public const int ExportedFilesSizeMaxLimitMb = 450;
+
+    // Максимальная длина должности для передачи через МКДО.
+    [Sungero.Core.Public]
+    public const int JobTitleMaxLength = 128;
+    
+    // Максимальная длина основания полномочий грузополучателя.
+    [Sungero.Core.Public]
+    public const int PowersBaseConsigneeMaxLength = 120;
     
     [Sungero.Core.Public]
     public const string IncomingTaxInvoiceGuid = "74c9ddd4-4bc4-42b6-8bb0-c91d5e21fb8a";
@@ -71,9 +79,8 @@ namespace Sungero.Docflow.Constants
     {
       public const string Signatory = "Signatory";
       public const string Consignee = "Consignee";
-      public const string SignatoryPowerOfAttorney = "SignatoryPowerOfAttorney";
       public const string ConsigneePowerOfAttorney = "ConsigneePowerOfAttorney";
+      public const string SignatoryPowersBase = "SignatoryPowersBase";
     }
-    
   }
 }

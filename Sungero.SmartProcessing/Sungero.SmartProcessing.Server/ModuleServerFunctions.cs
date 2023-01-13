@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using CommonLibrary;
 using Sungero.Commons;
 using Sungero.Commons.Structures.Module;
@@ -20,6 +21,7 @@ using Sungero.SmartProcessing.Constants;
 using Sungero.SmartProcessing.Structures.Module;
 using Sungero.Workflow;
 using ArioGrammars = Sungero.SmartProcessing.Constants.Module.ArioGrammars;
+using ElasticsearchTypes = Sungero.Commons.PublicConstants.Module.ElasticsearchType;
 
 namespace Sungero.SmartProcessing.Server
 {
@@ -56,11 +58,50 @@ namespace Sungero.SmartProcessing.Server
       this.OrderAndLinkDocumentPackage(documentPackage);
       
       this.SendToResponsible(documentPackage);
+      
+      // Вызываем асинхронную выдачу прав, так как убрали ее при сохранении.
+      this.EnqueueGrantAccessRightsJobs(documentPackage);
 
       this.FinalizeProcessing(blobPackage);
     }
     
     #region Обработка пакета документов через rxcmd
+    
+    /// <summary>
+    /// Установка параметра AllIndicesExist в DocflowParams, при наличии всех индексов.
+    /// </summary>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void UpdateDocflowParamsIfAllIndicesExist()
+    {
+      // Проверка существования индексов.
+      var indicesNotExist = new List<string>();
+      
+      if (!Commons.PublicFunctions.Module.IsIndexExist(Commons.PublicFunctions.Module.GetIndexName(BusinessUnits.Info.Name)))
+        indicesNotExist.Add(BusinessUnits.Info.Name);
+      
+      if (!Commons.PublicFunctions.Module.IsIndexExist(Commons.PublicFunctions.Module.GetIndexName(Employees.Info.Name)))
+        indicesNotExist.Add(Employees.Info.Name);
+      
+      if (!Commons.PublicFunctions.Module.IsIndexExist(Commons.PublicFunctions.Module.GetIndexName(CompanyBases.Info.Name)))
+        indicesNotExist.Add(CompanyBases.Info.Name);
+      
+      if (!Commons.PublicFunctions.Module.IsIndexExist(Commons.PublicFunctions.Module.GetIndexName(Contacts.Info.Name)))
+        indicesNotExist.Add(Contacts.Info.Name);
+      
+      if (indicesNotExist.Any())
+        Logger.ErrorFormat("SmartProcessing. UpdateDocflowParamsIfAllIndicesExist. Indices not created: {0}.", string.Join(", ", indicesNotExist));
+      else
+        Docflow.PublicFunctions.Module.InsertOrUpdateDocflowParam(Commons.PublicConstants.Module.AllIndicesExistParamName, string.Empty);
+    }
+    
+    /// <summary>
+    /// Удаление параметра AllIndicesExist из DocflowParams.
+    /// </summary>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void RemoveAllIndicesExistFromDocflowParams()
+    {
+      Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.Module.RemoveDocflowParamsValue, new[] { Commons.PublicConstants.Module.AllIndicesExistParamName });
+    }
     
     /// <summary>
     /// Валидация настроек интеллектуальной обработки.
@@ -606,6 +647,10 @@ namespace Sungero.SmartProcessing.Server
     [Public]
     public virtual IDocumentPackage PrepareDocumentPackage(IBlobPackage blobPackage, IArioPackage arioPackage)
     {
+      var isFuzzySearchEnabled = this.IsFuzzySearchEnabled();
+      if (!isFuzzySearchEnabled)
+        this.LogMessage("Smart processing. PrepareDocumentPackage. Fuzzy search does not enabled.", blobPackage);
+      
       var documentInfos = new List<IDocumentInfo>();
       foreach (var arioDocument in arioPackage.Documents)
       {
@@ -625,6 +670,7 @@ namespace Sungero.SmartProcessing.Server
           this.LogError("Smart processing. PrepareDocumentPackage. Error while filling Ario document body.", ex, blobPackage);
         }
         var documentInfo = this.CreateDocumentInfo(arioDocument);
+        documentInfo.IsFuzzySearchEnabled = isFuzzySearchEnabled;
         documentInfos.Add(documentInfo);
       }
 
@@ -878,7 +924,14 @@ namespace Sungero.SmartProcessing.Server
     public virtual void SaveDocument(IOfficialDocument document, IDocumentInfo documentInfo)
     {
       if (!documentInfo.FailedCreateVersion)
+      {
+        // Удаляем параметр, чтобы не вызывать асинхронный обработчик по выдаче прав на документ, так как это вызывает ошибку (Bug 199971, 202010).
+        // Асинхронный обработчик запускается после выполнения всех операций по документу.
+        var documentParams = ((Sungero.Domain.Shared.IExtendedEntity)document).Params;
+        if (documentParams.ContainsKey(Sungero.Docflow.PublicConstants.OfficialDocument.GrantAccessRightsToDocumentAsync))
+          documentParams.Remove(Sungero.Docflow.PublicConstants.OfficialDocument.GrantAccessRightsToDocumentAsync);
         document.Save();
+      }
 
       var arioDocument = documentInfo.ArioDocument;
       if (arioDocument.IsProcessedByArio)
@@ -921,7 +974,18 @@ namespace Sungero.SmartProcessing.Server
 
       return document;
     }
-    
+
+    /// <summary>
+    /// Проверить возможность использования нечеткого поиска при заполнении карточек документов.
+    /// </summary>
+    /// <returns>True - если нечеткий поиск включен, иначе - false.</returns>
+    public virtual bool IsFuzzySearchEnabled()
+    {
+      return Commons.PublicFunctions.Module.IsIntelligenceEnabled() &&
+        Commons.PublicFunctions.Module.IsElasticsearchEnabled() &&
+        Commons.PublicFunctions.Module.IsElasticsearchConfigured();
+    }
+
     #endregion
     
     #region Создание конкретных типов документов
@@ -938,7 +1002,10 @@ namespace Sungero.SmartProcessing.Server
     {
       // Входящее письмо.
       var document = RecordManagement.IncomingLetters.Create();
-      this.FillIncomingLetterProperties(document, documentInfo, responsible);
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillIncomingLetterPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillIncomingLetterProperties(document, documentInfo, responsible);
       
       return document;
     }
@@ -950,12 +1017,14 @@ namespace Sungero.SmartProcessing.Server
     /// <param name="responsible">Ответственный за верификацию.</param>
     /// <returns>Акт выполненных работ.</returns>
     [Public]
-    public virtual IOfficialDocument CreateContractStatement(IDocumentInfo documentInfo,
-                                                             IEmployee responsible)
+    public virtual IOfficialDocument CreateContractStatement(IDocumentInfo documentInfo, IEmployee responsible)
     {
       // Акт выполненных работ.
       var document = FinancialArchive.ContractStatements.Create();
-      this.FillContractStatementProperties(document, documentInfo, responsible);
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillContractStatementPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillContractStatementProperties(document, documentInfo, responsible);
       
       return document;
     }
@@ -967,12 +1036,14 @@ namespace Sungero.SmartProcessing.Server
     /// <param name="responsible">Ответственный за верификацию.</param>
     /// <returns>Товарная накладная.</returns>
     [Public]
-    public virtual IOfficialDocument CreateWaybill(IDocumentInfo documentInfo,
-                                                   IEmployee responsible)
+    public virtual IOfficialDocument CreateWaybill(IDocumentInfo documentInfo, IEmployee responsible)
     {
       // Товарная накладная.
       var document = FinancialArchive.Waybills.Create();
-      this.FillWaybillProperties(document, documentInfo, responsible);
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillWaybillPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillWaybillProperties(document, documentInfo, responsible);
       
       return document;
     }
@@ -987,7 +1058,10 @@ namespace Sungero.SmartProcessing.Server
     public virtual IOfficialDocument CreateTaxInvoice(IDocumentInfo documentInfo,
                                                       IEmployee responsible)
     {
-      var documentParties = this.GetRecognizedTaxInvoiceParties(documentInfo.ArioDocument.Facts, responsible);
+      var documentParties = documentInfo.IsFuzzySearchEnabled ?
+        this.GetRecognizedTaxInvoicePartiesFuzzy(documentInfo.ArioDocument.Facts, responsible) :
+        this.GetRecognizedTaxInvoiceParties(documentInfo.ArioDocument.Facts, responsible);
+      
       if (documentParties.IsDocumentOutgoing.Value == true)
       {
         var document = FinancialArchive.OutgoingTaxInvoices.Create();
@@ -1012,7 +1086,10 @@ namespace Sungero.SmartProcessing.Server
     public virtual IOfficialDocument CreateTaxInvoiceCorrection(IDocumentInfo documentInfo,
                                                                 IEmployee responsible)
     {
-      var documentParties = this.GetRecognizedTaxInvoiceParties(documentInfo.ArioDocument.Facts, responsible);
+      var documentParties = documentInfo.IsFuzzySearchEnabled ?
+        this.GetRecognizedTaxInvoicePartiesFuzzy(documentInfo.ArioDocument.Facts, responsible) :
+        this.GetRecognizedTaxInvoiceParties(documentInfo.ArioDocument.Facts, responsible);
+      
       if (documentParties.IsDocumentOutgoing.Value == true)
       {
         var document = FinancialArchive.OutgoingTaxInvoices.Create();
@@ -1041,8 +1118,10 @@ namespace Sungero.SmartProcessing.Server
     {
       // УПД.
       var document = FinancialArchive.UniversalTransferDocuments.Create();
-      this.FillUniversalTransferDocumentProperties(document, documentInfo, responsible);
-      
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillUniversalTransferDocumentPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillUniversalTransferDocumentProperties(document, documentInfo, responsible);
       return document;
     }
     
@@ -1059,8 +1138,10 @@ namespace Sungero.SmartProcessing.Server
       // УКД.
       var document = FinancialArchive.UniversalTransferDocuments.Create();
       document.IsAdjustment = true;
-      this.FillUniversalTransferDocumentProperties(document, documentInfo, responsible);
-      
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillUniversalTransferDocumentPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillUniversalTransferDocumentProperties(document, documentInfo, responsible);
       return document;
     }
     
@@ -1076,7 +1157,10 @@ namespace Sungero.SmartProcessing.Server
     {
       // Счет на оплату.
       var document = Contracts.IncomingInvoices.Create();
-      this.FillIncomingInvoiceProperties(document, documentInfo, responsible);
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillIncomingInvoicePropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillIncomingInvoiceProperties(document, documentInfo, responsible);
       return document;
     }
     
@@ -1092,7 +1176,10 @@ namespace Sungero.SmartProcessing.Server
     {
       // Договор.
       var document = Contracts.Contracts.Create();
-      this.FillContractProperties(document, documentInfo, responsible);
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillContractPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillContractProperties(document, documentInfo, responsible);
       
       return document;
     }
@@ -1109,7 +1196,10 @@ namespace Sungero.SmartProcessing.Server
     {
       // Доп.соглашение.
       var document = Contracts.SupAgreements.Create();
-      this.FillSupAgreementProperties(document, documentInfo, responsible);
+      if (documentInfo.IsFuzzySearchEnabled)
+        this.FillSupAgreementPropertiesFuzzy(document, documentInfo, responsible);
+      else
+        this.FillSupAgreementProperties(document, documentInfo, responsible);
       
       return document;
     }
@@ -1246,14 +1336,15 @@ namespace Sungero.SmartProcessing.Server
       
       // Проверить конфигурацию DirectumRX на возможность нумерации документа.
       // Можем нумеровать только тогда, когда однозначно подобран журнал.
-      var registers = Docflow.PublicFunctions.OfficialDocument.GetDocumentRegistersByDocument(document, Docflow.RegistrationSetting.SettingType.Numeration);
+      var registersIds = Docflow.PublicFunctions.OfficialDocument.GetDocumentRegistersIdsByDocument(document, Docflow.RegistrationSetting.SettingType.Numeration);
       
       // Если не смогли пронумеровать, то передать параметр с результатом в задачу на обработку документа.
-      if (registers.Count != 1)
+      if (registersIds.Count != 1)
       {
         documentInfo.RegistrationFailed = true;
         return;
       }
+      var register = DocumentRegisters.Get(registersIds.First());
 
       var props = document.Info.Properties;
       
@@ -1285,7 +1376,7 @@ namespace Sungero.SmartProcessing.Server
         var kindCode = document.DocumentKind != null ? document.DocumentKind.Code : string.Empty;
         var counterpartyCode = Docflow.PublicFunctions.OfficialDocument.GetCounterpartyCode(document);
         var leadingDocumentId = document.LeadingDocument != null ? document.LeadingDocument.Id : 0;
-        if (!Docflow.PublicFunctions.DocumentRegister.Remote.IsRegistrationNumberUnique(registers.First(), document,
+        if (!Docflow.PublicFunctions.DocumentRegister.Remote.IsRegistrationNumberUnique(register, document,
                                                                                         recognizedNumber.Number, 0, recognizedDate.Date.Value,
                                                                                         depCode, bunitCode,
                                                                                         caseIndex, kindCode,
@@ -1297,7 +1388,7 @@ namespace Sungero.SmartProcessing.Server
       }
       
       // Не сохранять документ при нумерации, чтобы не потерять параметр DocumentNumberingBySmartCaptureResult.
-      Docflow.PublicFunctions.OfficialDocument.RegisterDocument(document, registers.First(), recognizedDate.Date, recognizedNumber.Number, false, false);
+      Docflow.PublicFunctions.OfficialDocument.RegisterDocument(document, register, recognizedDate.Date, recognizedNumber.Number, false, false);
       
       Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
                                                                         recognizedDate.Fact,
@@ -1401,21 +1492,7 @@ namespace Sungero.SmartProcessing.Server
       this.FillDocumentKind(letter);
       
       // Содержание.
-      var subjectFact = Commons.PublicFunctions.Module.GetOrderedFacts(arioDocument.Facts,
-                                                                       ArioGrammars.LetterFact.Name,
-                                                                       ArioGrammars.LetterFact.SubjectField)
-        .FirstOrDefault();
-      
-      var subject = Commons.PublicFunctions.Module.GetFieldValue(subjectFact, ArioGrammars.LetterFact.SubjectField);
-      if (!string.IsNullOrEmpty(subject))
-      {
-        letter.Subject = string.Format("{0}{1}", subject.Substring(0, 1).ToUpper(), subject.Remove(0, 1).ToLower());
-        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
-                                                                          subjectFact,
-                                                                          ArioGrammars.LetterFact.SubjectField,
-                                                                          props.Subject.Name,
-                                                                          letter.Subject);
-      }
+      this.FillIncomingLetterSubject(letter, arioDocument);
       
       // Дата.
       var recognizedDate = this.GetRecognizedDate(arioDocument.Facts, ArioGrammars.LetterFact.Name, ArioGrammars.LetterFact.DateField);
@@ -1666,7 +1743,7 @@ namespace Sungero.SmartProcessing.Server
       document.BusinessUnit = recognizedBusinessUnit.BusinessUnit;
       
       // Если запись НОР - закрытая, то установить минимальную вероятность. bug 104160
-      if (recognizedBusinessUnit.BusinessUnit.Status == Sungero.CoreEntities.DatabookEntry.Status.Closed)
+      if (recognizedBusinessUnit.BusinessUnit != null && recognizedBusinessUnit.BusinessUnit.Status == Sungero.CoreEntities.DatabookEntry.Status.Closed)
         recognizedBusinessUnit.BusinessUnitProbability = Module.PropertyProbabilityLevels.Min;
       
       Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(recognitionInfo, recognizedBusinessUnit.Fact,
@@ -1711,7 +1788,31 @@ namespace Sungero.SmartProcessing.Server
                                                                         document.Addressee,
                                                                         probability);
     }
-    
+
+    /// <summary>
+    /// Заполнить содержание входящего письма.
+    /// </summary>
+    /// <param name="letter">Входящее письмо.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    [Public]
+    public virtual void FillIncomingLetterSubject(IIncomingLetter letter, IArioDocument arioDocument)
+    {
+      var subjectFact = Commons.PublicFunctions.Module.GetOrderedFacts(arioDocument.Facts,
+                                                                       ArioGrammars.LetterFact.Name,
+                                                                       ArioGrammars.LetterFact.SubjectField)
+        .FirstOrDefault();
+      
+      var subject = Commons.PublicFunctions.Module.GetFieldValue(subjectFact, ArioGrammars.LetterFact.SubjectField);
+      if (!string.IsNullOrEmpty(subject))
+      {
+        letter.Subject = string.Format("{0}{1}", subject.Substring(0, 1).ToUpper(), subject.Remove(0, 1).ToLower());
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
+                                                                          subjectFact,
+                                                                          ArioGrammars.LetterFact.SubjectField,
+                                                                          letter.Info.Properties.Subject.Name,
+                                                                          letter.Subject);
+      }
+    }
     #endregion
     
     #region Договорные документы и счет на оплату
@@ -1880,38 +1981,7 @@ namespace Sungero.SmartProcessing.Server
       
       // При заполнении поля подписал, если НОР не заполнена, она подставляется из подписанта.
       if (ourSignatory.Employee != null)
-      {
-        if (contractualDocument.BusinessUnit == null &&
-            ourSignatory.Employee.Department != null &&
-            ourSignatory.Employee.Department.BusinessUnit != null)
-        {
-          // Если вероятность определения подписанта больше уровня "выше среднего", то установить вероятность определения НОР "выше среднего",
-          // иначе установить минимальную вероятность.
-          var recognizedBusinessUnitProbability = ourSignatory.Probability >= Module.PropertyProbabilityLevels.UpperMiddle ?
-            Module.PropertyProbabilityLevels.UpperMiddle :
-            Module.PropertyProbabilityLevels.Min;
-          
-          // Если запись НОР - закрытая, то установить минимальную вероятность. bug 104069
-          if (ourSignatory.Employee.Department.BusinessUnit.Status == Sungero.CoreEntities.DatabookEntry.Status.Closed)
-            recognizedBusinessUnitProbability = Module.PropertyProbabilityLevels.Min;
-          
-          Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
-                                                                            null,
-                                                                            null,
-                                                                            props.BusinessUnit.Name,
-                                                                            ourSignatory.Employee.Department.BusinessUnit,
-                                                                            recognizedBusinessUnitProbability);
-        }
-        
-        contractualDocument.OurSignatory = ourSignatory.Employee;
-        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
-                                                                                ourSignatory.Fact,
-                                                                                signatoryFieldNames,
-                                                                                props.OurSignatory.Name,
-                                                                                contractualDocument.OurSignatory,
-                                                                                ourSignatory.Probability,
-                                                                                null);
-      }
+        this.FillOurSignatoryForContractualDocument(contractualDocument, documentInfo, ourSignatory, signatoryFieldNames);
       
       // Если НОР по фактам не нашли, то взять ее из персональных настроек, или от ответственного.
       if (contractualDocument.BusinessUnit == null)
@@ -1927,16 +1997,16 @@ namespace Sungero.SmartProcessing.Server
           contractualDocument.BusinessUnit = responsibleEmployeePersonalSettingsBusinessUnit;
         else
           contractualDocument.BusinessUnit = responsibleEmployeeBusinessUnit;
-
-        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+        
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(documentInfo.ArioDocument.RecognitionInfo,
                                                                                 null,
                                                                                 null,
-                                                                                props.BusinessUnit.Name,
+                                                                                contractualDocument.Info.Properties.BusinessUnit.Name,
                                                                                 contractualDocument.BusinessUnit,
                                                                                 Module.PropertyProbabilityLevels.Min,
                                                                                 null);
       }
-      
+
       // Убрать использованные факты подбора НОР и подписывающего с нашей стороны.
       if (recognizedBusinessUnit.Fact != null)
         arioDocument.Facts.Remove(recognizedBusinessUnit.Fact);
@@ -1972,39 +2042,98 @@ namespace Sungero.SmartProcessing.Server
       
       // При заполнении поля подписал, если контрагент не заполнен, он подставляется из подписанта.
       if (signedBy.Contact != null)
+        this.FillCounterpartySignatoryForContractualDocument(contractualDocument, documentInfo, signedBy, signatoryFieldNames);
+      
+    }
+
+    /// <summary>
+    /// Заполнить подписанта НОР.
+    /// </summary>
+    /// <param name="contractualDocument">Договорной документ.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="ourSignatory">Информация о подписанте.</param>
+    /// <param name="signatoryFieldNames">Список полей факта о подписанте.</param>
+    public virtual void FillOurSignatoryForContractualDocument(Contracts.IContractualDocument contractualDocument,
+                                                               IDocumentInfo documentInfo,
+                                                               IRecognizedOfficial ourSignatory,
+                                                               List<string> signatoryFieldNames)
+    {
+      if (contractualDocument.BusinessUnit == null &&
+          ourSignatory.Employee.Department != null &&
+          ourSignatory.Employee.Department.BusinessUnit != null)
       {
-        // Если контрагент не заполнен, взять его из подписанта.
-        if (contractualDocument.Counterparty == null && signedBy.Contact.Company != null)
-        {
-          
-          // Если вероятность определения подписанта больше уровня "выше среднего", то установить вероятность определения КА "выше среднего",
-          // иначе установить минимальную вероятность.
-          var recognizedCounterpartyProbability = signedBy.Probability >= Module.PropertyProbabilityLevels.UpperMiddle ?
-            Module.PropertyProbabilityLevels.UpperMiddle :
-            Module.PropertyProbabilityLevels.Min;
-          
-          // Если запись контрагента - закрытая, то установить минимальную вероятность. bug 104069
-          if (signedBy.Contact.Company.Status == Sungero.CoreEntities.DatabookEntry.Status.Closed)
-            recognizedCounterpartyProbability = Module.PropertyProbabilityLevels.Min;
-          
-          Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
-                                                                                  null,
-                                                                                  null,
-                                                                                  props.Counterparty.Name,
-                                                                                  signedBy.Contact.Company,
-                                                                                  recognizedCounterpartyProbability,
-                                                                                  null);
-        }
+        // Если вероятность определения подписанта больше уровня "выше среднего", то установить вероятность определения НОР "выше среднего",
+        // иначе установить минимальную вероятность.
+        var recognizedBusinessUnitProbability = ourSignatory.Probability >= Module.PropertyProbabilityLevels.UpperMiddle ?
+          Module.PropertyProbabilityLevels.UpperMiddle :
+          Module.PropertyProbabilityLevels.Min;
         
-        contractualDocument.CounterpartySignatory = signedBy.Contact;
+        // Если запись НОР - закрытая, то установить минимальную вероятность. bug 104069
+        if (ourSignatory.Employee.Department.BusinessUnit.Status == Sungero.CoreEntities.DatabookEntry.Status.Closed)
+          recognizedBusinessUnitProbability = Module.PropertyProbabilityLevels.Min;
+        contractualDocument.BusinessUnit = ourSignatory.Employee.Department.BusinessUnit;
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(documentInfo.ArioDocument.RecognitionInfo,
+                                                                          null,
+                                                                          null,
+                                                                          contractualDocument.Info.Properties.BusinessUnit.Name,
+                                                                          ourSignatory.Employee.Department.BusinessUnit,
+                                                                          recognizedBusinessUnitProbability);
+      }
+      
+      contractualDocument.OurSignatory = ourSignatory.Employee;
+      Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(documentInfo.ArioDocument.RecognitionInfo,
+                                                                              ourSignatory.Fact,
+                                                                              signatoryFieldNames,
+                                                                              contractualDocument.Info.Properties.OurSignatory.Name,
+                                                                              contractualDocument.OurSignatory,
+                                                                              ourSignatory.Probability,
+                                                                              null);
+    }
+    
+    /// <summary>
+    /// Заполнить подписанта контрагента.
+    /// </summary>
+    /// <param name="contractualDocument">Договорной документ.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="signedBy">Информация о подписанте.</param>
+    /// <param name="signatoryFieldNames">Список полей факта о подписанте.</param>
+    public virtual void FillCounterpartySignatoryForContractualDocument(Contracts.IContractualDocument contractualDocument,
+                                                                        IDocumentInfo documentInfo,
+                                                                        IRecognizedOfficial signedBy,
+                                                                        List<string> signatoryFieldNames)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      var props = contractualDocument.Info.Properties;
+      // Если контрагент не заполнен, взять его из подписанта.
+      if (contractualDocument.Counterparty == null && signedBy.Contact.Company != null)
+      {
+        // Если вероятность определения подписанта больше уровня "выше среднего", то установить вероятность определения КА "выше среднего",
+        // иначе установить минимальную вероятность.
+        var recognizedCounterpartyProbability = signedBy.Probability >= Module.PropertyProbabilityLevels.UpperMiddle ?
+          Module.PropertyProbabilityLevels.UpperMiddle :
+          Module.PropertyProbabilityLevels.Min;
+        
+        // Если запись контрагента - закрытая, то установить минимальную вероятность. bug 104069
+        if (signedBy.Contact.Company.Status == Sungero.CoreEntities.DatabookEntry.Status.Closed)
+          recognizedCounterpartyProbability = Module.PropertyProbabilityLevels.Min;
+        
         Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
-                                                                                signedBy.Fact,
-                                                                                signatoryFieldNames,
-                                                                                props.CounterpartySignatory.Name,
-                                                                                contractualDocument.CounterpartySignatory,
-                                                                                signedBy.Probability,
+                                                                                null,
+                                                                                null,
+                                                                                props.Counterparty.Name,
+                                                                                signedBy.Contact.Company,
+                                                                                recognizedCounterpartyProbability,
                                                                                 null);
       }
+      
+      contractualDocument.CounterpartySignatory = signedBy.Contact;
+      Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                              signedBy.Fact,
+                                                                              signatoryFieldNames,
+                                                                              props.CounterpartySignatory.Name,
+                                                                              contractualDocument.CounterpartySignatory,
+                                                                              signedBy.Probability,
+                                                                              null);
     }
 
     /// <summary>
@@ -2050,28 +2179,7 @@ namespace Sungero.SmartProcessing.Server
         }
         
         if (recognizedOrganization.BusinessUnit != null || recognizedOrganization.Counterparty != null)
-        {
-          var organizationName = isOurSignatory ?
-            recognizedOrganization.BusinessUnit.Name :
-            recognizedOrganization.Counterparty.Name;
-          
-          // Ожидаемое наименование НОР или организации в формате {Название}, {ОПФ}.
-          var organizationNameAndLegalForm = organizationName.Split(new string[] { ", " }, StringSplitOptions.None);
-          
-          // Уточнить по наименованию.
-          signatoryFacts = signatoryFacts
-            .Where(f => f.Fields.Any(fl => fl.Name == ArioGrammars.CounterpartyFact.NameField &&
-                                     fl.Value.Equals(organizationNameAndLegalForm.FirstOrDefault(), StringComparison.InvariantCultureIgnoreCase)))
-            .ToList();
-          // Уточнить по ОПФ.
-          if (organizationNameAndLegalForm.Length > 1)
-          {
-            signatoryFacts = signatoryFacts
-              .Where(f => f.Fields.Any(fl => fl.Name == ArioGrammars.CounterpartyFact.LegalFormField &&
-                                       fl.Value.Equals(organizationNameAndLegalForm.LastOrDefault(), StringComparison.InvariantCultureIgnoreCase)))
-              .ToList();
-          }
-        }
+          signatoryFacts = this.GetSpecifiedSignatoryByNameAndLegalForm(signatoryFacts, recognizedOrganization, isOurSignatory);
       }
       
       signatoryFacts = signatoryFacts
@@ -2105,6 +2213,38 @@ namespace Sungero.SmartProcessing.Server
         return signedBy;
       
       return organizationSignatory.OrderByDescending(x => x.Probability).FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Получить список фактов о подписанте, уточненный по наименованию организации и ОПФ.
+    /// </summary>
+    /// <param name="signatoryFacts">Список фактов.</param>
+    /// <param name="recognizedOrganization">Структура с НОР, КА, фактом и признаком доверия.</param>
+    /// <param name="isOurSignatory">Признак поиска нашего подписанта (true) или подписанта КА (false).</param>
+    /// <returns>Уточненный список фактов.</returns>
+    public virtual List<IArioFact> GetSpecifiedSignatoryByNameAndLegalForm(List<IArioFact> signatoryFacts, IRecognizedCounterparty recognizedOrganization, bool isOurSignatory)
+    {
+      var organizationName = isOurSignatory ?
+        recognizedOrganization.BusinessUnit.Name :
+        recognizedOrganization.Counterparty.Name;
+      
+      // Ожидаемое наименование НОР или организации в формате {Название}, {ОПФ}.
+      var organizationNameAndLegalForm = organizationName.Split(new string[] { ", " }, StringSplitOptions.None);
+      
+      // Уточнить по наименованию.
+      var specifiedSignatoryFacts = signatoryFacts
+        .Where(f => f.Fields.Any(fl => fl.Name == ArioGrammars.CounterpartyFact.NameField &&
+                                 fl.Value.Equals(organizationNameAndLegalForm.FirstOrDefault(), StringComparison.InvariantCultureIgnoreCase)))
+        .ToList();
+      // Уточнить по ОПФ.
+      if (organizationNameAndLegalForm.Length > 1)
+      {
+        specifiedSignatoryFacts = specifiedSignatoryFacts
+          .Where(f => f.Fields.Any(fl => fl.Name == ArioGrammars.CounterpartyFact.LegalFormField &&
+                                   fl.Value.Equals(organizationNameAndLegalForm.LastOrDefault(), StringComparison.InvariantCultureIgnoreCase)))
+          .ToList();
+      }
+      return specifiedSignatoryFacts;
     }
 
     /// <summary>
@@ -4584,8 +4724,1968 @@ namespace Sungero.SmartProcessing.Server
     
     #endregion
     
-    #region Поиск по штрихкодам
+    #region Заполнение свойств документов с нечетким поиском
     
+    #region Входящее письмо
+    
+    /// <summary>
+    /// Заполнить свойства входящего письма по результатам обработки Ario. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="letter">Входящее письмо.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Сотрудник, ответственный за обработку поступивших документов.</param>
+    [Public]
+    public virtual void FillIncomingLetterPropertiesFuzzy(RecordManagement.IIncomingLetter letter,
+                                                          IDocumentInfo documentInfo,
+                                                          Sungero.Company.IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      var props = letter.Info.Properties;
+      
+      // Вид документа.
+      this.FillDocumentKind(letter);
+      
+      // Содержание.
+      this.FillIncomingLetterSubject(letter, arioDocument);
+      
+      // Номер и дата.
+      this.FillDocumentNumberAndDateFuzzy(letter, arioDocument, ArioGrammars.LetterFact.Name,
+                                          props.InNumber, ArioGrammars.LetterFact.NumberField,
+                                          props.Dated, ArioGrammars.LetterFact.DateField);
+
+      // НОР, адресат, подразделение.
+      this.FillIncomingLetterRecipientFuzzy(letter, arioDocument, responsible);
+
+      // Корреспондент.
+      this.FillIncomingLetterCorrespondentFuzzy(letter, arioDocument);
+
+      // Контактные лица (подписант, исполнитель).
+      this.FillIncomingLetterContactsFuzzy(letter, arioDocument);
+      
+      // Реквизиты искодящего письма ("в ответ на").
+      this.FillIncomingLetterResponseToFuzzy(letter, arioDocument);
+    }
+    
+    /// <summary>
+    /// Заполнить корреспондента входящего письма.
+    /// </summary>
+    /// <param name="letter">Входящее письмо.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    /// <remarks>С использованием нечеткого поиска.</remarks>
+    [Public]
+    public virtual void FillIncomingLetterCorrespondentFuzzy(IIncomingLetter letter, IArioDocument arioDocument)
+    {
+      // Задать приоритет полей для поиска корреспондента. Вес определяет как учитывается вероятность каждого поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.LetterFact.TinField, 0.35 },
+        { ArioGrammars.LetterFact.TrrcField, 0.05 },
+        { ArioGrammars.LetterFact.PsrnField, 0.25 },
+        { ArioGrammars.LetterFact.CorrespondentNameField, 0.15 },
+        { ArioGrammars.LetterFact.HeadCompanyNameField, 0.05 },
+        { ArioGrammars.LetterFact.WebsiteField, 0.05 },
+        { ArioGrammars.LetterFact.PhoneField, 0.05 },
+        { ArioGrammars.LetterFact.EmailField, 0.05 }
+      };
+
+      // Подобрать факт Letter с полем типа Correspondent. Игнорировать факты Counterparty, содержащие данные о прочих организациях.
+      var counterpartyFacts = arioDocument.Facts
+        .Where(f => f.Name == ArioGrammars.LetterFact.Name &&
+               f.Fields.Any(fl => fl.Name == ArioGrammars.LetterFact.TypeField &&
+                            fl.Value == ArioGrammars.LetterFact.CorrespondentTypes.Correspondent) &&
+               f.Fields.Any(fl => weightedFields.ContainsKey(fl.Name) && !string.IsNullOrEmpty(fl.Value)))
+        .ToList();
+      
+      if (!counterpartyFacts.Any())
+        return;
+
+      // Отсортировать факты по количеству и приоритету полей.
+      var orderedCounterpartyFacts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(counterpartyFacts, ArioGrammars.LetterFact.Name, weightedFields);
+      var propertyName = letter.Info.Properties.Correspondent.Name;
+
+      foreach (var fact in orderedCounterpartyFacts)
+      {
+        // Получить корреспондента по значениям полей факта с использованием Elasticsearch.
+        var searchResult = this.SearchLetterCorrespondentFuzzy(fact);
+
+        if (searchResult.EntityId == 0)
+          continue;
+        
+        // Если корреспондент найден, рассчитать вероятность факта. Заполнить свойство в карточке документа и связь в результатах распознавания.
+        var counterparty = Parties.Counterparties.GetAll(x => Equals(x.Id, searchResult.EntityId)).FirstOrDefault();
+        if (counterparty == null)
+          continue;
+        
+        letter.Correspondent = counterparty;
+        
+        var recognizedFields = new Dictionary<IArioFactField, double>();
+        foreach (var field in searchResult.FoundedFields)
+          recognizedFields.Add(field, weightedFields[field.Name]);
+        
+        var factProbability = Commons.PublicFunctions.Module.GetAggregateFieldsProbability(recognizedFields);
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                fact,
+                                                                                searchResult.FoundedFields.Select(fl => fl.Name).ToList(),
+                                                                                propertyName,
+                                                                                counterparty,
+                                                                                factProbability,
+                                                                                null);
+        return;
+      }
+    }
+    
+    /// <summary>
+    /// Заполнить нашу организацию, адресата и подразделение. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="letter">Входящее письмо.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    /// <param name="responsible">Ответственный за обработку документов.</param>
+    [Public]
+    public virtual void FillIncomingLetterRecipientFuzzy(IIncomingLetter letter, IArioDocument arioDocument, IEmployee responsible)
+    {
+      var allBusinessUnits = Sungero.Company.BusinessUnits.GetAll();
+      if (!allBusinessUnits.Any())
+        return;
+
+      var recognizedBusinessUnit = RecognizedCounterparty.Create();
+      var recognizedAddressees = new List<IRecognizedOfficial>();
+
+      // Получить список распознанных НОР и адресатов из фактов.
+      var recognizedRecipients = this.GetRecognizedRecipientsFuzzy(arioDocument.Facts);
+      
+      // Получить НОР из карточки ответственного за обработку. Считать ее приоритетной при выборе из нескольких НОР.
+      var defaultbusinessUnit = Docflow.PublicFunctions.Module.GetDefaultBusinessUnit(responsible);
+      if (defaultbusinessUnit == null && allBusinessUnits.Count() == 1)
+        defaultbusinessUnit = allBusinessUnits.Single();
+
+      if (recognizedRecipients.Any())
+      {
+        // Если распознано несколько НОР, приоритетнее организация с адресатом.
+        var recognizedRecipient = recognizedRecipients.First();
+        if (defaultbusinessUnit != null && recognizedRecipients.Any(x => Equals(x.BusinessUnit.BusinessUnit, defaultbusinessUnit)))
+          recognizedRecipient = recognizedRecipients.First(x => Equals(x.BusinessUnit.BusinessUnit, defaultbusinessUnit));
+        else if (recognizedRecipients.Any(x => x.Addressees.Any()))
+          recognizedRecipient = recognizedRecipients.First(x => x.Addressees.Any());
+        
+        recognizedBusinessUnit = recognizedRecipient.BusinessUnit;
+        recognizedAddressees = recognizedRecipient.Addressees;
+      }
+      else if (defaultbusinessUnit != null)
+      {
+        // Если НОР не найдена по фактам. Взять НОР, полученную по ответственному за обработку.
+        recognizedBusinessUnit.Fact = null;
+        recognizedBusinessUnit.BusinessUnit = defaultbusinessUnit;
+        recognizedBusinessUnit.BusinessUnitProbability = Module.PropertyProbabilityLevels.Min;
+      }
+
+      // Заполнить карточку.
+      if (recognizedBusinessUnit.BusinessUnit != null)
+      {
+        letter.BusinessUnit = recognizedBusinessUnit.BusinessUnit;
+        var fieldNames = recognizedBusinessUnit.Fact != null ? recognizedBusinessUnit.Fact.Fields.Select(x => x.Name).ToList() : null;
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                recognizedBusinessUnit.Fact,
+                                                                                fieldNames,
+                                                                                letter.Info.Properties.BusinessUnit.Name,
+                                                                                recognizedBusinessUnit.BusinessUnit,
+                                                                                recognizedBusinessUnit.BusinessUnitProbability,
+                                                                                null);
+      }
+      
+      if (recognizedAddressees.Count == 1)
+      {
+        var recognizedAddressee = recognizedAddressees.Single();
+        letter.Addressee = recognizedAddressee.Employee;
+
+        Sungero.Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
+                                                                                  recognizedAddressee.Fact,
+                                                                                  ArioGrammars.LetterFact.AddresseeField,
+                                                                                  letter.Info.Properties.Addressee.Name,
+                                                                                  letter.Addressee,
+                                                                                  recognizedAddressee.Probability);
+      }
+      else if (recognizedAddressees.Count > 1)
+      {
+        letter.IsManyAddressees = true;
+        foreach (var addressee in recognizedAddressees)
+        {
+          var row = letter.Addressees.AddNew();
+          row.Addressee = addressee.Employee;
+          Sungero.Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                          addressee.Fact,
+                                                                                          new List<string> { ArioGrammars.LetterFact.AddresseeField },
+                                                                                          row.Info.Properties.Addressee.Name,
+                                                                                          row.Addressee,
+                                                                                          addressee.Probability,
+                                                                                          row.Id);
+        }
+      }
+      
+      // Заполнить подразделение.
+      letter.Department = letter.Addressee != null
+        ? Company.PublicFunctions.Department.GetDepartment(letter.Addressee)
+        : Company.PublicFunctions.Department.GetDepartment(responsible);
+    }
+
+    /// <summary>
+    /// Заполнить подписанта и исполнителя входящего письма.
+    /// </summary>
+    /// <param name="letter">Входящее письмо.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    /// <remarks>С использованием нечеткого поиска.</remarks>
+    [Public]
+    public virtual void FillIncomingLetterContactsFuzzy(IIncomingLetter letter, IArioDocument arioDocument)
+    {
+      var filterCounterpartyId = letter.Correspondent != null ? letter.Correspondent.Id : 0;
+      var probability = 0d;
+      
+      // Подписант.
+      var signatory = this.GetRecognizedContactFuzzy(arioDocument, ArioGrammars.LetterPersonFact.PersonTypes.Signatory, filterCounterpartyId);
+      
+      if (signatory.Contact != null)
+      {
+        letter.SignedBy = signatory.Contact;
+        probability += signatory.Probability.GetValueOrDefault();
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo, signatory.Fact,
+                                                                          null, letter.Info.Properties.SignedBy.Name,
+                                                                          letter.SignedBy,
+                                                                          signatory.Probability);
+        
+        // Если удалось найти подписанта. Искать исполнителя в той же компании.
+        if (filterCounterpartyId == 0)
+          filterCounterpartyId = letter.SignedBy.Company.Id;
+      }
+      
+      // Исполнитель.
+      var responsible = this.GetRecognizedContactFuzzy(arioDocument, ArioGrammars.LetterPersonFact.PersonTypes.Responsible, filterCounterpartyId);
+      if (responsible.Contact != null)
+      {
+        letter.Contact = responsible.Contact;
+        probability += responsible.Probability.GetValueOrDefault();
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo, responsible.Fact,
+                                                                          null, letter.Info.Properties.Contact.Name,
+                                                                          letter.Contact,
+                                                                          responsible.Probability);
+      }
+      
+      // Установить корреспондента по контактам.
+      if (letter.Correspondent == null && (signatory.Contact != null || responsible.Contact != null))
+      {
+        var recognizedCorrespondent = signatory.Contact != null ? signatory.Contact.Company : responsible.Contact.Company;
+        letter.Correspondent = recognizedCorrespondent;
+        
+        // Вероятность для подсветки определить по средней вероятности подписанта и исполнителя.
+        var recognizedCorrespondentProbability = Module.PropertyProbabilityLevels.Min;
+        if (recognizedCorrespondent.Status == Sungero.CoreEntities.DatabookEntry.Status.Active &&
+            (probability / 2) >= Module.PropertyProbabilityLevels.UpperMiddle)
+          recognizedCorrespondentProbability = Module.PropertyProbabilityLevels.UpperMiddle;
+
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo, null, null,
+                                                                          letter.Info.Properties.Correspondent.Name,
+                                                                          letter.Correspondent,
+                                                                          recognizedCorrespondentProbability);
+      }
+    }
+
+    /// <summary>
+    /// Заполнить реквизиты исходящего письма (свойство "в ответ на").
+    /// </summary>
+    /// <param name="letter">Входящее письмо.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    [Public]
+    public virtual void FillIncomingLetterResponseToFuzzy(IIncomingLetter letter, IArioDocument arioDocument)
+    {
+      if (letter.BusinessUnit == null)
+        return;
+
+      // Получить факты с номером и/или датой исходящего документа. Приоритетнее факты, содержащие оба поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.LetterFact.ResponseToNumberField, 0.5 },
+        { ArioGrammars.LetterFact.ResponseToDateField, 0.5 }
+      };
+      var facts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(arioDocument.Facts, ArioGrammars.LetterFact.Name, weightedFields);
+
+      if (!facts.Any())
+        return;
+      
+      // Подготовить список исходящих писем для поиска.
+      var outgoingLetters = RecordManagement.OutgoingLetters.GetAll(d => Equals(d.BusinessUnit, letter.BusinessUnit));
+      if (letter.Correspondent != null)
+        outgoingLetters = outgoingLetters.Where(d => Equals(d.Correspondent, letter.Correspondent));
+      
+      // Найти документ по номеру и дате.
+      var recognizedDocument = this.GetRecognizedDocumentFuzzy(facts,
+                                                               outgoingLetters,
+                                                               ArioGrammars.LetterFact.ResponseToNumberField,
+                                                               ArioGrammars.LetterFact.ResponseToDateField);
+      if (recognizedDocument.Document != null)
+      {
+        letter.InResponseTo = OutgoingDocumentBases.As(recognizedDocument.Document);
+        Sungero.Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                        recognizedDocument.Fact,
+                                                                                        weightedFields.Select(x => x.Key).ToList(),
+                                                                                        letter.Info.Properties.InResponseTo.Name,
+                                                                                        letter.InResponseTo,
+                                                                                        recognizedDocument.Probability,
+                                                                                        null);
+      }
+    }
+
+    /// <summary>
+    /// Получить список распознанных НОР и связанных с ними адресатов из фактов Ario.
+    /// </summary>
+    /// <param name="facts">Список фактов Ario.</param>
+    /// <returns>Список структур с распознанными НОР и адресатами.</returns>
+    [Public]
+    public virtual List<IRecognizedRecipient> GetRecognizedRecipientsFuzzy(List<IArioFact> facts)
+    {
+      var recognizedRecipients = new List<IRecognizedRecipient>();
+      if (!facts.Any())
+        return recognizedRecipients;
+      
+      // Получить все распознанные НОР, связанные с фактами.
+      var recognizedBusinessUnits = this.GetRecognizedLetterBusinessUnitsFuzzy(facts);
+
+      // Получить адресатов.
+      var recognizedAddressees = this.GetRecognizedLetterAddresseesFuzzy(facts, recognizedBusinessUnits);
+
+      // Добавить НОР из адресатов в общий список распознанных.
+      var addresseeBusinessUnits = recognizedAddressees
+        .Where(x => x.Employee?.Department?.BusinessUnit != null)
+        .Select(x => x.Employee.Department.BusinessUnit)
+        .Distinct()
+        .ToList();
+
+      foreach (var businessUnit in addresseeBusinessUnits
+               .Where(b => !recognizedBusinessUnits.Any(r => Equals(b, r.BusinessUnit))))
+      {
+        var recognizedBusinessUnit = RecognizedCounterparty.Create();
+        recognizedBusinessUnit.BusinessUnit = businessUnit;
+        recognizedBusinessUnit.BusinessUnitProbability = Constants.Module.PropertyProbabilityLevels.Min;
+        recognizedBusinessUnits.Add(recognizedBusinessUnit);
+      }
+
+      // Для каждой НОР создать запись в результирующем списке.
+      foreach (var recognizedBusinessUnit in recognizedBusinessUnits)
+      {
+        var businessUnit = recognizedBusinessUnit.BusinessUnit;
+        if (recognizedRecipients.Any(x => Equals(x.BusinessUnit.BusinessUnit, businessUnit)))
+          continue;
+        
+        var recognizedRecipient = RecognizedRecipient.Create(recognizedBusinessUnit, new List<IRecognizedOfficial>());
+        
+        // Собрать всех адресатов. Исключить дубли.
+        var employees = recognizedAddressees
+          .Where(x => Equals(x.Employee?.Department?.BusinessUnit, businessUnit))
+          .Select(x => x.Employee)
+          .Distinct()
+          .ToList();
+        
+        foreach (var employee in employees)
+        {
+          // Если НОР определена по адресату, сбросить вероятность до минимальной.
+          var recognizedAddressee = recognizedAddressees.First(x => Equals(x.Employee, employee));
+          if (recognizedBusinessUnit.Fact == null)
+            recognizedAddressee.Probability = Constants.Module.PropertyProbabilityLevels.Min;
+          recognizedRecipient.Addressees.Add(recognizedAddressee);
+        }
+        
+        recognizedRecipients.Add(recognizedRecipient);
+      }
+      return recognizedRecipients;
+    }
+
+    /// <summary>
+    /// Получить список всех распознанных НОР во входящем письме. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="facts">Список фактов Ario.</param>
+    /// <returns>Список распознанных НОР.</returns>
+    public virtual List<IRecognizedCounterparty> GetRecognizedLetterBusinessUnitsFuzzy(List<IArioFact> facts)
+    {
+      var recognizedBusinessUnits = new List<IRecognizedCounterparty>();
+      
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.LetterFact.TinField, 0.35 },
+        { ArioGrammars.LetterFact.TrrcField, 0.05 },
+        { ArioGrammars.LetterFact.PsrnField, 0.25 },
+        { ArioGrammars.LetterFact.CorrespondentNameField, 0.20 },
+        { ArioGrammars.LetterFact.AddresseeField, 0.15 }
+      };
+      
+      var recipientFacts = facts
+        .Where(f => f.Name == ArioGrammars.LetterFact.Name &&
+               f.Fields.Any(fl => fl.Name == ArioGrammars.LetterFact.TypeField &&
+                            fl.Value == ArioGrammars.LetterFact.CorrespondentTypes.Recipient) &&
+               f.Fields.Any(fl => weightedFields.ContainsKey(fl.Name) && !string.IsNullOrEmpty(fl.Value)))
+        .ToList();
+      
+      if (!recipientFacts.Any())
+        return recognizedBusinessUnits;
+      
+      var orderedFacts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(recipientFacts,
+                                                                                         ArioGrammars.LetterFact.Name,
+                                                                                         weightedFields);
+      foreach (var fact in orderedFacts)
+      {
+        var searchBusinessUnitResult = this.SearchLetterBusinessUnitFuzzy(fact);
+        if (searchBusinessUnitResult.EntityId > 0)
+        {
+          var businessUnit = Company.BusinessUnits.GetAll(x => Equals(x.Id, searchBusinessUnitResult.EntityId)).FirstOrDefault();
+          if (businessUnit == null)
+            continue;
+
+          var recognizedBusinessUnit = RecognizedCounterparty.Create();
+          recognizedBusinessUnit.BusinessUnit = businessUnit;
+          // Ограничить список подсвечиваемых полей найденными значениями.
+          // Чтобы не потерять поля в исходном факте, создать его копию.
+          var factForLink = ArioFact.Create(fact.Id, fact.Name, searchBusinessUnitResult.FoundedFields);
+          recognizedBusinessUnit.Fact = factForLink;
+          recognizedBusinessUnit.Type = ArioGrammars.LetterFact.CorrespondentTypes.Recipient;
+          // Рассчитать средневзвешенную вероятность факта по списку найденных полей.
+          var recognizedFields = new Dictionary<IArioFactField, double>();
+          foreach (var field in factForLink.Fields)
+            recognizedFields.Add(field, weightedFields[field.Name]);
+          recognizedBusinessUnit.BusinessUnitProbability = Commons.PublicFunctions.Module.GetAggregateFieldsProbability(recognizedFields);
+          
+          recognizedBusinessUnits.Add(recognizedBusinessUnit);
+        }
+      }
+      return recognizedBusinessUnits;
+    }
+
+    /// <summary>
+    /// Получить адресатов входящего письма по фактам Арио.
+    /// </summary>
+    /// <param name="facts">Список фактов.</param>
+    /// <param name="recognizedBusinessUnits">Список распознанных НОР.</param>
+    /// <returns>Список найденных адресатов.</returns>
+    public virtual List<IRecognizedOfficial> GetRecognizedLetterAddresseesFuzzy(List<IArioFact> facts, List<IRecognizedCounterparty> recognizedBusinessUnits)
+    {
+      var recognizedAddressees = new List<IRecognizedOfficial>();
+      
+      var addresseeFacts = facts
+        .Where(f => f.Name == ArioGrammars.LetterFact.Name &&
+               f.Fields.Any(fl => fl.Name == ArioGrammars.LetterFact.TypeField &&
+                            fl.Value == ArioGrammars.LetterFact.CorrespondentTypes.Recipient) &&
+               f.Fields.Any(fl => fl.Name == ArioGrammars.LetterFact.AddresseeField && !string.IsNullOrEmpty(fl.Value)))
+        .ToList();
+      
+      if (!addresseeFacts.Any())
+        return recognizedAddressees;
+      
+      /* Искать сотрудников по всем фактам, содержащим ФИО адресата.
+       * Фильтровать по конкретной НОР, если удалось ее определить по этому же факту.
+       * Либо, в противном случае, искать ФИО адресата в каждой извлеченной НОР.
+       * Если по одному ФИО найдено несколько сотрудников, выбрать из них руководителя НОР/подразделения.
+       * Если в итоге осталось более одного однофамильца, считать поиск неточным и не возвращать никого.
+       */
+
+      var allBusinessUnitIds = recognizedBusinessUnits
+        .Where(x => x.BusinessUnit != null)
+        .Select(x => x.BusinessUnit.Id)
+        .Distinct()
+        .ToList();
+      
+      var managers = Company.BusinessUnits.GetAll(x => x.CEO != null).Select(x => x.CEO).ToList();
+      managers.AddRange(Company.Departments.GetAll(x => x.Manager != null).Select(x => x.Manager));
+      managers = managers.Distinct().ToList();
+
+      foreach (var fact in addresseeFacts)
+      {
+        var factBusinessUnitIds = new List<int>();
+        var recognizedBusinessUnit = recognizedBusinessUnits.FirstOrDefault(x => x.BusinessUnit != null && Equals(x.Fact?.Id, fact.Id));
+        if (recognizedBusinessUnit != null)
+          factBusinessUnitIds.Add(recognizedBusinessUnit.BusinessUnit.Id);
+        else if (allBusinessUnitIds.Any())
+          factBusinessUnitIds.AddRange(allBusinessUnitIds);
+        else
+          factBusinessUnitIds.Add(0);
+
+        // В одном факте может быть несколько полей с адресатами. В этом случае обработать их все.
+        foreach (var field in fact.Fields.Where(x => x.Name == ArioGrammars.LetterFact.AddresseeField))
+        {
+          foreach (var businessUnitId in factBusinessUnitIds)
+          {
+            var employees = Company.PublicFunctions.Employee.GetEmployeesByNameFuzzy(field.Value, businessUnitId);
+            if (employees.Count > 1)
+              employees = employees.Where(x => managers.Contains(x)).ToList();
+            if (employees.Count == 1)
+              recognizedAddressees.Add(RecognizedOfficial.Create(employees.First(), null, fact, field.Probability));
+          }
+        }
+      }
+      
+      return recognizedAddressees;
+    }
+    
+    #endregion
+
+    #region Первичка
+
+    /// <summary>
+    /// Заполнить свойства акта выполненных работ по результатам обработки Ario. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="contractStatement">Акт выполненных работ.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Сотрудник, ответственный за обработку поступивших документов.</param>
+    [Public]
+    public virtual void FillContractStatementPropertiesFuzzy(FinancialArchive.IContractStatement contractStatement,
+                                                             IDocumentInfo documentInfo,
+                                                             Sungero.Company.IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      
+      // Вид документа.
+      this.FillDocumentKind(contractStatement);
+      
+      // Подразделение и ответственный.
+      contractStatement.Department = Company.PublicFunctions.Department.GetDepartment(responsible);
+      contractStatement.ResponsibleEmployee = responsible;
+      
+      // Сумма и валюта.
+      this.FillAccountingDocumentAmountAndCurrency(contractStatement, documentInfo);
+      
+      // НОР и КА.
+      var arioCounterpartyTypes = new List<string>()
+      {
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller,
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer
+      };
+      
+      var recognizedCounterparties = this.GetRecognizedAccountingDocumentCounterpartiesFuzzy(arioDocument.Facts, arioCounterpartyTypes);
+      var seller = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller).FirstOrDefault();
+      var buyer = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer).FirstOrDefault();
+      var nonType = recognizedCounterparties.Where(m => m.Type == string.Empty).ToList();
+      
+      var recognizedDocumentParties = this.GetDocumentParties(buyer, seller, nonType, responsible);
+      
+      this.FillAccountingDocumentParties(contractStatement, documentInfo, recognizedDocumentParties);
+      
+      // Дата, номер и регистрация.
+      this.FillDocumentRegistrationData(contractStatement, documentInfo, ArioGrammars.DocumentFact.Name, Docflow.Resources.UnknownNumber);
+      
+      // Договор.
+      this.FillAccountingDocumentLeadingDocumentFuzzy(contractStatement, arioDocument);
+    }
+
+    /// <summary>
+    /// Заполнить свойства накладной по результатам обработки Ario. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="waybill">Товарная накладная.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Сотрудник, ответственный за обработку поступивших документов.</param>
+    [Public]
+    public virtual void FillWaybillPropertiesFuzzy(FinancialArchive.IWaybill waybill,
+                                                   IDocumentInfo documentInfo,
+                                                   Sungero.Company.IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      
+      // Вид документа.
+      this.FillDocumentKind(waybill);
+      
+      // Подразделение и ответственный.
+      waybill.Department = Company.PublicFunctions.Department.GetDepartment(responsible);
+      waybill.ResponsibleEmployee = responsible;
+      
+      // Сумма и валюта.
+      this.FillAccountingDocumentAmountAndCurrency(waybill, documentInfo);
+      
+      // НОР и КА.
+      var arioCounterpartyTypes = new List<string>();
+      arioCounterpartyTypes.Add(ArioGrammars.CounterpartyFact.CounterpartyTypes.Supplier);
+      arioCounterpartyTypes.Add(ArioGrammars.CounterpartyFact.CounterpartyTypes.Payer);
+      arioCounterpartyTypes.Add(ArioGrammars.CounterpartyFact.CounterpartyTypes.Shipper);
+      arioCounterpartyTypes.Add(ArioGrammars.CounterpartyFact.CounterpartyTypes.Consignee);
+      
+      var recognizedCounterparties = this.GetRecognizedAccountingDocumentCounterpartiesFuzzy(arioDocument.Facts, arioCounterpartyTypes);
+      var seller = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Supplier).FirstOrDefault() ??
+        recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Shipper).FirstOrDefault();
+      var buyer = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Payer).FirstOrDefault() ??
+        recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Consignee).FirstOrDefault();
+      
+      var recognizedDocumentParties = this.GetDocumentParties(buyer, seller, responsible);
+      
+      this.FillAccountingDocumentParties(waybill, documentInfo, recognizedDocumentParties);
+      
+      // Дата, номер и регистрация.
+      this.FillDocumentRegistrationData(waybill, documentInfo, ArioGrammars.FinancialDocumentFact.Name, Docflow.Resources.UnknownNumber);
+      
+      // Документ-основание.
+      this.FillAccountingDocumentLeadingDocumentFuzzy(waybill, arioDocument);
+    }
+
+    /// <summary>
+    /// Заполнить свойства универсального передаточного документа по результатам обработки Ario. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="universalTransferDocument">Универсальный передаточный документ.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Сотрудник, ответственный за обработку поступивших документов.</param>
+    [Public]
+    public virtual void FillUniversalTransferDocumentPropertiesFuzzy(FinancialArchive.IUniversalTransferDocument universalTransferDocument,
+                                                                     IDocumentInfo documentInfo,
+                                                                     Sungero.Company.IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      
+      // Вид документа.
+      this.FillDocumentKind(universalTransferDocument);
+      
+      // Сумма и валюта.
+      this.FillAccountingDocumentAmountAndCurrency(universalTransferDocument, documentInfo);
+      
+      // Подразделение и ответственный.
+      universalTransferDocument.Department = Company.PublicFunctions.Department.GetDepartment(responsible);
+      universalTransferDocument.ResponsibleEmployee = responsible;
+      
+      // НОР и КА.
+      var arioCounterpartyTypes = new List<string>()
+      {
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller,
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer,
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Shipper,
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Consignee
+      };
+
+      var recognizedCounterparties = this.GetRecognizedAccountingDocumentCounterpartiesFuzzy(arioDocument.Facts, arioCounterpartyTypes);
+      var seller = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller).FirstOrDefault() ??
+        recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Shipper).FirstOrDefault();
+      var buyer = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer).FirstOrDefault() ??
+        recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Consignee).FirstOrDefault();
+      
+      var recognizedDocumentParties = this.GetDocumentParties(buyer, seller, responsible);
+      
+      this.FillAccountingDocumentParties(universalTransferDocument, documentInfo, recognizedDocumentParties);
+      
+      // Дата, номер и регистрация.
+      this.FillDocumentRegistrationData(universalTransferDocument, documentInfo, ArioGrammars.FinancialDocumentFact.Name, Docflow.Resources.UnknownNumber);
+      
+      // Договор (документ-основание).
+      this.FillAccountingDocumentLeadingDocumentFuzzy(universalTransferDocument, arioDocument);
+      
+      // Корректировочный документ.
+      if (universalTransferDocument.IsAdjustment.HasValue && universalTransferDocument.IsAdjustment.Value == true)
+        this.FillUniversalTransferDocumentCorrectedDocument(universalTransferDocument, documentInfo);
+      else
+        this.FillUniversalTransferDocumentRevisionInfo(universalTransferDocument, documentInfo);
+    }
+
+    /// <summary>
+    /// Подобрать по факту контрагента и НОР.
+    /// </summary>
+    /// <param name="allFacts">Факты.</param>
+    /// <param name="arioCounterpartyTypes">Типы фактов контрагентов.</param>
+    /// <returns>Наши организации и контрагенты, найденные по фактам.</returns>
+    [Public]
+    public virtual List<IRecognizedCounterparty> GetRecognizedAccountingDocumentCounterpartiesFuzzy(List<IArioFact> allFacts, List<string> arioCounterpartyTypes)
+    {
+      var recognizedCounterparties = new List<IRecognizedCounterparty>();
+      
+      foreach (var counterpartyType in arioCounterpartyTypes)
+      {
+        var recognizedBusinessUnit = this.GetRecognizedBusinessUnitFuzzy(allFacts, counterpartyType);
+        var recognizedCounterparty = this.GetRecognizedCounterpartyFuzzy(allFacts, counterpartyType);
+        
+        // Если по одному факту найдены и НОР, и КА. Объединить результаты в одной структуре. Если найдены по разным фактам, то НОР приоритетнее.
+        if (recognizedBusinessUnit.BusinessUnit != null && recognizedCounterparty.Counterparty != null && Equals(recognizedBusinessUnit.Fact, recognizedCounterparty.Fact))
+        {
+          recognizedCounterparty.BusinessUnit = recognizedBusinessUnit.BusinessUnit;
+          recognizedCounterparty.BusinessUnitProbability = recognizedBusinessUnit.BusinessUnitProbability;
+          recognizedCounterparties.Add(recognizedCounterparty);
+        }
+        else if (recognizedBusinessUnit.BusinessUnit != null)
+          recognizedCounterparties.Add(recognizedBusinessUnit);
+        else if (recognizedCounterparty.Counterparty != null)
+          recognizedCounterparties.Add(recognizedCounterparty);
+      }
+      
+      return recognizedCounterparties;
+    }
+
+    #endregion
+
+    #region Договорные документы, финансовые документы, счет на оплату
+
+    /// <summary>
+    /// Заполнить свойства во входящем счете на оплату. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="incomingInvoice">Входящий счет.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Ответственный за верификацию.</param>
+    [Public]
+    public virtual void FillIncomingInvoicePropertiesFuzzy(Contracts.IIncomingInvoice incomingInvoice,
+                                                           IDocumentInfo documentInfo,
+                                                           IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      
+      // Вид документа.
+      this.FillDocumentKind(incomingInvoice);
+      
+      // Подразделение.
+      incomingInvoice.Department = Company.PublicFunctions.Department.GetDepartment(responsible);
+
+      // Сумма и валюта.
+      this.FillAccountingDocumentAmountAndCurrency(incomingInvoice, documentInfo);
+      
+      // НОР и КА.
+      var arioCounterpartyTypes = new List<string>()
+      {
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller,
+        ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer
+      };
+      
+      var recognizedCounterparties = this.GetRecognizedAccountingDocumentCounterpartiesFuzzy(arioDocument.Facts, arioCounterpartyTypes);
+      var seller = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller).FirstOrDefault();
+      var buyer = recognizedCounterparties.Where(m => m.Type == ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer).FirstOrDefault();
+      var nonType = recognizedCounterparties.Where(m => m.Type == string.Empty).ToList();
+      
+      var recognizedDocumentParties = this.GetDocumentParties(buyer, seller, nonType, responsible);
+      
+      this.FillAccountingDocumentParties(incomingInvoice, documentInfo, recognizedDocumentParties);
+      
+      // Договор.
+      this.FillIncomingInvoiceContractFuzzy(incomingInvoice, arioDocument);
+      
+      // Номер и дата.
+      var props = incomingInvoice.Info.Properties;
+      this.FillDocumentNumberAndDateFuzzy(incomingInvoice, arioDocument, ArioGrammars.FinancialDocumentFact.Name,
+                                          props.Number, ArioGrammars.FinancialDocumentFact.NumberField,
+                                          props.Date, ArioGrammars.FinancialDocumentFact.DateField);
+    }
+
+    /// <summary>
+    /// Заполнить свойства договора по результатам обработки Ario.
+    /// </summary>
+    /// <param name="contract">Договор.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Сотрудник, ответственный за обработку поступивших документов.</param>
+    [Public]
+    public virtual void FillContractPropertiesFuzzy(Contracts.IContract contract,
+                                                    IDocumentInfo documentInfo,
+                                                    Sungero.Company.IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      
+      // Вид документа.
+      this.FillDocumentKind(contract);
+      
+      this.FillContractualDocumentAmountAndCurrency(contract, documentInfo);
+      
+      // Заполнить данные нашей стороны и корреспондента.
+      this.FillContractualDocumentPartiesFuzzy(contract, documentInfo, responsible);
+      
+      // Заполнить ответственного после заполнения НОР и КА, чтобы вычислялась НОР из фактов, а не по отв.
+      // Если так не сделать, то НОР заполнится по ответственному и вычисления не будут выполняться.
+      contract.Department = Company.PublicFunctions.Department.GetDepartment(responsible);
+      contract.ResponsibleEmployee = responsible;
+      
+      // Дата и номер.
+      this.FillDocumentRegistrationData(contract, documentInfo, ArioGrammars.DocumentFact.Name, Docflow.Resources.DocumentWithoutNumber);
+    }
+
+    /// <summary>
+    /// Заполнить свойства доп. соглашения по результатам обработки Ario. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="supAgreement">Доп. соглашение.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Сотрудник, ответственный за обработку поступивших документов.</param>
+    [Public]
+    public virtual void FillSupAgreementPropertiesFuzzy(Contracts.ISupAgreement supAgreement,
+                                                        IDocumentInfo documentInfo,
+                                                        Sungero.Company.IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      
+      // Вид документа.
+      this.FillDocumentKind(supAgreement);
+      
+      this.FillContractualDocumentAmountAndCurrency(supAgreement, documentInfo);
+      
+      // Заполнить данные нашей стороны и корреспондента.
+      this.FillContractualDocumentPartiesFuzzy(supAgreement, documentInfo, responsible);
+      
+      // Договор (документ-основание).
+      this.FillSupAgreementLeadingDocumentFuzzy(supAgreement, arioDocument);
+      
+      // Заполнить ответственного после заполнения НОР и КА, чтобы вычислялась НОР из фактов, а не по отв.
+      // Если так не сделать, то НОР заполнится по ответственному и вычисления не будут выполняться.
+      supAgreement.Department = Company.PublicFunctions.Department.GetDepartment(responsible);
+      supAgreement.ResponsibleEmployee = responsible;
+      
+      // Дата и номер.
+      this.FillDocumentRegistrationData(supAgreement, documentInfo, ArioGrammars.SupAgreementFact.Name, Docflow.Resources.DocumentWithoutNumber);
+    }
+
+    /// <summary>
+    /// Заполнить стороны договорного документа с использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="contractualDocument">Договорной документ.</param>
+    /// <param name="documentInfo">Информация о документе.</param>
+    /// <param name="responsible">Ответственный за верификацию.</param>
+    [Public]
+    public virtual void FillContractualDocumentPartiesFuzzy(Contracts.IContractualDocument contractualDocument,
+                                                            IDocumentInfo documentInfo,
+                                                            IEmployee responsible)
+    {
+      var arioDocument = documentInfo.ArioDocument;
+      var props = contractualDocument.Info.Properties;
+      var businessUnitPropertyName = props.BusinessUnit.Name;
+      var counterpartyPropertyName = props.Counterparty.Name;
+      
+      var signatoryFieldNames = new List<string>
+      {
+        ArioGrammars.CounterpartyFact.SignatorySurnameField,
+        ArioGrammars.CounterpartyFact.SignatoryNameField,
+        ArioGrammars.CounterpartyFact.SignatoryPatrnField
+      };
+      
+      // Задать приоритет полей для поиска корреспондента. Вес определяет как учитывается вероятность каждого поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.CounterpartyFact.TinField, 0.30 },
+        { ArioGrammars.CounterpartyFact.TrrcField, 0.05 },
+        { ArioGrammars.CounterpartyFact.NameField, 0.25 },
+        { ArioGrammars.CounterpartyFact.LegalFormField, 0.05 },
+        { ArioGrammars.CounterpartyFact.SignatorySurnameField, 0.20 },
+        { ArioGrammars.CounterpartyFact.SignatoryNameField, 0.10 },
+        { ArioGrammars.CounterpartyFact.SignatoryPatrnField, 0.05 }
+      };
+      
+      var defaultBusinessUnit = Docflow.PublicFunctions.Module.GetDefaultBusinessUnit(responsible);
+      // Если НОР не указана в карточке ответственного, проверить, является ли НОР единственной в справочнике.
+      var allBusinessUnits = Sungero.Company.BusinessUnits.GetAll();
+      if (allBusinessUnits.Count() == 1)
+        defaultBusinessUnit = allBusinessUnits.Single();
+      var defaultBusinessUnitId = defaultBusinessUnit != null ? defaultBusinessUnit.Id : 0;
+      
+      var allCounterparyFacts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(arioDocument.Facts, ArioGrammars.CounterpartyFact.Name, weightedFields);
+      var resultsForBusinessUnit = new List<IArioFactElasticsearchData>();
+      var resultsForCounterparty = new List<IArioFactElasticsearchData>();
+      foreach (var fact in allCounterparyFacts)
+      {
+        var searchResultForBusinessUnit = this.SearchBusinessUnitFuzzy(fact);
+        if (searchResultForBusinessUnit.EntityId != 0)
+        {
+          var recognizedFields = new Dictionary<IArioFactField, double>();
+          foreach (var field in searchResultForBusinessUnit.FoundedFields)
+            recognizedFields.Add(field, weightedFields[field.Name]);
+          searchResultForBusinessUnit.AggregateFieldsProbability = Commons.PublicFunctions.Module.GetAggregateFieldsProbability(recognizedFields);
+          resultsForBusinessUnit.Add(searchResultForBusinessUnit);
+        }
+        
+        var searchResultForCounterparty = this.SearchCounterpartyFuzzy(fact);
+        if (searchResultForCounterparty.EntityId != 0)
+        {
+          // Если запись закрыта, установить минимальную вероятность. Иначе рассчитать средневзвешенную вероятность.
+          var recognizedFields = new Dictionary<IArioFactField, double>();
+          foreach (var field in searchResultForCounterparty.FoundedFields)
+            recognizedFields.Add(field, weightedFields[field.Name]);
+          searchResultForCounterparty.AggregateFieldsProbability = Commons.PublicFunctions.Module.GetAggregateFieldsProbability(recognizedFields);
+          resultsForCounterparty.Add(searchResultForCounterparty);
+        }
+      }
+
+      var recognizedBusinessUnitInfo = ArioFactElasticsearchData.Create();
+      recognizedBusinessUnitInfo.EntityId = 0;
+      // Если найденная НОР соответствует НОР по умолчанию.
+      var foundedDefaultBusinessUnit = resultsForBusinessUnit.Where(l => l.EntityId == defaultBusinessUnitId);
+      if (foundedDefaultBusinessUnit.Any())
+        recognizedBusinessUnitInfo = foundedDefaultBusinessUnit.FirstOrDefault();
+      // Взять первую НОР из найденных, если нет НОР по умолчанию.
+      if (resultsForBusinessUnit.Any() && recognizedBusinessUnitInfo.EntityId == 0)
+        recognizedBusinessUnitInfo = resultsForBusinessUnit.FirstOrDefault();
+
+      if (recognizedBusinessUnitInfo.EntityId != 0)
+      {
+        contractualDocument.BusinessUnit = Company.BusinessUnits.GetAll(x => x.Id == recognizedBusinessUnitInfo.EntityId).FirstOrDefault();
+        
+        var businessUnitFieldNames = recognizedBusinessUnitInfo.FoundedFields.Select(l => l.Name).ToList();
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                recognizedBusinessUnitInfo.Fact,
+                                                                                businessUnitFieldNames,
+                                                                                businessUnitPropertyName,
+                                                                                contractualDocument.BusinessUnit,
+                                                                                recognizedBusinessUnitInfo.AggregateFieldsProbability,
+                                                                                null);
+      }
+
+      // Заполнить подписанта.
+      var recognizedBusinessUnit = RecognizedCounterparty.Create(contractualDocument.BusinessUnit,
+                                                                 null,
+                                                                 recognizedBusinessUnitInfo.Fact,
+                                                                 string.Empty,
+                                                                 recognizedBusinessUnitInfo.AggregateFieldsProbability,
+                                                                 null);
+      var ourSignatory = this.GetSignatoryForContractualDocumentFuzzy(contractualDocument,
+                                                                      arioDocument.Facts,
+                                                                      recognizedBusinessUnit,
+                                                                      signatoryFieldNames,
+                                                                      true);
+      if (ourSignatory.Employee != null)
+        this.FillOurSignatoryForContractualDocument(contractualDocument, documentInfo, ourSignatory, signatoryFieldNames);
+
+      if (contractualDocument.BusinessUnit == null)
+      {
+        contractualDocument.BusinessUnit = Company.BusinessUnits.GetAll(x => x.Id == defaultBusinessUnitId).FirstOrDefault();
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                null,
+                                                                                null,
+                                                                                businessUnitPropertyName,
+                                                                                contractualDocument.BusinessUnit,
+                                                                                Module.PropertyProbabilityLevels.Min,
+                                                                                null);
+      }
+
+      // Заполнить данные контрагента.
+      var recognizedCounterpartyInfo = resultsForCounterparty
+        .Where(x => x.EntityId != 0 && (contractualDocument.BusinessUnit == null || (contractualDocument.BusinessUnit != null &&
+                                                                                     x.EntityId != contractualDocument.BusinessUnit.Company.Id)))
+        .FirstOrDefault();
+
+      if (recognizedCounterpartyInfo != null)
+      {
+        contractualDocument.Counterparty = Parties.Counterparties.GetAll(x => Equals(x.Id, recognizedCounterpartyInfo.EntityId)).FirstOrDefault();
+        var counterpartyFieldNames = recognizedCounterpartyInfo.FoundedFields.Select(l => l.Name).ToList();
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                recognizedCounterpartyInfo.Fact,
+                                                                                counterpartyFieldNames,
+                                                                                counterpartyPropertyName,
+                                                                                contractualDocument.Counterparty,
+                                                                                recognizedCounterpartyInfo.AggregateFieldsProbability,
+                                                                                null);
+      }
+      // Заполнить подписанта от КА.
+      var recognizedCounterparty = RecognizedCounterparty.Create(null,
+                                                                 contractualDocument.Counterparty,
+                                                                 recognizedCounterpartyInfo != null ? recognizedCounterpartyInfo.Fact : null,
+                                                                 string.Empty,
+                                                                 null,
+                                                                 recognizedCounterpartyInfo != null ? recognizedCounterpartyInfo.AggregateFieldsProbability : 0);
+      
+      var signedBy = this.GetSignatoryForContractualDocumentFuzzy(contractualDocument,
+                                                                  arioDocument.Facts,
+                                                                  recognizedCounterparty,
+                                                                  signatoryFieldNames,
+                                                                  false);
+      
+      // При заполнении поля подписал, если контрагент не заполнен, он подставляется из подписанта.
+      if (signedBy.Contact != null)
+        this.FillCounterpartySignatoryForContractualDocument(contractualDocument, documentInfo, signedBy, signatoryFieldNames);
+    }
+
+    /// <summary>
+    /// Заполнить ведущий договор финансового документа.
+    /// </summary>
+    /// <param name="document">Финансовый документ.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    [Public]
+    public virtual void FillAccountingDocumentLeadingDocumentFuzzy(IAccountingDocumentBase document, IArioDocument arioDocument)
+    {
+      var recognizedDocument = this.GetLeadingContractualDocumentFuzzy(arioDocument.Facts, document.BusinessUnit, document.Counterparty);
+      if (recognizedDocument.Contract != null)
+      {
+        document.LeadingDocument = recognizedDocument.Contract;
+        Sungero.Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
+                                                                                  recognizedDocument.Fact,
+                                                                                  null,
+                                                                                  document.Info.Properties.LeadingDocument.Name,
+                                                                                  document.LeadingDocument,
+                                                                                  recognizedDocument.Probability);
+      }
+    }
+    
+    /// <summary>
+    /// Заполнить ведущий договор во входящем счете.
+    /// </summary>
+    /// <param name="incomingInvoice">Входящий счет.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    [Public]
+    public virtual void FillIncomingInvoiceContractFuzzy(IIncomingInvoice incomingInvoice, IArioDocument arioDocument)
+    {
+      var recognizedDocument = this.GetLeadingContractualDocumentFuzzy(arioDocument.Facts, incomingInvoice.BusinessUnit, incomingInvoice.Counterparty);
+      if (recognizedDocument.Contract != null)
+      {
+        incomingInvoice.Contract = recognizedDocument.Contract;
+        Sungero.Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
+                                                                                  recognizedDocument.Fact,
+                                                                                  null,
+                                                                                  incomingInvoice.Info.Properties.Contract.Name,
+                                                                                  incomingInvoice.Contract,
+                                                                                  recognizedDocument.Probability);
+      }
+    }
+    
+    /// <summary>
+    /// Заполнить ведущий договор в доп. соглашении.
+    /// </summary>
+    /// <param name="supAgreement">Доп. соглашение.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    [Public]
+    public virtual void FillSupAgreementLeadingDocumentFuzzy(Contracts.ISupAgreement supAgreement, IArioDocument arioDocument)
+    {
+      // Получить факты, содержащие номер и/или дату договора. Приоритетнее факты, содержащие оба поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.SupAgreementFact.DocumentBaseDateField, 0.5 },
+        { ArioGrammars.SupAgreementFact.DocumentBaseNumberField, 0.5 }
+      };
+      var facts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(arioDocument.Facts, ArioGrammars.SupAgreementFact.Name, weightedFields);
+
+      if (!facts.Any())
+        return;
+      
+      // Подготовить список договоров для поска. НОР обязательна, контрагент - нет.
+      if (supAgreement.BusinessUnit == null)
+        return;
+      
+      var contracts = Contracts.ContractBases.GetAll(d => Equals(d.BusinessUnit, supAgreement.BusinessUnit));
+      if (supAgreement.Counterparty != null)
+        contracts = contracts.Where(d => Equals(d.Counterparty, supAgreement.Counterparty));
+      if (!contracts.Any())
+        return;
+      
+      // Найти договор по номеру и дате.
+      var recognizedDocument = this.GetRecognizedDocumentFuzzy(facts, contracts, ArioGrammars.SupAgreementFact.DocumentBaseNumberField,
+                                                               ArioGrammars.SupAgreementFact.DocumentBaseDateField);
+      
+      if (recognizedDocument.Document != null)
+      {
+        supAgreement.LeadingDocument = Contracts.ContractBases.As(recognizedDocument.Document);
+        Sungero.Commons.PublicFunctions.EntityRecognitionInfo.LinkFactFieldsAndProperty(arioDocument.RecognitionInfo,
+                                                                                        recognizedDocument.Fact,
+                                                                                        weightedFields.Select(fl => fl.Key).ToList(),
+                                                                                        supAgreement.Info.Properties.LeadingDocument.Name,
+                                                                                        supAgreement.LeadingDocument,
+                                                                                        recognizedDocument.Probability,
+                                                                                        null);
+      }
+    }
+
+    /// <summary>
+    /// Получить подписанта нашей стороны/подписанта контрагента для договорного документа по фактам и НОР с использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="document">Договорной документ.</param>
+    /// <param name="facts">Извлеченные из документа факты.</param>
+    /// <param name="recognizedOrganization">Структура с НОР, КА, фактом и признаком доверия.</param>
+    /// <param name="signatoryFieldNames">Список наименований полей с ФИО подписанта.</param>
+    /// <param name="isOurSignatory">Признак поиска нашего подписанта (true) или подписанта КА (false).</param>
+    /// <returns>Структура, содержащая сотрудника или контакт, факт и вероятность.</returns>
+    [Public]
+    public virtual IRecognizedOfficial GetSignatoryForContractualDocumentFuzzy(Contracts.IContractualDocument document,
+                                                                               List<IArioFact> facts,
+                                                                               IRecognizedCounterparty recognizedOrganization,
+                                                                               List<string> signatoryFieldNames,
+                                                                               bool isOurSignatory = false)
+    {
+      var props = document.Info.Properties;
+      var signatoryFacts = Commons.PublicFunctions.Module.GetFacts(facts, ArioGrammars.CounterpartyFact.Name);
+      var signedBy = RecognizedOfficial.Create(null, null, null, Module.PropertyProbabilityLevels.Min);
+      
+      if (!signatoryFacts.Any())
+        return signedBy;
+      
+      if (recognizedOrganization != null)
+      {
+        var organizationFact = recognizedOrganization.Fact;
+        if (organizationFact != null)
+        {
+          signedBy.Fact = organizationFact;
+          var isOrganizationFactWithSignatory = Commons.PublicFunctions.Module.GetFields(organizationFact, signatoryFieldNames).Any();
+          
+          var recognizedOrganizationNaming = this.GetRecognizedPersonNaming(organizationFact,
+                                                                            ArioGrammars.CounterpartyFact.SignatorySurnameField,
+                                                                            ArioGrammars.CounterpartyFact.SignatoryNameField,
+                                                                            ArioGrammars.CounterpartyFact.SignatoryPatrnField);
+          if (isOrganizationFactWithSignatory)
+            return isOurSignatory
+              ? this.GetRecognizedOurSignatoryForContractualDocumentFuzzy(document, organizationFact, recognizedOrganizationNaming)
+              : this.GetRecognizedContactFuzzy(organizationFact, document.Counterparty, recognizedOrganizationNaming);
+        }
+      }
+      
+      signatoryFacts = signatoryFacts
+        .Where(f => Commons.PublicFunctions.Module.GetFields(f, signatoryFieldNames).Any()).ToList();
+      
+      var organizationSignatory = new List<IRecognizedOfficial>();
+      foreach (var signatoryFact in signatoryFacts)
+      {
+        IRecognizedOfficial signatory = null;
+        
+        var recognizedSignatoryNaming = this.GetRecognizedPersonNaming(signatoryFact,
+                                                                       ArioGrammars.CounterpartyFact.SignatorySurnameField,
+                                                                       ArioGrammars.CounterpartyFact.SignatoryNameField,
+                                                                       ArioGrammars.CounterpartyFact.SignatoryPatrnField);
+        if (isOurSignatory)
+        {
+          signatory = this.GetRecognizedOurSignatoryForContractualDocumentFuzzy(document, signatoryFact, recognizedSignatoryNaming);
+          if (signatory.Employee != null)
+            organizationSignatory.Add(signatory);
+        }
+        else
+        {
+          signatory = this.GetRecognizedContactFuzzy(signatoryFact, document.Counterparty, recognizedSignatoryNaming);
+          if (signatory.Contact != null)
+            organizationSignatory.Add(signatory);
+        }
+      }
+      
+      if (organizationSignatory.Any())
+        signedBy = organizationSignatory.OrderByDescending(x => x.Probability).FirstOrDefault();
+
+      return signedBy;
+    }
+
+    /// <summary>
+    /// Получить контактное лицо по данным из факта и контрагента с использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="contactFact">Факт, содержащий сведения о контакте.</param>
+    /// <param name="counterparty">Контрагент.</param>
+    /// <param name="recognizedContactNaming">Полное и краткое ФИО персоны.</param>
+    /// <returns>Структура, содержащая контактное лицо, факт и вероятность.</returns>
+    [Public]
+    public virtual IRecognizedOfficial GetRecognizedContactFuzzy(IArioFact contactFact,
+                                                                 ICounterparty counterparty,
+                                                                 IRecognizedPersonNaming recognizedContactNaming)
+    {
+      var signedBy = RecognizedOfficial.Create(null, Sungero.Parties.Contacts.Null, contactFact, Module.PropertyProbabilityLevels.Min);
+      
+      if (contactFact == null)
+        return signedBy;
+      
+      var contact = Contacts.Null;
+      
+      var fullName = recognizedContactNaming.FullName;
+      var shortName = recognizedContactNaming.ShortName;
+      var probability = Module.PropertyProbabilityLevels.Min;
+      
+      if (!string.IsNullOrWhiteSpace(fullName) || !string.IsNullOrWhiteSpace(shortName))
+      {
+        var counterpartyId = counterparty != null ? counterparty.Id : 0;
+        contact = Parties.PublicFunctions.Contact.GetContactsByNameFuzzy(fullName, counterpartyId);
+        
+        if (contact == null)
+          contact = Parties.PublicFunctions.Contact.GetContactsByNameFuzzy(shortName, counterpartyId);
+        else
+          probability = Module.PropertyProbabilityLevels.UpperMiddle;
+      }
+      
+      if (contact == null)
+        return signedBy;
+      
+      signedBy.Contact = contact;
+      signedBy.Fact = contactFact;
+      signedBy.Probability = probability;
+      
+      return signedBy;
+    }
+
+    /// <summary>
+    /// Получить подписанта нашей стороны для договорного документа по факту с использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="document">Договорной документ.</param>
+    /// <param name="ourSignatoryFact">Факт, содержащий сведения о подписанте нашей стороны.</param>
+    /// <param name="recognizedOurSignatoryNaming">Полное и краткое ФИО подписанта нашей стороны.</param>
+    /// <returns>Структура, содержащая сотрудника, факт и вероятность.</returns>
+    [Public]
+    public virtual IRecognizedOfficial GetRecognizedOurSignatoryForContractualDocumentFuzzy(Contracts.IContractualDocument document,
+                                                                                            IArioFact ourSignatoryFact,
+                                                                                            IRecognizedPersonNaming recognizedOurSignatoryNaming)
+    {
+      var signedBy = RecognizedOfficial.Create(null, null, ourSignatoryFact, Module.PropertyProbabilityLevels.Min);
+      var businessUnit = document.BusinessUnit;
+
+      if (ourSignatoryFact == null)
+        return signedBy;
+      
+      var fullName = recognizedOurSignatoryNaming.FullName;
+      var shortName = recognizedOurSignatoryNaming.ShortName;
+      var foundEmployees = Company.PublicFunctions.Employee.GetEmployeesByNameFuzzy(fullName, businessUnit != null ? businessUnit.Id : 0);
+      
+      if (!foundEmployees.Any())
+        return signedBy;
+      
+      if (foundEmployees.Count == 1)
+      {
+        signedBy.Employee = foundEmployees.FirstOrDefault();
+        
+        var employeeFoundByFullName = string.Equals(signedBy.Employee.Name, fullName, StringComparison.InvariantCultureIgnoreCase);
+        var fullNameEqualsShortName = string.Equals(fullName, shortName, StringComparison.InvariantCultureIgnoreCase);
+        if (employeeFoundByFullName && !fullNameEqualsShortName)
+          signedBy.Probability = Constants.Module.PropertyProbabilityLevels.Max;
+        else
+          signedBy.Probability = Constants.Module.PropertyProbabilityLevels.LowerMiddle;
+      }
+      
+      return signedBy;
+    }
+
+    #endregion
+
+    #region Заполнение даты и номера
+
+    /// <summary>
+    /// Заполнить номер и дату документа по результатам обработки Ario.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="arioDocument">Информация о документе Ario.</param>
+    /// <param name="factName">Наименование факта.</param>
+    /// <param name="numberPropertyInfo">Информация о свойстве с номером.</param>
+    /// <param name="numberFieldName">Наименование поля с номером.</param>
+    /// <param name="datePropertyInfo">Информация о свойстве с датой.</param>
+    /// <param name="dateFieldName">Наименование поля с датой.</param>
+    [Public]
+    public virtual void FillDocumentNumberAndDateFuzzy(IOfficialDocument document, IArioDocument arioDocument, string factName,
+                                                       Sungero.Domain.Shared.IStringPropertyInfo numberPropertyInfo, string numberFieldName,
+                                                       Sungero.Domain.Shared.IDateTimePropertyInfo datePropertyInfo, string dateFieldName)
+    {
+      // Получить факты с номером и/или датой документа. Приоритетнее факты, содержащие оба поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { numberFieldName, 0.5 },
+        { dateFieldName, 0.5 }
+      };
+      var facts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(arioDocument.Facts, factName, weightedFields);
+      
+      // Заполнить номер.
+      var numberFact = facts.FirstOrDefault(f => f.Fields.Any(fl => fl.Name == numberFieldName));
+      if (numberFact != null)
+      {
+        var recognizedNumber = this.GetRecognizedNumber(new List<IArioFact>() { numberFact }, factName, numberFieldName, numberPropertyInfo);
+        document.SetPropertyValue(numberPropertyInfo.Name, recognizedNumber.Number);
+        Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
+                                                                          recognizedNumber.Fact,
+                                                                          numberFieldName,
+                                                                          numberPropertyInfo.Name,
+                                                                          recognizedNumber.Number,
+                                                                          recognizedNumber.Probability);
+      }
+      
+      // Заполнить дату.
+      var dateFact = facts.FirstOrDefault(f => f.Fields.Any(fl => fl.Name == dateFieldName));
+      if (dateFact != null)
+      {
+        var recognizedDate = this.GetRecognizedDate(new List<IArioFact>() { dateFact }, factName, dateFieldName);
+        if (recognizedDate.Fact != null)
+        {
+          document.SetPropertyValue(datePropertyInfo.Name, recognizedDate.Date);
+          Commons.PublicFunctions.EntityRecognitionInfo.LinkFactAndProperty(arioDocument.RecognitionInfo,
+                                                                            recognizedDate.Fact,
+                                                                            dateFieldName,
+                                                                            datePropertyInfo.Name,
+                                                                            recognizedDate.Date,
+                                                                            recognizedDate.Probability);
+        }
+      }
+    }
+
+    #endregion
+
+    #region Получение ведущего документа
+
+    /// <summary>
+    /// Получить ведущий договор из фактов.
+    /// </summary>
+    /// <param name="facts">Список фактов.</param>
+    /// <param name="businessUnit">Наша организация.</param>
+    /// <param name="counterparty">Контрагент.</param>
+    /// <returns>Структура, содержащая ведущий договорной документ, факт и признак доверия.</returns>
+    [Public]
+    public virtual IRecognizedContract GetLeadingContractualDocumentFuzzy(List<IArioFact> facts, IBusinessUnit businessUnit, ICounterparty counterparty)
+    {
+      var result = RecognizedContract.Create(Contracts.ContractualDocuments.Null, null, null);
+      if (!facts.Any())
+        return result;
+
+      var fieldNames = new List<string>()
+      {
+        ArioGrammars.FinancialDocumentFact.DocumentBaseNameField,
+        ArioGrammars.FinancialDocumentFact.DocumentBaseDateField
+      };
+      
+      var baseDocumentFacts = facts
+        .Where(f => f.Name == ArioGrammars.FinancialDocumentFact.Name &&
+               f.Fields.Any(fl => fieldNames.Contains(fl.Name) && !string.IsNullOrEmpty(fl.Value)))
+        .ToList();
+
+      if (!baseDocumentFacts.Any())
+        return result;
+
+      // Получить список договоров для поиска. НОР обязательна, контрагент - нет.
+      if (businessUnit == null)
+        return result;
+
+      var contractualDocuments = Contracts.ContractualDocuments.GetAll(d => Equals(d.BusinessUnit, businessUnit));
+      if (counterparty != null)
+        contractualDocuments = contractualDocuments.Where(d => Equals(d.Counterparty, counterparty));
+      if (!contractualDocuments.Any())
+        return result;
+      
+      // Если найдено несколько документов-оснований, отсортировать их по важности. Более приоритетные содержат слово "договор" в названии.
+      if (baseDocumentFacts.Count > 1)
+      {
+        var contractualBaseNames = Resources.ContractualBaseDocumentNamesPriority.ToString().Split(';');
+        
+        var factScores = new Dictionary<IArioFact, double>();
+        foreach (var fact in baseDocumentFacts)
+        {
+          var baseNumberDateFields = fact.Fields.Where(fl => fieldNames.Contains(fl.Name) && !string.IsNullOrEmpty(fl.Value)).ToList();
+          var factProbability = baseNumberDateFields.Sum(fl => fl.Probability) / 2;
+          var score = Math.Round(baseNumberDateFields.Count + (factProbability / 100), 4);
+          var baseDocumentNameField = fact.Fields.FirstOrDefault(fl => fl.Name == ArioGrammars.FinancialDocumentFact.DocumentBaseNameField);
+          if (baseDocumentNameField != null)
+          {
+            var baseDocumentNameFieldValue = baseDocumentNameField.Value.Trim().ToLower();
+            for (var i = 0; i < contractualBaseNames.Length; i++)
+            {
+              if (baseDocumentNameFieldValue.Contains(contractualBaseNames[i]))
+              {
+                score += 10 * (contractualBaseNames.Length - i);
+                if (baseDocumentNameFieldValue.StartsWith(contractualBaseNames[i]))
+                  score += 100;
+                break;
+              }
+            }
+          }
+          factScores.Add(fact, score);
+        }
+        baseDocumentFacts = factScores.OrderByDescending(x => x.Value).Select(x => x.Key).ToList();
+      }
+
+      // Найти документ по номеру и дате.
+      var recognizedDocument = this.GetRecognizedDocumentFuzzy(baseDocumentFacts,
+                                                               contractualDocuments,
+                                                               ArioGrammars.FinancialDocumentFact.DocumentBaseNumberField,
+                                                               ArioGrammars.FinancialDocumentFact.DocumentBaseDateField);
+      
+      if (recognizedDocument.Document != null)
+      {
+        // Создать копию факта для подсветки полей документа-основания.
+        var fieldsForLink = recognizedDocument.Fact.Fields.Where(fl => fieldNames.Contains(fl.Name)).ToList();
+        result.Fact = ArioFact.Create(recognizedDocument.Fact.Id, recognizedDocument.Fact.Name, fieldsForLink);
+        result.Contract = Contracts.ContractualDocuments.As(recognizedDocument.Document);
+        result.Probability = recognizedDocument.Probability;
+      }
+      else if (counterparty != null)
+      {
+        // Если договор по номеру и дате не нашли, но есть единственный действующий для указанного контрагента, то подставить его.
+        contractualDocuments = contractualDocuments.Where(x => x.LifeCycleState.HasValue &&
+                                                          x.LifeCycleState.Value == Contracts.ContractualDocument.LifeCycleState.Active);
+        if (contractualDocuments.Count() == 1)
+        {
+          result.Contract = contractualDocuments.Single();
+          result.Probability = Module.PropertyProbabilityLevels.Min;
+        }
+      }
+      
+      return result;
+    }
+    
+    /// <summary>
+    /// Получить документ из фактов по номеру и дате.
+    /// </summary>
+    /// <param name="orderedFacts">Список фактов, отсортированных для поиска документа.</param>
+    /// <param name="filteredDocuments">Предварительно отфильтрованный запрос документов.</param>
+    /// <param name="numberFieldName">Имя поля факта с номером документа.</param>
+    /// <param name="dateFieldName">Имя поля факта с датой документа.</param>
+    /// <returns>Распознанный документ.</returns>
+    [Public]
+    public virtual IRecognizedDocument GetRecognizedDocumentFuzzy(List<IArioFact> orderedFacts, IQueryable<IOfficialDocument> filteredDocuments,
+                                                                  string numberFieldName, string dateFieldName)
+    {
+      var recognizedDocument = RecognizedDocument.Create();
+      if (!orderedFacts.Any())
+        return recognizedDocument;
+
+      if (!filteredDocuments.Any())
+        return recognizedDocument;
+
+      foreach (var fact in orderedFacts)
+      {
+        var probability = 0d;
+        var responseToDateField = fact.Fields
+          .Where(fl => fl.Name == dateFieldName && !string.IsNullOrWhiteSpace(fl.Value))
+          .OrderByDescending(fl => fl.Probability)
+          .FirstOrDefault();
+        if (responseToDateField != null)
+        {
+          DateTime responseToDate;
+          if (Calendar.TryParseDate(responseToDateField.Value, out responseToDate))
+          {
+            filteredDocuments = filteredDocuments.Where(l => Equals(l.RegistrationDate, responseToDate));
+            probability += responseToDateField.Probability;
+          }
+        }
+        
+        var responseToNumberField = fact.Fields
+          .Where(fl => fl.Name == numberFieldName && !string.IsNullOrWhiteSpace(fl.Value))
+          .OrderByDescending(fl => fl.Probability)
+          .FirstOrDefault();
+        if (responseToNumberField != null)
+        {
+          filteredDocuments = filteredDocuments.Where(l => string.Equals(l.RegistrationNumber, responseToNumberField.Value, StringComparison.InvariantCultureIgnoreCase));
+          probability += responseToNumberField.Probability;
+        }
+
+        if (filteredDocuments.Count() == 1)
+        {
+          recognizedDocument.Document = filteredDocuments.First();
+          recognizedDocument.Fact = fact;
+          recognizedDocument.Probability = probability / 2;
+          break;
+        }
+      }
+
+      return recognizedDocument;
+    }
+
+    #endregion
+
+    #region Получение контрагентов, контактов, подписантов, НОР
+    /// <summary>
+    /// Определить направление документа, НОР и КА у счет-фактуры. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="facts">Извлеченные из документа факты.</param>
+    /// <param name="responsible">Ответственный.</param>
+    /// <returns>Результат подбора сторон сделки для документа.</returns>
+    /// <remarks>Если НОР выступает продавцом, то счет-фактура - исходящая, иначе - входящая.</remarks>
+    [Public]
+    public virtual IRecognizedDocumentParties GetRecognizedTaxInvoicePartiesFuzzy(List<IArioFact> facts, IEmployee responsible)
+    {
+      // Определить является НОР продавцом (грузоотправителем) или покупателем (грузополучателем).
+      var buyer = this.GetRecognizedBusinessUnitFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer);
+      if (buyer == null)
+        buyer = this.GetRecognizedBusinessUnitFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Consignee);
+      var buyerIsBusinessUnit = buyer != null && buyer.BusinessUnit != null;
+      
+      var seller = this.GetRecognizedBusinessUnitFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller);
+      if (seller == null)
+        seller = this.GetRecognizedBusinessUnitFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Shipper);
+      var sellerIsBusinessUnit = seller != null && seller.BusinessUnit != null;
+
+      // Получить контргаента в зависимости от результатов поиска НОР.
+      if (!buyerIsBusinessUnit)
+      {
+        buyer = this.GetRecognizedCounterpartyFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Buyer);
+        if (buyer == null)
+          buyer = this.GetRecognizedCounterpartyFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Consignee);
+      }
+      if (!sellerIsBusinessUnit)
+      {
+        seller = this.GetRecognizedCounterpartyFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Seller);
+        if (seller == null)
+          seller = this.GetRecognizedCounterpartyFuzzy(facts, ArioGrammars.CounterpartyFact.CounterpartyTypes.Shipper);
+      }
+      
+      // Определить направление документа.
+      var recognizedDocumentParties = RecognizedDocumentParties.Create();
+      recognizedDocumentParties.ResponsibleEmployeeBusinessUnit = Docflow.PublicFunctions.Module.GetDefaultBusinessUnit(responsible);
+
+      if (buyerIsBusinessUnit && sellerIsBusinessUnit)
+      {
+        // Мультинорность. Уточнить НОР по ответственному.
+        if (Equals(seller.BusinessUnit, recognizedDocumentParties.ResponsibleEmployeeBusinessUnit))
+        {
+          // Исходящий документ.
+          recognizedDocumentParties.IsDocumentOutgoing = true;
+          recognizedDocumentParties.Counterparty = buyer;
+          recognizedDocumentParties.BusinessUnit = seller;
+        }
+        else
+        {
+          // Входящий документ.
+          recognizedDocumentParties.IsDocumentOutgoing = false;
+          recognizedDocumentParties.Counterparty = seller;
+          recognizedDocumentParties.BusinessUnit = buyer;
+        }
+      }
+      else if (buyerIsBusinessUnit)
+      {
+        // Входящий документ.
+        recognizedDocumentParties.IsDocumentOutgoing = false;
+        recognizedDocumentParties.Counterparty = seller;
+        recognizedDocumentParties.BusinessUnit = buyer;
+      }
+      else if (sellerIsBusinessUnit)
+      {
+        // Исходящий документ.
+        recognizedDocumentParties.IsDocumentOutgoing = true;
+        recognizedDocumentParties.Counterparty = buyer;
+        recognizedDocumentParties.BusinessUnit = seller;
+      }
+      else
+      {
+        // НОР не найдена по фактам - НОР будет взята по ответственному.
+        if (buyer != null && buyer.Counterparty != null && (seller == null || seller.Counterparty == null))
+        {
+          // Исходящий документ, потому что buyer - контрагент, а другой информации нет.
+          recognizedDocumentParties.IsDocumentOutgoing = true;
+          recognizedDocumentParties.Counterparty = buyer;
+        }
+        else
+        {
+          // Входящий документ.
+          recognizedDocumentParties.IsDocumentOutgoing = false;
+          recognizedDocumentParties.Counterparty = seller;
+        }
+      }
+
+      return recognizedDocumentParties;
+    }
+
+    /// <summary>
+    /// Поиск контрагента по извлеченным фактам. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="facts">Извлеченные из документа факты.</param>
+    /// <param name="counterpartyType">Тип контрагента.</param>
+    /// <returns>Контрагент со связанным фактом.</returns>
+    [Public]
+    public virtual IRecognizedCounterparty GetRecognizedCounterpartyFuzzy(List<IArioFact> facts, string counterpartyType)
+    {
+      var recognizedCounterparty = RecognizedCounterparty.Create();
+
+      // Задать приоритет полей для поиска. Вес определяет как учитывается вероятность каждого поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.CounterpartyFact.TinField, 0.40 },
+        { ArioGrammars.CounterpartyFact.TrrcField, 0.05 },
+        { ArioGrammars.CounterpartyFact.PsrnField, 0.30 },
+        { ArioGrammars.CounterpartyFact.NameField, 0.20 },
+        { ArioGrammars.CounterpartyFact.LegalFormField, 0.05 }
+      };
+      
+      // Отфильтровать факты по типу организации.
+      var counterpartyFacts = facts
+        .Where(f => f.Name == ArioGrammars.CounterpartyFact.Name &&
+               f.Fields.Any(fl => fl.Name == ArioGrammars.CounterpartyFact.CounterpartyTypeField && fl.Value == counterpartyType) &&
+               f.Fields.Any(fl => weightedFields.ContainsKey(fl.Name) && !string.IsNullOrEmpty(fl.Value)))
+        .ToList();
+      
+      if (!counterpartyFacts.Any())
+        return recognizedCounterparty;
+
+      // Отсортировать факты по количеству и приоритету полей.
+      var orderedCounterpartyFacts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(counterpartyFacts, ArioGrammars.CounterpartyFact.Name, weightedFields);
+      
+      // Получить контрагента по значениям полей факта с использованием Elasticsearch.
+      foreach (var fact in orderedCounterpartyFacts)
+      {
+        var searchResult = this.SearchCounterpartyFuzzy(fact);
+
+        if (searchResult.EntityId == 0)
+          continue;
+        
+        var counterparty = Parties.Counterparties.GetAll(x => Equals(x.Id, searchResult.EntityId)).FirstOrDefault();
+        if (counterparty == null)
+          continue;
+        
+        fact.Fields = searchResult.FoundedFields;
+        recognizedCounterparty.Fact = fact;
+        recognizedCounterparty.Type = counterpartyType;
+        recognizedCounterparty.Counterparty = counterparty;
+        
+        var recognizedFields = new Dictionary<IArioFactField, double>();
+        foreach (var field in fact.Fields)
+        {
+          recognizedFields.Add(field, weightedFields[field.Name]);
+        }
+        recognizedCounterparty.CounterpartyProbability = Commons.PublicFunctions.Module.GetAggregateFieldsProbability(recognizedFields);
+        
+        break;
+      }
+      
+      return recognizedCounterparty;
+    }
+
+    /// <summary>
+    /// Поиск НОР по извлеченным фактам. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="facts">Извлеченные из документа факты.</param>
+    /// <param name="counterpartyType">Тип факта с НОР.</param>
+    /// <returns>НОР со связанным фактом.</returns>
+    [Public]
+    public virtual IRecognizedCounterparty GetRecognizedBusinessUnitFuzzy(List<IArioFact> facts, string counterpartyType)
+    {
+      var recognizedBusinessUnit = RecognizedCounterparty.Create();
+      
+      // Задать приоритет полей для поиска. Вес определяет как учитывается вероятность каждого поля.
+      var weightedFields = new Dictionary<string, double>()
+      {
+        { ArioGrammars.CounterpartyFact.TinField, 0.40 },
+        { ArioGrammars.CounterpartyFact.TrrcField, 0.05 },
+        { ArioGrammars.CounterpartyFact.PsrnField, 0.30 },
+        { ArioGrammars.CounterpartyFact.NameField, 0.20 },
+        { ArioGrammars.CounterpartyFact.LegalFormField, 0.05 }
+      };
+      
+      // Отфильтровать факты по типу организации.
+      var counterpartyFacts = facts
+        .Where(f => f.Name == ArioGrammars.CounterpartyFact.Name &&
+               f.Fields.Any(fl => fl.Name == ArioGrammars.CounterpartyFact.CounterpartyTypeField && fl.Value == counterpartyType) &&
+               f.Fields.Any(fl => weightedFields.ContainsKey(fl.Name) && !string.IsNullOrEmpty(fl.Value)))
+        .ToList();
+      
+      if (!counterpartyFacts.Any())
+        return recognizedBusinessUnit;
+
+      // Отсортировать факты по количеству и приоритету полей.
+      var orderedCounterpartyFacts = Commons.PublicFunctions.Module.GetOrderedFactsByFieldPriorities(counterpartyFacts, ArioGrammars.CounterpartyFact.Name, weightedFields);
+      
+      // Получить НОР по значениям полей факта с использованием Elasticsearch.
+      foreach (var fact in orderedCounterpartyFacts)
+      {
+        var searchResult = this.SearchBusinessUnitFuzzy(fact);
+
+        if (searchResult.EntityId == 0)
+          continue;
+        
+        var businessUnit = Company.BusinessUnits.GetAll(x => Equals(x.Id, searchResult.EntityId)).FirstOrDefault();
+        if (businessUnit == null)
+          continue;
+        
+        fact.Fields = searchResult.FoundedFields;
+        recognizedBusinessUnit.Fact = fact;
+        recognizedBusinessUnit.Type = counterpartyType;
+        recognizedBusinessUnit.BusinessUnit = businessUnit;
+        
+        var recognizedFields = new Dictionary<IArioFactField, double>();
+        foreach (var field in fact.Fields)
+        {
+          recognizedFields.Add(field, weightedFields[field.Name]);
+        }
+        recognizedBusinessUnit.BusinessUnitProbability = Commons.PublicFunctions.Module.GetAggregateFieldsProbability(recognizedFields);
+        
+        break;
+      }
+      
+      return recognizedBusinessUnit;
+    }
+
+    /// <summary>
+    /// Найти корреспондента письма по значению полей факта. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="fact">Факт.</param>
+    /// <returns>Результаты поиска корреспондента.</returns>
+    [Public]
+    public virtual IArioFactElasticsearchData SearchLetterCorrespondentFuzzy(IArioFact fact)
+    {
+      // Создать список запросов для поиска по полям входящего письма.
+      var fieldQueries = new List<IArioFieldElasticsearchData>();
+
+      // ИНН.
+      var tin = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.TinField);
+      if (tin != null)
+      {
+        // Проверить ИНН на валидность. По значению поля Ario, либо (если поле извлечено не было), с помощью функции справочника.
+        var tinIsValid = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.TinIsValidField);
+        if ((tinIsValid != null && tinIsValid.Value == "true") || (tinIsValid == null && string.IsNullOrEmpty(Parties.PublicFunctions.Counterparty.CheckTin(tin.Value, true))))
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(tin, "TIN", ElasticsearchTypes.Term));
+      }
+
+      // КПП. Только для уточнения организаций, найденных по ИНН.
+      var trrc = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.TrrcField);
+      if (tin != null && trrc != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(trrc, "TRRC", ElasticsearchTypes.Term, true));
+      
+      // ОГРН.
+      var psrn = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.PsrnField);
+      if (psrn != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(psrn, "PSRN", ElasticsearchTypes.Term));
+      
+      // Наименование.
+      var names = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.LetterFact.CorrespondentNameField });
+      if (names != null)
+      {
+        // Если есть несколько полей с наименованием, проверить их все, последовательно уточняя. Если не нашли по полному наименованию, искать по краткому.
+        foreach (var name in names)
+        {
+          var normalizedValue = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(name.Value);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.MatchAnd, normalizedValue));
+          var fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Parties.PublicConstants.CompanyBase.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.MatchAnd, normalizedValue));
+          fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Parties.PublicConstants.CompanyBase.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+        }
+      }
+
+      // Головная организация.
+      var headCompany = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.HeadCompanyNameField);
+      if (headCompany != null)
+      {
+        var normalizedValue = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(headCompany.Value);
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(headCompany, "HeadCompany", ElasticsearchTypes.FuzzyOr, normalizedValue));
+      }
+      
+      // Адрес эл. почты.
+      var emails = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.LetterFact.EmailField });
+      if (emails != null)
+      {
+        foreach (var email in emails)
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(email, "Email", ElasticsearchTypes.MatchAnd));
+      }
+      
+      // Сайт.
+      var sites = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.LetterFact.WebsiteField });
+      if (sites != null)
+      {
+        foreach (var site in sites)
+        {
+          var normalizedValue = Parties.PublicFunctions.Module.NormalizeSite(site.Value);
+          if (!string.IsNullOrEmpty(normalizedValue))
+            fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(site, "Homepage", ElasticsearchTypes.MatchAnd, normalizedValue));
+        }
+      }
+
+      // Номер телефона.
+      var phones = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.LetterFact.PhoneField });
+      if (phones != null)
+      {
+        foreach (var phone in phones)
+        {
+          // По номеру телефона искать только для уточнения сущностей, найденных по другим полям.
+          var normalizedValue = Parties.PublicFunctions.Module.NormalizePhone(phone.Value);
+          if (!string.IsNullOrEmpty(normalizedValue))
+            fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(phone, "Phones", ElasticsearchTypes.Wildcard, normalizedValue, true, false));
+        }
+      }
+
+      // Выполнить запрос.
+      var searchQuery = ArioFactElasticsearchData.Create();
+      searchQuery.EntityName = CompanyBases.Info.Name;
+      searchQuery.Fact = fact;
+      searchQuery.Queries = fieldQueries;
+      return Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(searchQuery);
+    }
+
+    /// <summary>
+    /// Найти НОР письма по значению полей факта. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="fact">Факт.</param>
+    /// <returns>Результаты поиска НОР.</returns>
+    [Public]
+    public virtual IArioFactElasticsearchData SearchLetterBusinessUnitFuzzy(IArioFact fact)
+    {
+      // Создать список запросов для поиска по полям входящего письма.
+      var fieldQueries = new List<IArioFieldElasticsearchData>();
+
+      // ИНН.
+      var tin = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.TinField);
+      if (tin != null)
+      {
+        // Проверить ИНН на валидность. По значению поля Ario, либо (если поле извлечено не было), с помощью функции справочника.
+        var tinIsValid = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.TinIsValidField);
+        if ((tinIsValid != null && tinIsValid.Value == "true") || (tinIsValid == null && string.IsNullOrEmpty(Parties.PublicFunctions.Counterparty.CheckTin(tin.Value, true))))
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(tin, "TIN", ElasticsearchTypes.Term));
+      }
+
+      // КПП. Только для уточнения организаций, найденных по ИНН.
+      var trrc = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.TrrcField);
+      if (trrc != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(trrc, "TRRC", ElasticsearchTypes.Term, true));
+
+      // ОГРН.
+      var psrn = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.LetterFact.PsrnField);
+      if (psrn != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(psrn, "PSRN", ElasticsearchTypes.Term));
+      
+      // Наименование.
+      var names = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.LetterFact.CorrespondentNameField });
+      if (names != null)
+      {
+        // Если есть несколько полей с наименованием, проверить их все, последовательно уточняя.
+        foreach (var name in names)
+        {
+          var normalizedValue = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(name.Value);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.MatchAnd, normalizedValue));
+          var fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Company.PublicConstants.BusinessUnit.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.MatchAnd, normalizedValue));
+          fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Company.PublicConstants.BusinessUnit.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+        }
+      }
+      
+      // Выполнить запрос.
+      var searchQuery = ArioFactElasticsearchData.Create();
+      searchQuery.EntityName = Company.BusinessUnits.Info.Name;
+      searchQuery.Fact = fact;
+      searchQuery.Queries = fieldQueries;
+      return Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(searchQuery);
+    }
+
+    /// <summary>
+    /// Найти контрагента по значению полей факта. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="fact">Факт.</param>
+    /// <returns>Результаты поиска контрагента.</returns>
+    [Public]
+    public virtual IArioFactElasticsearchData SearchCounterpartyFuzzy(IArioFact fact)
+    {
+      // Подготовить данные для поиска полей.
+      var fieldQueries = new List<IArioFieldElasticsearchData>();
+      
+      // ИНН.
+      var tin = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.TinField);
+      if (tin != null)
+      {
+        // Проверить ИНН на валидность. По значению поля Ario, либо (если поле извлечено не было), с помощью функции справочника.
+        var tinIsValid = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.TinIsValidField);
+        if ((tinIsValid != null && tinIsValid.Value == "true") || (tinIsValid == null && string.IsNullOrEmpty(Parties.PublicFunctions.Counterparty.CheckTin(tin.Value, true))))
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(tin, "TIN", ElasticsearchTypes.Term));
+      }
+      
+      // КПП. Только для уточнения организаций, найденных по ИНН.
+      var trrc = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.TrrcField);
+      if (tin != null && trrc != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(trrc, "TRRC", ElasticsearchTypes.Term, true));
+
+      // ОГРН.
+      var psrn = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.PsrnField);
+      if (psrn != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(psrn, "PSRN", ElasticsearchTypes.Term));
+      
+      // Наименование.
+      var names = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.CounterpartyFact.NameField });
+      if (names != null)
+      {
+        var legalForm = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.LegalFormField);
+        // Если есть несколько полей с наименованием, проверить их все, последовательно уточняя. Если не нашли по полному наименованию, искать по краткому.
+        foreach (var name in names)
+        {
+          // Если есть поле с организационно-правовой формой, добавить значение ОПФ к наименованию.
+          if (legalForm != null && !name.Value.Contains(legalForm.Value))
+            name.Value = string.Format("{0} {1}", legalForm.Value, name.Value);
+          var normalizedValue = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(name.Value);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.MatchAnd, normalizedValue));
+          var fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Parties.PublicConstants.CompanyBase.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.MatchAnd, normalizedValue));
+          fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Parties.PublicConstants.CompanyBase.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+        }
+      }
+
+      // Выполнить запрос.
+      var searchQuery = ArioFactElasticsearchData.Create();
+      searchQuery.EntityName = Parties.CompanyBases.Info.Name;
+      searchQuery.Fact = fact;
+      searchQuery.Queries = fieldQueries;
+      return Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(searchQuery);
+    }
+
+    /// <summary>
+    /// Найти НОР по значению полей факта. С использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="fact">Факт.</param>
+    /// <returns>Результаты поиска НОР.</returns>
+    [Public]
+    public virtual IArioFactElasticsearchData SearchBusinessUnitFuzzy(IArioFact fact)
+    {
+      // Подготовить данные для поиска полей.
+      var fieldQueries = new List<IArioFieldElasticsearchData>();
+      
+      // ИНН.
+      var tin = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.TinField);
+      if (tin != null)
+      {
+        // Проверить ИНН на валидность. По значению поля Ario, либо (если поле извлечено не было), с помощью функции справочника.
+        var tinIsValid = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.TinIsValidField);
+        if ((tinIsValid != null && tinIsValid.Value == "true") || (tinIsValid == null && string.IsNullOrEmpty(Parties.PublicFunctions.Counterparty.CheckTin(tin.Value, true))))
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(tin, "TIN", ElasticsearchTypes.Term));
+      }
+
+      // КПП. Только для уточнения организаций, найденных по ИНН.
+      var trrc = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.TrrcField);
+      if (tin != null && trrc != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(trrc, "TRRC", ElasticsearchTypes.Term, true));
+
+      // ОГРН.
+      var psrn = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.PsrnField);
+      if (psrn != null)
+        fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(psrn, "PSRN", ElasticsearchTypes.Term));
+      
+      // Наименование.
+      var names = Commons.PublicFunctions.Module.GetFields(fact, new List<string>() { ArioGrammars.CounterpartyFact.NameField });
+      if (names != null)
+      {
+        var legalForm = Commons.PublicFunctions.Module.GetField(fact, ArioGrammars.CounterpartyFact.LegalFormField);
+        // Если есть несколько полей с наименованием, проверить их все, последовательно уточняя.
+        foreach (var name in names)
+        {
+          // Если есть поле с организационно-правовой формой, добавить значение ОПФ к наименованию.
+          if (legalForm != null && !name.Value.Contains(legalForm.Value))
+            name.Value = string.Format("{0} {1}", legalForm.Value, name.Value);
+          var normalizedValue = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(name.Value);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.MatchAnd, normalizedValue));
+          var fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "Name", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Company.PublicConstants.BusinessUnit.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+          fieldQueries.Add(Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.MatchAnd, normalizedValue));
+          fuzzyQuery = Commons.PublicFunctions.Module.CreateSearchFieldQuery(name, "ShortName", ElasticsearchTypes.FuzzyOr, normalizedValue);
+          fuzzyQuery.ScoreMinLimit = Company.PublicConstants.BusinessUnit.ElasticsearchMinScore;
+          fieldQueries.Add(fuzzyQuery);
+        }
+      }
+      
+      // Выполнить запрос.
+      var searchQuery = ArioFactElasticsearchData.Create();
+      searchQuery.EntityName = Company.BusinessUnits.Info.Name;
+      searchQuery.Fact = fact;
+      searchQuery.Queries = fieldQueries;
+      return Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(searchQuery);
+    }
+
+    /// <summary>
+    /// Поиск контактов по фактам Арио с учетом типа.
+    /// </summary>
+    /// <param name="arioDocument">Документ Арио.</param>
+    /// <param name="factType">Тип факта.</param>
+    /// <param name="filterCounterpartyId">ИД компании для фильтрации.</param>
+    /// <returns>Найденный контакт.</returns>
+    [Public]
+    public virtual IRecognizedOfficial GetRecognizedContactFuzzy(IArioDocument arioDocument, string factType, int filterCounterpartyId)
+    {
+      var recognized = RecognizedOfficial.Create();
+      
+      // Отфильтровать по нужному типу факта, отсортировать по вероятности.
+      var facts = arioDocument.Facts
+        .Where(x => x.Name == ArioGrammars.LetterPersonFact.Name &&
+               x.Fields.Any(f => f.Name == ArioGrammars.LetterPersonFact.TypeField && f.Value == factType) &&
+               x.Fields.Any(f => f.Name == ArioGrammars.LetterPersonFact.NameField && !string.IsNullOrWhiteSpace(f.Value)))
+        .OrderByDescending(x => x.Fields.First(f => f.Name == ArioGrammars.LetterPersonFact.NameField).Probability)
+        .ToList();
+      
+      foreach (var fact in facts)
+      {
+        var contactNameField = fact.Fields.First(x => x.Name == ArioGrammars.LetterPersonFact.NameField);
+        recognized.Contact = Sungero.Parties.PublicFunctions.Contact.GetContactsByNameFuzzy(contactNameField.Value, filterCounterpartyId);
+        
+        if (recognized.Contact != null)
+        {
+          recognized.Fact = fact;
+          recognized.Probability = contactNameField.Probability;
+          break;
+        }
+      }
+      
+      return recognized;
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Поиск по штрихкодам
+
     /// <summary>
     /// Получить документ по штрихкоду.
     /// </summary>
@@ -4611,7 +6711,7 @@ namespace Sungero.SmartProcessing.Server
       
       return document;
     }
-    
+
     /// <summary>
     /// Поиск Id документа по штрихкодам.
     /// </summary>
@@ -4650,11 +6750,11 @@ namespace Sungero.SmartProcessing.Server
       }
       return result;
     }
-    
+
     #endregion
-    
+
     #region Создание документа из тела письма
-    
+
     /// <summary>
     /// Создание документа на основе тела письма.
     /// </summary>
@@ -4683,7 +6783,7 @@ namespace Sungero.SmartProcessing.Server
         }
       }
     }
-    
+
     /// <summary>
     /// Создать документ из тела эл. письма.
     /// </summary>
@@ -4749,7 +6849,7 @@ namespace Sungero.SmartProcessing.Server
       
       return document;
     }
-    
+
     /// <summary>
     /// Удалить изображения из тела письма.
     /// </summary>
@@ -4778,11 +6878,11 @@ namespace Sungero.SmartProcessing.Server
 
       return mailBody;
     }
-    
+
     #endregion
-    
+
     #region Сборка и связывание пакета
-    
+
     /// <summary>
     /// Упорядочить и связать документы в пакете.
     /// </summary>
@@ -4821,7 +6921,7 @@ namespace Sungero.SmartProcessing.Server
       this.LogMessage("Smart processing. OrderAndLinkDocumentPackage.", packageId);
       
     }
-    
+
     /// <summary>
     /// Определить ведущий документ распознанного комплекта.
     /// </summary>
@@ -4864,7 +6964,7 @@ namespace Sungero.SmartProcessing.Server
                       leadingDocument.DisplayValue);
       return leadingDocument;
     }
-    
+
     /// <summary>
     /// Связать документы комплекта.
     /// </summary>
@@ -4903,7 +7003,7 @@ namespace Sungero.SmartProcessing.Server
         notRecognizedDocument.Save();
       }
     }
-    
+
     /// <summary>
     /// Переименовать документы в комплекте.
     /// </summary>
@@ -4988,11 +7088,11 @@ namespace Sungero.SmartProcessing.Server
         }
       }
     }
-    
+
     #endregion
-    
+
     #region Отправка в работу
-    
+
     /// <summary>
     /// Отправить документы ответственному.
     /// </summary>
@@ -5066,6 +7166,41 @@ namespace Sungero.SmartProcessing.Server
       
       this.LogMessage("Smart processing. SendToResponsible.", packageId);
     }
+
+    /// <summary>
+    /// Запустить асинхронные обработчики выдачи прав.
+    /// </summary>
+    /// <param name="documentPackage">Пакет документов в системе.</param>
+    public virtual void EnqueueGrantAccessRightsJobs(IDocumentPackage documentPackage)
+    {
+      var packageId = documentPackage.BlobPackage.PackageId;
+      this.LogMessage("Smart processing. EnqueueGrantAccessRightsJobs started.", packageId);
+      var documents = documentPackage.DocumentInfos.Select(d => d.Document).ToList<IOfficialDocument>();
+      if (!documents.Any())
+        return;
+      
+      var enqueueGrantAccessRightsToProjectDocumentJob = false;
+      foreach (var document in documents)
+      {
+        Docflow.PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(document.Id, new List<int>(), true);
+        this.LogMessage(string.Format("Smart processing. GrantAccessRightsToDocumentAsync started. Document ID = ({0})", document.Id), packageId);
+        
+        var documentParams = ((Sungero.Domain.Shared.IExtendedEntity)document).Params;
+        if (documentParams.ContainsKey(Docflow.PublicConstants.OfficialDocument.GrantAccessRightsToProjectDocument))
+        {
+          enqueueGrantAccessRightsToProjectDocumentJob = true;
+          documentParams.Remove(Docflow.PublicConstants.OfficialDocument.GrantAccessRightsToProjectDocument);
+        }
+      }
+      
+      if (enqueueGrantAccessRightsToProjectDocumentJob)
+      {
+        Sungero.Projects.Jobs.GrantAccessRightsToProjectDocuments.Enqueue();
+        this.LogMessage("Smart processing. GrantAccessRightsToProjectDocuments job started.", packageId);
+      }
+      
+      this.LogMessage("Smart processing. EnqueueGrantAccessRightsJobs completed.", packageId);
+    }
     
     /// <summary>
     /// Получить список ответственных за документы.
@@ -5092,7 +7227,7 @@ namespace Sungero.SmartProcessing.Server
       
       return responsibleEmployees.Distinct().ToList();
     }
-    
+
     /// <summary>
     /// Получить текст задачи на проверку документов.
     /// </summary>
@@ -5125,7 +7260,7 @@ namespace Sungero.SmartProcessing.Server
       
       return string.Join(Environment.NewLine + Environment.NewLine, taskActiveText);
     }
-    
+
     /// <summary>
     /// Получить блок текста задачи с ошибками обработки пакета документов.
     /// </summary>
@@ -5162,7 +7297,7 @@ namespace Sungero.SmartProcessing.Server
       else
         return string.Empty;
     }
-    
+
     /// <summary>
     /// Получить блок текста задачи со списком документов, которые не удалось классифицировать.
     /// </summary>
@@ -5191,7 +7326,7 @@ namespace Sungero.SmartProcessing.Server
       
       return string.Empty;
     }
-    
+
     /// <summary>
     /// Получить блок текста задачи со списком документов, которые не удалось зарегистрировать.
     /// </summary>
@@ -5222,7 +7357,7 @@ namespace Sungero.SmartProcessing.Server
       
       return string.Empty;
     }
-    
+
     /// <summary>
     /// Получить блок текста задачи со списком документов, которые занесены по штрихкоду.
     /// </summary>
@@ -5248,7 +7383,7 @@ namespace Sungero.SmartProcessing.Server
       
       return string.Empty;
     }
-    
+
     /// <summary>
     /// Получить блок текста задачи со списком документов, которые были заблокированы при занесении новой версии.
     /// </summary>
@@ -5288,7 +7423,7 @@ namespace Sungero.SmartProcessing.Server
       
       return string.Empty;
     }
-    
+
     /// <summary>
     /// Сформировать блок текста задачи на верификацию с гиперссылками на документы комплекта.
     /// </summary>
@@ -5320,11 +7455,11 @@ namespace Sungero.SmartProcessing.Server
       
       return documentsTaskText;
     }
-    
+
     #endregion
-    
+
     #region Завершение процесса обработки
-    
+
     /// <summary>
     /// Завершить процесс обработки.
     /// </summary>
@@ -5340,11 +7475,11 @@ namespace Sungero.SmartProcessing.Server
       
       this.LogMessage("Smart processing. FinalizeProcessing.", packageId);
     }
-    
+
     #endregion
-    
+
     #region Тесты
-    
+
     /// <summary>
     /// Обработать пакет бинарных образов документов (для теста).
     /// </summary>
@@ -5359,7 +7494,10 @@ namespace Sungero.SmartProcessing.Server
       this.OrderAndLinkDocumentPackage(documentPackage);
       
       this.SendToResponsible(documentPackage);
-
+      
+      // Вызываем асинхронную выдачу прав, так как убрали ее при сохранении.
+      this.EnqueueGrantAccessRightsJobs(documentPackage);
+      
       this.FinalizeProcessing(blobPackage);
     }
 
@@ -5392,7 +7530,7 @@ namespace Sungero.SmartProcessing.Server
 
       return documentPackage;
     }
-    
+
     /// <summary>
     /// Создать незаполненный пакет документов (для теста).
     /// </summary>
@@ -5421,7 +7559,7 @@ namespace Sungero.SmartProcessing.Server
 
       return documentPackage;
     }
-    
+
     /// <summary>
     /// Запустить фоновый процесс, удаляющий пакеты бинарных образов документов, которые отправлены на верификацию.
     /// </summary>
@@ -5430,11 +7568,11 @@ namespace Sungero.SmartProcessing.Server
     {
       Jobs.DeleteBlobPackages.Enqueue();
     }
-    
+
     #endregion
-    
+
     #region Логирование
-    
+
     /// <summary>
     /// Записать сообщение в лог.
     /// </summary>
@@ -5446,7 +7584,7 @@ namespace Sungero.SmartProcessing.Server
       this.LogMessage(string.Format(format, args),
                       package != null ? package.PackageId : string.Empty);
     }
-    
+
     /// <summary>
     /// Записать сообщение в лог.
     /// </summary>
@@ -5456,7 +7594,7 @@ namespace Sungero.SmartProcessing.Server
     {
       this.LogMessage(message, package != null ? package.PackageId : string.Empty);
     }
-    
+
     /// <summary>
     /// Записать сообщение в лог.
     /// </summary>
@@ -5467,7 +7605,7 @@ namespace Sungero.SmartProcessing.Server
       var logMessageFormat = "{0} (pkg={1})";
       Logger.DebugFormat(logMessageFormat, message, packageId);
     }
-    
+
     /// <summary>
     /// Записать ошибку в лог.
     /// </summary>
@@ -5480,7 +7618,7 @@ namespace Sungero.SmartProcessing.Server
                     exception,
                     package != null ? package.PackageId : string.Empty);
     }
-    
+
     /// <summary>
     /// Записать ошибку в лог.
     /// </summary>
@@ -5492,7 +7630,7 @@ namespace Sungero.SmartProcessing.Server
       var logMessage = string.Format("{0} (pkg={1})", message, packageId);
       Logger.Error(logMessage, exception);
     }
-    
+
     #endregion
   }
 }

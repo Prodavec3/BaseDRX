@@ -17,6 +17,9 @@ namespace Sungero.Docflow.Client
     /// <returns>Отображаемый текст по умолчанию.</returns>
     public static string GetPlaceHolder(IApprovalRuleBaseStages stage)
     {
+      if (stage == null || stage.StageType == null)
+        return null;
+      
       return ApprovalRuleBases.Info.Properties.Stages.Properties.StageType.GetLocalizedValue(stage.StageType.Value);
     }
     

@@ -26,7 +26,6 @@
             <property name="SortMode">Custom</property>
             <property name="FixedWidth">true</property>
             <property name="Visible">true</property>
-            <property name="ExtendedVisibleIndex">0</property>
             <property name="VisibleIndex">0</property>
             <property name="Width">32</property>
             <property name="ActualWidth">4*</property>

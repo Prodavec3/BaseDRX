@@ -87,6 +87,8 @@ namespace Sungero.Company.Server
         return new List<IUser>();
       return Substitutions.GetAll()
         .Where(x => Equals(x.Substitute, substitute))
+        .Where(x => !x.StartDate.HasValue || x.StartDate <= Calendar.Today)
+        .Where(x => !x.EndDate.HasValue || x.EndDate >= Calendar.Today)
         .Select(x => x.User)
         .ToList();
     }
@@ -546,6 +548,9 @@ namespace Sungero.Company.Server
       if (managersAssistant.PreparesResolution == true)
         responsibilities.Add(ManagersAssistants.Info.Properties.PreparesResolution.LocalizedName);
       
+      if (managersAssistant.SendActionItems == true)
+        responsibilities.Add(ManagersAssistants.Info.Properties.SendActionItems.LocalizedName);
+      
       if (managersAssistant.PreparesAssignmentCompletion == true)
         responsibilities.Add(ManagersAssistants.Info.Properties.PreparesAssignmentCompletion.LocalizedName);
       
@@ -667,8 +672,8 @@ namespace Sungero.Company.Server
     /// <summary>
     /// Получить головные Наши организации/подразделения для сотрудника.
     /// </summary>
-    /// <param name="currentEmployeeId">Ид сотрудника.</param>
-    /// <returns>Список Ид реципиентов.</returns>
+    /// <param name="currentEmployeeId">ИД сотрудника.</param>
+    /// <returns>Список ИД реципиентов.</returns>
     [Public]
     public virtual List<int> GetHeadRecipientsByEmployee(int currentEmployeeId)
     {
@@ -677,11 +682,11 @@ namespace Sungero.Company.Server
     }
     
     /// <summary>
-    /// Получить список Ид реципиентов Нашей организации/подразделения.
+    /// Получить список ИД реципиентов Нашей организации/подразделения.
     /// </summary>
-    /// <param name="currentRecipientId">Ид реципиента.</param>
+    /// <param name="currentRecipientId">ИД реципиента.</param>
     /// <param name="recipientTypeGuid">GUID типа сущности.</param>
-    /// <returns>Раскрытый список Ид реципиентов.</returns>
+    /// <returns>Раскрытый список ИД реципиентов.</returns>
     [Public]
     public virtual List<int> GetAllVisisbleRecipientsIds(int currentRecipientId, string recipientTypeGuid)
     {
@@ -714,6 +719,12 @@ namespace Sungero.Company.Server
       return query.Where(x => (Employees.Is(x) || Groups.Is(x)) && !systemRecipientsSid.Contains(x.Sid.Value));
     }
     
+    /// <summary>
+    /// Получить список ИД реципиентов через хранимую процедуру.
+    /// </summary>
+    /// <param name="procedureName">Имя хранимой процедуры.</param>
+    /// <param name="parameters">Параметры хранимой процедуры.</param>
+    /// <returns>Список ИД реципиентов.</returns>
     private List<int> GetRecipientIdsFromStoredProcedure(string procedureName, string parameters)
     {
       var recipientIds = new List<int>();
@@ -818,5 +829,120 @@ namespace Sungero.Company.Server
       
       return string.Join("|", passwordHashString, saltString);
     }
+    
+    #region Работа с ElasticSearch
+    
+    /// <summary>
+    /// Переиндексация сущностей модуля.
+    /// </summary>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void Reindex()
+    {
+      var elasticUrl = Commons.PublicFunctions.Module.GetElasticsearchUrl();
+      if (Commons.PublicFunctions.Module.IsElasticsearchEnabled())
+      {
+        this.ReindexBusinessUnits();
+        this.ReindexEmployees();
+      }
+    }
+    
+    /// <summary>
+    /// Переиндексация НОР.
+    /// </summary>
+    public virtual void ReindexBusinessUnits()
+    {
+      Logger.Debug("Company. ReindexBusinessUnits. Start.");
+      
+      Logger.Debug("Company. ReindexBusinessUnits. Recreate index...");
+      var indexName = Commons.PublicFunctions.Module.GetIndexName(BusinessUnits.Info.Name);
+      var synonyms = Commons.PublicFunctions.Module.GetLegalFormSynonyms();
+      Commons.PublicFunctions.Module.ElasticsearchCreateIndex(indexName, string.Format(Constants.BusinessUnit.ElasticsearchIndexConfig, synonyms));
+      
+      var lastId = 0;
+      while (true)
+      {
+        var businessUnits = BusinessUnits.GetAll(l => l.Id > lastId)
+          .OrderBy(l => l.Id)
+          .Take(Commons.PublicConstants.Module.MaxQueryIds)
+          .ToList();
+        
+        if (!businessUnits.Any())
+          break;
+        
+        lastId = businessUnits.Last().Id;
+        Logger.DebugFormat("Company. ReindexBusinessUnits. Indexing businessunits. Entity id from {0} to {1}...", businessUnits.First().Id, lastId);
+        
+        var jsonStrings = businessUnits
+          .Select(x => string.Format("{0}{1}{2}", Commons.PublicConstants.Module.BulkOperationIndexToTarget,
+                                     Environment.NewLine,
+                                     Company.Functions.BusinessUnit.GetIndexingJson(x)));
+
+        var bulkJson = string.Format("{0}{1}", string.Join(Environment.NewLine, jsonStrings), Environment.NewLine);
+        
+        Commons.PublicFunctions.Module.ElasticsearchBulk(indexName, bulkJson);
+      }
+      Logger.Debug("Company. ReindexBusinessUnits. Finish.");
+    }
+    
+    /// <summary>
+    /// Переиндексация сотрудников.
+    /// </summary>
+    public virtual void ReindexEmployees()
+    {
+      Logger.Debug("Company. ReindexEmployees. Start.");
+      
+      Logger.Debug("Company. ReindexEmployees. Recreate index...");
+      var indexName = Commons.PublicFunctions.Module.GetIndexName(Employees.Info.Name);
+      Commons.PublicFunctions.Module.ElasticsearchCreateIndex(indexName, Constants.Employee.ElasticsearchIndexConfig);
+      
+      var lastId = 0;
+      while (true)
+      {
+        var employees = Employees.GetAll(l => l.Id > lastId)
+          .OrderBy(l => l.Id)
+          .Take(Commons.PublicConstants.Module.MaxQueryIds)
+          .ToList();
+        
+        if (!employees.Any())
+          break;
+        
+        lastId = employees.Last().Id;
+        Logger.DebugFormat("Company. ReindexEmployees. Indexing employees. Entity id from {0} to {1}...", employees.First().Id, lastId);
+        
+        var jsonStrings = employees
+          .Select(x => string.Format("{0}{1}{2}", Commons.PublicConstants.Module.BulkOperationIndexToTarget,
+                                     Environment.NewLine,
+                                     Company.Functions.Employee.GetIndexingJson(x)));
+
+        var bulkJson = string.Format("{0}{1}", string.Join(Environment.NewLine, jsonStrings), Environment.NewLine);
+        
+        Commons.PublicFunctions.Module.ElasticsearchBulk(indexName, bulkJson);
+      }
+      Logger.Debug("Company. ReindexEmployees. Finish.");
+    }
+    
+    /// <summary>
+    /// Обновить синонимы в индексе НОР.
+    /// </summary>
+    /// <param name="synonyms">Список синонимов.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void UpdateBusinessUnitsIndexSynonyms(string synonyms)
+    {
+      if (Commons.PublicFunctions.Module.IsElasticsearchEnabled())
+      {
+        Logger.Debug("Company. UpdateBusinessUnitsIndexSynonyms start.");
+        
+        var businessUnitIndexName = Commons.PublicFunctions.Module.GetIndexName(BusinessUnits.Info.Name);
+        synonyms = Commons.PublicFunctions.Module.SynonymsParse(synonyms);
+        var businessUnitIndexConfig = string.Format(Constants.BusinessUnit.ElasticsearchIndexConfig, synonyms);
+        
+        Commons.PublicFunctions.Module.ElasticsearchCloseIndex(businessUnitIndexName);
+        Commons.PublicFunctions.Module.ElasticsearchUpdateIndexSettings(businessUnitIndexName, businessUnitIndexConfig);
+        Commons.PublicFunctions.Module.ElasticsearchOpenIndex(businessUnitIndexName);
+        
+        Logger.Debug("Company. UpdateBusinessUnitsIndexSynonyms finish.");
+      }
+    }
+    #endregion
   }
 }

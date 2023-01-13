@@ -84,7 +84,8 @@ namespace Sungero.Docflow.Server
                                                          l.ExternalEntityId == Constants.DocumentKind.UniversalBasicKind.ToString() ||
                                                          l.ExternalEntityId == Constants.DocumentKind.UniversalTaxInvoiceAndBasicKind.ToString() ||
                                                          l.ExternalEntityId == Constants.DocumentKind.WaybillDocumentKind.ToString() ||
-                                                         l.ExternalEntityId == Docflow.Constants.Module.Initialize.ExchangeKind.ToString()))
+                                                         l.ExternalEntityId == Docflow.Constants.Module.Initialize.ExchangeKind.ToString() ||
+                                                         l.ExternalEntityId == Docflow.Constants.Module.Initialize.FormalizedPowerOfAttorneyKind.ToString()))
         .Any();
     }
     

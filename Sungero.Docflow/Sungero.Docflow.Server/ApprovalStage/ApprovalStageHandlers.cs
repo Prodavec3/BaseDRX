@@ -129,9 +129,11 @@ namespace Sungero.Docflow
           e.AddError(ApprovalStages.Resources.ImpossibleRole, _obj.Info.Actions.GetApprovalRulesWithImpossibleRoles);
       }
 
-      e.Params.Remove(Sungero.Docflow.Constants.ApprovalStage.HasRules);
+      // HACK, BUG 208989
+      var approvalStageParams = ((Domain.Shared.IExtendedEntity)_obj).Params;
+      approvalStageParams.Remove(Sungero.Docflow.Constants.ApprovalStage.HasRules);
       if (e.IsValid)
-        e.Params.Remove(Sungero.Docflow.Constants.ApprovalStage.ChangeRequisites);
+        approvalStageParams.Remove(Sungero.Docflow.Constants.ApprovalStage.ChangeRequisites);
       
       // Добавить в параметры информацию о возможности регистрации документа в этапе регистрации.
       // Оптимизация для того, чтобы на refresh карточки не было лишнего запроса на то же самое.
@@ -152,6 +154,7 @@ namespace Sungero.Docflow
       _obj.AllowChangeReworkPerformer = false;
       _obj.RightType = Sungero.Docflow.ApprovalStage.RightType.Edit;
       _obj.NeedRestrictPerformerRights = false;
+      _obj.AllowApproveWithSuggestions = false;
       
       _obj.StageType = ApprovalStages.Info.Properties.StageType.GetFilter();
     }

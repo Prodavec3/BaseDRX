@@ -111,7 +111,11 @@ namespace Sungero.Docflow
     {
       e.DisableUiFiltering = true;
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      var signatories = Functions.OfficialDocument.GetSignatories(document).Select(s => s.EmployeeId).Distinct().ToList();
+
+      if (Functions.OfficialDocument.SignatorySettingWithAllUsersExist(document))
+        return query;
+      
+      var signatories = Functions.OfficialDocument.GetSignatoriesIds(document);
       
       return query.Where(s => signatories.Contains(s.Id));
     }

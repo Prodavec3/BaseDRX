@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-16"?>
+<RouteScheme xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Blocks>
+    <BlockBase xsi:type="StartBlock">
+      <Id>0</Id>
+      <BlockTypeId xsi:nil="true" />
+      <CustomProperties />
+    </BlockBase>
+    <BlockBase xsi:type="FinishBlock">
+      <Id>1</Id>
+      <BlockTypeId xsi:nil="true" />
+      <CustomProperties />
+      <UnderReview>false</UnderReview>
+      <ReviewAssignmentId>0</ReviewAssignmentId>
+    </BlockBase>
+  </Blocks>
+  <Edges>
+    <Edge>
+      <Id>0</Id>
+      <Source>0</Source>
+      <Target>1</Target>
+    </Edge>
+  </Edges>
+  <Layout>
+    <BlocksLayout>
+      <BlockLayout>
+        <BlockId>0</BlockId>
+        <Bounds>
+          <X>10</X>
+          <Y>0</Y>
+        </Bounds>
+      </BlockLayout>
+      <BlockLayout>
+        <BlockId>1</BlockId>
+        <Bounds>
+          <X>10</X>
+          <Y>100</Y>
+        </Bounds>
+      </BlockLayout>
+    </BlocksLayout>
+    <EdgesLayout>
+      <EdgeLayout>
+        <DestinationAnchor>1</DestinationAnchor>
+        <EdgeId>0</EdgeId>
+        <OriginAnchor>3</OriginAnchor>
+        <PathPoints />
+      </EdgeLayout>
+    </EdgesLayout>
+  </Layout>
+</RouteScheme>

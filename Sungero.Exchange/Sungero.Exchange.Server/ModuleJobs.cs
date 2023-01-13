@@ -199,6 +199,12 @@ namespace Sungero.Exchange.Server
         var transactionSuccess = Transactions.Execute(
           () =>
           {
+            // Dmitriev_IA:
+            // Переполучение queueItem, т.к. при выполнении Transactions.Execute сбрасывается сессия NHibernate и полученные ранее сущности "забываются".
+            // см. User Story 199135.
+            queueItem = ExchangeCore.BodyConverterQueueItems.GetAll().Where(x => x.Id == queueItemId).SingleOrDefault();
+            if (queueItem == null || queueItem.Document == null)
+              return;
             generated = Docflow.PublicFunctions.Module.GeneratePublicBodyForExchangeDocument(queueItem.Document, queueItem.VersionId.Value, queueItem.ExchangeState, startTime);
           });
         
@@ -212,6 +218,12 @@ namespace Sungero.Exchange.Server
           Transactions.Execute(
             () =>
             {
+              // Dmitriev_IA:
+              // Переполучение queueItem, т.к. при выполнении Transactions.Execute сбрасывается сессия NHibernate и полученные ранее сущности "забываются".
+              // см. User Story 199135.
+              queueItem = ExchangeCore.BodyConverterQueueItems.GetAll().Where(x => x.Id == queueItemId).SingleOrDefault();
+              if (queueItem == null)
+                return;
               ExchangeCore.PublicFunctions.QueueItemBase.QueueItemOnError(queueItem, Resources.GeneratePublicBodyFailed);
             });
           Exchange.PublicFunctions.Module.LogDebugFormat(queueItem, string.Format("BodyConverterJob. {0}.", Resources.GeneratePublicBodyFailed));
@@ -401,10 +413,11 @@ namespace Sungero.Exchange.Server
                         var counterpartyId = info.ServiceCounterpartyId;
                         return Structures.Module.ReglamentDocumentWithCertificate.Create(d.GeneratedName, d.Body, d.Certificate,
                                                                                          d.Sign, parentId, box, info.Document,
-                                                                                         info.ServiceMessageId, d.DocumentId, null,
+                                                                                         info.ServiceMessageId, d.DocumentId, d.StageId,
                                                                                          counterpartyId,
                                                                                          isRootDocumentReceipt(d.DocumentType), info,
-                                                                                         isInvoiceFlow, d.DocumentType);
+                                                                                         isInvoiceFlow, d.DocumentType, 
+                                                                                         d.FormalizedPoAUnifiedRegNo);
                       })
               .ToList();
             documentsToSend.AddRange(reglamentDocument);

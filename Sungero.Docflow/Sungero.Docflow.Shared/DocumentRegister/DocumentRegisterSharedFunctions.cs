@@ -705,10 +705,13 @@ namespace Sungero.Docflow.Shared
     /// Получить журнал по умолчанию для документа.
     /// </summary>
     /// <param name="document">Документ.</param>
-    /// <param name="filteredDocRegisters">Список доступных журналов.</param>
+    /// <param name="filteredDocRegistersIds">Список ИД доступных журналов.</param>
     /// <param name="settingType">Тип настройки.</param>
-    /// <returns>Журнал.</returns>
-    public static IDocumentRegister GetDefaultDocRegister(IOfficialDocument document, List<IDocumentRegister> filteredDocRegisters, Enumeration? settingType)
+    /// <returns>Журнал регистрации по умолчанию.</returns>
+    /// <remarks>Журнал подбирается сначала из настройки регистрации, потом из персональных настроек пользователя.
+    /// Если в настройках не указан журнал, или указан недействующий, то вернётся первый журнал из доступных для документа.
+    /// Если доступных журналов несколько, то вернётся пустое значение.</remarks>
+    public static IDocumentRegister GetDefaultDocRegister(IOfficialDocument document, List<int> filteredDocRegistersIds, Enumeration? settingType)
     {
       var defaultDocRegister = DocumentRegisters.Null;
 
@@ -716,7 +719,7 @@ namespace Sungero.Docflow.Shared
         return defaultDocRegister;
 
       var registrationSetting = Docflow.PublicFunctions.RegistrationSetting.GetSettingByDocument(document, settingType);
-      if (registrationSetting != null && filteredDocRegisters.Contains(registrationSetting.DocumentRegister))
+      if (registrationSetting != null && filteredDocRegistersIds.Contains(registrationSetting.DocumentRegister.Id))
         return registrationSetting.DocumentRegister;
       
       var personalSettings = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(null);
@@ -734,9 +737,11 @@ namespace Sungero.Docflow.Shared
           defaultDocRegister = personalSettings.ContractDocRegister;
       }
 
-      if (defaultDocRegister == null || !filteredDocRegisters.Contains(defaultDocRegister) || defaultDocRegister.Status != CoreEntities.DatabookEntry.Status.Active)
+      if (defaultDocRegister == null || !filteredDocRegistersIds.Contains(defaultDocRegister.Id) || defaultDocRegister.Status != CoreEntities.DatabookEntry.Status.Active)
       {
-        defaultDocRegister = filteredDocRegisters.Count() > 1 ? DocumentRegisters.Null : DocumentRegisters.As(filteredDocRegisters.FirstOrDefault());
+        defaultDocRegister = null;
+        if (filteredDocRegistersIds.Count() == 1)
+          defaultDocRegister = Functions.DocumentRegister.Remote.GetDocumentRegister(filteredDocRegistersIds.First());
       }
       
       return defaultDocRegister;

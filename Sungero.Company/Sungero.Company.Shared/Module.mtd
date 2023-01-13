@@ -207,6 +207,7 @@
         "Name": "Employees",
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconEmployees_81281d6c7b9342fabf28103d0e3419e3.png",
+        "TabId": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
         "Versions": []
       },
       {
@@ -214,6 +215,7 @@
         "Name": "Group2",
         "BackgroundPosition": "Stretch",
         "PreviousItemGuid": "81281d6c-7b93-42fa-bf28-103d0e3419e3",
+        "TabId": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
         "Versions": []
       },
       {
@@ -222,6 +224,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconOrganizationalStructure_9778efad0f26415086b0b539e9fa468f.png",
         "PreviousItemGuid": "fcc83272-e661-4c8f-9c55-8df60f71d9d7",
+        "TabId": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
         "Versions": []
       },
       {
@@ -230,6 +233,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconLinks_741ff20346fc4676b6d7a474dd9fefa4.png",
         "PreviousItemGuid": "9778efad-0f26-4150-86b0-b539e9fa468f",
+        "TabId": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
         "Versions": []
       },
       {
@@ -237,6 +241,7 @@
         "Name": "Group3",
         "BackgroundPosition": "Stretch",
         "PreviousItemGuid": "741ff203-46fc-4676-b6d7-a474dd9fefa4",
+        "TabId": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
         "Versions": []
       },
       {
@@ -245,6 +250,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconIntegration_7ec69dbae05646e18b62c3f460b22884.png",
         "PreviousItemGuid": "56c9171b-dc25-443a-a05f-6522ba936885",
+        "TabId": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
         "Versions": []
       }
     ],
@@ -254,6 +260,12 @@
       "IconName": "",
       "Versions": []
     },
+    "Tabs": [
+      {
+        "NameGuid": "495b6cdb-1677-4c3c-a1f2-9391aec9883f",
+        "Name": "Tab"
+      }
+    ],
     "Versions": []
   },
   "Dependencies": [
@@ -762,6 +774,12 @@
       "ReturnTypeFullName": "System.Boolean"
     },
     {
+      "Name": "Reindex",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
       "Name": "SetLoginPassword",
       "Parameters": [
         {
@@ -771,6 +789,19 @@
         },
         {
           "Name": "password",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "UpdateBusinessUnitsIndexSynonyms",
+      "Parameters": [
+        {
+          "Name": "synonyms",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
         }
@@ -808,12 +839,12 @@
   "SharedAssemblyName": "Sungero.Company.Shared",
   "SharedNamespace": "Sungero.Company.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

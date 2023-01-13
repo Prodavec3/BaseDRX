@@ -1,0 +1,67 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "e08dc659-2828-4d50-b90d-7d06408ab7cb",
+  "Name": "Intelligence",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Sungero.Intelligence.Client",
+  "ClientBaseAssemblyName": "Sungero.Intelligence.ClientBase",
+  "ClientBaseNamespace": "Sungero.Intelligence.ClientBase",
+  "ClientNamespace": "Sungero.Intelligence.Client",
+  "Code": "Intel",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "8c69c9d0-19e4-430c-9294-09c085e6e514",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "da70a6c6-f9d6-4f61-a1a7-9578d3322d12",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "b75d2e39-e393-411c-a099-bb1b06294f24",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "e4fe1153-919e-4732-aadc-2c8e9b5c0b5a",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Low",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Sungero.Intelligence",
+  "IsLicensed": true,
+  "IsVisible": false,
+  "Overridden": [
+    "IsLicensed",
+    "IsVisible",
+    "Importance"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Sungero.Intelligence",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "Sungero.Intelligence.Server",
+  "ServerNamespace": "Sungero.Intelligence.Server",
+  "SharedAssemblyName": "Sungero.Intelligence.Shared",
+  "SharedNamespace": "Sungero.Intelligence.Shared",
+  "SpecialFolders": [],
+  "Version": "4.5.38.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

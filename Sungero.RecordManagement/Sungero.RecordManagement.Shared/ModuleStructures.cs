@@ -97,5 +97,4 @@ namespace Sungero.RecordManagement.Structures.Module
     
     public DateTime Month { get; set; }
   }
-
 }

@@ -71,7 +71,7 @@ namespace Sungero.RecordManagement
         foreach (var addendum in documentAddenda)
         {
           var addendumInfo = string.Format("\n - {0} ({1}:{2}{3}).", addendum.DisplayValue.Trim(),
-                                          Docflow.Resources.Id, nonBreakingSpace, addendum.Id);
+                                           Docflow.Resources.Id, nonBreakingSpace, addendum.Id);
           AcquaintanceReport.AddendaDescription += addendumInfo;
         }
       }
@@ -101,6 +101,18 @@ namespace Sungero.RecordManagement
         
         foreach (var employee in acquainters)
         {
+          // Задание.
+          var assignment = AcquaintanceAssignments.GetAll()
+            .Where(a => Equals(a.Task, task) &&
+                   Equals(a.Performer, employee) &&
+                   a.Created >= task.Started)
+            .FirstOrDefault();
+          
+          // Не включать сотрудника в отчёт, если его задание было снято.
+          var isAborted = assignment == null ? false : assignment.Status == Sungero.Workflow.Assignment.Status.Aborted;
+          if (isAborted)
+            continue;
+          
           var newLine = Structures.AcquaintanceReport.TableLine.Create();
           newLine.RowNumber = 0;
           newLine.ReportSessionId = reportSessionId;
@@ -126,13 +138,6 @@ namespace Sungero.RecordManagement
             continue;
           }
           
-          // Задание.
-          var assignment = AcquaintanceAssignments.GetAll()
-            .Where(a => Equals(a.Task, task) &&
-                   Equals(a.Performer, employee) &&
-                   a.Created >= task.Started)
-            .FirstOrDefault();
-
           if (assignment == null)
           {
             if (employee.Status != Company.Employee.Status.Closed)

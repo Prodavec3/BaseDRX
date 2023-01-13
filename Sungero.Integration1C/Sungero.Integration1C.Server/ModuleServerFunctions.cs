@@ -37,7 +37,7 @@ namespace Sungero.Integration1C.Server
     /// <param name="processedEntitiesCount">Количество обработанных записей.</param>
     /// <param name="entitiesCountForProcessing">Размер пакета.</param>
     /// <param name="extEntityType">Тип записи внешней системы.</param>
-    /// <param name="systemId">Ид системы 1С.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
     /// <returns>Список сущностей.</returns>
     [Remote(IsPure = true)]
     public List<Sungero.Domain.Shared.IEntity> GetChangedEntitiesFromSyncDateRemote(List<Guid> entityTypeGuids,
@@ -68,7 +68,7 @@ namespace Sungero.Integration1C.Server
     /// </summary>
     /// <param name="entityTypeGuids">Список гуидов типов сущностей.</param>
     /// <param name="extEntityType">Тип записи внешней системы.</param>
-    /// <param name="systemId">Ид системы 1С.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
     /// <returns>Количество сущностей.</returns>
     [Remote(IsPure = true)]
     public int GetChangedEntitiesFromSyncDateRemoteCount(List<Guid> entityTypeGuids,
@@ -92,7 +92,7 @@ namespace Sungero.Integration1C.Server
     /// <param name="processedEntitiesCount">Количество обработанных записей.</param>
     /// <param name="entitiesCountForProcessing">Размер пакета.</param>
     /// <param name="extEntityType">Тип записи внешней системы.</param>
-    /// <param name="systemId">Ид системы 1С.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
     /// <returns>Список сущностей.</returns>
     [Remote(IsPure = true)]
     public List<Sungero.Domain.Shared.IEntity> GetChangedBankAccountsFromSyncDateRemote(List<Guid> entityTypeGuids,
@@ -128,7 +128,7 @@ namespace Sungero.Integration1C.Server
     /// </summary>
     /// <param name="entityTypeGuids">Список гуидов типов сущностей.</param>
     /// <param name="extEntityType">Тип записи внешней системы.</param>
-    /// <param name="systemId">Ид системы 1С.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
     /// <returns>Количество сущностей.</returns>
     [Remote(IsPure = true)]
     public int GetChangedBankAccountsFromSyncDateRemoteCount(List<Guid> entityTypeGuids,
@@ -152,6 +152,14 @@ namespace Sungero.Integration1C.Server
       }
     }
 
+    /// <summary>
+    /// Получить сущности, измененные с момента последней синхронизации, в рамках сессии.
+    /// </summary>
+    /// <param name="session">Сессия.</param>
+    /// <param name="entityTypeGuid">Guid типа сущности.</param>
+    /// <param name="extEntityType">Тип записи внешней системы.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
+    /// <returns>Список сущностей, измененных с момента последней синхронизации.</returns>
     private IQueryable<Sungero.Domain.Shared.IEntity> GetChangedEntities(Sungero.Domain.Session session,
                                                                          Guid entityTypeGuid,
                                                                          string extEntityType,
@@ -224,7 +232,7 @@ namespace Sungero.Integration1C.Server
     /// Обновить дату последней синхронизации с 1С.
     /// </summary>
     /// <param name="date">Дата синхронизации, на которую обновить.</param>
-    /// <param name="systemId">Ид системы 1С.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
     [Remote]
     public void UpdateLastNotificationDate(DateTime date, string systemId)
     {
@@ -274,7 +282,7 @@ namespace Sungero.Integration1C.Server
     /// Получить дату последней синхронизации с 1С
     /// из уведомления о результатах синхронизации.
     /// </summary>
-    /// <param name="systemId">Ид системы 1С.</param>
+    /// <param name="systemId">ИД системы 1С.</param>
     /// <returns>Дата последней синхронизации, либо пустая строка в случае ее отсутствия.</returns>
     [Remote(IsPure = true)]
     public string GetLastNotificationDate(string systemId)

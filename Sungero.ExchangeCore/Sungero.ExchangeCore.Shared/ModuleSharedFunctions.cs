@@ -72,10 +72,10 @@ namespace Sungero.ExchangeCore.Shared
     }
     
     /// <summary>
-    /// Проверить что строка соответствует формату Guid.
+    /// Проверить, что строка соответствует формату Guid.
     /// </summary>
-    /// <param name="guid">Строка содержащая Guid.</param>
-    /// <returns>True если строка соответствует формату Guid, иначе False.</returns>
+    /// <param name="guid">Строка, содержащая Guid.</param>
+    /// <returns>True, если строка соответствует формату Guid, иначе False.</returns>
     public virtual bool CheckGuid(string guid)
     {
       if (string.IsNullOrWhiteSpace(guid))

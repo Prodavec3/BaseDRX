@@ -45,6 +45,8 @@ namespace Sungero.Docflow
     {
       if (!Functions.ApprovalTask.SchemeVersionSupportsRework(ApprovalTasks.As(_obj.Task)))
         e.HideAction(_obj.Info.Actions.Forward);
+      
+      Functions.ApprovalReworkAssignment.Remote.CreateParamsCache(_obj);
     }
 
     public virtual void DeliveryMethodValueInput(Sungero.Docflow.Client.ApprovalReworkAssignmentDeliveryMethodValueInputEventArgs e)
@@ -74,31 +76,32 @@ namespace Sungero.Docflow
 
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
-      // Если в регламенте запрещен уменьшающийся круг рецензентов, то не даем изменять действие в гриде.
-      if (ApprovalTasks.As(_obj.Task).ApprovalRule.IsSmallApprovalAllowed != true)
-        _obj.State.Properties.Approvers.Properties.Action.IsEnabled = false;
+      var task = ApprovalTasks.As(_obj.Task);
+      if (task == null)
+        return;
       
-      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      var refreshParameters = Functions.ApprovalTask.Remote.GetFullStagesInfoForRefresh(ApprovalTasks.As(_obj.Task));
-
+      var refreshParameters = Functions.ApprovalTask.GetOrUpdateAssignmentRefreshParams(task, _obj, false);
+      
+      _obj.State.Properties.ForwardPerformer.IsVisible = refreshParameters.ForwardPerformerIsVisible;
+      // Область карточки "Параметры согласования".
+      _obj.State.Properties.Signatory.IsVisible = refreshParameters.SignatoryIsVisible;
+      _obj.State.Properties.Signatory.IsRequired = refreshParameters.SignatoryIsRequired;
       _obj.State.Properties.Addressee.IsVisible = refreshParameters.AddresseeIsVisible;
       _obj.State.Properties.Addressee.IsRequired = refreshParameters.AddresseeIsRequired;
       _obj.State.Properties.Addressees.IsVisible = refreshParameters.AddresseesIsVisible;
       _obj.State.Properties.Addressees.IsRequired = refreshParameters.AddresseesIsRequired;
-
-      _obj.State.Properties.Signatory.IsVisible = refreshParameters.SignatoryIsVisible;
-      _obj.State.Properties.Signatory.IsRequired = refreshParameters.SignatoryIsRequired;
-      _obj.State.Properties.AddApprovers.IsVisible = refreshParameters.AddApproversIsVisible;
       _obj.State.Properties.DeliveryMethod.IsVisible = refreshParameters.DeliveryMethodIsVisible;
       _obj.State.Properties.ExchangeService.IsVisible = refreshParameters.ExchangeServiceIsVisible;
-      _obj.State.Properties.ForwardPerformer.IsVisible = Functions.ApprovalTask.SchemeVersionSupportsRework(ApprovalTasks.As(_obj.Task));
+      _obj.State.Properties.Approvers.Properties.Action.IsEnabled = refreshParameters.ApproversActionIsEnabled;
+      _obj.State.Properties.Approvers.IsVisible = refreshParameters.ApproversIsVisible;
+      _obj.State.Properties.AddApprovers.IsVisible = refreshParameters.AddApproversIsVisible;
       
       Functions.ApprovalReworkAssignment.UpdatePropertiesEnableState(_obj);
       
       if (_obj.Status == Status.InProcess && !Functions.Module.IsLockedByOther(_obj) && _obj.AccessRights.CanUpdate())
-        Functions.ApprovalTask.ShowExchangeHint(ApprovalTasks.As(_obj.Task), _obj.State.Properties.DeliveryMethod, _obj.Info.Properties.DeliveryMethod, _obj.DeliveryMethod, e);
+        Functions.ApprovalTask.ShowExchangeHint(task, _obj.State.Properties.DeliveryMethod, _obj.Info.Properties.DeliveryMethod, _obj.DeliveryMethod, e);
       
-      if (!_obj.DocumentGroup.OfficialDocuments.Any())
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(task))
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
     }
   }

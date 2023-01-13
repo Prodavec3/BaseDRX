@@ -7,6 +7,7 @@ using Sungero.Docflow.OfficialDocument;
 
 namespace Sungero.Docflow
 {
+
   partial class OfficialDocumentVersionsSharedCollectionHandlers
   {
 
@@ -133,6 +134,33 @@ namespace Sungero.Docflow
   partial class OfficialDocumentSharedHandlers
   {
 
+    public virtual void OurSignatoryChanged(Sungero.Docflow.Shared.OfficialDocumentOurSignatoryChangedEventArgs e)
+    {
+      if (e.NewValue != null && e.NewValue != e.OldValue)
+        _obj.OurSigningReason = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetDefaultSignatureSetting(_obj, _obj.OurSignatory);
+      
+      if (e.NewValue == null)
+        _obj.OurSigningReason = null;
+    }
+
+    public virtual void DocumentGroupChanged(Sungero.Docflow.Shared.OfficialDocumentDocumentGroupChangedEventArgs e)
+    {
+      if (e.NewValue != null && !Equals(e.NewValue, e.OriginalValue))
+        e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
+    }
+
+    public virtual void LeadingDocumentChanged(Sungero.Docflow.Shared.OfficialDocumentLeadingDocumentChangedEventArgs e)
+    {
+      if (e.NewValue != null && !Equals(e.NewValue, e.OriginalValue))
+        e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
+    }
+
+    public virtual void BusinessUnitChanged(Sungero.Docflow.Shared.OfficialDocumentBusinessUnitChangedEventArgs e)
+    {
+      if (e.NewValue != null && !Equals(e.NewValue, e.OriginalValue))
+        e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
+    }
+
     public virtual void VerificationStateChanged(Sungero.Domain.Shared.EnumerationPropertyChangedEventArgs e)
     {
       if (e.NewValue == Docflow.OfficialDocument.VerificationState.Completed)
@@ -162,6 +190,9 @@ namespace Sungero.Docflow
       var department = e.NewValue;
       if (department != null && _obj.BusinessUnit == null && department.BusinessUnit != null)
         _obj.BusinessUnit = department.BusinessUnit;
+      
+      if (e.NewValue != null && !Equals(e.NewValue, e.OriginalValue))
+        e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
     }
     
     protected void FillName()
@@ -206,6 +237,16 @@ namespace Sungero.Docflow
     {
       Functions.OfficialDocument.SetRequiredProperties(_obj);
       Functions.OfficialDocument.UpdateLifeCycle(_obj, e.NewValue, _obj.InternalApprovalState, _obj.ExternalApprovalState);
+      
+      // Обновить параметр доступности нумерации.
+      if (_obj.DocumentKind != null &&
+          _obj.DocumentKind.AutoNumbering == true &&
+          _obj.RegistrationState == RegistrationState.NotRegistered &&
+          !Functions.OfficialDocument.IsObsolete(_obj, e.NewValue))
+      {
+        var hasNumerationSetting = Functions.OfficialDocument.HasDocumentRegistersByDocument(_obj, Docflow.RegistrationSetting.SettingType.Numeration);
+        e.Params.AddOrUpdate(Sungero.Docflow.Constants.OfficialDocument.HasNumerationSetting, hasNumerationSetting);
+      }
     }
 
     public virtual void InternalApprovalStateChanged(Sungero.Domain.Shared.EnumerationPropertyChangedEventArgs e)
@@ -305,6 +346,9 @@ namespace Sungero.Docflow
       Functions.OfficialDocument.ClearBusinessUnit(_obj, e.NewValue);
       
       e.Params.Remove(paramName);
+      
+      if (e.NewValue != null && !Equals(e.NewValue, e.OriginalValue))
+        e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
     }
 
     public virtual void ExternalApprovalStateChanged(Sungero.Domain.Shared.EnumerationPropertyChangedEventArgs e)

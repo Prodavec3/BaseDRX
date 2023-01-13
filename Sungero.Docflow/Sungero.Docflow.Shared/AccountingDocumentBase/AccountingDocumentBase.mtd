@@ -187,6 +187,7 @@
       "ActionArea": "CardAndCollection",
       "GenerateHandler": true,
       "IsMultiSelectAction": true,
+      "IsVisibleInDesktopClient": false,
       "LargeIconName": "Action_ExportFinancialDocument_large_cf63dc4e66844c9cbdb455757fe67380.png",
       "SmallIconName": "Action_ExportFinancialDocument_small_cf63dc4e66844c9cbdb455757fe67380.png",
       "Versions": []
@@ -1056,6 +1057,32 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d3c59c0c-fabc-49cf-a6e7-6fe2e29c2b8d",
+          "Name": "CounterpartySigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "a5496557-87f4-4e62-a097-5a9e48878e5c",
+          "PropertyGuid": "a61809b1-cac9-4f1c-8691-3b5f30a0a16d",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b82db005-b5f5-4f6f-88cb-4076ea0bf038",
+          "Name": "OurSigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "51f9d515-59f7-4999-bb61-87796e7a87cb",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -1085,6 +1112,16 @@
     "IconName"
   ],
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+      "Name": "OurSigningReason",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList",
+        "IsVisibility"
+      ]
+    },
     {
       "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
       "NameGuid": "9b7cc9f8-d575-45a0-b9e3-e6c820a1fc83",
@@ -1933,6 +1970,19 @@
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "64463c0f-8daf-4a6a-842d-487f6e4cb951",
       "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a61809b1-cac9-4f1c-8691-3b5f30a0a16d",
+      "Name": "CounterpartySigningReason",
+      "CanBeSearch": false,
+      "Code": "AccCPSgnRsn",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "Length": 500,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "664cae29-3074-46e9-b2ad-f12febaa8b51"
     }
   ],
   "PublicConstants": [
@@ -1961,12 +2011,28 @@
       "Value": "\"74c9ddd4-4bc4-42b6-8bb0-c91d5e21fb8a\""
     },
     {
+      "Name": "JobTitleMaxLength",
+      "ParentClasses": [
+        "AccountingDocumentBase"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "128"
+    },
+    {
       "Name": "OutcomingTaxInvoiceGuid",
       "ParentClasses": [
         "AccountingDocumentBase"
       ],
       "TypeName": "System.String",
       "Value": "\"f50c4d8a-56bc-43ef-bac3-856f57ca70be\""
+    },
+    {
+      "Name": "PowersBaseConsigneeMaxLength",
+      "ParentClasses": [
+        "AccountingDocumentBase"
+      ],
+      "TypeName": "System.Int32",
+      "Value": "120"
     }
   ],
   "PublicFunctions": [
@@ -1993,6 +2059,24 @@
       ],
       "ReturnType": "global::System.DateTime",
       "ReturnTypeFullName": "System.DateTime"
+    },
+    {
+      "Name": "FillLeadingDocument",
+      "Parameters": [
+        {
+          "Name": "accountingDocumentBase",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "leadingDocument",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     },
     {
       "Name": "GenerateAnswer",
@@ -2081,6 +2165,19 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "GetCounterpartySigningReason",
+      "Parameters": [
+        {
+          "Name": "accountingDocumentBase",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GetVATAmountFromTotal",
       "Parameters": [
         {
@@ -2118,24 +2215,6 @@
     }
   ],
   "PublicStructures": [
-    {
-      "Name": "Attorney",
-      "IsPublic": true,
-      "Properties": [
-        {
-          "Name": "Document",
-          "IsEntity": true,
-          "IsNullable": true,
-          "TypeFullName": "global::Sungero.Docflow.IPowerOfAttorney"
-        },
-        {
-          "Name": "OtherReason",
-          "IsNullable": true,
-          "TypeFullName": "global::System.String"
-        }
-      ],
-      "StructureNamespace": "Sungero.Docflow.Structures.AccountingDocumentBase"
-    },
     {
       "Name": "BuyerTitle",
       "IsPublic": true,
@@ -2183,26 +2262,21 @@
           "TypeFullName": "global::System.String"
         },
         {
-          "Name": "SignatoryPowerOfAttorney",
-          "IsEntity": true,
-          "IsNullable": true,
-          "TypeFullName": "global::Sungero.Docflow.IPowerOfAttorney"
-        },
-        {
-          "Name": "SignatoryOtherReason",
-          "IsNullable": true,
-          "TypeFullName": "global::System.String"
-        },
-        {
           "Name": "ConsigneePowerOfAttorney",
           "IsEntity": true,
           "IsNullable": true,
-          "TypeFullName": "global::Sungero.Docflow.IPowerOfAttorney"
+          "TypeFullName": "global::Sungero.Docflow.IPowerOfAttorneyBase"
         },
         {
           "Name": "ConsigneeOtherReason",
           "IsNullable": true,
           "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "SignatureSetting",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Docflow.ISignatureSetting"
         }
       ],
       "StructureNamespace": "Sungero.Docflow.Structures.AccountingDocumentBase"
@@ -2228,15 +2302,10 @@
           "TypeFullName": "global::System.String"
         },
         {
-          "Name": "SignatoryPowerOfAttorney",
+          "Name": "SignatureSetting",
           "IsEntity": true,
           "IsNullable": true,
-          "TypeFullName": "global::Sungero.Docflow.IPowerOfAttorney"
-        },
-        {
-          "Name": "SignatoryOtherReason",
-          "IsNullable": true,
-          "TypeFullName": "global::System.String"
+          "TypeFullName": "global::Sungero.Docflow.ISignatureSetting"
         }
       ],
       "StructureNamespace": "Sungero.Docflow.Structures.AccountingDocumentBase"
@@ -2297,7 +2366,8 @@
     "PropertiesFillingDialog_HasAuthority_SignSchf",
     "PropertiesFillingDialog_HasAuthority_SignSchfAndRegister",
     "PropertiesFillingDialog_HasAuthority_Other",
-    "PropertiesFillingDialog_Result_NotAccepted"
+    "PropertiesFillingDialog_Result_NotAccepted",
+    "PropertiesFillingDialog_Error_ConsigneePowersBaseGreaterMaxLength"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "0271e2ac-0989-47e3-a06e-399cba5a61be",

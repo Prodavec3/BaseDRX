@@ -1,0 +1,65 @@
+{
+  "$type": "Sungero.Metadata.NoticeMetadata, Sungero.Workflow.Shared",
+  "NameGuid": "8484c5ba-5646-4327-9158-cd9fe0eb082b",
+  "Name": "AcquaintanceCompleteNotification",
+  "AccessRightsMode": "Instance",
+  "AssociatedGuid": "2d53959b-2cee-41f7-83c2-98ae1dbbd538",
+  "BaseGuid": "ef79164b-2ce7-451b-9ba6-eb59dd9a4a74",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "5fe997cb-7fc0-4c74-a663-73af56c7c4f2",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "8b3cedfe-01e2-47a9-b77d-3a7d6ad7904f",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true
+  },
+  "IconResourcesKeys": [],
+  "IsVisibleThreadText": true,
+  "NeverLinkToParentWhenCreated": true,
+  "OperationsClass": "",
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "af52893c-e563-45ba-a68e-79d7e8c404e5",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "36393ca3-bdc8-4d11-8475-9782979e18b2",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "NoticeMetadata",
+      "Number": 1
+    },
+    {
+      "Type": "AssignmentBaseMetadata",
+      "Number": 2
+    },
+    {
+      "Type": "WorkflowEntityMetadata",
+      "Number": 2
+    },
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    }
+  ]
+}

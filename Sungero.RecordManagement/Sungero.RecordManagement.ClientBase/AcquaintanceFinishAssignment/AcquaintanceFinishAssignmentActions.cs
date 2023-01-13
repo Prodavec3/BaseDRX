@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -17,7 +17,7 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanShowAcquaintanceReport(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsChanged;
+      return !_obj.State.IsChanged && Functions.AcquaintanceTask.HasDocumentAndCanRead(AcquaintanceTasks.As(_obj.Task));
     }
 
     public virtual void ExtendDeadline(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -33,7 +33,8 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanExtendDeadline(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.Status == Workflow.AssignmentBase.Status.InProcess && _obj.AccessRights.CanUpdate();
+      return _obj.Status == Workflow.AssignmentBase.Status.InProcess && _obj.AccessRights.CanUpdate() &&
+        Functions.AcquaintanceTask.HasDocumentAndCanRead(AcquaintanceTasks.As(_obj.Task));
     }
 
     public virtual void Complete(Sungero.Workflow.Client.ExecuteResultActionArgs e)
@@ -43,7 +44,7 @@ namespace Sungero.RecordManagement.Client
     
     public virtual bool CanComplete(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return true;
+      return Functions.AcquaintanceTask.HasDocumentAndCanRead(AcquaintanceTasks.As(_obj.Task));
     }
 
   }

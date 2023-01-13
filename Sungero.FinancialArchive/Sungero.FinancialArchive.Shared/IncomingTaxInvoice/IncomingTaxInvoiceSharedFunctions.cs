@@ -22,8 +22,8 @@ namespace Sungero.FinancialArchive.Shared
           _obj.Name = string.Empty;
         
         if (_obj.VerificationState != null && string.IsNullOrWhiteSpace(_obj.Name))
-          _obj.Name = _obj.DocumentKind.ShortName; 
-      }       
+          _obj.Name = _obj.DocumentKind.ShortName;
+      }
       
       if (_obj.DocumentKind == null || (!_obj.DocumentKind.GenerateDocumentName.Value && _obj.IsFormalized != true))
         return;
@@ -68,6 +68,16 @@ namespace Sungero.FinancialArchive.Shared
       name = Docflow.PublicFunctions.Module.TrimSpecialSymbols(name);
       
       _obj.Name = Docflow.PublicFunctions.OfficialDocument.AddClosingQuote(name, _obj);
+    }
+
+    /// <summary>
+    /// Получить список адресатов с электронной почтой для отправки вложением в письмо.
+    /// </summary>
+    /// <returns>Список адресатов.</returns>
+    [Public]
+    public override List<Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee> GetEmailAddressees()
+    {
+      return Functions.Module.GetEmailAddressees(_obj);
     }
     
     #region Интеллектуальная обработка

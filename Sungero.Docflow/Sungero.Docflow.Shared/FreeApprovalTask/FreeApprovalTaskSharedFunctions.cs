@@ -29,8 +29,13 @@ namespace Sungero.Docflow.Shared
       if (!Functions.Module.CheckDeadline(_obj.MaxDeadline, Calendar.Now))
         errors.Add(StartValidationMessage.Create(FreeApprovalTasks.Resources.ImpossibleSpecifyDeadlineLessThanToday, true, false));
       
+      var hasDocument = Functions.FreeApprovalTask.HasDocumentAndCanRead(_obj);
+      // Проверить наличие документа в задаче и наличие прав на него.
+      if (!hasDocument)
+        errors.Add(StartValidationMessage.Create(Docflow.Resources.NoRightsToDocument, false, false));
+      
       // Проверить права на изменение документа.
-      if (!_obj.ForApprovalGroup.ElectronicDocuments.First().AccessRights.CanUpdate())
+      if (hasDocument && !_obj.ForApprovalGroup.ElectronicDocuments.First().AccessRights.CanUpdate())
         errors.Add(StartValidationMessage.Create(FreeApprovalTasks.Resources.CantSendDocumentsWithoutUpdateRights, false, false));
       
       return errors;
@@ -235,66 +240,32 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
-    /// Получить список документов добавленных в группу "Приложения" в заданиях.
+    /// Получить список документов, добавленных в группу "Приложения" в заданиях.
     /// </summary>
     /// <returns>Список документов.</returns>
     public virtual List<IElectronicDocument> GetAddedAddendaFromAssignments()
     {
-      var addedAddenda = new List<IElectronicDocument>();
-      
-      var addendaHistory = Functions.FreeApprovalTask.Remote.GetAttachmentHistoryEntriesByGroupId(_obj, Constants.FreeApprovalTask.AddendaGroupGuid);
-      var addedAttachmentIds = addendaHistory.Added
-        .Select(x => x.DocumentId)
-        .Distinct()
-        .ToList();
-      
-      foreach (var id in addedAttachmentIds)
-      {
-        var lastAddedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Added, id);
-        var lastRemovedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Removed, id);
-
-        if (lastAddedDate.HasValue && (!lastRemovedDate.HasValue || lastAddedDate.Value > lastRemovedDate.Value))
-        {
-          var attachment = Functions.Module.Remote.GetElectronicDocumentById(id);
-          if (attachment == null)
-            continue;
-          addedAddenda.Add(attachment);
-        }
-      }
-      
-      return addedAddenda;
+      return Docflow.Functions.Module.GetAddedAddendaFromAssignments(_obj, Constants.FreeApprovalTask.AddendaGroupGuid);
     }
     
     /// <summary>
-    /// Получить список документов удаленных из группы "Приложения" в заданиях.
+    /// Получить список документов, удаленных из группы "Приложения" в заданиях.
     /// </summary>
     /// <returns>Список документов.</returns>
     public virtual List<IElectronicDocument> GetRemovedAddendaFromAssignments()
     {
-      var removedAddenda = new List<IElectronicDocument>();
-      
-      var addendaHistory = Functions.FreeApprovalTask.Remote.GetAttachmentHistoryEntriesByGroupId(_obj, Constants.FreeApprovalTask.AddendaGroupGuid);
-      var removedFromHistoryIds = addendaHistory.Removed
-        .Select(x => x.DocumentId)
-        .Distinct()
-        .ToList();
-      foreach (var id in removedFromHistoryIds)
-      {
-        var lastAddedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Added, id);
-        var lastRemovedDate = Functions.Module.GetMaxHistoryOperationDateById(addendaHistory.Removed, id);
-        
-        if (lastRemovedDate.HasValue && (!lastAddedDate.HasValue || lastRemovedDate.Value > lastAddedDate.Value))
-        {
-          var attachment = Functions.Module.Remote.GetElectronicDocumentById(id);
-          if (attachment == null)
-            continue;
-          removedAddenda.Add(attachment);
-        }
-      }
-      
-      return removedAddenda;
+      return Docflow.Functions.Module.GetRemovedAddendaFromAssignments(_obj, Constants.FreeApprovalTask.AddendaGroupGuid);
     }
     
     #endregion
+    
+    /// <summary>
+    /// Проверить наличие документа в задаче и наличие прав на него.
+    /// </summary>
+    /// <returns>True, если с документом можно работать.</returns>
+    public virtual bool HasDocumentAndCanRead()
+    {
+      return _obj.ForApprovalGroup.ElectronicDocuments.Any();
+    }
   }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -15,7 +15,7 @@ namespace Sungero.Docflow
       if (!_obj.DocumentGroup.OfficialDocuments.Any())
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
             
-      var reworkParameters = Functions.ApprovalTask.Remote.GetReworkParameters(ApprovalTasks.As(_obj.Task), _obj.StageNumber.Value);     
+      var reworkParameters = Functions.ApprovalTask.GetAssignmentReworkParameters(ApprovalTasks.As(_obj.Task), _obj.StageNumber.Value);     
       _obj.State.Properties.ReworkPerformer.IsEnabled = reworkParameters.AllowChangeReworkPerformer;
       _obj.State.Properties.ReworkPerformer.IsVisible = reworkParameters.AllowViewReworkPerformer;
     }

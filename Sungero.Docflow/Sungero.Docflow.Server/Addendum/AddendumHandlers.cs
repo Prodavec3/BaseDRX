@@ -42,12 +42,14 @@ namespace Sungero.Docflow
         var isLeadingDocumentDisabled = Sungero.Docflow.PublicFunctions.OfficialDocument.NeedDisableLeadingDocument(_obj);
         if (isLeadingDocumentDisabled)
           e.AddError(Sungero.Docflow.OfficialDocuments.Resources.RelationPropertyDisabled);
-        e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToProjectDocument, true);
+        
+        if (Functions.OfficialDocument.IsProjectDocument(_obj.LeadingDocument, new List<int>()))
+          e.Params.AddOrUpdate(Constants.OfficialDocument.GrantAccessRightsToProjectDocument, true);
       }
       
       base.BeforeSave(e);
       
-      if (_obj.LeadingDocument != null && leadingDocumentChanged)
+      if (_obj.LeadingDocument != null && leadingDocumentChanged && _obj.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced)
       {
         var accessRightsLimit = Functions.OfficialDocument.GetAvailableAccessRights(_obj);
         if (accessRightsLimit != Guid.Empty)

@@ -141,4 +141,7 @@
   <data name="Property_IsNoticeSended" xml:space="preserve">
     <value>Notification about expiration of script execution deadline is sent</value>
   </data>
+  <data name="Enum_ProcessingStatus_Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
 </root>

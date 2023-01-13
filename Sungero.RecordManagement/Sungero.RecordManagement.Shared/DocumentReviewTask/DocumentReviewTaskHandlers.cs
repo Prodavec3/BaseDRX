@@ -12,6 +12,36 @@ namespace Sungero.RecordManagement
   partial class DocumentReviewTaskSharedHandlers
   {
 
+    public virtual void AddendaGroupCreated(Sungero.Workflow.Interfaces.AttachmentCreatedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.DocumentReviewTask.AddedAddendaAppend(_obj, addendum);
+      Functions.DocumentReviewTask.RemovedAddendaRemove(_obj, addendum);
+    }
+
+    public virtual void AddendaGroupDeleted(Sungero.Workflow.Interfaces.AttachmentDeletedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.DocumentReviewTask.RemovedAddendaAppend(_obj, addendum);
+      Functions.DocumentReviewTask.AddedAddendaRemove(_obj, addendum);
+    }
+
+    public virtual void AddendaGroupAdded(Sungero.Workflow.Interfaces.AttachmentAddedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.DocumentReviewTask.AddedAddendaAppend(_obj, addendum);
+      Functions.DocumentReviewTask.RemovedAddendaRemove(_obj, addendum);
+    }
+
     public virtual void ResolutionGroupCreated(Sungero.Workflow.Interfaces.AttachmentCreatedEventArgs e)
     {
       var task = ActionItemExecutionTasks.As(e.Attachment);
@@ -43,7 +73,7 @@ namespace Sungero.RecordManagement
       using (TenantInfo.Culture.SwitchTo())
         _obj.Subject = Docflow.Resources.AutoformatTaskSubject;
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, null);
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
     }
 
     public virtual void DocumentForReviewGroupAdded(Sungero.Workflow.Interfaces.AttachmentAddedEventArgs e)
@@ -69,7 +99,7 @@ namespace Sungero.RecordManagement
       
       // Добавить вложения.
       if (!_obj.State.IsCopied)
-        Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, _obj.DocumentForReviewGroup.OfficialDocuments.FirstOrDefault());
+        Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
       Docflow.PublicFunctions.OfficialDocument.DocumentAttachedInMainGroup(document, _obj);
       Docflow.PublicFunctions.OfficialDocument.AddRelatedDocumentsToAttachmentGroup(document, _obj.OtherGroup);
     }

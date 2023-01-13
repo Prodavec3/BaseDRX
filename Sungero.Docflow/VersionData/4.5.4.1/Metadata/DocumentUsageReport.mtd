@@ -1,0 +1,95 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "f70c4908-34b1-47c7-9bf1-90d18e8309d4",
+  "Name": "DocumentUsageReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Pdf",
+    "Excel",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient",
+    "BeforeExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "DisplayName",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "34a1f6ea-2c4e-4ac7-b452-83d1cced9c44",
+      "Name": "PeriodBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "a6d314fa-ea3c-4892-b9ae-8441626f02f9",
+      "Name": "PeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "e201353f-c8bb-4a45-bf45-894958e74399",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d3ee3aea-ac3d-447c-95f8-2babf9444665",
+      "Name": "DepartmentId",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "4c0dc683-7872-4f50-b7a3-3e830a35827b",
+      "Name": "ClientPeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "451f7d8b-9668-4af1-b01c-b565686f99b2",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "c0859024-ee96-43d3-a323-9225a429c08d",
+      "Name": "ClientPeriodBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "6a3cb071-fdd6-4ec6-8897-c642bb668ebe",
+      "Name": "Empty",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "EmployeeName",
+    "JobTitle",
+    "Department",
+    "CreatedDocumentsAmount",
+    "EditedDocumentsAmount",
+    "ViewedDocumentsAmount",
+    "TotalDocumentsAmount",
+    "PeriodFrom",
+    "PeriodTo"
+  ],
+  "Versions": []
+}

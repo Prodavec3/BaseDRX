@@ -454,4 +454,16 @@ Personal account at {0}: {1}</value>
   <data name="OneOrMoreDocumentAlreadyProcessing" xml:space="preserve">
     <value>Some documents do not require signing, or a response on them has already been sent to the counterparty.</value>
   </data>
+  <data name="SbisFormalizedPoALinkTitle" xml:space="preserve">
+    <value>PoA No. {0}</value>
+  </data>
+  <data name="CounterpartyPowerOfAttorney" xml:space="preserve">
+    <value>PoA No. {0} ({1})</value>
+  </data>
+  <data name="SigningReasonDisplayValue" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="NoRightsForDocument" xml:space="preserve">
+    <value>You must have at least the "Change" access rights to send documents via exchange services.</value>
+  </data>
 </root>

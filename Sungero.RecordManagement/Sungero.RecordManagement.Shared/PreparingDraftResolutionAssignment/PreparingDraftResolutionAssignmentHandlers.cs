@@ -13,14 +13,16 @@ namespace Sungero.RecordManagement
     public virtual void ResolutionGroupCreated(Sungero.Workflow.Interfaces.AttachmentCreatedEventArgs e)
     {
       var task = ActionItemExecutionTasks.As(e.Attachment);
+      var documentReviewTask = DocumentReviewTasks.As(_obj.Task);
       if (task != null)
       {
         task.IsDraftResolution = true;
-        var document = _obj.DocumentForReviewGroup.OfficialDocuments.FirstOrDefault();
-        if (document != null)
-          task.DocumentsGroup.OfficialDocuments.Add(document);
-        foreach (var otherGroupAttachment in _obj.OtherGroup.All)
-          task.OtherGroup.All.Add(otherGroupAttachment);
+        Functions.Module.SynchronizeAttachmentsToActionItem(_obj.DocumentForReviewGroup.OfficialDocuments.FirstOrDefault(),
+                                                            _obj.AddendaGroup.OfficialDocuments.Select(x => Sungero.Content.ElectronicDocuments.As(x)).ToList(),
+                                                            Functions.DocumentReviewTask.GetAddedAddenda(documentReviewTask),
+                                                            Functions.DocumentReviewTask.GetRemovedAddenda(documentReviewTask),
+                                                            _obj.OtherGroup.All.ToList(),
+                                                            task);
       }
     }
 

@@ -221,7 +221,7 @@
     <value>Печать поручения</value>
   </data>
   <data name="Action_PrintActionItemDescription" xml:space="preserve">
-    <value>Печать поручения для передачи сотруднику, который не работает в системе. </value>
+    <value>Печать поручения для передачи сотруднику, который не работает в системе.</value>
   </data>
   <data name="Action_PrintActionItemHint" xml:space="preserve">
     <value>Печать поручения</value>

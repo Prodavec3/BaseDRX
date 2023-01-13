@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -10,6 +10,11 @@ namespace Sungero.Docflow
 
   partial class SignatureSettingSharedHandlers
   {
+
+    public virtual void SigningReasonChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
+    {
+      Functions.SignatureSetting.FillName(_obj);
+    }
 
     public virtual void BusinessUnitsChanged(Sungero.Domain.Shared.CollectionPropertyChangedEventArgs e)
     {
@@ -60,17 +65,30 @@ namespace Sungero.Docflow
 
     public virtual void DocumentChanged(Sungero.Docflow.Shared.SignatureSettingDocumentChangedEventArgs e)
     {
-      if (e.NewValue != null && !Equals(e.NewValue, e.OldValue) && _obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney)
+      if (e.NewValue != null && !Equals(e.NewValue, e.OldValue) && (_obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney ||
+                                                                    _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA))
       {
-        if (PowerOfAttorneys.Is(e.NewValue))
+        if (PowerOfAttorneyBases.Is(e.NewValue))
         {
-          var powerOfAttorney = PowerOfAttorneys.As(e.NewValue);
-          _obj.Recipient = powerOfAttorney.IssuedTo;
-          _obj.ValidFrom = powerOfAttorney.RegistrationDate;
-          _obj.ValidTill = powerOfAttorney.ValidTill;
+          var powerOfAttorneyBase = PowerOfAttorneyBases.As(e.NewValue);
+          _obj.Recipient = powerOfAttorneyBase.IssuedTo;
+          _obj.ValidFrom = powerOfAttorneyBase.ValidFrom ?? powerOfAttorneyBase.RegistrationDate;
+          _obj.ValidTill = powerOfAttorneyBase.ValidTill;
           _obj.BusinessUnits.Clear();
           var newBusinessUnit = _obj.BusinessUnits.AddNew();
-          newBusinessUnit.BusinessUnit = powerOfAttorney.BusinessUnit;
+          newBusinessUnit.BusinessUnit = powerOfAttorneyBase.BusinessUnit;
+          
+          if (PowerOfAttorneys.Is(powerOfAttorneyBase))
+          {
+            var powerOfAttorney = PowerOfAttorneys.As(powerOfAttorneyBase);
+            _obj.SigningReason = Functions.SignatureSetting.GetPowerOfAttorneySigningReason(_obj, powerOfAttorney);
+          }
+          
+          if (FormalizedPowerOfAttorneys.Is(powerOfAttorneyBase))
+          {
+            var formalizedPowerOfAttorney = FormalizedPowerOfAttorneys.As(powerOfAttorneyBase);
+            _obj.SigningReason = Functions.SignatureSetting.GetFormalizedPowerOfAttorneySigningReason(_obj, formalizedPowerOfAttorney);
+          }
         }
         else
         {
@@ -79,10 +97,36 @@ namespace Sungero.Docflow
           _obj.BusinessUnits.Clear();
         }
       }
+      
+      if (e.NewValue != null && !Equals(e.NewValue, e.OldValue) && _obj.Reason == Docflow.SignatureSetting.Reason.Other)
+      {
+        _obj.SigningReason = Functions.Module.TrimSpecialSymbols(_obj.Document.Name);
+        _obj.ValidTill = null;
+        _obj.ValidFrom = null;
+      }
+      
+      if (e.NewValue == null)
+      {
+        _obj.SigningReason = null;
+        _obj.ValidTill = null;
+        _obj.ValidFrom = null;
+      }
     }
 
     public virtual void RecipientChanged(Sungero.Docflow.Shared.SignatureSettingRecipientChangedEventArgs e)
     {
+      if (e.NewValue != null && !Sungero.Company.Employees.Is(e.NewValue))
+      {
+        if (_obj.Reason == Sungero.Docflow.SignatureSetting.Reason.PowerOfAttorney ||
+            _obj.Reason == Sungero.Docflow.SignatureSetting.Reason.FormalizedPoA)
+        {
+          _obj.Reason = null;
+          _obj.Document = null;
+          _obj.SigningReason = null;
+          _obj.ValidFrom = null;
+          _obj.ValidTill = null;
+        }
+      }
       // При изменении подписывающего почистить документ.
       if (_obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney &&
           _obj.Document != null && Docflow.PowerOfAttorneys.Is(_obj.Document) && !Equals(e.NewValue, PowerOfAttorneys.As(_obj.Document).IssuedTo))
@@ -93,7 +137,10 @@ namespace Sungero.Docflow
       }
       
       if (!Equals(e.NewValue, e.OldValue))
+      {
         _obj.Certificate = null;
+        _obj.JobTitle = e.NewValue != null && Sungero.Company.Employees.Is(e.NewValue) ? Sungero.Company.Employees.As(e.NewValue).JobTitle : null;
+      }
       Functions.SignatureSetting.ChangePropertiesAccess(_obj);
     }
 
@@ -102,9 +149,14 @@ namespace Sungero.Docflow
       if (!Equals(e.NewValue, e.OldValue))
       {
         _obj.Document = null;
-        _obj.DocumentInfo = null;
+
+        if (e.NewValue == SignatureSetting.Reason.Duties)
+          _obj.SigningReason = Sungero.Docflow.SignatureSettings.Resources.Statute;
+        else
+          _obj.SigningReason = null;
       }
       
+      Functions.SignatureSetting.FillName(_obj);
     }
 
     public virtual void AmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)

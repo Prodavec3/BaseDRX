@@ -26,19 +26,10 @@ namespace Sungero.Company.Server
     /// </summary>
     /// <param name="users">Список пользователей, для которых надо создать замещение.</param>
     /// <param name="manager">Руководитель.</param>
+    [Obsolete("Используйте функцию DeleteSystemSubstitutions модуля Company.")]
     public static void DeleteSystemSubstitutions(System.Collections.Generic.IEnumerable<IUser> users, IUser manager)
     {
-      var deletedSubstitutions = Substitutions.GetAll()
-        .Where(s => s.Substitute.Equals(manager) &&
-               users.Contains(s.User) &&
-               s.IsSystem == true)
-        .ToList();
-      foreach (var user in users)
-      {
-        var deletedSubstitution = deletedSubstitutions.FirstOrDefault(s => s.User.Equals(user));
-        if (deletedSubstitution != null)
-          Substitutions.Delete(deletedSubstitution);
-      }
+      Functions.Module.DeleteSystemSubstitutions(users, manager);
     }
 
     /// <summary>

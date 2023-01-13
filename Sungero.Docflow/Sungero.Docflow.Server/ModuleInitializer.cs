@@ -130,6 +130,9 @@ namespace Sungero.Docflow.Server
       InitializeExchangeServiceUsersRole();
       CreateReportsTables();
       AddCompanyDataServiceParam();
+      AddDisableMailNotificationParam();
+      AddSummaryMailNotificationsBunchCountParam();
+      AddAccessRightsRuleProcessingBatchSizeParam();
       
       // Конвертация очереди выдачи прав на документы.
       if (PublicFunctions.Module.GetGrantRightMode() == string.Empty)
@@ -148,10 +151,10 @@ namespace Sungero.Docflow.Server
       ConvertDocumentTemplates();
     }
     
-    #region Выдача прав на спец.папки
+    #region Выдача прав на спец. папки
     
     /// <summary>
-    /// Выдать права на спец.папки модуля.
+    /// Выдать права на спец. папки модуля.
     /// </summary>
     /// <param name="allUsers">Группа "Все пользователи".</param>
     public static void GrantRightsOnFolders(IRole allUsers)
@@ -260,6 +263,7 @@ namespace Sungero.Docflow.Server
       Docflow.AccessRightsRules.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
       Docflow.DistributionLists.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Create);
       Docflow.StoragePolicyBases.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+      Docflow.StampSettings.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
       
       Docflow.CaseFiles.AccessRights.Save();
       Docflow.FileRetentionPeriods.AccessRights.Save();
@@ -278,6 +282,7 @@ namespace Sungero.Docflow.Server
       Docflow.ApprovalRoleBases.AccessRights.Save();
       Docflow.AccessRightsRules.AccessRights.Save();
       Docflow.DistributionLists.AccessRights.Save();
+      Docflow.StampSettings.AccessRights.Save();
       
       // Интеллектуальная обработка.
       Docflow.SmartProcessingSettings.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
@@ -381,6 +386,15 @@ namespace Sungero.Docflow.Server
     {
       InitializationLogger.Debug("Init: Create access rights for document type OfficialDocument");
       CreateAccessRightsForDocumentType(OfficialDocument.ClassTypeGuid);
+      
+      // Создать тип прав "Импорт электронной доверенности".
+      var mask = OfficialDocumentOperations.Create ^ OfficialDocumentOperations.Approve;
+      CreateAccessRightsType(FormalizedPowerOfAttorney.ClassTypeGuid.ToString(),
+                             Resources.ImportFPoAAccessRightsTypeName.ToString(),
+                             mask, mask,
+                             CoreEntities.AccessRightsType.AccessRightsTypeArea.Type,
+                             Constants.Module.DefaultAccessRightsTypeSid.ImportFormalizedPowerOfAttorney,
+                             false);
     }
 
     /// <summary>
@@ -862,6 +876,7 @@ namespace Sungero.Docflow.Server
       CreateDocumentType(Docflow.Resources.AddendumTypeName, Addendum.ClassTypeGuid, Docflow.DocumentType.DocumentFlow.Inner, true);
       CreateDocumentType(Docflow.Resources.ExchangeDocumentTypeName, ExchangeDocument.ClassTypeGuid, Docflow.DocumentType.DocumentFlow.Incoming, false);
       CreateDocumentType(Docflow.Resources.PowerOfAttorneyTypeName, PowerOfAttorney.ClassTypeGuid, Docflow.DocumentType.DocumentFlow.Inner, true);
+      CreateDocumentType(Docflow.Resources.FormalizedPowerOfAttorneyTypeName, FormalizedPowerOfAttorney.ClassTypeGuid, Docflow.DocumentType.DocumentFlow.Inner, true);
       CreateDocumentType(Docflow.Resources.CounterpartyDocumentTypeName, CounterpartyDocument.ClassTypeGuid, Docflow.DocumentType.DocumentFlow.Inner, true);
     }
     
@@ -905,6 +920,22 @@ namespace Sungero.Docflow.Server
                          notNumerable, DocumentFlow.Inner, true, false, CounterpartyDocument.ClassTypeGuid,
                          new Domain.Shared.IActionInfo[] { OfficialDocuments.Info.Actions.SendForFreeApproval },
                          Init.CounterpartyDocumentDefaultKind);
+      CreateFormalizedPowerOfAttorneyDocumentKind();
+    }
+    
+    /// <summary>
+    /// Создать вид документа для электронной доверенности.
+    /// </summary>
+    public static void CreateFormalizedPowerOfAttorneyDocumentKind()
+    {
+      // Определить, создавался ли ранее журнал регистрации для доверенностей.
+      var registerExternalLink = Docflow.PublicFunctions.Module.GetExternalLink(DocumentRegister.ClassTypeGuid, Init.PowerOfAttorneyKind);
+      
+      // Если журнал для доверенностей ранее не создавался (новая поставка), то сделать вид документа автонумеруемым.
+      var isAutonumerable = registerExternalLink == null;
+      CreateDocumentKind(Docflow.Resources.FormalizedPowerOfAttorneyKindName, Docflow.Resources.FormalizedPowerOfAttorneyKindShortName,
+                         Docflow.DocumentKind.NumberingType.Numerable, DocumentFlow.Inner, true, isAutonumerable, FormalizedPowerOfAttorney.ClassTypeGuid,
+                         new Domain.Shared.IActionInfo[] { OfficialDocuments.Info.Actions.SendForFreeApproval }, Init.FormalizedPowerOfAttorneyKind);
     }
     
     /// <summary>
@@ -1476,7 +1507,7 @@ namespace Sungero.Docflow.Server
                                                                       Resources.RegistersAndSettingsPowerOfAttorneyIndex,
                                                                       Init.PowerOfAttorneyKind);
       CreateNumerationSetting(Memo.ClassTypeGuid, Docflow.RegistrationSetting.DocumentFlow.Inner, memosRegister);
-      CreateNumerationSetting(PowerOfAttorney.ClassTypeGuid, Docflow.RegistrationSetting.DocumentFlow.Inner, powerOfAttorneyRegister);
+      CreatePowerOfAttorneySetting(powerOfAttorneyRegister);
     }
     
     /// <summary>
@@ -1538,6 +1569,42 @@ namespace Sungero.Docflow.Server
       
       Docflow.PublicFunctions.Module.CreateExternalLink(documentRegister, entityId);
       return documentRegister;
+    }
+    
+    /// <summary>
+    /// Создать настройку регистрации для доверенностей.
+    /// </summary>
+    /// <param name="documentRegister">Журнал.</param>
+    [Public]
+    public static void CreatePowerOfAttorneySetting(IDocumentRegister documentRegister)
+    {
+      if (documentRegister == null)
+        return;
+      
+      var name = documentRegister.Name;
+      InitializationLogger.DebugFormat("Init: Create numeration setting {0} for {1}", name, PowerOfAttorney.ClassTypeGuid);
+      
+      var settings = RegistrationSettings.GetAll().FirstOrDefault(s => s.Name == name) ?? RegistrationSettings.Create();
+      settings.Name = name;
+      settings.DocumentFlow = Docflow.RegistrationSetting.DocumentFlow.Inner;
+      settings.SettingType = Docflow.RegistrationSetting.SettingType.Numeration;
+      var allKinds = DocumentKinds
+        .GetAll(k => k.DocumentType.DocumentTypeGuid == PowerOfAttorney.ClassTypeGuid.ToString() ||
+                k.DocumentType.DocumentTypeGuid == FormalizedPowerOfAttorney.ClassTypeGuid.ToString())
+        .ToList();
+      foreach (var kind in allKinds)
+        if (!settings.DocumentKinds.Any(k => Equals(k.DocumentKind, kind)))
+          settings.DocumentKinds.AddNew().DocumentKind = kind;
+      
+      // Если настройка дублирует существующую - прекратить инициализацию настройки.
+      if (Docflow.PublicFunctions.RegistrationSetting.Remote.GetDoubleSettings(settings).Any())
+      {
+        Docflow.PublicFunctions.Module.Remote.EvictEntityFromSession(settings);
+        return;
+      }
+      
+      settings.DocumentRegister = documentRegister;
+      settings.Save();
     }
     
     /// <summary>
@@ -1915,15 +1982,27 @@ namespace Sungero.Docflow.Server
     
     #endregion
     
-    #region Добавление в таблицу параметров адреса веб-сервиса проверки контрагентов
+    #region Добавление в таблицу параметров
     
+    /// <summary>
+    /// Добавить в таблицу параметров адреса веб-сервиса проверки контрагентов.
+    /// </summary>
     public static void AddCompanyDataServiceParam()
     {
       Docflow.PublicFunctions.Module.InsertOrUpdateDocflowParam(Constants.Module.CompanyDataServiceKey, Constants.Module.CompanyDataServiceDefaultURL);
     }
+    
+    /// <summary>
+    /// Добавить в таблицу параметров настройку для рассылки по умолчанию.
+    /// </summary>
+    public static void AddDisableMailNotificationParam()
+    {
+      InitializationLogger.Debug("Init: Adding summary mail notifications disable parameter.");
+      Docflow.PublicFunctions.Module.InsertDocflowParam(Constants.Module.DisableMailNotification, "false");
+    }
 
     #endregion
-    
+
     #region Создание индексов
     
     public static void CreateTaskIndices()
@@ -2159,12 +2238,12 @@ namespace Sungero.Docflow.Server
       {
         if (queueItem.ChangedEntityType == Docflow.DocumentGrantRightsQueueItem.ChangedEntityType.Document)
         {
-          PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(queueItem.DocumentId.Value, null, true);
+          PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(queueItem.DocumentId.Value, new List<int>(), true);
           Logger.DebugFormat("Create grant rights async for document {0}", queueItem.DocumentId.Value);
         }
         else if (queueItem.ChangedEntityType == Docflow.DocumentGrantRightsQueueItem.ChangedEntityType.Rule)
         {
-          PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(queueItem.DocumentId.Value, queueItem.AccessRightsRule.Id, true);
+          PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(queueItem.DocumentId.Value, new List<int>() { queueItem.AccessRightsRule.Id }, true);
           Logger.DebugFormat("Create grant rights async for document {0} for rule {1}", queueItem.DocumentId.Value, queueItem.AccessRightsRule.Id);
         }
       }
@@ -2213,6 +2292,19 @@ namespace Sungero.Docflow.Server
         Logger.Debug(string.Format("Convert template {0} OK!", documentTemplate.Name));
       }
     }
+    
+    #region Добавление в таблицу параметров значения количества писем в пакете
+    
+    public static void AddSummaryMailNotificationsBunchCountParam()
+    {
+      InitializationLogger.Debug("Init: Adding summary mail notifications bunch count.");
+      
+      if (Docflow.PublicFunctions.Module.GetDocflowParamsValue(Constants.Module.SummaryMailNotificationsBunchCountParamName) == null)
+        Docflow.PublicFunctions.Module.InsertOrUpdateDocflowParam(Constants.Module.SummaryMailNotificationsBunchCountParamName,
+                                                                  Constants.Module.SummaryMailNotificationsBunchCount.ToString());
+    }
+    
+    #endregion
     
     #region Интеллектуальная обработка
     
@@ -2281,6 +2373,19 @@ namespace Sungero.Docflow.Server
     }
     
     #endregion
+    
+    #endregion
+    
+    #region Добавление в таблицу параметров значения количества документов в пакете для массовой выдачи прав
+    
+    public static void AddAccessRightsRuleProcessingBatchSizeParam()
+    {
+      InitializationLogger.Debug("Init: Adding docs for access rights rule processing batch size.");
+      
+      if (Docflow.PublicFunctions.Module.GetDocflowParamsValue(Constants.Module.DocsForAccessRightsRuleProcessingBatchSizeParamName) == null)
+        Docflow.PublicFunctions.Module.InsertOrUpdateDocflowParam(Constants.Module.DocsForAccessRightsRuleProcessingBatchSizeParamName,
+                                                                  Constants.Module.DocsForAccessRightsRuleProcessingBatchSize.ToString());
+    }
     
     #endregion
   }

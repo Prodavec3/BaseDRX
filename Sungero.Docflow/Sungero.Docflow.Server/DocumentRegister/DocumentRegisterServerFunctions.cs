@@ -13,6 +13,17 @@ namespace Sungero.Docflow.Server
   {
 
     /// <summary>
+    /// Получить журнал регистрации по ИД.
+    /// </summary>
+    /// <param name="registerId">ИД журнала.</param>
+    /// <returns>Журнал регистрации.</returns>
+    [Public, Remote]
+    public static IDocumentRegister GetDocumentRegister(int registerId)
+    {
+      return DocumentRegisters.Get(registerId);
+    }
+    
+    /// <summary>
     /// Получить список групп регистрации текущего пользователя.
     /// </summary>
     /// <returns>Список групп регистрации текущего пользователя.</returns>
@@ -80,43 +91,62 @@ namespace Sungero.Docflow.Server
     public static List<IDocumentRegister> GetDocumentRegistersByParams(IDocumentKind kind, IBusinessUnit unit, IDepartment department,
                                                                        Enumeration? settingType, bool forCurrentUser)
     {
-      // Результат сразу замыкается в ToList, так как иначе не транслируется в SQL, если вызывать на сервере.
-      // Все журналы, указанные в настройках регистрации.
-      var documentRegistersWithRegistrationSettings = RegistrationSettings
-        .GetAllCached(s => s.Status == CoreEntities.DatabookEntry.Status.Active &&
-                      s.SettingType == Docflow.RegistrationSetting.SettingType.Registration)
-        .Select(s => s.DocumentRegister)
-        .ToList();
+      var registersIds = GetDocumentRegistersIdsByParams(kind, unit, department, settingType, forCurrentUser);
       
-      // Все журналы, кроме указанных в настройках регистрации.
-      var documentRegistersWithoutRegistrationSettings = DocumentRegisters.GetAll()
-        .Where(l => !documentRegistersWithRegistrationSettings.Contains(l));
+      return DocumentRegisters.GetAll().Where(dr => registersIds.Contains(dr.Id)).ToList();
+    }
+    
+    /// <summary>
+    /// Получить журналы регистрации\резервирования по параметрам.
+    /// </summary>
+    /// <param name="kind">Вид.</param>
+    /// <param name="unit">НОР.</param>
+    /// <param name="department">Подразделение.</param>
+    /// <param name="settingType">Тип нумерации.</param>
+    /// <param name="forCurrentUser">Для текущего пользователя.</param>
+    /// <returns>Журналы.</returns>
+    [Public, Remote(IsPure = true)]
+    public static List<int> GetDocumentRegistersIdsByParams(IDocumentKind kind, IBusinessUnit unit, IDepartment department,
+                                                            Enumeration? settingType, bool forCurrentUser)
+    {
+      // Журналы, указанные в активных настройках регистрации с типом "Регистрация".
+      var documentRegistersIdsWithSettings = RegistrationSettings
+        .GetAll(s => s.Status == CoreEntities.DatabookEntry.Status.Active &&
+                s.SettingType == Docflow.RegistrationSetting.SettingType.Registration)
+        .Select(s => s.DocumentRegister.Id);
       
-      // Журналы, подходящие по непротиворечивым настройкам.
-      var documentRegistersBySettings = Functions.RegistrationSetting
-        .GetAvailableSettingsByParams(settingType, unit, kind, department)
-        .Select(s => s.DocumentRegister)
-        .ToList();
-      
-      // Журналы настроек регистрации, подходящих для текущего документа.
-      var documentRegistersByRegistrationSettings = Functions.RegistrationSetting
+      var documentRegistersIds = Functions.RegistrationSetting
         .GetAvailableSettingsByParams(Docflow.RegistrationSetting.SettingType.Registration, unit, kind, department)
-        .Select(s => s.DocumentRegister)
-        .ToList();
-      
-      // Получить все журналы по настройкам.
-      documentRegistersByRegistrationSettings.AddRange(documentRegistersBySettings);
-      
-      // Фильтруем журналы по документопотоку. Только журналы регистрации.
+        .Select(s => s.DocumentRegister.Id);
+
+      // Все журналы, кроме журналов из настроек с типом "Регистрация" не подходящих по параметрам.
       var result = Functions.DocumentRegister.GetFilteredDocumentRegisters(kind.DocumentFlow.Value, true, forCurrentUser)
-        .Where(a => documentRegistersByRegistrationSettings.Contains(a) || documentRegistersWithoutRegistrationSettings.Contains(a)).ToList();
-      
+        .Where(dr => !documentRegistersIdsWithSettings.Contains(dr.Id) || documentRegistersIds.Contains(dr.Id))
+        .Select(dr => dr.Id)
+        .ToList();
+
       // Для резервирования добавить настройки резервирования в обход проверки доступности журнала группе регистрации.
       // Делопроизводитель должен иметь возможность резервировать номер в документе, который не сможет зарегистрировать.
       if (settingType == Docflow.RegistrationSetting.SettingType.Reservation)
-        result.AddRange(documentRegistersBySettings);
-
+        result.AddRange(Functions.Module.GetAvailableRegistrationSettings(settingType, unit, kind, department).Select(r => r.DocumentRegister.Id).ToList());
+      
       return result.Distinct().ToList();
+    }
+    
+    /// <summary>
+    /// Имеются ли подходящие журналы регистрации\резервирования по параметрам.
+    /// </summary>
+    /// <param name="kind">Вид.</param>
+    /// <param name="unit">НОР.</param>
+    /// <param name="department">Подразделение.</param>
+    /// <param name="settingType">Тип нумерации.</param>
+    /// <param name="forCurrentUser">Для текущего пользователя.</param>
+    /// <returns>True - если есть подходящие журналы.</returns>
+    [Public, Remote(IsPure = true)]
+    public static bool HasDocumentRegistersByParams(IDocumentKind kind, IBusinessUnit unit, IDepartment department,
+                                                    Enumeration? settingType, bool forCurrentUser)
+    {
+      return Functions.DocumentRegister.GetDocumentRegistersIdsByParams(kind, unit, department, settingType, forCurrentUser).Any();
     }
 
     /// <summary>
@@ -401,11 +431,26 @@ namespace Sungero.Docflow.Server
     /// <param name="registrationDate">Дата регистрации.</param>
     /// <param name="index">Индекс.</param>
     /// <returns>Документы, зарегистрированные в журнале под тем же номером.</returns>
-    [Public]
+    [Public, Obsolete("Используйте метод GetSameIndexRegistrationNumbers.")]
     public virtual IQueryable<IOfficialDocument> GetSameNumberDocuments(IOfficialDocument doc, DateTime registrationDate, int index)
     {
       return this.GetOtherDocumentsInPeriodBySections(doc, registrationDate)
         .Where(l => l.Index == index);
+    }
+    
+    /// <summary>
+    /// Получить рег. номера документов, зарегистрированных в журнале с тем же индексом.
+    /// </summary>
+    /// <param name="doc">Документ.</param>
+    /// <param name="registrationDate">Дата регистрации.</param>
+    /// <param name="index">Индекс.</param>
+    /// <returns>Рег. номера документов, зарегистрированных в журнале с тем же индексом.</returns>
+    [Public]
+    public virtual IQueryable<string> GetSameIndexRegistrationNumbers(IOfficialDocument doc, DateTime registrationDate, int index)
+    {
+      return this.GetOtherDocumentsInPeriodBySections(doc, registrationDate)
+        .Where(l => l.Index == index)
+        .Select(l => l.RegistrationNumber);
     }
     
     /// <summary>
@@ -476,12 +521,12 @@ namespace Sungero.Docflow.Server
                                                                               businessUnitCode, caseFileIndex, docKindCode, counterpartyCode, leadDocNumber,
                                                                               checkRegistrationNumberUnique);
           
-          var equalsIndexes = Functions.DocumentRegister.GetSameNumberDocuments(_obj, document, registrationDate, index).ToList();
+          var sameIndexRegistrationNumbers = Functions.DocumentRegister.GetSameIndexRegistrationNumbers(_obj, document, registrationDate, index).ToList();
           
-          foreach (var equalsIndex in equalsIndexes)
+          foreach (var number in sameIndexRegistrationNumbers)
           {
             // Параметр функции "Искать корректировочный постфикс" = true, если необходимо проверять рег. номер на уникальность.
-            if (Functions.DocumentRegister.IsEqualsRegistrationNumbers(_obj, registrationDate, equalsIndex.RegistrationNumber,
+            if (Functions.DocumentRegister.IsEqualsRegistrationNumbers(_obj, registrationDate, number,
                                                                        departmentCode, businessUnitCode, caseFileIndex, docKindCode, counterpartyCode, leadDocNumber,
                                                                        registrationNumber, checkRegistrationNumberUnique))
               result = false;

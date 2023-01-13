@@ -1,0 +1,122 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "eb9bebab-6c1b-448b-ab15-c0e029f7af3c",
+  "Name": "ExchangeServiceDocumentReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "BeforeExecuteClient",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters",
+    "DisplayName",
+    "Description",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "7a6f655b-5b70-4e16-8cd1-2ade131c4b31",
+      "Name": "DocumentsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "98d37464-86dc-417b-aad9-877ad5e09def",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "4c678037-35ab-4343-9bba-f673cdd01571",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "38a95a37-3560-480e-98f0-b5fc1133b47a",
+      "Name": "Employee",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "9a8f9c22-b6df-4582-aaa3-f95c507333ac",
+      "Name": "Counterparty",
+      "EntityType": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+      "InternalDataTypeName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "ada2c6f2-31fb-4ea9-8b93-abc683621495",
+      "Name": "ExchangeService",
+      "EntityType": "d6c0fcaf-4ac9-4a6a-9e2c-8fed1e35c08a",
+      "InternalDataTypeName": "Sungero.ExchangeCore.IExchangeService, Sungero.Domain.Interfaces",
+      "IsCollection": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "7f6638ce-6935-4513-95cc-ba6521696de1",
+      "Name": "SendDateFrom",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "d9ddc857-d022-4727-b5fe-963a46051c23",
+      "Name": "SendDateTo",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "955f07b9-3b50-4bae-8f8c-1285d9c405a0",
+      "Name": "SendPeriod",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d95750e4-a424-449f-84b1-dc3fe589a6e4",
+      "Name": "ParametersInfo",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "9278ee20-c6c4-4d01-ad26-f9b1de22a4c2",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ReportName",
+    "Document",
+    "Id",
+    "Counterparty",
+    "SendDate",
+    "ResponsibleHeaderName",
+    "Delay",
+    "ExchangeService",
+    "SendDateFrom",
+    "SendDateTo",
+    "ExchangeServiceDocumentReportName",
+    "PeriodFrom",
+    "PeriodTo"
+  ],
+  "Versions": []
+}

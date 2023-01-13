@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Parties.Counterparty;
@@ -120,14 +121,15 @@ namespace Sungero.Parties.Server
         Logger.DebugFormat("CreateDefaultDistributionListCounterpartyIgnoreFiltering: companyId {0}", companyId);
         using (var session = new Sungero.Domain.Session())
         {
-           var innerSession = (Sungero.Domain.ISession)session.GetType()
-             .GetField("InnerSession", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(session);
-         
-           return Companies.As((Sungero.Domain.Shared.IEntity)innerSession.Get(typeof(ICompany), companyId));
+          var innerSession = (Sungero.Domain.ISession)session.GetType()
+            .GetField("InnerSession", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(session);
+          
+          return Companies.As((Sungero.Domain.Shared.IEntity)innerSession.Get(typeof(ICompany), companyId));
         }
       }
       
       return null;
     }
+
   }
 }

@@ -529,7 +529,7 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Добвить этап в схему правила согласования.
+    /// Добавить этап в схему правила согласования.
     /// </summary>
     /// <param name="linedRoute">Схема правила.</param>
     /// <param name="prefix">Префикс перед заголовком.</param>
@@ -589,13 +589,19 @@ namespace Sungero.Docflow.Server
         parameters.Add(string.Format("{0}: {1}", resources.Rework, rework));
       }
       
-      // Права доступа
+      // Права доступа.
       var accessRights = Functions.ApprovalStage.GetAccessRightsSettings(_obj);
       if (!string.IsNullOrEmpty(accessRights))
       {
         parameters.Add(string.Format("{0}: {1}", resources.AccessRightsForEmployee, accessRights));
       }
 
+      // Признак "Разрешить согласование с замечаниями".
+      if (_obj.AllowApproveWithSuggestions == true)
+      {
+        parameters.Add(resources.StageAllowApproveWithSuggestions);
+      }
+      
       tableLine.Parameters = string.Join(System.Environment.NewLine, parameters);
       
       // Срок.

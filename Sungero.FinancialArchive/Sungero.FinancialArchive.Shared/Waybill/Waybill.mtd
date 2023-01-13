@@ -5,15 +5,6 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
-      "NameGuid": "51235fd5-4441-48cc-a6f1-3e5af16d5a64",
-      "Name": "ChangeDocumentType",
-      "GenerateHandler": true,
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "GenerateHandler"
-      ]
-    },
-    {
       "NameGuid": "228f2bab-7091-4731-a6e2-3742eeaf9ff5",
       "Name": "Sign",
       "IsAncestorMetadata": true,
@@ -638,6 +629,19 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "be87c526-5e40-48c7-8130-4f3a6864b603",
+          "Name": "OurSigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "51f9d515-59f7-4999-bb61-87796e7a87cb",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -1085,6 +1089,19 @@
       "Placement": "Client",
       "ReturnType": "global::Sungero.Docflow.IOfficialDocument",
       "ReturnTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEmailAddressees",
+      "Parameters": [
+        {
+          "Name": "waybill",
+          "ParameterType": "global::Sungero.FinancialArchive.IWaybill",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IWaybill, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
       "Name": "IsVerificationModeSupported",

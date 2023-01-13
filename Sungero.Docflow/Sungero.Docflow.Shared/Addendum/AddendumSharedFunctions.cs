@@ -65,7 +65,7 @@ namespace Sungero.Docflow.Shared
       var isNotNumerable = _obj.DocumentKind == null || _obj.DocumentKind.NumberingType == Docflow.DocumentKind.NumberingType.NotNumerable;
       _obj.State.Properties.BusinessUnit.IsVisible = !isNotNumerable;
       _obj.State.Properties.Department.IsVisible = !isNotNumerable;
-      _obj.State.Properties.OurSignatory.IsVisible = !isNotNumerable;
+      _obj.State.Properties.OurSignatory.IsVisible = !isNotNumerable || this.GetShowOurSigningReasonParam();
       _obj.State.Properties.PreparedBy.IsVisible = !isNotNumerable;
       _obj.State.Properties.Assignee.IsVisible = !isNotNumerable;
     }
@@ -101,10 +101,36 @@ namespace Sungero.Docflow.Shared
       _obj.State.Properties.PlacedToCaseFileDate.IsEnabled = caseIsEnabled;
     }
     
+    /// <summary>
+    /// Проверка на то, что документ является проектным.
+    /// </summary>
+    /// <returns>True - если документ проектный, иначе - false.</returns>
+    [Obsolete("Используйте метод IsProjectDocument(List<int>)")]
     public override bool IsProjectDocument()
     {
-      var isProject = base.IsProjectDocument();
-      return isProject ? isProject : Functions.OfficialDocument.IsProjectDocument(_obj.LeadingDocument);
+      return this.IsProjectDocument(new List<int>());
+    }
+    
+    /// <summary>
+    /// Проверка на то, что документ является проектным.
+    /// </summary>
+    /// <param name="leadingDocumentIds">ИД ведущих документов.</param>
+    /// <returns>True - если документ проектный, иначе - false.</returns>
+    public override bool IsProjectDocument(List<int> leadingDocumentIds)
+    {
+      if (base.IsProjectDocument(leadingDocumentIds))
+        return true;
+      
+      // Если текущий документ входит в список ранее вычисленных ведущих документов приложения,
+      // то есть произошло зацикливание ведущих документов друг с другом,
+      // и при этом ни один из них не определился как проектный, то значит документ не является проектным.
+      if (leadingDocumentIds.Any() && leadingDocumentIds.Contains(_obj.Id))
+        return false;
+      
+      leadingDocumentIds.Add(_obj.Id);
+      
+      // Проверить, что ведущий документ является проектным.
+      return Functions.OfficialDocument.IsProjectDocument(_obj.LeadingDocument, leadingDocumentIds);
     }
     
     public override IProjectBase GetProject()

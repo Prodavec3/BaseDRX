@@ -17,8 +17,14 @@ namespace Sungero.Parties.Constants
     
     // Код системы у external link для данных инициализации.
     [Sungero.Core.Public]
-    public const string InitializeExternalLinkSystem = "Initialize"; 
+    public const string InitializeExternalLinkSystem = "Initialize";
 
     public const string SugeroCounterpartyTableName = "Sungero_Parties_Counterparty";
+    
+    /// <summary>
+    /// Шаблон поиска инициалов в строке, в различных вариантах написания.
+    /// </summary>
+    [Sungero.Core.Public]
+    public const string InitialsRegex = @"(?:^|\s)+([А-Я])(?:\.|\s){0,}([А-Я])?(?:\.|\s|$)+";
   }
 }

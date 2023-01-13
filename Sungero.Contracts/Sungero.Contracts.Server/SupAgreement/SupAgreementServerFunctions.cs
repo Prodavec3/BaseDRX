@@ -80,6 +80,31 @@ namespace Sungero.Contracts.Server
     }
     
     /// <summary>
+    /// Получить правила согласования по умолчанию для доп. соглашения.
+    /// </summary>
+    /// <returns>Правила согласования по умолчанию.</returns>
+    /// <remarks>Если подходящих правил нет или их несколько, то вернется null.</remarks>
+    [Remote, Public]
+    public override IApprovalRuleBase GetDefaultApprovalRule()
+    {
+      var availableApprovalRules = this.GetApprovalRules();
+      if (availableApprovalRules.Count() == 1)
+        return availableApprovalRules.First();
+
+      if (availableApprovalRules.Any())
+      {
+        var supAgreementKinds = Docflow.PublicFunctions.DocumentKind.GetAvailableDocumentKinds(typeof(ISupAgreement)).ToList();
+        var supAgreementRules = availableApprovalRules.Where(r => r.DocumentKinds.Any(k => supAgreementKinds.Contains(k.DocumentKind)));
+        var approvalRules = supAgreementRules.Any() ? supAgreementRules : availableApprovalRules;
+        var maxPriopity = approvalRules.Select(a => a.Priority).OrderByDescending(a => a).FirstOrDefault();
+        var defaultApprovalRule = approvalRules.Where(a => Equals(a.Priority, maxPriopity));
+        if (defaultApprovalRule.Count() == 1)
+          return defaultApprovalRule.First();
+      }
+      return null;
+    }
+    
+    /// <summary>
     /// Сводка по документу.
     /// </summary>
     /// <returns>Сводка.</returns>

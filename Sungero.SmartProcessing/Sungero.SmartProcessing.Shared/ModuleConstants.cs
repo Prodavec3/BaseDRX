@@ -58,7 +58,7 @@ namespace Sungero.SmartProcessing.Constants
         /// </summary>
         [Sungero.Core.Public]
         public const string CorrespondentNameField = "CorrespondentName";
-        
+
         /// <summary>
         /// Дата документа.
         /// </summary>
@@ -88,6 +88,73 @@ namespace Sungero.SmartProcessing.Constants
         /// </summary>
         [Sungero.Core.Public]
         public const string SubjectField = "Subject";
+        
+        /// <summary>
+        /// ИНН.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string TinField = "TIN";
+        
+        /// <summary>
+        /// Признак "ИНН корректен".
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string TinIsValidField = "TinIsValid";
+        
+        /// <summary>
+        /// КПП.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string TrrcField = "TRRC";
+
+        /// <summary>
+        /// ОГРН.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string PsrnField = "PSRN";
+
+        /// <summary>
+        /// Головная организация.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string HeadCompanyNameField = "CorrHeadCompanyName";
+        
+        /// <summary>
+        /// Адрес эл. почты.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string EmailField = "Email";
+
+        /// <summary>
+        /// Номер телефона.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string PhoneField = "Phone";
+
+        /// <summary>
+        /// Веб-сайт.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string WebsiteField = "Website";
+
+        /// <summary>
+        /// Тип корреспондента.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string TypeField = "Type";
+
+        /// <summary>
+        /// Типы корреспондентов: "Корреспондент", "Адресат".
+        /// </summary>
+        public static class CorrespondentTypes
+        {
+          [Sungero.Core.Public]
+          public const string Correspondent = "CORRESPONDENT";
+          
+          [Sungero.Core.Public]
+          public const string Recipient = "RECIPIENT";
+        }
+
       }
       
       /// <summary>
@@ -238,6 +305,12 @@ namespace Sungero.SmartProcessing.Constants
         /// </summary>
         [Sungero.Core.Public]
         public const string TrrcField = "TRRC";
+        
+        /// <summary>
+        /// ОГРН.
+        /// </summary>
+        [Sungero.Core.Public]
+        public const string PsrnField = "PSRN";
       }
       
       /// <summary>

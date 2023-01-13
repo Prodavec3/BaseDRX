@@ -529,4 +529,7 @@
   <data name="AsyncHandler_Description_16102ef88cb046c29281c3234fd704fb" xml:space="preserve">
     <value>Make edits to action items that are not related with waiting for unlocking of assignments within the current action item.</value>
   </data>
+  <data name="AsyncHandler_Description_266cdf0020434667a0dda8e62c341f0e" xml:space="preserve">
+    <value>Exclude participants from acquaintance</value>
+  </data>
 </root>

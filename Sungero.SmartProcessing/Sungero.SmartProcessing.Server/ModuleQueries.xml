@@ -1,3 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <queries>
+  <query key="RemoveDocflowParamsValue">
+    <mssql><![CDATA[if exists
+  (select * from dbo.Sungero_Docflow_Params params where params.[Key] = '{0}')
+begin
+  delete from dbo.Sungero_Docflow_Params where dbo.Sungero_Docflow_Params.[Key] = '{0}'
+end]]></mssql>
+    <postgres><![CDATA[do $$
+begin
+IF EXISTS (select * from public.Sungero_Docflow_Params params where params.key = '{0}') THEN
+  delete from public.Sungero_Docflow_Params where public.Sungero_Docflow_Params.key = '{0}';
+END IF;
+end $$;
+]]></postgres>
+  </query>
 </queries>

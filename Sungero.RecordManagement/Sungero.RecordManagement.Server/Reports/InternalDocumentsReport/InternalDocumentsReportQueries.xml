@@ -1,3 +1,37 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+ ([ReportSessionId] varchar(256) NOT NULL,
+  [LineNumber] int not null,
+  [RegistrationDate] datetime null,
+  [RegistrationNumber] nvarchar(max) null,
+  [PreparedByName] nvarchar(max) null,
+  [PreparedByDepartmentShortName] nvarchar(max) null,
+  [PreparedByDepartmentName] nvarchar(max) null,
+  [Subject] nvarchar(max) NULL,
+  [CanRead] bit not null)]]></mssql>
+    <postgres><![CDATA[create table {0}
+ (ReportSessionId varchar(256) NOT NULL,
+  LineNumber integer not null,
+  RegistrationDate timestamp null,
+  RegistrationNumber citext null,
+  PreparedByName citext null,
+  PreparedByDepartmentShortName citext null,
+  PreparedByDepartmentName citext null,
+  Subject citext NULL,
+  CanRead boolean not null);]]></postgres>
+  </query>
+  <query key="SelectDocumentsFromTempTable">
+    <default><![CDATA[select RegistrationDate,
+       RegistrationNumber,
+       PreparedByName, 
+       PreparedByDepartmentShortName,
+       PreparedByDepartmentName,
+       Subject,
+       CanRead
+  from Sungero_Reports_InternalDocuments
+  where ReportSessionId = @ReportSessionId
+  order by LineNumber;]]></default>
+  </query>
 </queries>

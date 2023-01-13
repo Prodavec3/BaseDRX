@@ -8,7 +8,7 @@ using Sungero.Docflow.CounterpartyDocument;
 namespace Sungero.Docflow.Server
 {
   partial class CounterpartyDocumentFunctions
-  {    
-     
+  {
+    
   }
 }

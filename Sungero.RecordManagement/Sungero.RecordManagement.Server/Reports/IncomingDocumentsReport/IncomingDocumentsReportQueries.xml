@@ -2,249 +2,230 @@
 <queries>
   <query key="FillTempTables">
     <mssql><![CDATA[select
-		d.Id as DocId,
-  		d.RegDate_Docflow_Sungero as RegistrationDate,
-  		d.RegNumber_Docflow_Sungero as RegistrationNumber,
-  		counterparty.Name as Correspondent,
-  		d.Dated_Docflow_Sungero as CorrespondentDate,
-  		d.InNumber_Docflow_Sungero as CorrespondentNumber,
-  		d.Subject_Docflow_Sungero as Subject,
-  		identity(int, 1,1) as recordId
-	into {0}
-	from
- 		Sungero_Content_EDoc d
-  	join {2} availableIds on
-    		availableIds.Id = d.Id
-  	left join Sungero_Parties_Counterparty counterparty on
-    		counterparty.Id = d.InCorr_Docflow_Sungero
-	where
-  		d.RegState_Docflow_Sungero = 'Registered'
-	order by d.RegDate_Docflow_Sungero, d.RegNumber_Docflow_Sungero
+	d.Id as DocId,
+  d.RegDate_Docflow_Sungero as RegistrationDate,
+  d.RegNumber_Docflow_Sungero as RegistrationNumber,
+  d.Index_Docflow_Sungero as RegistrationIndex,
+  case when availableIds.Id is not null then counterparty.Name else '' end as Correspondent,
+  case when availableIds.Id is not null then d.Dated_Docflow_Sungero else null end as CorrespondentDate,
+  case when availableIds.Id is not null then d.InNumber_Docflow_Sungero else '' end as CorrespondentNumber,
+  case when availableIds.Id is not null then d.Subject_Docflow_Sungero else '' end as Subject,
+  identity(int, 1, 1) as recordId,
+  case when availableIds.Id is not null then 1 else 0 end as CanRead
+into {0}
+from Sungero_Content_EDoc d
+ 	inner join {3} allIncomingIds 
+ 	  on allIncomingIds.Id = d.Id
+  left join {2} availableIds 
+    on availableIds.Id = d.Id
+  left join Sungero_Parties_Counterparty counterparty 
+    on counterparty.Id = d.InCorr_Docflow_Sungero
+where d.RegState_Docflow_Sungero = 'Registered'
+order by d.RegDate_Docflow_Sungero, d.Index_Docflow_Sungero
 	
-	select
- 		att.AttachmentId as AttachmentId,
-  		person.ShortName as Author,
-  		task.ActionItemTAI_RecMan_Sungero as Resolution,
-  		performerPerson.ShortName as Performer,
-  		identity(int, 1,1) as attRecordId
-	into {1}
-	from
-  		dbo.Sungero_WF_Attachment att
-  		left join dbo.Sungero_WF_Task task on
-    		task.Id = att.Task and
-    		task.Discriminator = 'c290b098-12c7-487d-bb38-73e2c98f9789' and
-    		task.Status <> 'Draft' and
-    		(task.MainTask = task.Id or
-   		(select 
-   			Discriminator 
-   		from Sungero_WF_Task j 
-   		where j.Id = task.MainTask) != 'c290b098-12c7-487d-bb38-73e2c98f9789')
-  	join dbo.Sungero_Core_Recipient author on
-    		author.Id = task.AssignedBy_RecMan_Sungero
-  	join dbo.Sungero_Core_Recipient performer on
-    		performer.Id = task.AssigneeTAI_RecMan_Sungero
-  	join dbo.Sungero_Parties_Counterparty person on
-    		person.Id = author.Person_Company_Sungero
-  	left join dbo.Sungero_Parties_Counterparty performerPerson on
-    		performerPerson.Id = performer.Person_Company_Sungero
-	where
-  		att.[Group] = '804f50fe-f3da-411b-bb2e-e5373936e029'
-  		and person.Discriminator = 'f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6'
-  		and att.AttachmentId in (select DocId from {0})]]></mssql>
+select
+ 	att.AttachmentId as AttachmentId,
+  person.ShortName as Author,
+  task.ActionItemTAI_RecMan_Sungero as Resolution,
+  performerPerson.ShortName as Performer,
+  identity(int, 1,1) as attRecordId
+into {1}
+from dbo.Sungero_WF_Attachment att
+  left join dbo.Sungero_WF_Task task 
+    on task.Id = att.Task 
+    and task.Discriminator = 'c290b098-12c7-487d-bb38-73e2c98f9789' 
+    and task.Status <> 'Draft' 
+    and (task.MainTask = task.Id 
+         or (select Discriminator 
+   		       from Sungero_WF_Task j 
+   		       where j.Id = task.MainTask) != 'c290b098-12c7-487d-bb38-73e2c98f9789'
+         or (select ActionItemType_RecMan_Sungero
+   		       from Sungero_WF_Task j 
+   		       where j.Id = task.MainTask and task.MainTask = task.ParentTask) = 'Main')
+  inner join dbo.Sungero_Core_Recipient author 
+    on author.Id = task.AssignedBy_RecMan_Sungero
+  inner join dbo.Sungero_Core_Recipient performer 
+    on performer.Id = task.AssigneeTAI_RecMan_Sungero
+  inner join dbo.Sungero_Parties_Counterparty person 
+    on person.Id = author.Person_Company_Sungero
+ 	left join dbo.Sungero_Parties_Counterparty performerPerson 
+ 	  on performerPerson.Id = performer.Person_Company_Sungero
+where att.[Group] = '804f50fe-f3da-411b-bb2e-e5373936e029'
+  and person.Discriminator = 'f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6'
+  and att.AttachmentId in (select Id from {2})]]></mssql>
     <postgres><![CDATA[select
-		d.Id as DocId,
-  		d.RegDate_Docflow_Sungero as RegistrationDate,
-  		d.RegNumber_Docflow_Sungero as RegistrationNumber,
-  		counterparty.Name as Correspondent,
-  		d.Dated_Docflow_Sungero as CorrespondentDate,
-  		d.InNumber_Docflow_Sungero as CorrespondentNumber,
-  		d.Subject_Docflow_Sungero as Subject,
-		row_number() over(order by d.RegDate_Docflow_Sungero, d.RegNumber_Docflow_Sungero) as recordId  		
-	into {0}
-	from
- 		Sungero_Content_EDoc d
-  	join {2} availableIds on
-    		availableIds.Id = d.Id
-  	left join Sungero_Parties_Counterparty counterparty on
-    		counterparty.Id = d.InCorr_Docflow_Sungero
-	where
-  		d.RegState_Docflow_Sungero = 'Registered'
-	order by recordId;
+	d.Id as DocId,
+  d.RegDate_Docflow_Sungero as RegistrationDate,
+  d.RegNumber_Docflow_Sungero as RegistrationNumber,
+  d.Index_Docflow_Sungero as RegistrationIndex,
+  case when availableIds.Id is not null then counterparty.Name else '' end as Correspondent,
+  case when availableIds.Id is not null then d.Dated_Docflow_Sungero else null end as CorrespondentDate,
+  case when availableIds.Id is not null then d.InNumber_Docflow_Sungero else '' end as CorrespondentNumber,
+  case when availableIds.Id is not null then d.Subject_Docflow_Sungero else '' end as Subject,
+	row_number() over(order by d.RegDate_Docflow_Sungero, d.Index_Docflow_Sungero) as recordId,
+  case when availableIds.Id is not null then true else false end as CanRead		
+into {0}
+from Sungero_Content_EDoc d
+ 	inner join {3} allIncomingIds 
+ 	  on allIncomingIds.Id = d.Id
+  left join {2} availableIds 
+    on availableIds.Id = d.Id
+  left join Sungero_Parties_Counterparty counterparty 
+    on counterparty.Id = d.InCorr_Docflow_Sungero
+where	d.RegState_Docflow_Sungero = 'Registered'
+order by recordId;
 	
-	select
- 		att.AttachmentId as AttachmentId,
-  		person.ShortName as Author,
-  		task.ActionItemTAI_RecMan_Sungero as Resolution,
-  		performerPerson.ShortName as Performer,
-  		row_number() over() as attRecordId
-	into {1}
-	from
-  		Sungero_WF_Attachment att
-  		left join Sungero_WF_Task task on
-    		task.Id = att.Task and
-    		task.Discriminator = 'c290b098-12c7-487d-bb38-73e2c98f9789' and
-    		task.Status <> 'Draft' and
-    		(task.MainTask = task.Id or
-   		(select 
-   			Discriminator 
-   		from Sungero_WF_Task j 
-   		where j.Id = task.MainTask) != 'c290b098-12c7-487d-bb38-73e2c98f9789')
-  	join Sungero_Core_Recipient author on
-    		author.Id = task.AssignedBy_RecMan_Sungero
-  	join Sungero_Core_Recipient performer on
-    		performer.Id = task.AssigneeTAI_RecMan_Sungero
-  	join Sungero_Parties_Counterparty person on
-    		person.Id = author.Person_Company_Sungero
-  	left join Sungero_Parties_Counterparty performerPerson on
-    		performerPerson.Id = performer.Person_Company_Sungero
-	where
-  		att.Group = '804f50fe-f3da-411b-bb2e-e5373936e029'
-  		and person.Discriminator = 'f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6'
-  		and att.AttachmentId in (select DocId from {0})]]></postgres>
+select
+ 	att.AttachmentId as AttachmentId,
+  person.ShortName as Author,
+  task.ActionItemTAI_RecMan_Sungero as Resolution,
+  performerPerson.ShortName as Performer,
+  row_number() over() as attRecordId
+into {1}
+from Sungero_WF_Attachment att
+  left join Sungero_WF_Task task 
+    on task.Id = att.Task 
+    and task.Discriminator = 'c290b098-12c7-487d-bb38-73e2c98f9789'
+    and task.Status <> 'Draft'
+    and (task.MainTask = task.Id
+         or (select Discriminator 
+   		       from Sungero_WF_Task j 
+   		       where j.Id = task.MainTask) != 'c290b098-12c7-487d-bb38-73e2c98f9789'
+         or (select ActionItemType_RecMan_Sungero
+   		       from Sungero_WF_Task j 
+   		       where j.Id = task.MainTask and task.MainTask = task.ParentTask) = 'Main')
+  join Sungero_Core_Recipient author
+    on author.Id = task.AssignedBy_RecMan_Sungero
+  join Sungero_Core_Recipient performer
+  	on performer.Id = task.AssigneeTAI_RecMan_Sungero
+  join Sungero_Parties_Counterparty person
+    on person.Id = author.Person_Company_Sungero
+  left join Sungero_Parties_Counterparty performerPerson
+    on performerPerson.Id = performer.Person_Company_Sungero
+where att.Group = '804f50fe-f3da-411b-bb2e-e5373936e029'
+  and person.Discriminator = 'f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6'
+  and att.AttachmentId in (select Id from {2})
+order by attRecordId]]></postgres>
   </query>
   <query key="FillSourceTable">
     <mssql><![CDATA[insert into {2}
-      select
-        case when recordId % 2 = 0
-		      then 1
-		      else 0
-		    end as Filter,
-        '{3}' as ReportSeesionId, 
-        RegistrationDate, 
-        RegistrationNumber, 
-        Correspondent,
-        CorrespondentDate,
-        CorrespondentNumber,
-        Subject,
-        case when recordId % 2 = 0
-          then recordId - 1   
-          else
-            case 
-              when att.attRecordId = 
-                (select top 1
-                  attRecordId 
-                 from  {1} att2
+select
+  case when recordId % 2 = 0 then 1 else 0 end as Filter,
+  '{3}' as ReportSeesionId, 
+  RegistrationDate,
+  RegistrationNumber,
+  RegistrationIndex,
+  Correspondent,
+  CorrespondentDate,
+  CorrespondentNumber,
+  Subject,
+  case when recordId % 2 = 0 then recordId - 1   
+       else
+         case 
+           when att.attRecordId = 
+                (select top 1 attRecordId 
+                 from {1} att2
                  where att2.AttachmentId = att.AttachmentId
                  order by attRecordId desc)
-              or not exists 
-                (select
-                  attRecordId
-                from  {1} att3
-                where att3.AttachmentId = att.AttachmentId)
-              then recordId
-              else -1
-            end
-        end as recordId,
-        Author,
-        Resolution,
-        Performer          
-        from {0} d
-        left join {1} att on
-            att.AttachmentId = d.DocId
-  order by RegistrationDate, RegistrationNumber, recordId]]></mssql>
+             or not exists 
+                (select attRecordId
+                 from {1} att3
+                 where att3.AttachmentId = att.AttachmentId)
+             then recordId
+            else -1 
+         end  
+  end as recordId,
+  Author,
+  Resolution,
+  Performer,
+  CanRead
+from {0} d
+  left join {1} att 
+    on att.AttachmentId = d.DocId
+order by RegistrationDate, RegistrationIndex, recordId]]></mssql>
     <postgres><![CDATA[insert into {2}
-      select
-        case when recordId % 2 = 0
-		      then 1
-		      else 0
-		    end as Filter,
-        '{3}' as ReportSeesionId, 
-        RegistrationDate, 
-        RegistrationNumber, 
-        Correspondent,
-        CorrespondentDate,
-        CorrespondentNumber,
-        Subject,
-        case when recordId % 2 = 0
-          then recordId - 1   
-          else
-            case 
-              when att.attRecordId = 
-                (select
-                  attRecordId 
-                 from  {1} att2
-                 where att2.AttachmentId = att.AttachmentId
-                 order by attRecordId desc
-                 limit 1)
-              or not exists 
-                (select
-                  attRecordId
-                from  {1} att3
-                where att3.AttachmentId = att.AttachmentId)
-              then recordId
-              else -1
-            end
-        end as recordId,
-        Author,
-        Resolution,
-        Performer          
-        from {0} d
-        left join {1} att on
-            att.AttachmentId = d.DocId
-	order by RegistrationDate, RegistrationNumber, recordId]]></postgres>
+select case when recordId % 2 = 0 then 1 else 0 end as Filter,
+  '{3}' as ReportSeesionId,
+  RegistrationDate,
+  RegistrationNumber,
+  RegistrationIndex,
+  Correspondent,
+  CorrespondentDate,
+  CorrespondentNumber,
+  Subject,
+  case when recordId % 2 = 0 
+       then recordId - 1   
+       else
+         case
+           when att.attRecordId = (select attRecordId 
+                                 from  {1} att2
+                                 where att2.AttachmentId = att.AttachmentId
+                                 order by attRecordId desc
+                                 limit 1)
+              or not exists (select attRecordId
+                             from  {1} att3
+                             where att3.AttachmentId = att.AttachmentId)
+             then recordId
+           else -1
+         end
+  end as recordId,
+  Author,
+  Resolution,
+  Performer,
+  CanRead
+from {0} d
+left join {1} att
+  on att.AttachmentId = d.DocId
+order by RegistrationDate, RegistrationIndex, recordId;]]></postgres>
   </query>
   <query key="GetDocuments">
-    <mssql><![CDATA[select 
-  	RegistrationDate, 
-  	RegistrationNumber, 
-  	Correspondent,
-  	CorrespondentDate,
-  	CorrespondentNumber,
-  	Subject, 
-  	recordId,
-  	Author,
-  	Resolution,
-  	Performer
-from  
- 	Sungero_Reports_IncDocsReport
-where 
-	ReportSessionId = @ReportSessionId
+    <default><![CDATA[select 
+  RegistrationDate,
+  RegistrationNumber,
+  Correspondent,
+  CorrespondentDate,
+  CorrespondentNumber,
+  Subject, 
+  recordId,
+  Author,
+  Resolution,
+  Performer,
+  CanRead
+from Sungero_Reports_IncDocsReport
+where ReportSessionId = @ReportSessionId
 	and Filter = @Filter
-order by RegistrationDate, RegistrationNumber 	]]></mssql>
-    <postgres><![CDATA[select 
-  	RegistrationDate, 
-  	RegistrationNumber, 
-  	Correspondent,
-  	CorrespondentDate,
-  	CorrespondentNumber,
-  	Subject, 
-  	recordId,
-  	Author,
-  	Resolution,
-  	Performer
-from  
- 	Sungero_Reports_IncDocsReport
-where 
-	ReportSessionId = @ReportSessionId
-	and Filter = @Filter
-order by RegistrationDate, RegistrationNumber	]]></postgres>
+order by RegistrationDate, RegistrationIndex, recordId]]></default>
   </query>
   <query key="CreateIncomingDocumentsSourceTable">
-    <mssql><![CDATA[create table {0}
-([Filter] int NOT NULL,
- [ReportSessionId] nvarchar(max) NOT NULL,                                              
- [RegistrationDate] datetime,
- [RegistrationNumber] nvarchar(max),
- [Correspondent] nvarchar(max),
- [CorrespondentDate] datetime,
- [CorrespondentNumber] nvarchar(max),
- [Subject] nvarchar(max),
- [recordId] int NOT NULL,
-[Author]  nvarchar(max),
-[Resolution] nvarchar(max),
-[Performer] nvarchar(max))]]></mssql>
-    <postgres><![CDATA[create table {0}
-(Filter int NOT NULL,
-ReportSessionId citext NOT NULL,                                              
-RegistrationDate timestamp,
-RegistrationNumber citext,
-Correspondent citext,
-CorrespondentDate timestamp,
-CorrespondentNumber citext,
-Subject citext,
-recordId int NOT NULL,
-Author  citext,
-Resolution citext,
-Performer citext)]]></postgres>
+    <mssql><![CDATA[create table {0} (
+  [Filter] int NOT NULL,
+  [ReportSessionId] nvarchar(max) NOT NULL,                                              
+  [RegistrationDate] datetime,
+  [RegistrationNumber] nvarchar(max),
+  [RegistrationIndex] int,
+  [Correspondent] nvarchar(max),
+  [CorrespondentDate] datetime,
+  [CorrespondentNumber] nvarchar(max),
+  [Subject] nvarchar(max),
+  [recordId] int NOT NULL,
+  [Author]  nvarchar(max),
+  [Resolution] nvarchar(max),
+  [Performer] nvarchar(max),
+  [CanRead] bit not null)]]></mssql>
+    <postgres><![CDATA[create table {0} (
+  Filter int NOT NULL,
+  ReportSessionId citext NOT NULL,                                              
+  RegistrationDate timestamp,
+  RegistrationNumber citext,
+  RegistrationIndex int,
+  Correspondent citext,
+  CorrespondentDate timestamp,
+  CorrespondentNumber citext,
+  Subject citext,
+  recordId int NOT NULL,
+  Author citext,
+  Resolution citext,
+  Performer citext,
+  CanRead boolean not null)]]></postgres>
   </query>
 </queries>

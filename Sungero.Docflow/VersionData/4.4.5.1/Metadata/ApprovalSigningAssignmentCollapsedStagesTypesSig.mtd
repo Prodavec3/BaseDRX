@@ -1,0 +1,129 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "970a3e40-2343-4cc7-98a6-7db27370ec13",
+  "Name": "ApprovalSigningAssignmentCollapsedStagesTypesSig",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "AAprSignStgs",
+  "CreationAreaMetadata": {
+    "NameGuid": "78ab50ac-cd3f-4b9b-ace4-91be4754886f",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "f1956736-e6b9-4663-b1c7-e9832c993b9d",
+      "Name": "ApprovalSigningAssignment",
+      "CanBeSearch": false,
+      "Code": "Assignment",
+      "EntityGuid": "db516acc-0f02-4ea7-960a-08f3f734db4f",
+      "IsReferenceToRootEntity": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9810c84d-e561-4e4a-bd09-2f1be95c1e1d",
+      "Name": "StageType",
+      "CanBeSearch": false,
+      "Code": "StageType",
+      "DirectValues": [
+        {
+          "NameGuid": "cc5495aa-f83f-46c1-85b8-790b87be1c12",
+          "Name": "Sign",
+          "Code": "Sign",
+          "Versions": []
+        },
+        {
+          "NameGuid": "51cb8072-c062-44f0-acb1-49a234fbe67e",
+          "Name": "Register",
+          "Code": "Register",
+          "Versions": []
+        },
+        {
+          "NameGuid": "f2267045-7367-403f-a5a2-1f9617d983f5",
+          "Name": "Print",
+          "Code": "Print",
+          "Versions": []
+        },
+        {
+          "NameGuid": "7e415bbd-690c-4268-9360-eabed67e8815",
+          "Name": "Sending",
+          "Code": "Sending",
+          "Versions": []
+        },
+        {
+          "NameGuid": "1755fa2d-c1f6-4183-b32f-d128d6d8dbd7",
+          "Name": "ConfirmSign",
+          "Code": "ConfirmSign",
+          "Versions": []
+        },
+        {
+          "NameGuid": "caf2e60c-ef50-49b9-a611-1afc4427abd5",
+          "Name": "Execution",
+          "Code": "Execution",
+          "Versions": []
+        },
+        {
+          "NameGuid": "d1b12d25-bbb6-4ecb-a634-98395fa629ce",
+          "Name": "Review",
+          "Code": "Review",
+          "Versions": []
+        },
+        {
+          "NameGuid": "1a02fec8-1625-47a8-bd3a-e271567aa19d",
+          "Name": "ReviewingResult",
+          "Code": "ReviewingResult",
+          "Versions": []
+        }
+      ],
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "f1956736-e6b9-4663-b1c7-e9832c993b9d",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "2caea13c-42f6-4419-af9f-080d7e89dc54",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "99daf8ad-9680-457b-9b80-8d211fe9ea93",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

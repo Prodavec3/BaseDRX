@@ -26,6 +26,9 @@ namespace Sungero.Contracts.Client
     /// <returns>Список типов документов, доступных для смены типа.</returns>
     public override List<Domain.Shared.IEntityInfo> GetTypesAvailableForChange()
     {
+      if (_obj.ExchangeState != null)
+        return new List<Domain.Shared.IEntityInfo>() { Docflow.SimpleDocuments.Info };
+      
       var types = new List<Domain.Shared.IEntityInfo>();
       types.Add(ContractStatements.Info);
       types.Add(IncomingTaxInvoices.Info);
@@ -41,13 +44,22 @@ namespace Sungero.Contracts.Client
     /// <param name="convertedDoc">Преобразуемый документ.</param>
     /// <param name="contract">Значение свойства до преобразования.</param>
     /// <remarks>Используется при смене типа первички на вх. счёт.</remarks>
-    [Public]
+    [Public, Obsolete("Используйте метод FillLeadingDocument")]
     public static void FillContractFromLeadingDocument(Docflow.IOfficialDocument convertedDoc,
                                                        Docflow.IContractualDocumentBase contract)
     {
       // 115833 Не маппится свойство, если этого свойства нет в источнике.
-      if (ContractualDocuments.Is(contract) && IncomingInvoices.Is(convertedDoc))
-        IncomingInvoices.As(convertedDoc).Contract = ContractualDocuments.As(contract);
+      if (IncomingInvoices.Is(convertedDoc))
+        Functions.IncomingInvoice.FillLeadingDocument(IncomingInvoices.As(convertedDoc), contract);
+    }
+    
+    /// <summary>
+    /// Дополнительное условие доступности действия "Сменить тип".
+    /// </summary>
+    /// <returns>True - если действие "Сменить тип" доступно, иначе - false.</returns>
+    public override bool CanChangeDocumentType()
+    {
+      return _obj.VerificationState == VerificationState.InProcess || base.CanChangeDocumentType();
     }
   }
 }

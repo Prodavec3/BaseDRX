@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Sungero.Company;
 using Sungero.Contracts;
 using Sungero.Core;
@@ -144,7 +146,7 @@ namespace Sungero.Shell.Server
     #endregion
     
     #region Виджет "Исполнительская дисциплина"
-   
+    
     /// <summary>
     /// Получить Id заданий "Рассмотрение руководителем".
     /// </summary>
@@ -540,5 +542,368 @@ namespace Sungero.Shell.Server
       return query;
     }
     
+    #region Проверка стенда
+    
+    /// <summary>
+    /// Проверить возможность прочитать тело документа.
+    /// </summary>
+    /// <returns>ИД документа.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int CheckReadingDocumentBody()
+    {
+      var documentId = 0;
+      
+      var document = DocumentTemplates.GetAll().Where(d => d.HasVersions).OrderByDescending(d => d.Id).FirstOrDefault();
+      if (document == null)
+        throw AppliedCodeException.Create("Check: не найдено ни одного тела документа.");
+      else
+        documentId = document.Id;
+
+      var bodyStream = document.LastVersion.Body.Read();
+      using (var memory = new MemoryStream())
+      {
+        bodyStream.CopyTo(memory);
+        var body = memory.ToArray();
+        if (body.Length != document.LastVersion.Body.Size)
+          throw AppliedCodeException.Create(string.Format("Check: не удалось прочитать тело документа ИД {0}.", documentId));
+      }
+
+      return documentId;
+    }
+    
+    /// <summary>
+    /// Проверить возможность создать документ из шаблона.
+    /// </summary>
+    /// <returns>ИД документа.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int CheckCreatingDocumentFromTemplate()
+    {
+      var documentId = 0;
+      var template = DocumentTemplates.GetAll().Where(d => d.HasVersions).OrderByDescending(d => d.Id).FirstOrDefault();
+      var document = SimpleDocuments.Create();
+      document.Name = "Check creating from template";
+      document.PreparedBy = Employees.GetAll().Where(x => x.Status == Status.Active).FirstOrDefault();
+      document.Department = Departments.GetAll().Where(x => x.Status == Status.Active).FirstOrDefault();
+      document.Save();
+      documentId = document.Id;
+
+      Sungero.Content.Shared.ElectronicDocumentUtils.CreateVersionFrom(document, template);
+      document.Save();
+
+      document = SimpleDocuments.Get(documentId);
+      if (document == null)
+        throw AppliedCodeException.Create("Check: не найден созданный документ.");
+
+      var stream = document.LastVersion.Body.Read();
+
+      using (MemoryStream ms = new MemoryStream())
+      {
+        stream.CopyTo(ms);
+        var body = ms.ToArray();
+        if (body.Length != document.LastVersion.Body.Size)
+          throw AppliedCodeException.Create(string.Format("Check: не удалось прочитать документ ИД {0}.", documentId));
+      }
+      
+      SimpleDocuments.Delete(document);
+      
+      return documentId;
+    }
+    
+    /// <summary>
+    /// Проверить работу сервиса Workflow: старт задачи.
+    /// </summary>
+    /// <returns>ИД задачи.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int CheckTaskStart()
+    {
+      var task = SimpleTasks.Create();
+      task.Subject = "Check WF state";
+      var route = task.RouteSteps.AddNew();
+      route.Performer = Employees.GetAll().Where(x => x.Status == Status.Active).FirstOrDefault();
+      task.Start();
+
+      var retryCount = 0;
+      var maxRetryCount = 20;
+      while (!Assignments.GetAll().Where(a => a.Task.Id == task.Id).Any() &&
+             retryCount++ < maxRetryCount)
+      {
+        System.Threading.Thread.Sleep(1000);
+      }
+      if (retryCount >= maxRetryCount)
+        throw AppliedCodeException.Create("Check: Превышено количество попыток стартовать задачу");
+      
+      return task.Id;
+    }
+    
+    /// <summary>
+    /// Проверить работу сервиса Workflow: прекращение задачи.
+    /// </summary>
+    /// <param name="taskId">ИД задачи.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void AbortTask(int taskId)
+    {
+      var task = SimpleTasks.Get(taskId);
+      if (task == null)
+        throw AppliedCodeException.Create(string.Format("Check: Задача с Id {0} не найдена", taskId));
+      
+      task.Abort();
+    }
+    
+    /// <summary>
+    /// Проверить работу сервиса Workflow: проверить, что задача прекращена.
+    /// </summary>
+    /// <param name="taskId">ИД задачи.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void CheckTaskAbort(int taskId)
+    {
+      var retryCount = 0;
+      var maxRetryCount = 20;
+      while ((Assignments.GetAll().Any(a => a.Task.Id == taskId && a.Status == Workflow.Assignment.Status.InProcess) ||
+              Tasks.GetAll().Any(t => t.Id == taskId && t.Status == Workflow.Task.Status.InProcess)) &&
+             retryCount++ < maxRetryCount)
+      {
+        System.Threading.Thread.Sleep(1000);
+      }
+      if (retryCount >= maxRetryCount)
+        throw AppliedCodeException.Create(string.Format("Check: Превышено количество попыток прекратить задачу с Id {0}", taskId));
+    }
+    
+    /// <summary>
+    /// Проверить работу сервиса Workflow: удаление задачи.
+    /// </summary>
+    /// <param name="taskId">ИД задачи.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void CheckTaskDelete(int taskId)
+    {
+      var retryCount = 0;
+      var maxRetryCount = 20;
+      while ((Assignments.GetAll().Where(a => a.Task.Id == taskId).ToList().Any(a => Locks.GetLockInfo(a).IsLocked) ||
+              Tasks.GetAll().Where(t => t.Id == taskId).ToList().Any(t => Locks.GetLockInfo(t).IsLocked)) &&
+             retryCount++ < maxRetryCount)
+      {
+        System.Threading.Thread.Sleep(1000);
+      }
+      if (retryCount >= maxRetryCount)
+        throw AppliedCodeException.Create(string.Format("Check: Превышено количество попыток ожидания разблокировки задачи с Id {0} или ее заданий", taskId));
+      
+      var task = SimpleTasks.Get(taskId);
+      if (task == null)
+        throw AppliedCodeException.Create(string.Format("Check: Задача с Id {0} не найдена", taskId));
+      
+      SimpleTasks.Delete(task);
+    }
+    
+    /// <summary>
+    /// Проверить работу сервиса отчетов.
+    /// </summary>
+    /// <returns>ИД документа, куда сохранен отчет.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int CheckReportService()
+    {
+      var documentId = 0;
+      var report = Sungero.Docflow.Reports.GetDepartmentsAssignmentCompletionReport();
+      report.PeriodBegin = Calendar.Today;
+      report.PeriodEnd = Calendar.Today.AddDays(1).AddSeconds(-1);
+      report.ExportFormat = ReportExportFormat.Excel;
+      
+      var document = SimpleDocuments.Create();
+      document.Name = "Assignment completion report";
+      document.PreparedBy = Employees.GetAll().Where(x => x.Status == Status.Active).FirstOrDefault();
+      document.Department = Departments.GetAll().Where(x => x.Status == Status.Active).FirstOrDefault();
+      document.Save();
+      documentId = document.Id;
+      report.ExportTo(document);
+      document.Save();
+      
+      if (document.LastVersion.Body.Size == 0)
+        throw AppliedCodeException.Create(string.Format("Check: не удалось прочитать отчет ИД {0}.", documentId));
+      
+      SimpleDocuments.Delete(document);
+
+      return documentId;
+    }
+    
+    /// <summary>
+    /// Проверить, что версии модулей соответствуют требуемой.
+    /// </summary>
+    /// <param name="version">Номер версии.</param>
+    /// <returns>0, если проверка прошла успешно.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int CheckModulesVersion(string version)
+    {
+      var licenseInfo = Sungero.Domain.LicenseInfo.GetFullLicenseInfo();
+      if (!licenseInfo.AppliedModulesInfo.All(v => v.Version == version))
+        throw AppliedCodeException.Create("Check: версия некоторых модулей не соответствует заданной");
+      
+      if (!string.IsNullOrEmpty(licenseInfo.LicenseExceptionMessage))
+        throw AppliedCodeException.Create(licenseInfo.LicenseExceptionMessage);
+      
+      return 0;
+    }
+    
+    /// <summary>
+    /// Проверить работу фоновых процессов.
+    /// </summary>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void CheckWorker()
+    {
+      var result = new StringBuilder(string.Empty);
+      var jobs = Jobs.GetAll();
+      var errorJobs = jobs.Where(j => j.LastExecuteResult == Sungero.CoreEntities.Job.LastExecuteResult.Error);
+      foreach (var job in errorJobs)
+      {
+        result.AppendLine(string.Format("Check: при работе ФП {0} были ошибки.", job.Name));
+      }
+
+      var timeout = Calendar.Now.AddMinutes(-30);
+      var longRunningJobs = jobs.Where(j => j.LastExecuted < timeout && j.LastExecuteExceptionMessage == Sungero.CoreEntities.Shared.Job.Job.CurrentlyRunning);
+      foreach (var job in longRunningJobs)
+      {
+        result.AppendLine(string.Format("Check: превышено ожидаемое время работы ФП {0}.", job.Name));
+      }
+      
+      if (result.Length > 0)
+        throw AppliedCodeException.Create(result.ToString());
+    }
+    
+    /// <summary>
+    /// Проверить работу сервиса обмена.
+    /// </summary>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void CheckExchange()
+    {
+      var result = new StringBuilder(string.Empty);
+      
+      var boxes = Sungero.ExchangeCore.BusinessUnitBoxes.GetAll()
+        .Where(b => b.Status == Sungero.ExchangeCore.BusinessUnitBox.Status.Active).ToList();
+      foreach (var box in boxes)
+      {
+        var connectionError = Sungero.ExchangeCore.PublicFunctions.BusinessUnitBox.Remote.CheckConnection(box);
+        
+        if (!string.IsNullOrEmpty(connectionError))
+        {
+          result.AppendLine(string.Format("Check: при проверке а/я НОР ИД {0} возникла ошибка: {1}.", box.Name, connectionError));
+        }
+      }
+
+      if (result.Length > 0)
+        throw AppliedCodeException.Create(result.ToString());
+    }
+    
+    /// <summary>
+    /// Проверить подписание документа.
+    /// </summary>
+    /// <param name="documentId">ИД документа для подписания.</param>
+    /// <param name="certificateId">ИД сертификата для подписания.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void CheckSigning(int documentId, int certificateId)
+    {
+      var document = OfficialDocuments.GetAll().Where(d => d.Id == documentId).FirstOrDefault();
+      var certificate = Certificates.GetAll().Where(c => c.Id == certificateId).FirstOrDefault();
+      if (document == null)
+        throw AppliedCodeException.Create(string.Format("Check: Не найден документ ИД {0}", documentId));
+      if (certificate == null)
+        throw AppliedCodeException.Create(string.Format("Check: Не найден сертификат ИД {0}", certificateId));
+      if (!Signatures.Approve(document.LastVersion, certificate, "Подписание в рамках проверки стенда"))
+        throw AppliedCodeException.Create(string.Format("Check: Не удалось подписать документ ИД {0}", documentId));
+    }
+    
+    #region Проверка регистрации документа.
+    
+    /// <summary>
+    /// Получить действующую настройку регистрации документа.
+    /// </summary>
+    /// <returns>ИД найденной настройки.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int GetActiveRegistrationSetting()
+    {
+      // Подобрать действующую настройку регистрации.
+      var registrationGroups = RegistrationGroups.GetAll()
+        .Where(g => g.RecipientLinks.Any(r => Equals(r.Member, Employees.Current)));
+      var documentRegisters = DocumentRegisters.GetAll()
+        .Where(d => registrationGroups.Contains(d.RegistrationGroup));
+
+      var registrationSetting = RegistrationSettings.GetAll()
+        .Where(r => r.SettingType == Sungero.Docflow.RegistrationSetting.SettingType.Registration &&
+               r.Status == Sungero.CoreEntities.DatabookEntry.Status.Active &&
+               documentRegisters.Contains(r.DocumentRegister))
+        .FirstOrDefault();
+      if (registrationSetting == null)
+        throw AppliedCodeException.Create("Check: не найдена настройка регистрации документов.");
+      
+      return registrationSetting.Id;
+    }
+    
+    /// <summary>
+    /// Создать документ для регистрации.
+    /// </summary>
+    /// <param name="registrationSettingId">ИД настройки регистрации, из которой будут взяты данные о типе для создания документа.</param>
+    /// <returns>ИД документа.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual int CreateDocumentToRegister(int registrationSettingId)
+    {
+      var registrationSetting = RegistrationSettings.GetAll(x => x.Id == registrationSettingId).FirstOrDefault();
+      if (registrationSetting == null)
+        throw AppliedCodeException.Create(string.Format("Check: не найдена настройка регистрации с ИД {0}", registrationSettingId));
+      
+      // Создать документ.
+      var documentType = registrationSetting.DocumentKinds.Select(k => k.DocumentKind.DocumentType).FirstOrDefault();
+      var typeGuid = Guid.Parse(documentType.DocumentTypeGuid);
+      var docType = Sungero.Domain.Shared.TypeExtension.GetTypeByGuid(typeGuid);
+
+      IEntity entity = null;
+      using (var session = new Sungero.Domain.Session())
+      {
+        entity = session.Create(docType);
+      }
+      
+      var document = OfficialDocuments.As(entity);
+      foreach (var property in document.State.Properties.ToList().Where(p => p.IsRequired))
+        property.IsRequired = false;
+      document.Name = "Check document registration";
+      document.Save();
+
+      return document.Id;
+    }
+    
+    /// <summary>
+    /// Проверить регистрацию документа.
+    /// </summary>
+    /// <param name="documentId">ИД документа.</param>
+    /// <param name="registrationSettingId">ИД настройки регистрации.</param>
+    /// <returns>True, если удалось зарегистрировать документ.</returns>
+    [Public(WebApiRequestType = RequestType.Get)]
+    public virtual bool CheckRegistration(int documentId, int registrationSettingId)
+    {
+      var document = OfficialDocuments.GetAll(x => x.Id == documentId).FirstOrDefault();
+      if (document == null)
+        throw AppliedCodeException.Create(string.Format("Check: не найден документ для регистрации с ИД {0}", documentId));
+
+      var registrationSetting = RegistrationSettings.GetAll(x => x.Id == registrationSettingId).FirstOrDefault();
+      if (registrationSetting == null)
+        throw AppliedCodeException.Create(string.Format("Check: не найдена настройка регистрации с ИД {0}", registrationSettingId));
+      
+      // Проверить регистрацию.
+      Sungero.Docflow.PublicFunctions.OfficialDocument.RegisterDocument(document, registrationSetting.DocumentRegister, Calendar.Today, string.Empty, false, false);
+      foreach (var property in document.State.Properties.ToList().Where(p => p.IsRequired))
+        property.IsRequired = false;
+      document.Save();
+      
+      if (string.IsNullOrEmpty(document.RegistrationNumber))
+        throw AppliedCodeException.Create("Check: не удалось зарегистрировать документ.");
+      
+      // Проверить отмену регистрации.
+      Sungero.Docflow.PublicFunctions.OfficialDocument.RegisterDocument(document, DocumentRegisters.Null, null, null, false, false);
+      document.RegistrationState = Sungero.Docflow.OfficialDocument.RegistrationState.NotRegistered;
+      foreach (var property in document.State.Properties.ToList().Where(p => p.IsRequired))
+        property.IsRequired = false;
+      document.Save();
+      
+      return true;
+    }
+    
+    #endregion
+    
+    #endregion
   }
 }

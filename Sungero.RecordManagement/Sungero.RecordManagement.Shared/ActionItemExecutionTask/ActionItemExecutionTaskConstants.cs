@@ -1,4 +1,6 @@
-﻿namespace Sungero.RecordManagement.Constants
+﻿using System;
+
+namespace Sungero.RecordManagement.Constants
 {
   public static class ActionItemExecutionTask
   {
@@ -82,7 +84,7 @@
     /// Ограничение длины короткого представления пункта корректировки.
     /// </summary>
     public const int ActionItemPartTextMaxLength = 58;
-        
+    
     /// <summary>
     /// Варианты контекста вызова корректировки поручения.
     /// </summary>
@@ -92,6 +94,11 @@
       public const string Compound = "Compound";
       public const string Part = "Part";
     }
+    
+    /// <summary>
+    /// ИД группы приложений.
+    /// </summary>
+    public static readonly Guid AddendaGroupGuid = Guid.Parse("d44a8df5-3fe9-4a1b-a5a0-e8aaa65820da");
 
   }
 }

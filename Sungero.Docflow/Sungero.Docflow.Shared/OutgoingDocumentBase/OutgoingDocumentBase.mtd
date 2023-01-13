@@ -158,6 +158,34 @@
   "CanBeNavigationPropertyType": true,
   "ConverterFunctions": [
     {
+      "Name": "AddresseeAppeal",
+      "DisplayNameResourceCode": "AddresseeAppeal",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOutgoingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "AddresseeNameAndPatronymic",
+      "DisplayNameResourceCode": "AddresseeNameAndPatronymic",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOutgoingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "Contract",
       "DisplayNameResourceCode": "Contract",
       "IsConverter": true,
@@ -530,10 +558,25 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "333ff195-200d-40eb-807d-e8d7896609b4",
+          "Name": "Control",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "5e1a61cc-b147-4608-9932-da958641bf0b",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
-      "Overridden": [],
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
       "Versions": []
     },
     {
@@ -580,7 +623,8 @@
     "CreatedServer",
     "BeforeSaveServer",
     "RefreshClient",
-    "CreatingFromServer"
+    "CreatingFromServer",
+    "ConvertingFromServer"
   ],
   "IconName": "OutgoingDocumentBase.ico",
   "IconResourcesKeys": [],
@@ -595,6 +639,16 @@
     "IsVisible"
   ],
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+      "Name": "OurSigningReason",
+      "IsAncestorMetadata": true,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsVisibility"
+      ]
+    },
     {
       "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
       "NameGuid": "f348032e-2d86-4f4a-b7d7-c60d86427cfa",
@@ -1307,6 +1361,18 @@
       "ReturnTypeFullName": "System.Boolean"
     },
     {
+      "Name": "GetAddressees",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOutgoingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GetContactsInformation",
       "Parameters": [
         {
@@ -1341,7 +1407,11 @@
     "InitialsAndLastName",
     "PostalAddress",
     "SpecifyMultipleRecipients",
-    "NeedFillAddressee"
+    "NeedFillAddressee",
+    "AddresseeAppeal",
+    "AddresseeNameAndPatronymic",
+    "AddresseeAppealRespectedMale",
+    "AddresseeAppealRespectedFemale"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "2deb04fb-87e8-4ed9-8091-5f5ec3c83647",
@@ -1408,6 +1478,16 @@
         "Index": -1,
         "ParentGuid": "b09a758e-0774-412d-8347-6d78e7e3abc3",
         "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "d1e47134-a8cf-4c16-b24f-2e83cadb1fb8",
+        "Name": "ShowOurSigningReason",
+        "ActionGuid": "94c8ea34-943f-43cc-90a7-9b96bde80f85",
+        "ButtonSize": "Large",
+        "Index": 32,
+        "IsVisible": false,
+        "ParentGuid": "52099269-7fc8-4a2c-b6bf-20a19fb11d09"
       }
     ],
     "Groups": [

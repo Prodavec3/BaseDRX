@@ -11,7 +11,7 @@ namespace Sungero.Docflow.Client
   {
 
     /// <summary>
-    /// Показать предупреждение о редактировании карточки этапа. 
+    /// Показать предупреждение о редактировании карточки этапа.
     /// </summary>
     /// <param name="e">Аргументы события "Обновление формы".</param>
     public void ShowEditWarning(Sungero.Presentation.FormRefreshEventArgs e)
@@ -19,10 +19,13 @@ namespace Sungero.Docflow.Client
       if (!(_obj.State.IsInserted || _obj.State.IsCopied) && _obj.AccessRights.CanUpdate())
       {
         bool hasRules;
-        if (!e.Params.Contains(Sungero.Docflow.Constants.ApprovalStage.HasRules))
-          e.Params.Add(Sungero.Docflow.Constants.ApprovalStage.HasRules, Functions.ApprovalStageBase.Remote.HasRules(_obj));
-
-        if (e.Params.TryGetValue(Sungero.Docflow.Constants.ApprovalStage.HasRules, out hasRules) && hasRules)
+        // HACK, BUG 208989 - параметры HasRules, ChangeRequisites исчезают при повторном вызове функции, если добавлены через e.Params.
+        var approvalStageParams = ((Domain.Shared.IExtendedEntity)_obj).Params;
+        if (!approvalStageParams.ContainsKey(Sungero.Docflow.Constants.ApprovalStage.HasRules))
+          approvalStageParams.Add(Sungero.Docflow.Constants.ApprovalStage.HasRules, Functions.ApprovalStageBase.Remote.HasRules(_obj));
+        object paramValue;
+        if (approvalStageParams.TryGetValue(Sungero.Docflow.Constants.ApprovalStage.HasRules, out paramValue) && 
+            bool.TryParse(paramValue.ToString(), out hasRules) && hasRules)
         {
           foreach (var property in _obj.State.Properties)
           {
@@ -32,7 +35,9 @@ namespace Sungero.Docflow.Client
         }
         
         bool changeRequisites;
-        if (e.Params.TryGetValue(Sungero.Docflow.Constants.ApprovalStage.ChangeRequisites, out changeRequisites) && changeRequisites)
+        object changeRequisitesParamValue;
+        if (approvalStageParams.TryGetValue(Sungero.Docflow.Constants.ApprovalStage.ChangeRequisites, out changeRequisitesParamValue) && 
+            bool.TryParse(changeRequisitesParamValue.ToString(), out changeRequisites) && changeRequisites)
           e.AddInformation(ApprovalStages.Resources.StageHasRules, _obj.Info.Actions.GetApprovalRules);
       }
     }

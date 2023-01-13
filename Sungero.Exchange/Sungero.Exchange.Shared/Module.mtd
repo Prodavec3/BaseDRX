@@ -24,6 +24,7 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "Dependencies": [
@@ -158,6 +159,14 @@
       ],
       "TypeName": "System.String",
       "Value": "\"b54f0e86-0cac-49bf-b99b-30ffd8030d9b\""
+    },
+    {
+      "Name": "DefaultFormalizedPoALink",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"https://m4d.nalog.gov.ru/\""
     },
     {
       "Name": "DefaultSignResult",
@@ -1234,6 +1243,44 @@
   ],
   "PublicStructures": [
     {
+      "Name": "AnnulmentCounterpartyNames",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "SenderName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "ReceiverName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Exchange.Structures.Module"
+    },
+    {
+      "Name": "OrganizationInfo",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Name",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "TIN",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "IsOurSignature",
+          "TypeFullName": "global::System.Boolean"
+        }
+      ],
+      "StructureNamespace": "Sungero.Exchange.Structures.Module"
+    },
+    {
       "Name": "TaxDocumentClassifier",
       "IsPublic": true,
       "Properties": [
@@ -1384,19 +1431,23 @@
     "SendToCounterpartyDialog_BuyerAcceptanceStatusPartiallyAccepted",
     "SendToCounterpartyDialog_BuyerTitleIsEmpty",
     "SendToCounterpartyDialog_AddendaWithBuyerAcceptanceStatusRejected",
-    "OneOrMoreDocumentAlreadyProcessing"
+    "OneOrMoreDocumentAlreadyProcessing",
+    "SbisFormalizedPoALinkTitle",
+    "CounterpartyPowerOfAttorney",
+    "SigningReasonDisplayValue",
+    "NoRightsForDocument"
   ],
   "ServerAssemblyName": "Sungero.Exchange.Server",
   "ServerNamespace": "Sungero.Exchange.Server",
   "SharedAssemblyName": "Sungero.Exchange.Shared",
   "SharedNamespace": "Sungero.Exchange.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

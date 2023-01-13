@@ -11,7 +11,7 @@ namespace Sungero.Docflow
   partial class PersonalSettingResolutionAuthorPropertyFilteringServerHandler<T>
   {
 
-    public virtual IQueryable<T> ResolutionAuthorFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e) 
+    public virtual IQueryable<T> ResolutionAuthorFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
       e.DisableUiFiltering = true;
       return Functions.Module.UsersCanBeResolutionAuthor(null).Cast<T>().AsQueryable();
@@ -78,7 +78,8 @@ namespace Sungero.Docflow
       _obj.PrintSender = true;
       _obj.ShowNotApproveSign = false;
       _obj.MyPowersOfAttorneyNotification = true;
-      _obj.MySubordinatesPowersOfAttorneyNotification = true;      
+      _obj.MySubordinatesPowersOfAttorneyNotification = true;
+      _obj.RegistrationStampPosition = RegistrationStampPosition.BottomRight;
     }
 
     public override void BeforeDelete(Sungero.Domain.BeforeDeleteEventArgs e)

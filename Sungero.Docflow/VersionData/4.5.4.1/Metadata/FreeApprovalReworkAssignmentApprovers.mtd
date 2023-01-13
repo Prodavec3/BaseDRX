@@ -1,0 +1,137 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "f4f000d4-c9ca-4209-aa95-b393914ac346",
+  "Name": "FreeApprovalReworkAssignmentApprovers",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "AFAApprovers",
+  "CreationAreaMetadata": {
+    "NameGuid": "78ab50ac-cd3f-4b9b-ace4-91be4754886f",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "87d2a401-b391-4a21-85fe-21b254385b8f",
+      "Name": "FreeApprovalReworkAssignment",
+      "CanBeSearch": false,
+      "Code": "Assignment",
+      "EntityGuid": "593ff79e-38b4-4903-b20e-9e08cfea6307",
+      "IsReferenceToRootEntity": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "97bd0144-28c5-4996-a23d-33d5aa6493e5",
+      "Name": "Approver",
+      "CanBeSearch": false,
+      "Code": "Approver",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "8f8f66eb-d3f2-4384-988e-e1ffb720e621",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5447c7cf-c5d8-4003-aa2e-af577ec74da6",
+      "Name": "Approved",
+      "CanBeSearch": false,
+      "Code": "Approved",
+      "DirectValues": [
+        {
+          "NameGuid": "bf73d1c3-0b62-4629-a97a-c766aa924e6b",
+          "Name": "IsApproved",
+          "Code": "IsApproved",
+          "Versions": []
+        },
+        {
+          "NameGuid": "80ea6f96-fb41-4487-a0e8-491b86cb6b6d",
+          "Name": "NotApproved",
+          "Code": "NotApproved",
+          "Versions": []
+        }
+      ],
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "97bd0144-28c5-4996-a23d-33d5aa6493e5",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "81bd1fa4-1815-43f1-93e4-b8d744cb9110",
+      "Name": "Action",
+      "CanBeSearch": false,
+      "Code": "Action",
+      "DirectValues": [
+        {
+          "NameGuid": "dd7ad05e-5ceb-4ec9-ac57-f68dc50efe09",
+          "Name": "SendForApproval",
+          "Code": "SendForApproval",
+          "Versions": []
+        },
+        {
+          "NameGuid": "8c7f7f1c-f1a3-4441-8c0d-402b93c0e6cc",
+          "Name": "DoNotSend",
+          "Code": "DoNotSend",
+          "Versions": []
+        },
+        {
+          "NameGuid": "9ff61cab-befd-407c-8d10-a6c22b3c7287",
+          "Name": "SendNotice",
+          "Code": "SendNotice",
+          "Versions": []
+        }
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "5447c7cf-c5d8-4003-aa2e-af577ec74da6",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "cc1c5fed-ce88-42ee-8628-dc55784b8dc9",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "b2806b81-3ed4-4518-b277-9aae6bf4c2f8",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

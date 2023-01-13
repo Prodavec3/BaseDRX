@@ -61,7 +61,7 @@ namespace Sungero.Contracts.Server
     
     #endregion
     
-    #region Спец.папки
+    #region Спец. папки
 
     /// <summary>
     /// Получить виды документов с документопотоком "Договоры".

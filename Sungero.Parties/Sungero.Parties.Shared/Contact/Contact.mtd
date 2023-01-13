@@ -58,6 +58,77 @@
       "Name": "Card",
       "Controls": [
         {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
+          "Name": "ContactPerson",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 50.0
+            },
+            {
+              "Percentage": 50.0
+            }
+          ],
+          "SharedNestedGroupsAlignment": true,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "f0fe2161-a357-4dc6-bda6-ae49eb1195d8",
+          "Name": "Phone",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "fe4e349f-4da3-47de-83bd-7e9bb5fa2510",
+          "PropertyGuid": "5e19209b-af11-44d1-927e-f756a7b2cb51",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "8241d03f-c077-4e87-be01-d35236bceff6",
+          "Name": "Fax",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "fe4e349f-4da3-47de-83bd-7e9bb5fa2510",
+          "PropertyGuid": "01ffb69e-c4b9-4080-91b7-637c0dd11307",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "be30f5b6-9384-4aa7-8fcd-ec2fa565d7ad",
+          "Name": "Email",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "fe4e349f-4da3-47de-83bd-7e9bb5fa2510",
+          "PropertyGuid": "d239a500-dc35-4c7d-8d39-923ccda58a1b",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "fb76e4a2-0bfa-46c5-aa0f-7eeaec8959d0",
+          "Name": "Website",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "fe4e349f-4da3-47de-83bd-7e9bb5fa2510",
+          "PropertyGuid": "60378ca9-224f-4ef5-9306-1d23df2eac3f",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "64289e56-94ab-42ea-bf61-ddd302accb13",
           "Name": "Name",
@@ -101,20 +172,6 @@
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "b0c5b03b-a0eb-4b0f-b7eb-f0e39c4278b5",
-          "Name": "Department",
-          "ColumnNumber": 0,
-          "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-          "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "PropertyGuid": "469311ca-3ef4-48ec-8066-b555a799f23a",
-          "RowNumber": 4,
-          "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "0bfda0f9-7c69-4dfb-8205-375ce0bb37a6",
           "Name": "Position",
           "ColumnNumber": 0,
@@ -129,56 +186,60 @@
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "f0fe2161-a357-4dc6-bda6-ae49eb1195d8",
-          "Name": "Phone",
+          "NameGuid": "e7a6fe24-6001-4803-b557-e35b8496de13",
+          "Name": "SigningReason",
           "ColumnNumber": 0,
-          "ColumnSpan": 1,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "PropertyGuid": "5e19209b-af11-44d1-927e-f756a7b2cb51",
+          "PropertyGuid": "9f0d6299-8f44-4fab-8993-327c082b4316",
           "RowNumber": 5,
           "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
+          "Settings": []
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "8241d03f-c077-4e87-be01-d35236bceff6",
-          "Name": "Fax",
-          "ColumnNumber": 1,
-          "ColumnSpan": 1,
+          "NameGuid": "b0c5b03b-a0eb-4b0f-b7eb-f0e39c4278b5",
+          "Name": "Department",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "PropertyGuid": "01ffb69e-c4b9-4080-91b7-637c0dd11307",
-          "RowNumber": 5,
+          "PropertyGuid": "469311ca-3ef4-48ec-8066-b555a799f23a",
+          "RowNumber": 4,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
         },
         {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "fe4e349f-4da3-47de-83bd-7e9bb5fa2510",
+          "Name": "Contacts",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 50.0
+            },
+            {
+              "Percentage": 50.0
+            }
+          ],
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "SharedNestedGroupsAlignment": true
+        },
+        {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "be30f5b6-9384-4aa7-8fcd-ec2fa565d7ad",
-          "Name": "Email",
+          "NameGuid": "69889964-41e7-4bc6-9074-d720b358dd7f",
+          "Name": "Status",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
           "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "PropertyGuid": "d239a500-dc35-4c7d-8d39-923ccda58a1b",
-          "RowNumber": 6,
-          "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "fb76e4a2-0bfa-46c5-aa0f-7eeaec8959d0",
-          "Name": "Website",
-          "ColumnNumber": 1,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-          "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "PropertyGuid": "60378ca9-224f-4ef5-9306-1d23df2eac3f",
-          "RowNumber": 6,
+          "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+          "RowNumber": 7,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
@@ -205,34 +266,6 @@
             }
           ],
           "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "69889964-41e7-4bc6-9074-d720b358dd7f",
-          "Name": "Status",
-          "ColumnNumber": 0,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
-          "ParentGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
-          "RowNumber": 7,
-          "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
-          "NameGuid": "2a156ca4-2738-46f9-b395-93ab7f4d0c0f",
-          "Name": "ContactPerson",
-          "ColumnDefinitions": [
-            {
-              "Percentage": 55.0
-            },
-            {
-              "Percentage": 45.0
-            }
-          ],
-          "Versions": []
         }
       ],
       "Overridden": [
@@ -245,7 +278,9 @@
     "CreatedServer",
     "BeforeDeleteServer",
     "BeforeSaveServer",
-    "RefreshClient"
+    "RefreshClient",
+    "AfterSaveServer",
+    "AfterDeleteServer"
   ],
   "IconName": "Contact.ico",
   "IconResourcesKeys": [],
@@ -393,34 +428,132 @@
       "Code": "Homepage",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9f0d6299-8f44-4fab-8993-327c082b4316",
+      "Name": "SigningReason",
+      "CanBeSearch": false,
+      "Code": "SigningReason",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
     }
   ],
   "PublicFunctions": [
+    {
+      "Name": "CreateUpdateContactNameAsyncHandler",
+      "Parameters": [
+        {
+          "Name": "personId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "EqualsInitials",
+      "Parameters": [
+        {
+          "Name": "fullName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "initialFirstName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "initialMiddleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "GetContactByName",
+      "Parameters": [
+        {
+          "Name": "name",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::Sungero.Parties.IContact",
+      "ReturnTypeFullName": "Sungero.Parties.IContact, Sungero.Domain.Interfaces"
+    },
     {
       "Name": "GetContactsByName",
       "Parameters": [
         {
           "Name": "name",
           "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String",
-          "Versions": []
+          "ParameterTypeFullName": "System.String"
         },
         {
           "Name": "personShortName",
           "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String",
-          "Versions": []
+          "ParameterTypeFullName": "System.String"
         },
         {
           "Name": "counterparty",
           "ParameterType": "global::Sungero.Parties.ICounterparty",
-          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces",
-          "Versions": []
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
         }
       ],
       "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Parties.IContact>",
-      "ReturnTypeFullName": "System.Linq.IQueryable",
-      "Versions": []
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetContactsByNameFuzzy",
+      "Parameters": [
+        {
+          "Name": "fullName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "filterCounterpartyId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::Sungero.Parties.IContact",
+      "ReturnTypeFullName": "Sungero.Parties.IContact, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetSingleContactFilteredByInitials",
+      "Parameters": [
+        {
+          "Name": "contactIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "initialFirstName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "initialMiddleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.Parties.IContact",
+      "ReturnTypeFullName": "Sungero.Parties.IContact, Sungero.Domain.Interfaces"
     }
   ],
   "PublicStructures": [],

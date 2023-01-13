@@ -7,11 +7,23 @@ using Sungero.RecordManagement.IncomingLetter;
 
 namespace Sungero.RecordManagement
 {
+  partial class IncomingLetterConvertingFromServerHandler
+  {
+
+    public override void ConvertingFrom(Sungero.Domain.ConvertingFromEventArgs e)
+    {
+      base.ConvertingFrom(e);
+      
+      // Для Входящих документов эл. обмена мапим Контрагента в Корреспондента.
+      if (Docflow.ExchangeDocuments.Is(_source))
+        e.Map(_info.Properties.SignedBy, Docflow.ExchangeDocuments.Info.Properties.CounterpartySignatory);
+    }
+  }
 
   partial class IncomingLetterAddresseePropertyFilteringServerHandler<T>
   {
 
-    public override IQueryable<T> AddresseeFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e) 
+    public override IQueryable<T> AddresseeFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
       query = base.AddresseeFiltering(query, e);
       return query;
@@ -21,7 +33,7 @@ namespace Sungero.RecordManagement
   partial class IncomingLetterContactPropertyFilteringServerHandler<T>
   {
 
-    public virtual IQueryable<T> ContactFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e) 
+    public virtual IQueryable<T> ContactFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
       if (_obj.Correspondent != null)
         query = query.Where(c => Equals(c.Company, _obj.Correspondent));
@@ -31,11 +43,11 @@ namespace Sungero.RecordManagement
 
   partial class IncomingLetterSignedByPropertyFilteringServerHandler<T>
   {
-    public virtual IQueryable<T> SignedByFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)  
+    public virtual IQueryable<T> SignedByFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
       if (_obj.Correspondent != null)
         query = query.Where(c => Equals(c.Company, _obj.Correspondent));
-      return query; 
+      return query;
     }
   }
 

@@ -9,6 +9,29 @@ namespace Sungero.Docflow
 {
   partial class PersonalSettingClientHandlers
   {
+
+    public virtual void BottomIndentValueInput(Sungero.Presentation.DoubleValueInputEventArgs e)
+    {
+      if (e.NewValue.HasValue && e.NewValue.Value < 0)
+        e.AddError(Docflow.Resources.RegistrationStampCoordsMustBePositive);
+    }
+
+    public virtual void RightIndentValueInput(Sungero.Presentation.DoubleValueInputEventArgs e)
+    {
+      if (e.NewValue.HasValue && e.NewValue.Value < 0)
+        e.AddError(Docflow.Resources.RegistrationStampCoordsMustBePositive);
+    }
+
+    public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
+    {
+      Functions.PersonalSetting.ChangeRegistrationStampCoordsVisibility(_obj, _obj.RegistrationStampPosition);
+    }
+
+    public virtual void RegistrationStampPositionValueInput(Sungero.Presentation.EnumerationValueInputEventArgs e)
+    {
+      Functions.PersonalSetting.ChangeRegistrationStampCoordsVisibility(_obj, e.NewValue);
+    }
+    
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
       var properties = _obj.State.Properties;

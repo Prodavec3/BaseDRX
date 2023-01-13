@@ -15,7 +15,7 @@ namespace Sungero.Meetings
       this.FillName();
       
       if (e.NewValue != null && e.NewValue.President != null && _obj.OurSignatory == null &&
-          Docflow.PublicFunctions.OfficialDocument.Remote.GetEmployeeSignatories(_obj).Any(s => Equals(s, e.NewValue.President.Id)))
+          Docflow.PublicFunctions.OfficialDocument.Remote.CanSignByEmployee(_obj, e.NewValue.President))
         _obj.OurSignatory = e.NewValue.President;
     }
 

@@ -101,7 +101,7 @@ namespace Sungero.Docflow.Server
        * Для нового согласующего через Forward будет создано задание на согласование.
        * Выполнится только обработчик StartAssignment2().
        * Задание того, кто добавляет дополнительного согласующего, будет сохранено.
-       * Чтобы синхронизация не "потеряла" документы вложенные в еще не выполненное задание, явно считать их добавленными.
+       * Чтобы синхронизация не "потеряла" документы, вложенные в еще не выполненное задание, явно считать их добавленными.
        * Также согласующий после добавления дополнительного согласующего может удалить вложенное им ранее приложение.
        * В этом случае нужно считать его как явно удаленное, чтобы синхронизация не восстанавливала его обратно.
        */
@@ -251,7 +251,7 @@ namespace Sungero.Docflow.Server
     public virtual void StartAssignment3(Sungero.Docflow.IFreeApprovalReworkAssignment assignment, Sungero.Docflow.Server.FreeApprovalReworkAssignmentArguments e)
     {
       var lastAssignment = FreeApprovalAssignments.GetAll()
-        .Where(ass => Equals(ass.Task, _obj) && ass.Result == Docflow.FreeApprovalAssignment.Result.ForRework)
+        .Where(a => Equals(a.Task, _obj) && a.Result == Docflow.FreeApprovalAssignment.Result.ForRework)
         .OrderByDescending(o => o.Completed)
         .FirstOrDefault();
       assignment.Author = lastAssignment.Performer;
@@ -314,6 +314,9 @@ namespace Sungero.Docflow.Server
           e.Block.Performers.Add(recipient.Approver);
         }
       }
+      
+      Functions.Module.GrantReadAccessRightsForAttachments(_obj.ForApprovalGroup.All.Concat(_obj.AddendaGroup.All).ToList(),
+                                                           _obj.Observers.Select(o => o.Observer).ToList());
     }
 
     public virtual void StartNotice7(Sungero.Docflow.IFreeApprovalNotification notice, Sungero.Docflow.Server.FreeApprovalNotificationArguments e)

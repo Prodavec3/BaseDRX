@@ -1,4 +1,6 @@
-﻿namespace Sungero.RecordManagement.Constants
+﻿using System;
+
+namespace Sungero.RecordManagement.Constants
 {
   public static class DocumentReviewTask
   {
@@ -6,6 +8,16 @@
     /// ИД диалога подтверждения при старте задачи.
     /// </summary>
     public const string StartConfirmDialogID = "37e9e49b-6985-4a87-b9e8-25b27aaca93b";
+    
+    /// <summary>
+    /// ИД диалога подтверждения при старте задачи с удалением проектов резолюции.
+    /// </summary>
+    public const string StartWithDropConfirmDialogID = "23ef03f5-fc00-4fbc-81cd-4ea260e2a7d5";
+    
+    /// <summary>
+    /// ИД диалога подтверждения при старте задачи с удалением проектов резолюции неактуальному адресату.
+    /// </summary>
+    public const string StartWithDropWrongActionItemsConfirmDialogID = "E9E38607-A51B-4903-B67D-7642C941EB3E";
     
     /// <summary>
     /// ИД диалога подтверждения при прекращении задачи.
@@ -77,6 +89,11 @@
       /// С результатом "Переадресовать рассмотрение".
       /// </summary>
       public const string Forward = "599fd57f-b47c-4fa8-b4ff-d3891e909931";
+      
+      /// <summary>
+      /// С результатом "Вернуть инициатору".
+      /// </summary>
+      public const string ForRework = "2a9900bb-0adB-4be4-8138-d79ada4b0103";
     }
     
     /// <summary>
@@ -93,6 +110,11 @@
       /// С результатом "Отправить на рассмотрение".
       /// </summary>
       public const string SendForReview = "f40e7720-9cd3-41db-b0c1-af2e97a7417c";
+      
+      /// <summary>
+      /// С результатом "Отправить на рассмотрение" и удалением всех проектов резолюции.
+      /// </summary>
+      public const string SendForReviewWithDeletingDraftResolutions = "F20EF8C9-32CC-4AA4-83C1-96EE90503DC1";
       
       /// <summary>
       /// С результатом "Принято к сведению".
@@ -118,6 +140,47 @@
       /// С результатом "Переадресовать рассмотрение" и удалением всех проектов резолюции.
       /// </summary>
       public const string ForwardWithDeletingDraftResolutions = "dd8cb25c-02ad-4ecd-8958-1844e476d553";
+      
+      /// <summary>
+      /// С результатом "Вернуть инициатору".
+      /// </summary>
+      public const string ForRework = "ce4a26b5-60e9-ff5a-7f3a-36abe3798964";
+      
+      /// <summary>
+      /// С результатом "Прекратить".
+      /// </summary>
+      public const string Abort = "a433031c-c7b8-4741-b492-1f79faf35ea9";
+    }
+    
+    /// <summary>
+    /// ИД диалогов подтверждения при выполнении задания на доработку инициатором.
+    /// </summary>
+    public static class ReviewReworkAssignmentConfirmDialogID
+    {
+      /// <summary>
+      /// С результатом "Отправить на рассмотрение".
+      /// </summary>
+      public const string SendForReview = "3118f0c5-19d3-4f7a-9e19-b22ce6e4ef3a";
+      
+      /// <summary>
+      /// С результатом "Отправить на рассмотрение" и удалением проекта.
+      /// </summary>
+      public const string SendForReviewWithDrop = "61748ebc-e48f-41cb-a231-dfdffa94bf0d";
+      
+      /// <summary>
+      /// С результатом "Прекратить".
+      /// </summary>
+      public const string Abort = "c24465c0-2038-4557-b422-768846be1c5d";
+      
+      /// <summary>
+      /// С результатом "Переадресовать рассмотрение".
+      /// </summary>
+      public const string Forward = "059b6f11-11f6-a31b-f1f8-7c8367df98fc";
+      
+      /// <summary>
+      /// С результатом "Переадресовать рассмотрение" и удалением проекта.
+      /// </summary>
+      public const string ForwardWithDrop = "097d54fe-fdfe-48ae-adc6-5412a8ef9d17";
     }
     
     /// <summary>
@@ -135,5 +198,12 @@
     /// Период проверки завершения рассмотрения в часах.
     /// </summary>
     public const double CheckCompletionMonitoringPeriodInHours = 8;
+    
+    /// <summary>
+    /// ИД группы приложений.
+    /// </summary>
+    [Sungero.Core.Public]
+    public static readonly Guid AddendaGroupGuid = Guid.Parse("5320f83f-1364-4035-a7ab-44e457b9b388");
+
   }
 }

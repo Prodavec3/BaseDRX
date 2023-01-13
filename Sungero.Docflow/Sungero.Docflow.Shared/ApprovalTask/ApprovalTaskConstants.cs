@@ -37,6 +37,11 @@ namespace Sungero.Docflow.Constants
       /// С результатом "Переадресовать".
       /// </summary>
       public const string Forward = "E2DC81D0-74CE-45E6-89A4-C3C09EB46A19";
+      
+      /// <summary>
+      /// С результатом "Согласовать с замечаниями".
+      /// </summary>
+      public const string WithSuggestions = "7D3587F6-B8F5-4A8D-A987-85FD08EA2D23";
     }
     
     /// <summary>
@@ -96,6 +101,11 @@ namespace Sungero.Docflow.Constants
       /// С результатом "Согласовать".
       /// </summary>
       public const string Approved = "39CFF281-22EB-42D5-BE31-BE2DB6AE76BC";
+      
+      /// <summary>
+      /// С результатом "Согласовать с замечаниями".
+      /// </summary>
+      public const string WithSuggestions = "D97B8BB3-BA47-4EC0-B45F-BCCA7CE6A42C";
       
       /// <summary>
       /// С результатом "На доработку".
@@ -232,7 +242,7 @@ namespace Sungero.Docflow.Constants
       /// <summary>
       /// С результатом "Выполнено".
       /// </summary>
-      public const string Complete = "F6190E2A-E801-40D1-8CC1-60E279D5864F";      
+      public const string Complete = "F6190E2A-E801-40D1-8CC1-60E279D5864F";
     }
     
     /// <summary>
@@ -249,6 +259,69 @@ namespace Sungero.Docflow.Constants
     /// ИД группы приложений.
     /// </summary>
     public static readonly Guid AddendaGroupGuid = Guid.Parse("852b3e7d-f178-47d3-8fad-a64021065cfd");
+        
+    /// <summary>
+    /// Параметры обновления формы.
+    /// </summary>
+    public static class RefreshApprovalTaskForm
+    {
+      // Имя параметра: виден ли согласуемый документ.
+      public const string HasDocumentAndCanReadParamName = "ATFormHasDocumentAndCanRead";
+      
+      // Имя параметра: виден ли сотрудник, которому нужно переадресовать.
+      public const string ForwardPerformerIsVisibleParamName = "ATFormForwardPerformerIsVisible";
+      
+      // Имя параметра: виден ли контрол На подпись.
+      public const string SignatoryIsVisibleParamName = "ATFormSignatoryIsVisible";
+      
+      // Имя параметра: обязателен ли контрол На подпись.
+      public const string SignatoryIsRequiredParamName = "ATFormSignatoryIsRequired";
+      
+      // Имя параметра: доступен ли контрол Адресат.
+      public const string AddresseeIsEnabledParamName = "ATFormAddresseeIsEnabled";
+      
+      // Имя параметра: виден ли контрол Адресат.
+      public const string AddresseeIsVisibleParamName = "ATFormAddresseeIsVisible";
+      
+      // Имя параметра: обязателен ли контрол Адресат.
+      public const string AddresseeIsRequiredParamName = "ATFormAddresseeIsRequired";
+      
+      // Имя параметра: доступен ли контрол Адресаты.
+      public const string AddresseesIsEnabledParamName = "ATFormAddresseesIsEnabled";
+      
+      // Имя параметра: виден ли контрол Адресаты.
+      public const string AddresseesIsVisibleParamName = "ATFormAddresseesIsVisible";
+      
+      // Имя параметра: обязателен ли контрол Адресаты.
+      public const string AddresseesIsRequiredParamName = "ATFormAddresseesIsRequired";
+      
+      // Имя параметра: доступнен ли контрол Способ доставки.
+      public const string DeliveryMethodIsEnabledParamName = "ATFormDeliveryMethodIsEnabled";
+      
+      // Имя параметра: виден ли контрол Способ доставки.
+      public const string DeliveryMethodIsVisibleParamName = "ATFormDeliveryMethodIsVisible";
+      
+      // Имя параметра: доступнен ли контрол Сервис обмена.
+      public const string ExchangeServiceIsEnabledParamName = "ATFormExchangeServiceIsEnabled";
+      
+      // Имя параметра: виден ли контрол Сервис обмена.
+      public const string ExchangeServiceIsVisibleParamName = "ATFormExchangeServiceIsVisible";
+      
+      // Имя параметра: обязателен ли контрол Способ доставки.
+      public const string ExchangeServiceIsRequiredParamName = "ATFormExchangeServiceIsRequired";
+      
+      // Имя параметра: доступна ли колонка "Действие" в списке согласующих.
+      public const string ApproversActionIsEnabledParamName = "ATFormApproversActionIsEnabled";
+      
+      // Имя параметра: виден ли контрол Согласующие.
+      public const string ApproversIsVisibleParamName = "ATFormApproversIsVisible";
+      
+      // Имя параметра: виден ли контрол Дополнительные.
+      public const string AddApproversIsVisibleParamName = "ATFormAddApproversIsVisible";
+      
+      // Имя параметра: пропустить ли обновление на событиях.
+      public const string SkipRefreshEventsParamName = "ATFormSkipRefreshEvents";
+    }
     
   }
 }

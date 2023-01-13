@@ -54,5 +54,6 @@ namespace Sungero.Parties.Shared
         return People.Resources.ShortNameFormat(firstName.ToUpper()[0], middleName.ToUpper()[0], lastName, "\u00A0");
       }
     }
+    
   }
 }

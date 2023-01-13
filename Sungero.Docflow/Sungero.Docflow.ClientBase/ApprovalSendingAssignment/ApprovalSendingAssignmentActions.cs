@@ -30,7 +30,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForRevision(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.DocumentGroup.OfficialDocuments.Any();
+      return Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task));
     }
 
     public virtual void SendByMail(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -45,7 +45,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void SendViaExchangeService(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -64,7 +64,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void Complete(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -84,7 +84,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void CreateCoverLetter(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;

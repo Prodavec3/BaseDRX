@@ -68,6 +68,11 @@ namespace Sungero.Projects.Server
       return queue;
     }
     
+    /// <summary>
+    /// Получить все приложения к заданному документу.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Список приложений.</returns>
     private static List<IOfficialDocument> GetAddendums(IOfficialDocument document)
     {
       var addendaList = new List<IOfficialDocument>() { };
@@ -144,27 +149,45 @@ namespace Sungero.Projects.Server
         return true;
 
       var isChanged = false;
-      var accessRights = this.GetProjectRecipientRights(queueItem, document, document.Project);
-      foreach (var accessRight in accessRights)
+      var accessRights = this.GetProjectRecipientRights(queueItem, document, document.Project);      
+
+      var result = true;
+      try
       {
-        var accessRightsType = Docflow.PublicFunctions.Module.GetRightTypeGuid(new Enumeration(accessRight.AccessRights));
-        if (!document.AccessRights.IsGrantedDirectly(accessRightsType, accessRight.Recipient))
+        foreach (var accessRight in accessRights)
         {
-          if (Locks.GetLockInfo(document).IsLockedByOther)
-            return false;
-          
-          document.AccessRights.Grant(accessRight.Recipient, accessRightsType);
-          isChanged = true;
+          var accessRightsType = Docflow.PublicFunctions.Module.GetRightTypeGuid(new Enumeration(accessRight.AccessRights));
+          if (!document.AccessRights.IsGrantedDirectly(accessRightsType, accessRight.Recipient))
+          {
+            if (!isChanged && !Locks.TryLock(document))
+            {
+              Logger.DebugFormat("GrantRightsToProjectDocuments: cannot grant rights, document {0} is locked.", document.Id);
+              return false;
+            }
+            document.AccessRights.Grant(accessRight.Recipient, accessRightsType);
+            Logger.DebugFormat("GrantRightsToProjectDocuments: granted rights on document {0} to recipient {1}.", document.Id, accessRight.Recipient.Id);
+            isChanged = true;
+          }
+        }
+
+        if (isChanged)
+        {
+          ((Domain.Shared.IExtendedEntity)document).Params[Docflow.PublicConstants.OfficialDocument.DontUpdateModified] = true;
+          document.Save();
         }
       }
-
-      if (isChanged)
+      catch (Exception ex)
       {
-        ((Domain.Shared.IExtendedEntity)document).Params[Docflow.PublicConstants.OfficialDocument.DontUpdateModified] = true;
-        document.Save();
+        result = false;
+        Logger.ErrorFormat("GrantRightsToProjectDocuments: grant rights on project document {0} failed", ex, document.Id);
+      }
+      finally
+      {
+        if (isChanged)
+          Locks.Unlock(document);
       }
       
-      return true;
+      return result;
     }
 
     /// <summary>
@@ -186,7 +209,7 @@ namespace Sungero.Projects.Server
       var readType = Constants.Module.AccessRightsReadTypeName;
       var editType = Constants.Module.AccessRightsEditTypeName;
 
-      if (Docflow.PublicFunctions.OfficialDocument.IsProjectDocument(document))
+      if (Docflow.PublicFunctions.OfficialDocument.IsProjectDocument(document, new List<int>()))
         result.Add(Structures.Module.RecipientRights.Create(project.Manager, editType));
 
       if (grantRightsToProject == true)
@@ -485,6 +508,11 @@ namespace Sungero.Projects.Server
       return members;
     }
     
+    /// <summary>
+    /// Получить строковое представление типа прав.
+    /// </summary>
+    /// <param name="rightType">Тип прав.</param>
+    /// <returns>Строковое представление.</returns>
     private static string GetRightType(Enumeration rightType)
     {
       return rightType == Sungero.Projects.ProjectTeamMembers.Group.Read ? Constants.Module.AccessRightsReadTypeName : Constants.Module.AccessRightsEditTypeName;

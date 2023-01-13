@@ -36,5 +36,14 @@ namespace Sungero.Docflow.Client
       types.Add(Sungero.FinancialArchive.Waybills.Info);
       return types;
     }
+    
+    /// <summary>
+    /// Дополнительное условие доступности действия "Сменить тип".
+    /// </summary>
+    /// <returns>True - если действие "Сменить тип" доступно, иначе - false.</returns>
+    public override bool CanChangeDocumentType()
+    {
+      return true;
+    }
   }
 }

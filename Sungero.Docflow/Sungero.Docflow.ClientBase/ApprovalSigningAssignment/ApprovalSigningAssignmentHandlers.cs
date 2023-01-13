@@ -14,7 +14,7 @@ namespace Sungero.Docflow
 
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
-      if (!_obj.DocumentGroup.OfficialDocuments.Any())
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
       
       _obj.State.Properties.DeliveryMethodDescription.IsVisible = !string.IsNullOrEmpty(_obj.DeliveryMethodDescription);
@@ -23,7 +23,7 @@ namespace Sungero.Docflow
       var needViewDocumentSummary = Functions.ApprovalSigningAssignment.NeedViewDocumentSummary(_obj);
       _obj.State.Controls.DocumentSummary.IsVisible = needViewDocumentSummary;
             
-      var reworkParameters = Functions.ApprovalTask.Remote.GetReworkParameters(ApprovalTasks.As(_obj.Task), _obj.StageNumber.Value);           
+      var reworkParameters = Functions.ApprovalTask.GetAssignmentReworkParameters(ApprovalTasks.As(_obj.Task), _obj.StageNumber.Value);           
       _obj.State.Properties.ReworkPerformer.IsEnabled = reworkParameters.AllowChangeReworkPerformer;
       _obj.State.Properties.ReworkPerformer.IsVisible = reworkParameters.AllowViewReworkPerformer;
     }

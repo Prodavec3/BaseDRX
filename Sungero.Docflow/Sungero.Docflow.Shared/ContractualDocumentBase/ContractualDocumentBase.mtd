@@ -41,7 +41,6 @@
       "Conditions": [
         {
           "NameGuid": "b18dc633-c211-4b81-ab28-a7d1dbd89f81",
-          "IsAncestorMetadata": true,
           "LeftSideGuid": "ec082683-e3d8-4cf2-8cfa-1461ee0e6fc0",
           "RightSide": "Obsolete"
         }
@@ -508,6 +507,32 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c47bf8aa-62c8-4f47-a174-63c1b7fd76d8",
+          "Name": "CounterpartySigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "2a9b759d-673b-4a94-bb3b-3d6bdcae0d5d",
+          "PropertyGuid": "7bead9d6-4768-4538-8925-4d223a99ca78",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "36145f13-dd41-45b7-94a8-125baff136b5",
+          "Name": "OurSigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "519f2394-febe-4501-adca-a34ee883d986",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -517,7 +542,8 @@
   ],
   "HandledEvents": [
     "WriteHistoryServer",
-    "ClosingClient"
+    "ClosingClient",
+    "ConvertingFromServer"
   ],
   "IconResourcesKeys": [],
   "IsAbstract": true,
@@ -529,6 +555,15 @@
     "IsVisible"
   ],
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+      "Name": "OurSigningReason",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "NeedPassEntityToLookupEvent"
+      ]
+    },
     {
       "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
       "NameGuid": "d7319199-3333-49cc-a7b9-8467617ccf20",
@@ -823,6 +858,46 @@
         "EntityGuid"
       ],
       "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7bead9d6-4768-4538-8925-4d223a99ca78",
+      "Name": "CounterpartySigningReason",
+      "CanBeSearch": false,
+      "Code": "CntCPSgnRsn",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "ca562f2d-d3c7-448f-a648-b858e8d2fb2a"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetCounterpartySigningReason",
+      "Parameters": [
+        {
+          "Name": "contractualDocumentBase",
+          "ParameterType": "global::Sungero.Docflow.IContractualDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IContractualDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "HasEmptyRequiredProperties",
+      "Parameters": [
+        {
+          "Name": "contractualDocumentBase",
+          "ParameterType": "global::Sungero.Docflow.IContractualDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IContractualDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     }
   ],
   "PublicStructures": [],

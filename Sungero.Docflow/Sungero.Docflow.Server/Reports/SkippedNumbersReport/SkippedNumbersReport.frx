@@ -141,7 +141,7 @@ namespace FastReport
           <Condition Expression="Year([Documents.RegistrationDate]) == 1" Font="Arial, 10pt"/>
         </Highlight>
       </TextObject>
-      <TextObject Name="Text14" Left="394.63" Width="328.86" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents.CanRead] ? [Documents.DocumentName] : Resources.SkippedNumbersReport.HaveNotEnoughAccessRights;]" Font="Arial, 10pt">
+      <TextObject Name="Text14" Left="394.63" Width="328.86" Height="22.68" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents.CanRead] ? [Documents.DocumentName] : Sungero.Docflow.Resources.HaveNotEnoughAccessRights;]" Font="Arial, 10pt">
         <Highlight>
           <Condition Expression="![Documents.CanRead]" Font="Arial, 9.75pt, style=Italic" ApplyTextFill="false" ApplyFont="true"/>
         </Highlight>

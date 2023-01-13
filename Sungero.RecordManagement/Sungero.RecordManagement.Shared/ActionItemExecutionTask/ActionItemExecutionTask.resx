@@ -158,7 +158,7 @@
     <value>Action item</value>
   </data>
   <data name="ActionItemCanNotAssignedByUser" xml:space="preserve">
-    <value>In the "Assigned by" field you can specify only your name, your manager, employee you substitute for, or his or her manager.</value>
+    <value>To send the action item, specify another employee in the  "Assigned by" field.</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CompoundActionItem" type="System.Byte[], mscorlib">
@@ -529,6 +529,6 @@ If you add or change a supervisor, the selected employee will receive an assignm
     <value>Change deadline</value>
   </data>
   <data name="ChangeCompoundActionItemHistory" xml:space="preserve">
-    <value>Execution deadlines were changed. For more information, see notices and history of the action item parts. </value>
+    <value>Execution deadlines were changed. For more information, see notices and history of the action item parts.</value>
   </data>
 </root>

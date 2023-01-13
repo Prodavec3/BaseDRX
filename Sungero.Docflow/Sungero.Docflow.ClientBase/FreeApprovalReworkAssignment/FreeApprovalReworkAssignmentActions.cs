@@ -23,7 +23,8 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanExtendDeadline(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.Status == Workflow.AssignmentBase.Status.InProcess && _obj.AccessRights.CanUpdate();
+      return _obj.Status == Workflow.AssignmentBase.Status.InProcess && _obj.AccessRights.CanUpdate() &&
+        Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
     public virtual void AbortAction(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -58,7 +59,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanReworked(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return true;
+      return Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
   }

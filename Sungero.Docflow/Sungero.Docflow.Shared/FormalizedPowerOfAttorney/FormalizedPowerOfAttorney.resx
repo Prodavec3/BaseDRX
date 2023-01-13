@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorValidateUnifiedRegistrationNumber" xml:space="preserve">
+    <value>The registration number must be in the GUID format.</value>
+  </data>
+  <data name="RegistrationNumberInBrackets" xml:space="preserve">
+    <value> (reg. No. {0})</value>
+  </data>
+  <data name="UnifiedRegistrationNumber" xml:space="preserve">
+    <value> No. {0}</value>
+  </data>
+  <data name="ImportPowerOfAttorneyFromXml" xml:space="preserve">
+    <value>Import formalized POA</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>XML file</value>
+  </data>
+  <data name="SignatureFile" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="FormalizedPowerOfAttorneyImportFailed" xml:space="preserve">
+    <value>Cannot import the formalized power of attorney.</value>
+  </data>
+  <data name="XmlLoadFailed" xml:space="preserve">
+    <value>The selected document has invalid format.</value>
+  </data>
+  <data name="SignatureImportFailed" xml:space="preserve">
+    <value>Cannot import the digital signature.</value>
+  </data>
+  <data name="PowerOfAttorneySuccessfullyImported" xml:space="preserve">
+    <value>The formalized POA and digital signature have been imported successfully.</value>
+  </data>
+  <data name="Enum_Operation_ImportFromXml" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="ImportFromXmlHistoryComment" xml:space="preserve">
+    <value>From XML file</value>
+  </data>
+  <data name="DuplicatesNotFound" xml:space="preserve">
+    <value>Duplicates not found.</value>
+  </data>
+  <data name="DuplicatesDetected" xml:space="preserve">
+    <value>Duplicate records found.</value>
+  </data>
+  <data name="FormalizedPowerOfAttorney" xml:space="preserve">
+    <value>{0} No. {1} dated {2}.</value>
+  </data>
+</root>

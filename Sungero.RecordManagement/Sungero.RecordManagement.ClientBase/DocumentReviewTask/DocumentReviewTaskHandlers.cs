@@ -15,6 +15,11 @@ namespace Sungero.RecordManagement
       e.Params.AddOrUpdate(RecordManagement.Constants.DocumentReviewTask.WorkingWithGuiParamName, true);
       
       _obj.State.Attachments.ResolutionGroup.IsVisible = Functions.DocumentReviewTask.CanPrepareDraftResolution(_obj);
+      
+      if (_obj.Status != Workflow.Task.Status.Draft &&
+          _obj.Status != Workflow.Task.Status.Aborted &&
+          !Functions.DocumentReviewTask.HasDocumentAndCanRead(_obj))
+        e.AddError(Docflow.Resources.NoRightsToDocument);
     }
 
     public override void Showing(Sungero.Presentation.FormShowingEventArgs e)

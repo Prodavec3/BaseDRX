@@ -823,6 +823,19 @@
       "Placement": "Shared",
       "ReturnType": "global::Sungero.RecordManagement.IOutgoingLetter",
       "ReturnTypeFullName": "Sungero.RecordManagement.IOutgoingLetter, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEmailAddressees",
+      "Parameters": [
+        {
+          "Name": "outgoingLetter",
+          "ParameterType": "global::Sungero.RecordManagement.IOutgoingLetter",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IOutgoingLetter, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],
@@ -830,13 +843,29 @@
     "CorrespondentToCompany",
     "CorrespondentToPerson",
     "Sending",
-    "CorrespondentToManyAddressees"
+    "CorrespondentToManyAddressees",
+    "DistributionListCounterpartyName",
+    "Correspondents"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "656be7b3-0011-4110-a6ce-1884fcc937e3",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "d1e47134-a8cf-4c16-b24f-2e83cadb1fb8",
+        "Name": "ShowOurSigningReason",
+        "ActionGuid": "94c8ea34-943f-43cc-90a7-9b96bde80f85",
+        "ButtonSize": "Large",
+        "Index": 32,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsVisible"
+        ],
+        "ParentGuid": "52099269-7fc8-4a2c-b6bf-20a19fb11d09"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

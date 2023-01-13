@@ -11,15 +11,15 @@ namespace Sungero.RecordManagement.Client
   {
     public virtual void Forward(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task)))
-      {
-        e.AddError(DocumentReviewTasks.Resources.NoRightsToDocument);
-        e.Cancel();
-      }
-      
       if (_obj.Addressee == null)
       {
         e.AddError(DocumentReviewTasks.Resources.CantRedirectWithoutAddressee);
+        e.Cancel();
+      }
+      
+      if (Equals(_obj.Addressee, _obj.Performer))
+      {
+        e.AddError(DocumentReviewTasks.Resources.AddresseeAlreadyExistsFormat(_obj.Addressee.Person.ShortName));
         e.Cancel();
       }
       
@@ -56,23 +56,19 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanForward(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return true;
+      return Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task)) &&
+        Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task));
     }
     
     public virtual void AddResolution(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task)))
-      {
-        e.AddError(DocumentReviewTasks.Resources.NoRightsToDocument);
-        e.Cancel();
-      }
-      
       // В качестве проектов резолюции нельзя отправить поручения-непроекты.
       if (_obj.ResolutionGroup.ActionItemExecutionTasks.Any(a => a.IsDraftResolution != true))
       {
         e.AddError(DocumentReviewTasks.Resources.FindNotDraftResolution);
         e.Cancel();
       }
+      
       // Проверить заполненность текста резолюции.
       if (string.IsNullOrWhiteSpace(_obj.ActiveText))
       {
@@ -95,12 +91,6 @@ namespace Sungero.RecordManagement.Client
 
     public virtual void Informed(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task)))
-      {
-        e.AddError(DocumentReviewTasks.Resources.NoRightsToDocument);
-        e.Cancel();
-      }
-      
       // В качестве проектов резолюции нельзя отправить поручения-непроекты.
       if (_obj.ResolutionGroup.ActionItemExecutionTasks.Any(a => a.IsDraftResolution != true))
       {
@@ -137,17 +127,11 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanInformed(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Addressee == null;
+      return _obj.Addressee == null && Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task));
     }
 
     public virtual void ForExecution(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task)))
-      {
-        e.AddError(DocumentReviewTasks.Resources.NoRightsToDocument);
-        e.Cancel();
-      }
-      
       // В качестве проектов резолюции нельзя отправить поручения-непроекты.
       if (_obj.ResolutionGroup.ActionItemExecutionTasks.Any(a => a.IsDraftResolution != true))
       {
@@ -170,7 +154,7 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanForExecution(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Addressee == null;
+      return _obj.Addressee == null && Functions.DocumentReviewTask.HasDocumentAndCanRead(DocumentReviewTasks.As(_obj.Task));
     }
 
   }

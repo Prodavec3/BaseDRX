@@ -3,6 +3,16 @@
   "NameGuid": "58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d",
   "Name": "Addendum",
   "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "98d6b3eb-f739-46fa-b02c-eb15bc4ce317",
+      "Name": "UnbindAddendum",
+      "ActionArea": "CardAndCollection",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_UnbindAddendum_large_98d6b3ebf73946fab02ceb15bc4ce317.png",
+      "SmallIconName": "Action_UnbindAddendum_small_98d6b3ebf73946fab02ceb15bc4ce317.png"
+    }
+  ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
   "CanBeNavigationPropertyType": true,
   "CanBeSearch": true,
@@ -749,14 +759,89 @@
       "Versions": []
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "ChangeDocumentType",
+      "Parameters": [
+        {
+          "Name": "addendum",
+          "ParameterType": "global::Sungero.Docflow.IAddendum",
+          "ParameterTypeFullName": "Sungero.Docflow.IAddendum, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "types",
+          "ParameterType": "global::System.Collections.Generic.List<Sungero.Domain.Shared.IEntityInfo>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::Sungero.Docflow.IOfficialDocument",
+      "ReturnTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+    }
+  ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "UnbindLogError",
+    "UnbindError",
+    "ConvertToSimpleDocumentError",
+    "NeedAbortApproval",
+    "UnbindLockError",
+    "NeedCancelRegistration",
+    "DisableStrictModeToUnbindAddendum"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "f578b69b-cd40-46de-a520-b43929f6dd50",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
-    "Groups": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "4c9bf673-312c-45fd-bbab-6499f61ecf51",
+        "Name": "ChangeType",
+        "ActionGuid": "51235fd5-4441-48cc-a6f1-3e5af16d5a64",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsVisible"
+        ],
+        "ParentGuid": "2ed94346-ba89-4c52-9815-d18010d3a2ae"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "45bd4f94-d42f-4f24-9beb-8288d9b9c209",
+        "Name": "UnbindAddendum",
+        "ActionGuid": "98d6b3eb-f739-46fa-b02c-eb15bc4ce317",
+        "ButtonSize": "Large",
+        "Index": 2,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8929554f-478a-44b3-a43b-4a89f550b964",
+        "Name": "ShowOurSigningReason",
+        "ActionGuid": "94c8ea34-943f-43cc-90a7-9b96bde80f85",
+        "ButtonSize": "Large",
+        "Index": 32,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsVisible"
+        ],
+        "ParentGuid": "52099269-7fc8-4a2c-b6bf-20a19fb11d09"
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "2ed94346-ba89-4c52-9815-d18010d3a2ae",
+        "Name": "ServiceGroup",
+        "Index": 32,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsVisible"
+        ],
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57"
+      }
+    ],
     "IsAncestorMetadata": true,
     "Pages": [],
     "RibbonKind": "Card",
@@ -766,7 +851,22 @@
     "NameGuid": "bd79db7e-9197-40f9-94c5-65600317579e",
     "Name": "RibbonCollection",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "b2d10cec-e74e-45da-af92-9119513ab72a",
+        "Name": "ChangeType",
+        "ActionGuid": "51235fd5-4441-48cc-a6f1-3e5af16d5a64",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "IsAncestorMetadata": true,
+        "IsShowInContextMenu": true,
+        "Overridden": [
+          "IsShowInContextMenu"
+        ],
+        "ParentGuid": "6d15b567-8aaa-43c9-8c9e-aca6d8f16bfe"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

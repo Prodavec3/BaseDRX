@@ -166,9 +166,6 @@
   <data name="FindDocumentDialogInvalidExchangeProvider" xml:space="preserve">
     <value>Поиск возможен только для документов из сервисов обмена Диадок и СБИС.</value>
   </data>
-  <data name="DocumentFullInfoDialogTitle" xml:space="preserve">
-    <value>Поиск документов из сервиса обмена</value>
-  </data>
   <data name="DocumentFullInfoDialogForbiddenDocuments" xml:space="preserve">
     <value>Найдены документы, на которых у вас нет прав доступа. Обратитесь к администратору.</value>
   </data>
@@ -180,9 +177,6 @@
   </data>
   <data name="DocumentFullInfoDialogMessages" xml:space="preserve">
     <value>Cообщения в обработке</value>
-  </data>
-  <data name="DocumentFullInfoDialogNoResult" xml:space="preserve">
-    <value>Данные не найдены</value>
   </data>
   <data name="DocumentFullInfoDialogAllDocumentsCount" xml:space="preserve">
     <value>Найдено документов - {0}</value>

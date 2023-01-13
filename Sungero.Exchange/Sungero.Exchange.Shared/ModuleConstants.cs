@@ -247,5 +247,11 @@ namespace Sungero.Exchange.Constants
     /// Количество дней для уведомления о том, что сообщение висит в очереди.
     /// </summary>
     public const int PoisonedMessagePeriod = 7;
+        
+    /// <summary>
+    /// Ссылка на эл. доверенность в сервисе.
+    /// </summary>
+    [Sungero.Core.Public]
+    public const string DefaultFormalizedPoALink = "https://m4d.nalog.gov.ru/";
   }
 }

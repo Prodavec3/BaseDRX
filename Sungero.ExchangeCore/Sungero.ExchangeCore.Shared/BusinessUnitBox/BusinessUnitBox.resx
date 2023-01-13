@@ -166,9 +166,6 @@
   <data name="FindDocumentDialogInvalidExchangeProvider" xml:space="preserve">
     <value>You can search only for the documents from the Diadoc or SBIS exchange services.</value>
   </data>
-  <data name="DocumentFullInfoDialogTitle" xml:space="preserve">
-    <value>Search for Documents from Exchange Service</value>
-  </data>
   <data name="DocumentFullInfoDialogForbiddenDocuments" xml:space="preserve">
     <value>You don't have access right to the found documents. Contact the system administrator.</value>
   </data>
@@ -180,9 +177,6 @@
   </data>
   <data name="DocumentFullInfoDialogMessages" xml:space="preserve">
     <value>Processing Messages</value>
-  </data>
-  <data name="DocumentFullInfoDialogNoResult" xml:space="preserve">
-    <value>No results</value>
   </data>
   <data name="DocumentFullInfoDialogAllDocumentsCount" xml:space="preserve">
     <value>Found documents - {0}</value>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -7,6 +7,26 @@ using Sungero.Docflow.ContractualDocumentBase;
 
 namespace Sungero.Docflow
 {
+
+  partial class ContractualDocumentBaseConvertingFromServerHandler
+  {
+
+    public override void ConvertingFrom(Sungero.Domain.ConvertingFromEventArgs e)
+    {
+      base.ConvertingFrom(e);
+
+      if (Sungero.Docflow.Addendums.Is(_source))
+        e.Without(Sungero.Docflow.ContractualDocumentBases.Info.Properties.LeadingDocument);
+      
+      var counterparty = Exchange.PublicFunctions.ExchangeDocumentInfo.GetDocumentCounterparty(_source, _source.LastVersion);
+      if (counterparty != null)
+      {
+        var contractualDocument = ContractualDocumentBases.As(e.Entity);
+        contractualDocument.Counterparty = counterparty;
+      }
+    }
+  }
+
   partial class ContractualDocumentBaseServerHandlers
   {
 
@@ -36,4 +56,4 @@ namespace Sungero.Docflow
       }
     }
   }
- }
+}

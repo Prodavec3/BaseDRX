@@ -17,8 +17,10 @@ namespace Sungero.FinancialArchive
       if (Sungero.Contracts.IncomingInvoices.Is(_source))
         e.Map(_info.Properties.LeadingDocument, Sungero.Contracts.IncomingInvoices.Info.Properties.Contract);
       
-      // Отключить проброс полей, которых нет во входящих счетах
+      // Отключить проброс полей, которых нет в полученных СФ.
       e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.ResponsibleEmployee);
+      e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.OurSignatory);
+      e.Without(Sungero.Docflow.AccountingDocumentBases.Info.Properties.OurSigningReason);
     }
   }
 

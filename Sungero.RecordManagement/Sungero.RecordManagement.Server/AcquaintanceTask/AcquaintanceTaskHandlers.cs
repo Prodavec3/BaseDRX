@@ -64,16 +64,7 @@ namespace Sungero.RecordManagement
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
-      // Запомнить номер версии и хеш для отчета.
-      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      if (document != null)
-      {
-        _obj.AcquaintanceVersions.Clear();
-        Functions.AcquaintanceTask.StoreAcquaintanceVersion(_obj, document, true);
-        var addenda = _obj.AddendaGroup.OfficialDocuments;
-        foreach (var addendum in addenda)
-          Functions.AcquaintanceTask.StoreAcquaintanceVersion(_obj, addendum, false);
-      }
+      
     }
 
     public override void BeforeStart(Sungero.Workflow.Server.BeforeStartEventArgs e)
@@ -88,6 +79,7 @@ namespace Sungero.RecordManagement
       
       if (!_obj.State.IsCopied)
       {
+        _obj.ReceiveOnCompletion = ReceiveOnCompletion.Assignment;
         _obj.Subject = Docflow.Resources.AutoformatTaskSubject;
         
         // Получить ресурсы в культуре тенанта.
@@ -103,6 +95,8 @@ namespace Sungero.RecordManagement
       var participants = AcquaintanceTaskParticipants.GetAll().FirstOrDefault(x => x.TaskId == _obj.Id);
       if (participants != null)
         participants.Employees.Clear();
+      
+      Functions.AcquaintanceTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
     }
   }
 

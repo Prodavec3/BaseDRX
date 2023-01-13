@@ -13,6 +13,18 @@ namespace Sungero.RecordManagement.Server
 {
   partial class DocumentReviewTaskFunctions
   {
+    /// <summary>
+    /// Проверить, является ли текущий пользователь исполнителем задания или его замещающим.
+    /// </summary>
+    /// <param name="performer">Исполнитель задания.</param>
+    /// <returns>True, если совпадает с исполнителем или замещающим, иначе false.</returns>
+    [Remote]
+    public static bool CurrentUserIsPerformerOrSubstitute(IUser performer)
+    {
+      var activeUsersWhoSubstitute = Substitutions.ActiveUsersWhoSubstitute(performer);
+      return activeUsersWhoSubstitute.Contains(Users.Current) || Equals(performer, Users.Current);
+    }
+    
     #region Контрол "Состояние"
 
     /// <summary>
@@ -89,6 +101,7 @@ namespace Sungero.RecordManagement.Server
       {
         this.AddPreraringDraftResolutionBlock(managerBlock, startDate);
         this.AddReviewResolutionBlock(managerBlock, startDate);
+        this.AddReviewReworkBlock(managerBlock, startDate);
       }
       
       // Добавить блок информации о поручениях и вложенных проектах резолюций, созданных в рамках рассмотрения.
@@ -126,6 +139,7 @@ namespace Sungero.RecordManagement.Server
     {
       var managerAssignment = this.GetManagerAssignment(startDate);
       var resolutionAssignment = this.GetPreparingDraftResolutionAssignment(startDate);
+      var reworkAssignment = this.GetReviewReworkAssignment(startDate);
       
       var author = string.Empty;
       if (managerAssignment != null)
@@ -143,6 +157,7 @@ namespace Sungero.RecordManagement.Server
       var isReworkResolution = managerAssignment != null && ReviewDraftResolutionAssignments.Is(managerAssignment) &&
         managerAssignment.Result == RecordManagement.ReviewDraftResolutionAssignment.Result.AddResolution &&
         !(resolutionAssignment != null && resolutionAssignment.Result == RecordManagement.PreparingDraftResolutionAssignment.Result.AddAssignment);
+      var isRework = reworkAssignment != null && reworkAssignment.Status == Sungero.Workflow.Assignment.Status.InProcess;
       var isDraft = _obj.Status == Workflow.Task.Status.Draft;
       
       var headerStyle = Docflow.PublicFunctions.Module.CreateHeaderStyle(isDraft);
@@ -153,13 +168,13 @@ namespace Sungero.RecordManagement.Server
       // Добавить блок. Установить иконку и сущность.
       var block = stateView.AddBlock();
       block.Entity = _obj;
-      if (isCompleted && !isReworkResolution)
+      if (isCompleted && !isReworkResolution && !isRework)
         block.AssignIcon(ReviewManagerAssignments.Info.Actions.AddResolution, StateBlockIconSize.Large);
       else
         block.AssignIcon(StateBlockIconType.OfEntity, StateBlockIconSize.Large);
 
       // Рассмотрение руководителем ещё в работе.
-      if (!isCompleted || isReworkResolution)
+      if (!isCompleted || isReworkResolution || isRework)
       {
         // Добавить заголовок.
         block.AddLabel(Docflow.Resources.StateViewDocumentReview, headerStyle);
@@ -293,6 +308,17 @@ namespace Sungero.RecordManagement.Server
     }
     
     /// <summary>
+    /// Добавить блок информации о доработке инициатором.
+    /// </summary>
+    /// <param name="parentBlock">Основной блок.</param>
+    /// <param name="startDate">Дата начала текущей итерации рассмотрения.</param>
+    public void AddReviewReworkBlock(Sungero.Core.StateBlock parentBlock, DateTime startDate)
+    {
+      var reworkAssignment = this.GetReviewReworkAssignment(startDate);
+      this.AddAssignmentBlock(parentBlock, reworkAssignment, DocumentReviewTasks.Resources.ReviewReworkAssignment, string.Empty);
+    }
+    
+    /// <summary>
     /// Добавить блок информации о поручениях и вложенных проектах резолюций, созданных в рамках рассмотрения.
     /// </summary>
     /// <param name="stateView">Схема представления.</param>
@@ -316,7 +342,7 @@ namespace Sungero.RecordManagement.Server
         // Сформировать схему представления поручения без добавления дополнительного блока резолюции.
         var actionItemTask = ActionItemExecutionTasks.As(actionItemExecution);
         var actionItemStateView = PublicFunctions.ActionItemExecutionTask.GetActionItemExecutionTaskStateView(actionItemTask,
-                                                                                                 null, null, null, true, false);
+                                                                                                              null, null, null, true, false);
         foreach (var block in actionItemStateView.Blocks)
           stateView.AddBlock(block);
       }
@@ -372,6 +398,20 @@ namespace Sungero.RecordManagement.Server
         .Where(a => Equals(a.Task, _obj))
         .Where(a => a.Created >= startDate)
         .Where(a => PreparingDraftResolutionAssignments.Is(a))
+        .OrderByDescending(a => a.Created)
+        .FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Получить задание на доработку инициатором.
+    /// </summary>
+    /// <param name="startDate">Дата начала текущей итерации рассмотрения.</param>
+    /// <returns>Задание на доработку инициатором.</returns>
+    private IAssignment GetReviewReworkAssignment(DateTime startDate)
+    {
+      return ReviewReworkAssignments.GetAll()
+        .Where(a => Equals(a.Task, _obj))
+        .Where(a => a.Created >= startDate)
         .OrderByDescending(a => a.Created)
         .FirstOrDefault();
     }
@@ -453,6 +493,20 @@ namespace Sungero.RecordManagement.Server
     }
     
     /// <summary>
+    /// Получить последнее задание, отправленное на доработку инициатору руководителем или помощником.
+    /// </summary>
+    /// <param name="task">Задача на рассмотрение.</param>
+    /// <returns>Последнее задание, отправленное на доработку.</returns>
+    public static IAssignment GetLastAssignmentSentForRework(IDocumentReviewTask task)
+    {
+      return Assignments.GetAll()
+        .Where(a => Equals(a.Task, task) &&
+               (ReviewManagerAssignments.Is(a) && a.Result == RecordManagement.ReviewManagerAssignment.Result.ForRework ||
+                PreparingDraftResolutionAssignments.Is(a) && a.Result == RecordManagement.PreparingDraftResolutionAssignment.Result.ForRework))
+        .OrderByDescending(a => a.Created).FirstOrDefault();
+    }
+    
+    /// <summary>
     /// Выдать права на вложения, не выше прав инициатора задачи.
     /// </summary>
     /// <param name="assignees">Исполнители.</param>
@@ -521,6 +575,20 @@ namespace Sungero.RecordManagement.Server
     }
     
     /// <summary>
+    /// Выдать права на задачу помощнику руководителя для корректной работы с приложениями.
+    /// </summary>
+    public virtual void GrantRightsOnTaskForSecretary()
+    {
+      var assistant = Docflow.PublicFunctions.Module.GetSecretary(_obj.Addressee);
+      if (!Equals(assistant, _obj.Author) &&
+          !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, assistant) &&
+          !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, assistant))
+      {
+        _obj.AccessRights.Grant(assistant, DefaultAccessRightsTypes.Change);
+      }
+    }
+    
+    /// <summary>
     /// Получить нестандартных исполнителей задачи.
     /// </summary>
     /// <returns>Исполнители.</returns>
@@ -558,6 +626,8 @@ namespace Sungero.RecordManagement.Server
     public void UpdateReviewTaskAfterForward(IEmployee newAddressee)
     {
       _obj.Addressee = newAddressee;
+      _obj.Addressees.Clear();
+      _obj.Addressees.AddNew().Addressee = newAddressee;
     }
     
     /// <summary>
@@ -593,35 +663,33 @@ namespace Sungero.RecordManagement.Server
       // TODO Shklyaev: переделать метод, когда сделают 65004.
       foreach (var draftResolution in _obj.ResolutionGroup.ActionItemExecutionTasks.Where(t => t.Status == RecordManagement.ActionItemExecutionTask.Status.Draft))
       {
-        // Очистить все вложения и заполнить заново, чтобы корректно отработала синхронизация вновь добавленных документов.
-        var officialDocuments = draftResolution.DocumentsGroup.OfficialDocuments.ToList();
+        // После указания ParentAssignment и MainTask для поручения все его вложения будут очищены.
+        // Для их восстановления сохраним их в списки и вызовем синхронизацию как для нового поручения.
+        var officialDocument = draftResolution.DocumentsGroup.OfficialDocuments.FirstOrDefault();
+        var addendaDocuments = draftResolution.AddendaGroup.OfficialDocuments
+          .Select(x => ElectronicDocuments.As(x))
+          .ToList();
+        var otherAttachments = draftResolution.OtherGroup.All.ToList();
+        var addedAddendaIds = Functions.ActionItemExecutionTask.GetAddedAddenda(draftResolution);
+        var removedAddendaIds = Functions.ActionItemExecutionTask.GetRemovedAddenda(draftResolution);
+        
         draftResolution.DocumentsGroup.OfficialDocuments.Clear();
-        
-        var addendaDocuments = draftResolution.AddendaGroup.OfficialDocuments.ToList();
         draftResolution.AddendaGroup.OfficialDocuments.Clear();
-        
-        var othersGroup = draftResolution.OtherGroup.All.ToList();
         draftResolution.OtherGroup.All.Clear();
         
         ((Sungero.Workflow.IInternalTask)draftResolution).ParentAssignment = parentAssignment;
         ((Sungero.Workflow.IInternalTask)draftResolution).MainTask = parentAssignment.MainTask;
         draftResolution.Save();
         
-        foreach (var attachment in othersGroup)
+        Functions.Module.SynchronizeAttachmentsToActionItem(officialDocument, addendaDocuments, addedAddendaIds, removedAddendaIds, otherAttachments, draftResolution);
+        
+        foreach (var attachment in otherAttachments)
         {
-          draftResolution.OtherGroup.All.Add(attachment);
-          
           var participants = Sungero.Docflow.PublicFunctions.Module.Remote.GetTaskAssignees(draftResolution).ToList();
           foreach (var participant in participants)
             attachment.AccessRights.Grant(participant, DefaultAccessRightsTypes.Read);
           attachment.AccessRights.Save();
         }
-        
-        foreach (var attachment in officialDocuments)
-          draftResolution.DocumentsGroup.OfficialDocuments.Add(attachment);
-        
-        foreach (var attachment in addendaDocuments)
-          draftResolution.AddendaGroup.OfficialDocuments.Add(attachment);
         
         draftResolution.Save();
         ((Domain.Shared.IExtendedEntity)draftResolution).Params[PublicConstants.ActionItemExecutionTask.CheckDeadline] = true;
@@ -713,51 +781,109 @@ namespace Sungero.RecordManagement.Server
     }
     
     /// <summary>
-    /// Определить может ли автор задачи готовить проекты резолюций.
+    /// Определить, может ли автор задачи готовить проекты резолюций.
     /// </summary>
     /// <returns>True - может, False - не может.</returns>
-    /// <remarks>Автор задачи может готовить проект резолюции если:
+    /// <remarks>Автор задачи может готовить проект резолюции, если:
     /// <para>- является помощником с таким правом как минимум для одного из адресатов;</para>
     /// <para>- замещает помощника с таким правом как минимум для одного из адресатов.</para>
     /// </remarks>
+    [Remote(IsPure = true)]
     public virtual bool CanAuthorPrepareResolution()
     {
       var addressees = _obj.Addressees
         .Select(x => x.Addressee)
         .ToList();
+      return this.CanAuthorPrepareResolution(addressees);
+    }
+    
+    /// <summary>
+    /// Определить, может ли автор задачи готовить проекты резолюций.
+    /// </summary>
+    /// <param name="addressees">Адресаты.</param>
+    /// <returns>True - может, False - не может.</returns>
+    /// <remarks>Автор задачи может готовить проект резолюции, если:
+    /// <para>- является помощником с таким правом как минимум для одного из адресатов;</para>
+    /// <para>- замещает помощника с таким правом как минимум для одного из адресатов.</para>
+    /// </remarks>
+    public virtual bool CanAuthorPrepareResolution(List<IEmployee> addressees)
+    {
       var assistants = addressees
         .SelectMany(x => Company.PublicFunctions.Employee.GetManagerAssistantsWhoPrepareDraftResolution(x));
       var authorSubstitute = Sungero.Company.PublicFunctions.Module.GetUsersSubstitutedBy(_obj.Author);
-      
       return assistants.Any(x => Equals(x.Assistant, _obj.Author)) || assistants.Any(x => authorSubstitute.Contains(x.Assistant));
+    }
+    
+    #region Синхронизация группы приложений
+    
+    /// <summary>
+    /// Связать с основным документом документы из группы Приложения, если они не были связаны ранее.
+    /// </summary>
+    public virtual void RelateAddedAddendaToPrimaryDocument()
+    {
+      var primaryDocument = _obj.DocumentForReviewGroup.OfficialDocuments.SingleOrDefault();
+      if (primaryDocument == null)
+        return;
+      
+      Logger.DebugFormat("DocumentReviewTask (ID = {0}). Add relation with type Addendum to primary document (ID = {1})",
+                         _obj.Id, primaryDocument.Id);
+      var taskAddenda = _obj.AddendaGroup.OfficialDocuments
+        .Where(x => !Equals(x, primaryDocument))
+        .Where(x => !Docflow.PublicFunctions.OfficialDocument.IsObsolete(x))
+        .ToList();
+      Docflow.PublicFunctions.OfficialDocument.RelateDocumentsToPrimaryDocumentAsAddenda(primaryDocument, taskAddenda);
     }
     
     /// <summary>
     /// Перенести вложения из головной задачи в задачу на рассмотрение.
     /// </summary>
     /// <param name="approvalTask">Задача на согласование по регламенту.</param>
-    [Public]
-    public virtual void SynchronizeParentTaskAttachments(Sungero.Docflow.IApprovalTask approvalTask)
+    [Public, Obsolete("Используйте метод RecordManagement.PublicFunctions.Module.SynchronizeAttachmentsToDocumentReview")]
+    public virtual void SynchronizeParentTaskAttachments(Sungero.Docflow.IApprovalTask approvalTask) 
     {
       if (approvalTask == null)
         return;
       
-      var document = approvalTask.DocumentGroup.OfficialDocuments.SingleOrDefault();
+      var document = approvalTask.DocumentGroup.OfficialDocuments.FirstOrDefault();
       if (document != null)
       {
         if (!_obj.DocumentForReviewGroup.OfficialDocuments.Contains(document))
           _obj.DocumentForReviewGroup.OfficialDocuments.Add(document);
-        Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+        
+        // Добавить документы в группу Приложения, которые были добавлены в основную задачу. Документ может быть уже добавлен, поэтому повторно не добавляем.
+        var addendaToAdd = _obj.AddendaGroup.All.Except(approvalTask.AddendaGroup.All);
+        foreach (var addendum in addendaToAdd)
+          _obj.AddendaGroup.All.Add(addendum);
+        
+        // Удалить документы из группы Приложения, которые были удалены из основной задачи.
+        var removedAddendumIds = approvalTask.RemovedAddenda.Select(x => x.AddendumId);
+        foreach (var removedAddendumId in removedAddendumIds)
+        {
+          var addendum = _obj.AddendaGroup.All.Where(x => x.Id == removedAddendumId).FirstOrDefault();
+          if (addendum != null)
+            _obj.AddendaGroup.All.Remove(addendum);
+        }
+        
+        Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
       }
       
       foreach (var addInformation in approvalTask.OtherGroup.All)
+      {
+        // Документ может быть уже добавлен в OtherGroup.
+        // Например, при добавлении входящего письма основным документом
+        // в OtherGroup будет добавлено исходящее письмо, ответом на которое было входящее.
+        // Повторное добавление документа вызывает ошибку #147320.
+        if (_obj.OtherGroup.All.Any(x => x.Id == addInformation.Id))
+          continue;
         _obj.OtherGroup.All.Add(addInformation);
+      }
     }
     
     /// <summary>
     /// Синхронизировать вложения задачи в указанную задачу на рассмотрение.
     /// </summary>
     /// <param name="task">Задача на рассмотрение, в которую требуется синхронизировать вложения.</param>
+    [Obsolete("Используйте метод RecordManagement.PublicFunctions.Module.SynchronizeAttachmentsToDocumentReview")]
     public virtual void SynchronizeAttachmentsToReviewTask(IDocumentReviewTask task)
     {
       var document = _obj.DocumentForReviewGroup.OfficialDocuments.FirstOrDefault();
@@ -765,22 +891,37 @@ namespace Sungero.RecordManagement.Server
       {
         task.DocumentForReviewGroup.OfficialDocuments.Clear();
         task.DocumentForReviewGroup.OfficialDocuments.Add(document);
+        
+        // Добавить документы в группу Приложения, которые были добавлены в основную задачу. Документ может быть уже добавлен, поэтому повторно не добавляем.
+        var addendaToAdd = _obj.AddendaGroup.All.Except(task.AddendaGroup.All);
+        foreach (var addendum in addendaToAdd)
+          task.AddendaGroup.All.Add(addendum);
+        
+        // Удалить документы из группы Приложения, которые были удалены из основной задачи.
+        var removedAddendumIds = _obj.RemovedAddenda.Select(x => x.AddendumId);
+        foreach (var removedAddendumId in removedAddendumIds)
+        {
+          var addendum = task.AddendaGroup.All.Where(x => x.Id == removedAddendumId).FirstOrDefault();
+          if (addendum != null)
+            task.AddendaGroup.All.Remove(addendum);
+        }
+        
+        Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(task);
       }
-      
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
       
       foreach (var attachment in _obj.OtherGroup.All)
       {
-        /* Документ может быть уже добавлен в OtherGroup.
-         * Например, при добавлении входящего письма основным документом
-         * в OtherGroup будет добавлено исходящее письмо, ответом на которое было входящее.
-         * Повторное добавление документа вызывает ошибку #147320.
-         */
+        // Документ может быть уже добавлен в OtherGroup.
+        // Например, при добавлении входящего письма основным документом
+        // в OtherGroup будет добавлено исходящее письмо, ответом на которое было входящее.
+        // Повторное добавление документа вызывает ошибку #147320.
         if (task.OtherGroup.All.Any(x => x.Id == attachment.Id))
           continue;
         task.OtherGroup.All.Add(attachment);
       }
     }
+    
+    #endregion
     
     /// <summary>
     /// Выполнить блоки мониторинга родительской задачи на согласование по регламенту.
@@ -842,6 +983,16 @@ namespace Sungero.RecordManagement.Server
     public virtual Guid GetCreationContextAttachmentRights()
     {
       return Docflow.ApprovalTasks.Is(_obj.MainTask) ? DefaultAccessRightsTypes.Read : DefaultAccessRightsTypes.Change;
+    }
+    
+    /// <summary>
+    /// Удалить все поручения, где поле "Выдал" не соответствует ни одному из адресатов текущей задачи.
+    /// </summary>
+    public virtual void DeleteDraftActionItems()
+    {
+      Functions.Module.DeleteActionItemExecutionTasks(_obj.ResolutionGroup.ActionItemExecutionTasks
+                                                      .Where(x => _obj.Addressees.All(a => !Equals(a.Addressee, x.AssignedBy)))
+                                                      .ToList());
     }
   }
 }

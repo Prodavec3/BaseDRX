@@ -490,4 +490,10 @@ Employees already specified as performers will not be added.</value>
   <data name="Property_WaitForParentAssignment" xml:space="preserve">
     <value>Wait for the parent assignment to be completed</value>
   </data>
+  <data name="Property_AddedAddenda" xml:space="preserve">
+    <value>Documents added to the Addenda group</value>
+  </data>
+  <data name="Property_RemovedAddenda" xml:space="preserve">
+    <value>Documents removed from the Addenda group</value>
+  </data>
 </root>

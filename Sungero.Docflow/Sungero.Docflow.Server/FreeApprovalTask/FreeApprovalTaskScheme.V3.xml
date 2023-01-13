@@ -3,12 +3,15 @@
   <Blocks>
     <BlockBase xsi:type="StartBlock">
       <Id>1</Id>
+      <BlockTypeId xsi:nil="true" />
+      <CustomProperties />
     </BlockBase>
     <BlockBase xsi:type="AssignmentBlock">
       <Id>2</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Согласование рецензентами</Title>
-      <GroupsAttachmentsRights />
       <CustomProperties />
+      <GroupsAttachmentsRights />
       <TypeGuid>01be6c28-8785-4f74-9877-e3270704452e</TypeGuid>
       <CreatedEntitiesIds />
       <Performers />
@@ -28,9 +31,10 @@
     </BlockBase>
     <BlockBase xsi:type="AssignmentBlock">
       <Id>3</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Корректировка автором</Title>
-      <GroupsAttachmentsRights />
       <CustomProperties />
+      <GroupsAttachmentsRights />
       <TypeGuid>593ff79e-38b4-4903-b20e-9e08cfea6307</TypeGuid>
       <CreatedEntitiesIds />
       <Performers />
@@ -49,36 +53,44 @@
     </BlockBase>
     <BlockBase xsi:type="FinishBlock">
       <Id>4</Id>
+      <BlockTypeId xsi:nil="true" />
+      <CustomProperties />
       <UnderReview>false</UnderReview>
       <ReviewAssignmentId>0</ReviewAssignmentId>
     </BlockBase>
     <BlockBase xsi:type="NoticeBlock">
       <Id>7</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Уведомление согласовавшим о новом круге согласования</Title>
-      <GroupsAttachmentsRights />
       <CustomProperties />
+      <GroupsAttachmentsRights />
       <TypeGuid>7d9816f6-1dea-4718-84a5-1a413df81145</TypeGuid>
       <CreatedEntitiesIds />
       <Performers />
     </BlockBase>
     <BlockBase xsi:type="DecisionBlock">
       <Id>5</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Нужно задание-контроль?</Title>
+      <CustomProperties />
+      <ConditionExpressions />
     </BlockBase>
     <BlockBase xsi:type="NoticeBlock">
       <Id>6</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Уведомление инициатора о завершении согласования</Title>
-      <GroupsAttachmentsRights />
       <CustomProperties />
+      <GroupsAttachmentsRights />
       <TypeGuid>7d9816f6-1dea-4718-84a5-1a413df81145</TypeGuid>
       <CreatedEntitiesIds />
       <Performers />
     </BlockBase>
     <BlockBase xsi:type="AssignmentBlock">
       <Id>8</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Задание инициатору о завершении согласования</Title>
-      <GroupsAttachmentsRights />
       <CustomProperties />
+      <GroupsAttachmentsRights />
       <TypeGuid>d3277007-c49f-4aaa-a0f7-e397fa4fb9fc</TypeGuid>
       <CreatedEntitiesIds />
       <Performers />
@@ -97,7 +109,10 @@
     </BlockBase>
     <BlockBase xsi:type="DecisionBlock">
       <Id>12</Id>
+      <BlockTypeId xsi:nil="true" />
       <Title>Нужна доработка?</Title>
+      <CustomProperties />
+      <ConditionExpressions />
     </BlockBase>
   </Blocks>
   <Edges>
@@ -215,14 +230,14 @@
         <Bounds>
           <Location>
             <X>207.66299999997443</X>
-            <Y>647</Y>
+            <Y>679</Y>
           </Location>
           <Size>
             <Width>48</Width>
             <Height>48</Height>
           </Size>
           <X>207.66299999997443</X>
-          <Y>647</Y>
+          <Y>679</Y>
           <Width>48</Width>
           <Height>48</Height>
         </Bounds>
@@ -462,7 +477,7 @@
         <EdgeId>10</EdgeId>
         <EndPoint>
           <X>231.66299999997443</X>
-          <Y>647</Y>
+          <Y>679</Y>
         </EndPoint>
         <OriginAnchor>10</OriginAnchor>
         <Points>
@@ -472,23 +487,15 @@
           </Point>
           <Point>
             <X>34.337000000025569</X>
-            <Y>613.29527559055123</Y>
-          </Point>
-          <Point>
-            <X>183.16850000001278</X>
-            <Y>613.29527559055123</Y>
-          </Point>
-          <Point>
-            <X>183.16850000001278</X>
-            <Y>575.5</Y>
+            <Y>594.39763779527561</Y>
           </Point>
           <Point>
             <X>231.66299999997443</X>
-            <Y>575.5</Y>
+            <Y>594.39763779527561</Y>
           </Point>
           <Point>
             <X>231.66299999997443</X>
-            <Y>647</Y>
+            <Y>679</Y>
           </Point>
         </Points>
         <StartPoint>
@@ -501,7 +508,7 @@
         <EdgeId>11</EdgeId>
         <EndPoint>
           <X>231.66299999997443</X>
-          <Y>647</Y>
+          <Y>679</Y>
         </EndPoint>
         <OriginAnchor>10</OriginAnchor>
         <Points>
@@ -511,15 +518,15 @@
           </Point>
           <Point>
             <X>427.66299999997443</X>
-            <Y>611.25</Y>
+            <Y>594.39763779527561</Y>
           </Point>
           <Point>
             <X>231.66299999997443</X>
-            <Y>611.25</Y>
+            <Y>594.39763779527561</Y>
           </Point>
           <Point>
             <X>231.66299999997443</X>
-            <Y>647</Y>
+            <Y>679</Y>
           </Point>
         </Points>
         <StartPoint>

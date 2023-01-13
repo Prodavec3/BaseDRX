@@ -5,72 +5,91 @@
     <XtraSerializer version="1.0" application="GridControl">
       <property name="#LayoutVersion" isnull="true" />
       <property name="$GridControl" iskey="true" value="GridControl">
-        <property name="GroupSummary" iskey="true" value="0" />
         <property name="View" isnull="true" iskey="true">
-          <property name="ShowTotalSummary">false</property>
-          <property name="AllowMoveColumnToDropArea">false</property>
-          <property name="AllowColumnMoving">true</property>
+          <property name="LinesPerRowMode">None</property>
           <property name="ColumnChooserState" isnull="true" iskey="true">
             <property name="Location">854,-2</property>
             <property name="Size">220,250</property>
           </property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="ShowGroupPanel">false</property>
           <property name="AutoWidth">false</property>
           <property name="AllowGrouping">false</property>
-          <property name="AllowSorting">true</property>
-          <property name="ShowGroupPanel">false</property>
-          <property name="LinesPerRowMode">None</property>
-          <property name="IsRowCellMenuEnabled">false</property>
         </property>
-        <property name="GroupCount">0</property>
         <property name="TotalSummary" iskey="true" value="0" />
-        <property name="Columns" iskey="true" value="5">
+        <property name="SortInfo" iskey="true" value="1">
           <property name="Item1" isnull="true" iskey="true">
             <property name="FieldName">DocumentType</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="Columns" iskey="true" value="7">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">0</property>
             <property name="Visible">true</property>
             <property name="Name">ExchangeDocumentInfo_ServiceDocuments_DocumentType</property>
-            <property name="ExtendedVisibleIndex">0</property>
+            <property name="FieldName">DocumentType</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">232</property>
+            <property name="Width">234</property>
             <property name="ActualWidth">22*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
-            <property name="FieldName">DocumentId</property>
+            <property name="ExtendedVisibleIndex">1</property>
             <property name="Visible">true</property>
             <property name="Name">ExchangeDocumentInfo_ServiceDocuments_DocumentId</property>
-            <property name="ExtendedVisibleIndex">1</property>
+            <property name="FieldName">DocumentId</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">253</property>
-            <property name="ActualWidth">27*</property>
+            <property name="Width">202</property>
+            <property name="ActualWidth">19*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
-            <property name="FieldName">Date</property>
+            <property name="ExtendedVisibleIndex">3</property>
             <property name="Visible">true</property>
             <property name="Name">ExchangeDocumentInfo_ServiceDocuments_Date</property>
-            <property name="ExtendedVisibleIndex">3</property>
+            <property name="FieldName">Date</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">84</property>
-            <property name="ActualWidth">10*</property>
+            <property name="Width">64</property>
+            <property name="ActualWidth">6*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
-            <property name="FieldName">ParentDocumentId</property>
+            <property name="ExtendedVisibleIndex">2</property>
             <property name="Visible">true</property>
             <property name="Name">ExchangeDocumentInfo_ServiceDocuments_ParentDocumentId</property>
-            <property name="ExtendedVisibleIndex">2</property>
+            <property name="FieldName">ParentDocumentId</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">253</property>
-            <property name="ActualWidth">31*</property>
+            <property name="Width">298</property>
+            <property name="ActualWidth">28*</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
-            <property name="FieldName">Certificate</property>
+            <property name="ExtendedVisibleIndex">5</property>
             <property name="Visible">true</property>
             <property name="Name">ExchangeDocumentInfo_ServiceDocuments_Certificate</property>
-            <property name="ExtendedVisibleIndex">5</property>
+            <property name="FieldName">Certificate</property>
             <property name="VisibleIndex">4</property>
-            <property name="Width">84</property>
+            <property name="Width">96</property>
             <property name="ActualWidth">9*</property>
           </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocumentInfo_ServiceDocuments_FormalizedPoAUnifiedRegNo</property>
+            <property name="FieldName">FormalizedPoAUnifiedRegNo</property>
+            <property name="VisibleIndex">5</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="Visible">true</property>
+            <property name="Name">ExchangeDocumentInfo_ServiceDocuments_SecondFormalizedPoAUnifiedRegNo</property>
+            <property name="FieldName">SecondFormalizedPoAUnifiedRegNo</property>
+            <property name="VisibleIndex">6</property>
+            <property name="ActualWidth">NaN</property>
+          </property>
         </property>
-        <property name="SortInfo" iskey="true" value="0" />
         <property name="GroupSummarySortInfo" iskey="true" value="0" />
       </property>
     </XtraSerializer>

@@ -179,8 +179,7 @@ namespace Sungero.Docflow.Client
     {
       if (Functions.ApprovalRuleBase.Remote.GetDoubleRules(_obj).Any())
       {
-        e.AddError(ApprovalRuleBases.Resources.DuplicateDetected, _obj.Info.Actions.ShowDuplicate);
-        return;
+        e.AddWarning(ApprovalRuleBases.Resources.DuplicateDetected, _obj.Info.Actions.ShowDuplicate);
       }
       
       var message = e.Action.ConfirmationMessage;

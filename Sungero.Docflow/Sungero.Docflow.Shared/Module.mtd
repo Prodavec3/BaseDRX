@@ -17,10 +17,9 @@
           "Versions": []
         },
         {
-          "NameGuid": "8662147d-aa1b-487f-a10a-9330afa44cd4",
-          "Name": "RuleId",
-          "ParameterType": "Integer",
-          "Versions": []
+          "NameGuid": "56afed6e-ccd0-4cb7-8941-005655908b08",
+          "Name": "RuleIds",
+          "ParameterType": "String"
         },
         {
           "NameGuid": "efc64fb9-dd5a-4c42-8fdd-dac020f496bb",
@@ -182,6 +181,54 @@
           "NameGuid": "91638f41-9665-4a31-a53d-4114bafd2b73",
           "Name": "QueueItemId",
           "ParameterType": "Integer"
+        }
+      ]
+    },
+    {
+      "NameGuid": "3e3240a6-f984-406f-a2e5-79467cb926ea",
+      "Name": "AddRegistrationStamp",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "39919c36-08e7-4812-a86f-809a1503876d",
+          "Name": "BottomIndent",
+          "ParameterType": "Double"
+        },
+        {
+          "NameGuid": "441814f1-ea00-48fe-8401-385359d274e3",
+          "Name": "RightIndent",
+          "ParameterType": "Double"
+        },
+        {
+          "NameGuid": "73348e23-17f3-4845-8be2-1380dd989814",
+          "Name": "VersionId",
+          "ParameterType": "Integer"
+        },
+        {
+          "NameGuid": "d82a50f3-ad3f-4bc4-9362-d7ae6f6e41a9",
+          "Name": "DocumentId",
+          "ParameterType": "Integer"
+        }
+      ]
+    },
+    {
+      "NameGuid": "e243048a-0320-4bb6-b9b0-b3e1b1c1770f",
+      "Name": "GrantAccessRightsToDocumentsBulk",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "13cdd20b-a00a-45f8-ab81-4f7b387e22d0",
+          "Name": "RuleId",
+          "ParameterType": "Integer"
+        },
+        {
+          "NameGuid": "3e31932c-fe59-47ab-a381-e4e8b06a740a",
+          "Name": "DocumentIds",
+          "ParameterType": "String"
         }
       ]
     }
@@ -408,6 +455,7 @@
         "Name": "PersonalSettings",
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconPersonalSettings_22f134839ec34ab8b4d5510972e61a07.png",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -416,6 +464,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconReports_bf7ec0bfa0cd43908e204071d2745ac9.png",
         "PreviousItemGuid": "22f13483-9ec3-4ab8-b4d5-510972e61a07",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -424,6 +473,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconDocflow_a45c248097754f34a8f2aa91c233d04f.png",
         "PreviousItemGuid": "bf7ec0bf-a0cd-4390-8e20-4071d2745ac9",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -432,6 +482,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconRetentionDocument_23d239d08f2c49ba975e559a554b96d7.png",
         "PreviousItemGuid": "a45c2480-9775-4f34-a8f2-aa91c233d04f",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -440,6 +491,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconRegistration_ef0cb40d3c65405aa2959ac170813fad.png",
         "PreviousItemGuid": "23d239d0-8f2c-49ba-975e-559a554b96d7",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -448,6 +500,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconApproval_8676ae40d291484582708cccbe9b8ba7.png",
         "PreviousItemGuid": "ef0cb40d-3c65-405a-a295-9ac170813fad",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -455,6 +508,7 @@
         "Name": "Group",
         "BackgroundPosition": "Stretch",
         "PreviousItemGuid": "8676ae40-d291-4845-8270-8cccbe9b8ba7",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -463,6 +517,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconApplicationSettings_2832d02d6c4642cd84b335dc867d8539.png",
         "PreviousItemGuid": "f177d1e6-2cc0-4f87-a2a0-403c1f839691",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       },
       {
@@ -471,6 +526,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconSmartProcessingSettings_0da8db1603124a679bdde76e309f7f85.png",
         "PreviousItemGuid": "2832d02d-6c46-42cd-84b3-35dc867d8539",
+        "TabId": "f5658d54-f782-4570-9a47-e7b7421f6853",
         "Versions": []
       }
     ],
@@ -479,6 +535,12 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [
+      {
+        "NameGuid": "f5658d54-f782-4570-9a47-e7b7421f6853",
+        "Name": "Tab"
+      }
+    ],
     "Versions": []
   },
   "Dependencies": [
@@ -875,8 +937,21 @@
       "PreviousItemId": "e511f4f9-72a3-484c-a5f2-d5fcdd113dde"
     },
     {
+      "ItemId": "a8d955b1-4b35-4013-b643-3ea9d80bd1ea",
+      "PreviousItemId": "9bc1a190-7ede-40e0-9895-397f2433d587"
+    },
+    {
+      "ItemId": "104472db-b71b-42a8-bca5-581a08d1ca7b",
+      "PreviousItemId": "a8d955b1-4b35-4013-b643-3ea9d80bd1ea"
+    },
+    {
+      "IsVisible": false,
+      "ItemId": "06e3a0a6-5e8c-463e-bbfd-578227389d3f",
+      "PreviousItemId": "104472db-b71b-42a8-bca5-581a08d1ca7b"
+    },
+    {
       "ItemId": "35a9397d-9602-46a3-b922-09f6681f1241",
-      "PreviousItemId": "9bc1a190-7ede-40e0-9895-397f2433d587",
+      "PreviousItemId": "06e3a0a6-5e8c-463e-bbfd-578227389d3f",
       "Versions": []
     },
     {
@@ -1447,6 +1522,18 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "CreatePowerOfAttorneySetting",
+      "Parameters": [
+        {
+          "Name": "documentRegister",
+          "ParameterType": "global::Sungero.Docflow.IDocumentRegister",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentRegister, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "CreateRelationType",
       "Parameters": [
         {
@@ -1624,6 +1711,14 @@
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T04:00:00",
       "Versions": []
+    },
+    {
+      "NameGuid": "35ba6be5-acff-4551-9f4d-48f0c7bb6419",
+      "Name": "SendSummaryMailNotifications",
+      "GenerateHandler": true,
+      "Monthly": "WorkingDays",
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T07:00:00"
     }
   ],
   "Libraries": [
@@ -1631,12 +1726,6 @@
       "NameGuid": "612c0465-0426-4040-9cea-c8d87ffff349",
       "Name": "Nustache",
       "Scope": "Server",
-      "Versions": []
-    },
-    {
-      "NameGuid": "4d8a3214-88eb-4fe0-9aab-9940dc54bca2",
-      "Name": "Dialogs",
-      "Scope": "ClientBase",
       "Versions": []
     },
     {
@@ -1706,6 +1795,15 @@
       ],
       "TypeName": "System.String",
       "Value": "\"ArioUrl\""
+    },
+    {
+      "Name": "Attribute",
+      "ParentClasses": [
+        "Module",
+        "UnsignedAdditionalInfoSeparator"
+      ],
+      "TypeName": "System.Char",
+      "Value": "'|'"
     },
     {
       "Name": "BasisRelationName",
@@ -1853,6 +1951,14 @@
       "Value": "new System.Guid(\"EA04AA41-9BD8-45D5-A479-A986137A509C\")"
     },
     {
+      "Name": "DisableMailNotification",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"DisableMailNotification\""
+    },
+    {
       "Name": "DocumentDeleteRole",
       "ParentClasses": [
         "Module",
@@ -1897,6 +2003,15 @@
       "Value": "new System.Guid(\"4E02B0C3-D448-44E8-AE61-208A79A44205\")"
     },
     {
+      "Name": "FormalizedPowerOfAttorneyKind",
+      "ParentClasses": [
+        "Module",
+        "Initialize"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"D1FD38A9-1BE7-475E-BF1E-2B2796301BF5\")"
+    },
+    {
       "Name": "GivenName",
       "ParentClasses": [
         "Module",
@@ -1921,6 +2036,15 @@
       ],
       "TypeName": "System.String",
       "Value": "\"2.5.4.12\""
+    },
+    {
+      "Name": "KeyValue",
+      "ParentClasses": [
+        "Module",
+        "UnsignedAdditionalInfoSeparator"
+      ],
+      "TypeName": "System.Char",
+      "Value": "'='"
     },
     {
       "Name": "Locality",
@@ -2071,6 +2195,30 @@
       "Value": "new System.Guid(\"372D8FDB-316E-4F3C-9F6D-C2C1292BBFAE\")"
     },
     {
+      "Name": "RegistrationStampDefaultBottomIndent",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Double",
+      "Value": "0.3"
+    },
+    {
+      "Name": "RegistrationStampDefaultPageCenterIndent",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Double",
+      "Value": "8.5"
+    },
+    {
+      "Name": "RegistrationStampDefaultRightIndent",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Double",
+      "Value": "1.0"
+    },
+    {
       "Name": "ResponseRelationName",
       "ParentClasses": [
         "Module"
@@ -2163,6 +2311,14 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"49761788-cc45-4485-adb4-55f2056ab043\")"
+    },
+    {
+      "Name": "UnsignedAdditionalInfoKeyFPoA",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"FPOA\""
     },
     {
       "Name": "UsersWithAssignmentCompletionRightsRole",
@@ -2425,6 +2581,27 @@
           "Name": "task",
           "ParameterType": "global::System.Int32",
           "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "AddUnsignedAttribute",
+      "Parameters": [
+        {
+          "Name": "signature",
+          "ParameterType": "Sungero.Domain.Shared.ISignature"
+        },
+        {
+          "Name": "key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "attributeValue",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
         }
       ],
       "ReturnType": "void",
@@ -2836,6 +3013,29 @@
       "WebApiRequestType": "Post"
     },
     {
+      "Name": "ConvertToPdfWithRegistrationStamp",
+      "Parameters": [
+        {
+          "Name": "documentId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "rightIndent",
+          "ParameterType": "global::System.Double",
+          "ParameterTypeFullName": "System.Double"
+        },
+        {
+          "Name": "bottomIndent",
+          "ParameterType": "global::System.Double",
+          "ParameterTypeFullName": "System.Double"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
       "Name": "ConvertToPdfWithSignatureMarkInteractively",
       "Parameters": [
         {
@@ -3037,14 +3237,31 @@
           "ParameterTypeFullName": "System.Int32"
         },
         {
-          "Name": "ruleId",
-          "ParameterType": "global::System.Nullable<global::System.Int32>",
-          "ParameterTypeFullName": "System.Nullable"
+          "Name": "ruleIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
         },
         {
           "Name": "grantAccessRightsToRelatedDocuments",
           "ParameterType": "global::System.Boolean",
           "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "CreateGrantAccessRightsToDocumentAsyncHandlerBulk",
+      "Parameters": [
+        {
+          "Name": "ruleId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "documentIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
         }
       ],
       "ReturnType": "void",
@@ -3149,6 +3366,29 @@
     {
       "Name": "CreateSeparatorStyle",
       "ReturnType": "Sungero.Core.StateBlockLabelStyle"
+    },
+    {
+      "Name": "CreateSignatureSettingWithFormalizedPoA",
+      "Parameters": [
+        {
+          "Name": "employeeId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "documentId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "certificateId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Post"
     },
     {
       "Name": "CreateSimpleTask",
@@ -3407,6 +3647,11 @@
         }
       ],
       "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "DocflowParamsTableExist",
       "ReturnType": "global::System.Boolean",
       "ReturnTypeFullName": "System.Boolean"
     },
@@ -3705,6 +3950,23 @@
       "ReturnTypeFullName": "System.String"
     },
     {
+      "Name": "FormatUnsignedAttribute",
+      "Parameters": [
+        {
+          "Name": "key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "attributeValue",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GeneratePublicBodyForExchangeDocument",
       "Parameters": [
         {
@@ -3923,6 +4185,24 @@
       "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
+      "Name": "GetAddedAddendaFromAssignments",
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "groupId",
+          "ParameterType": "global::System.Guid",
+          "ParameterTypeFullName": "System.Guid"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Content.IElectronicDocument>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetAddenda",
       "Parameters": [
         {
@@ -4067,6 +4347,19 @@
       "ReturnTypeFullName": "Sungero.Content.IAssociatedApplication, Sungero.Content.Shared"
     },
     {
+      "Name": "GetAttachmentGroupIdFromHistoryComment",
+      "Parameters": [
+        {
+          "Name": "comment",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Nullable<global::System.Guid>",
+      "ReturnTypeFullName": "System.Nullable"
+    },
+    {
       "Name": "GetAttachmentsWithoutAccessRights",
       "IsRemote": true,
       "Parameters": [
@@ -4084,6 +4377,35 @@
       "Placement": "Shared",
       "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Domain.Shared.IEntity>",
       "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "GetAvailableRegistrationSettings",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "settingType",
+          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentKind",
+          "ParameterType": "global::Sungero.Docflow.IDocumentKind",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentKind, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "department",
+          "ParameterType": "global::Sungero.Company.IDepartment",
+          "ParameterTypeFullName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IRegistrationSetting>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
     },
     {
       "Name": "GetAvaliableLeadingDocuments",
@@ -4316,6 +4638,23 @@
       "ReturnTypeFullName": "System.String"
     },
     {
+      "Name": "GetDateDisplayValue",
+      "Parameters": [
+        {
+          "Name": "date",
+          "ParameterType": "global::System.Nullable<global::System.DateTime>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "performer",
+          "ParameterType": "global::Sungero.CoreEntities.IUser",
+          "ParameterTypeFullName": "Sungero.CoreEntities.IUser, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GetDateWithTime",
       "Parameters": [
         {
@@ -4413,6 +4752,18 @@
       "ReturnTypeFullName": "Sungero.Docflow.Structures.Module.IExpiringDocsNotificationParams"
     },
     {
+      "Name": "GetDefaultSignatureStampParams",
+      "Parameters": [
+        {
+          "Name": "withCertificate",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::Sungero.Docflow.Structures.StampSetting.ISignatureStampParams",
+      "ReturnTypeFullName": "Sungero.Docflow.Structures.StampSetting.ISignatureStampParams"
+    },
+    {
       "Name": "GetDepartmentAssignmentCompletionReportData",
       "Parameters": [
         {
@@ -4506,6 +4857,19 @@
         }
       ],
       "ReturnType": "System.Object"
+    },
+    {
+      "Name": "GetDocumentIdFromHistoryComment",
+      "Parameters": [
+        {
+          "Name": "comment",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Nullable<global::System.Int32>",
+      "ReturnTypeFullName": "System.Nullable"
     },
     {
       "Name": "GetDocumentKindIdByGuid",
@@ -4651,6 +5015,23 @@
       "WebApiRequestType": "Get"
     },
     {
+      "Name": "GetFormalizedPoAByEmployee",
+      "Parameters": [
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "employee",
+          "ParameterType": "global::Sungero.Company.IEmployee",
+          "ParameterTypeFullName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::Sungero.Docflow.IFormalizedPowerOfAttorney",
+      "ReturnTypeFullName": "Sungero.Docflow.IFormalizedPowerOfAttorney, Sungero.Domain.Interfaces"
+    },
+    {
       "Name": "GetFormatedUserText",
       "Parameters": [
         {
@@ -4700,6 +5081,27 @@
       ],
       "ReturnType": "global::System.DateTime",
       "ReturnTypeFullName": "System.DateTime"
+    },
+    {
+      "Name": "GetLastStringEntryPosition",
+      "Parameters": [
+        {
+          "Name": "pdfDocumentStream",
+          "ParameterType": "System.IO.Stream"
+        },
+        {
+          "Name": "searchablePagesNumber",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "searchString",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::Sungero.Docflow.Structures.Module.IPdfStringSearchResult",
+      "ReturnTypeFullName": "Sungero.Docflow.Structures.Module.IPdfStringSearchResult"
     },
     {
       "Name": "GetManager",
@@ -4785,6 +5187,121 @@
       "Placement": "Shared",
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetOrderedSignatureSettings",
+      "Parameters": [
+        {
+          "Name": "settings",
+          "ParameterType": "global::System.Linq.IQueryable<global::Sungero.Docflow.ISignatureSetting>",
+          "ParameterTypeFullName": "System.Linq.IQueryable"
+        }
+      ],
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.ISignatureSetting>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetOurSigningReasonWithHighPriority",
+      "Parameters": [
+        {
+          "Name": "settings",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Docflow.ISignatureSetting>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "certificate",
+          "ParameterType": "global::Sungero.CoreEntities.ICertificate",
+          "ParameterTypeFullName": "Sungero.CoreEntities.ICertificate, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::Sungero.Docflow.ISignatureSetting",
+      "ReturnTypeFullName": "Sungero.Docflow.ISignatureSetting, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetPowersBase",
+      "Parameters": [
+        {
+          "Name": "signatureSetting",
+          "ParameterType": "global::Sungero.Docflow.ISignatureSetting",
+          "ParameterTypeFullName": "Sungero.Docflow.ISignatureSetting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetRegistrationSettingByDocumentRegister",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "documentRegister",
+          "ParameterType": "global::Sungero.Docflow.IDocumentRegister",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentRegister, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IRegistrationSetting>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetRegistrationSettings",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "settingType",
+          "ParameterType": "global::System.Nullable<global::Sungero.Core.Enumeration>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "businessUnit",
+          "ParameterType": "global::Sungero.Company.IBusinessUnit",
+          "ParameterTypeFullName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "documentKind",
+          "ParameterType": "global::Sungero.Docflow.IDocumentKind",
+          "ParameterTypeFullName": "Sungero.Docflow.IDocumentKind, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "department",
+          "ParameterType": "global::Sungero.Company.IDepartment",
+          "ParameterTypeFullName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IRegistrationSetting>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "GetRegistrationStampAsHtml",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetRemovedAddendaFromAssignments",
+      "Parameters": [
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "groupId",
+          "ParameterType": "global::System.Guid",
+          "ParameterTypeFullName": "System.Guid"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Content.IElectronicDocument>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
       "Name": "GetReportTableName",
@@ -5032,11 +5549,43 @@
       "ReturnTypeFullName": "System.String"
     },
     {
+      "Name": "GetSignatureMarkForCertificateAsHtml",
+      "Parameters": [
+        {
+          "Name": "signature",
+          "ParameterType": "Sungero.Domain.Shared.ISignature"
+        },
+        {
+          "Name": "signatureStampParams",
+          "ParameterType": "global::Sungero.Docflow.Structures.StampSetting.ISignatureStampParams",
+          "ParameterTypeFullName": "Sungero.Docflow.Structures.StampSetting.ISignatureStampParams"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GetSignatureMarkForSimpleSignatureAsHtml",
       "Parameters": [
         {
           "Name": "signature",
           "ParameterType": "Sungero.Domain.Shared.ISignature"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetSignatureMarkForSimpleSignatureAsHtml",
+      "Parameters": [
+        {
+          "Name": "signature",
+          "ParameterType": "Sungero.Domain.Shared.ISignature"
+        },
+        {
+          "Name": "signatureStampParams",
+          "ParameterType": "global::Sungero.Docflow.Structures.StampSetting.ISignatureStampParams",
+          "ParameterTypeFullName": "Sungero.Docflow.Structures.StampSetting.ISignatureStampParams"
         }
       ],
       "ReturnType": "global::System.String",
@@ -5055,6 +5604,19 @@
           "ParameterTypeFullName": "System.String"
         }
       ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetSigningReason",
+      "Parameters": [
+        {
+          "Name": "signatureSetting",
+          "ParameterType": "global::Sungero.Docflow.ISignatureSetting",
+          "ParameterTypeFullName": "Sungero.Docflow.ISignatureSetting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
     },
@@ -5158,6 +5720,46 @@
       "ReturnTypeFullName": "System.DateTime"
     },
     {
+      "Name": "GetUnsignedAttribute",
+      "Parameters": [
+        {
+          "Name": "signature",
+          "ParameterType": "Sungero.Domain.Shared.ISignature"
+        },
+        {
+          "Name": "key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetUnsignedAttribute",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "signatureId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GrantAccessRightsOnEntity",
       "Parameters": [
         {
@@ -5176,8 +5778,8 @@
           "ParameterTypeFullName": "System.Guid"
         }
       ],
-      "ReturnType": "void",
-      "ReturnTypeFullName": "System.Void"
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     },
     {
       "Name": "GrantAccessRightsToDocument",
@@ -5288,6 +5890,29 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "ImportFormalizedPoABodyAndSign",
+      "Parameters": [
+        {
+          "Name": "documentId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "xmlDataBase64",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "signatureDataBase64",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
       "Name": "IncludedInBusinessUnitHeadsRole",
       "ReturnType": "global::System.Boolean",
       "ReturnTypeFullName": "System.Boolean"
@@ -5303,6 +5928,23 @@
       "Name": "IncludedInDepartmentManagersRole",
       "ReturnType": "global::System.Boolean",
       "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "InsertDocflowParam",
+      "Parameters": [
+        {
+          "Name": "key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "value",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     },
     {
       "Name": "InsertOrUpdateDocflowParam",
@@ -5746,6 +6388,27 @@
         }
       ],
       "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SetDataSignature",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "signatureId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "newDataSignature",
+          "ParameterType": "System.Byte[]"
+        }
+      ],
       "ReturnType": "void",
       "ReturnTypeFullName": "System.Void"
     },
@@ -6471,6 +7134,95 @@
       "StructureNamespace": "Sungero.Docflow.Structures.Module"
     },
     {
+      "Name": "EmployeeMailInfo",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Id",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Email",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "EmployeeShortName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "LastWorkingDay",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "PeriodLastDay",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "PeriodFirstDay",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "SubstitutorEmails",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        },
+        {
+          "Name": "NeedNotifyAssignmentsSummary",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "EmployeeCurrentDate",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "AssignmentsAndNotices",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo>"
+        },
+        {
+          "Name": "ActionItems",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo>"
+        },
+        {
+          "Name": "Tasks",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo>"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.Module"
+    },
+    {
+      "Name": "EmployeeSubstitutions",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "SubstitutedId",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "SubstitutorId",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "SubstitutorEmail",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.Module"
+    },
+    {
       "Name": "ExpiringDocsNotificationParams",
       "IsPublic": true,
       "Properties": [
@@ -6622,6 +7374,106 @@
           "Name": "FillingColor",
           "IsNullable": true,
           "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.Module"
+    },
+    {
+      "Name": "PdfStringSearchResult",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "XIndent",
+          "TypeFullName": "global::System.Double"
+        },
+        {
+          "Name": "YIndent",
+          "TypeFullName": "global::System.Double"
+        },
+        {
+          "Name": "PageNumber",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "PageWidth",
+          "TypeFullName": "global::System.Double"
+        },
+        {
+          "Name": "PageHeight",
+          "TypeFullName": "global::System.Double"
+        },
+        {
+          "Name": "PageCount",
+          "TypeFullName": "global::System.Int32"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.Module"
+    },
+    {
+      "Name": "WorkflowEntityMailInfo",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Id",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Created",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "Deadline",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "DeadlineDisplayValue",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "IsOverdue",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "IsNew",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "Subject",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "PerformerId",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "AuthorName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Hyperlink",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "IsTasks",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "IsNotice",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "IsActionItems",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "IsCompoundActionItem",
+          "TypeFullName": "global::System.Boolean"
         }
       ],
       "StructureNamespace": "Sungero.Docflow.Structures.Module"
@@ -7022,8 +7874,6 @@
     "ExportDialog_Title",
     "ExportDialog_Format",
     "ExportDialog_Group",
-    "ExportDialog_Path",
-    "ExportDialog_Hyperlink_ChangePath",
     "ExportDialog_OpenDocuments",
     "ExportDialog_Search_Show",
     "ExportDialog_Search_DateFrom",
@@ -7032,7 +7882,6 @@
     "ExportDialog_Close",
     "ExportDialog_Back",
     "ExportDialog_StartExport",
-    "ExportDialog_OpenExplorer",
     "ExportDialog_ConfigExport",
     "ExportDialog_Completed",
     "ExportDialog_End_AllDocs",
@@ -7051,7 +7900,6 @@
     "ExportDialog_Step_Config",
     "ExportDialog_Step_End",
     "ExportDialog_Error_CounterpartySignNotFound",
-    "ExportDialog_CompletedNotFound",
     "ExportDialog_CompletedNotExported",
     "ExportDialog_Error_InProcess",
     "ExportDialog_Error_Rejected",
@@ -7102,7 +7950,41 @@
     "ReportEmployees",
     "RoleNameUsersWithAssignmentCompletionRights",
     "DescriptionUsersWithAssignmentCompletionRightsRole",
-    "Ellipsis_CutText"
+    "Ellipsis_CutText",
+    "SignatureBlock",
+    "DocumentSignedByCounterpartyIsExchangeServiceNote",
+    "StateViewVersion",
+    "StateViewSubstitutedUser",
+    "Ellipsis_Comment",
+    "HtmlStampTemplateForRegistrationStamp",
+    "RegistrationStampCoordsMustBePositive",
+    "SummaryMailMainTemplate",
+    "SummaryMailSubject",
+    "SummaryMailBlockContentTemplate",
+    "SummaryMailGroupContentTemplate",
+    "NewAssignmentsGroupName",
+    "OverdueAssignmentsGroupName",
+    "TodayAssignmentsGroupName",
+    "ClosestDaysAssignmentsGroupName",
+    "ActionItemsBlockName",
+    "TasksBlockName",
+    "OpenLinkPicture",
+    "AssignmentsBlockName",
+    "SummaryMailWorkflowEntitiesListTemplate",
+    "NoRightsToDocument",
+    "FormalizedPowerOfAttorneyKindShortName",
+    "FormalizedPowerOfAttorneyKindName",
+    "FormalizedPowerOfAttorneyTypeName",
+    "HaveNotEnoughAccessRights",
+    "ImportFPoAAccessRightsTypeName",
+    "HtmlStampTemplateForCertificateWithUnifiedNumber",
+    "SignatureStampSampleLogo",
+    "SignatureStampSampleTitle",
+    "HtmlStampLogoForCertificate",
+    "HtmlStampSigningDateForSignature",
+    "HtmlStampLogoForSignature",
+    "FPoATitle",
+    "PersonSignatureBlock"
   ],
   "ServerAssemblyName": "Sungero.Docflow.Server",
   "ServerNamespace": "Sungero.Docflow.Server",
@@ -7309,12 +8191,12 @@
       "Versions": []
     }
   ],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

@@ -39,6 +39,29 @@ namespace Sungero.Docflow.Server
       personalSettings.Save();
       return personalSettings;
     }
+    
+    /// <summary>
+    /// Получить признак отображения области регистрации из персональных настроек пользователя.
+    /// </summary>
+    /// <param name="employee">Сотрудник.</param>
+    /// <returns>True - если отображение области регистрации включено в настройках пользователя, иначе - false.</returns>
+    [Remote(IsPure = true), Public]
+    public static bool GetShowRegistrationPaneParam(IEmployee employee)
+    {
+      if (employee == null)
+        employee = Employees.Current;
+      
+      // Для пользователя без сотрудника настроек быть не может.
+      if (employee == null)
+        return false;
+      
+      var showRegPane = PersonalSettings.GetAll(s => s.Employee.Id == employee.Id).Select(p => p.ShowRegPane).SingleOrDefault();
+      if (showRegPane != null)
+        return (bool)showRegPane;
+      
+      var personalSettings = CreatePersonalSettings(employee);
+      return (bool)personalSettings.ShowRegPane;
+    }
 
     /// <summary>
     /// Получить или создать, если не существуют, настройки пользователя.

@@ -28,6 +28,7 @@
       "ActionArea": "CardAndCollection",
       "GenerateHandler": true,
       "IsMultiSelectAction": true,
+      "IsVisibleInDesktopClient": false,
       "LargeIconName": "Action_ExportFinancialDocument_large_3641a9970fe343bb8be9265b73b1b5ad.png",
       "SmallIconName": "Action_ExportFinancialDocument_small_3641a9970fe343bb8be9265b73b1b5ad.png",
       "Versions": []
@@ -207,10 +208,19 @@
           "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
           "NameGuid": "2a9b759d-673b-4a94-bb3b-3d6bdcae0d5d",
           "Name": "Counterparty",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 50.0
+            },
+            {
+              "Percentage": 50.0
+            }
+          ],
           "GroupType": "WithTitleNoBorder",
           "IsAncestorMetadata": true,
           "Overridden": [
-            "Controls"
+            "Controls",
+            "ColumnDefinitions"
           ],
           "Versions": []
         },
@@ -409,6 +419,32 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "6a993f55-2422-4815-95e4-76b5a73cb9ae",
+          "Name": "CounterpartySigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "2a9b759d-673b-4a94-bb3b-3d6bdcae0d5d",
+          "PropertyGuid": "7bead9d6-4768-4538-8925-4d223a99ca78",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "407c6524-1df4-449e-b1d6-5df162b9d019",
+          "Name": "OurSigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "519f2394-febe-4501-adca-a34ee883d986",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -470,6 +506,15 @@
     "IsVisible"
   ],
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+      "Name": "OurSigningReason",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList"
+      ]
+    },
     {
       "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
       "NameGuid": "9b7cc9f8-d575-45a0-b9e3-e6c820a1fc83",
@@ -863,6 +908,19 @@
     }
   ],
   "PublicFunctions": [
+    {
+      "Name": "GetEmailAddressees",
+      "Parameters": [
+        {
+          "Name": "contractualDocument",
+          "ParameterType": "global::Sungero.Contracts.IContractualDocument",
+          "ParameterTypeFullName": "Sungero.Contracts.IContractualDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
     {
       "Name": "GetRegistrationNumberIgnoreAccessRights",
       "IsRemote": true,

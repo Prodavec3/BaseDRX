@@ -52,11 +52,14 @@ namespace Sungero.Contracts
     {
       base.OurSignatoryChanged(e);
       
-      if (e.NewValue != null && _obj.BusinessUnit == null)
+      if (e.NewValue != null && e.NewValue != e.OldValue)
       {
-        var businessUnit = Company.PublicFunctions.BusinessUnit.Remote.GetBusinessUnit(e.NewValue);
-        if (businessUnit != null)
-          _obj.BusinessUnit = businessUnit;
+        if (_obj.BusinessUnit == null)
+        {
+          var businessUnit = Company.PublicFunctions.BusinessUnit.Remote.GetBusinessUnit(e.NewValue);
+          if (businessUnit != null)
+            _obj.BusinessUnit = businessUnit;
+        }
       }
     }
     
@@ -85,6 +88,13 @@ namespace Sungero.Contracts
       
       if (e.NewValue != null && _obj.Counterparty == null)
         _obj.Counterparty = e.NewValue.Company;
+
+      if (_obj.ExternalApprovalState != ExternalApprovalState.Signed)
+      {
+        _obj.CounterpartySigningReason = e.NewValue != null
+          ? e.NewValue.SigningReason
+          : string.Empty;
+      }
     }
 
     public virtual void ContactChanged(Sungero.Contracts.Shared.ContractualDocumentContactChangedEventArgs e)

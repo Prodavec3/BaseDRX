@@ -103,10 +103,7 @@ namespace Sungero.ExchangeCore.Server
     }
     
     public static void CreateExchangeServices()
-    {
-      CreateExchangeService("https://service.synerdocs.ru/exchangeservice.svc", ExchangeCore.ExchangeService.ExchangeProvider.Synerdocs,
-                            "https://client.synerdocs.ru/account/logon");
-      
+    { 
       CreateExchangeService("https://diadoc-api.kontur.ru/", ExchangeCore.ExchangeService.ExchangeProvider.Diadoc,
                             "https://diadoc.kontur.ru/");
       

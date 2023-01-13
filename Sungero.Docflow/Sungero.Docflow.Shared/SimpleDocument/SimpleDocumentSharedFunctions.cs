@@ -53,7 +53,7 @@ namespace Sungero.Docflow.Shared
       var isNotNumerable = _obj.DocumentKind == null || _obj.DocumentKind.NumberingType == Docflow.DocumentKind.NumberingType.NotNumerable;
       _obj.State.Properties.BusinessUnit.IsVisible = !isNotNumerable;
       _obj.State.Properties.Department.IsVisible = !isNotNumerable;
-      _obj.State.Properties.OurSignatory.IsVisible = !isNotNumerable;
+      _obj.State.Properties.OurSignatory.IsVisible = !isNotNumerable || this.GetShowOurSigningReasonParam();
       _obj.State.Properties.PreparedBy.IsVisible = !isNotNumerable;
       _obj.State.Properties.Assignee.IsVisible = !isNotNumerable;
     }

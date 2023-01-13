@@ -227,25 +227,48 @@ namespace Sungero.RecordManagement.Server
         return;
       }
       
-      var lockInfo = Locks.GetLockInfo(parentAssignment);
-      if (lockInfo.IsLockedByOther)
-      {
-        Logger.DebugFormat("CompleteParentActionItemExecutionAssignment({1}): parent assignment (ID = {0}) is locked.", parentAssignment.Id, formattedArgs);
-        args.Retry = true;
-        return;
-      }
-      
       try
       {
         // Добавить документы из группы "Результаты исполнения" в ведущее задание на исполнение.
         Functions.ActionItemExecutionTask.SynchronizeResultGroup(task);
         // Выполнить ведущее задание на исполнение.
         Functions.ActionItemExecutionTask.CompleteParentAssignment(task);
+        // Заполнить в ведущем задании на исполнение свойство "Выполнил" исполнителем задания.
+        Functions.ActionItemExecutionTask.SetCompletedByInParentAssignment(task);
+      }
+      catch (Sungero.Domain.Shared.Exceptions.RepeatedLockException)
+      {
+        Logger.DebugFormat("CompleteParentActionItemExecutionAssignment({1}): parent assignment (ID = {0}) is locked.", parentAssignment.Id, formattedArgs);
+        args.Retry = true;
+        return;
       }
       catch (Exception ex)
       {
         Logger.ErrorFormat("CompleteParentActionItemExecutionAssignment({0}): unhandled exception", ex, formattedArgs);
         return;
+      }
+    }
+    
+    public virtual void ExcludeFromAcquaintance(Sungero.RecordManagement.Server.AsyncHandlerInvokeArgs.ExcludeFromAcquaintanceInvokeArgs args)
+    {
+      var assignments = Functions.Module.GetActiveAcquaintanceAssignments(args.AssignmentIds);
+      foreach (var assignment in assignments)
+      {
+        // Не обрабатывать завершённые и прекращённые задания.
+        if (assignment.Status == Sungero.Workflow.Assignment.Status.Completed &&
+            assignment.Status == Sungero.Workflow.Assignment.Status.Aborted)
+          continue;
+        
+        // Если задание заблокировано, то нужно повторное выполнение обработчика.
+        var locksInfo = Locks.GetLockInfo(assignment);
+        if (locksInfo.IsLockedByOther)
+        {
+          args.Retry = true;
+          continue;
+        }
+        
+        Logger.DebugFormat("ExcludeFromAcquaintance: acquaintance assignment with id {0} has been excluded async.", assignment.Id);
+        assignment.Abort();
       }
     }
   }

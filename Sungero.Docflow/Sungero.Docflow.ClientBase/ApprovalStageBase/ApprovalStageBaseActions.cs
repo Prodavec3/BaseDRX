@@ -20,8 +20,10 @@ namespace Sungero.Docflow.Client
         }
         
         // Очистить признак используемости в правилах.
-        e.Params.AddOrUpdate(Sungero.Docflow.Constants.ApprovalStage.HasRules, false);
-        e.Params.AddOrUpdate(Sungero.Docflow.Constants.ApprovalStage.ChangeRequisites, true);
+        // HACK, BUG 208989
+        var approvalStageParams = ((Domain.Shared.IExtendedEntity)_obj).Params;
+        approvalStageParams[Sungero.Docflow.Constants.ApprovalStage.HasRules] = false;
+        approvalStageParams[Sungero.Docflow.Constants.ApprovalStage.ChangeRequisites] = true;
         // HACK, BUG 28505
         ((Domain.Shared.Validation.IValidationObject)_obj).ValidationResult.Clear();
       }

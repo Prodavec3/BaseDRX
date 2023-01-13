@@ -411,8 +411,8 @@ where [ReportSessionId] = '{1}']]></mssql>
 WHERE ReportSessionId = '{1}']]></postgres>
   </query>
   <query key="GetAllRecipientMembers">
-    <mssql><![CDATA[exec sungero_core_getallrecipientmembers {0}]]></mssql>
-    <postgres><![CDATA[select sungero_core_getallrecipientmembers({0})]]></postgres>
+    <mssql><![CDATA[exec sungero_core_getallrecipientmembers {0}, 1]]></mssql>
+    <postgres><![CDATA[select sungero_core_getallrecipientmembers({0}, true)]]></postgres>
   </query>
   <query key="SungeroContentEDocIndex3Query">
     <mssql><![CDATA[CREATE NONCLUSTERED INDEX {1} ON {0}
@@ -681,10 +681,10 @@ where
   drop table {0}
 
 select r.Storage, rdk.DocumentKind,
-  case when r.DocDateType = 'DocumentDate' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as DocumentDate,
-  case when r.DocDateType = 'Modified' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as Modified,
+  case when r.DocDateType = 'DocumentDate' then dateadd(DD, -1 * r.DaysToMove, @now) else @maxDate end as DocumentDate,
+  case when r.DocDateType = 'Modified' then dateadd(DD, -1 * r.DaysToMove, @now) else @maxDate end as Modified,
   case when r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' then r.[Priority] else r.[Priority] + (select coalesce(max(r2.[Priority]), 0) from Sungero_Docflow_StoragePolicy r2 where r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') end as [Priority],
-  case when coalesce(r.NextRetention, '{1}') <= '{1}' then 1 else 0 end as NeedRetention
+  case when coalesce(r.NextRetention, @now) <= @now then 1 else 0 end as NeedRetention
 into {0}
   from Sungero_Docflow_StoragePolicy r
   join Sungero_Docflow_SPolicyDocKind rdk
@@ -693,10 +693,10 @@ into {0}
 
 insert into {0}
 select r.Storage, rdk.Id,
-  case when r.DocDateType = 'DocumentDate' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as DocumentDate,
-  case when r.DocDateType = 'Modified' then dateadd(DD, -1 * r.DaysToMove, '{1}') else '2100-01-01 00:00:00.000' end as Modified,
+  case when r.DocDateType = 'DocumentDate' then dateadd(DD, -1 * r.DaysToMove, @now) else @maxDate end as DocumentDate,
+  case when r.DocDateType = 'Modified' then dateadd(DD, -1 * r.DaysToMove, @now) else @maxDate end as Modified,
   case when r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' then r.[Priority] else r.[Priority] + (select coalesce(max(r2.[Priority]), 0) from Sungero_Docflow_StoragePolicy r2 where r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') end as [Priority],
-  case when coalesce(r.NextRetention, '{1}') <= '{1}' then 1 else 0 end as NeedRetention
+  case when coalesce(r.NextRetention, @now) <= @now then 1 else 0 end as NeedRetention
   from Sungero_Docflow_StoragePolicy r
   join Sungero_Docflow_DocumentKind rdk
     on 1=1
@@ -704,7 +704,7 @@ select r.Storage, rdk.Id,
 	  and not exists (select 1 from Sungero_Docflow_SPolicyDocKind k where k.StoragePolicy = r.Id);
 	  
 insert into {0}
-select s.Id, rdk.Id, '2100-01-01 00:00:00.000', '2100-01-01 00:00:00.000', -1, 1
+select s.Id, rdk.Id, @maxDate, @maxDate, -1, 1
   from Sungero_Core_Storage s
   join Sungero_Docflow_DocumentKind rdk
     on 1=1
@@ -719,13 +719,13 @@ END $$;
 SELECT r.Storage, rdk.DocumentKind,
   CASE 
     WHEN r.DocDateType = 'DocumentDate' 
-    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
-    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+    THEN @now - r.DaysToMove * INTERVAL '1 day' 
+    ELSE @maxDate 
   END AS DocumentDate,
   CASE 
     WHEN r.DocDateType = 'Modified' 
-    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
-    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+    THEN @now - r.DaysToMove * INTERVAL '1 day' 
+    ELSE @maxDate 
   END AS Modified,
   CASE 
     WHEN r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' 
@@ -733,7 +733,7 @@ SELECT r.Storage, rdk.DocumentKind,
     ELSE r.Priority + (SELECT COALESCE(MAX(r2.Priority), 0) FROM Sungero_Docflow_StoragePolicy r2 WHERE r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') 
   END AS Priority,
   CASE 
-    WHEN COALESCE(r.NextRetention, '{1}') <= '{1}' 
+    WHEN COALESCE(r.NextRetention, @now) <= @now 
     THEN 1 
     ELSE 0
   END AS NeedRetention
@@ -747,13 +747,13 @@ INSERT INTO {0}
 SELECT r.Storage, rdk.Id,
   CASE 
     WHEN r.DocDateType = 'DocumentDate' 
-    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
-    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+    THEN @now - r.DaysToMove * INTERVAL '1 day' 
+    ELSE @maxDate 
   END AS DocumentDate,
   CASE 
     WHEN r.DocDateType = 'Modified' 
-    THEN TO_TIMESTAMP('{1}','YYYY-MM-DD HH24:MI:SS') - r.DaysToMove * INTERVAL '1 day' 
-    ELSE TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS') 
+    THEN @now - r.DaysToMove * INTERVAL '1 day' 
+    ELSE @maxDate 
   END AS Modified,
   CASE 
     WHEN r.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef' 
@@ -761,7 +761,7 @@ SELECT r.Storage, rdk.Id,
     ELSE r.Priority + (SELECT COALESCE(MAX(r2.Priority), 0) FROM Sungero_Docflow_StoragePolicy r2 WHERE r2.Discriminator = '9fed5653-77e7-4543-b071-6586033907ef') 
   END AS Priority,
   CASE 
-    WHEN COALESCE(r.NextRetention, '{1}') <= '{1}' 
+    WHEN COALESCE(r.NextRetention, @now) <= @now 
     THEN 1 
     ELSE 0 
   END AS NeedRetention
@@ -772,9 +772,7 @@ SELECT r.Storage, rdk.Id,
       AND NOT EXISTS (SELECT 1 FROM Sungero_Docflow_SPolicyDocKind k WHERE k.StoragePolicy = r.Id);
       
 INSERT INTO {0}
-SELECT s.Id, rdk.Id, 
-       TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS'), 
-       TO_TIMESTAMP('2100-01-01 00:00:00.000','YYYY-MM-DD HH24:MI:SS'), -1, 1
+SELECT s.Id, rdk.Id, @maxDate, @maxDate, -1, 1
   FROM Sungero_Core_Storage s
   JOIN Sungero_Docflow_DocumentKind rdk
     ON 1=1
@@ -942,14 +940,40 @@ end $$;]]></postgres>
   [Status],
   [Deadline],
   [Completed],
-  [Created]
-)]]></mssql>
-    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Discriminator, Performer, Status, Deadline, Completed, Created)]]></postgres>
+  [Created],
+  [IsRead]
+)
+INCLUDE (
+  [Subject])]]></mssql>
+    <postgres><![CDATA[CREATE INDEX IF NOT EXISTS {1} ON {0} (Discriminator, Performer, Status, Deadline, Completed, Created, IsRead, Subject)]]></postgres>
   </query>
   <query key="ReservIdsQuery">
     <mssql><![CDATA[Declare @id int
 exec Sungero_System_GetNewId '{0}', @id output, {1}
 select @id]]></mssql>
     <postgres><![CDATA[select sungero_system_GetNewId('{0}', {1});]]></postgres>
+  </query>
+  <query key="InsertDocflowParamsValue">
+    <mssql><![CDATA[if not exists(select 1 from [dbo].[Sungero_Docflow_Params] where [Key] = '{0}')
+  insert [Sungero_Docflow_Params] ([Key],Value) values ('{0}', '{1}')]]></mssql>
+    <postgres><![CDATA[do $$
+begin
+  if not exists(select 1 from Sungero_Docflow_Params where Key = '{0}')
+  then
+    insert into Sungero_Docflow_Params (Key, Value) values ('{0}', '{1}');
+  end if;
+end$$;]]></postgres>
+  </query>
+  <query key="ParametersTableExist">
+    <mssql><![CDATA[SELECT
+cast(case
+when exists(select 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'Sungero_Docflow_Params') then 1
+else 0
+end as bit)]]></mssql>
+    <postgres><![CDATA[SELECT EXISTS (
+   SELECT FROM pg_tables
+   WHERE  schemaname = 'public'
+   AND    tablename  = 'sungero_docflow_params'
+   );]]></postgres>
   </query>
 </queries>

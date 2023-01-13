@@ -22,10 +22,10 @@
           <LocalizedTitle Localization="ru" Title="Исполнение моих поручений" />
         </LocalizedTitles>
       </Widget>
-      <Widget Column="24" Row="0" ZIndex="3" ActionListGuid="ee4549f6-367d-4d49-8671-296d6f4ebe7c" > 
+      <Widget Column="24" Row="0" ZIndex="3" ActionListGuid="ee4549f6-367d-4d49-8671-296d6f4ebe7c">
         <Parameters>
           <Parameter Id="dba72007-56ba-468a-a2bc-4c89bb831791" Value="8c2c095f-60a1-4e4f-828e-53f92efc48d8" />
-        </Parameters>      
+        </Parameters>
       </Widget>
       <Widget Column="0" Row="0" ZIndex="4" ActionListGuid="c1491b3d-4085-4e59-8553-963b4b72ddeb" />
       <Widget Column="0" Row="22" ZIndex="5" ActionListGuid="59e381ae-d54c-49ed-9896-bd33d08d7a7a">

@@ -5,15 +5,6 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
-      "NameGuid": "51235fd5-4441-48cc-a6f1-3e5af16d5a64",
-      "Name": "ChangeDocumentType",
-      "GenerateHandler": true,
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "GenerateHandler"
-      ]
-    },
-    {
       "NameGuid": "60d2879c-d6f5-4ac5-b524-22aef818825e",
       "Name": "ShowDuplicates",
       "ActionArea": "Card",
@@ -1129,6 +1120,32 @@
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "31ec4e75-46c6-4a15-b721-a2c61e745b71",
+          "Name": "CounterpartySigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "2a9b759d-673b-4a94-bb3b-3d6bdcae0d5d",
+          "PropertyGuid": "a61809b1-cac9-4f1c-8691-3b5f30a0a16d",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "196e3115-3874-443d-80ff-cb681f8c9e46",
+          "Name": "OurSigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "519f2394-febe-4501-adca-a34ee883d986",
+          "PropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -1887,6 +1904,52 @@
       ],
       "PreviousPropertyGuid": "c30d80ad-f9f0-4b10-a2e1-b4d57e40604b",
       "Versions": []
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "ChangeDocumentType",
+      "Parameters": [
+        {
+          "Name": "contractStatement",
+          "ParameterType": "global::Sungero.FinancialArchive.IContractStatement",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IContractStatement, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "types",
+          "ParameterType": "global::System.Collections.Generic.List<Domain.Shared.IEntityInfo>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::Sungero.Docflow.IOfficialDocument",
+      "ReturnTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEmailAddressees",
+      "Parameters": [
+        {
+          "Name": "contractStatement",
+          "ParameterType": "global::Sungero.FinancialArchive.IContractStatement",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IContractStatement, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "IsVerificationModeSupported",
+      "Parameters": [
+        {
+          "Name": "contractStatement",
+          "ParameterType": "global::Sungero.FinancialArchive.IContractStatement",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IContractStatement, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     }
   ],
   "PublicStructures": [],

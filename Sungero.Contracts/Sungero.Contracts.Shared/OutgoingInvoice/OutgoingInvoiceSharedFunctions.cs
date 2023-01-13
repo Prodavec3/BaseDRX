@@ -82,5 +82,44 @@ namespace Sungero.Contracts.Shared
       if (lifeCycleMustBeActive)
         _obj.LifeCycleState = Docflow.OfficialDocument.LifeCycleState.Active;
     }
+    
+    /// <summary>
+    /// Получить список адресатов с электронной почтой для отправки вложением в письмо.
+    /// </summary>
+    /// <returns>Список адресатов.</returns>
+    [Public]
+    public override List<Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee> GetEmailAddressees()
+    {
+      var result = new List<Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>();
+      
+      // Получить контрагента.
+      if (_obj.Counterparty != null && !string.IsNullOrWhiteSpace(_obj.Counterparty.Email))
+      {
+        var emailAddressee = Sungero.Docflow.Structures.OfficialDocument.EmailAddressee
+          .Create(Sungero.Docflow.OfficialDocuments.Resources.AddresseeLabelFormat(_obj.Counterparty.Name, _obj.Counterparty.Email),
+                  _obj.Counterparty.Email);
+        result.Add(emailAddressee);
+      }
+      
+      // Получить контакт.
+      if (_obj.Contact != null && !string.IsNullOrWhiteSpace(_obj.Contact.Email))
+      {
+        var emailAddressee = Sungero.Docflow.Structures.OfficialDocument.EmailAddressee
+          .Create(Sungero.Docflow.OfficialDocuments.Resources.AddresseeLabelFormat(_obj.Contact.Name, _obj.Contact.Email),
+                  _obj.Contact.Email);
+        result.Add(emailAddressee);
+      }
+      
+      // Получить подписывающего.
+      if (_obj.CounterpartySignatory != null && !string.IsNullOrWhiteSpace(_obj.CounterpartySignatory.Email))
+      {
+        var emailAddressee = Sungero.Docflow.Structures.OfficialDocument.EmailAddressee
+          .Create(Sungero.Docflow.OfficialDocuments.Resources.AddresseeLabelFormat(_obj.CounterpartySignatory.Name, _obj.CounterpartySignatory.Email),
+                  _obj.CounterpartySignatory.Email);
+        result.Add(emailAddressee);
+      }
+      
+      return result;
+    }
   }
 }

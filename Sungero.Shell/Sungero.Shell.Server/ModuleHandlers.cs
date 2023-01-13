@@ -8,6 +8,29 @@ using Sungero.RecordManagement;
 
 namespace Sungero.Shell.Server
 {
+  partial class OnAcquaintanceFolderHandlers
+  {
+
+    public virtual IQueryable<Sungero.Workflow.IAssignmentBase> OnAcquaintanceDataQuery(IQueryable<Sungero.Workflow.IAssignmentBase> query)
+    {
+      var result = query.Where(t => Sungero.RecordManagement.AcquaintanceAssignments.Is(t));
+      
+      // Запрос непрочитанных без фильтра.
+      if (_filter == null)
+        return RecordManagement.PublicFunctions.Module.ApplyCommonSubfolderFilters(result);
+      
+      // Фильтры по статусу, замещению и периоду.
+      return RecordManagement.PublicFunctions.Module.ApplyCommonSubfolderFilters(result, _filter.InProcess,
+                                                                                 _filter.Last30Days, _filter.Last90Days,
+                                                                                 _filter.Last180Days, false);
+    }
+
+    public virtual bool IsOnAcquaintanceVisible()
+    {
+      return false;
+    }
+  }
+
   partial class OnVerificationFolderHandlers
   {
 
@@ -211,8 +234,7 @@ namespace Sungero.Shell.Server
                               RecordManagement.DeadlineExtensionAssignments.Is(a) ||
                               ReportRequestCheckAssignments.Is(a) ||
                               Workflow.ReviewAssignments.Is(a) ||
-                              CheckReturnCheckAssignments.Is(a) ||
-                              AcquaintanceFinishAssignments.Is(a)));
+                              CheckReturnCheckAssignments.Is(a)));
       
       // Запрос непрочитанных без фильтра.
       if (_filter == null)
@@ -311,7 +333,7 @@ namespace Sungero.Shell.Server
                                // Контроль возврата.
                                showCheckReturn && ApprovalCheckReturnAssignments.Is(q) ||
                                // Прочие задания.
-                               showOther && (ApprovalSimpleAssignments.Is(q) || ApprovalCheckingAssignments.Is(q)));
+                               showOther && (ApprovalSimpleAssignments.Is(q) || ApprovalCheckingAssignments.Is(q) || ReviewReworkAssignments.Is(q)));
       
       // Запрос непрочитанных без фильтра.
       if (_filter == null)

@@ -514,7 +514,8 @@
     "BeforeSaveServer",
     "CreatingFromServer",
     "AfterSaveServer",
-    "RefreshClient"
+    "RefreshClient",
+    "AfterDeleteServer"
   ],
   "IconName": "CompanyBase.ico",
   "IconResourcesKeys": [],
@@ -803,6 +804,16 @@
       "Versions": []
     }
   ],
+  "PublicConstants": [
+    {
+      "Name": "ElasticsearchMinScore",
+      "ParentClasses": [
+        "CompanyBase"
+      ],
+      "TypeName": "System.Double",
+      "Value": "5"
+    }
+  ],
   "PublicFunctions": [
     {
       "Name": "CheckNceoLength",
@@ -850,6 +861,19 @@
     },
     {
       "Name": "GetCounterpartyWithSameTinWarning",
+      "Parameters": [
+        {
+          "Name": "companyBase",
+          "ParameterType": "global::Sungero.Parties.ICompanyBase",
+          "ParameterTypeFullName": "Sungero.Parties.ICompanyBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetIndexingJson",
       "Parameters": [
         {
           "Name": "companyBase",

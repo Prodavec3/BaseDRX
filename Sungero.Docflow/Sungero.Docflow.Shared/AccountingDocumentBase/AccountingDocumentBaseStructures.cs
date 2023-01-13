@@ -49,22 +49,17 @@ namespace Sungero.Docflow.Structures.AccountingDocumentBase
     /// <summary>
     /// Доверенность.
     /// </summary>
-    public IPowerOfAttorney SignatoryPowerOfAttorney { get; set; }
-    
-    /// <summary>
-    /// Другой документ.
-    /// </summary>
-    public string SignatoryOtherReason { get; set; }
-    
-    /// <summary>
-    /// Доверенность.
-    /// </summary>
-    public IPowerOfAttorney ConsigneePowerOfAttorney { get; set; }
+    public IPowerOfAttorneyBase ConsigneePowerOfAttorney { get; set; }
     
     /// <summary>
     /// Другой документ.
     /// </summary>
     public string ConsigneeOtherReason { get; set; }
+    
+    /// <summary>
+    /// Право подписи.
+    /// </summary>
+    public ISignatureSetting SignatureSetting { get; set; }
     
     /* TODO Ждёт баги 44693
     
@@ -79,7 +74,6 @@ namespace Sungero.Docflow.Structures.AccountingDocumentBase
     public Sungero.Docflow.Structures.AccountingDocumentBase.IAttorney ConsigneeAttorney { get; set; }
     
      */
-
   }
   
   [PublicAttribute]
@@ -101,28 +95,9 @@ namespace Sungero.Docflow.Structures.AccountingDocumentBase
     public string SignatoryPowers { get; set; }
     
     /// <summary>
-    /// Доверенность.
+    /// Право подписи.
     /// </summary>
-    public IPowerOfAttorney SignatoryPowerOfAttorney { get; set; }
-    
-    /// <summary>
-    /// Другая причина.
-    /// </summary>
-    public string SignatoryOtherReason { get; set; }
-  }
-  
-  [Public]
-  partial class Attorney
-  {
-    /// <summary>
-    /// Доверенность.
-    /// </summary>
-    public IPowerOfAttorney Document { get; set; }
-    
-    /// <summary>
-    /// Другая причина.
-    /// </summary>
-    public string OtherReason { get; set; }
+    public ISignatureSetting SignatureSetting { get; set; }
   }
   
   partial class GenerateTitleError

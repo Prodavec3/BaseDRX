@@ -138,7 +138,8 @@ namespace Sungero.RecordManagement.Client
     public virtual void CreateChildActionItem(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Start CreateChildActionItem.", _obj.Id);
-      var subTask = Functions.ActionItemExecutionTask.Remote.CreateActionItemExecutionFromExecution(_obj);
+      var subTask = Functions.ActionItemExecutionTask.Remote.CreateActionItemExecutionFromExecution(ActionItemExecutionTasks.As(_obj.Task), _obj);
+      
       subTask.Show();
       Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). End CreateChildActionItem.", _obj.Id);
     }

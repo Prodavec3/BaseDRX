@@ -43,7 +43,10 @@ namespace Sungero.Projects.Server
         folders.Add(_obj.Folder);
       
       foreach (var folder in folders.Where(l => !l.Items.Contains(document)))
+      {
         folder.Items.Add(document);
+        Logger.DebugFormat("GrantAccessRightsToProjectDocuments: document (id = {0}) added to folder (id = {1})", document.Id, folder.Id);
+      }
     }
     
     /// <summary>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.CoreEntities.Server&#13;&#10;Sungero.Domain&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.RecordManagement.Shared&#13;&#10;Sungero.RecordManagement.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.RecordManagement.Shared&#13;&#10;Sungero.RecordManagement.Server" ReportInfo.CreatorVersion="2020.2.12.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -63,6 +63,7 @@ namespace FastReport
         <Column Name="Correspondent" DataType="System.String" PropName="Column"/>
         <Column Name="CorrespondentDate" DataType="System.DateTime" PropName="Column"/>
         <Column Name="CorrespondentNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="CanRead" DataType="System.Boolean" PropName="Column"/>
         <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
         <CommandParameter Name="Filter" DataType="11" IsDbType="true" DefaultValue="0"/>
       </TableDataSource>
@@ -79,6 +80,7 @@ namespace FastReport
         <Column Name="Correspondent" DataType="System.String" PropName="Column"/>
         <Column Name="CorrespondentDate" DataType="System.DateTime" PropName="Column"/>
         <Column Name="CorrespondentNumber" DataType="System.String" PropName="Column"/>
+        <Column Name="CanRead" DataType="System.Boolean" PropName="Column"/>
         <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
         <CommandParameter Name="Filter" DataType="11" IsDbType="true" DefaultValue="1"/>
       </TableDataSource>
@@ -91,6 +93,7 @@ namespace FastReport
     <SungeroParameter Name="JobsDataTableName" Id="d08dcf74-0b28-48f2-bafe-54613bdccda6" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="AvailableDocumentsIdsTableName" Id="d7fbd7d0-1ecb-47f4-be09-b2f0fae46be7" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="ReportSessionId" Id="7e1d7288-7a19-4c1f-9060-0a486270f8a9" IsRequired="true" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="AllIncomingDocumentsIdsTableName" Id="c7281f1e-cd00-4512-b64b-3ba23345b1d7" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" FirstPageSource="15" OtherPagesSource="15" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="122.85" CanGrow="true">
@@ -142,7 +145,11 @@ namespace FastReport
           <GeneralFormat/>
         </Formats>
       </TextObject>
-      <TextObject Name="Text11" Left="481.95" Width="264.6" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Subject]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt"/>
+      <TextObject Name="Text11" Left="481.95" Width="264.6" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents1.CanRead] ? [Documents1.Subject] : Sungero.Docflow.Resources.HaveNotEnoughAccessRights;]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt">
+        <Highlight>
+          <Condition Expression="![Documents1.CanRead]" Font="Arial, 10pt, style=Italic" ApplyTextFill="false" ApplyFont="true"/>
+        </Highlight>
+      </TextObject>
       <TextObject Name="Text13" Left="746.55" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Author]&#13;&#10;[Documents1.Resolution]" Padding="2, 2, 2, 2" Font="Arial, 10pt"/>
       <TextObject Name="Text15" Left="897.75" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents1.Performer]" Font="Arial, 10pt"/>
       <DataBand Name="Data2" Top="229.36" Width="1047.06" Height="28.35" CanGrow="true" CanShrink="true" CanBreak="true" DataSource="Documents2">
@@ -157,7 +164,11 @@ namespace FastReport
             <GeneralFormat/>
           </Formats>
         </TextObject>
-        <TextObject Name="Text12" Left="481.95" Width="264.6" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Subject]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt"/>
+        <TextObject Name="Text12" Left="481.95" Width="264.6" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[[Documents2.CanRead] ? [Documents2.Subject] : Sungero.Docflow.Resources.HaveNotEnoughAccessRights;]" Padding="2, 2, 2, 2" Duplicates="Merge" Font="Arial, 10pt">
+          <Highlight>
+            <Condition Expression="![Documents2.CanRead]" Font="Arial, 10pt, style=Italic" ApplyTextFill="false" ApplyFont="true"/>
+          </Highlight>
+        </TextObject>
         <TextObject Name="Text14" Left="746.55" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Author]&#13;&#10;[Documents2.Resolution]" Padding="2, 2, 2, 2" Font="Arial, 10pt"/>
         <TextObject Name="Text16" Left="897.75" Width="151.2" Height="28.35" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Documents2.Performer]" Font="Arial, 10pt"/>
       </DataBand>

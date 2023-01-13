@@ -101,6 +101,7 @@
         "Name": "Meetings",
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconMeetings_b3e5e4a4f8e44b5c8c9652b1dc02a0a6.png",
+        "TabId": "44b704d3-4d8f-4711-9e9e-a73110405dcc",
         "Versions": []
       },
       {
@@ -109,6 +110,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconReports_f835ecc9a3944ae3aa3640fee5802e1a.png",
         "PreviousItemGuid": "b3e5e4a4-f8e4-4b5c-8c96-52b1dc02a0a6",
+        "TabId": "44b704d3-4d8f-4711-9e9e-a73110405dcc",
         "Versions": []
       },
       {
@@ -117,6 +119,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconAgendas_493238b28a4e4f5d9cf606702b94ed4a.png",
         "PreviousItemGuid": "f835ecc9-a394-4ae3-aa36-40fee5802e1a",
+        "TabId": "44b704d3-4d8f-4711-9e9e-a73110405dcc",
         "Versions": []
       },
       {
@@ -125,6 +128,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconLinkedInformation_6aa2e4d289c048c6bb0f146613c99d44.png",
         "PreviousItemGuid": "493238b2-8a4e-4f5d-9cf6-06702b94ed4a",
+        "TabId": "44b704d3-4d8f-4711-9e9e-a73110405dcc",
         "Versions": []
       },
       {
@@ -133,6 +137,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconMinutes_09ac4246c01145258a9c70710323384b.png",
         "PreviousItemGuid": "6aa2e4d2-89c0-48c6-bb0f-146613c99d44",
+        "TabId": "44b704d3-4d8f-4711-9e9e-a73110405dcc",
         "Versions": []
       }
     ],
@@ -141,6 +146,12 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [
+      {
+        "NameGuid": "44b704d3-4d8f-4711-9e9e-a73110405dcc",
+        "Name": "Tab"
+      }
+    ],
     "Versions": []
   },
   "Dependencies": [
@@ -343,12 +354,12 @@
       "Versions": []
     }
   ],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

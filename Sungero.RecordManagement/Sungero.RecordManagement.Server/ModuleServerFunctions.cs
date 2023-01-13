@@ -23,7 +23,6 @@ namespace Sungero.RecordManagement.Server
 
   public class ModuleFunctions
   {
-    
     #region Виджеты
     
     #region Виджет "Поручения"
@@ -36,6 +35,22 @@ namespace Sungero.RecordManagement.Server
     /// <returns>Список поручений.</returns>
     public IQueryable<Sungero.RecordManagement.IActionItemExecutionTask> GetActionItemsToWidgets(bool onlyOverdue, bool substitution)
     {
+      var users = substitution ? Substitutions.ActiveSubstitutedUsersWithoutSystem.ToList() : new List<IUser>();
+      users.Add(Users.Current);
+      var usersIds = users.Select(u => u.Id).ToList();
+
+      return this.GetActionItemsUnderControl(usersIds, onlyOverdue);
+    }
+    
+    /// <summary>
+    /// Выбрать поручения, которые нужно проконтролировать.
+    /// </summary>
+    /// <param name="usersIds">Список Ид сотрудников.</param>
+    /// <param name="onlyOverdue">Только просроченные.</param>
+    /// <returns>Список поручений.</returns>
+    [Public]
+    public virtual IQueryable<IActionItemExecutionTask> GetActionItemsUnderControl(List<int> usersIds, bool onlyOverdue)
+    {
       var tasks = ActionItemExecutionTasks.GetAll()
         .Where(t => t.Status == Workflow.AssignmentBase.Status.InProcess);
 
@@ -44,10 +59,7 @@ namespace Sungero.RecordManagement.Server
                             (!t.Deadline.Value.HasTime() && t.Deadline.Value < Calendar.UserToday ||
                              t.Deadline.Value.HasTime() && t.Deadline.Value < Calendar.Now));
 
-      var users = substitution ? Substitutions.ActiveSubstitutedUsersWithoutSystem.ToList() : new List<IUser>();
-      users.Add(Users.Current);
-
-      return tasks.Where(a => users.Contains(a.Supervisor));
+      return tasks.Where(a => a.Supervisor != null && usersIds.Contains(a.Supervisor.Id));
     }
 
     #endregion
@@ -385,6 +397,37 @@ namespace Sungero.RecordManagement.Server
     }
     
     /// <summary>
+    /// Создать задачу на рассмотрение документа с указанием задачи-основания.
+    /// </summary>
+    /// <param name="documentId">ИД документа.</param>
+    /// <param name="addresseeId">ИД адресата.</param>
+    /// <param name="parentTaskId">ИД задачи-основания.</param>
+    /// <returns>ИД задачи на рассмотрение.</returns>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual int CreateDocumentReviewTaskFromParentTask(int documentId, int addresseeId, int parentTaskId)
+    {
+      var document = OfficialDocuments.GetAll(d => d.Id == documentId).FirstOrDefault();
+      if (document == null)
+        throw AppliedCodeException.Create(string.Format("Create review task. Document with ID ({0}) not found.", documentId));
+      
+      var addressee = Employees.GetAll(e => e.Id == addresseeId).FirstOrDefault();
+      if (addressee == null)
+        throw AppliedCodeException.Create(string.Format("Create review task. Employee with ID ({0}) not found.", addresseeId));
+      
+      var parentTask = Tasks.GetAll(t => t.Id == parentTaskId).FirstOrDefault();
+      if (parentTask == null)
+        throw AppliedCodeException.Create(string.Format("Create review task. Parent task with ID ({0}) not found.", parentTaskId));
+      
+      var task = CreateDocumentReviewTask(document, parentTask);
+      
+      task.Addressees.Clear();
+      task.Addressees.AddNew().Addressee = addressee;
+      task.Save();
+      
+      return task.Id;
+    }
+    
+    /// <summary>
     /// Создать поручение по документу.
     /// </summary>
     /// <param name="document">Документ на рассмотрение.</param>
@@ -392,9 +435,9 @@ namespace Sungero.RecordManagement.Server
     /// <remarks>Только для создания самостоятельного поручения.
     /// Для создания подпоручения используется CreateActionItemExecutionTask(document, parentAssignment).</remarks>
     [Remote(PackResultEntityEagerly = true), Public]
-    public static IActionItemExecutionTask CreateActionItemExecution(IOfficialDocument document)
+    public virtual IActionItemExecutionTask CreateActionItemExecution(IOfficialDocument document)
     {
-      return CreateActionItemExecution(document, Assignments.Null);
+      return this.CreateActionItemExecution(document, Assignments.Null);
     }
 
     /// <summary>
@@ -404,9 +447,9 @@ namespace Sungero.RecordManagement.Server
     /// <param name="parentAssignmentId">Задание-основание.</param>
     /// <returns>Поручение по документу.</returns>
     [Remote(PackResultEntityEagerly = true), Public]
-    public static IActionItemExecutionTask CreateActionItemExecution(IOfficialDocument document, int parentAssignmentId)
+    public virtual IActionItemExecutionTask CreateActionItemExecution(IOfficialDocument document, int parentAssignmentId)
     {
-      return CreateActionItemExecution(document, Assignments.Get(parentAssignmentId));
+      return this.CreateActionItemExecution(document, Assignments.Get(parentAssignmentId));
     }
 
     /// <summary>
@@ -418,9 +461,9 @@ namespace Sungero.RecordManagement.Server
     /// <param name="assignedBy">Пользователь - автор резолюции.</param>
     /// <returns>Поручение по документу.</returns>
     [Remote(PackResultEntityEagerly = true), Public]
-    public static IActionItemExecutionTask CreateActionItemExecutionWithResolution(IOfficialDocument document, int parentAssignmentId, string resolution, Sungero.Company.IEmployee assignedBy)
+    public virtual IActionItemExecutionTask CreateActionItemExecutionWithResolution(IOfficialDocument document, int parentAssignmentId, string resolution, Sungero.Company.IEmployee assignedBy)
     {
-      var newTask = CreateActionItemExecution(document, Assignments.Get(parentAssignmentId));
+      var newTask = this.CreateActionItemExecution(document, Assignments.Get(parentAssignmentId));
       newTask.ActiveText = resolution;
       newTask.AssignedBy = Docflow.PublicFunctions.Module.Remote.IsUsersCanBeResolutionAuthor(document, assignedBy) ? assignedBy : null;
       return newTask;
@@ -467,7 +510,7 @@ namespace Sungero.RecordManagement.Server
           throw AppliedCodeException.Create(string.Format("Create action item execution task. Employee with ID ({0}) not found.", coassigneeId));
       }
       
-      var task = CreateActionItemExecution(document, null);
+      var task = this.CreateActionItemExecution(document, null);
       task.Assignee = assignee;
       task.Deadline = deadline;
       task.IsUnderControl = isUnderControl;
@@ -491,46 +534,110 @@ namespace Sungero.RecordManagement.Server
     /// <param name="parentAssignment">Задание-основание.</param>
     /// <returns>Поручение по документу.</returns>
     [Remote(PackResultEntityEagerly = true), Public]
-    public static IActionItemExecutionTask CreateActionItemExecution(IOfficialDocument document, IAssignment parentAssignment)
+    public virtual IActionItemExecutionTask CreateActionItemExecution(IOfficialDocument document, IAssignment parentAssignment)
     {
       var parentAssignmentId = parentAssignment != null ? parentAssignment.Id : -1;
       Logger.DebugFormat("Start CreateActionItemExecution, CreateAsSubtask = {0}, Parent assignment (ID={1}).", parentAssignment != null, parentAssignmentId);
       
       var task = parentAssignment == null ? ActionItemExecutionTasks.Create() : ActionItemExecutionTasks.CreateAsSubtask(parentAssignment);
-      
       var taskId = task != null ? task.Id : -1;
-      var docId = document != null ? document.Id : -1;
-      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Add document (ID={1}) to DocumentsGroup.OfficialDocuments.", taskId, docId);
-      task.DocumentsGroup.OfficialDocuments.Add(document);
       
+      if (parentAssignment != null)
+      {
+        Logger.DebugFormat("Start SynchronizeAttachmentsToActionItem from parent task (ID={0}).", parentAssignment.Task.Id);
+        Functions.Module.SynchronizeAttachmentsToActionItem(parentAssignment.Task, task);
+      }
+      else
+      {
+        Logger.DebugFormat("Start SynchronizeAttachmentsToActionItem from document (ID={0}).", document.Id);
+        Functions.Module.SynchronizeAttachmentsToActionItem(document,
+                                                            new List<IElectronicDocument>(),
+                                                            new List<int>(),
+                                                            new List<int>(),
+                                                            new List<IEntity>(),
+                                                            task);
+      }
+      Logger.Debug("End SynchronizeAttachmentsToActionItem.");
+      
+      if (document != null)
+      {
+        // Выдать права на изменение группе регистрации. Группа регистрации будет взята из журнала документа.
+        var documentRegister = document.DocumentRegister;
+        if (documentRegister != null && documentRegister.RegistrationGroup != null)
+        {
+          Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Grant access rights to registration group (ID={1}).", taskId, documentRegister.RegistrationGroup.Id);
+          task.AccessRights.Grant(documentRegister.RegistrationGroup, DefaultAccessRightsTypes.Change);
+        }
+      }
+
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Set task Subject.", taskId);
       task.Subject = Functions.ActionItemExecutionTask.GetActionItemExecutionSubject(task, ActionItemExecutionTasks.Resources.TaskSubject);
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Task Subject = {1}.", taskId, task.Subject);
       
-      // Выдать права на изменение группе регистрации. Группа регистрации будет взята из журнала документа.
-      var documentRegister = document.DocumentRegister;
-      if (documentRegister != null && documentRegister.RegistrationGroup != null)
-      {
-        Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Grant access rights to registration group (ID={1}).", taskId, documentRegister.RegistrationGroup.Id);
-        task.AccessRights.Grant(documentRegister.RegistrationGroup, DefaultAccessRightsTypes.Change);
-      }
-
-      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Synchronize OtherGroup attachments.", taskId);
-      if (parentAssignment == null)
-        return task;
-      
-      var addenda = task.AddendaGroup.All;
-      var resolutions = new List<IEntity>();
-      if (DocumentReviewTasks.Is(parentAssignment.Task.MainTask))
-        resolutions = DocumentReviewTasks.As(parentAssignment.Task.MainTask).ResolutionGroup.All.ToList();
-      var otherAttachments = parentAssignment.Attachments.AsEnumerable();
-      if (parentAssignment.Task != null)
-        otherAttachments = otherAttachments.Concat(parentAssignment.Task.Attachments).Distinct();
-      otherAttachments = otherAttachments.Where(x => !Equals(x, document) && !addenda.Contains(x) && !resolutions.Contains(x));
-      foreach (var attachment in otherAttachments)
-        task.OtherGroup.All.Add(attachment);
-      
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End CreateActionItemExecution.", taskId);
+      return task;
+    }
+
+    /// <summary>
+    /// Создать поручение.
+    /// </summary>
+    /// <returns>Поручение.</returns>
+    [Remote, Public]
+    public virtual IActionItemExecutionTask CreateActionItemExecution()
+    {
+      return ActionItemExecutionTasks.Create();
+    }
+    
+    /// <summary>
+    /// Создать поручение из открытого задания.
+    /// </summary>
+    /// <param name="actionItemAssignment">Задание.</param>
+    /// <returns>Поручение.</returns>
+    [Public]
+    public virtual IActionItemExecutionTask CreateActionItemExecutionFromExecution(Sungero.RecordManagement.IActionItemExecutionAssignment actionItemAssignment)
+    {
+      if (actionItemAssignment == null)
+      {
+        Logger.Debug("ActionItemExecutionAssignment is null.");
+        return ActionItemExecutionTasks.Null;
+      }
+      
+      var actionItemAssignmentId = actionItemAssignment.Id;
+      Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Get documents.", actionItemAssignmentId);
+      var document = actionItemAssignment.DocumentsGroup.OfficialDocuments.FirstOrDefault();
+      var task = this.CreateActionItemExecution(document, actionItemAssignment);
+      if (task == null)
+      {
+        Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Task is null.", actionItemAssignmentId);
+        return ActionItemExecutionTasks.Null;
+      }
+      
+      var taskId = task.Id;
+      Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Task (ID={1}) created.", actionItemAssignmentId, taskId);
+      
+      // Для подчиненных поручений заполнить признак автовыполнения из персональных настроек.
+      if (actionItemAssignment != null)
+      {
+        var settings = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(Employees.As(task.StartedBy));
+        task.IsAutoExec = settings != null && (task.IsUnderControl != true || !Equals(task.Supervisor, task.StartedBy))
+          ? settings.IsAutoExecLeadingActionItem
+          : false;
+      }
+      
+      Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Set Assignee = null. Task (ID={1}).", actionItemAssignmentId, taskId);
+      task.Assignee = null;
+      if (actionItemAssignment.Deadline.HasValue &&
+          (actionItemAssignment.Deadline.Value.HasTime() && actionItemAssignment.Deadline >= Calendar.Now ||
+           !actionItemAssignment.Deadline.Value.HasTime() && actionItemAssignment.Deadline >= Calendar.Today))
+      {
+        Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Set Deadline = {1}. Task (ID={2}).", actionItemAssignmentId, actionItemAssignment.Deadline, taskId);
+        task.Deadline = actionItemAssignment.Deadline;
+      }
+      Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). Set AssignedBy = {1} (ID={2}). Task (ID={3}).",
+                         actionItemAssignmentId, Users.Current, Users.Current.Id, taskId);
+      task.AssignedBy = Employees.Current;
+      Logger.DebugFormat("ActionItemExecutionAssignment (ID={0}). End CreateActionItemExecutionFromExecution.", actionItemAssignmentId);
+      
       return task;
     }
     
@@ -561,14 +668,14 @@ namespace Sungero.RecordManagement.Server
     {
       var document = OfficialDocuments.GetAll(d => d.Id == documentId).FirstOrDefault();
       if (document == null)
-        throw AppliedCodeException.Create(string.Format("Create review task. Document with ID ({0}) not found.", documentId));
+        throw AppliedCodeException.Create(string.Format("Create acquaintance task. Document with ID ({0}) not found.", documentId));
 
       var performers = new List<IEmployee>();
       if (performerIds.Any())
       {
         performers = Employees.GetAll(e => performerIds.Contains(e.Id)).ToList();
         if (!performers.Any())
-          throw AppliedCodeException.Create(string.Format("Create review task. No employee found."));
+          throw AppliedCodeException.Create(string.Format("Create acquaintance task. No employee found."));
       }
 
       var task = CreateAcquaintanceTask(document);
@@ -596,18 +703,8 @@ namespace Sungero.RecordManagement.Server
     public static IAcquaintanceTask CreateAcquaintanceTaskAsSubTask(IOfficialDocument document, IAssignment parentAssignment)
     {
       var newAcqTask = AcquaintanceTasks.CreateAsSubtask(parentAssignment);
-      newAcqTask.DocumentGroup.OfficialDocuments.Add(document);
+      RecordManagement.PublicFunctions.Module.SynchronizeAttachmentsToAcquaintance(parentAssignment.Task, newAcqTask);
       return newAcqTask;
-    }
-
-    /// <summary>
-    /// Создать поручение.
-    /// </summary>
-    /// <returns>Поручение.</returns>
-    [Remote, Public]
-    public static IActionItemExecutionTask CreateActionItemExecution()
-    {
-      return ActionItemExecutionTasks.Create();
     }
 
     #region AbortSubtasksAndSendNotices
@@ -1637,6 +1734,7 @@ namespace Sungero.RecordManagement.Server
       var recordManagementSettings = RecordManagementSettings.Create();
       recordManagementSettings.Name = RecordManagementSettings.Info.LocalizedName;
       recordManagementSettings.AllowActionItemsWithIndefiniteDeadline = false;
+      recordManagementSettings.AllowAcquaintanceBySubstitute = false;
       recordManagementSettings.ControlRelativeDeadlineInDays = 1;
       recordManagementSettings.Save();
     }
@@ -1930,6 +2028,22 @@ namespace Sungero.RecordManagement.Server
         .Select(t => t.Modified)
         .OrderByDescending(t => t)
         .FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Получить активные задания на ознакомление.
+    /// </summary>
+    /// <param name="assignmentsIds">ИД заданий на ознакомление, записанные в виде строки через запятую.</param>
+    /// <returns>Задания на ознакомление.</returns>
+    public virtual List<IAcquaintanceAssignment> GetActiveAcquaintanceAssignments(string assignmentsIds)
+    {
+      var splittedAssignmentsIds = assignmentsIds.Split(',');
+      var assignments = AcquaintanceAssignments.GetAll()
+        .Where(x => splittedAssignmentsIds.Contains(x.Id.ToString()))
+        .Where(x => x.Status != Workflow.Assignment.Status.Completed &&
+               x.Status != Workflow.Assignment.Status.Aborted)
+        .ToList();
+      return assignments;
     }
   }
   

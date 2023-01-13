@@ -7,6 +7,21 @@ using Sungero.Docflow.CounterpartyDocument;
 
 namespace Sungero.Docflow
 {
+  partial class CounterpartyDocumentConvertingFromServerHandler
+  {
+
+    public override void ConvertingFrom(Sungero.Domain.ConvertingFromEventArgs e)
+    {
+      base.ConvertingFrom(e);
+      
+      var counterparty = Exchange.PublicFunctions.ExchangeDocumentInfo.GetDocumentCounterparty(_source, _source.LastVersion);
+      if (counterparty != null)
+      {
+        var counterpartyDocument = CounterpartyDocuments.As(e.Entity);
+        counterpartyDocument.Counterparty = counterparty;
+      }      
+    }
+  }
 
   partial class CounterpartyDocumentFilteringServerHandler<T>
   {

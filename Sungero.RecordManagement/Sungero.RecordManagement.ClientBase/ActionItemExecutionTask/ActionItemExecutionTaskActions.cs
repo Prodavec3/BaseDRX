@@ -30,7 +30,7 @@ namespace Sungero.RecordManagement.Client
 
     public virtual bool CanChangeCompoundActionItemPart(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
     {
-      return (_obj.ActionItemExecutionTask.State.IsInserted || Locks.GetLockInfo(_obj.ActionItemExecutionTask).IsLockedByMe) && 
+      return (_obj.ActionItemExecutionTask.State.IsInserted || Locks.GetLockInfo(_obj.ActionItemExecutionTask).IsLockedByMe) &&
         _obj.ActionItemExecutionTask.Status == ActionItemExecutionTask.Status.Draft || Functions.ActionItemExecutionTask.CanChangeActionItem(_obj.ActionItemExecutionTask);
     }
 
@@ -191,15 +191,6 @@ namespace Sungero.RecordManagement.Client
 
     public override void Abort(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var error = Docflow.PublicFunctions.Module.Remote.GetTaskAbortingError(_obj, Docflow.Constants.Module.TaskMainGroup.ActionItemExecutionTask.ToString());
-      if (!string.IsNullOrWhiteSpace(error))
-      {
-        e.AddError(error);
-        return;
-      }
-      
-      _obj.Save();
-      
       var dialog = Dialogs.CreateInputDialog(ActionItemExecutionTasks.Resources.Confirmation);
       var abortingReason = dialog.AddMultilineString(_obj.Info.Properties.AbortingReason.LocalizedName, true);
       

@@ -27,6 +27,50 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
+    /// Заполнить основание в карточке документа.
+    /// </summary>
+    /// <param name="employee">Сотрудник.</param>
+    /// <param name="e">Аргументы события подписания.</param>
+    /// <param name="changedSignatory">Признак смены подписывающего.</param>
+    public override void SetOurSigningReason(Company.IEmployee employee, Sungero.Domain.BeforeSigningEventArgs e, bool changedSignatory)
+    {
+      // Не перебивать основание при рассмотрении, если подписывает Адресат. US: 189445.
+      var documentParams = ((Domain.Shared.IExtendedEntity)_obj).Params;
+      var calledFromApprovalReviewAssignments = documentParams.ContainsKey(Constants.ApprovalReviewAssignment.CalledFromApprovalReviewAssignments);
+      
+      if ((CallContext.CalledFrom(ApprovalReviewAssignments.Info) || calledFromApprovalReviewAssignments) && !Equals(_obj.OurSignatory, employee))
+        return;
+
+      base.SetOurSigningReason(employee, e, changedSignatory);
+    }
+    
+    /// <summary>
+    /// Заполнить Единый рег. № из эл. доверенности в подпись.
+    /// </summary>
+    /// <param name="employee">Сотрудник.</param>
+    /// <param name="signature">Подпись.</param>
+    /// <param name="certificate">Сертификат для подписания.</param>
+    public override void SetUnifiedRegistrationNumber(Company.IEmployee employee, Sungero.Domain.Shared.ISignature signature, ICertificate certificate)
+    {
+      if (signature.SignCertificate == null)
+        return;
+      
+      var documentParams = ((Domain.Shared.IExtendedEntity)_obj).Params;
+      var calledFromApprovalReviewAssignments = documentParams.ContainsKey(Constants.ApprovalReviewAssignment.CalledFromApprovalReviewAssignments);
+      
+      if (CallContext.CalledFrom(ApprovalReviewAssignments.Info) || calledFromApprovalReviewAssignments)
+      {
+        var signatureSettingsByEmployee = this.GetSignatureSettingsByEmployee(employee).ToList();
+        var ourSigningReasonAddressee = PublicFunctions.Module.GetOurSigningReasonWithHighPriority(signatureSettingsByEmployee, certificate);
+          
+        this.SetUnifiedRegistrationNumber(ourSigningReasonAddressee, signature, certificate);
+        return;
+      }
+
+      base.SetUnifiedRegistrationNumber(employee, signature, certificate);
+    }
+    
+    /// <summary>
     /// Признак того, что необходимо проверять наличие прав подписи на документ у сотрудника, указанного в качестве подписанта с нашей стороны.
     /// </summary>
     /// <returns>True - необходимо проверять, False - иначе.</returns>

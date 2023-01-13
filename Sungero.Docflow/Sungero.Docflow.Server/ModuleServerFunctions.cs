@@ -15,6 +15,7 @@ using Sungero.CoreEntities;
 using Sungero.Docflow.ApprovalStage;
 using Sungero.Docflow.DocumentKind;
 using Sungero.Docflow.Structures.Module;
+using Sungero.Docflow.Structures.StampSetting;
 using Sungero.Domain;
 using Sungero.Domain.LinqExpressions;
 using Sungero.Domain.Shared;
@@ -106,18 +107,24 @@ namespace Sungero.Docflow.Server
       
       var version = document.Versions.Single(v => v.Id == versionId);
       var exchangeStatus = documentInfo.ExchangeState;
-
+      
       var senderSign = Signatures.Get(document).Where(s => s.Id == documentInfo.SenderSignId).FirstOrDefault();
       if (senderSign != null)
       {
+        var organizationName = documentInfo.MessageType == Exchange.ExchangeDocumentInfo.MessageType.Incoming ?
+          documentInfo.Counterparty.Name : documentInfo.RootBox.BusinessUnit.Name;
+        
         var stampSignStatus = Docflow.OfficialDocument.ExchangeState.Signed;
-        stampGenerator.Signatures.Add(GetStampTableRowForSignature(senderSign, stampSignStatus));
+        stampGenerator.Signatures.Add(GetStampTableRowForSignature(senderSign, stampSignStatus, organizationName));
       }
 
       if (exchangeStatus == Docflow.OfficialDocument.ExchangeState.Signed && documentInfo.ReceiverSignId != null)
       {
+        var organizationName = documentInfo.MessageType == Exchange.ExchangeDocumentInfo.MessageType.Incoming ?
+          documentInfo.RootBox.BusinessUnit.Name : documentInfo.Counterparty.Name;
+
         var receiverSign = Signatures.Get(document).Where(s => s.Id == documentInfo.ReceiverSignId).FirstOrDefault();
-        stampGenerator.Signatures.Add(GetStampTableRowForSignature(receiverSign, exchangeStatus));
+        stampGenerator.Signatures.Add(GetStampTableRowForSignature(receiverSign, exchangeStatus, organizationName));
       }
       else
       {
@@ -336,18 +343,24 @@ namespace Sungero.Docflow.Server
             document.FormalizedFunction.Value == Docflow.AccountingDocumentBase.FormalizedFunction.Schf)
           return CreateAndGetSignaturesStampNonFormalized(document, sellerTitleVersion.Id);
         else
-          stampGenerator.Signatures.Add(GetStampTableRowForSignature(sellerTitleSign, stampSignStatus));
+        {
+          var organizationName = documentInfo.MessageType == Exchange.ExchangeDocumentInfo.MessageType.Incoming ?
+            documentInfo.Counterparty.Name : documentInfo.RootBox.BusinessUnit.Name;
+          stampGenerator.Signatures.Add(GetStampTableRowForSignature(sellerTitleSign, stampSignStatus, organizationName));
+        }
       }
 
       if (buyerTitleVersion != null && document.BuyerSignatureId != null)
       {
         var buyerTitleSign = Signatures.Get(buyerTitleVersion).Where(x => x.Id == document.BuyerSignatureId).First();
+        var organizationName = documentInfo.MessageType == Exchange.ExchangeDocumentInfo.MessageType.Incoming ?
+          documentInfo.RootBox.BusinessUnit.Name : documentInfo.Counterparty.Name;
         if (buyerTitleSign != null)
         {
           // КодИтогда - "Не принято" отображаем как подписан.
           var buyerStampSignStatus = documentInfo.BuyerAcceptanceStatus == Exchange.ExchangeDocumentInfo.BuyerAcceptanceStatus.Rejected ?
             Docflow.OfficialDocument.ExchangeState.Signed : exchangeStatus;
-          stampGenerator.Signatures.Add(GetStampTableRowForSignature(buyerTitleSign, buyerStampSignStatus));
+          stampGenerator.Signatures.Add(GetStampTableRowForSignature(buyerTitleSign, buyerStampSignStatus, organizationName));
         }
       }
       else
@@ -400,12 +413,13 @@ namespace Sungero.Docflow.Server
     /// <summary>
     /// Получить информацию о подписанте.
     /// </summary>
-    /// <param name="signatory">Информация о подписи.</param>
+    /// <param name="signature">Информация о подписи.</param>
     /// <param name="exchangeStatus">Статус подписания, который нужно проставить.</param>
+    /// <param name="organizationName">Наименование организации подписывающего.</param>
     /// <returns>Информация о подписывающем.</returns>
-    private static NpoComputer.Dpad.Converter.SignatureInfo GetStampTableRowForSignature(Sungero.Domain.Shared.ISignature signatory, Enumeration? exchangeStatus)
+    private static NpoComputer.Dpad.Converter.SignatureInfo GetStampTableRowForSignature(Sungero.Domain.Shared.ISignature signature, Enumeration? exchangeStatus, string organizationName = null)
     {
-      var certificateInfo = Docflow.PublicFunctions.Module.GetSignatureCertificateInfo(signatory.GetDataSignature());
+      var certificateInfo = Docflow.PublicFunctions.Module.GetSignatureCertificateInfo(signature.GetDataSignature());
       
       var parsedSubject = Sungero.Docflow.Functions.Module.ParseCertificateSubject(certificateInfo.SubjectInfo);
       var parsedIssuer = Sungero.Docflow.Functions.Module.ParseCertificateIssuer(certificateInfo.IssuerInfo);
@@ -415,10 +429,10 @@ namespace Sungero.Docflow.Server
       if (exchangeStatus == Docflow.OfficialDocument.ExchangeState.SignRequired ||
           exchangeStatus == Docflow.OfficialDocument.ExchangeState.Signed)
       {
-        foreach (var error in signatory.ValidationErrors)
+        foreach (var error in signature.ValidationErrors)
           Logger.DebugFormat("Execute GetStampTableRowForSignature. Type error: '{0}', message: '{1}'.", error.ErrorType, error.Message);
         
-        signValidString += signatory.IsValid
+        signValidString += signature.IsValid
           ? Sungero.Docflow.AccountingDocumentBases.Resources.PdfStampSignIsValid
           : Sungero.Docflow.AccountingDocumentBases.Resources.PdfStampSignIsInvalid;
       }
@@ -430,9 +444,12 @@ namespace Sungero.Docflow.Server
           signValidString = OfficialDocuments.Info.Properties.ExchangeState.GetLocalizedValue(exchangeStatus);
       }
       
-      var signatureName = GetCertificateOwnerShortName(parsedSubject);
+      var signatoryName = GetCertificateOwnerShortName(parsedSubject);
       if (!string.IsNullOrEmpty(parsedSubject.JobTitle))
-        signatureName += string.Format(", {0}", parsedSubject.JobTitle);
+        signatoryName += string.Format(", {0}", parsedSubject.JobTitle);
+      
+      var unifiedRegistrationNumber = Docflow.PublicFunctions.Module.GetUnsignedAttribute(signature, Docflow.PublicConstants.Module.UnsignedAdditionalInfoKeyFPoA);
+      var signedWithFPoA = !string.IsNullOrEmpty(unifiedRegistrationNumber);
       
       // Если документ аннулирован, то изменяется формат вывода статуса и даты подписания в штампе.
       if (exchangeStatus == Docflow.OfficialDocument.ExchangeState.Obsolete || exchangeStatus == Docflow.OfficialDocument.ExchangeState.Terminated)
@@ -442,9 +459,11 @@ namespace Sungero.Docflow.Server
           CertificateIssuer = parsedIssuer.CounterpartyName,
           CertificateSerialNumber = certificateInfo.Serial,
           SignIcon = NpoComputer.DpadCP.Converter.SignIcon.Sign,
-          OrganizationInfo = parsedSubject.OrganizationName,
-          PersonInfo = signatureName,
-          Status = signValidString
+          OrganizationInfo = organizationName,
+          PersonInfo = signatoryName,
+          Status = signValidString,
+          FormalizedPoATitle = signedWithFPoA ? Sungero.Docflow.Resources.FPoATitle : string.Empty,
+          FormalizedPoAUnifiedNumber = unifiedRegistrationNumber
         };
       }
       else
@@ -454,10 +473,12 @@ namespace Sungero.Docflow.Server
           CertificateIssuer = parsedIssuer.CounterpartyName,
           CertificateSerialNumber = certificateInfo.Serial,
           SignIcon = NpoComputer.DpadCP.Converter.SignIcon.Sign,
-          OrganizationInfo = parsedSubject.OrganizationName,
-          PersonInfo = signatureName,
+          OrganizationInfo = organizationName,
+          PersonInfo = signatoryName,
           Status = signValidString,
-          SigningDate = signatory.SigningDate.ToUniversalTime().Add(TenantInfo.UtcOffset).ToString("dd.MM.yyyy HH:mm:ss (UTCzzz)")
+          SigningDate = signature.SigningDate.ToUniversalTime().Add(TenantInfo.UtcOffset).ToString("dd.MM.yyyy HH:mm:ss (UTCzzz)"),
+          FormalizedPoATitle = signedWithFPoA ? Sungero.Docflow.Resources.FPoATitle : string.Empty,
+          FormalizedPoAUnifiedNumber = unifiedRegistrationNumber
         };
       }
     }
@@ -615,33 +636,60 @@ namespace Sungero.Docflow.Server
     /// <returns>Информация о результате генерации PublicBody для версии документа.</returns>
     public virtual Structures.OfficialDocument.СonversionToPdfResult GeneratePublicBodyWithSignatureMark(Sungero.Docflow.IOfficialDocument document, int versionId, string signatureMark)
     {
-      var info = Structures.OfficialDocument.СonversionToPdfResult.Create();
-      info.HasErrors = true;
+      return this.ConvertToPdfWithStamp(document, versionId, signatureMark, true, 0, 0);
+    }
+    
+    /// <summary>
+    /// Преобразовать в PDF с добавлением отметки.
+    /// </summary>
+    /// <param name="document">Документ для преобразования.</param>
+    /// <param name="versionId">ИД версии.</param>
+    /// <param name="htmlStamp">Отметка (html).</param>
+    /// <param name="isSignatureMark">Признак отметки об ЭП. True - отметка об ЭП, False - отметка о поступлении.</param>
+    /// <param name="rightIndent">Значение отступа справа (для отметки о поступлении).</param>
+    /// <param name="bottomIndent">Значение отступа снизу (для отметки о поступлении).</param>
+    /// <returns>Информация о результате преобразования в PDF с добавлением отметки.</returns>
+    public virtual Structures.OfficialDocument.СonversionToPdfResult ConvertToPdfWithStamp(Sungero.Docflow.IOfficialDocument document, int versionId, string htmlStamp,
+                                                                                           bool isSignatureMark, double rightIndent, double bottomIndent)
+    {
+      // Предпроверки.
+      var result = Structures.OfficialDocument.СonversionToPdfResult.Create();
+      result.HasErrors = true;
       var version = document.Versions.SingleOrDefault(v => v.Id == versionId);
       if (version == null)
       {
-        info.HasConvertionError = true;
-        info.ErrorMessage = OfficialDocuments.Resources.NoVersionWithNumberErrorFormat(versionId);
-        return info;
+        result.HasConvertionError = true;
+        result.ErrorMessage = OfficialDocuments.Resources.NoVersionWithNumberErrorFormat(versionId);
+        return result;
       }
       
-      Logger.DebugFormat("Start generate public body for document id {0} version id {1}: document application - {2}, version application - {3}.",
+      Logger.DebugFormat("Start Convert to PDF: document id {0}, version id {1}: application - {2}, original application - {3}.",
                          document.Id, version.Id, document.AssociatedApplication, version.BodyAssociatedApplication);
+      
+      // Чтобы не потерять текстовый слой в pdf документе, который может находиться в публичном теле после интеллектуальной обработки.
+      // Отметку о поступлении проставлять на публичное тело последней версии документа, если оно есть.
+      var documentBody = version.Body;
+      var extension = version.BodyAssociatedApplication.Extension;
+      if (!isSignatureMark && version.PublicBody != null && version.PublicBody.Size != 0)
+      {
+        documentBody = version.PublicBody;
+        extension = version.AssociatedApplication.Extension;
+      }
       
       System.IO.Stream pdfDocumentStream = null;
       using (var inputStream = new System.IO.MemoryStream())
       {
-        version.Body.Read().CopyTo(inputStream);
+        documentBody.Read().CopyTo(inputStream);
         try
         {
           var pdfConverter = AsposeExtensions.Converter.Create();
-          var extension = version.BodyAssociatedApplication.Extension;
           pdfDocumentStream = pdfConverter.GeneratePdf(inputStream, extension);
-          var htmlStampString = signatureMark;
-          if (!string.IsNullOrEmpty(htmlStampString))
+          if (!string.IsNullOrEmpty(htmlStamp))
           {
-            pdfDocumentStream = pdfConverter.AddSignatureMark(pdfDocumentStream, extension, htmlStampString, Docflow.Resources.SignatureMarkAnchorSymbol,
-                                                              Docflow.Constants.Module.SearchablePagesLimit);
+            pdfDocumentStream = isSignatureMark
+              ? pdfConverter.AddSignatureMark(pdfDocumentStream, extension, htmlStamp, Docflow.Resources.SignatureMarkAnchorSymbol,
+                                              Docflow.Constants.Module.SearchablePagesLimit)
+              : pdfConverter.AddRegistrationStamp(pdfDocumentStream, htmlStamp, 1, rightIndent, bottomIndent);
           }
         }
         catch (Exception e)
@@ -651,56 +699,72 @@ namespace Sungero.Docflow.Server
           else
             Logger.Error(string.Format("{0} {1}", Docflow.Resources.PdfConvertErrorFormat(document.Id), e.Message));
           
-          info.HasConvertionError = true;
-          info.HasLockError = false;
-          info.ErrorMessage = Docflow.Resources.DocumentBodyNeedsRepair;
+          result.HasConvertionError = true;
+          result.HasLockError = false;
+          result.ErrorMessage = Docflow.Resources.DocumentBodyNeedsRepair;
         }
       }
       
-      if (!string.IsNullOrWhiteSpace(info.ErrorMessage))
-        return info;
+      if (!string.IsNullOrWhiteSpace(result.ErrorMessage))
+        return result;
       
-      version.PublicBody.Write(pdfDocumentStream);
-      version.AssociatedApplication = Content.AssociatedApplications.GetByExtension("pdf");
+      if (isSignatureMark)
+      {
+        version.PublicBody.Write(pdfDocumentStream);
+        version.AssociatedApplication = Content.AssociatedApplications.GetByExtension("pdf");
+      }
+      else
+      {
+        document.CreateVersionFrom(pdfDocumentStream, "pdf");
+        
+        var lastVersion = document.LastVersion;
+        lastVersion.Note = Sungero.Docflow.OfficialDocuments.Resources.VersionWithRegistrationStamp;
+      }
+      
       pdfDocumentStream.Close();
-      
-      Logger.DebugFormat("Generate public body: document id {0} version id {1}:  application - {2}, version application - {3}.",
-                         document.Id, version.Id, document.AssociatedApplication, version.BodyAssociatedApplication);
+      Logger.DebugFormat("{4}: document id {0}, version id {1}: application - {2}, original application - {3}.",
+                         document.Id, version.Id, document.AssociatedApplication, version.BodyAssociatedApplication,
+                         isSignatureMark ? "Generate public body" : "Create new version");
       
       try
       {
-        ((Domain.Shared.IExtendedEntity)document).Params[PublicConstants.OfficialDocument.AddHistoryCommentAboutPDFConvert] = true;
+        var paramToWriteInHistory = isSignatureMark
+          ? PublicConstants.OfficialDocument.AddHistoryCommentAboutPDFConvert
+          : PublicConstants.OfficialDocument.AddHistoryCommentAboutRegistrationStamp;
+        ((Domain.Shared.IExtendedEntity)document).Params[paramToWriteInHistory] = true;
         document.Save();
-        ((Domain.Shared.IExtendedEntity)document).Params.Remove(PublicConstants.OfficialDocument.AddHistoryCommentAboutPDFConvert);
+        ((Domain.Shared.IExtendedEntity)document).Params.Remove(paramToWriteInHistory);
         
-        info.HasErrors = false;
+        Functions.OfficialDocument.PreparePreview(document);
+        
+        result.HasErrors = false;
       }
       catch (Sungero.Domain.Shared.Exceptions.RepeatedLockException e)
       {
         Logger.Error(e.Message);
-        info.HasConvertionError = false;
-        info.HasLockError = true;
-        info.ErrorMessage = e.Message;
+        result.HasConvertionError = false;
+        result.HasLockError = true;
+        result.ErrorMessage = e.Message;
       }
       catch (Exception e)
       {
         Logger.Error(e.Message);
-        info.HasConvertionError = true;
-        info.HasLockError = false;
-        info.ErrorMessage = e.Message;
+        result.HasConvertionError = true;
+        result.HasLockError = false;
+        result.ErrorMessage = e.Message;
       }
 
-      Logger.DebugFormat("End generate public body document id {0} version id {1}: application - {2}, version application - {3}.",
+      Logger.DebugFormat("End Convert to PDF document id {0} version id {1}: application - {2}, original application - {3}.",
                          document.Id, version.Id, document.AssociatedApplication, version.BodyAssociatedApplication);
-
-      return info;
+      
+      return result;
     }
     
     /// <summary>
     /// Получить отметку об ЭП.
     /// </summary>
     /// <param name="document">Документ для преобразования.</param>
-    /// <param name="versionId">Id версии, для генерации.</param>
+    /// <param name="versionId">ИД версии для генерации.</param>
     /// <returns>Изображение отметки об ЭП в виде html.</returns>
     [Public]
     public virtual string GetSignatureMarkAsHtml(Sungero.Docflow.IOfficialDocument document, int versionId)
@@ -709,12 +773,32 @@ namespace Sungero.Docflow.Server
       if (signature == null)
         throw new Exception(OfficialDocuments.Resources.LastVersionNotApproved);
       
-      // В случае квалифицированной ЭП информацию для отметки брать из атрибутов субъекта сертификата.
-      if (signature.SignCertificate != null)
-        return this.GetSignatureMarkForCertificateAsHtml(signature);
+      var stampSetting = Functions.OfficialDocument.GetStampSettings(document).FirstOrDefault();
+      var signatureStampParams = SignatureStampParams.Create();
+      if (stampSetting != null)
+        signatureStampParams = Functions.StampSetting.GetSignatureStampParams(stampSetting, signature.SigningDate, signature.SignCertificate != null);
+      else
+        signatureStampParams = this.GetDefaultSignatureStampParams(signature.SignCertificate != null);
       
+      // В случае квалифицированной ЭП информацию для отметки брать из атрибутов субъекта сертификата.
       // В случае простой ЭП информацию для отметки брать из атрибутов подписи.
-      return this.GetSignatureMarkForSimpleSignatureAsHtml(signature);
+      if (signature.SignCertificate != null)
+        return this.GetSignatureMarkForCertificateAsHtml(signature, signatureStampParams);
+      else
+        return this.GetSignatureMarkForSimpleSignatureAsHtml(signature, signatureStampParams);
+    }
+    
+    /// <summary>
+    /// Получить стандартные параметры простановки отметки для документа.
+    /// </summary>
+    /// <param name="withCertificate">True - подпись с сертификатом, False - простая подпись.</param>
+    /// <returns>Стандартные параметры простановки отметки.</returns>
+    [Public]
+    public virtual ISignatureStampParams GetDefaultSignatureStampParams(bool withCertificate)
+    {
+      string logoImage = withCertificate ? Resources.HtmlStampLogoForCertificate : Resources.HtmlStampLogoForSignature;
+      logoImage = logoImage.Replace("{Image}", Resources.SignatureStampSampleLogo);
+      return SignatureStampParams.Create(logoImage, Resources.SignatureStampSampleTitle, string.Empty);
     }
     
     /// <summary>
@@ -722,8 +806,20 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="signature">Подпись.</param>
     /// <returns>Изображение отметки об ЭП для подписи в виде html.</returns>
-    [Public]
+    [Public, Obsolete("Используйте метод GetSignatureMarkForSimpleSignatureAsHtml(ISignature, ISignatureStampParams).")]
     public virtual string GetSignatureMarkForSimpleSignatureAsHtml(Sungero.Domain.Shared.ISignature signature)
+    {
+      return this.GetSignatureMarkForSimpleSignatureAsHtml(signature, this.GetDefaultSignatureStampParams(false));
+    }
+    
+    /// <summary>
+    /// Получить отметку об ЭП для подписи.
+    /// </summary>
+    /// <param name="signature">Подпись.</param>
+    /// <param name="signatureStampParams">Параметры простановки отметки.</param>
+    /// <returns>Изображение отметки об ЭП для подписи в виде html.</returns>
+    [Public]
+    public virtual string GetSignatureMarkForSimpleSignatureAsHtml(Sungero.Domain.Shared.ISignature signature, ISignatureStampParams signatureStampParams)
     {
       if (signature == null)
         return string.Empty;
@@ -738,6 +834,9 @@ namespace Sungero.Docflow.Server
         html = Resources.HtmlStampTemplateForSignature;
         html = html.Replace("{SignatoryFullName}", signatoryFullName);
         html = html.Replace("{SignatoryId}", signatoryId.ToString());
+        html = html.Replace("{Logo}", signatureStampParams.Logo);
+        html = html.Replace("{SigningDate}", signatureStampParams.SigningDate);
+        html = html.Replace("{Title}", signatureStampParams.Title);
       }
       return html;
     }
@@ -747,8 +846,20 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="signature">Подпись.</param>
     /// <returns>Изображение отметки об ЭП для сертификата в виде html.</returns>
-    [Public]
+    [Public, Obsolete("Используйте метод GetSignatureMarkForCertificateAsHtml(ISignature, ISignatureStampParams).")]
     public virtual string GetSignatureMarkForCertificateAsHtml(Sungero.Domain.Shared.ISignature signature)
+    {
+      return this.GetSignatureMarkForCertificateAsHtml(signature, this.GetDefaultSignatureStampParams(true));
+    }
+    
+    /// <summary>
+    /// Получить отметку об ЭП для сертификата из подписи.
+    /// </summary>
+    /// <param name="signature">Подпись.</param>
+    /// <param name="signatureStampParams">Параметры простановки отметки.</param>
+    /// <returns>Изображение отметки об ЭП для сертификата в виде html.</returns>
+    [Public]
+    public virtual string GetSignatureMarkForCertificateAsHtml(Sungero.Domain.Shared.ISignature signature, ISignatureStampParams signatureStampParams)
     {
       if (signature == null)
         return string.Empty;
@@ -767,15 +878,29 @@ namespace Sungero.Docflow.Server
       string validity;
       using (Core.CultureInfoExtensions.SwitchTo(TenantInfo.Culture))
       {
-        html = Resources.HtmlStampTemplateForCertificate;
+        if (string.IsNullOrWhiteSpace(signature.UnsignedAdditionalInfo))
+        {
+          html = Resources.HtmlStampTemplateForCertificate;
+        }
+        else
+        {
+          html = Resources.HtmlStampTemplateForCertificateWithUnifiedNumber;
+          var unifiedRegistrationNumber = this.GetUnsignedAttribute(signature, Constants.Module.UnsignedAdditionalInfoKeyFPoA);
+          html = html.Replace("{UnifiedRegistrationNumber}", unifiedRegistrationNumber);
+        }
+        
         html = html.Replace("{SignatoryFullName}", signatoryFullName);
         html = html.Replace("{Thumbprint}", certificate.Thumbprint.ToLower());
+        html = html.Replace("{Logo}", signatureStampParams.Logo);
+        html = html.Replace("{SigningDate}", signatureStampParams.SigningDate);
+        html = html.Replace("{Title}", signatureStampParams.Title);
         validity = string.Format("{0} {1} {2} {3}",
                                  Company.Resources.From,
                                  certificate.NotBefore.Value.ToShortDateString(),
                                  Company.Resources.To,
                                  certificate.NotAfter.Value.ToShortDateString());
       }
+      
       html = html.Replace("{Validity}", validity);
       return html;
     }
@@ -807,6 +932,66 @@ namespace Sungero.Docflow.Server
       return document.LastVersion.Body.Size < Constants.OfficialDocument.MaxBodySizeForInteractiveConvertation &&
         (Locks.GetLockInfo(document).IsLockedByMe || !Locks.GetLockInfo(document).IsLocked) &&
         supportedFormatsList.Contains(document.LastVersion.BodyAssociatedApplication.Extension.ToLower());
+    }
+    
+    /// <summary>
+    /// Получить координаты последнего вхождения строки в документ.
+    /// </summary>
+    /// <param name="pdfDocumentStream">Поток с входным документом в формате PDF.</param>
+    /// <param name="searchablePagesNumber">Количество страниц для поиска строки.</param>
+    /// <param name="searchString">Строка для поиска.</param>
+    /// <returns>Структура с результатами поиска.</returns>
+    /// <remarks>Ось X - горизонтальная, ось Y - вертикальная. Начало координат - левый нижний угол.</remarks>
+    [Public]
+    public virtual Sungero.Docflow.Structures.Module.IPdfStringSearchResult GetLastStringEntryPosition(System.IO.Stream pdfDocumentStream,
+                                                                                                       int searchablePagesNumber,
+                                                                                                       string searchString)
+    {
+      var converter = AsposeExtensions.Converter.Create();
+      var stringSearchResult = converter.SearchLastStringEntryInDocument(pdfDocumentStream, searchablePagesNumber, searchString);
+      if (stringSearchResult == null)
+        return null;
+      
+      var result = Sungero.Docflow.Structures.Module.PdfStringSearchResult.Create();
+      result.XIndent = stringSearchResult.XIndent;
+      result.YIndent = stringSearchResult.YIndent;
+      result.PageNumber = stringSearchResult.PageNumber;
+      result.PageWidth = stringSearchResult.PageWidth;
+      result.PageHeight = stringSearchResult.PageHeight;
+      result.PageCount = stringSearchResult.PageCount;
+      
+      return result;
+    }
+    
+    #endregion
+    
+    #region Отметка о регистрации
+    
+    /// <summary>
+    /// Получить отметку о регистрации.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Изображение отметки о регистрации в виде html.</returns>
+    [Public]
+    public virtual string GetRegistrationStampAsHtml(Sungero.Docflow.IOfficialDocument document)
+    {
+      var regNumber = document.RegistrationNumber;
+      var regDate = document.RegistrationDate;
+      var businessUnit = document.BusinessUnit.Name;
+      
+      if (string.IsNullOrWhiteSpace(regNumber) || regDate == null)
+        return string.Empty;
+      
+      string html;
+      using (Core.CultureInfoExtensions.SwitchTo(TenantInfo.Culture))
+      {
+        html = Resources.HtmlStampTemplateForRegistrationStamp;
+        html = html.Replace("{RegNumber}", regNumber.ToString());
+        html = html.Replace("{RegDate}", regDate.Value.ToShortDateString());
+        html = html.Replace("{BusinessUnit}", businessUnit);
+      }
+      
+      return html;
     }
     
     #endregion
@@ -1062,7 +1247,7 @@ namespace Sungero.Docflow.Server
       var isSubstitute = true;
       var isAdministrator = true;
       var hasDocuments = documentRegister != null && Functions.DocumentRegister.HasRegisteredDocuments(documentRegister);
-      var isUsed = documentRegister != null && (Functions.RegistrationSetting.GetByDocumentRegister(documentRegister).Any() || hasDocuments);
+      var isUsed = documentRegister != null && (Functions.Module.GetRegistrationSettingByDocumentRegister(documentRegister).Any() || hasDocuments);
       if (registrationGroup != null && registrationGroup.ResponsibleEmployee != null)
       {
         isSubstitute = Recipients.AllRecipientIds.Contains(registrationGroup.ResponsibleEmployee.Id);
@@ -1462,6 +1647,381 @@ namespace Sungero.Docflow.Server
     
     #endregion
     
+    #region Лист согласования
+
+    /// <summary>
+    /// Создать модель контрола состояния листа согласования.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Модель контрола состояния листа согласования.</returns>
+    [Remote(IsPure = true)]
+    public virtual StateView CreateApprovalListStateView(IOfficialDocument document)
+    {
+      // Задать текст по умолчанию.
+      var stateView = StateView.Create();
+      stateView.AddDefaultLabel(OfficialDocuments.Resources.DocumentIsNotSigned);
+      
+      if (document == null)
+        return stateView;
+      
+      // Сформировать список подписей.
+      var filteredSignatures = new List<Structures.Module.SignaturesInfo>();
+      var signatures = new List<Structures.Module.DocumentSignature>();
+      var signatureList = new List<Domain.Shared.ISignature>();
+      var externalSignatures = new List<Structures.Module.DocumentSignature>();
+      var externalSignatureList = new List<Domain.Shared.ISignature>();
+      foreach (var version in document.Versions.OrderByDescending(v => v.Created))
+      {
+        // Получить к версии Согласующие и Утверждающие подписи в порядке подписывания.
+        var versionSignatures = Signatures.Get(version).Where(s => s.SignatureType != SignatureType.NotEndorsing).OrderByDescending(s => s.SigningDate);
+        
+        // Вывести информацию о подписях.
+        foreach (var signature in versionSignatures)
+        {
+          if (signature.IsExternal == true)
+          {
+            externalSignatures.Add(Structures.Module.DocumentSignature.Create(signature.Id, signature.SigningDate, version.Number));
+            externalSignatureList.Add(signature);
+            continue;
+          }
+          var signatureTypeString = signature.SignatureType == SignatureType.Approval ?
+            Constants.Module.ApprovalSignatureType :
+            Constants.Module.EndorsingSignatureType;
+          
+          if (!filteredSignatures.Where(f => Equals(f.Signatory, signature.Signatory) && Equals(f.SubstitutedUser, signature.SubstitutedUser) && Equals(f.SignatoryType, signatureTypeString)).Any())
+          {
+            filteredSignatures.Add(Structures.Module.SignaturesInfo.Create(signature.Signatory, signature.SubstitutedUser, signatureTypeString));
+            signatures.Add(Structures.Module.DocumentSignature.Create(signature.Id, signature.SigningDate, version.Number));
+            signatureList.Add(signature);
+          }
+        }
+      }
+      
+      // Проверить, что подписи есть.
+      if (!signatures.Any())
+        return stateView;
+      
+      // Добавить подписи: по убыванию даты подписи, без учета версии.
+      foreach (var signatureInfo in signatures.OrderBy(s => s.SigningDate))
+      {
+        var signingBlock = stateView.AddBlock();
+        if (externalSignatures.Any() &&
+            signatureInfo.Equals(signatures.OrderBy(s => s.SigningDate).Last()))
+          signingBlock.DockType = DockType.None;
+        else
+          signingBlock.DockType = DockType.Bottom;
+        var signature = signatureList.Single(s => s.Id == signatureInfo.SignatureId);
+        var versionNumber = signatureInfo.VersionNumber;
+        this.AddSignatureInfoToBlock(signingBlock, signature, versionNumber);
+      }
+      
+      if (externalSignatures.Any())
+      {
+        // Добавить информацию о внешних подписях.
+        foreach (var signatureInfo in externalSignatures.OrderBy(s => s.SigningDate))
+        {
+          var signingBlock = stateView.AddBlock();
+          var signature = externalSignatureList.Single(s => s.Id == signatureInfo.SignatureId);
+          var versionNumber = signatureInfo.VersionNumber;
+          this.AddExternalSignatureInfoToBlock(signingBlock, signature, versionNumber, document);
+          signingBlock.DockType = DockType.Bottom;
+        }
+      }
+      
+      return stateView;
+    }
+    
+    /// <summary>
+    /// Добавить информацию о внешней подписи в блок.
+    /// </summary>
+    /// <param name="signingBlock">Блок с информацией о подписи.</param>
+    /// <param name="signature">Электронная подпись.</param>
+    /// <param name="versionNumber">Номер версии.</param>
+    /// <param name="document">Документ.</param>
+    public virtual void AddExternalSignatureInfoToBlock(Sungero.Core.StateBlock signingBlock, Sungero.Domain.Shared.ISignature signature, int? versionNumber, IOfficialDocument document)
+    {
+      var certificateInfo = Sungero.Docflow.Functions.Module.GetSignatureCertificateInfo(signature.GetDataSignature());
+      var parsedSubject = Sungero.Docflow.Functions.Module.ParseCertificateSubject(certificateInfo.SubjectInfo);
+      var organizationInfo = Docflow.Functions.OfficialDocument.GetSigningOrganizationFromExchangeInfo(document, signature);
+      var organizationName = organizationInfo.Name;
+      var organizationTin = organizationInfo.TIN;
+      
+      var headerStyle = Functions.Module.CreateHeaderStyle();
+      var ownerName = Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject);
+      
+      if (string.IsNullOrWhiteSpace(organizationName))
+      {
+        signingBlock.AddLabel(Sungero.Docflow.Resources.PersonSignatureBlockFormat(parsedSubject.JobTitle, ownerName),
+                              headerStyle);
+      }
+      else
+      {
+        signingBlock.AddLabel(Resources.SignatureBlockFormat(parsedSubject.JobTitle,
+                                                             ownerName,
+                                                             organizationName,
+                                                             organizationTin),
+                              headerStyle);
+      }
+      
+      var version = document.Versions.FirstOrDefault(v => v.Number == versionNumber);
+      var exchangeServiceName = this.GetExchangeServiceNameByDocument(document, version.Id);
+      
+      if (document.ExchangeState != null)
+      {
+        signingBlock.AddLineBreak();
+        signingBlock.AddLabel(Constants.Module.SeparatorText, Docflow.PublicFunctions.Module.CreateSeparatorStyle());
+        signingBlock.AddLineBreak();
+        signingBlock.AddLabel(Resources.DocumentSignedByCounterpartyIsExchangeServiceNoteFormat(exchangeServiceName),
+                              Docflow.PublicFunctions.Module.CreateNoteStyle());
+      }
+      
+      var number = versionNumber.HasValue ? versionNumber.Value.ToString() : string.Empty;
+      var numberLabel = string.Format("{0} {1}", Resources.StateViewVersion, number);
+      Functions.Module.AddInfoToRightContent(signingBlock, numberLabel, Docflow.PublicFunctions.Module.CreateNoteStyle());
+      
+      // Добавить информацию о валидности подписи.
+      this.AddValidationInfoToBlock(signingBlock, signature);
+      
+      // Установить иконку.
+      signingBlock.AssignIcon(ApprovalTasks.Resources.ExternalSignatureIcon, StateBlockIconSize.Small);
+      
+      signingBlock.DockType = DockType.Bottom;
+    }
+    
+    /// <summary>
+    /// Получить название сервиса обмена по документу.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Название сервиса обмена.</returns>
+    [Obsolete("Используйте метод GetExchangeServiceNameByDocument")]
+    public virtual string GetOriginalExchangeServiceNameByDocument(IOfficialDocument document)
+    {
+      var task = Exchange.ExchangeDocumentProcessingTasks.GetAll().FirstOrDefault(t => t.AttachmentDetails.Any(a => a.AttachmentId == document.Id));
+      
+      if (task == null)
+        return string.Empty;
+      
+      return task.ExchangeService.Name;
+    }
+    
+    /// <summary>
+    /// Получить название сервиса обмена по документу.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="versionId">Id версии документа.</param>
+    /// <returns>Название сервиса обмена.</returns>
+    public virtual string GetExchangeServiceNameByDocument(IOfficialDocument document, int versionId)
+    {
+      var documentInfo = Sungero.Exchange.PublicFunctions.ExchangeDocumentInfo.Remote.GetExDocumentInfoFromVersion(document, versionId);
+      
+      if (documentInfo == null)
+        return string.Empty;
+      
+      return documentInfo.RootBox.ExchangeService.Name;
+    }
+    
+    /// <summary>
+    /// Добавить информацию о подписи в блок.
+    /// </summary>
+    /// <param name="signingBlock">Блок с информацией о подписи.</param>
+    /// <param name="signature">Электронная подпись.</param>
+    /// <param name="versionNumber">Номер версии.</param>
+    public virtual void AddSignatureInfoToBlock(Sungero.Core.StateBlock signingBlock, Sungero.Domain.Shared.ISignature signature, int? versionNumber)
+    {
+      // Добавить подписавшего.
+      if (signature.Signatory != null)
+      {
+        var signatory = Sungero.Company.Employees.As(signature.Signatory);
+        if (signatory != null)
+          signingBlock.AddLabel(string.Format("{0} {1}", signatory.JobTitle, Company.PublicFunctions.Employee.GetShortName(signatory, false)), Functions.Module.CreateHeaderStyle());
+        else
+          signingBlock.AddLabel(signature.Signatory.Name, Functions.Module.CreateHeaderStyle());
+      }
+      else
+        signingBlock.AddLabel(signature.SignatoryFullName, Functions.Module.CreateHeaderStyle());
+      
+      // Добавить дату подписания.
+      var signDate = signature.SigningDate.FromUtcTime().ToUserTime();
+      signingBlock.AddLabel(string.Format("{0}: {1}",
+                                          OfficialDocuments.Resources.StateViewDate.ToString(),
+                                          Functions.Module.ToShortDateShortTime(signDate)),
+                            Functions.Module.CreatePerformerDeadlineStyle());
+      
+      // Добавить замещаемого.
+      var substitutedUser = this.GetSubstitutedEmployee(signature);
+      if (!string.IsNullOrEmpty(substitutedUser))
+      {
+        signingBlock.AddLineBreak();
+        signingBlock.AddLabel(substitutedUser);
+      }
+      
+      // Добавить комментарий пользователя.
+      var comment = this.GetSignatureComment(signature);
+      comment = Functions.Module.RemoveApproveWithSuggestionsMark(comment);
+      
+      if (!string.IsNullOrEmpty(comment))
+      {
+        signingBlock.AddLineBreak();
+        signingBlock.AddLabel(Constants.Module.SeparatorText, Docflow.PublicFunctions.Module.CreateSeparatorStyle());
+        signingBlock.AddLineBreak();
+        
+        var commentStyle = Functions.Module.CreateNoteStyle();
+        signingBlock.AddLabel(comment, commentStyle);
+      }
+      
+      // Добавить номер версии документа.
+      var number = versionNumber.HasValue ? versionNumber.Value.ToString() : string.Empty;
+      var numberLabel = string.Format("{0} {1}", Resources.StateViewVersion, number);
+      Functions.Module.AddInfoToRightContent(signingBlock, numberLabel, Docflow.PublicFunctions.Module.CreateNoteStyle());
+      
+      // Добавить информацию о валидности подписи.
+      this.AddValidationInfoToBlock(signingBlock, signature);
+      
+      // Установить иконку.
+      this.SetIconToBlock(signingBlock, signature);
+    }
+    
+    /// <summary>
+    /// Добавить информацию о валидности подписи в блок.
+    /// </summary>
+    /// <param name="block">Блок с информацией о подписи.</param>
+    /// <param name="signature">Электронная подпись.</param>
+    public virtual void AddValidationInfoToBlock(Sungero.Core.StateBlock block, Sungero.Domain.Shared.ISignature signature)
+    {
+      var redTextStyle = Functions.Module.CreateStyle(Sungero.Core.Colors.Common.Red);
+      var greenTextStyle = Functions.Module.CreateStyle(Sungero.Core.Colors.Common.Green);
+      var separator = ". ";
+      
+      var errorValidationText = string.Empty;
+      var validationInfo = this.GetValidationInfo(signature);
+      if (validationInfo.IsInvalidCertificate)
+        errorValidationText += Resources.StateViewCertificateIsNotValid + separator;
+      
+      if (validationInfo.IsInvalidData)
+        errorValidationText += Resources.StateViewDocumentIsChanged + separator;
+      
+      if (validationInfo.IsInvalidAttributes)
+        errorValidationText += Resources.StateViewSignatureAttributesNotValid + separator;
+      
+      // Если нет ошибок - выйти.
+      if (string.IsNullOrWhiteSpace(errorValidationText))
+        return;
+      
+      block.AddLineBreak();
+      block.AddLabel(errorValidationText, redTextStyle);
+      
+      // Для подписи с невалидными атрибутами добавить информацию, что тело не было изменено.
+      if (validationInfo.IsInvalidAttributes && !validationInfo.IsInvalidData)
+      {
+        var trueValidationText = Resources.StateViewDocumentIsValid + separator;
+        block.AddLabel(trueValidationText, greenTextStyle);
+      }
+    }
+    
+    /// <summary>
+    /// Получить замещаемого сотрудника из подписи.
+    /// </summary>
+    /// <param name="signature">Электронная подпись.</param>
+    /// <returns>Сотрудник.</returns>
+    public virtual string GetSubstitutedEmployee(Sungero.Domain.Shared.ISignature signature)
+    {
+      var substituted = Sungero.Company.Employees.As(signature.SubstitutedUser);
+      
+      if (substituted == null)
+        return string.Empty;
+      
+      var jobTitle = Company.PublicFunctions.Employee.GetJobTitle(substituted, Sungero.Core.DeclensionCase.Accusative);
+      
+      // TODO: 35010.
+      if (System.Threading.Thread.CurrentThread.CurrentUICulture.Equals(System.Globalization.CultureInfo.CreateSpecificCulture("ru-RU")))
+        jobTitle = jobTitle.ToLower();
+
+      jobTitle = string.IsNullOrEmpty(jobTitle) ? jobTitle : string.Format("{0} ", jobTitle);
+      
+      return string.Format("{0} {1}{2}",
+                           Resources.StateViewSubstitutedUser,
+                           jobTitle,
+                           Company.PublicFunctions.Employee.GetShortName(substituted, Sungero.Core.DeclensionCase.Accusative, false));
+    }
+    
+    /// <summary>
+    /// Получить комментарий пользователя из подписи.
+    /// </summary>
+    /// <param name="signature">Электронная подпись.</param>
+    /// <returns>Комментарий.</returns>
+    public virtual string GetSignatureComment(Sungero.Domain.Shared.ISignature signature)
+    {
+      if (string.IsNullOrEmpty(signature.Comment))
+        return string.Empty;
+      
+      var comment = signature.Comment;
+      
+      // Взять первые 2 строки комментария.
+      // TODO Убрать укорачивание комментария после исправления 33192, 33195, 33196. Или укорачивать по-другому.
+      var linesCount = comment.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).Length;
+      if (linesCount > 2)
+      {
+        var strings = comment.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        comment = string.Join(Environment.NewLine, strings, 0, 2);
+        comment += Resources.Ellipsis_Comment;
+      }
+      
+      return comment;
+    }
+    
+    /// <summary>
+    /// Получить ошибки валидации подписи.
+    /// </summary>
+    /// <param name="signature">Электронная подпись.</param>
+    /// <returns>Ошибки валидации подписи.</returns>
+    public virtual Structures.ApprovalTask.SignatureValidationErrors GetValidationInfo(Sungero.Domain.Shared.ISignature signature)
+    {
+      var validationErrors = Structures.ApprovalTask.SignatureValidationErrors.Create(false, false, false);
+      if (signature.IsValid)
+        return validationErrors;
+      
+      // Проверить, действителен ли сертификат.
+      validationErrors.IsInvalidCertificate = signature.ValidationErrors.Any(e => e.ErrorType == Sungero.Domain.Shared.SignatureValidationErrorType.Certificate);
+      
+      // Проверить, были ли изменены подписываемые данные.
+      validationErrors.IsInvalidData = signature.ValidationErrors.Any(e => e.ErrorType == Sungero.Domain.Shared.SignatureValidationErrorType.Data);
+      
+      // Проверить, были ли изменены атрибуты подписи.
+      validationErrors.IsInvalidAttributes = signature.ValidationErrors.Any(e => e.ErrorType == Sungero.Domain.Shared.SignatureValidationErrorType.Signature);
+      
+      return validationErrors;
+    }
+    
+    /// <summary>
+    /// Установить иконку в блок с информацией о подписи.
+    /// </summary>
+    /// <param name="signingBlock">Блок с информацией о подписи.</param>
+    /// <param name="signature">Электронная подпись.</param>
+    public virtual void SetIconToBlock(Sungero.Core.StateBlock signingBlock, Sungero.Domain.Shared.ISignature signature)
+    {
+      if (signature.IsValid)
+      {
+        if (signature.SignatureType == Core.SignatureType.Approval)
+          signingBlock.AssignIcon(ApprovalTasks.Resources.Sign, StateBlockIconSize.Small);
+        else
+        {
+          if (Docflow.Functions.Module.HasApproveWithSuggestionsMark(signature.Comment))
+            signingBlock.AssignIcon(ApprovalTasks.Resources.SignWithRemarks, StateBlockIconSize.Small);
+          else
+            signingBlock.AssignIcon(ApprovalTasks.Resources.Approve, StateBlockIconSize.Small);
+        }
+      }
+      else
+      {
+        if (signature.ValidationErrors.Any(e => e.ErrorType == Sungero.Domain.Shared.SignatureValidationErrorType.Signature))
+          signingBlock.AssignIcon(ApprovalTasks.Resources.SignatureAttributeChanged, StateBlockIconSize.Small);
+        else
+          signingBlock.AssignIcon(ApprovalTasks.Resources.SignedDataChanged, StateBlockIconSize.Small);
+      }
+    }
+    
+    #endregion
+    
     #region Работа с сотрудником
     
     /// <summary>
@@ -1486,7 +2046,7 @@ namespace Sungero.Docflow.Server
     /// <param name="user">Пользователь.</param>
     /// <returns>Руководитель.</returns>
     [Remote(IsPure = true), Public]
-    public static IEmployee GetManager(IUser user)
+    public virtual IEmployee GetManager(IUser user)
     {
       var department = GetDepartment(user);
       var manager = (department != null) ? department.Manager : null;
@@ -1544,6 +2104,27 @@ namespace Sungero.Docflow.Server
       
       // Если таких групп регистрации нет, то выбрать те, которые обслуживают все подразделения.
       return regGroups.FirstOrDefault(g => !g.Departments.Any());
+    }
+    
+    /// <summary>
+    /// Получить доступные настройки по параметрам.
+    /// </summary>
+    /// <param name="settingType">Тип настройки.</param>
+    /// <param name="businessUnit">НОР.</param>
+    /// <param name="documentKind">Вид документа.</param>
+    /// <param name="department">Подразделение.</param>
+    /// <returns>Все настройки, которые подходят по параметрам.</returns>
+    [Remote(IsPure = true), Public]
+    public virtual IQueryable<IRegistrationSetting> GetRegistrationSettings(Enumeration? settingType, IBusinessUnit businessUnit, IDocumentKind documentKind, IDepartment department)
+    {
+      // Если есть настройка регистрации, учесть это при фильтрации.
+      return RegistrationSettings.GetAll()
+        .Where(s => s.SettingType == settingType &&
+               s.Status == CoreEntities.DatabookEntry.Status.Active &&
+               (!s.DocumentKinds.Any() || s.DocumentKinds.Any(k => Equals(k.DocumentKind, documentKind))) &&
+               (!s.BusinessUnits.Any() || s.BusinessUnits.Any(u => Equals(u.BusinessUnit, businessUnit))) &&
+               (!s.Departments.Any() || s.Departments.Any(d => Equals(d.Department, department))))
+        .OrderByDescending(r => r.Priority);
     }
     
     /// <summary>
@@ -2080,16 +2661,30 @@ namespace Sungero.Docflow.Server
     /// Создать асинхронное событие выдачи прав на документ.
     /// </summary>
     /// <param name="documentId">ИД документа.</param>
-    /// <param name="ruleId">ИД правила выдачи прав.</param>
+    /// <param name="ruleIds">ИД правил выдачи прав.</param>
     /// <param name="grantAccessRightsToRelatedDocuments">Выдавать права дочерним документам.</param>
     [Public]
-    public void CreateGrantAccessRightsToDocumentAsyncHandler(int documentId, int? ruleId, bool grantAccessRightsToRelatedDocuments)
+    public void CreateGrantAccessRightsToDocumentAsyncHandler(int documentId, List<int> ruleIds, bool grantAccessRightsToRelatedDocuments)
     {
       var asyncRightsHandler = Docflow.AsyncHandlers.GrantAccessRightsToDocument.Create();
       asyncRightsHandler.DocumentId = documentId;
-      if (ruleId != null)
-        asyncRightsHandler.RuleId = ruleId.Value;
+      if (ruleIds.Any())
+        asyncRightsHandler.RuleIds = string.Join(Constants.AccessRightsRule.DocumentIdsSeparator, ruleIds.ToArray());
       asyncRightsHandler.GrantRightToChildDocuments = grantAccessRightsToRelatedDocuments;
+      asyncRightsHandler.ExecuteAsync();
+    }
+    
+    /// <summary>
+    /// Создать асинхронное событие выдачи прав на документ.
+    /// </summary>
+    /// <param name="ruleId">ИД правила выдачи прав.</param>
+    /// <param name="documentIds">ИД документов.</param>
+    [Public]
+    public void CreateGrantAccessRightsToDocumentAsyncHandlerBulk(int ruleId, List<int> documentIds)
+    {
+      var asyncRightsHandler = Docflow.AsyncHandlers.GrantAccessRightsToDocumentsBulk.Create();
+      asyncRightsHandler.RuleId = ruleId;
+      asyncRightsHandler.DocumentIds = string.Join(Constants.AccessRightsRule.DocumentIdsSeparator, documentIds);
       asyncRightsHandler.ExecuteAsync();
     }
     
@@ -2167,10 +2762,10 @@ namespace Sungero.Docflow.Server
         // Права на дочерние документы от ведущего.
         if (documentRule.GrantRightsOnLeadingDocument == true && grantAccessRightsToRelatedDocuments == true)
         {
-          var childDocumentIds = GetDocumentsByLeadingDocument(document);
+          var childDocumentIds = this.GetAllChildDocuments(document);
           foreach (var childDocumentId in childDocumentIds)
           {
-            PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(childDocumentId, documentRule.Id, false);
+            PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(childDocumentId, new List<int>() { documentRule.Id }, false);
             Logger.DebugFormat("GrantRightsToDocument: create child document queue for document {0}, rule {1}", childDocumentId, documentRule.Id);
           }
         }
@@ -2182,73 +2777,98 @@ namespace Sungero.Docflow.Server
     /// <summary>
     /// Выдать права на документ по правилу назначения прав.
     /// </summary>
-    /// <param name="documentId">ИД документа.</param>
-    /// <param name="ruleId">ИД правила назначения прав.</param>
+    /// <param name="document">Документ.</param>
+    /// <param name="ruleIds">ИД правил назначения прав.</param>
     /// <param name="grantAccessRightsToRelatedDocuments">Выдавать права связанным документам.</param>
     /// <returns>True, если права были успешно выданы.</returns>
-    public virtual bool GrantAccessRightsToDocumentByRule(int documentId, int ruleId, bool grantAccessRightsToRelatedDocuments)
+    public virtual bool GrantAccessRightsToDocumentByRule(IOfficialDocument document, List<int> ruleIds, bool grantAccessRightsToRelatedDocuments)
     {
-      var allRules = AccessRightsRules.GetAll(s => s.Status == Docflow.AccessRightsRule.Status.Active).ToList();
-      if (!allRules.Any())
-      {
-        Logger.DebugFormat("GrantAccessRightsToDocumentByRule: no rights for document {0}", documentId);
-        return true;
-      }
-      
-      var document = OfficialDocuments.GetAll(d => d.Id == documentId).FirstOrDefault();
+      var logMessagePrefix = string.Format("GrantAccessRightsToDocumentsByRule. Document(ID={0}).", document.Id);
       if (document == null)
       {
-        Logger.DebugFormat("GrantAccessRightsToDocumentByRule: no document with id {0}", documentId);
+        Logger.DebugFormat("{0} No document with this id found", logMessagePrefix);
         return true;
       }
       
-      var rule = AccessRightsRules.GetAll(r => r.Id == ruleId).FirstOrDefault();
-      if (rule == null && ruleId != 0)
+      var documentRules = AccessRightsRules.GetAll(r => ruleIds.Contains(r.Id)).ToList();
+      if (!documentRules.Any())
       {
-        Logger.DebugFormat("GrantAccessRightsToDocumentByRule: no rights with id {0}", ruleId);
+        Logger.DebugFormat("{0} No suitable rules found", logMessagePrefix);
         return true;
       }
-
-      // Права на документ.
-      var documentRules = GetAvailableRules(document, allRules);
       
-      if (allRules.Any(s => s.GrantRightsOnLeadingDocument == true))
+      var needSave = false;
+      var recipientsAccessRights = this.GetRecipientsAccessRights(document.Id, documentRules);
+      foreach (var recipientAccessRights in recipientsAccessRights)
       {
-        var leadingDocumentIds = GetLeadingDocuments(document);
-        foreach (var leadingDocumentId in leadingDocumentIds)
+        var recipientAccessRightsGuids = recipientAccessRights.Value.Select(x => Docflow.PublicFunctions.Module.GetRightTypeGuid(x));
+        var highestAccessRights = this.GetHighestInstanceAccessRights(recipientAccessRightsGuids);
+        if (this.GrantAccessRightsOnEntity(document, recipientAccessRights.Key, highestAccessRights.Value))
+          needSave = true;
+      }
+      
+      if (needSave)
+      {
+        try
         {
-          var leadingDocument = OfficialDocuments.GetAll(d => d.Id == leadingDocumentId).FirstOrDefault();
-          var leadDocumentRules = GetAvailableRules(leadingDocument, allRules).Where(s => s.GrantRightsOnLeadingDocument == true).ToList();
-          documentRules.AddRange(leadDocumentRules);
+          document.AccessRights.Save();
+          Logger.DebugFormat("{0} Rights to the document granted successfully", logMessagePrefix);
         }
-      }
-      
-      if (rule != null)
-      {
-        if (documentRules.Contains(rule))
-          documentRules = new List<IAccessRightsRule>() { rule };
-        else
-          return true;
-      }
-
-      foreach (var documentRule in documentRules)
-      {
-        if (!TryGrantAccessRightsToDocumentByRule(document, documentRule))
+        catch (Exception ex)
+        {
+          // В случае возникновения исключения документ всегда уходит на повторную обработку в рамках АО.
+          // Ничего критичного не произойдет и поэтому в лог пишется сообщение типа Debug,
+          // чтобы оно не светилось красным и не нервировало лишний раз администратора.
+          Logger.DebugFormat("{0} Cannot grant rights to document", ex, logMessagePrefix);
           return false;
-        
-        // Права на дочерние документы от ведущего.
-        if (documentRule.GrantRightsOnLeadingDocument == true && grantAccessRightsToRelatedDocuments == true)
-        {
-          var childDocumentIds = GetDocumentsByLeadingDocument(document);
-          foreach (var childDocumentId in childDocumentIds)
-          {
-            PublicFunctions.Module.CreateGrantAccessRightsToDocumentAsyncHandler(childDocumentId, documentRule.Id, false);
-            Logger.DebugFormat("GrantAccessRightsToDocumentByRule: create child document queue for document {0}, rule {1}", childDocumentId, documentRule.Id);
-          }
         }
       }
-
+      
+      // Права на дочерние документы от ведущего.
+      if (grantAccessRightsToRelatedDocuments)
+        this.CreateGrantAccessRightsToChildDocumentAsyncHandler(document, documentRules);
+      
       return true;
+    }
+    
+    /// <summary>
+    /// Создать асинхронное событие выдачи прав на дочерние документы.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="rules">Правила назначения прав.</param>
+    public virtual void CreateGrantAccessRightsToChildDocumentAsyncHandler(IOfficialDocument document, List<IAccessRightsRule> rules)
+    {
+      var childDocumentsRuleIds = rules.Where(r => r.GrantRightsOnLeadingDocument == true).Select(r => r.Id).ToList();
+      if (childDocumentsRuleIds.Any())
+      {
+        var childDocumentIds = this.GetAllChildDocuments(document);
+        foreach (var childDocumentId in childDocumentIds)
+        {
+          this.CreateGrantAccessRightsToDocumentAsyncHandler(childDocumentId, new List<int>() { childDocumentsRuleIds }, false);
+          Logger.DebugFormat("GrantAccessRightsToDocument: create child document queue for document {0}", childDocumentId);
+        }
+      }
+    }
+    
+    /// <summary>
+    /// Получить список типов прав в разрезе пользователей.
+    /// </summary>
+    /// <param name="documentId">ИД документа.</param>
+    /// <param name="rules">Правила назначения прав.</param>
+    /// <returns>Список типов прав.</returns>
+    public virtual System.Collections.Generic.IDictionary<IRecipient, List<Enumeration?>> GetRecipientsAccessRights(int documentId, List<IAccessRightsRule> rules)
+    {
+      var recipientsAccessRights = new Dictionary<IRecipient, List<Enumeration?>>();
+      foreach (var rule in rules)
+      {
+        foreach (var member in rule.Members)
+        {
+          if (!recipientsAccessRights.ContainsKey(member.Recipient))
+            recipientsAccessRights.Add(member.Recipient, new List<Enumeration?>());
+          recipientsAccessRights[member.Recipient].Add(member.RightType);
+        }
+      }
+      return recipientsAccessRights;
     }
     
     /// <summary>
@@ -2307,19 +2927,21 @@ namespace Sungero.Docflow.Server
     /// <returns>Возвращает true, если права удалось выдать, false - если надо повторить позже.</returns>
     public static bool TryGrantAccessRightsToDocumentByRule(IOfficialDocument document, IAccessRightsRule rule)
     {
+      // TODO удалить функцию, когда будем удалять логику выдачи прав через ФП.
       Logger.DebugFormat("TryGrantAccessRightsToDocumentByRule: document {0}, rule {1}", document.Id, rule.Id);
-      
+      var isLocked = false;
       var isChanged = false;
       foreach (var member in rule.Members)
       {
         if (!document.AccessRights.IsGrantedDirectly(Docflow.PublicFunctions.Module.GetRightTypeGuid(member.RightType), member.Recipient))
         {
-          if (Locks.GetLockInfo(document).IsLockedByOther)
+          if (!isLocked && !Locks.TryLock(document))
           {
             Logger.DebugFormat("TryGrantAccessRightsToDocumentByRule: cannot grant rights, document {0} is locked.", document.Id, rule.Id);
             return false;
           }
-
+          
+          isLocked = true;
           document.AccessRights.Grant(member.Recipient, Docflow.PublicFunctions.Module.GetRightTypeGuid(member.RightType));
           isChanged = true;
         }
@@ -2336,12 +2958,22 @@ namespace Sungero.Docflow.Server
           Logger.Error("TryGrantAccessRightsToDocumentByRule: cannot grant rights to document", ex);
           return false;
         }
+        finally
+        {
+          if (isLocked)
+          {
+            Locks.Unlock(document);
+            isLocked = false;
+          }
+        }
       }
       else
       {
         Logger.DebugFormat("TryGrantAccessRightsToDocumentByRule: rights already granted for document {0}, rule {1}", document.Id, rule.Id);
       }
       
+      if (isLocked)
+        Locks.Unlock(document);
       return true;
     }
     
@@ -2353,6 +2985,7 @@ namespace Sungero.Docflow.Server
     /// <returns>Подходящие правила.</returns>
     public static List<IAccessRightsRule> GetAvailableRules(IOfficialDocument document, List<IAccessRightsRule> rules)
     {
+      // TODO удалить функцию, когда будем удалять логику выдачи прав через ФП.
       var documentGroup = Functions.OfficialDocument.GetDocumentGroup(document);
       
       return rules
@@ -2364,11 +2997,45 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
+    /// Получить из списка правил подходящие для документа.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Подходящие правила.</returns>
+    public virtual IQueryable<IAccessRightsRule> GetAvailableRules(IOfficialDocument document)
+    {
+      var documentGroup = Functions.OfficialDocument.GetDocumentGroup(document);
+      
+      return AccessRightsRules.GetAll(s => s.Status == Docflow.AccessRightsRule.Status.Active)
+        .Where(s => !s.DocumentKinds.Any() || s.DocumentKinds.Any(k => Equals(k.DocumentKind, document.DocumentKind)))
+        .Where(s => !s.BusinessUnits.Any() || s.BusinessUnits.Any(u => Equals(u.BusinessUnit, document.BusinessUnit)))
+        .Where(s => !s.Departments.Any() || s.Departments.Any(k => Equals(k.Department, document.Department)))
+        .Where(s => !s.DocumentGroups.Any() || s.DocumentGroups.Any(k => Equals(k.DocumentGroup, documentGroup)));
+    }
+    
+    /// <summary>
+    /// Получить список ИД подходящих для документа правил.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="ruleIds">Список ИД правил, которые нужно проверить.</param>
+    /// <returns>Список ИД правил.</returns>
+    public virtual List<int> GetAvailableRuleIds(IOfficialDocument document, List<int> ruleIds)
+    {
+      var documentRuleIds = GetAvailableRules(document).Select(r => r.Id).ToList();
+      var leadindDocumentsRuleIds = Docflow.Functions.Module.GetLeadindDocumentsRules(document);
+      documentRuleIds.AddRange(leadindDocumentsRuleIds);
+      
+      if (ruleIds.Any())
+        return ruleIds.Where(r => documentRuleIds.Contains(r)).ToList();
+      else
+        return documentRuleIds;
+    }
+    
+    /// <summary>
     /// Получить ведущие документы.
     /// </summary>
     /// <param name="document">Документ.</param>
     /// <returns>Ведущие документы.</returns>
-    private static List<int> GetLeadingDocuments(IOfficialDocument document)
+    public static List<int> GetLeadingDocuments(IOfficialDocument document)
     {
       var documents = new List<int>() { document.Id };
       var leadingDocuments = new List<int>();
@@ -2382,27 +3049,46 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Получить документы, у которых документ указан в качестве LeadingDocument.
+    /// Получить все дочерние документы по иерархии, у которых документ указан в качестве LeadingDocument.
     /// </summary>
     /// <param name="document">Ведущий документ.</param>
-    /// <returns>Документы, у которых документ указан в качестве LeadingDocument.</returns>
-    private static List<int> GetDocumentsByLeadingDocument(IOfficialDocument document)
+    /// <returns>Список Ид документов.</returns>
+    public virtual List<int> GetAllChildDocuments(IOfficialDocument document)
     {
-      var documents = new List<int>() { document.Id };
+      return this.GetAllChildDocuments(new List<int> { document.Id });
+    }
+    
+    /// <summary>
+    /// Получить все дочерние документы по иерархии, у которых документ из списка указан в качестве LeadingDocument.
+    /// </summary>
+    /// <param name="documentIds">Список Ид ведущих документов.</param>
+    /// <returns>Список Ид документов.</returns>
+    public virtual List<int> GetAllChildDocuments(List<int> documentIds)
+    {
+      var documents = new List<int>(documentIds);
       var allChildDocuments = new List<int>();
-      var childDocuments = OfficialDocuments.GetAll(d => d.LeadingDocument != null && documents.Contains(d.LeadingDocument.Id) && !documents.Contains(d.Id))
-        .Select(d => d.Id)
-        .ToList();
+      var childDocuments = this.GetChildDocuments(documents);
       while (childDocuments.Any())
       {
         documents.AddRange(childDocuments);
         allChildDocuments.AddRange(childDocuments);
-        childDocuments = OfficialDocuments.GetAll(d => d.LeadingDocument != null && documents.Contains(d.LeadingDocument.Id) && !documents.Contains(d.Id))
-          .Select(d => d.Id)
-          .ToList();
+        childDocuments = this.GetChildDocuments(documents);
       }
+      
       return allChildDocuments;
     }
+    
+    /// <summary>
+    /// Получить документы, у которых документ из списка указан в качестве LeadingDocument.
+    /// </summary>
+    /// <param name="documentIds">Список Ид ведущих документов.</param>
+    /// <returns>Список Ид документов.</returns>
+    public virtual List<int> GetChildDocuments(List<int> documentIds)
+    {
+      return OfficialDocuments.GetAll(d => d.LeadingDocument != null && documentIds.Contains(d.LeadingDocument.Id) && !documentIds.Contains(d.Id))
+        .Select(d => d.Id)
+        .ToList();
+    }    
     
     /// <summary>
     /// Получить вариант автоматической выдачи прав на документы.
@@ -2497,6 +3183,41 @@ namespace Sungero.Docflow.Server
       }
     }
     
+    /// <summary>
+    /// Проверить доступность таблицы Sungero_Docflow_Params.
+    /// </summary>
+    /// <returns>True - доступна, False - не доступна.</returns>
+    [Public]
+    public static bool DocflowParamsTableExist()
+    {
+      return (bool)ExecuteScalarSQLCommand(Queries.Module.ParametersTableExist);
+    }
+    
+    /// <summary>
+    /// Получить правила назначения прав по ведущим документам.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Список правил.</returns>
+    public virtual List<int> GetLeadindDocumentsRules(IOfficialDocument document)
+    {
+      var leadDocumentRuleIds = new List<int>();
+      if (document == null)
+        return leadDocumentRuleIds;
+      
+      var leadingDocumentIds = Docflow.Functions.Module.GetLeadingDocuments(document);
+      foreach (var leadingDocumentId in leadingDocumentIds)
+      {
+        var leadingDocument = OfficialDocuments.GetAll(d => d.Id == leadingDocumentId).FirstOrDefault();
+        var availableRuleIds = Docflow.Functions.Module.GetAvailableRules(leadingDocument)
+          .Where(s => s.GrantRightsOnLeadingDocument == true)
+          .Select(s => s.Id)
+          .ToList();
+        leadDocumentRuleIds.AddRange(availableRuleIds);
+      }
+      
+      return leadDocumentRuleIds;
+    }
+    
     #endregion
     
     #region Рассылка по почте
@@ -2537,7 +3258,7 @@ namespace Sungero.Docflow.Server
     /// <returns>Дата последней рассылки.</returns>
     public static DateTime GetLastNotificationDate()
     {
-      var key = "LastNotificationOfAssignment";
+      var key = Constants.Module.LastNotificationOfAssignment;
       var command = string.Format(Queries.Module.SelectDocflowParamsValue, key);
       try
       {
@@ -2559,6 +3280,19 @@ namespace Sungero.Docflow.Server
         Logger.Error("Error while getting last notification date", ex);
         return Calendar.Today;
       }
+    }
+    
+    /// <summary>
+    /// Обновить дату последней рассылки уведомлений.
+    /// </summary>
+    /// <param name="notificationDate">Дата рассылки уведомлений.</param>
+    public static void UpdateLastNotificationDate(DateTime notificationDate)
+    {
+      var key = Constants.Module.LastNotificationOfAssignment;
+      
+      var newDate = notificationDate.Add(-Calendar.UtcOffset).ToString("yyyy-MM-ddTHH:mm:ss.ffff+0");
+      Functions.Module.ExecuteSQLCommandFormat(Queries.Module.InsertOrUpdateDocflowParamsValue, new[] { key, newDate });
+      Logger.DebugFormat("Last notification date is set to {0} (UTC)", newDate);
     }
     
     /// <summary>
@@ -2707,19 +3441,6 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Обновить дату последней рассылки уведомлений.
-    /// </summary>
-    /// <param name="notificationDate">Дата рассылки уведомлений.</param>
-    public static void UpdateLastNotificationDate(DateTime notificationDate)
-    {
-      var key = "LastNotificationOfAssignment";
-      
-      var newDate = notificationDate.Add(-Calendar.UtcOffset).ToString("yyyy-MM-ddTHH:mm:ss.ffff+0");
-      Functions.Module.ExecuteSQLCommandFormat(Queries.Module.InsertOrUpdateDocflowParamsValue, new[] { key, newDate });
-      Logger.DebugFormat("Last notification date is set to {0} (UTC)", newDate);
-    }
-    
-    /// <summary>
     /// Получить локализованное имя типа задания.
     /// </summary>
     /// <param name="assignment">Базовое задание.</param>
@@ -2734,6 +3455,45 @@ namespace Sungero.Docflow.Server
         return ReviewAssignments.Info.LocalizedName;
       else
         return Assignments.Info.LocalizedName;
+    }
+    
+    /// <summary>
+    /// Получить отображаемое значение даты в часовом поясе исполнителя.
+    /// </summary>
+    /// <param name="date">Дата.</param>
+    /// <param name="performer">Исполнитель.</param>
+    /// <returns>Отображаемое значение даты.</returns>
+    /// <remarks>Виртуальные функции доступны в шаблоне письма только с паблик атрибутом.</remarks>
+    [Public]
+    public virtual string GetDateDisplayValue(DateTime? date, IUser performer)
+    {
+      if (!date.HasValue)
+        return string.Empty;
+      
+      if (performer == null)
+        performer = Users.Current;
+      
+      if (date.Value.HasTime())
+        date = date.ToUserTime(performer);
+      
+      return this.GetDateDisplayValue(date);
+    }
+    
+    /// <summary>
+    /// Получить отображаемое значение даты.
+    /// </summary>
+    /// <param name="date">Дата.</param>
+    /// <returns>Отображаемое значение.</returns>
+    public virtual string GetDateDisplayValue(DateTime? date)
+    {
+      if (!date.HasValue)
+        return string.Empty;
+      
+      var dateDisplayValue = date.Value.ToShortDateString();
+      if (date.Value.HasTime())
+        dateDisplayValue = string.Join(" ", dateDisplayValue, date.Value.ToShortTimeString());
+      
+      return dateDisplayValue;
     }
     
     /// <summary>
@@ -2877,11 +3637,8 @@ namespace Sungero.Docflow.Server
         Nustache.Core.Helpers.Register("process_text", ProcessText);
       
       var model = this.GenerateBodyModel(assignment, isExpired, hasSubstitutions);
-
-      return Nustache.Core.Render.StringToString(
-        Docflow.Resources.MailTemplate,
-        model,
-        new Nustache.Core.RenderContextBehaviour() { OnException = ex => Logger.Error(ex.Message, ex) });
+      
+      return this.GetMailBodyAsHtml(Docflow.Resources.MailTemplate, model);
     }
     
     /// <summary>
@@ -2891,9 +3648,9 @@ namespace Sungero.Docflow.Server
     /// <param name="isExpired">Признак просроченного задания.</param>
     /// <param name="hasSubstitutions">Признак просрочки.</param>
     /// <returns>Модель письма.</returns>
-    public virtual System.Collections.Hashtable GenerateBodyModel(IAssignmentBase assignment, bool isExpired, bool hasSubstitutions)
+    public virtual System.Collections.Generic.Dictionary<string, object> GenerateBodyModel(IAssignmentBase assignment, bool isExpired, bool hasSubstitutions)
     {
-      var model = new System.Collections.Hashtable();
+      var model = new Dictionary<string, object>();
       model["Assignment"] = assignment;
       model["Attachments"] = assignment.AllAttachments.Where(ent => ent.AccessRights.CanRead(assignment.Performer)).ToList();
       model["HasSubstitutions"] = hasSubstitutions;
@@ -2940,8 +3697,742 @@ namespace Sungero.Docflow.Server
 
     #endregion
     
-    #region Рассылка уведомлений
+    #region Рассылка писем со сводкой по заданиям и задачам в работе
     
+    /// <summary>
+    /// Агент отправки сводки.
+    /// </summary>
+    public virtual void SendSummaryMailNotification()
+    {
+      var employeeInfos = this.CreateEmployeesMailInfoToSendSummaryNotification();
+      if (!employeeInfos.Any())
+      {
+        this.SummaryMailLogDebug("There are no employees who need to send a summary");
+        return;
+      }
+      
+      var mailMessages = this.GetMailMessages(employeeInfos);
+      
+      var sentMessagesCount = 0;
+      var bunchSize = (int)Docflow.PublicFunctions.Module.Remote.GetDocflowParamsNumbericValue(Constants.Module.SummaryMailNotificationsBunchCountParamName);
+      if (bunchSize <= 0)
+        bunchSize = Constants.Module.SummaryMailNotificationsBunchCount;
+      
+      while (sentMessagesCount < mailMessages.Count())
+      {
+        var sentMessagesBunch = mailMessages.Skip(sentMessagesCount).Take(bunchSize).ToList();
+        Functions.Module.SendSummaryMailNotificationMessages(sentMessagesBunch);
+        sentMessagesCount += bunchSize;
+      }
+    }
+    
+    /// <summary>
+    /// Получить список писем.
+    /// </summary>
+    /// <param name="employeeMailInfos">Информация по сотрудникам.</param>
+    /// <returns>Список писем по сотрудникам.</returns>
+    public virtual List<Sungero.Core.IEmailMessage> GetMailMessages(List<Structures.Module.IEmployeeMailInfo> employeeMailInfos)
+    {
+      var periodFirstDay = this.GetMinPeriodFirstDay(employeeMailInfos);
+      var periodLastDay = this.GetMaxPeriodLastDay(employeeMailInfos);
+      this.SummaryMailLogDebug(string.Format("Data selection period: from {0} to {1}", periodFirstDay, periodLastDay));
+      
+      var assignmentAndNoticeMailInfos = new List<IWorkflowEntityMailInfo>();
+      assignmentAndNoticeMailInfos.AddRange(this.GetAssignmentMailInfosForSummary(employeeMailInfos, periodFirstDay, periodLastDay));
+      assignmentAndNoticeMailInfos.AddRange(this.GetNoticeMailInfosForSummary(employeeMailInfos, periodFirstDay));
+      var actionItemMailInfos = this.GetActionItemMailInfosForSummary(employeeMailInfos);
+      var taskMailInfos = this.GetTaskMailInfosForSummary(employeeMailInfos);
+      
+      var mailMessages = new List<IEmailMessage>();
+      foreach (var employeeInfo in employeeMailInfos)
+      {
+        employeeInfo.AssignmentsAndNotices = assignmentAndNoticeMailInfos.Where(a => a.PerformerId == employeeInfo.Id).ToList();
+        employeeInfo.ActionItems = actionItemMailInfos.Where(a => a.PerformerId == employeeInfo.Id).OrderBy(a => a.Deadline).ToList();
+        employeeInfo.Tasks = taskMailInfos.Where(a => a.PerformerId == employeeInfo.Id).OrderByDescending(a => a.Created).ToList();
+        
+        if (!employeeInfo.AssignmentsAndNotices.Any() && !employeeInfo.ActionItems.Any() && !employeeInfo.Tasks.Any())
+          continue;
+        
+        var currentDate = employeeInfo.EmployeeCurrentDate.HasValue ? employeeInfo.EmployeeCurrentDate.Value.ToShortDateString() : Calendar.Today.ToShortDateString();
+        var subject = Resources.SummaryMailSubjectFormat(employeeInfo.EmployeeShortName, currentDate);
+        var mailTo = new List<string>();
+        var mailCopy = new List<string>();
+        if (employeeInfo.NeedNotifyAssignmentsSummary)
+        {
+          mailTo.Add(employeeInfo.Email);
+          foreach (var substitutorEmail in employeeInfo.SubstitutorEmails)
+            mailCopy.Add(substitutorEmail);
+        }
+        else
+        {
+          foreach (var substitutorEmail in employeeInfo.SubstitutorEmails)
+            mailTo.Add(substitutorEmail);
+        }
+
+        var message = Functions.Module.GetSummaryMailNotificationMessage(subject,
+                                                                         mailTo,
+                                                                         mailCopy,
+                                                                         this.GetSummaryMailNotificationMailBodyAsHtml(employeeInfo));
+        mailMessages.Add(message);
+        Functions.Module.SummaryMailLogDebug(string.Format("Created mail to employee with id {0}", employeeInfo.Id));
+      }
+      return mailMessages;
+    }
+
+    /// <summary>
+    /// Создать информацию по сотрудникам для отправки им сводок по заданиям.
+    /// </summary>
+    /// <returns>Информация по сотрудникам.</returns>
+    public virtual List<Structures.Module.IEmployeeMailInfo> CreateEmployeesMailInfoToSendSummaryNotification()
+    {
+      var employees = this.GetEmployeesToSendSummaryNotification();
+      var substitutions = this.GetSubstitutionsToSendSummaryNotification(employees);
+      employees.AddRange(this.GetSubstitutorNeedSummaryNotificationEmployees(substitutions));
+      
+      var mailingList = new List<Structures.Module.IEmployeeMailInfo>();
+      foreach (var employee in employees)
+      {
+        var mailInfo = Structures.Module.EmployeeMailInfo.Create();
+        mailInfo.Id = employee.Id;
+        mailInfo.Email = employee.Email;
+        mailInfo.EmployeeShortName = Company.PublicFunctions.Employee.GetShortName(employee, Sungero.Core.DeclensionCase.Genitive, false);
+        mailInfo.LastWorkingDay = Calendar.Now.IsWorkingTime(employee) ? Calendar.Now : Calendar.Now.AddWorkingHours(employee, -1).EndOfWorkingDay();
+        mailInfo.PeriodFirstDay = Calendar.GetUserToday(employee).AddWorkingDays(-2).BeginningOfDay();
+        mailInfo.PeriodLastDay = Calendar.GetUserToday(employee).AddWorkingDays(this.GetSummaryMailNotificationClosestDaysCount()).EndOfDay();
+        mailInfo.SubstitutorEmails = substitutions.Where(s => s.SubstitutedId == employee.Id).Select(s => s.SubstitutorEmail).ToList();
+        mailInfo.NeedNotifyAssignmentsSummary = employee.NeedNotifyAssignmentsSummary.Value;
+        mailInfo.EmployeeCurrentDate = Calendar.GetUserToday(employee);
+        mailInfo.AssignmentsAndNotices = new List<Structures.Module.IWorkflowEntityMailInfo>();
+        mailInfo.ActionItems = new List<Structures.Module.IWorkflowEntityMailInfo>();
+        mailInfo.Tasks = new List<Structures.Module.IWorkflowEntityMailInfo>();
+        
+        mailingList.Add(mailInfo);
+      }
+      
+      return mailingList;
+    }
+
+    /// <summary>
+    /// Получить информацию по сотрудникам для отправки им сводок по заданиям и поручениям.
+    /// </summary>
+    /// <returns>Информация по сотрудникам.</returns>
+    public virtual List<IEmployee> GetEmployeesToSendSummaryNotification()
+    {
+      return Employees.GetAll(e => e.Status == Sungero.Company.Employee.Status.Active &&
+                              e.Email != null && e.NeedNotifyAssignmentsSummary == true).ToList();
+    }
+
+    /// <summary>
+    /// Получить информацию по замещениям сотрудников.
+    /// </summary>
+    /// <param name="employees">Сотрудники.</param>
+    /// <returns>Информация по замещениям сотрудников.</returns>
+    public virtual List<Structures.Module.IEmployeeSubstitutions> GetSubstitutionsToSendSummaryNotification(List<IEmployee> employees)
+    {
+      var employeeIds = employees.Select(e => e.Id).ToList();
+      var substitutions = Substitutions.GetAll().Where(s => s.IsSystem != true &&
+                                                       s.Status == CoreEntities.DatabookEntry.Status.Active &&
+                                                       (!s.StartDate.HasValue || Calendar.Today >= s.StartDate) &&
+                                                       (!s.EndDate.HasValue || Calendar.Today <= s.EndDate) &&
+                                                       employeeIds.Contains(s.Substitute.Id))
+        .Select(s => Structures.Module.EmployeeSubstitutions.Create(s.User.Id, s.Substitute.Id, Employees.As(s.Substitute).Email))
+        .ToList();
+      return substitutions;
+    }
+
+    /// <summary>
+    /// Получить сотрудников, которым не отправляется сводка, но их замещающим сводку отправлять надо.
+    /// </summary>
+    /// <param name="substitutions">Список с информацией по замещениям.</param>
+    /// <returns>Сотрудники, которым не отправляется сводка, но их замещающим сводку отправлять надо.</returns>
+    public virtual List<IEmployee> GetSubstitutorNeedSummaryNotificationEmployees(List<Structures.Module.IEmployeeSubstitutions> substitutions)
+    {
+      var substitutedIds = substitutions.Select(s => s.SubstitutedId).ToList();
+      return Employees.GetAll()
+        .Where(e => substitutedIds.Contains(e.Id) &&
+               e.NeedNotifyAssignmentsSummary == false)
+        .ToList();
+    }
+
+    /// <summary>
+    /// Сформировать письмо со сводкой по заданиям и задачам сотрудника.
+    /// </summary>
+    /// <param name="subject">Тема.</param>
+    /// <param name="to">Кому.</param>
+    /// <param name="copy">Копия.</param>
+    /// <param name="body">Тело.</param>
+    /// <returns>Письмо.</returns>
+    public virtual Sungero.Core.IEmailMessage GetSummaryMailNotificationMessage(string subject, List<string> to, List<string> copy, string body)
+    {
+      var message = Mail.CreateMailMessage();
+      message.Body = body;
+      message.IsBodyHtml = true;
+      message.Subject = subject;
+      message.To.Add(to);
+      message.CC.AddRange(copy);
+      
+      this.AddLogo(message);
+      this.AddPngAttachmentFromBase64(message, "openlink.png", Resources.OpenLinkPicture);
+      return message;
+    }
+
+    /// <summary>
+    /// Добавить картинку в формате PNG, закодированную в Base64, во вложения письма.
+    /// </summary>
+    /// <param name="message">Письмо.</param>
+    /// <param name="attachmentId">ИД вложения в письме.</param>
+    /// <param name="attachmentAsBase64">Содержимое картинки, закодированное в Base64.</param>
+    public virtual void AddPngAttachmentFromBase64(Sungero.Core.IEmailMessage message, string attachmentId, string attachmentAsBase64)
+    {
+      var attachmentBytes = Convert.FromBase64String(attachmentAsBase64);
+      var image = new System.IO.MemoryStream(attachmentBytes);
+      
+      var attachment = message.AddAttachment(image, attachmentId);
+      attachment.ContentId = attachmentId;
+      attachment.IsInline = true;
+      attachment.MediaType = "image/png";
+    }
+
+    /// <summary>
+    /// Отправить письма со сводками по заданиям.
+    /// </summary>
+    /// <param name="messages">Список писем со сводками.</param>
+    public virtual void SendSummaryMailNotificationMessages(List<Sungero.Core.IEmailMessage> messages)
+    {
+      try
+      {
+        Mail.Send(messages);
+      }
+      catch (Exception ex)
+      {
+        this.SummaryMailLogError("Email messages sending failed. Try send messages one by one", ex);
+        foreach (var mail in messages)
+        {
+          try
+          {
+            // Переполучить сообщение для корректной отправки.
+            Mail.Send(this.GetSummaryMailNotificationMessage(mail.Subject, mail.To.ToList(), mail.CC.ToList(), mail.Body));
+          }
+          catch (Exception exception)
+          {
+            var mailTo = string.Join(", ", mail.To);
+            this.SummaryMailLogError(string.Format("Email message to {0} sending failed", mailTo), exception);
+          }
+        }
+      }
+    }
+
+    /// <summary>
+    /// Получить по всем сотрудникам максимальный срок для задач/заданий, которые должны попасть в сводку.
+    /// </summary>
+    /// <param name="employeesMailInfo">Информация по сотрудникам.</param>
+    /// <returns>Максимальный срок для задач/заданий, которые должны попасть в сводку.</returns>
+    public virtual DateTime GetMaxPeriodLastDay(List<Structures.Module.IEmployeeMailInfo> employeesMailInfo)
+    {
+      if (employeesMailInfo == null || employeesMailInfo.Count() == 0)
+        return Calendar.Today;
+      
+      return employeesMailInfo.Where(t => t.PeriodLastDay != null).Select(t => t.PeriodLastDay.Value).Max(t => t);
+    }
+
+    /// <summary>
+    /// Получить по всем сотрудникам минимальную дату создания заданий/уведомлений, начиная с которой они должны попасть в сводку.
+    /// </summary>
+    /// <param name="employeesMailInfo">Информация по сотрудникам.</param>
+    /// <returns>Минимальная дата создания заданий/уведомлений, начиная с которой они должны попасть в сводку.</returns>
+    public virtual DateTime GetMinPeriodFirstDay(List<Structures.Module.IEmployeeMailInfo> employeesMailInfo)
+    {
+      if (employeesMailInfo == null || employeesMailInfo.Count() == 0)
+        return Calendar.Today;
+      
+      return employeesMailInfo.Where(t => t.PeriodFirstDay != null).Select(t => t.PeriodFirstDay.Value).Min(t => t);
+    }
+
+    /// <summary>
+    /// Получить информацию по поручениям на контроле для сводки.
+    /// </summary>
+    /// <param name="employeeMailInfos">Информация по сотрудникам.</param>
+    /// <returns>Информация по поручениям на контроле.</returns>
+    public virtual List<Structures.Module.IWorkflowEntityMailInfo> GetActionItemMailInfosForSummary(List<Structures.Module.IEmployeeMailInfo> employeeMailInfos)
+    {
+      var employeeIds = employeeMailInfos.Select(e => e.Id).ToList();
+      var hyperlinkTemplate = Sungero.Core.Hyperlinks.Get(RecordManagement.ActionItemExecutionTasks.Info, int.MaxValue);
+      
+      var actionItems = RecordManagement.PublicFunctions.Module.GetActionItemsUnderControl(employeeIds, false);
+
+      var actionItemInfoList = actionItems
+        .Select(a => Structures.Module.WorkflowEntityMailInfo.Create(a.Id,
+                                                                     a.Created,
+                                                                     a.Deadline ?? a.FinalDeadline,
+                                                                     null,
+                                                                     false,
+                                                                     false,
+                                                                     a.Subject,
+                                                                     a.Supervisor.Id,
+                                                                     this.GetAuthorName(a.Assignee),
+                                                                     hyperlinkTemplate.Replace(int.MaxValue.ToString(), a.Id.ToString()),
+                                                                     false,
+                                                                     false,
+                                                                     true,
+                                                                     a.IsCompoundActionItem == true))
+        .ToList();
+      
+      var tasksEmployees = actionItemInfoList.Select(a => a.PerformerId).Distinct().ToList();
+      var employeesCache = Company.Employees.GetAll().Where(e => tasksEmployees.Contains(e.Id)).ToDictionary(e => e.Id);
+      
+      foreach (var taskMailInfo in actionItemInfoList)
+      {
+        if (!taskMailInfo.Deadline.HasValue)
+          continue;
+        
+        var performer = Employees.Null;
+        employeesCache.TryGetValue(taskMailInfo.PerformerId, out performer);
+        
+        // Перевод Deadline в пользовательское время.
+        DateTime deadline = taskMailInfo.Deadline.Value;
+        if (deadline.HasTime())
+          deadline = deadline.ToUserTime(performer);
+        taskMailInfo.Deadline = deadline;
+        taskMailInfo.DeadlineDisplayValue = this.GetDateDisplayValue(deadline);
+        
+        // Определение просроченности.
+        taskMailInfo.IsOverdue = taskMailInfo.Deadline.Value.HasTime() ?
+          taskMailInfo.Deadline < Calendar.GetUserNow(performer) :
+          taskMailInfo.Deadline < Calendar.GetUserToday(performer);
+      }
+      
+      return actionItemInfoList;
+    }
+
+    /// <summary>
+    /// Получить информацию по задачам для сводки с учетом фильтров.
+    /// </summary>
+    /// <param name="employeeMailInfos">Информация по сотрудникам.</param>
+    /// <returns>Информация по задачам.</returns>
+    public virtual List<Structures.Module.IWorkflowEntityMailInfo> GetTaskMailInfosForSummary(List<Structures.Module.IEmployeeMailInfo> employeeMailInfos)
+    {
+      var taskMailInfoList = this.GetOutgoingTaskMailInfosForSummary(employeeMailInfos);
+      var tasksEmployees = taskMailInfoList.Select(a => a.PerformerId).Distinct().ToList();
+      var employeesCache = Company.Employees.GetAll().Where(e => tasksEmployees.Contains(e.Id)).ToDictionary(e => e.Id);
+      // Для контейнера составного поручения срок берем из FinalDeadline.
+      var tasksWitoutDeadline = taskMailInfoList.Where(x => x.Deadline == null).Select(x => x.Id).ToList();
+      var actionItemFinalDeadline = RecordManagement.ActionItemExecutionTasks.GetAll().Where(t => tasksWitoutDeadline.Contains(t.Id) && t.FinalDeadline.HasValue).ToDictionary(k => k.Id, v => v.FinalDeadline);
+      
+      foreach (var taskMailInfo in taskMailInfoList)
+      {
+        DateTime? finalDeadline;
+        actionItemFinalDeadline.TryGetValue(taskMailInfo.Id, out finalDeadline);
+        if (!taskMailInfo.Deadline.HasValue && finalDeadline.HasValue)
+          taskMailInfo.Deadline = finalDeadline;
+        
+        if (!taskMailInfo.Deadline.HasValue)
+          continue;
+        
+        var performer = Employees.Null;
+        employeesCache.TryGetValue(taskMailInfo.PerformerId, out performer);
+        
+        // Перевод Deadline в пользовательское время.
+        DateTime deadline = taskMailInfo.Deadline.Value;
+        if (deadline.HasTime())
+          deadline = deadline.ToUserTime(performer);
+        taskMailInfo.Deadline = deadline;
+        taskMailInfo.DeadlineDisplayValue = this.GetDateDisplayValue(deadline);
+        
+        // Определение просроченности.
+        taskMailInfo.IsOverdue = taskMailInfo.Deadline.Value.HasTime() ?
+          taskMailInfo.Deadline < Calendar.GetUserNow(performer) :
+          taskMailInfo.Deadline < Calendar.GetUserToday(performer);
+      }
+      
+      return taskMailInfoList;
+    }
+    
+    /// <summary>
+    /// Получить информацию по задачам.
+    /// </summary>
+    /// <param name="employeeMailInfos">Информация по сотрудникам.</param>
+    /// <returns>Информация по задачам.</returns>
+    public virtual List<Structures.Module.IWorkflowEntityMailInfo> GetOutgoingTaskMailInfosForSummary(List<Structures.Module.IEmployeeMailInfo> employeeMailInfos)
+    {
+      var employeeIds = employeeMailInfos.Select(e => e.Id).ToList();
+      var hyperlinkTemplate = Sungero.Core.Hyperlinks.Get(Workflow.Tasks.Info, int.MaxValue);
+      
+      var tasksAuthor = Tasks.GetAll()
+        .Where(t => t.Status != Workflow.Task.Status.Completed &&
+               t.Status != Workflow.Task.Status.Aborted &&
+               t.Status != Workflow.Task.Status.Suspended &&
+               t.Status != Workflow.Task.Status.Draft)
+        .Where(t => employeeIds.Contains(t.Author.Id) &&
+               (!RecordManagement.ActionItemExecutionTasks.Is(t) || RecordManagement.ActionItemExecutionTasks.As(t).Supervisor == null ||
+                !Equals(RecordManagement.ActionItemExecutionTasks.As(t).Supervisor, t.Author)))
+        .Select(t => Structures.Module.WorkflowEntityMailInfo.Create(t.Id,
+                                                                     t.Created,
+                                                                     t.MaxDeadline,
+                                                                     null,
+                                                                     false,
+                                                                     false,
+                                                                     t.Subject,
+                                                                     t.Author.Id,
+                                                                     this.GetAuthorName(t.Author),
+                                                                     hyperlinkTemplate.Replace(int.MaxValue.ToString(), t.Id.ToString()),
+                                                                     true,
+                                                                     false,
+                                                                     false,
+                                                                     false))
+        .ToList();
+      
+      var tasksStartedBy = Tasks.GetAll()
+        .Where(t => t.Status != Workflow.Task.Status.Completed &&
+               t.Status != Workflow.Task.Status.Aborted &&
+               t.Status != Workflow.Task.Status.Suspended &&
+               t.Status != Workflow.Task.Status.Draft)
+        .Where(t => employeeIds.Contains(t.StartedBy.Id) &&
+               (!RecordManagement.ActionItemExecutionTasks.Is(t) || RecordManagement.ActionItemExecutionTasks.As(t).Supervisor == null ||
+                !Equals(RecordManagement.ActionItemExecutionTasks.As(t).Supervisor, t.StartedBy)))
+        .Where(t => t.StartedBy.Id != t.Author.Id)
+        .Select(t => Structures.Module.WorkflowEntityMailInfo.Create(t.Id,
+                                                                     t.Created,
+                                                                     t.MaxDeadline,
+                                                                     null,
+                                                                     false,
+                                                                     false,
+                                                                     t.Subject,
+                                                                     t.StartedBy.Id,
+                                                                     this.GetAuthorName(t.Author),
+                                                                     hyperlinkTemplate.Replace(int.MaxValue.ToString(), t.Id.ToString()),
+                                                                     true,
+                                                                     false,
+                                                                     false,
+                                                                     false))
+        .ToList();
+      
+      var taskMailInfoList = new List<Structures.Module.IWorkflowEntityMailInfo>();
+      taskMailInfoList.AddRange(tasksAuthor);
+      taskMailInfoList.AddRange(tasksStartedBy);
+      return taskMailInfoList;
+    }
+
+    /// <summary>
+    /// Получить информацию по заданиям для сводки с учетом фильтров.
+    /// </summary>
+    /// <param name="employeeMailInfos">Информация по сотрудникам.</param>
+    /// <param name="periodFirstDay">Дата создания задания/уведомления, начиная с которой оно должно попасть в сводку сотрудника.</param>
+    /// <param name="periodLastDay">Дата срока задания, после которой задание не должно попадать в сводку.</param>
+    /// <returns>Информация по заданиям.</returns>
+    public virtual List<Structures.Module.IWorkflowEntityMailInfo> GetAssignmentMailInfosForSummary(List<Structures.Module.IEmployeeMailInfo> employeeMailInfos,
+                                                                                                    DateTime periodFirstDay,
+                                                                                                    DateTime periodLastDay)
+    {
+      var employeeIds = employeeMailInfos.Select(e => e.Id).ToList();
+      var hyperlinkTemplate = Sungero.Core.Hyperlinks.Get(Assignments.Info, int.MaxValue);
+      
+      var assignmentMailInfoList = Assignments.GetAll(a => a.Status == Workflow.AssignmentBase.Status.InProcess &&
+                                                      (a.Deadline.HasValue && a.Deadline <= periodLastDay || a.IsRead == false && a.Created >= periodFirstDay) &&
+                                                      a.Performer != null &&
+                                                      employeeIds.Contains(a.Performer.Id))
+        .Select(a => Structures.Module.WorkflowEntityMailInfo.Create(a.Id, a.Created, a.Deadline, null,
+                                                                     a.Deadline != null && (!a.Deadline.Value.HasTime() && a.Deadline < Calendar.Today || a.Deadline.Value.HasTime() && a.Deadline < Calendar.Now),
+                                                                     a.IsRead == false, a.Subject, a.Performer.Id, this.GetAuthorName(a.Author),
+                                                                     hyperlinkTemplate.Replace(int.MaxValue.ToString(), a.Id.ToString()), false, false, false, false))
+        .ToList();
+      
+      var assignmentEmployees = assignmentMailInfoList.Select(a => a.PerformerId).Distinct().ToList();
+      var employeesCache = Company.Employees.GetAll().Where(e => assignmentEmployees.Contains(e.Id)).ToDictionary(e => e.Id);
+      
+      foreach (var assignmentMailInfo in assignmentMailInfoList)
+      {
+        if (!assignmentMailInfo.Deadline.HasValue)
+          continue;
+        
+        var performer = Employees.Null;
+        employeesCache.TryGetValue(assignmentMailInfo.PerformerId, out performer);
+        
+        // Перевод Deadline в пользовательское время.
+        DateTime deadline = assignmentMailInfo.Deadline.Value;
+        if (deadline.HasTime())
+          deadline = deadline.ToUserTime(performer);
+        assignmentMailInfo.Deadline = deadline;
+        assignmentMailInfo.DeadlineDisplayValue = this.GetDateDisplayValue(deadline);
+        
+        // Определение просроченности.
+        assignmentMailInfo.IsOverdue = assignmentMailInfo.Deadline.Value.HasTime() ?
+          assignmentMailInfo.Deadline < Calendar.GetUserNow(performer) :
+          assignmentMailInfo.Deadline < Calendar.GetUserToday(performer);
+        
+        // Снять признак "Новое" для заданий, которые фигурируют в других блоках.
+        if (assignmentMailInfo.IsNew == true)
+        {
+          var firstDay = employeeMailInfos.Where(e => e.Id == assignmentMailInfo.PerformerId).Select(e => e.PeriodFirstDay).First();
+          var lastDay = employeeMailInfos.Where(e => e.Id == assignmentMailInfo.PerformerId).Select(e => e.PeriodLastDay).First();
+          if (assignmentMailInfo.Created < firstDay || (assignmentMailInfo.Deadline.HasValue && assignmentMailInfo.Deadline <= lastDay))
+            assignmentMailInfo.IsNew = false;
+        }
+      }
+      
+      return assignmentMailInfoList;
+    }
+
+    /// <summary>
+    /// Получить информацию по уведомлениям для сводки с учетом фильтров.
+    /// </summary>
+    /// <param name="employeeMailInfos">Информация по сотрудникам.</param>
+    /// <param name="periodFirstDay">Дата создания задания/уведомления, начиная с которой оно должно попасть в сводку сотрудника.</param>
+    /// <returns>Информация по уведомлениям.</returns>
+    public virtual List<Structures.Module.IWorkflowEntityMailInfo> GetNoticeMailInfosForSummary(List<Structures.Module.IEmployeeMailInfo> employeeMailInfos, DateTime periodFirstDay)
+    {
+      var employeeIds = employeeMailInfos.Select(e => e.Id).ToList();
+      var hyperlinkTemplate = Sungero.Core.Hyperlinks.Get(Notices.Info, int.MaxValue);
+      
+      return Notices.GetAll(a => a.IsRead == false && a.Created >= periodFirstDay &&
+                            a.Performer != null &&
+                            employeeIds.Contains(a.Performer.Id))
+        .Select(a => Structures.Module.WorkflowEntityMailInfo.Create(a.Id, a.Created, null, null, false, true, a.Subject, a.Performer.Id, this.GetAuthorName(a.Author),
+                                                                     hyperlinkTemplate.Replace(int.MaxValue.ToString(), a.Id.ToString()), false, true, false, false))
+        .ToList();
+    }
+
+    /// <summary>
+    /// Получить количество рабочих дней, которые будут считаться ближайшим временем для выполнения заданий.
+    /// </summary>
+    /// <returns>Количество рабочих дней, которые считаются как ближайшее время для выполнения заданий.</returns>
+    public virtual int GetSummaryMailNotificationClosestDaysCount()
+    {
+      return Constants.Module.SummaryMailNotificationClosestDaysCount;
+    }
+
+    /// <summary>
+    /// Получить размер левого отступа для шаблона письма.
+    /// </summary>
+    /// <returns>Размер левого отступа.</returns>
+    public virtual int GetSummaryMailLeftMarginSize()
+    {
+      return Constants.Module.SummaryMailLeftMarginSize;
+    }
+    
+    /// <summary>
+    /// Получить тело письма со сводкой по сотруднику в виде HTML.
+    /// </summary>
+    /// <param name="employeeMailInfo">Информация по сотруднику.</param>
+    /// <returns>Тело письма со сводкой по сотруднику в виде HTML.</returns>
+    public virtual string GetSummaryMailNotificationMailBodyAsHtml(Structures.Module.IEmployeeMailInfo employeeMailInfo)
+    {
+      var employee = Employees.GetAll().Where(x => x.Id == employeeMailInfo.Id).FirstOrDefault();
+      var assignmentsBlockContent = this.GetSummaryMailNotificationAssignmentsAndNoticesContentBlockAsHtml(Sungero.Docflow.Resources.AssignmentsBlockName,
+                                                                                                           employeeMailInfo.AssignmentsAndNotices,
+                                                                                                           employee,
+                                                                                                           employeeMailInfo.PeriodLastDay);
+      var actionItemBlockContent = this.GetSummaryMailNotificationTasksContentBlockAsHtml(Sungero.Docflow.Resources.ActionItemsBlockName,
+                                                                                          employeeMailInfo.ActionItems);
+      var taskBlockContent = this.GetSummaryMailNotificationTasksContentBlockAsHtml(Sungero.Docflow.Resources.TasksBlockName,
+                                                                                    employeeMailInfo.Tasks);
+      var model = this.GenerateSummaryBodyModel(assignmentsBlockContent, actionItemBlockContent, taskBlockContent);
+      
+      return this.GetMailBodyAsHtml(Docflow.Resources.SummaryMailMainTemplate, model);
+    }
+
+    /// <summary>
+    /// Получить тело письма на основе шаблона и модели.
+    /// </summary>
+    /// <param name="template">Шаблон.</param>
+    /// <param name="model">Модель.</param>
+    /// <returns>Тело письма.</returns>
+    public virtual string GetMailBodyAsHtml(string template, System.Collections.Generic.Dictionary<string, object> model)
+    {
+      if (string.IsNullOrEmpty(template) || model == null)
+        return string.Empty;
+      
+      return Nustache.Core.Render.StringToString(template, model,
+                                                 new Nustache.Core.RenderContextBehaviour() { OnException = ex => Logger.Error(ex.Message, ex) });
+    }
+
+    /// <summary>
+    /// Сгенерировать общую модель письма.
+    /// </summary>
+    /// <param name="assignmentsBlockContent">Блок с заданиями и уведомлениями.</param>
+    /// <param name="actionItemBlockContent">Блок с поручениями.</param>
+    /// <param name="taskBlockContent">Блок с исходящими заданиями.</param>
+    /// <returns>Модель письма.</returns>
+    public virtual System.Collections.Generic.Dictionary<string, object> GenerateSummaryBodyModel(string assignmentsBlockContent,
+                                                                                                  string actionItemBlockContent,
+                                                                                                  string taskBlockContent)
+    {
+      var model = new Dictionary<string, object>();
+      model["AssignmentsBlock"] = assignmentsBlockContent;
+      model["ActionItemsBlock"] = actionItemBlockContent;
+      model["TasksBlock"] = taskBlockContent;
+      model["AdministratorEmail"] = AdministrationSettings.AdministratorEmail;
+      return model;
+    }
+
+    /// <summary>
+    /// Получить содержание блока сводки с заданиями и уведомлениями в виде HTML.
+    /// </summary>
+    /// <param name="blockName">Заголовок блока.</param>
+    /// <param name="assignmentsAndNotices">Задания и уведомлния.</param>
+    /// <param name="employee">Сотрудник для которого формируется сводка.</param>
+    /// <param name="periodLastDay">Срок, после которого задание не должно попадать в сводку.</param>
+    /// <returns>Содержание блока сводки с заданиями и уведомлениями в виде HTML.</returns>
+    public virtual string GetSummaryMailNotificationAssignmentsAndNoticesContentBlockAsHtml(string blockName,
+                                                                                            List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> assignmentsAndNotices,
+                                                                                            IEmployee employee,
+                                                                                            DateTime? periodLastDay)
+    {
+      if (assignmentsAndNotices == null || !assignmentsAndNotices.Any())
+        return string.Empty;
+      
+      var assignmentsAndNoticesCount = 0;
+      var groupsContent = new List<string>();
+      var groups = this.GetSummaryMailNotificationAssignmentsAndNoticesGroups(assignmentsAndNotices, employee, periodLastDay);
+      foreach (var group in groups)
+        if (group.Value.Any())
+      {
+        groupsContent.Add(this.GetSummaryMailNotificationGroupContentAsHtml(group.Key, group.Value.OrderByDescending(a => a.Created).ToList()));
+        assignmentsAndNoticesCount += group.Value.Count;
+      }
+      
+      if (!groupsContent.Any())
+        return string.Empty;
+      
+      var groupContent = string.Join(Environment.NewLine, groupsContent);
+      var model = this.GenerateBlockContentModel(blockName, groupContent, assignmentsAndNoticesCount, false, 0);
+      
+      return this.GetMailBodyAsHtml(Docflow.Resources.SummaryMailBlockContentTemplate, model);
+    }
+
+    /// <summary>
+    /// Получить содержание блока сводки с задачами в виде HTML.
+    /// </summary>
+    /// <param name="blockName">Заголовок блока.</param>
+    /// <param name="tasks">Задачи.</param>
+    /// <returns>Содержание блока сводки с задачами в виде HTML.</returns>
+    public virtual string GetSummaryMailNotificationTasksContentBlockAsHtml(string blockName,
+                                                                            List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> tasks)
+    {
+      if (blockName == null || tasks == null || !tasks.Any())
+        return string.Empty;
+
+      var tasksListContent = this.GetSummaryMailNotificationWorkflowEntitiesListContentAsHtml(tasks);
+      var model = this.GenerateBlockContentModel(blockName, tasksListContent, tasks.Count, false, 0);
+      
+      return this.GetMailBodyAsHtml(Docflow.Resources.SummaryMailBlockContentTemplate, model);
+    }
+
+    /// <summary>
+    /// Сгенерировать модель содержания блока.
+    /// </summary>
+    /// <param name="blockName">Название блока.</param>
+    /// <param name="content">Содержание блока.</param>
+    /// <param name="count">Количество элементов в блоке.</param>
+    /// <param name="isNeedShowCount">Нужно ли выводить количество элементов в блоке.</param>
+    /// <param name="leftMarginSize">Размер левого отступа.</param>
+    /// <returns>Модель содержания блока.</returns>
+    public virtual System.Collections.Generic.Dictionary<string, object> GenerateBlockContentModel(string blockName, string content,
+                                                                                                   int count, bool isNeedShowCount,
+                                                                                                   int leftMarginSize)
+    {
+      var model = new Dictionary<string, object>();
+      model["Name"] = blockName;
+      model["Content"] = content;
+      model["Count"] = count;
+      model["IsNeedShowCount"] = isNeedShowCount;
+      model["LeftMarginSize"] = leftMarginSize;
+      return model;
+    }
+
+    /// <summary>
+    /// Получить группы сводки для списка заданий и уведомлений.
+    /// </summary>
+    /// <param name="assignmentsAndNotices">Список обрабатываемых сущностей.</param>
+    /// <param name="employee">Сотрудник для которого формируется сводка.</param>
+    /// <param name="periodLastDay">Дата срока сущности, после которой она не должна попадать в сводку.</param>
+    /// <returns>Группы сводки для списка заданий и уведомлений.</returns>
+    public virtual System.Collections.Generic.Dictionary<string, List<Structures.Module.IWorkflowEntityMailInfo>> GetSummaryMailNotificationAssignmentsAndNoticesGroups(
+      List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> assignmentsAndNotices,
+      IEmployee employee,
+      DateTime? periodLastDay)
+    {
+      var groups = new Dictionary<string, List<Structures.Module.IWorkflowEntityMailInfo>>();
+      if (employee == null ||
+          assignmentsAndNotices == null ||
+          !assignmentsAndNotices.Any())
+        return groups;
+      
+      var endOfToday = Calendar.GetUserToday(employee).EndOfDay();
+      groups.Add(Resources.NewAssignmentsGroupName, assignmentsAndNotices.Where(a => a.IsNew).ToList());
+      groups.Add(Resources.OverdueAssignmentsGroupName, assignmentsAndNotices.Where(a => a.IsOverdue).ToList());
+      groups.Add(Resources.TodayAssignmentsGroupName, assignmentsAndNotices.Where(a => !a.IsOverdue && a.Deadline <= endOfToday).ToList());
+      groups.Add(Resources.ClosestDaysAssignmentsGroupName, assignmentsAndNotices.Where(a => a.Deadline > endOfToday && a.Deadline <= periodLastDay).ToList());
+      
+      return groups;
+    }
+
+    /// <summary>
+    /// Получить содержание группы в виде HTML.
+    /// </summary>
+    /// <param name="name">Название группы.</param>
+    /// <param name="entities">Список информации о сущностях.</param>
+    /// <returns>Содержание группы в виде HTML.</returns>
+    public virtual string GetSummaryMailNotificationGroupContentAsHtml(string name, List<Structures.Module.IWorkflowEntityMailInfo> entities)
+    {
+      var entitiesGroupContent = this.GetSummaryMailNotificationWorkflowEntitiesListContentAsHtml(entities);
+      var leftMarginSize = this.GetSummaryMailLeftMarginSize();
+      var model = this.GenerateBlockContentModel(name, entitiesGroupContent, entities.Count, true, leftMarginSize);
+      return this.GetMailBodyAsHtml(Docflow.Resources.SummaryMailGroupContentTemplate, model);
+    }
+
+    /// <summary>
+    /// Получить содержание списка сущностей в виде HTML.
+    /// </summary>
+    /// <param name="workflowEntitiesMailInfo">Список обрабатываемых сущностей.</param>
+    /// <returns>Содержание списка сущностей в виде HTML.</returns>
+    public virtual string GetSummaryMailNotificationWorkflowEntitiesListContentAsHtml(List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> workflowEntitiesMailInfo)
+    {
+      var leftMarginSize = this.GetSummaryMailLeftMarginSize();
+      var model = this.GenerateWorkflowEntitiesBodyModel(workflowEntitiesMailInfo, leftMarginSize * 2);
+      
+      return this.GetMailBodyAsHtml(Docflow.Resources.SummaryMailWorkflowEntitiesListTemplate, model);
+    }
+
+    /// <summary>
+    /// Сгенерировать модель письма.
+    /// </summary>
+    /// <param name="workflowEntities">Список информации о обрабатываемых сущностях.</param>
+    /// <param name="leftMarginSize">Размер левого отступа.</param>
+    /// <returns>Модель письма.</returns>
+    public virtual System.Collections.Generic.Dictionary<string, object> GenerateWorkflowEntitiesBodyModel(List<Sungero.Docflow.Structures.Module.IWorkflowEntityMailInfo> workflowEntities,
+                                                                                                           int leftMarginSize)
+    {
+      var model = new Dictionary<string, object>();
+      model["WorkflowEntities"] = workflowEntities;
+      model["LeftMarginSize"] = leftMarginSize;
+      return model;
+    }
+
+    /// <summary>
+    /// Записать сообщение в лог.
+    /// </summary>
+    /// <param name="text">Сообщение.</param>
+    public virtual void SummaryMailLogDebug(string text)
+    {
+      var format = string.Format("Summary Mail. {0}", text);
+      Logger.Debug(format);
+    }
+
+    /// <summary>
+    /// Записать ошибку в лог.
+    /// </summary>
+    /// <param name="text">Ошибка.</param>
+    /// <param name="exception">Исключение.</param>
+    public virtual void SummaryMailLogError(string text, System.Exception exception)
+    {
+      var format = string.Format("Summary Mail. {0}", text);
+      Logger.Error(format, exception);
+    }
+
+    #endregion
+
+    #region Рассылка уведомлений
+
     /// <summary>
     /// Получить параметры по умолчанию для рассылки уведомлений по документам.
     /// </summary>
@@ -2964,7 +4455,7 @@ namespace Sungero.Docflow.Server
       
       return param;
     }
-    
+
     /// <summary>
     /// Получить дату последней рассылки уведомлений.
     /// </summary>
@@ -2987,7 +4478,7 @@ namespace Sungero.Docflow.Server
       Logger.DebugFormat("Last notification date in DB is {0}", lastNotificationDate.Value);
       return lastNotificationDate.Value;
     }
-    
+
     /// <summary>
     /// Получить документы, по которым уже отправлены уведомления.
     /// </summary>
@@ -3017,7 +4508,7 @@ namespace Sungero.Docflow.Server
         }
       }
     }
-    
+
     /// <summary>
     /// Убрать из таблицы для отправки Id документов.
     /// </summary>
@@ -3034,7 +4525,7 @@ namespace Sungero.Docflow.Server
       command = string.Format(Queries.Module.DeleteDocumentIdsWithoutTask, expiringDocsTableName, string.Join(", ", ids));
       Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommand(command);
     }
-    
+
     /// <summary>
     /// Очистить таблицу для отправки уведомлений.
     /// </summary>
@@ -3053,7 +4544,7 @@ namespace Sungero.Docflow.Server
       
       Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommand(command);
     }
-    
+
     /// <summary>
     /// Записать Id документов в таблицу для отправки.
     /// </summary>
@@ -3069,12 +4560,52 @@ namespace Sungero.Docflow.Server
       var command = string.Format(Queries.Module.AddExpiringDocumentsToTable, expiringDocsTableName, string.Join("), (", ids));
       Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommand(command);
     }
-    
+
     /// <summary>
     /// Сотрудники, которых необходимо уведомить о сроке доверенности.
     /// </summary>
     /// <param name="powerOfAttorney">Доверенность.</param>
     /// <returns>Список сотрудников.</returns>
+    public virtual List<IUser> GetNotificationPoAPerformers(IPowerOfAttorneyBase powerOfAttorney)
+    {
+      var issuedTo = powerOfAttorney.IssuedTo;
+      var preparedBy = powerOfAttorney.PreparedBy;
+      var issuedToManager = Employees.Null;
+      if (issuedTo != null)
+        issuedToManager = PublicFunctions.Module.Remote.GetManager(issuedTo);
+      
+      var performers = new List<IUser>() { };
+      
+      if (issuedTo != null)
+      {
+        var needNotice = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(issuedTo).MyPowersOfAttorneyNotification;
+        if (needNotice == true)
+          performers.Add(issuedTo);
+      }
+      
+      if (preparedBy != null)
+      {
+        var needNotice = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(preparedBy).MyPowersOfAttorneyNotification;
+        if (needNotice == true)
+          performers.Add(preparedBy);
+      }
+      
+      if (issuedToManager != null)
+      {
+        var needNotice = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(issuedToManager).MySubordinatesPowersOfAttorneyNotification;
+        if (needNotice == true)
+          performers.Add(issuedToManager);
+      }
+      
+      return performers;
+    }
+
+    /// <summary>
+    /// Сотрудники, которых необходимо уведомить о сроке доверенности.
+    /// </summary>
+    /// <param name="powerOfAttorney">Доверенность.</param>
+    /// <returns>Список сотрудников.</returns>
+    [Obsolete("")]
     public virtual List<IUser> GetNotificationPerformers(IPowerOfAttorney powerOfAttorney)
     {
       var issuedTo = powerOfAttorney.IssuedTo;
@@ -3124,7 +4655,7 @@ namespace Sungero.Docflow.Server
       Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommand(command);
       Logger.DebugFormat("Task {0} for document {1} started and marked in db.", task, document);
     }
-    
+
     /// <summary>
     /// Проверить, по всем ли документам запущены уведомления.
     /// </summary>
@@ -3152,7 +4683,7 @@ namespace Sungero.Docflow.Server
         return false;
       }
     }
-    
+
     /// <summary>
     /// Обновить дату последней рассылки уведомлений.
     /// </summary>
@@ -3167,7 +4698,7 @@ namespace Sungero.Docflow.Server
       Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommand(command);
       Logger.DebugFormat("Last notification date is set to {0}", newDate);
     }
-    
+
     /// <summary>
     /// Попытаться отправить уведомления по документу, срок которого истекает.
     /// </summary>
@@ -3239,11 +4770,11 @@ namespace Sungero.Docflow.Server
         Logger.ErrorFormat("{0} notification failed.", ex, documentLogView);
       }
     }
-    
+
     #endregion
-    
+
     #region Отчет эл. обмена
-    
+
     /// <summary>
     /// Получить данные для формирования отчета Отчет эл. обмена.
     /// </summary>
@@ -3261,11 +4792,24 @@ namespace Sungero.Docflow.Server
       var hasCancellation = false;
       
       var signature = Signatures.Get(documentInfo.Document).SingleOrDefault(x => x.Id == documentInfo.SenderSignId);
-      
+      var senderInfo = Exchange.PublicFunctions.ExchangeDocumentInfo.GetSigningOrganizationInfo(documentInfo, signature);
+      var receiverSignature = Signatures.Get(documentInfo.Document).SingleOrDefault(x => x.Id == documentInfo.ReceiverSignId);
+      var receiverInfo = Exchange.PublicFunctions.ExchangeDocumentInfo.GetSigningOrganizationInfo(documentInfo, receiverSignature);
+      string receiverName = receiverInfo.Name;
+      string senderName = senderInfo.Name;
+      if (!documentInfo.ReceiverSignId.HasValue)
+      {
+        receiverName =
+          senderInfo.IsOurSignature ?
+          documentInfo.Counterparty.Name :
+          documentInfo.RootBox.BusinessUnit.Name;
+      }
       dataTable.Add(this.FillTableRow(documentInfo.Document.Name,
                                       null,
                                       documentInfo.MessageType == MessageType.Incoming ? ReportResources.ExchangeOrderReport.TitleAccepted : ReportResources.ExchangeOrderReport.TitleSended,
-                                      signature.GetDataSignature(), null));
+                                      signature.GetDataSignature(),
+                                      null,
+                                      senderName));
       
       var documents = documentInfo.ServiceDocuments.Where(x => x.Date != null)
         .OrderByDescending(x => x.DocumentType == ExchDocumentType.IConfirmation)
@@ -3296,7 +4840,8 @@ namespace Sungero.Docflow.Server
                                           document.DocumentType,
                                           this.GetMessageType(document.DocumentType.Value, documentInfo.MessageType.Value),
                                           document.Sign,
-                                          document.Date));
+                                          document.Date,
+                                          receiverName));
         }
       }
       
@@ -3305,17 +4850,33 @@ namespace Sungero.Docflow.Server
       
       if (annulment != null)
       {
+        string annulmentSenderName = string.Empty;
+        string annulmentReceiverName = string.Empty;
+        try
+        {
+          var annulmentCounterpartyNames = this.GetAnnulmentCounterpartyNamesFromBody(documentInfo, annulment);
+          annulmentSenderName = annulmentCounterpartyNames.SenderName;
+          annulmentReceiverName = annulmentCounterpartyNames.ReceiverName;
+        }
+        catch (Exception ex)
+        {
+          Logger.DebugFormat("GetExchangeOrderInfo. Cannot get sender from annulment body, ExchangeDocumentInfo Id({0}), get annulment counterparty names from signatures. Error text: {1}",
+                             documentInfo.Id, ex.Message);
+        }
+        
         dataTable.Add(this.FillTableRow(annulment.Info.Properties.DocumentType.GetLocalizedValue(annulment.DocumentType).ToLower(),
                                         annulment.DocumentType,
                                         this.GetMessageType(annulment.DocumentType.Value, documentInfo.MessageType.Value),
                                         annulment.Sign,
-                                        annulment.Date));
+                                        annulment.Date,
+                                        annulmentSenderName));
         if (annulment.SecondSign != null)
           dataTable.Add(this.FillTableRow(annulment.Info.Properties.DocumentType.GetLocalizedValue(annulment.DocumentType).ToLower(),
                                           annulment.DocumentType,
                                           ReportResources.ExchangeOrderReport.AnnulmentSigned,
                                           annulment.SecondSign,
-                                          annulment.Date));
+                                          annulment.Date,
+                                          annulmentReceiverName));
         else if (Equals(annulment.DocumentType, ExchDocumentType.Annulment) && !hasReject)
         {
           var annulmentRow = Structures.ExchangeOrderReport.ExchangeOrderInfo.Create();
@@ -3334,7 +4895,8 @@ namespace Sungero.Docflow.Server
                                         reject.DocumentType,
                                         this.GetMessageType(reject.DocumentType.Value, documentInfo.MessageType.Value),
                                         reject.Sign,
-                                        reject.Date));
+                                        reject.Date,
+                                        receiverName));
       
       foreach (var row in dataTable)
         row.ReportSessionId = reportSessionId;
@@ -3358,8 +4920,7 @@ namespace Sungero.Docflow.Server
 
       var exchDocumentTypeReceipt = isUTD ? ExchDocumentType.IReceipt : ExchDocumentType.Receipt;
       var isReceipt = documentInfo.NeedSign != true &&
-        ((documentInfo.RootBox.ExchangeService.ExchangeProvider == ExchangeCore.ExchangeService.ExchangeProvider.Synerdocs ||
-          documentInfo.RootBox.ExchangeService.ExchangeProvider == ExchangeCore.ExchangeService.ExchangeProvider.Sbis) &&
+        (documentInfo.RootBox.ExchangeService.ExchangeProvider == ExchangeCore.ExchangeService.ExchangeProvider.Sbis &&
          documentInfo.ServiceDocuments.Any(x => x.DocumentType == exchDocumentTypeReceipt) ||
          documentInfo.RootBox.ExchangeService.ExchangeProvider == ExchangeCore.ExchangeService.ExchangeProvider.Diadoc &&
          (isUTD && documentInfo.ServiceDocuments.Any(x => x.DocumentType == ExchDocumentType.IReceipt) || !isUTD));
@@ -3373,7 +4934,7 @@ namespace Sungero.Docflow.Server
 
       return exchangeData;
     }
-    
+
     /// <summary>
     /// Получение титула покупателя.
     /// </summary>
@@ -3432,12 +4993,13 @@ namespace Sungero.Docflow.Server
       
       var certificateInfo = Docflow.PublicFunctions.Module.GetSignatureCertificateInfo(sign.GetDataSignature());
       var parsedSubject = Sungero.Docflow.Functions.Module.ParseCertificateSubject(certificateInfo.SubjectInfo);
-      result.SendedFrom = this.SendedFrom(parsedSubject.OrganizationName, Sungero.Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject));
+      var organizationName = Exchange.PublicFunctions.ExchangeDocumentInfo.GetSigningOrganizationInfo(info, sign).Name;
+      result.SendedFrom = this.SendedFrom(organizationName, Sungero.Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject));
       result.Date = DateFormat(sign.SigningDate);
       
       return result;
     }
-    
+
     /// <summary>
     /// Получение вида входящее/исходящее для ИОПов.
     /// </summary>
@@ -3462,7 +5024,7 @@ namespace Sungero.Docflow.Server
       
       return ReportResources.ExchangeOrderReport.MessageSended;
     }
-    
+
     /// <summary>
     /// Заполнение строки для временной таблицы отчета.
     /// </summary>
@@ -3471,17 +5033,28 @@ namespace Sungero.Docflow.Server
     /// <param name="messageType">Вид сообщения.</param>
     /// <param name="sign">Подпись.</param>
     /// <param name="date">Дата.</param>
+    /// <param name="organizationNameFromInfo">Наименование организации из сведений о документе обмена.</param>
     /// <returns>Структуру с заполненными данными строки отчета.</returns>
     private Structures.ExchangeOrderReport.ExchangeOrderInfo FillTableRow(string documentName, Enumeration? documentType,
-                                                                          string messageType, byte[] sign, DateTime? date)
+                                                                          string messageType, byte[] sign, DateTime? date,
+                                                                          string organizationNameFromInfo)
     {
       var certificateInfo = Sungero.Docflow.Functions.Module.GetSignatureCertificateInfo(sign);
       var parsedSubject = Sungero.Docflow.Functions.Module.ParseCertificateSubject(certificateInfo.SubjectInfo);
       var row = new Structures.ExchangeOrderReport.ExchangeOrderInfo();
-      if (Equals(documentType, ExchDocumentType.IConfirmation) || Equals(documentType, ExchDocumentType.IRConfirmation))
-        row.SendedFrom = this.SendedFrom(ReportResources.ExchangeOrderReport.Operator, Sungero.Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject));
+      
+      if (Equals(documentType, ExchDocumentType.IConfirmation) ||
+          Equals(documentType, ExchDocumentType.IRConfirmation) ||
+          Equals(documentType, ExchDocumentType.IRjConfirmation))
+      {
+        row.SendedFrom = this.SendedFrom(ReportResources.ExchangeOrderReport.Operator,
+                                         Sungero.Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject));
+      }
       else
-        row.SendedFrom = this.SendedFrom(parsedSubject.OrganizationName, Sungero.Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject));
+      {
+        row.SendedFrom = this.SendedFrom(organizationNameFromInfo,
+                                         Sungero.Docflow.Server.ModuleFunctions.GetCertificateOwnerShortName(parsedSubject));
+      }
       var signatureInfo = ExternalSignatures.GetSignatureInfo(sign);
       if (signatureInfo.SignatureFormat == SignatureFormat.Hash)
         throw AppliedCodeException.Create(Resources.IncorrectSignatureFormat);
@@ -3491,6 +5064,32 @@ namespace Sungero.Docflow.Server
       row.DocumentName = documentName;
       row.MessageType = messageType;
       return row;
+    }
+
+    /// <summary>
+    /// Получить названия организаций из тела соглашения об аннулировании.
+    /// </summary>
+    /// <param name="documentInfo">Сведения о документе обмена.</param>
+    /// <param name="annulment">Служебный документ - соглашение об аннулировании.</param>
+    /// <returns>Структура с названиями отправителя и получателя соглашения об аннулировании.</returns>
+    private Sungero.Exchange.Structures.Module.IAnnulmentCounterpartyNames GetAnnulmentCounterpartyNamesFromBody(Sungero.Exchange.IExchangeDocumentInfo documentInfo,
+                                                                                                                 Sungero.Exchange.IExchangeDocumentInfoServiceDocuments annulment)
+    {
+      if (documentInfo == null || annulment == null)
+        return Sungero.Exchange.Structures.Module.AnnulmentCounterpartyNames.Create();
+      
+      var encoding = Encoding.GetEncoding(1251);
+      var annulmentBody = System.Xml.Linq.XDocument.Parse(encoding.GetString(annulment.Body));
+      var annulmentSenderFtsId = annulmentBody.Element("Файл").Element("Документ").Element("УчастЭДО").Attribute("ИдУчастЭДО").Value;
+      var senderBoxes = ExchangeCore.BusinessUnitBoxes.GetAll().Where(x => string.Equals(x.FtsId, annulmentSenderFtsId, StringComparison.InvariantCultureIgnoreCase));
+      var annulmentSentByBusinessUnit = senderBoxes.Any() && senderBoxes.Contains(documentInfo.RootBox);
+      var annulmentSenderName = annulmentSentByBusinessUnit ?
+        documentInfo.RootBox.BusinessUnit.Name :
+        documentInfo.Counterparty.Name;
+      var annulmentReceiverName = annulmentSentByBusinessUnit ?
+        documentInfo.Counterparty.Name :
+        documentInfo.RootBox.BusinessUnit.Name;
+      return Sungero.Exchange.Structures.Module.AnnulmentCounterpartyNames.Create(annulmentSenderName, annulmentReceiverName);
     }
     
     /// <summary>
@@ -3510,7 +5109,12 @@ namespace Sungero.Docflow.Server
         string.Format("{0} <b>{1}</b>, {2}", Sungero.Docflow.Reports.Resources.ExchangeOrderReport.SendedBy,
                       organizationName, signedBy);
     }
-    
+
+    /// <summary>
+    /// Получить строковое представление даты со временем, приведенной ко времени текущего пользователя.
+    /// </summary>
+    /// <param name="datetime">Дата со временем.</param>
+    /// <returns>Строковое представление даты во времени пользователя.</returns>
     private static string DateFormat(DateTime? datetime)
     {
       if (datetime == null)
@@ -3518,9 +5122,9 @@ namespace Sungero.Docflow.Server
       
       return Functions.Module.ToTenantTime(datetime.Value).ToUserTime().ToString("g");
     }
-    
+
     #endregion
-    
+
     #region Интеллектуальная обработка
 
     /// <summary>
@@ -3547,7 +5151,7 @@ namespace Sungero.Docflow.Server
           throw AppliedCodeException.Create(message.Text);
       }
     }
-    
+
     /// <summary>
     /// Получить адрес сервиса Ario.
     /// </summary>
@@ -3558,7 +5162,7 @@ namespace Sungero.Docflow.Server
       var smartProcessingSettings = PublicFunctions.SmartProcessingSetting.GetSettings();
       return smartProcessingSettings.ArioUrl;
     }
-    
+
     /// <summary>
     /// Получить токен к Ario.
     /// </summary>
@@ -3569,7 +5173,7 @@ namespace Sungero.Docflow.Server
       var smartProcessingSettings = PublicFunctions.SmartProcessingSetting.GetSettings();
       return PublicFunctions.SmartProcessingSetting.Remote.GetArioToken(smartProcessingSettings);
     }
-    
+
     /// <summary>
     /// Проверить, есть ли права на изменение настроек интеллектуальной обработки.
     /// </summary>
@@ -3579,7 +5183,7 @@ namespace Sungero.Docflow.Server
     {
       return Docflow.SmartProcessingSettings.AccessRights.CanUpdate();
     }
-    
+
     /// <summary>
     /// Получить приложение-обработчик по имени файла.
     /// </summary>
@@ -3601,9 +5205,9 @@ namespace Sungero.Docflow.Server
     }
 
     #endregion
-    
+
     #region Импорт/экспорт шаблонов
-    
+
     /// <summary>
     /// Получить вид документа в шаблонах по guid.
     /// </summary>
@@ -3625,7 +5229,7 @@ namespace Sungero.Docflow.Server
       }
       return 0;
     }
-    
+
     /// <summary>
     /// Получить список Guid видов документов шаблона в виде строки.
     /// </summary>
@@ -3641,7 +5245,7 @@ namespace Sungero.Docflow.Server
         .ToList();
       return string.Join(", ", guidList);
     }
-    
+
     /// <summary>
     /// Получить текущее наименование культуры.
     /// </summary>
@@ -3651,11 +5255,11 @@ namespace Sungero.Docflow.Server
     {
       return Sungero.Core.TenantInfo.Culture.Name;
     }
-    
+
     #endregion
-    
+
     #region Номенклатура дел
-    
+
     /// <summary>
     /// Фильтрация дел для документа.
     /// </summary>
@@ -3667,7 +5271,7 @@ namespace Sungero.Docflow.Server
     {
       return Functions.OfficialDocument.CaseFileFiltering(document, query);
     }
-    
+
     /// <summary>
     /// Отправить уведомление о результатах копирования номенклатуры дел.
     /// </summary>
@@ -3687,9 +5291,9 @@ namespace Sungero.Docflow.Server
         Logger.Error("CopyCaseFiles. SendCopyCaseFilesNotification failed.", ex);
       }
     }
-    
+
     #endregion
-    
+
     #region Работа с AccessRights
 
     /// <summary>
@@ -3744,10 +5348,13 @@ namespace Sungero.Docflow.Server
     /// <param name="entity">Сущность.</param>
     /// <param name="recipient">Субъект прав.</param>
     /// <param name="accessRightsType">Тип прав.</param>
+    /// <returns>True - если права были изменены, иначе - false.</returns>
     /// <remarks>Метод подходит только для экземплярных/смешанных способов авторизации.</remarks>
     [Public]
-    public virtual void GrantAccessRightsOnEntity(IEntity entity, IRecipient recipient, Guid accessRightsType)
+    public virtual bool GrantAccessRightsOnEntity(IEntity entity, IRecipient recipient, Guid accessRightsType)
     {
+      var rightsIsChanged = false;
+      
       var currentGrantedAccessRights = this.GetAllGrantedAccessRights(entity, recipient);
       var accessRightsTypes = currentGrantedAccessRights.Select(x => x.AccessRightsType).ToList();
       accessRightsTypes.Add(accessRightsType);
@@ -3762,15 +5369,20 @@ namespace Sungero.Docflow.Server
         Logger.DebugFormat("Revoke rights({0}) on entity({1}) for recipient({2}), because there is higher rights",
                            rightsLessThanGranted.AccessRightsType, entity.Id, recipient.Id);
         entity.AccessRights.Revoke(rightsLessThanGranted.Recipient, rightsLessThanGranted.AccessRightsType);
+        rightsIsChanged = true;
       }
+      
       if (maxRights.HasValue && !alreadyHasMaxRights)
       {
         Logger.DebugFormat("Grant rights({0}) on entity({1}) for recipient({2})",
                            maxRights.Value, entity.Id, recipient.Id);
         entity.AccessRights.Grant(recipient, maxRights.Value);
+        rightsIsChanged = true;
       }
+      
+      return rightsIsChanged;
     }
-    
+
     /// <summary>
     /// Получить все явно выданные субъекту права на сущность.
     /// </summary>
@@ -3795,7 +5407,7 @@ namespace Sungero.Docflow.Server
       
       return recipientAccessRights.Where(x => this.CompareInstanceAccessRightsTypes(x.AccessRightsType, limit.Value) < 0).ToList();
     }
-    
+
     /// <summary>
     /// Получить максимальный тип экземплярных прав из списка прав.
     /// </summary>
@@ -3811,7 +5423,7 @@ namespace Sungero.Docflow.Server
           maxRights = rightsType;
       return maxRights;
     }
-    
+
     /// <summary>
     /// Сравнить два типа прав.
     /// </summary>
@@ -3855,11 +5467,11 @@ namespace Sungero.Docflow.Server
       // Права на чтение ниже всех остальных. Если вдруг добрались сюда, то смотрим по type1.
       return type1 == DefaultAccessRightsTypes.Read ? -1 : 1;
     }
-    
+
     #endregion
-    
+
     #region Запрос подготовки предпросмотра
-    
+
     /// <summary>
     /// Отправить запрос на подготовку предпросмотра для документов из вложений задачи.
     /// </summary>
@@ -3877,9 +5489,143 @@ namespace Sungero.Docflow.Server
           Functions.OfficialDocument.PreparePreview(document);
       }
     }
-    
+
+    #endregion
+
+    #region Синхронизация группы приложений
+
+    /// <summary>
+    /// Получить список операций по всем операциям, относящимся к данной группе вложений из истории.
+    /// </summary>
+    /// <param name="task">Задача.</param>
+    /// <param name="groupId">ИД группы вложений.</param>
+    /// <returns>Список, содержащий историю операций по данной группе вложений.</returns>
+    [Remote]
+    public virtual Structures.Module.AttachmentHistoryEntries GetAttachmentHistoryEntriesByGroupId(Sungero.Workflow.ITask task, Guid groupId)
+    {
+      var taskGuid = task.GetEntityMetadata().GetOriginal().NameGuid;
+      var taskHistory = Sungero.Workflow.WorkflowHistories.GetAll()
+        .Where(h => h.EntityId.HasValue && task.Id == h.EntityId.Value && taskGuid == h.EntityType).ToList();
+      var taskAssignments = Sungero.Workflow.Assignments.GetAll()
+        .Where(x => Equals(x.Task, task)).ToList();
+      var taskAssignmentsIds = taskAssignments.Select(x => x.Id).ToList();
+      var taskAssignmentsNameGuids = taskAssignments.Select(x => x.GetEntityMetadata().GetOriginal().NameGuid).Distinct().ToList();
+      var taskAssignmentsHistory = Sungero.Workflow.WorkflowHistories.GetAll()
+        .Where(h => h.EntityId.HasValue && taskAssignmentsIds.Contains(h.EntityId.Value) && taskAssignmentsNameGuids.Contains(h.EntityType));
+      
+      var attachmentHistoryEntries = Functions.Module.ParseAttachmentsHistory(taskHistory.Union(taskAssignmentsHistory));
+      attachmentHistoryEntries.Added = attachmentHistoryEntries.Added.Where(x => x.GroupId == groupId).ToList();
+      attachmentHistoryEntries.Removed = attachmentHistoryEntries.Removed.Where(x => x.GroupId == groupId).ToList();
+      
+      return attachmentHistoryEntries;
+    }
+
     #endregion
     
+    #region Работа с неподписываемыми атрибутами подписи.
+    
+    /// <summary>
+    /// Сформировать строку с "ключ=значение" для неподписываемых атрибутов подписи.
+    /// </summary>
+    /// <param name="key">Ключ.</param>
+    /// <param name="attributeValue">Атрибут.</param>
+    /// <returns>Сформированная строка атрибута.</returns>
+    [Public]
+    public string FormatUnsignedAttribute(string key, string attributeValue)
+    {
+      if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(attributeValue))
+        return null;
+      
+      return string.Format("{0}{1}{2}", key, Constants.Module.UnsignedAdditionalInfoSeparator.KeyValue, attributeValue);
+    }
+    
+    /// <summary>
+    /// Добавить неподписываемые атрибуты в подпись документа.
+    /// </summary>
+    /// <param name="signature">Подпись.</param>
+    /// <param name="key">Ключ.</param>
+    /// <param name="attributeValue">Атрибут.</param>
+    /// <remarks>Добавить атрибут в UnsignedAdditionalInfo подписи.</remarks>
+    [Public]
+    public void AddUnsignedAttribute(Sungero.Domain.Shared.ISignature signature, string key, string attributeValue)
+    {
+      if (signature == null || string.IsNullOrEmpty(key) || string.IsNullOrEmpty(attributeValue))
+        return;
+      
+      if (string.IsNullOrEmpty(signature.UnsignedAdditionalInfo))
+      {
+        signature.UnsignedAdditionalInfo = this.FormatUnsignedAttribute(key, attributeValue);
+        return;
+      }
+
+      Dictionary<string, string> unsignedAttributes = signature.UnsignedAdditionalInfo.Split(Constants.Module.UnsignedAdditionalInfoSeparator.Attribute)
+        .Select(v => v.Split(Constants.Module.UnsignedAdditionalInfoSeparator.KeyValue))
+        .ToDictionary(p => p[0], p => p[1]);
+      
+      if (unsignedAttributes.ContainsKey(key))
+        return;
+      
+      signature.UnsignedAdditionalInfo += Constants.Module.UnsignedAdditionalInfoSeparator.Attribute + this.FormatUnsignedAttribute(key, attributeValue);
+    }
+    
+    /// <summary>
+    /// Получить значение неподписываемого атрибута из подписи документа.
+    /// </summary>
+    /// <param name="signature">Подпись.</param>
+    /// <param name="key">Ключ.</param>
+    /// <returns>Значение по ключу из UnsignedAdditionalInfo подписи документа.</returns>
+    [Public]
+    public string GetUnsignedAttribute(Sungero.Domain.Shared.ISignature signature, string key)
+    {
+      if (signature == null || string.IsNullOrEmpty(signature.UnsignedAdditionalInfo) || string.IsNullOrEmpty(key))
+        return null;
+      
+      Dictionary<string, string> unsignedAttributes = signature.UnsignedAdditionalInfo.Split(Constants.Module.UnsignedAdditionalInfoSeparator.Attribute)
+        .Select(v => v.Split(Constants.Module.UnsignedAdditionalInfoSeparator.KeyValue))
+        .ToDictionary(p => p[0], p => p[1]);
+      
+      if (!unsignedAttributes.ContainsKey(key))
+        return null;
+      
+      return unsignedAttributes[key];
+    }
+    
+    /// <summary>
+    /// Получить значение неподписываемого атрибута из подписи документа.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="signatureId">Идентификатор подписи.</param>
+    /// <param name="key">Ключ.</param>
+    /// <returns>Значение по ключу из UnsignedAdditionalInfo подписи документа.</returns>
+    [Public, Remote]
+    public string GetUnsignedAttribute(IOfficialDocument document, int signatureId, string key)
+    {
+      var signature = Signatures.Get(document).Single(s => s.Id == signatureId);
+      
+      return this.GetUnsignedAttribute(signature, key);
+    }
+    
+    /// <summary>
+    /// Обновить тело подписи.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="signatureId">Ид обновляемой подписи.</param>
+    /// <param name="newDataSignature">Новое тело подписи.</param>
+    [Public]
+    public void SetDataSignature(IOfficialDocument document, int signatureId, byte[] newDataSignature)
+    {
+      var signature = Signatures.Get(document).Single(s => s.Id == signatureId);
+      
+      // HACK: Обновляем тело подписи в базе.
+      using (var session = new Session())
+      {
+        (signature as IInternalSignature).SetDataSignature(newDataSignature);
+        session.SubmitChanges();
+      }
+    }
+    
+    #endregion
+
     /// <summary>
     /// Данные для отчета полномочий сотрудника из модуля Документооборот.
     /// </summary>
@@ -3962,7 +5708,7 @@ namespace Sungero.Docflow.Server
       
       return result;
     }
-    
+
     /// <summary>
     /// Сформировать представление настроек подписи для отчета о полномочиях.
     /// </summary>
@@ -4011,7 +5757,7 @@ namespace Sungero.Docflow.Server
                                                         l.ExternalSystemId == Constants.Module.InitializeExternalLinkSystem)
         .SingleOrDefault();
     }
-    
+
     /// <summary>
     /// Получить external link.
     /// </summary>
@@ -4025,7 +5771,7 @@ namespace Sungero.Docflow.Server
         .Where(x => x.AdditionalInfo == additionalInfo)
         .SingleOrDefault();
     }
-    
+
     /// <summary>
     /// Получить список ExternalLink.
     /// </summary>
@@ -4039,7 +5785,7 @@ namespace Sungero.Docflow.Server
                                                         l.EntityTypeGuid == typeGuid)
         .ToList();
     }
-    
+
     /// <summary>
     /// Создать external link.
     /// </summary>
@@ -4056,7 +5802,7 @@ namespace Sungero.Docflow.Server
       externalLink.IsDeleted = false;
       externalLink.Save();
     }
-    
+
     /// <summary>
     /// Удалить сущность из кеша сессии.
     /// </summary>
@@ -4079,7 +5825,7 @@ namespace Sungero.Docflow.Server
         innerSession.Evict(entity);
       }
     }
-    
+
     /// <summary>
     /// Запустить фоновый процесс "Документооборот. Автоматическое назначение прав на документы".
     /// </summary>
@@ -4088,7 +5834,7 @@ namespace Sungero.Docflow.Server
     {
       Jobs.GrantAccessRightsToDocuments.Enqueue();
     }
-    
+
     /// <summary>
     /// Создать задачу по процессу "Свободное согласование документа".
     /// </summary>
@@ -4104,7 +5850,7 @@ namespace Sungero.Docflow.Server
       
       return task;
     }
-    
+
     /// <summary>
     /// Получить созданные задачи на согласование по регламенту для документа.
     /// </summary>
@@ -4122,7 +5868,7 @@ namespace Sungero.Docflow.Server
                .Any(att => att.AttachmentId == document.Id && att.EntityTypeGuid == docGuid &&
                     att.GroupId == approvalTaskDocumentGroupGuid));
     }
-    
+
     /// <summary>
     /// Получить созданные задачи на рассмотрение документа.
     /// </summary>
@@ -4140,7 +5886,7 @@ namespace Sungero.Docflow.Server
                .Any(att => att.AttachmentId == document.Id && att.EntityTypeGuid == docGuid &&
                     att.GroupId == reviewTaskDocumentGroupGuid));
     }
-    
+
     /// <summary>
     /// Создать задачу по процессу "Согласование официального документа".
     /// </summary>
@@ -4154,7 +5900,7 @@ namespace Sungero.Docflow.Server
       
       return task;
     }
-    
+
     /// <summary>
     /// Получить доступные ведущие документы.
     /// </summary>
@@ -4164,7 +5910,7 @@ namespace Sungero.Docflow.Server
     {
       return Contracts.ContractualDocuments.GetAll();
     }
-    
+
     /// <summary>
     /// Отправить уведомление.
     /// </summary>
@@ -4184,7 +5930,7 @@ namespace Sungero.Docflow.Server
       
       SendStandardNotice(subject, performer, activeText, author, threadSubject);
     }
-    
+
     /// <summary>
     /// Отправить уведомление.
     /// </summary>
@@ -4210,7 +5956,7 @@ namespace Sungero.Docflow.Server
       
       Logger.DebugFormat("SendStandardNotice. Notification (Id {0}) sent. Performer (Id {1}).", task.Id, performer.Id);
     }
-    
+
     /// <summary>
     /// Отправить уведомление подзадачей.
     /// </summary>
@@ -4271,7 +6017,8 @@ namespace Sungero.Docflow.Server
     public static void GrantReadAccessRightsForAttachments(System.Collections.Generic.IEnumerable<IEntity> attachments,
                                                            System.Collections.Generic.IEnumerable<IRecipient> users)
     {
-      foreach (var attachment in attachments.Where(a => a.Info.AccessRightsMode != Metadata.AccessRightsMode.Type))
+      foreach (var attachment in attachments.Where(a => a.Info.AccessRightsMode != Metadata.AccessRightsMode.Type &&
+                                                   a.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced))
       {
         foreach (var user in users)
         {
@@ -4284,7 +6031,7 @@ namespace Sungero.Docflow.Server
         }
       }
     }
-    
+
     /// <summary>
     /// Проверка доступности модуля по лицензии.
     /// </summary>
@@ -4306,7 +6053,7 @@ namespace Sungero.Docflow.Server
     {
       return Sungero.Domain.Security.LicenseHelper.IsModuleValidForCurrentUserByLicense(moduleGuid);
     }
-    
+
     /// <summary>
     /// Запуск серверной функции сущности вне зависимостей.
     /// </summary>
@@ -4343,74 +6090,63 @@ namespace Sungero.Docflow.Server
       if (task == null || !attachments.Any())
         return;
       
-      foreach (var accessRight in task.AccessRights.Current.Where(x => x.AccessRightsType != DefaultAccessRightsTypes.Forbidden))
+      var availableAttachments = attachments
+        .Where(a => a.Info.AccessRightsMode == Metadata.AccessRightsMode.Both || a.Info.AccessRightsMode == Metadata.AccessRightsMode.Instance)
+        .Where(a => a.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced);
+      
+      if (availableAttachments.Any())
       {
-        foreach (var attach in attachments.Where(a => a.Info.AccessRightsMode == Metadata.AccessRightsMode.Both || a.Info.AccessRightsMode == Metadata.AccessRightsMode.Instance))
+        foreach (var accessRight in task.AccessRights.Current.Where(x => x.AccessRightsType != DefaultAccessRightsTypes.Forbidden))
         {
-          // TODO Zamerov нужен нормальный признак IsDeleted, 50908
-          var isDeleted = (attach as Sungero.Domain.Shared.IChangeTracking).ChangeTracker.IsDeleted;
-          if (isDeleted || attach.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, accessRight.Recipient) ||
-              attach.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, accessRight.Recipient))
-            continue;
-          if (attach.AccessRights.CanManage() && !attach.AccessRights.IsGranted(DefaultAccessRightsTypes.Read, accessRight.Recipient))
-            attach.AccessRights.Grant(accessRight.Recipient, DefaultAccessRightsTypes.Read);
+          foreach (var attach in availableAttachments)
+          {
+            // TODO Zamerov нужен нормальный признак IsDeleted, 50908
+            var isDeleted = (attach as Sungero.Domain.Shared.IChangeTracking).ChangeTracker.IsDeleted;
+            if (isDeleted || attach.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, accessRight.Recipient) ||
+                attach.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, accessRight.Recipient))
+              continue;
+            if (attach.AccessRights.CanManage() && !attach.AccessRights.IsGranted(DefaultAccessRightsTypes.Read, accessRight.Recipient))
+              attach.AccessRights.Grant(accessRight.Recipient, DefaultAccessRightsTypes.Read);
+          }
         }
       }
     }
-    
+
     /// <summary>
     /// Отсортировать сотрудников, которые могут быть авторами резолюции для данного пользователя по выбранному документу.
     /// </summary>
     /// <param name="document">Документ.</param>
     /// <returns>Список пользователей.</returns>
     [Public, Remote]
-    public static List<IEmployee> UsersCanBeResolutionAuthor(IOfficialDocument document)
+    public virtual List<IEmployee> UsersCanBeResolutionAuthor(IOfficialDocument document)
     {
       var docId = document != null ? document.Id : -1;
       var userId = Users.Current != null ? Users.Current.Id : -1;
-      Logger.DebugFormat("UsersCanBeResolutionAuthor. Get assisted managers, Document (ID={0}), User (ID={1}).", docId, userId);
-      var assistedManagers = ManagersAssistants.GetAll()
-        .Where(m => m.Status == CoreEntities.DatabookEntry.Status.Active &&
-               Recipients.AllRecipientIds.Contains(m.Assistant.Id))
-        .Where(m => m.IsAssistant == true)
-        .Select(m => m.Manager)
-        .ToList();
-      
-      Logger.DebugFormat("UsersCanBeResolutionAuthor. Get substituted employees, " +
-                         "Document (ID={0}), User (ID={1}), assisted managers Count={2}.", docId, userId, assistedManagers.Count);
-      var substitutedEmployees = Substitutions.ActiveSubstitutedUsers
-        .Where(asu => Employees.Is(asu))
-        .Select(asu => Employees.As(asu))
-        .ToList();
-      
-      Logger.DebugFormat("UsersCanBeResolutionAuthor. Add assisted managers, substituted employees and current employee to result list, " +
-                         "Document (ID={0}), User (ID={1}), substituted employees Count={2}.", docId, userId, substitutedEmployees.Count);
       var result = new List<IEmployee>();
-      result.AddRange(assistedManagers);
-      result.AddRange(substitutedEmployees);
       if (Employees.Current != null)
         result.Add(Employees.Current);
       
+      Logger.DebugFormat("UsersCanBeResolutionAuthor. Get assisted managers, Document (ID={0}), User (ID={1}).", docId, userId);
+      var assistedManagers = this.GetAssistedManagers();
+      result.AddRange(assistedManagers);
+      
+      Logger.DebugFormat("UsersCanBeResolutionAuthor. Get substituted employees, " +
+                         "Document (ID={0}), User (ID={1}), assisted managers Count={2}.", docId, userId, assistedManagers.Count);
+      var substitutedEmployees = this.GetSubstitutedEmployees();
+      result.AddRange(substitutedEmployees);
+      
+      Logger.DebugFormat("UsersCanBeResolutionAuthor. Add assisted managers, substituted employees and current employee to result list, " +
+                         "Document (ID={0}), User (ID={1}), substituted employees Count={2}.", docId, userId, substitutedEmployees.Count);
+      
       if (document != null)
       {
-        Logger.DebugFormat("UsersCanBeResolutionAuthor. Get ApprovalReviewAssignment or ReviewManagerAssignment with document and AddResolution result, " +
-                           "Document (ID={0}), User (ID={1}).", docId, userId);
-        var docGuid = document.GetEntityMetadata().GetOriginal().NameGuid;
-        var assignments = Assignments.GetAll(x => x.Task.AttachmentDetails.Any(att => att.AttachmentId == document.Id && att.EntityTypeGuid == docGuid) &&
-                                             (x.Result == Docflow.ApprovalReviewAssignment.Result.AddResolution ||
-                                              x.Result == RecordManagement.ReviewManagerAssignment.Result.AddResolution));
+        var passedResolutionEmployees = this.GetPassedResolutionEmployees(document);
+        result.AddRange(passedResolutionEmployees);
+        Logger.DebugFormat("UsersCanBeResolutionAuthor. Document (ID={0}), User (ID={1}), ResolutionCompletedBy Count={2}.", docId, userId, passedResolutionEmployees.Count);
         
-        Logger.DebugFormat("UsersCanBeResolutionAuthor. Get CompletedBy from each assignment, Document (ID={0}), User (ID={1}).", docId, userId);
-        foreach (var assignment in assignments)
-        {
-          var completedBy = Employees.As(assignment.CompletedBy);
-          if (completedBy != null)
-          {
-            Logger.DebugFormat("UsersCanBeResolutionAuthor. Assignment (ID={0}), CompletedBy (ID={1}), Document (ID={2}), User (ID={3}).",
-                               assignment.Id, assignment.CompletedBy.Id, docId, userId);
-            result.Add(completedBy);
-          }
-        }
+        var signatoryDocumentEmployees = this.GetApprovalSignatoryEmployees(document);
+        result.AddRange(signatoryDocumentEmployees);
+        Logger.DebugFormat("UsersCanBeResolutionAuthor. Document (ID={0}), User (ID={1}), SignatoryCompletedBy Count={2}.", docId, userId, signatoryDocumentEmployees.Count);
       }
       
       Logger.DebugFormat("UsersCanBeResolutionAuthor. Exclude duplicate employees from result list by Distinct, " +
@@ -4419,21 +6155,99 @@ namespace Sungero.Docflow.Server
     }
 
     /// <summary>
+    /// Получить руководителей, для которых текущий пользователь либо его заместитель является помощником или отправляет поручения от имени руководителя.
+    /// </summary>
+    /// <returns>Список руководителей.</returns>
+    public virtual List<IEmployee> GetAssistedManagers()
+    {
+      return ManagersAssistants.GetAll()
+        .Where(m => m.Status == CoreEntities.DatabookEntry.Status.Active &&
+               Recipients.AllRecipientIds.Contains(m.Assistant.Id))
+        .Where(m => m.IsAssistant == true || m.SendActionItems == true)
+        .Select(m => m.Manager)
+        .ToList();
+    }
+    
+    /// <summary>
+    /// Получить список замещаемых текущим пользователем сотрудников.
+    /// </summary>
+    /// <returns>Список замещаемых сотрудников.</returns>
+    public virtual List<IEmployee> GetSubstitutedEmployees()
+    {
+      return Substitutions.ActiveSubstitutedUsers
+        .Where(u => Employees.Is(u))
+        .Select(u => Employees.As(u))
+        .Distinct()
+        .ToList();
+    }
+    
+    /// <summary>
+    /// Получить список сотрудников, которые вынесли резолюцию по документу.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Список сотрудников.</returns>
+    public virtual List<IEmployee> GetPassedResolutionEmployees(IOfficialDocument document)
+    {
+      var docGuid = document.GetEntityMetadata().GetOriginal().NameGuid;
+      var taskIds = Tasks.GetAll(t => t.AttachmentDetails.Any(att => att.AttachmentId == document.Id && att.EntityTypeGuid == docGuid))
+        .Select(t => t.Id)
+        .Distinct()
+        .ToList();
+      
+      return Assignments
+        .GetAll(x => taskIds.Contains(x.Task.Id) &&
+                (x.Result == Docflow.ApprovalReviewAssignment.Result.AddResolution ||
+                 x.Result == RecordManagement.ReviewManagerAssignment.Result.AddResolution))
+        .Where(x => Employees.Is(x.CompletedBy))
+        .Select(x => Employees.As(x.CompletedBy))
+        .Distinct()
+        .ToList();
+    }
+    
+    /// <summary>
+    /// Получить список сотрудников, которые подписали документ.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Список сотрудников.</returns>
+    public virtual List<IEmployee> GetApprovalSignatoryEmployees(IOfficialDocument document)
+    {
+      var signatories = new List<IEmployee>();
+      var docGuid = document.GetEntityMetadata().GetOriginal().NameGuid;
+      var tasks = ApprovalTasks.GetAll(x => x.AttachmentDetails.Any(att => att.AttachmentId == document.Id && att.EntityTypeGuid == docGuid) &&
+                                       x.Signatory != null &&
+                                       (x.Status == Workflow.Task.Status.InProcess || x.Status == Workflow.Task.Status.Completed));
+      var taskSignatories = tasks.Select(t => t.Signatory).ToList();
+      signatories.AddRange(taskSignatories);
+      
+      var taskIds = tasks.Select(t => t.Id).ToList();
+      
+      var assignmentSignatories = ApprovalSigningAssignments
+        .GetAll(a => taskIds.Contains(a.Task.Id) &&
+                a.Result == Docflow.ApprovalSigningAssignment.Result.Sign &&
+                Employees.Is(a.CompletedBy))
+        .Select(a => Employees.As(a.CompletedBy))
+        .ToList();
+      
+      signatories.AddRange(assignmentSignatories);
+      return signatories.Distinct().ToList();
+    }
+    
+    /// <summary>
     /// Проверка, может ли сотрудник быть автором резолюции по выбранному документу.
     /// </summary>
     /// <param name="document">Документ.</param>
     /// <param name="employee">Сотрудник.</param>
     /// <returns>True - может быть автором резолюции, false - нет.</returns>
     [Public, Remote]
-    public static bool IsUsersCanBeResolutionAuthor(IOfficialDocument document, IEmployee employee)
+    public virtual bool IsUsersCanBeResolutionAuthor(IOfficialDocument document, IEmployee employee)
     {
       var docId = document != null ? document.Id : -1;
       Logger.DebugFormat("IsUsersCanBeResolutionAuthor. Document (ID={0}). Start.", docId);
-      var usersCanBeResolutionAuthor = Functions.Module.UsersCanBeResolutionAuthor(document);
+      var usersCanBeResolutionAuthor = this.UsersCanBeResolutionAuthor(document);
       Logger.DebugFormat("IsUsersCanBeResolutionAuthor. Document (ID={0}). End.", docId);
       return usersCanBeResolutionAuthor.Contains(employee);
     }
-    
+
     /// <summary>
     /// Получить строковое представление даты со временем, день без времени вернет дату.
     /// </summary>
@@ -4444,7 +6258,7 @@ namespace Sungero.Docflow.Server
     {
       return date == date.Date ? date.ToString("d") : date.ToString("g");
     }
-    
+
     /// <summary>
     /// Получить тенантское время из клиентской даты без времени.
     /// </summary>
@@ -4455,7 +6269,7 @@ namespace Sungero.Docflow.Server
     {
       return date.AddMilliseconds(1).FromUserTime().AddMilliseconds(-1);
     }
-    
+
     /// <summary>
     /// Получить списки рассылки.
     /// </summary>
@@ -4465,7 +6279,7 @@ namespace Sungero.Docflow.Server
     {
       return DistributionLists.GetAll().Where(a => a.Status == Sungero.RecordManagement.AcquaintanceList.Status.Active);
     }
-    
+
     /// <summary>
     /// Создать список рассылки.
     /// </summary>
@@ -4475,14 +6289,14 @@ namespace Sungero.Docflow.Server
     {
       return DistributionLists.Create();
     }
-    
+
     /// <summary>
     /// Проверить наличие документов в группе вложений, на которые не хватило прав.
     /// </summary>
     /// <param name="task">Задача.</param>
     /// <param name="groupId">ИД группы вложений.</param>
     /// <returns>Текст ошибки, если не хватает прав.</returns>
-    [Remote(IsPure = true), Public]
+    [Remote(IsPure = true), Public, Obsolete("Функция больше не используется.")]
     public static string GetTaskAbortingError(ITask task, string groupId)
     {
       var taskForMetadata = task;
@@ -4510,7 +6324,7 @@ namespace Sungero.Docflow.Server
         .AttachmentGroups.Single(g => g.NameGuid == Guid.Parse(groupId));
       return Docflow.Resources.CantAbortTaskWithoutDocumentAccessRightsFormat(metadata.Title);
     }
-    
+
     /// <summary>
     /// Получить сотрудников по списку реципиентов с раскрытием групп и ролей.
     /// </summary>
@@ -4522,7 +6336,7 @@ namespace Sungero.Docflow.Server
     {
       return Company.PublicFunctions.Module.Remote.GetEmployeesFromRecipientsRemote(recipients);
     }
-    
+
     /// <summary>
     /// Получить сотрудников по списку реципиентов с раскрытием групп и ролей.
     /// </summary>
@@ -4536,7 +6350,7 @@ namespace Sungero.Docflow.Server
     {
       return Company.PublicFunctions.Module.GetEmployeesFromRecipients(recipients);
     }
-    
+
     /// <summary>
     /// Считать лицензию из базы.
     /// </summary>
@@ -4562,7 +6376,7 @@ namespace Sungero.Docflow.Server
       }
       return licenses;
     }
-    
+
     /// <summary>
     /// Удалить лицензию из базы и обновить кеш лицензий.
     /// </summary>
@@ -4577,7 +6391,7 @@ namespace Sungero.Docflow.Server
       // Перечитывает лицензию из базы и обновляет кеш.
       Sungero.Domain.ModuleFunctions.GetFullLicenseInfo();
     }
-    
+
     /// <summary>
     /// Восстановить лицензию после удаления.
     /// </summary>
@@ -4608,7 +6422,7 @@ namespace Sungero.Docflow.Server
         Sungero.Domain.ModuleFunctions.GetFullLicenseInfo();
       }
     }
-    
+
     /// <summary>
     /// Записать параметр в docflow_params.
     /// </summary>
@@ -4621,6 +6435,17 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
+    /// Записать параметр в docflow_params, если его не было.
+    /// </summary>
+    /// <param name="key">Ключ.</param>
+    /// <param name="value">Значение.</param>
+    [Public]
+    public static void InsertDocflowParam(string key, string value)
+    {
+      Functions.Module.ExecuteSQLCommandFormat(Queries.Module.InsertDocflowParamsValue, new[] { key, value });
+    }
+
+    /// <summary>
     /// Получить документы по контрагенту.
     /// </summary>
     /// <param name="counterparty">Контрагент.</param>
@@ -4631,7 +6456,7 @@ namespace Sungero.Docflow.Server
       return CounterpartyDocuments.GetAll()
         .Where(doc => Equals(doc.Counterparty, counterparty));
     }
-    
+
     /// <summary>
     /// Получить сообщения валидации подписи в виде строки.
     /// </summary>
@@ -4663,7 +6488,7 @@ namespace Sungero.Docflow.Server
         return string.Join(separator, errors);
       }
     }
-    
+
     /// <summary>
     /// Получить автора резолюции из задачи.
     /// </summary>
@@ -4681,7 +6506,7 @@ namespace Sungero.Docflow.Server
       
       return resolutionAuthor;
     }
-    
+
     /// <summary>
     /// Добавить исполнителя в задание согласования.
     /// </summary>
@@ -4728,7 +6553,7 @@ namespace Sungero.Docflow.Server
         }
       }
     }
-    
+
     /// <summary>
     /// Получить список поручений по документу.
     /// </summary>
@@ -4742,7 +6567,7 @@ namespace Sungero.Docflow.Server
         .Where(t => t.AttachmentDetails.Any(g => g.GroupId == documentsGroupGuid && document.Id == g.AttachmentId))
         .ToList();
     }
-    
+
     /// <summary>
     /// Получить список справочников (правила согласования, правила назначения прав и др.), в которых используется вид документа.
     /// </summary>
@@ -4766,7 +6591,7 @@ namespace Sungero.Docflow.Server
       result.AddRange(documentGroups);
       return result.AsQueryable();
     }
-    
+
     /// <summary>
     /// Получить ИД текущего тенанта.
     /// </summary>
@@ -4776,7 +6601,7 @@ namespace Sungero.Docflow.Server
     {
       return Sungero.Core.TenantInfo.TenantId;
     }
-    
+
     /// <summary>
     /// Получить дату последнего обновления прав документов.
     /// </summary>
@@ -4804,7 +6629,7 @@ namespace Sungero.Docflow.Server
         return Calendar.SqlMinValue;
       }
     }
-    
+
     /// <summary>
     /// Обновить дату последнего запуска для фонового процесса.
     /// </summary>
@@ -4817,7 +6642,7 @@ namespace Sungero.Docflow.Server
       Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.Module.InsertOrUpdateDocflowParamsValue, new[] { agentKey, newDate });
       Logger.DebugFormat("Last access rights update date is set to {0} (UTC)", newDate);
     }
-    
+
     /// <summary>
     /// Удалить элементы очереди.
     /// </summary>
@@ -4832,7 +6657,7 @@ namespace Sungero.Docflow.Server
         command.ExecuteNonQuery();
       }
     }
-    
+
     /// <summary>
     /// Получить Guid типа прав.
     /// </summary>
@@ -4854,7 +6679,7 @@ namespace Sungero.Docflow.Server
     }
 
     #region Исполнительская дисциплина
-    
+
     /// <summary>
     /// Получить численное значение исполнительской дисциплины.
     /// </summary>
@@ -4876,7 +6701,7 @@ namespace Sungero.Docflow.Server
       var lightAssignments = this.GetLightAssignmentsWithDelays(sourceAssignments, periodBegin, periodEnd, lightAssignmentFilter, withSubstitution);
       return this.GetAssignmentsCompletionReportData(lightAssignments);
     }
-    
+
     /// <summary>
     /// Сформировать фильтр для подбора заданий по параметрам.
     /// </summary>
@@ -4917,7 +6742,7 @@ namespace Sungero.Docflow.Server
       
       return lightAssignmentFilter;
     }
-    
+
     /// <summary>
     /// Получение точек для графика "Динамика количества заданий".
     /// </summary>
@@ -4959,7 +6784,7 @@ namespace Sungero.Docflow.Server
       
       return points;
     }
-    
+
     /// <summary>
     /// Получение данных для отчета "Показатели исполнительской дисциплины подразделений за период".
     /// </summary>
@@ -4981,7 +6806,7 @@ namespace Sungero.Docflow.Server
       var lightAssignments = this.GetLightAssignmentsWithDelays(sourceAssignments, reportPeriodBegin, reportPeriodEnd, lightAssignmentFilter, withSubstitution);
       return this.GetBusinessUnitAssignmentCompletionReportData(lightAssignments, businessUnitIds, departmentIds, unwrap, withSubstitution, needFilter);
     }
-    
+
     /// <summary>
     /// Получение данных для виджетов "Исполнительская дисциплина подразделений", "Подразделения с высокой загрузкой".
     /// </summary>
@@ -5022,7 +6847,7 @@ namespace Sungero.Docflow.Server
     {
       return this.GetBusinessUnitAssignmentCompletionWidgetData(businessUnitIds, departmentIds, reportPeriodBegin, reportPeriodEnd, unwrap, withSubstitution, needFilter).Any();
     }
-    
+
     /// <summary>
     /// Получить подчиненных сотрудников для текущего сотрудника по иерархии оргструктуры.
     /// </summary>
@@ -5043,7 +6868,7 @@ namespace Sungero.Docflow.Server
       
       return employeeIds;
     }
-    
+
     /// <summary>
     /// Получить подчиненных сотрудников для заданного списка сотрудников по иерархии оргструктуры.
     /// </summary>
@@ -5059,7 +6884,7 @@ namespace Sungero.Docflow.Server
       employeeIds.AddRange(activeEmployees.Where(e => e.Department != null && departmentsIds.Contains(e.Department.Id) && !employeeIds.Contains(e.Id)).Select(e => e.Id));
       return employeeIds.ToList();
     }
-    
+
     /// <summary>
     /// Получить подчиненные подразделения от наших организаций для текущего сотрудника.
     /// </summary>
@@ -5070,7 +6895,7 @@ namespace Sungero.Docflow.Server
       var currentRecipients = this.GetCurrentRecipients(false);
       return this.GetCEODepartments(currentRecipients);
     }
-    
+
     /// <summary>
     /// Получить подчиненные подразделения для текущего сотрудника.
     /// </summary>
@@ -5081,7 +6906,7 @@ namespace Sungero.Docflow.Server
       var currentRecipients = this.GetCurrentRecipients(false);
       return this.GetManagersDepartments(currentRecipients);
     }
-    
+
     /// <summary>
     /// Получить список сотрудников, от лица которых текущий сотрудник может получать данные по исполнительской дисциплине.
     /// </summary>
@@ -5112,7 +6937,7 @@ namespace Sungero.Docflow.Server
       
       return currentRecipientsIds;
     }
-    
+
     /// <summary>
     /// Получить список подчиненных подразделений.
     /// </summary>
@@ -5126,7 +6951,7 @@ namespace Sungero.Docflow.Server
         .Select(d => d.Id)
         .ToList();
     }
-    
+
     /// <summary>
     /// Получить список подчиненных подразделений для наших организаций.
     /// </summary>
@@ -5142,7 +6967,7 @@ namespace Sungero.Docflow.Server
         .Select(d => d.Id)
         .ToList();
     }
-    
+
     /// <summary>
     /// Получить список подчиненных НОР.
     /// </summary>
@@ -5156,7 +6981,7 @@ namespace Sungero.Docflow.Server
         .Select(b => b.Id)
         .ToList();
     }
-    
+
     /// <summary>
     /// Получить список подчиненных подразделений.
     /// </summary>
@@ -5181,7 +7006,7 @@ namespace Sungero.Docflow.Server
       
       return this.UnwrapSubordinateDepartments(departmentsIds);
     }
-    
+
     /// <summary>
     /// Получить список подразделений с дочерними по иерархии оргструктуры.
     /// </summary>
@@ -5199,7 +7024,7 @@ namespace Sungero.Docflow.Server
       }
       return departmentsIds;
     }
-    
+
     /// <summary>
     /// Получить список подчиненных наших организаций.
     /// </summary>
@@ -5218,7 +7043,7 @@ namespace Sungero.Docflow.Server
 
       return this.UnwrapSubordinateBusinessUnits(businessUnitsIds);
     }
-    
+
     /// <summary>
     /// Получить список подразделений с подчиненными по иерархии.
     /// </summary>
@@ -5237,7 +7062,7 @@ namespace Sungero.Docflow.Server
       
       return businessUnitsIds;
     }
-    
+
     /// <summary>
     /// Получить данные для формирования отчета "Исполнительская дисциплина сотрудников" и виджетов "Исполнительская дисциплина сотрудников", "Сотрудники с высокой загрузкой".
     /// </summary>
@@ -5303,7 +7128,7 @@ namespace Sungero.Docflow.Server
       assignmentCompletionReportData.AddRange(lostAssignmentCompletionReportData);
       return assignmentCompletionReportData;
     }
-    
+
     /// <summary>
     /// Получить признак того, что есть данные для формирования отчета "Исполнительская дисциплина сотрудников" и виджетов "Исполнительская дисциплина сотрудников", "Сотрудники с высокой загрузкой".
     /// </summary>
@@ -5322,7 +7147,7 @@ namespace Sungero.Docflow.Server
     {
       return this.GetDepartmentAssignmentCompletionReportData(businessUnitIds, departmentIds, reportPeriodBegin, reportPeriodEnd, unwrap, withSubstitution, needFilter).Any();
     }
-    
+
     /// <summary>
     /// Получить данные для формирования отчета "Исполнительская дисциплина сотрудника".
     /// </summary>
@@ -5337,7 +7162,7 @@ namespace Sungero.Docflow.Server
       var lightAssignmentFilter = this.GetLightAssignmentFilter(new List<int>(), new List<int>(), reportPerformer.Id, false, true, true);
       return this.GetLightAssignmentsWithDelays(sourceAssignments, reportPeriodBegin, reportPeriodEnd, lightAssignmentFilter, true);
     }
-    
+
     /// <summary>
     /// Получить запрос с заданиями для расчета исполнительской дисциплины.
     /// </summary>
@@ -5366,7 +7191,7 @@ namespace Sungero.Docflow.Server
 
       return sourceAssignments;
     }
-    
+
     /// <summary>
     /// Получить список упрощенных заданий с рассчитанной просрочкой.
     /// </summary>
@@ -5405,7 +7230,7 @@ namespace Sungero.Docflow.Server
       
       return lightAssignments;
     }
-    
+
     /// <summary>
     /// Получить данные для виджета "Динамика количества заданий".
     /// </summary>
@@ -5447,7 +7272,7 @@ namespace Sungero.Docflow.Server
       
       return lightAssignments;
     }
-    
+
     /// <summary>
     /// Получить список упрощенных заданий из запроса.
     /// </summary>
@@ -5482,7 +7307,7 @@ namespace Sungero.Docflow.Server
 
       return lightAssignments;
     }
-    
+
     /// <summary>
     /// Получить процент исполнительской дисциплины по заданиям.
     /// </summary>
@@ -5498,7 +7323,7 @@ namespace Sungero.Docflow.Server
                          assignmentCompletion, statistic.CompletedInTimeCount, statistic.OverdueCount, statistic.AffectAssignmentCount, statistic.TotalAssignmentCount);
       return assignmentCompletion;
     }
-    
+
     /// <summary>
     /// Получить процент исполнительской дисциплины.
     /// </summary>
@@ -5516,7 +7341,7 @@ namespace Sungero.Docflow.Server
         // Если есть только непросроченные задания в работе, то исполнительская дисциплина 100%.
         return assignmentCount != 0 ? 100 : (int?)null;
     }
-    
+
     /// <summary>
     /// Рассчитать данные для исполнительской дисциплины по списку заданий.
     /// </summary>
@@ -5538,7 +7363,7 @@ namespace Sungero.Docflow.Server
       
       return Structures.Module.AssignmentStatistic.Create(totalAssignmentCount, overdueCount, completedCount, completedInTimeCount, overdueCompletedCount, inWorkCount, overdueInWorkCount, affectAssignmentCount);
     }
-    
+
     /// <summary>
     /// Получить подразделения для расчета по нашим организациям.
     /// </summary>
@@ -5581,7 +7406,7 @@ namespace Sungero.Docflow.Server
       
       return departments;
     }
-    
+
     /// <summary>
     /// Получить данные для формирования виджетов "Исполнительская дисциплина подразделений", "Подразделения с высокой загрузкой".
     /// </summary>
@@ -5630,7 +7455,7 @@ namespace Sungero.Docflow.Server
       Functions.Module.AssignmentCompletionLogger(lightAssignments);
       return result;
     }
-    
+
     /// <summary>
     /// Получить данные для формирования отчета по подразделениям.
     /// </summary>
@@ -5821,7 +7646,7 @@ namespace Sungero.Docflow.Server
       Functions.Module.AssignmentCompletionLogger(lightAssignments);
       return businessUnitResultList;
     }
-    
+
     /// <summary>
     /// Получить словарь с заданиями, распределенными по подразделениям.
     /// </summary>
@@ -5836,7 +7661,7 @@ namespace Sungero.Docflow.Server
       
       return lightAssignmentsDepartmentsCache;
     }
-    
+
     /// <summary>
     /// Получить иерархический список подчиненных НОР.
     /// </summary>
@@ -5855,7 +7680,7 @@ namespace Sungero.Docflow.Server
         }
       }
     }
-    
+
     /// <summary>
     /// Получить данные для формирования отчета по сотрудникам.
     /// </summary>
@@ -5897,7 +7722,7 @@ namespace Sungero.Docflow.Server
       Functions.Module.AssignmentCompletionLogger(lightAssignments);
       return result;
     }
-    
+
     /// <summary>
     /// Получить данные для формирования отчета "Исполнительская дисциплина сотрудника".
     /// </summary>
@@ -5936,7 +7761,7 @@ namespace Sungero.Docflow.Server
       
       return result;
     }
-    
+
     /// <summary>
     /// Получить список видимых наших организаций для текущего сотрудника.
     /// </summary>
@@ -5948,7 +7773,7 @@ namespace Sungero.Docflow.Server
       var subordinateBusinessUnitsIds = this.GetSubordinateBusinessUnits(currentRecipientsIds, new List<int>());
       return BusinessUnits.GetAll().Where(b => subordinateBusinessUnitsIds.Contains(b.Id)).ToList();
     }
-    
+
     /// <summary>
     /// Получить список видимых подразделений для текущего сотрудника.
     /// </summary>
@@ -5961,7 +7786,7 @@ namespace Sungero.Docflow.Server
       var subordinateDepartmentsIds = this.GetSubordinateDepartments(currentRecipientsIds, subordinateBusinessUnitsIds, new List<int>());
       return Departments.GetAll().Where(b => subordinateDepartmentsIds.Contains(b.Id)).ToList();
     }
-    
+
     /// <summary>
     /// Получить список видимых сотрудников для текущего сотрудника.
     /// </summary>
@@ -5985,9 +7810,9 @@ namespace Sungero.Docflow.Server
       Logger.DebugFormat("Assignments Completion Report. Assignments Completion = {0}, Assignments In Time = {1}, Assignments With Delay = {2}, Total Assignments Affect Discipline = {3}, Total Assignments = {4}",
                          assignmentCompletion, statistic.CompletedInTimeCount, statistic.OverdueCount, statistic.AffectAssignmentCount, statistic.TotalAssignmentCount);
     }
-    
+
     #endregion
-    
+
     /// <summary>
     /// Получить имя пользователя, который выполнил задание, если он не являлся исполнителем.
     /// </summary>
@@ -6001,7 +7826,7 @@ namespace Sungero.Docflow.Server
       
       return null;
     }
-    
+
     /// <summary>
     /// Получить имя автора задачи.
     /// </summary>
@@ -6009,9 +7834,12 @@ namespace Sungero.Docflow.Server
     /// <returns>Отображаемое имя автора задачи.</returns>
     private string GetAuthorName(IUser author)
     {
+      if (author == null)
+        return string.Empty;
+      
       return Company.Employees.Is(author) && Company.Employees.As(author).Person != null ? Company.Employees.As(author).Person.ShortName : author.DisplayValue;
     }
-    
+
     /// <summary>
     /// Получить список сертификатов.
     /// </summary>
@@ -6022,7 +7850,7 @@ namespace Sungero.Docflow.Server
     {
       var now = Calendar.Now;
       // Список прав подписей с учетом критериев.
-      var signatureSettingsWithCriterion = Functions.OfficialDocument.GetSignatureSettings(document, Employees.Current)
+      var signatureSettingsWithCriterion = Functions.OfficialDocument.GetSignatureSettingsByEmployee(document, Employees.Current)
         .Where(s => s.Certificate != null)
         .ToList();
       
@@ -6041,7 +7869,7 @@ namespace Sungero.Docflow.Server
                signatureSettingsWithCriterion.Any(s => Equals(s.Certificate, c)))
         .ToList();
     }
-    
+
     /// <summary>
     /// Запустить агент рассылки уведомления об окончании срока действия доверенностей.
     /// </summary>
@@ -6050,7 +7878,7 @@ namespace Sungero.Docflow.Server
     {
       Jobs.SendNotificationForExpiringPowerOfAttorney.Enqueue();
     }
-    
+
     /// <summary>
     /// Запустить фоновый процесс "Перемещение содержимого документов в соответствии с политиками хранения".
     /// </summary>
@@ -6059,16 +7887,21 @@ namespace Sungero.Docflow.Server
     {
       Jobs.TransferDocumentsByStoragePolicy.Enqueue();
     }
-    
+
     /// <summary>
-    /// Создать таблицу с настойками политик хранения.
+    /// Создать таблицу с настройками политик хранения.
     /// </summary>
     /// <param name="now">Время запуска фонового процесса.</param>
     public virtual void CreateStoragePolicySettings(DateTime now)
     {
-      var commandText = Sungero.Docflow.Functions.Module.GetStoragePolicySettingsQuery(now);
       Logger.DebugFormat("TransferDocumentsByStoragePolicy: create storage policy settings.");
-      Sungero.Docflow.Functions.Module.ExecuteSQLCommand(commandText);
+      using (var command = SQL.GetCurrentConnection().CreateCommand())
+      {
+        command.CommandText = this.GetStoragePolicySettingsQuery(now);
+        Docflow.PublicFunctions.Module.AddDateTimeParameterToCommand(command, "@now", now);
+        Docflow.PublicFunctions.Module.AddDateTimeParameterToCommand(command, "@maxDate", new DateTime(2100, 1, 1));
+        command.ExecuteNonQuery();
+      }
     }
     
     /// <summary>
@@ -6078,9 +7911,10 @@ namespace Sungero.Docflow.Server
     /// <returns>Текст запроса.</returns>
     public virtual string GetStoragePolicySettingsQuery(DateTime now)
     {
-      return string.Format(Docflow.Queries.Module.CreateStoragePolicySettings, Constants.Module.StoragePolicySettingsTableName, now.ToString("yyyy-MM-dd HH:mm:ss"));
+      // Параметр now - оставлен для совместимости на слое.
+      return string.Format(Docflow.Queries.Module.CreateStoragePolicySettings, Constants.Module.StoragePolicySettingsTableName);
     }
-    
+
     /// <summary>
     /// Получить список Ид документов и хранилищ, куда их переместить.
     /// </summary>
@@ -6104,7 +7938,7 @@ namespace Sungero.Docflow.Server
       }
       return documentsToSetStorageList;
     }
-    
+
     /// <summary>
     /// Получить запрос получения документов для перемещения.
     /// </summary>
@@ -6113,7 +7947,7 @@ namespace Sungero.Docflow.Server
     {
       return string.Format(Docflow.Queries.Module.SelectDocumentsToTransfer, Constants.Module.StoragePolicySettingsTableName);
     }
-    
+
     /// <summary>
     /// Запустить асинхронный обработчик по переносу содержимого документа в хранилище.
     /// </summary>
@@ -6129,7 +7963,7 @@ namespace Sungero.Docflow.Server
         asyncSetStorage.ExecuteAsync();
       }
     }
-    
+
     /// <summary>
     /// Получить сертификат по содержимому подписи.
     /// </summary>
@@ -6144,7 +7978,7 @@ namespace Sungero.Docflow.Server
       var cadesBesSignatureInfo = signatureInfo.AsCadesBesSignatureInfo();
       return cadesBesSignatureInfo.Certificate;
     }
-    
+
     /// <summary>
     /// Получить информацию о сертификате по содержимому подписи.
     /// </summary>
@@ -6159,7 +7993,7 @@ namespace Sungero.Docflow.Server
       var cadesBesSignatureInfo = signatureInfo.AsCadesBesSignatureInfo();
       return cadesBesSignatureInfo.CertificateInfo;
     }
-    
+
     /// <summary>
     /// Получить имя контрагента из сертификата.
     /// </summary>
@@ -6177,7 +8011,7 @@ namespace Sungero.Docflow.Server
       
       return result;
     }
-    
+
     /// <summary>
     /// Получить структуру с информацией о владельце сертификата.
     /// </summary>
@@ -6205,7 +8039,7 @@ namespace Sungero.Docflow.Server
       
       return parsedSubject;
     }
-    
+
     /// <summary>
     /// Получить структуру с информацией об издателе сертификата.
     /// </summary>
@@ -6220,7 +8054,7 @@ namespace Sungero.Docflow.Server
       
       return parsedIssuer;
     }
-    
+
     /// <summary>
     /// Получить идентификаторы объектов и их значения.
     /// </summary>
@@ -6246,9 +8080,9 @@ namespace Sungero.Docflow.Server
       }
       return oidDict;
     }
-    
+
     #region Выгрузка
-    
+
     /// <summary>
     /// Подготовка документов для выгрузки.
     /// </summary>
@@ -6281,7 +8115,7 @@ namespace Sungero.Docflow.Server
       var query = Functions.Module.SearchByRequisites(search);
       return Functions.Module.PrepareExportDocumentDialogDocuments(query, parameters);
     }
-    
+
     /// <summary>
     /// Подготовка данных для выгрузки документов.
     /// </summary>
@@ -6352,7 +8186,7 @@ namespace Sungero.Docflow.Server
       
       return result;
     }
-    
+
     /// <summary>
     /// Получить приложения для выгрузки.
     /// </summary>
@@ -6366,47 +8200,6 @@ namespace Sungero.Docflow.Server
         .ToList();
     }
 
-    /// <summary>
-    /// Выгрузка документов в десктоп-клиенте.
-    /// </summary>
-    /// <param name="objs">Данные для выгрузки документов.</param>
-    /// <returns>Результат экспорта.</returns>
-    [Remote]
-    public virtual List<Structures.Module.ExportedDocument> AfterExportDocumentDialog(List<Structures.Module.ExportedDocument> objs)
-    {
-      foreach (var obj in objs)
-      {
-        try
-        {
-          if (obj.IsAddendum)
-          {
-            var leadingDocument = objs.Where(x => Equals(x.Id, obj.LeadDocumentId)).FirstOrDefault();
-            if (leadingDocument != null && leadingDocument.IsFaulted == true)
-            {
-              obj.IsFaulted = true;
-              obj.Error = Resources.ExportDialog_Error_LeadDocumentNoVersion;
-              continue;
-            }
-          }
-          
-          if (obj.IsFormalized)
-            Functions.Module.ExportFormalizedDocumentsToFolder(obj, null);
-          else
-            Functions.Module.ExportNonformalizedDocumentsToFolder(obj, null);
-          
-          Logger.DebugFormat("Document with id '{0}' has been processed for export financial documents. Is formalized: '{1}', for print: '{2}', lead document id '{3}', is faulted: '{4}', error message: '{5}'",
-                             obj.Id, obj.IsFormalized, obj.IsPrint, obj.LeadDocumentId, obj.IsFaulted, obj.Error);
-        }
-        catch (Exception ex)
-        {
-          Logger.Debug(ex.ToString());
-          obj.Error = Resources.ExportDialog_Error_ClientFormat(ex.Message.TrimEnd('.'));
-          obj.IsFaulted = true;
-        }
-      }
-      return objs;
-    }
-    
     /// <summary>
     /// Выгрузка документов в веб-клиенте.
     /// </summary>
@@ -6493,7 +8286,7 @@ namespace Sungero.Docflow.Server
       Logger.DebugFormat("Zip model has been saved");
       return zip;
     }
-    
+
     /// <summary>
     /// Имя папки для экспорта документа.
     /// </summary>
@@ -6505,7 +8298,7 @@ namespace Sungero.Docflow.Server
       var name = Functions.Module.GetDocumentNameForExport(officialDocument, true);
       return CommonLibrary.FileUtils.NormalizeFileName(name) + " (" + officialDocument.Id + ")";
     }
-    
+
     /// <summary>
     /// Имя файла для выгружаемого документа.
     /// </summary>
@@ -6552,7 +8345,7 @@ namespace Sungero.Docflow.Server
       
       return CommonLibrary.FileUtils.NormalizeFileName(name);
     }
-    
+
     /// <summary>
     /// Имя документа/название папки для выгрузки.
     /// </summary>
@@ -6589,7 +8382,7 @@ namespace Sungero.Docflow.Server
       
       return name;
     }
-    
+
     /// <summary>
     /// Получить короткое наименование типа документа.
     /// </summary>
@@ -6615,7 +8408,7 @@ namespace Sungero.Docflow.Server
 
       return document.DocumentKind.DocumentType.Name;
     }
-    
+
     /// <summary>
     /// Получить папку, в которую документ будет выгружен.
     /// </summary>
@@ -6671,7 +8464,7 @@ namespace Sungero.Docflow.Server
       
       return innerFolder;
     }
-    
+
     /// <summary>
     /// Экспорт неформализованного документа.
     /// </summary>
@@ -6696,12 +8489,6 @@ namespace Sungero.Docflow.Server
         return;
       }
       Functions.Module.ExportDocumentWithSignature(exportModel, zipModels);
-
-      if (zipModels == null)
-      {
-        var operation = new Enumeration(Constants.AccountingDocumentBase.ExportToFolder);
-        document.History.Write(operation, operation, string.Empty, version.Number);
-      }
     }
 
     /// <summary>
@@ -6741,7 +8528,7 @@ namespace Sungero.Docflow.Server
       }
 
     }
-    
+
     /// <summary>
     /// Получить подписи формализованного документа.
     /// </summary>
@@ -6757,7 +8544,7 @@ namespace Sungero.Docflow.Server
       
       return new List<Sungero.Domain.Shared.ISignature>() { senderSign, receiverSign };
     }
-    
+
     /// <summary>
     /// Получить подписи неформализованного документа.
     /// </summary>
@@ -6768,7 +8555,7 @@ namespace Sungero.Docflow.Server
       var version = Functions.Module.GetExportedDocumentVersion(document);
       return Signatures.Get(version).Where(s => s.SignatureType == SignatureType.Approval && s.IsValid && s.SignCertificate != null).ToList();
     }
-    
+
     /// <summary>
     /// Получить путь до папки.
     /// </summary>
@@ -6791,7 +8578,7 @@ namespace Sungero.Docflow.Server
 
       return path;
     }
-    
+
     /// <summary>
     /// Подготовить информацию о файлах выгружаемого документа.
     /// </summary>
@@ -6821,21 +8608,6 @@ namespace Sungero.Docflow.Server
         zipModel.FolderRelativePath = Functions.Module.GetFolderRelativePath(mainFolder);
         zipModel.Size = body.Size;
         zipModels.Add(zipModel);
-      }
-      else
-      {
-        #warning Нелегал на сервис хранилищ, см 62340
-        var dependency = Type.GetType("CommonLibrary.Dependencies.Dependency, CommonLibrary");
-        var resolveMethod = dependency.GetMethods().Single(m => m.Name == "Resolve" && m.GetParameters().Length == 0);
-        var providerType = Type.GetType("Sungero.StorageService.Client.IStorageServiceTokenProvider, Sungero.StorageService.Client");
-        var generic = resolveMethod.MakeGenericMethod(providerType);
-        object tokenProvider = generic.Invoke(null, null);
-        
-        var currentUser = Users.Current.Name;
-        var generateMethod = providerType.GetMethod("GenerateReadToken");
-        ticketToken = (string)generateMethod.Invoke(tokenProvider, new object[] { body.Id.Value, Sungero.Core.TenantInfo.TenantId, currentUser });
-        
-        ticketServicePath = body.Storage.Address;
       }
       
       var file = Structures.Module.ExportedFile
@@ -6906,8 +8678,6 @@ namespace Sungero.Docflow.Server
         var fileName = Functions.Module.GetExportedDocumentFileName(exportModel, document);
         var version = document.LastVersion;
         Functions.Module.WriteTokenToFile(version, fileName, true, folder, document.Id, zipModels, exportModel.Folder);
-        if (zipModels == null)
-          document.History.Write(operation, operation, string.Empty, versionNumber);
       }
       catch (Exception ex)
       {
@@ -6939,8 +8709,6 @@ namespace Sungero.Docflow.Server
         
         if (onlyOneSign)
           versionNumber = sellerTitle.Number;
-        if (zipModels == null)
-          document.History.Write(operation, operation, string.Empty, versionNumber);
         
         if (onlyOneSign)
           return;
@@ -6964,7 +8732,7 @@ namespace Sungero.Docflow.Server
         Functions.Module.ExportFormalizedVersion(buyerTitle, folder, buyerSign, zipModels, exportModel.Folder);
       }
     }
-    
+
     /// <summary>
     /// Экспортировать версию с подписью.
     /// </summary>
@@ -6986,15 +8754,7 @@ namespace Sungero.Docflow.Server
       
       var body = version.Body;
       
-      if (zipModels == null)
-      {
-        using (var memory = new System.IO.MemoryStream())
-        {
-          body.Read().CopyTo(memory);
-          memoryArray = memory.ToArray();
-        }
-      }
-      else
+      if (zipModels != null)
       {
         var zipModel = Structures.Module.ZipModel.Create();
         zipModel.DocumentId = version.ElectronicDocument.Id;
@@ -7011,7 +8771,7 @@ namespace Sungero.Docflow.Server
       
       Functions.Module.ExportSignature(version, fileName, folder, signature, zipModels, mainFolder);
     }
-    
+
     /// <summary>
     /// Выгрузка подписи.
     /// </summary>
@@ -7046,7 +8806,7 @@ namespace Sungero.Docflow.Server
         folder.Files.Add(file);
       }
     }
-    
+
     /// <summary>
     /// Отчет о выгрузке.
     /// </summary>
@@ -7088,7 +8848,7 @@ namespace Sungero.Docflow.Server
       
       return reportSessionId;
     }
-    
+
     /// <summary>
     /// Заполнить ссылку и примечание по выгруженному документу.
     /// </summary>
@@ -7120,7 +8880,7 @@ namespace Sungero.Docflow.Server
         exportReportModel.Note = FinancialArchive.Reports.Resources.FinArchiveExportReport.OpenFile;
       }
     }
-    
+
     /// <summary>
     /// Поиск документов для выгрузки.
     /// </summary>
@@ -7175,7 +8935,7 @@ namespace Sungero.Docflow.Server
         officialDocuments = officialDocuments.Where(q => q.RegistrationDate != null && q.RegistrationDate <= filter.To);
       return officialDocuments;
     }
-    
+
     /// <summary>
     /// Получить версию документа для его выгрузки.
     /// </summary>
@@ -7187,7 +8947,7 @@ namespace Sungero.Docflow.Server
     }
 
     #endregion
-    
+
     /// <summary>
     /// Получить подписывающего.
     /// </summary>
@@ -7202,20 +8962,20 @@ namespace Sungero.Docflow.Server
         var document = task.DocumentGroup.OfficialDocuments.FirstOrDefault();
         if (document != null)
         {
-          var allowedSignatories = Functions.OfficialDocument.GetSignatories(document);
           var ourSignatory = document.OurSignatory;
-          if (ourSignatory != null && allowedSignatories.Any(s => Equals(s.EmployeeId, ourSignatory.Id)))
+          
+          if (ourSignatory != null && Functions.OfficialDocument.CanSignByEmployee(document, ourSignatory))
             taskSignatory = ourSignatory;
           else
-            taskSignatory = Docflow.Functions.OfficialDocument.GetDefaultSignatory(document, allowedSignatories);
+            taskSignatory = Functions.OfficialDocument.GetDefaultSignatory(document);
         }
       }
       
       return taskSignatory;
     }
-    
+
     #region Функции для сервиса интеграции
-    
+
     /// <summary>
     /// Создать версию из шаблона.
     /// </summary>
@@ -7242,7 +9002,26 @@ namespace Sungero.Docflow.Server
         throw AppliedCodeException.Create(string.Format("Failed to create document from template. Document ID ({0}), template ID ({1})", documentId, templateId), ex);
       }
     }
-    
+
+    /// <summary>
+    /// Преобразовать документ в PDF с отметкой о поступлении.
+    /// </summary>
+    /// <param name="documentId">ИД документа.</param>
+    /// <param name="rightIndent">Значение отступа справа.</param>
+    /// <param name="bottomIndent">Значение отступа снизу.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public void ConvertToPdfWithRegistrationStamp(int documentId, double rightIndent, double bottomIndent)
+    {
+      var document = IncomingDocumentBases.GetAll(d => d.Id == documentId).FirstOrDefault();
+      if (document == null)
+        throw AppliedCodeException.Create(string.Format("ConvertToPdfWithRegistrationStamp. Document with ID ({0}) not found.", documentId));
+      
+      var result = Docflow.Functions.IncomingDocumentBase.AddRegistrationStamp(document, rightIndent, bottomIndent);
+      if (result.HasErrors)
+        throw AppliedCodeException.Create(string.Format("Failed to convert document to PDF with registration Stamp. Document ID ({0}), error: {1}.",
+                                                        documentId, result.ErrorMessage));
+    }
+
     /// <summary>
     /// Зарегистрировать документ.
     /// </summary>
@@ -7274,7 +9053,7 @@ namespace Sungero.Docflow.Server
           .Create(string.Format("Failed to register document with ID ({0}) in document register with ID ({1})", documentId, documentRegisterId), ex);
       }
     }
-    
+
     /// <summary>
     /// Утвердить документ.
     /// </summary>
@@ -7303,7 +9082,7 @@ namespace Sungero.Docflow.Server
       if (!approved)
         throw AppliedCodeException.Create(string.Format("Failed to approve document with ID ({0}).", documentId));
     }
-    
+
     /// <summary>
     /// Согласовать документ.
     /// </summary>
@@ -7332,7 +9111,7 @@ namespace Sungero.Docflow.Server
       if (!endorsed)
         throw AppliedCodeException.Create(string.Format("Failed to endorse document with ID ({0}).", documentId));
     }
-    
+
     /// <summary>
     /// Связать документы.
     /// </summary>
@@ -7367,7 +9146,7 @@ namespace Sungero.Docflow.Server
         throw AppliedCodeException.Create(string.Format("Failed to add relation {0} between document with ID ({1}) and document with ID ({2}).",
                                                         relationName, baseDocumentId, relationDocumentId));
     }
-    
+
     /// <summary>
     /// Выдать права на документ.
     /// </summary>
@@ -7401,7 +9180,7 @@ namespace Sungero.Docflow.Server
                                 document.Id, recipientId, accessRightsTypeGuid), ex);
       }
     }
-    
+
     /// <summary>
     /// Выдать права на папку.
     /// </summary>
@@ -7435,7 +9214,7 @@ namespace Sungero.Docflow.Server
                                 folder.Name, recipientId, accessRightsTypeGuid), ex);
       }
     }
-    
+
     /// <summary>
     /// Добавить документ в папку.
     /// </summary>
@@ -7458,7 +9237,7 @@ namespace Sungero.Docflow.Server
         folder.Save();
       }
     }
-    
+
     /// <summary>
     /// Создать папку в родительской папке. Если папка с таким именем уже существует, вернуть её ИД.
     /// </summary>
@@ -7489,7 +9268,7 @@ namespace Sungero.Docflow.Server
         throw AppliedCodeException.Create(string.Format("Failed to create subfolder {0} in folder {1}.", folderName, parentFolder.Name), ex);
       }
     }
-    
+
     /// <summary>
     /// Добавить папку в родительскую папку.
     /// </summary>
@@ -7519,7 +9298,7 @@ namespace Sungero.Docflow.Server
         throw AppliedCodeException.Create(string.Format("Failed to add subfolder {0} to folder {1}.", folder.Name, parentFolder.Name), ex);
       }
     }
-    
+
     /// <summary>
     /// Получить папку "Избранные" заданного сотрудника.
     /// </summary>
@@ -7534,7 +9313,7 @@ namespace Sungero.Docflow.Server
       
       return Core.SpecialFolders.GetFavorites(Users.As(employee)).Id;
     }
-    
+
     /// <summary>
     /// Получить папку по названию.
     /// </summary>
@@ -7549,7 +9328,7 @@ namespace Sungero.Docflow.Server
       
       return null;
     }
-    
+
     /// <summary>
     /// Получить папку по названию.
     /// </summary>
@@ -7567,7 +9346,7 @@ namespace Sungero.Docflow.Server
       
       return folder;
     }
-    
+
     /// <summary>
     /// Получить папку по идентификатору.
     /// </summary>
@@ -7577,7 +9356,7 @@ namespace Sungero.Docflow.Server
     {
       return Folders.GetAll().Where(x => x.Id == folderId).FirstOrDefault();
     }
-    
+
     /// <summary>
     /// Проверить, что у папки есть содержимое.
     /// </summary>
@@ -7592,7 +9371,7 @@ namespace Sungero.Docflow.Server
       
       return folder.Items.Any();
     }
-    
+
     /// <summary>
     /// Добавить рабочие дни и часы к дате.
     /// </summary>
@@ -7605,7 +9384,7 @@ namespace Sungero.Docflow.Server
     {
       return date.AddWorkingDays(days).AddWorkingHours(hours);
     }
-    
+
     /// <summary>
     /// Создать задачу на согласование по регламенту.
     /// </summary>
@@ -7652,7 +9431,7 @@ namespace Sungero.Docflow.Server
       
       return task.Id;
     }
-    
+
     /// <summary>
     /// Создать задачу на свободное согласование.
     /// </summary>
@@ -7697,7 +9476,7 @@ namespace Sungero.Docflow.Server
       
       return task.Id;
     }
-    
+
     /// <summary>
     /// Создать простую задачу.
     /// </summary>
@@ -7766,7 +9545,7 @@ namespace Sungero.Docflow.Server
       
       return task.Id;
     }
-    
+
     /// <summary>
     /// Стартовать задачу.
     /// </summary>
@@ -7780,7 +9559,7 @@ namespace Sungero.Docflow.Server
       
       task.Start();
     }
-    
+
     /// <summary>
     /// Выполнить задание.
     /// </summary>
@@ -7800,7 +9579,7 @@ namespace Sungero.Docflow.Server
         assignmentResult = new Enumeration(result);
       assignment.Complete(assignmentResult);
     }
-    
+
     /// <summary>
     /// Создать список рассылки.
     /// </summary>
@@ -7840,8 +9619,59 @@ namespace Sungero.Docflow.Server
       return distributionList.Id;
     }
     
-    #endregion
+    /// <summary>
+    /// Создать право подписи с электронной доверенностью.
+    /// </summary>
+    /// <param name="employeeId">Ид сотрудника.</param>
+    /// <param name="documentId">Ид документа.</param>
+    /// <param name="certificateId">Ид сертификата.</param>
+    /// <returns>Ид права подписи.</returns>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual int CreateSignatureSettingWithFormalizedPoA(int employeeId, int documentId, int certificateId)
+    {
+      var signSetting = SignatureSettings.Create();
+      signSetting.Recipient = Employees.Get(employeeId);
+      signSetting.Reason = Sungero.Docflow.SignatureSetting.Reason.FormalizedPoA;
+      signSetting.Document = OfficialDocuments.Get(documentId);
+      signSetting.Certificate = Certificates.Get(certificateId);
+      signSetting.Save();
+      
+      return signSetting.Id;
+    }
     
+    /// <summary>
+    /// Импортировать xml фаил эл. доверенности и подпись в новую версию документа.
+    /// </summary>
+    /// <param name="documentId">Ид документа.</param>
+    /// <param name="xmlDataBase64">Содержимое XML фаила доверенности в формате Base64.</param>
+    /// <param name="signatureDataBase64">Содержимое фаила подписи в формате Base64.</param>
+    [Public(WebApiRequestType = RequestType.Post)]
+    public virtual void ImportFormalizedPoABodyAndSign(int documentId, string xmlDataBase64, string signatureDataBase64)
+    {
+      const string XmlExtension = "xml";
+      
+      var document = FormalizedPowerOfAttorneys.GetAll(f => f.Id == documentId).FirstOrDefault();
+      
+      if (document == null)
+        throw AppliedCodeException.Create(string.Format("Import formalized PoA body and sign. Document with ID ({0}) not found.", documentId));
+      
+      if (string.IsNullOrEmpty(xmlDataBase64))
+        throw AppliedCodeException.Create("Import formalized PoA body and sign. Xml body is empty.");
+      
+      if (string.IsNullOrEmpty(signatureDataBase64))
+        throw AppliedCodeException.Create("Import formalized PoA body and sign. Signature body is empty.");
+      
+      var xml = Docflow.Structures.Module.ByteArray.Create(Convert.FromBase64String(xmlDataBase64));
+      var signature = Docflow.Structures.Module.ByteArray.Create(Convert.FromBase64String(signatureDataBase64));
+      
+      var version = document.Versions.AddNew();
+      version.AssociatedApplication = Content.AssociatedApplications.GetByExtension(XmlExtension);
+      
+      Functions.FormalizedPowerOfAttorney.ImportFormalizedPowerOfAttorneyFromXmlAndSign(document, xml, signature);
+    }
+
+    #endregion
+
     /// <summary>
     /// Обрезать длинную строку.
     /// </summary>
@@ -7856,7 +9686,7 @@ namespace Sungero.Docflow.Server
       
       return text;
     }
-    
+
     /// <summary>
     /// Получить список ролей согласования с несколькими участниками.
     /// </summary>
@@ -7869,7 +9699,7 @@ namespace Sungero.Docflow.Server
       
       return roles;
     }
-    
+
     /// <summary>
     /// Получить список поддерживаемых расширений для создания поручений по документу.
     /// </summary>
@@ -7892,7 +9722,7 @@ namespace Sungero.Docflow.Server
       databooksWithNullCode.HasDocumentKindWithNullCode = Functions.DocumentKind.HasDocumentKindWithNullCode();
       return databooksWithNullCode;
     }
-    
+
     /// <summary>
     /// Отфильтровать виды документов по правам доступа.
     /// </summary>
@@ -7926,7 +9756,7 @@ namespace Sungero.Docflow.Server
       
       return query;
     }
-    
+
     /// <summary>
     /// Получить документ по Id.
     /// </summary>
@@ -7937,7 +9767,7 @@ namespace Sungero.Docflow.Server
     {
       return OfficialDocuments.GetAll().FirstOrDefault(x => x.Id == id);
     }
-    
+
     /// <summary>
     /// Получить электронный документ по Id.
     /// </summary>
@@ -7948,7 +9778,7 @@ namespace Sungero.Docflow.Server
     {
       return ElectronicDocuments.GetAll().FirstOrDefault(x => x.Id == id);
     }
-    
+
     /// <summary>
     /// Получить новый срок соисполнителя поручения.
     /// </summary>
@@ -7983,7 +9813,7 @@ namespace Sungero.Docflow.Server
         newCoAssigneeDeadline = newCoAssigneeDeadline.Date;
       return newCoAssigneeDeadline;
     }
-    
+
     /// <summary>
     /// Получить интервал между датами в рабочих часах.
     /// </summary>
@@ -8000,7 +9830,7 @@ namespace Sungero.Docflow.Server
         interval = -interval;
       return interval;
     }
-    
+
     /// <summary>
     /// Вызвать мониторинг ожидания выполнения родительского задания у задачи на исполнения поручений.
     /// </summary>
@@ -8016,6 +9846,130 @@ namespace Sungero.Docflow.Server
         Logger.DebugFormat("Execute wait assignment monitoring(Block113) of Task(ID={0})", task.Id);
         task.Blocks.Block113.Execute();
       }
+    }
+    
+    /// <summary>
+    /// Получить доступные настройки по параметрам.
+    /// </summary>
+    /// <param name="settingType">Тип настройки.</param>
+    /// <param name="businessUnit">НОР.</param>
+    /// <param name="documentKind">Вид документа.</param>
+    /// <param name="department">Подразделение.</param>
+    /// <returns>Все настройки, которые подходят по параметрам.</returns>
+    [Remote(IsPure = true), Public]
+    public virtual IQueryable<IRegistrationSetting> GetAvailableRegistrationSettings(Enumeration? settingType,
+                                                                                     Sungero.Company.IBusinessUnit businessUnit,
+                                                                                     Sungero.Docflow.IDocumentKind documentKind,
+                                                                                     Sungero.Company.IDepartment department)
+    {
+      var activeStatus = CoreEntities.DatabookEntry.Status.Active;
+      var settings = RegistrationSettings.GetAll(r => r.Status == activeStatus &&
+                                                 r.SettingType == settingType &&
+                                                 r.DocumentRegister.Status == activeStatus);
+      
+      settings = businessUnit != null ?
+        settings.Where(r => r.BusinessUnits.Any(o => o.BusinessUnit.Equals(businessUnit)) || !r.BusinessUnits.Any()) :
+        settings.Where(r => !r.BusinessUnits.Any());
+      
+      settings = documentKind != null ?
+        settings.Where(r => r.DocumentKinds.Any(o => o.DocumentKind.Equals(documentKind)) || !r.DocumentKinds.Any()) :
+        settings.Where(r => !r.DocumentKinds.Any());
+      
+      settings = department != null ?
+        settings.Where(r => r.Departments.Any(o => o.Department.Equals(department)) || !r.Departments.Any()) :
+        settings.Where(r => !r.Departments.Any());
+      
+      return settings;
+    }
+    
+    /// <summary>
+    /// Вернуть активные настройки по журналу.
+    /// </summary>
+    /// <param name="documentRegister">Журнал.</param>
+    /// <returns>Настройки по журналу.</returns>
+    [Remote(IsPure = true), Public]
+    public virtual IQueryable<IRegistrationSetting> GetRegistrationSettingByDocumentRegister(IDocumentRegister documentRegister)
+    {
+      return RegistrationSettings.GetAll(s => s.Status == CoreEntities.DatabookEntry.Status.Active && Equals(s.DocumentRegister, documentRegister));
+    }
+    
+    /// <summary>
+    /// Проверить, является ли документ-основание в праве подписи эл. доверенностью.
+    /// </summary>
+    /// <param name="businessUnit">Наша организация.</param>
+    /// <param name="employee">Сотрудник.</param>
+    /// <returns>Электронная доверенность.</returns>
+    [Public]
+    public virtual IFormalizedPowerOfAttorney GetFormalizedPoAByEmployee(IBusinessUnit businessUnit, IEmployee employee)
+    {
+      return FormalizedPowerOfAttorneys.GetAll(fpoa => Equals(fpoa.BusinessUnit, businessUnit) && Equals(fpoa.IssuedTo, employee))
+        .Where(fpoa => fpoa.ValidTill >= Calendar.Today &&
+               fpoa.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Obsolete &&
+               fpoa.LifeCycleState != Docflow.OfficialDocument.LifeCycleState.Draft)
+        .OrderByDescending(fpoa => fpoa.ValidTill)
+        .FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Получить наиболее подходящее право подписи по сертификату подписывающего.
+    /// </summary>
+    /// <param name="settings">Список прав подписи.</param>
+    /// <param name="certificate">Сертификат для подписания.</param>
+    /// <returns>Наиболее подходящее право подписи - основание подписания.</returns>
+    [Public]
+    public virtual ISignatureSetting GetOurSigningReasonWithHighPriority(List<ISignatureSetting> settings, ICertificate certificate)
+    {
+      var prioritySignatureSettings = settings
+        .OrderByDescending(s => s.Certificate != null && certificate != null &&
+                           certificate.Equals(s.Certificate))
+        .ThenByDescending(s => s.Certificate == null)
+        .ThenByDescending(s => s.Priority)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.Duties)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.Other)
+        .ThenByDescending(s => !s.ValidTill.HasValue)
+        .ThenByDescending(s => s.ValidTill)
+        .ThenByDescending(s => s.Id);
+      
+      return prioritySignatureSettings.FirstOrDefault();
+    }
+    
+    /// <summary>
+    /// Получить упорядоченный список прав подписи без учета сертификата подписывающего.
+    /// </summary>
+    /// <param name="settings">Список прав подписи.</param>
+    /// <returns>Упорядоченный список прав подписи.</returns>
+    [Public]
+    public virtual IQueryable<ISignatureSetting> GetOrderedSignatureSettings(IQueryable<ISignatureSetting> settings)
+    {
+      var now = Calendar.Now;
+      return settings
+        .Where(s => (s.Certificate != null &&
+                     ((!s.Certificate.NotAfter.HasValue || s.Certificate.NotAfter >= now) &&
+                      (!s.Certificate.NotBefore.HasValue || s.Certificate.NotBefore <= now))) ||
+               s.Certificate == null)
+        .OrderByDescending(s => s.Certificate != null)
+        .ThenByDescending(s => s.Priority)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.Duties)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney)
+        .ThenByDescending(s => s.Reason == Docflow.SignatureSetting.Reason.Other)
+        .ThenByDescending(s => !s.ValidTill.HasValue)
+        .ThenByDescending(s => s.ValidTill)
+        .ThenByDescending(s => s.Id);
+    }
+    
+    /// <summary>
+    /// Получить количество документов в пакете для массовой выдачи прав.
+    /// </summary>
+    /// <returns>Количество документов в пакете.</returns>
+    public virtual int GetDocsForAccessRightsRuleProcessingBatchSize()
+    {
+      var batchSize = (int)Docflow.PublicFunctions.Module.Remote.GetDocflowParamsNumbericValue(Constants.Module.DocsForAccessRightsRuleProcessingBatchSizeParamName);
+      if (batchSize <= 0)
+        batchSize = Constants.Module.DocsForAccessRightsRuleProcessingBatchSize;
+      return batchSize;
     }
     
   }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Company;
+using Sungero.Content;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Shared;
@@ -62,6 +63,36 @@ namespace Sungero.RecordManagement
 
   partial class ActionItemExecutionTaskSharedHandlers
   {
+
+    public virtual void AddendaGroupDeleted(Sungero.Workflow.Interfaces.AttachmentDeletedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.ActionItemExecutionTask.RemovedAddendaAppend(_obj, addendum);
+      Functions.ActionItemExecutionTask.AddedAddendaRemove(_obj, addendum);
+    }
+
+    public virtual void AddendaGroupAdded(Sungero.Workflow.Interfaces.AttachmentAddedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.ActionItemExecutionTask.AddedAddendaAppend(_obj, addendum);
+      Functions.ActionItemExecutionTask.RemovedAddendaRemove(_obj, addendum);
+    }
+
+    public virtual void AddendaGroupCreated(Sungero.Workflow.Interfaces.AttachmentCreatedEventArgs e)
+    {
+      var addendum = ElectronicDocuments.As(e.Attachment);
+      if (addendum == null)
+        return;
+      
+      Functions.ActionItemExecutionTask.AddedAddendaAppend(_obj, addendum);
+      Functions.ActionItemExecutionTask.RemovedAddendaRemove(_obj, addendum);
+    }
 
     public virtual void HasIndefiniteDeadlineChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
     {
@@ -159,7 +190,7 @@ namespace Sungero.RecordManagement
         ActionItemExecutionTasks.Resources.TaskSubject;
       _obj.Subject = Functions.ActionItemExecutionTask.GetActionItemExecutionSubject(_obj, subjectTemplate);
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, _obj.DocumentsGroup.OfficialDocuments.FirstOrDefault());
+      Functions.ActionItemExecutionTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
     }
 
     public virtual void DocumentsGroupAdded(Sungero.Workflow.Interfaces.AttachmentAddedEventArgs e)
@@ -185,8 +216,11 @@ namespace Sungero.RecordManagement
         ActionItemExecutionTasks.Resources.TaskSubject;
       _obj.Subject = Functions.ActionItemExecutionTask.GetActionItemExecutionSubject(_obj, subjectTemplate);
       
-      if (!_obj.State.IsCopied)
-        Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, document);
+      // Не синхронизировать приложения при копировании в случае программного вызова.
+      // Такой вызов происходит внутри платформы при создании поручения копированием.
+      var workingWithGui = ((Domain.Shared.IExtendedEntity)_obj).Params.ContainsKey(RecordManagement.Constants.ActionItemExecutionTask.WorkingWithGUI);
+      if (!_obj.State.IsCopied || workingWithGui)
+        Functions.ActionItemExecutionTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
       
       Docflow.PublicFunctions.OfficialDocument.DocumentAttachedInMainGroup(document, _obj);
     }

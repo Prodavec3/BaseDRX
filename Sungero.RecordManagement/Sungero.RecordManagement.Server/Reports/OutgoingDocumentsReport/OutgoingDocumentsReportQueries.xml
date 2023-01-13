@@ -1,3 +1,46 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <queries>
+  <query key="CreateSourceTable">
+    <mssql><![CDATA[create table {0}
+([ReportSessionId] varchar(256) not null,
+  [LineNumber] int not null,
+  [RegistrationDate] datetime null,
+  [RegistrationNumber] nvarchar(max) null,
+  [Addressee] nvarchar(max) null,
+  [DepartmentShortName] nvarchar(max) null,
+  [AssigneeName] nvarchar(max) null,
+  [AssigneeDepartmentShortName] nvarchar(max) null,
+  [AssigneeDepartmentName] nvarchar(max) null,
+  [Subject] nvarchar(max) null,
+  [Note] nvarchar(max) null,
+  [CanRead] bit not null)]]></mssql>
+    <postgres><![CDATA[create table {0}
+(ReportSessionId varchar(256) not null,
+  LineNumber integer not null,
+  RegistrationDate timestamp null,
+  RegistrationNumber citext null,
+  Addressee citext null,
+  DepartmentShortName citext null,
+  AssigneeName citext null,
+  AssigneeDepartmentShortName citext null,
+  AssigneeDepartmentName citext null,
+  Subject citext null,
+  Note citext null,
+  CanRead boolean not null);]]></postgres>
+  </query>
+  <query key="SelectDocumentsFromTempTable">
+    <default><![CDATA[select RegistrationDate,
+       RegistrationNumber,
+       Addressee,
+       DepartmentShortName,
+       AssigneeName,
+       AssigneeDepartmentShortName,
+       AssigneeDepartmentName,
+       Subject,
+       Note,
+       CanRead
+from Sungero_Reports_OutgoingDocuments
+where ReportSessionId = @ReportSessionId
+order by LineNumber;]]></default>
+  </query>
 </queries>

@@ -118,6 +118,9 @@ namespace Sungero.SmartProcessing.Structures.Module
     
     // Не удалось обработать документ в Ario.
     public bool FailedArioProcessDocument { get; set; }
+    
+    // Признак использования нечеткого поиска.
+    public bool IsFuzzySearchEnabled { get; set; }
   }
   
   /// <summary>
@@ -218,6 +221,19 @@ namespace Sungero.SmartProcessing.Structures.Module
   }
 
   /// <summary>
+  /// НОР и сопоставленный с ней список адресатов.
+  /// </summary>
+  [Public]
+  partial class RecognizedRecipient
+  {
+    // НОР.
+    public Sungero.SmartProcessing.Structures.Module.IRecognizedCounterparty BusinessUnit { get; set; }
+
+    // Адресаты.
+    public List<Sungero.SmartProcessing.Structures.Module.IRecognizedOfficial> Addressees { get; set; }
+  }
+  
+  /// <summary>
   /// Контрагент, НОР и сопоставленный с ними факт с типом "Контрагент".
   /// </summary>
   [Public]
@@ -271,6 +287,22 @@ namespace Sungero.SmartProcessing.Structures.Module
     public Sungero.Contracts.IContractualDocument Contract { get; set; }
     
     // Факт, по полям которого был найден договорной документ.
+    public Sungero.Commons.Structures.Module.IArioFact Fact { get; set; }
+    
+    // Вероятность.
+    public double? Probability { get; set; }
+  }
+  
+  /// <summary>
+  /// Документ и сопоставленный с ним факт.
+  /// </summary>
+  [Public]
+  partial class RecognizedDocument
+  {
+    // Ведущий документ.
+    public Sungero.Docflow.IOfficialDocument Document { get; set; }
+    
+    // Факт, по полям которого был найден ведущий документ.
     public Sungero.Commons.Structures.Module.IArioFact Fact { get; set; }
     
     // Вероятность.

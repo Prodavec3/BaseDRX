@@ -127,4 +127,7 @@
   <data name="ControlGroup_7064165d24ed45388c2aba40a1ba5112" xml:space="preserve">
     <value>Документы</value>
   </data>
+  <data name="Ribbon_ProcessingCommands_18052cb432964e8c81d1d3da99991553" xml:space="preserve">
+    <value>Обработка</value>
+  </data>
 </root>

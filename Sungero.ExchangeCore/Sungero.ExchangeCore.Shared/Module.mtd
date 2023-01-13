@@ -24,6 +24,7 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "Dependencies": [
@@ -246,12 +247,12 @@
   "SharedAssemblyName": "Sungero.ExchangeCore.Shared",
   "SharedNamespace": "Sungero.ExchangeCore.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

@@ -416,4 +416,10 @@
   <data name="Property_WaitForParentAssignment" xml:space="preserve">
     <value>Ожидать завершение родительского задания</value>
   </data>
+  <data name="Property_AddedAddenda" xml:space="preserve">
+    <value>Документы, добавленные в группу "Приложения"</value>
+  </data>
+  <data name="Property_RemovedAddenda" xml:space="preserve">
+    <value>Документы, удаленные из группы "Приложения"</value>
+  </data>
 </root>

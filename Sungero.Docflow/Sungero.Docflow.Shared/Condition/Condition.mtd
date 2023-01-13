@@ -44,7 +44,7 @@
           "Name": "Addressees",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
           "ParentGuid": "f904772f-63c7-4cbf-bbf2-f4b3ff15249d",
           "PropertyGuid": "d8d691a7-91ee-4c84-9b01-f3f3214c20f2",
           "RowNumber": 0,
@@ -53,13 +53,19 @@
             {
               "Name": "NavigationPropertyGuid",
               "Value": "fda120bf-0710-4967-a38d-e28036f97287"
+            },
+            {
+              "Name": "IsDuplicatesAllowed",
+              "Value": false
             }
           ],
           "Versions": []
         }
       ],
       "IsAncestorMetadata": true,
-      "Overridden": [],
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
       "Versions": []
     }
   ],

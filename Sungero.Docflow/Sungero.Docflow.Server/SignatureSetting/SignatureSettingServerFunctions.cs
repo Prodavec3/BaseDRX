@@ -157,5 +157,27 @@ namespace Sungero.Docflow.Server
         .Where(s => (!s.ValidFrom.HasValue || s.ValidFrom.Value <= today) &&
                (!s.ValidTill.HasValue || s.ValidTill.Value >= today));
     }
+    
+    /// <summary>
+    /// Проверить, является ли документ-основание в праве подписи эл. доверенностью.
+    /// </summary>
+    /// <returns>True - если документ-основание является эл. доверенностью.</returns>
+    [Public]
+    public virtual bool ReasonIsFormalizedPoA()
+    {
+      return _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA &&
+        _obj.Document != null && Docflow.FormalizedPowerOfAttorneys.Is(_obj.Document);
+    }
+    
+    /// <summary>
+    /// Проверить срок действия электронной доверенности в праве подписи.
+    /// </summary>
+    /// <returns>True - если срок действия доверенности истёк, иначе - false.</returns>
+    [Public, Remote]
+    public virtual bool FormalizedPowerOfAttorneyIsExpired()
+    {
+      return _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA &&
+        _obj.Document != null && FormalizedPowerOfAttorneys.As(_obj.Document).ValidTill < Calendar.Today;
+    }
   }
 }

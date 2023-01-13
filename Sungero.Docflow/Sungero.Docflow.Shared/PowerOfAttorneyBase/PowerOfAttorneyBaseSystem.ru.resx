@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_IssuedTo" xml:space="preserve">
+    <value>Кому выдана</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Базовая доверенность</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Базовую доверенность</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Базовые доверенности</value>
+  </data>
+  <data name="ControlGroup_406e14dc17444a7f85d8f6eef8abaa3f" xml:space="preserve">
+    <value>Основное</value>
+  </data>
+  <data name="Property_DaysToFinishWorks" xml:space="preserve">
+    <value>Дней для завершения</value>
+  </data>
+  <data name="Property_ValidTill" xml:space="preserve">
+    <value>Действует по</value>
+  </data>
+  <data name="ControlGroup_42612188cf984a66a4cc5c674787d208" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="ControlGroup_4e1d78fc6f6c4c81bf9aa1fa2031a46b" xml:space="preserve">
+    <value>Дата и номер</value>
+  </data>
+  <data name="ControlGroup_696a8bb83e1244c8927a37d955cfbf0f" xml:space="preserve">
+    <value>Хранение</value>
+  </data>
+  <data name="ControlGroup_1b194ce3c44048879f0d1cdc4303c583" xml:space="preserve">
+    <value>Жизненный цикл</value>
+  </data>
+  <data name="ControlGroup_72e492251e834e65bb33ea838a458e43" xml:space="preserve">
+    <value>Местонахождение</value>
+  </data>
+  <data name="FilterPanel_DraftState_f9963eaf69744dd0a188712fe10c50a6" xml:space="preserve">
+    <value>В разработке</value>
+  </data>
+  <data name="FilterPanel_ActiveState_8ae8e4567aa1450d95ffcc9f19dd952a" xml:space="preserve">
+    <value>Действующий</value>
+  </data>
+  <data name="FilterPanel_ObsoleteState_1af0d6c545e544e382c560f013a38bf7" xml:space="preserve">
+    <value>Устаревший</value>
+  </data>
+  <data name="FilterPanel_Performer_f2e487830bf649908fa0e0ec3baf8bbc" xml:space="preserve">
+    <value>Кому выдана</value>
+  </data>
+  <data name="FilterPanel_Today_d253b5a67f8b40918a3e193c4e1a9a21" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="FilterPanel_ManualPeriodPOA_ee08dd894cc846388fb90260b080e164" xml:space="preserve">
+    <value>В периоде:</value>
+  </data>
+  <data name="Action_FindSignatureSetting" xml:space="preserve">
+    <value>Показать права подписи</value>
+  </data>
+  <data name="Action_FindSignatureSettingDescription" xml:space="preserve">
+    <value>Показать список всех прав подписи на основании данной доверенности</value>
+  </data>
+  <data name="Action_FindSignatureSettingHint" xml:space="preserve">
+    <value>Показать все права подписи</value>
+  </data>
+  <data name="Ribbon_NavigationCommands_2c3ec73541cf4f7095145c6ea4909809" xml:space="preserve">
+    <value>Навигация</value>
+  </data>
+  <data name="Action_FindActiveSignatureSetting" xml:space="preserve">
+    <value>Показать право подписи</value>
+  </data>
+  <data name="Action_FindActiveSignatureSettingDescription" xml:space="preserve">
+    <value>Показать право подписи</value>
+  </data>
+  <data name="Action_FindActiveSignatureSettingHint" xml:space="preserve">
+    <value>Показать право подписи</value>
+  </data>
+  <data name="Property_ValidFrom" xml:space="preserve">
+    <value>Действует с</value>
+  </data>
+  <data name="ControlGroup_7c356f295404422aafa6935b76c6b83d" xml:space="preserve">
+    <value>Срок действия</value>
+  </data>
+  <data name="AdditionalInfoTemplate" xml:space="preserve">
+    <value>[BusinessUnit], Автор: [Author]</value>
+  </data>
+</root>

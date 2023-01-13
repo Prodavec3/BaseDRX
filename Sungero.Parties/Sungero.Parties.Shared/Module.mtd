@@ -2,7 +2,22 @@
   "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
   "NameGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
   "Name": "Parties",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "668982ea-29e3-4f4c-9908-6d1dfca2b51a",
+      "Name": "UpdateContactName",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "fb4fd345-9494-4ee0-82e7-49fbf369a5e1",
+          "Name": "PersonId",
+          "ParameterType": "Integer"
+        }
+      ]
+    }
+  ],
   "ClientAssemblyName": "Sungero.Parties.Client",
   "ClientBaseAssemblyName": "Sungero.Parties.ClientBase",
   "ClientBaseNamespace": "Sungero.Parties.ClientBase",
@@ -154,6 +169,7 @@
         "Name": "Companies",
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconCompanies_ad56e847534f45fcbb6889422da6f002.png",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       },
       {
@@ -162,6 +178,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconExchange_accdd7aaea5249c3b63467738e98d1a9.png",
         "PreviousItemGuid": "ad56e847-534f-45fc-bb68-89422da6f002",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       },
       {
@@ -170,6 +187,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconContactPersons_f11faba82ffa4c2ab96abe73705cccc5.png",
         "PreviousItemGuid": "accdd7aa-ea52-49c3-b634-67738e98d1a9",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       },
       {
@@ -178,6 +196,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconLinks_4587e4ba98c4428eabee37d8eab138cd.png",
         "PreviousItemGuid": "f11faba8-2ffa-4c2a-b96a-be73705cccc5",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       },
       {
@@ -186,6 +205,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconPersons_f95eb69172654bca878c4dcbb2cecdf8.png",
         "PreviousItemGuid": "4587e4ba-98c4-428e-abee-37d8eab138cd",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       },
       {
@@ -193,6 +213,7 @@
         "Name": "Empty",
         "BackgroundPosition": "Stretch",
         "PreviousItemGuid": "f95eb691-7265-4bca-878c-4dcbb2cecdf8",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       },
       {
@@ -201,6 +222,7 @@
         "BackgroundPosition": "Stretch",
         "IconName": "GroupIconCheckCounterparty_87826cb7c8074d7a985513002fa7a7d0.png",
         "PreviousItemGuid": "11b4aab8-7cfc-46a3-8b92-94c5de9b6c90",
+        "TabId": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
         "Versions": []
       }
     ],
@@ -210,6 +232,12 @@
       "IconName": "",
       "Versions": []
     },
+    "Tabs": [
+      {
+        "NameGuid": "9bf42f02-9604-4bf0-97b7-8aed8795fe09",
+        "Name": "Tab"
+      }
+    ],
     "Versions": []
   },
   "Dependencies": [
@@ -309,6 +337,14 @@
       ],
       "TypeName": "System.String",
       "Value": "\"Initialize\""
+    },
+    {
+      "Name": "InitialsRegex",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "@\"(?:^|\\s)+([А-Я])(?:\\.|\\s){0,}([А-Я])?(?:\\.|\\s|$)+\""
     }
   ],
   "PublicFunctions": [
@@ -388,6 +424,49 @@
       "Placement": "Shared",
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "NormalizePhone",
+      "Parameters": [
+        {
+          "Name": "phone",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "NormalizeSite",
+      "Parameters": [
+        {
+          "Name": "site",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "Reindex",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "UpdateCompanyIndexSynonyms",
+      "Parameters": [
+        {
+          "Name": "synonyms",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void",
+      "WebApiRequestType": "Post"
     }
   ],
   "PublicStructures": [],
@@ -414,7 +493,6 @@
     "WizardInviteByEmail",
     "WizardInvite",
     "WizardCompleted",
-    "WizardMailRegisterSynerdocs",
     "WizardCounterpartyView",
     "WizardCounterpartyViewShort",
     "ContactAdministrator",
@@ -532,12 +610,12 @@
       "Versions": []
     }
   ],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

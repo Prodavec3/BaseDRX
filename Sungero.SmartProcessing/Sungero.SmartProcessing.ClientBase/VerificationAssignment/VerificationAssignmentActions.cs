@@ -224,11 +224,12 @@ namespace Sungero.SmartProcessing.Client
       if (!Docflow.PublicFunctions.OfficialDocument.NeedCreateApprovalTask(mainOfficialDocument))
         return;
       
-      var approvalTask = Docflow.PublicFunctions.Module.Remote.CreateApprovalTask(mainOfficialDocument);
-      
       // Проверить наличие регламента.
-      if (approvalTask.ApprovalRule != null)
+      var availableApprovalRules = Docflow.PublicFunctions.ApprovalRuleBase.Remote.GetAvailableRulesByDocument(mainOfficialDocument);
+      if (availableApprovalRules.Any())
       {
+        var approvalTask = Docflow.PublicFunctions.Module.Remote.CreateApprovalTask(mainOfficialDocument);
+
         // Добавить вложения.
         foreach (var attachment in attachments.Where(att => !Equals(att, mainDocument)))
         {
@@ -291,7 +292,7 @@ namespace Sungero.SmartProcessing.Client
 
     public virtual bool CanForward(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Status == Status.InProcess && _obj.AllAttachments.Any();
+      return _obj.Status == Status.InProcess && Functions.VerificationTask.HasDocumentAndCanRead(VerificationTasks.As(_obj.Task));
     }
 
     public virtual void Complete(Sungero.Workflow.Client.ExecuteResultActionArgs e)

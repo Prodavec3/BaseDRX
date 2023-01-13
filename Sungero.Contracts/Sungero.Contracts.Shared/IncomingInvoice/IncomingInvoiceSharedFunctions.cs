@@ -205,5 +205,21 @@ namespace Sungero.Contracts.Shared
       
       return Functions.IncomingInvoice.Remote.GetDuplicates(incomingInvoice, documentKind, number, (DateTime)date, (double)totalAmount, currency, counterparty).Any();
     }
+    
+    /// <summary>
+    /// Заполнить свойство "Ведущий документ" в зависимости от типа документа.
+    /// </summary>
+    /// <param name="leadingDocument">Ведущий документ.</param>
+    /// <remarks>Используется при смене типа.</remarks>
+    [Public]
+    public override void FillLeadingDocument(Docflow.IOfficialDocument leadingDocument)
+    {
+      // У Входящего счета на оплату ведущий документ хранится в свойстве Договор.
+      var contractualDocument = ContractualDocuments.As(leadingDocument);
+      if (contractualDocument != null && (_obj.Counterparty == null || Equals(_obj.Counterparty, contractualDocument.Counterparty)))
+        _obj.Contract = contractualDocument;
+      else
+        _obj.Contract = null;
+    }
   }
 }

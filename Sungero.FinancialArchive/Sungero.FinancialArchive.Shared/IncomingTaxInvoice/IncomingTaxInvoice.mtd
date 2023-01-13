@@ -3,17 +3,6 @@
   "NameGuid": "74c9ddd4-4bc4-42b6-8bb0-c91d5e21fb8a",
   "Name": "IncomingTaxInvoice",
   "AccessRightsMode": "Both",
-  "Actions": [
-    {
-      "NameGuid": "51235fd5-4441-48cc-a6f1-3e5af16d5a64",
-      "Name": "ChangeDocumentType",
-      "GenerateHandler": true,
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "GenerateHandler"
-      ]
-    }
-  ],
   "BaseGuid": "96c4f4f3-dc74-497a-b347-e8faf4afe320",
   "CanBeNavigationPropertyType": true,
   "CanBeSearch": true,
@@ -1252,6 +1241,52 @@
       ],
       "PreviousPropertyGuid": "0d4c6141-a3e9-431c-8138-305443f31d8b",
       "Versions": []
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "ChangeDocumentType",
+      "Parameters": [
+        {
+          "Name": "incomingTaxInvoice",
+          "ParameterType": "global::Sungero.FinancialArchive.IIncomingTaxInvoice",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IIncomingTaxInvoice, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "types",
+          "ParameterType": "global::System.Collections.Generic.List<Domain.Shared.IEntityInfo>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::Sungero.Docflow.IOfficialDocument",
+      "ReturnTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetEmailAddressees",
+      "Parameters": [
+        {
+          "Name": "incomingTaxInvoice",
+          "ParameterType": "global::Sungero.FinancialArchive.IIncomingTaxInvoice",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IIncomingTaxInvoice, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "IsVerificationModeSupported",
+      "Parameters": [
+        {
+          "Name": "incomingTaxInvoice",
+          "ParameterType": "global::Sungero.FinancialArchive.IIncomingTaxInvoice",
+          "ParameterTypeFullName": "Sungero.FinancialArchive.IIncomingTaxInvoice, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     }
   ],
   "PublicStructures": [],

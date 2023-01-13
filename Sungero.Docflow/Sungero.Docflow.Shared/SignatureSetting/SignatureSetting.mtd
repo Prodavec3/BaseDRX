@@ -228,7 +228,7 @@
           "NameGuid": "ea5322a2-b232-4ad2-923f-74daee523a53",
           "Name": "Employee",
           "ColumnNumber": 0,
-          "ColumnSpan": 2,
+          "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "365f0095-d91b-44b4-9024-17ae572ec47a",
@@ -242,7 +242,7 @@
           "NameGuid": "0a5e1b09-b8ad-463a-ae9a-ac7955e06ebd",
           "Name": "Reason",
           "ColumnNumber": 0,
-          "ColumnSpan": 1,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "c311a027-8c86-4a13-8521-e9a9b70c0231",
@@ -274,7 +274,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "4a4fc0bd-e072-4395-8792-d65230875d28",
-          "RowNumber": 3,
+          "RowNumber": 4,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
@@ -288,7 +288,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "07357863-0b65-4ef6-9d6d-3a1028b11b7b",
-          "RowNumber": 3,
+          "RowNumber": 4,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
@@ -460,7 +460,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
-          "RowNumber": 5,
+          "RowNumber": 6,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
@@ -496,20 +496,6 @@
           "ParentGuid": "1f26d2ea-1d20-432f-bfbf-1e019464401b",
           "RowNumber": 1,
           "RowSpan": 1,
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "b897060f-a84f-43b2-a6f3-859c0ac4671c",
-          "Name": "DocumentInfo",
-          "ColumnNumber": 1,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-          "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
-          "PropertyGuid": "a47226c9-038d-4bf4-b987-ed147c12a436",
-          "RowNumber": 1,
-          "RowSpan": 1,
-          "Settings": [],
           "Versions": []
         },
         {
@@ -559,7 +545,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "cf8382f8-52d5-40f0-a575-16c9579f8846",
-          "RowNumber": 5,
+          "RowNumber": 6,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
@@ -587,10 +573,36 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
           "PropertyGuid": "fe63ee55-8b7f-4a92-898e-183063f89e0e",
-          "RowNumber": 4,
+          "RowNumber": 5,
           "RowSpan": 1,
           "Settings": [],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "0d746cf8-3589-4061-b22c-4c548d3c7a7a",
+          "Name": "SigningReason",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
+          "PropertyGuid": "cd1198d0-a782-4a8d-be68-3eaf12adead4",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "63c0cf78-21a3-4d08-b25a-b4bde2ee07c4",
+          "Name": "JobTitle",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "a2e56bdb-8fc3-4d6d-a4dd-c4371a3430ce",
+          "PropertyGuid": "1960417c-7664-44af-8f78-674191c697ba",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "Versions": []
@@ -604,15 +616,19 @@
     "BeforeDeleteServer",
     "SavingServer"
   ],
+  "HideFromNavigationEditorCreationArea": true,
   "IconName": "SignatureSetting.ico",
   "IconResourcesKeys": [],
   "IsStatusEnabled": true,
+  "LookupMode": "Popup",
   "OperationsClass": "",
   "Overridden": [
     "IsStatusEnabled",
     "IsCacheable",
     "IconName",
-    "CanBeUsedInIntegration"
+    "CanBeUsedInIntegration",
+    "LookupMode",
+    "HideFromNavigationEditorCreationArea"
   ],
   "Properties": [
     {
@@ -633,8 +649,9 @@
       "Name": "Name",
       "CanBeSearch": false,
       "Code": "Name",
+      "IsDisplayValue": true,
       "IsEnabled": false,
-      "IsShowedInList": false,
+      "IsQuickSearchAllowed": true,
       "IsVisibility": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
@@ -650,7 +667,6 @@
         "LookupServer",
         "ChangedShared"
       ],
-      "IsDisplayValue": true,
       "IsLoadEagerly": true,
       "IsQuickSearchAllowed": true,
       "IsRequired": true,
@@ -717,6 +733,11 @@
           "Versions": []
         },
         {
+          "NameGuid": "791e5f33-0951-4c63-bc03-2c4c20366add",
+          "Name": "FormalizedPoA",
+          "Code": "FormalizedPOA"
+        },
+        {
           "NameGuid": "15dc892a-8d45-465f-98fb-30d7adddd79a",
           "Name": "Other",
           "Code": "Other",
@@ -725,7 +746,8 @@
       ],
       "HandledEvents": [
         "ValueInputClient",
-        "ChangedShared"
+        "ChangedShared",
+        "FilteringClient"
       ],
       "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
@@ -843,7 +865,10 @@
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "a47226c9-038d-4bf4-b987-ed147c12a436",
       "Name": "DocumentInfo",
+      "CanBeSearch": false,
       "Code": "DocumentInfo",
+      "IsShowedInList": false,
+      "IsVisibility": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "95de09dd-a2ce-4901-8ce9-be78962f88af",
       "Versions": []
@@ -937,9 +962,45 @@
       "NeedPassEntityToLookupEvent": true,
       "PreviousPropertyGuid": "cf8382f8-52d5-40f0-a575-16c9579f8846",
       "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cd1198d0-a782-4a8d-be68-3eaf12adead4",
+      "Name": "SigningReason",
+      "Code": "SigningReason",
+      "HandledEvents": [
+        "ChangedShared",
+        "ValueInputClient"
+      ],
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "fe63ee55-8b7f-4a92-898e-183063f89e0e"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1960417c-7664-44af-8f78-674191c697ba",
+      "Name": "JobTitle",
+      "Code": "JobTitle",
+      "EntityGuid": "4a37aec4-764c-4c14-8887-e1ecafa5b4c5",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "cd1198d0-a782-4a8d-be68-3eaf12adead4"
     }
   ],
   "PublicFunctions": [
+    {
+      "Name": "FillName",
+      "Parameters": [
+        {
+          "Name": "signatureSetting",
+          "ParameterType": "global::Sungero.Docflow.ISignatureSetting",
+          "ParameterTypeFullName": "Sungero.Docflow.ISignatureSetting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
     {
       "Name": "FilterCategories",
       "Parameters": [
@@ -957,6 +1018,20 @@
       "Placement": "Shared",
       "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IDocumentGroupBase>",
       "ReturnTypeFullName": "System.Linq.IQueryable"
+    },
+    {
+      "Name": "FormalizedPowerOfAttorneyIsExpired",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "signatureSetting",
+          "ParameterType": "global::Sungero.Docflow.ISignatureSetting",
+          "ParameterTypeFullName": "Sungero.Docflow.ISignatureSetting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     },
     {
       "Name": "GetPossibleCashedCategories",
@@ -1001,6 +1076,18 @@
       "ReturnTypeFullName": "System.Linq.IQueryable"
     },
     {
+      "Name": "ReasonIsFormalizedPoA",
+      "Parameters": [
+        {
+          "Name": "signatureSetting",
+          "ParameterType": "global::Sungero.Docflow.ISignatureSetting",
+          "ParameterTypeFullName": "Sungero.Docflow.ISignatureSetting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
       "Name": "UpdateBusinessUnitSetting",
       "IsRemote": true,
       "Parameters": [
@@ -1043,7 +1130,13 @@
     "IncompatibleCategoriesExcluded",
     "DocumentCategories",
     "DocumentAdditionalCategories",
-    "DefaultSignatureSettingNote"
+    "DefaultSignatureSettingNote",
+    "Statute",
+    "DutiesDisplayName",
+    "FormalizedPoASigningReasonDocumentName",
+    "SettingValidityPeriodShouldNotExtendDocumentValidityPeriod",
+    "SignatoryDataDoesNotMatchWithDocument",
+    "FormalizedPoATooManyBusinessUnits"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "df972b09-57a4-497d-9fc4-cd17635a04b3",

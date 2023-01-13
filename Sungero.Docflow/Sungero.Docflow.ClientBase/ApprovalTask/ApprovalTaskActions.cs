@@ -34,7 +34,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void ApprovalForm(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(_obj))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(_obj))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -53,15 +53,8 @@ namespace Sungero.Docflow.Client
       if (!e.Validate())
         return;
       
-      var error = _obj.Status == Status.Draft ? string.Empty : Functions.Module.Remote.GetTaskAbortingError(_obj, Constants.Module.TaskMainGroup.ApprovalTask.ToString());
-      if (!string.IsNullOrWhiteSpace(error))
+      if (Functions.ApprovalTask.GetReasonBeforeAbort(_obj, null, e, true))
       {
-        e.AddError(error);
-      }
-      else if (Functions.ApprovalTask.GetReasonBeforeAbort(_obj, null, e, true))
-      {
-        
-        _obj.Save();
         base.Abort(e);
         Functions.ApprovalTask.AbortAsyncProcessingNotify(_obj);
       }
@@ -77,13 +70,13 @@ namespace Sungero.Docflow.Client
       if (!e.Validate())
         return;
       
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(_obj))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(_obj))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
       }
       
-      if (!Sungero.Docflow.Functions.ApprovalTask.ValidateApprovalTaskStart(_obj, e))
+      if (!Sungero.Docflow.Functions.ApprovalTask.ClientValidateApprovalTaskStart(_obj, e))
         return;
       
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();

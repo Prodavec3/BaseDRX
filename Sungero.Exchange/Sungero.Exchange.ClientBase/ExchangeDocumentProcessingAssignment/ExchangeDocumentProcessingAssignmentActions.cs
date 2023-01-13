@@ -117,12 +117,13 @@ namespace Sungero.Exchange.Client
         return;
       var mainOfficialDocument = Docflow.OfficialDocuments.As(mainDocument);
       
-      // Создать задачу.
-      var approvalTask = Sungero.Docflow.PublicFunctions.Module.Remote.CreateApprovalTask(mainOfficialDocument);
-      
       // Проверить наличие регламента.
-      if (approvalTask.ApprovalRule != null)
+      var availableApprovalRules = Docflow.PublicFunctions.ApprovalRuleBase.Remote.GetAvailableRulesByDocument(mainOfficialDocument);
+      if (availableApprovalRules.Any())
       {
+        // Создать задачу.
+        var approvalTask = Sungero.Docflow.PublicFunctions.Module.Remote.CreateApprovalTask(mainOfficialDocument);
+
         // Добавить вложения.
         foreach (var attachment in attachments.Where(att => !Equals(att, mainDocument)))
         {

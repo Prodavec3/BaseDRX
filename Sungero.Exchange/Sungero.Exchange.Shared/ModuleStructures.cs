@@ -41,6 +41,8 @@ namespace Sungero.Exchange.Structures.Module
     public bool IsInvoiceFlow { get; set; }
     
     public Sungero.Core.Enumeration? ReglamentDocumentType { get; set; }
+    
+    public string FormalizedPoAUnifiedRegNumber { get; set; }
   }
   
   partial class AddendumInfo
@@ -104,6 +106,30 @@ namespace Sungero.Exchange.Structures.Module
     public List<ICertificate> MyCertificates { get; set; }
   }
   
+  /// <summary>
+  /// Информация об организации подписывающего.
+  /// </summary>
+  [Public]
+  partial class OrganizationInfo
+  {
+    public string Name { get; set; }
+    
+    public string TIN { get; set; }
+    
+    public bool IsOurSignature { get; set; }
+  }
+  
+  /// <summary>
+  /// Информация о сторонах соглашения об аннулировании.
+  /// </summary>
+  [Public]
+  partial class AnnulmentCounterpartyNames
+  {
+    public string SenderName { get; set; }
+    
+    public string ReceiverName { get; set; }
+  }
+  
   partial class Certificate
   {
     public string Thumbprint { get; set; }
@@ -142,6 +168,8 @@ namespace Sungero.Exchange.Structures.Module
     public byte[] Body { get; set; }
     
     public int Id { get; set; }
+    
+    public string FormalizedPoAUnifiedRegNumber { get; set; }
   }
   
   [Public]

@@ -202,7 +202,7 @@
     <value>Restart Task</value>
   </data>
   <data name="Action_RestartDescription" xml:space="preserve">
-    <value>Restart task and require action item status report </value>
+    <value>Restart task and require action item status report</value>
   </data>
   <data name="Action_RestartConfirmationMessage" xml:space="preserve">
     <value>Restart the request for the action item status report?</value>

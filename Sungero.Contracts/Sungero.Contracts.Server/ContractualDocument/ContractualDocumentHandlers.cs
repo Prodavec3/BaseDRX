@@ -59,7 +59,10 @@ namespace Sungero.Contracts
       // Выдать ответственному права на изменение документа.
       var responsible = _obj.ResponsibleEmployee;
       if (responsible != null && !Equals(_obj.State.Properties.ResponsibleEmployee.OriginalValue, responsible) &&
-          !Equals(responsible, Sungero.Company.Employees.Current))
+          !Equals(responsible, Sungero.Company.Employees.Current) &&
+          !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, responsible) &&
+          !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, responsible) &&
+          _obj.AccessRights.StrictMode != AccessRightsStrictMode.Enhanced)
         _obj.AccessRights.Grant(responsible, DefaultAccessRightsTypes.Change);
     }
   }

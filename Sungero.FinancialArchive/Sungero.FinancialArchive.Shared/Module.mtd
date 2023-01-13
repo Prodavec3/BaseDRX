@@ -24,6 +24,7 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "Dependencies": [
@@ -470,6 +471,19 @@
       "ReturnTypeFullName": "System.Void"
     },
     {
+      "Name": "GetEmailAddressees",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IAccountingDocumentBase",
+          "ParameterTypeFullName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetReceiverSignatureId",
       "Parameters": [
         {
@@ -758,12 +772,12 @@
   "SharedAssemblyName": "Sungero.FinancialArchive.Shared",
   "SharedNamespace": "Sungero.FinancialArchive.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

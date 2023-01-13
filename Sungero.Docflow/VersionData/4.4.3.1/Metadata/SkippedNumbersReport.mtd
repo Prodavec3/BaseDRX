@@ -1,0 +1,319 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "efd88005-7a4b-419b-9325-25eb4d313a09",
+  "Name": "SkippedNumbersReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf",
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "BeforeExecuteClient",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "IsReadOnly",
+    "Parameters",
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "Description"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "25c097c0-ad9b-483d-89b8-d6301ccbd7f0",
+      "Name": "PeriodBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "ff30c8e5-64e6-455a-ae61-534c45fe80b7",
+      "Name": "PeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "dedaec29-014d-4da1-930c-1707c8d3fed5",
+      "Name": "DocumentRegister",
+      "EntityType": "d7800dd5-a9d2-41e9-bbc4-a39292ac1eeb",
+      "InternalDataTypeName": "Sungero.Docflow.ILog, Sungero.Domain.Interfaces",
+      "IsRequired": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "fb79d12f-504b-4d3f-9ab4-03a9324af7c5",
+      "Name": "AvailableDocumentsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "52de55a7-0367-4f00-b7a8-05ff8e6bd8f0",
+      "Name": "SkipsTableName",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "b7545ce2-8eae-4b5f-9f2c-72b4ad5c9ffe",
+      "Name": "SkipedNumberList",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "374cc54a-c944-4371-a4fb-31a84d5bdeb0",
+      "Name": "RegistrationDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "c97d7838-258a-4b4d-8676-9e75fe343ead",
+      "Name": "DocumentRegisterId",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "64c49f29-a41e-40c6-ab92-43b55d21e00d",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "d26f87e3-3dc8-4272-9b71-203aff710462",
+      "Name": "hyperlinkMask",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "7446a9c8-a224-4082-b76e-c9e8554fc7fb",
+      "Name": "LeadingDocument",
+      "EntityType": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
+      "InternalDataTypeName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "5bdf62c1-a863-40b7-8046-cec2ea036fbf",
+      "Name": "Department",
+      "EntityType": "61b1c19f-26e2-49a5-b3d3-0d3618151e12",
+      "InternalDataTypeName": "Sungero.Company.IDepartment, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "5e20ca5a-f49f-4086-ac38-e2ca015d2515",
+      "Name": "BusinessUnit",
+      "EntityType": "eff95720-181f-4f7d-892d-dec034c7b2ab",
+      "InternalDataTypeName": "Sungero.Company.IBusinessUnit, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "e9978efa-9a4f-4d89-99af-a4fa7024be14",
+      "Name": "CaseFile",
+      "EntityType": "493bb59e-ae48-4cb5-ab66-071de5f890b0",
+      "InternalDataTypeName": "Sungero.Docflow.ICaseFile, Sungero.Domain.Interfaces",
+      "Versions": []
+    },
+    {
+      "NameGuid": "78dbe745-3847-4c4a-b290-380f8582fe0c",
+      "Name": "NumberFormat",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "629408c0-4791-4475-9195-481d44d03dd9",
+      "Name": "Period",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "3e418569-6f17-4da6-b60d-2216491407f4",
+      "Name": "PeriodOffset",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "def18e66-ffdc-40f7-8710-f5171151566a",
+      "Name": "CurrentDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true,
+      "Versions": []
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "Month",
+      "ParentClasses": [
+        "SkippedNumbersReport"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Month\""
+    },
+    {
+      "Name": "Year",
+      "ParentClasses": [
+        "SkippedNumbersReport"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Year\""
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "BeforeExecuteArguments",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "CurrentDate",
+          "IsNullable": true,
+          "TypeFullName": "global::System.DateTime"
+        },
+        {
+          "Name": "BaseDate",
+          "IsNullable": true,
+          "TypeFullName": "global::System.DateTime"
+        },
+        {
+          "Name": "DocumentRegister",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Docflow.IDocumentRegister"
+        },
+        {
+          "Name": "RegistrationDate",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "LaunchedFromDialog",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "PeriodOffset",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Period",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "PeriodBegin",
+          "IsNullable": true,
+          "TypeFullName": "global::System.DateTime"
+        },
+        {
+          "Name": "PeriodEnd",
+          "IsNullable": true,
+          "TypeFullName": "global::System.DateTime"
+        },
+        {
+          "Name": "DocumentRegisterPeriodBegin",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "DocumentRegisterPeriodEnd",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "HasLeadingDocument",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "LeadingDocument",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Docflow.IOfficialDocument"
+        },
+        {
+          "Name": "HasDepartment",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "Department",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Company.IDepartment"
+        },
+        {
+          "Name": "HasBusinessUnit",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "BusinessUnit",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::Sungero.Company.IBusinessUnit"
+        },
+        {
+          "Name": "NumberFormat",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "HyperlinkMask",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "SkipedNumberList",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.SkippedNumbersReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "OrderNumberName",
+    "Id",
+    "DocumentName",
+    "And",
+    "NoSkippedNumbers",
+    "SkippedNumbers",
+    "Document",
+    "NumberReserved",
+    "Note",
+    "DateReg",
+    "RegNumber",
+    "ReportName",
+    "NumberIsSkipped",
+    "DocumentRegister",
+    "NumberNotOnFormat",
+    "LeadingDocument",
+    "Department",
+    "BusinessUnit",
+    "HaveNotEnoughAccessRights",
+    "CurrentYear",
+    "PreviousYear",
+    "CurrentWeek",
+    "PreviousWeek",
+    "CurrentMonth",
+    "PreviousMonth",
+    "CurrentQuarter",
+    "PreviousQuarter",
+    "Period",
+    "NumberFormat",
+    "NumbersAreSkipped",
+    "ChronologicalError",
+    "PeriodFrom",
+    "PeriodTo",
+    "CurrentDay"
+  ],
+  "Versions": []
+}

@@ -79,5 +79,21 @@ namespace Sungero.Contracts.Server
                            integerPart.ToString("N0"), fractionalPart.ToString("D2"), currencyName,
                            StringUtils.NumberToWords(integerPart).Capitalize(), currencyFractionalName);
     }
+    
+    /// <summary>
+    /// Проверить, связан ли документ специализированной связью.
+    /// </summary>
+    /// <returns>True - если связан, иначе - false.</returns>
+    [Remote(IsPure = true)]
+    public override bool HasSpecifiedTypeRelations()
+    {
+      var hasSpecifiedTypeRelations = false;
+      AccessRights.AllowRead(
+        () =>
+        {
+          hasSpecifiedTypeRelations = IncomingInvoices.GetAll().Any(x => Equals(x.Contract, _obj));
+        });
+      return base.HasSpecifiedTypeRelations() || hasSpecifiedTypeRelations;
+    }
   }
 }

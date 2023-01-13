@@ -45,6 +45,17 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
+    /// Сменить доступность поля Контрагент. Доступность зависит от статуса.
+    /// </summary>
+    /// <param name="isEnabled">Признак доступности поля. TRUE - поле доступно.</param>
+    /// <param name="counterpartyCodeInNumber">Признак вхождения кода контрагента в формат номера. TRUE - входит.</param>
+    /// <param name="enabledState">Признак доступности поля в зависимости от статуса.</param>
+    public override void ChangeCounterpartyPropertyAccess(bool isEnabled, bool counterpartyCodeInNumber, bool enabledState)
+    {
+      _obj.State.Properties.Counterparty.IsEnabled = isEnabled && !counterpartyCodeInNumber && (enabledState || _obj.Counterparty == null);
+    }
+    
+    /// <summary>
     /// Получить контрагентов по документу.
     /// </summary>
     /// <returns>Контрагенты.</returns>
@@ -57,14 +68,33 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
-    /// Сменить доступность поля Контрагент. Доступность зависит от статуса.
+    /// Получить основание подписания со стороны контрагента.
     /// </summary>
-    /// <param name="isEnabled">Признак доступности поля. TRUE - поле доступно.</param>
-    /// <param name="counterpartyCodeInNumber">Признак вхождения кода контрагента в формат номера. TRUE - входит.</param>
-    /// <param name="enabledState">Признак доступности поля в зависимости от статуса.</param>
-    public override void ChangeCounterpartyPropertyAccess(bool isEnabled, bool counterpartyCodeInNumber, bool enabledState)
+    /// <returns>Основание подписания со стороны контрагента.</returns>
+    [Public]
+    public override string GetCounterpartySigningReason()
     {
-      _obj.State.Properties.Counterparty.IsEnabled = isEnabled && !counterpartyCodeInNumber && (enabledState || _obj.Counterparty == null);
+      return _obj.CounterpartySigningReason;
+    }
+    
+    /// <summary>
+    /// Заполнить подписывающего.
+    /// </summary>
+    /// <param name="signatory">Подписывающий со стороны контрагента.</param>
+    public override void FillCounterpartySignatory(Parties.IContact signatory)
+    {
+      _obj.CounterpartySignatory = signatory;
+    }
+    
+    /// <summary>
+    /// Заполнить основание со стороны контрагента.
+    /// </summary>
+    /// <param name="signingReason">Основание контрагента.</param>
+    public override void FillCounterpartySigningReason(string signingReason)
+    {
+      if (!string.IsNullOrEmpty(signingReason) && signingReason.Length > _obj.Info.Properties.CounterpartySigningReason.Length)
+        signingReason = signingReason.Substring(0, _obj.Info.Properties.CounterpartySigningReason.Length);
+      _obj.CounterpartySigningReason = signingReason;
     }
     
     #region Интеллектуальная обработка

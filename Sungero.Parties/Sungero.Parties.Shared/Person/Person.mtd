@@ -776,6 +776,23 @@
       "ReturnTypeFullName": "System.String"
     },
     {
+      "Name": "GetLastNameAndInitials",
+      "Parameters": [
+        {
+          "Name": "person",
+          "ParameterType": "global::Sungero.Parties.IPerson",
+          "ParameterTypeFullName": "Sungero.Parties.IPerson, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "declension",
+          "ParameterType": "Sungero.Core.DeclensionCase"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GetSurnameAndInitialsInTenantCulture",
       "Parameters": [
         {

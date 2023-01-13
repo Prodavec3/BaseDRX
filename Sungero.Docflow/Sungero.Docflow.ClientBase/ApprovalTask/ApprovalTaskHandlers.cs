@@ -11,6 +11,11 @@ namespace Sungero.Docflow
   partial class ApprovalTaskClientHandlers
   {
 
+    public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
+    {
+      Functions.ApprovalTask.Remote.CreateParamsCache(_obj);
+    }
+
     public virtual void DeliveryMethodValueInput(Sungero.Docflow.Client.ApprovalTaskDeliveryMethodValueInputEventArgs e)
     {
       if (e.NewValue != null && e.NewValue.Sid == Constants.MailDeliveryMethod.Exchange)
@@ -44,12 +49,17 @@ namespace Sungero.Docflow
 
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
-      Functions.ApprovalTask.RefreshApprovalTaskForm(_obj);
+      Functions.ApprovalTask.RefreshApprovalTaskForm(_obj, false);
       // Обновить предметное отображение регламента.
       _obj.State.Controls.Control.Refresh();
 
       if (_obj.Status == Status.Draft && !Functions.Module.IsLockedByOther(_obj) && _obj.AccessRights.CanUpdate())
         Functions.ApprovalTask.ShowExchangeHint(_obj, _obj.State.Properties.DeliveryMethod, _obj.Info.Properties.DeliveryMethod, _obj.DeliveryMethod, e);
+      
+      if (_obj.Status != Workflow.Task.Status.Draft && 
+          _obj.Status != Workflow.Task.Status.Aborted &&
+          !Functions.ApprovalTask.HasDocumentAndCanRead(_obj))
+        e.AddError(Docflow.Resources.NoRightsToDocument);
     }
   }
 }

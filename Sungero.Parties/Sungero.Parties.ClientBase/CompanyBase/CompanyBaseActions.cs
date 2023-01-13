@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
@@ -54,7 +54,7 @@ namespace Sungero.Parties.Client
     }
 
     public virtual void FillFromService(Sungero.Domain.Client.ExecuteActionArgs e)
-    {            
+    {
       if (string.IsNullOrWhiteSpace(_obj.PSRN) && string.IsNullOrWhiteSpace(_obj.TIN) && string.IsNullOrWhiteSpace(_obj.Name))
       {
         e.AddError(CompanyBases.Resources.ErrorNeedFillTinPsrnNameForService);

@@ -200,4 +200,7 @@ Information on the document package:
   <data name="DocumentPackageHasErrors" xml:space="preserve">
     <value>The following errors occurred when processing documents:</value>
   </data>
+  <data name="ContractualBaseDocumentNamesPriority" xml:space="preserve">
+    <value>contract;specification</value>
+  </data>
 </root>

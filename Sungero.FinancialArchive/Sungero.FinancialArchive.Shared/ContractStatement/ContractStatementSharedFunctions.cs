@@ -140,6 +140,16 @@ namespace Sungero.FinancialArchive.Shared
       return base.GetDocumentResponsibleEmployee();
     }
     
+    /// <summary>
+    /// Получить список адресатов с электронной почтой для отправки вложением в письмо.
+    /// </summary>
+    /// <returns>Список адресатов.</returns>
+    [Public]
+    public override List<Sungero.Docflow.Structures.OfficialDocument.IEmailAddressee> GetEmailAddressees()
+    {
+      return Functions.Module.GetEmailAddressees(_obj);
+    }
+    
     #region Интеллектуальная обработка
     
     [Public]

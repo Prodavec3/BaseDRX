@@ -9,9 +9,52 @@ namespace Sungero.Docflow.Client
 {
   partial class ApprovalAssignmentActions
   {
+    public virtual void WithSuggestions(Sungero.Workflow.Client.ExecuteResultActionArgs e)
+    {
+      if (string.IsNullOrWhiteSpace(_obj.ActiveText))
+      {
+        e.AddError(ApprovalTasks.Resources.CommentNeeded);
+        e.Cancel();
+      }
+      
+      var needStrongSign = _obj.Stage.NeedStrongSign ?? false;
+      var errorText = Functions.ApprovalTask.GetPrimaryDocumentApproveValidationError(ApprovalTasks.As(_obj.Task), needStrongSign);
+      if (errorText != null)
+      {
+        e.AddError(errorText);
+        e.Cancel();
+      }
+      
+      var accessRightsGranted = Functions.Module.ShowDialogGrantAccessRights(_obj, _obj.OtherGroup.All.ToList());
+      if (accessRightsGranted == false)
+        e.Cancel();
+      
+      var document = _obj.DocumentGroup.OfficialDocuments.First();
+      var confirmationMessage = e.Action.ConfirmationMessage;
+      if (_obj.AddendaGroup.OfficialDocuments.Any())
+        confirmationMessage = Docflow.ApprovalAssignments.Resources.ApprovalWithSuggestionsConfirmationMessage;
+      if (accessRightsGranted == null && !Functions.ApprovalTask.ConfirmCompleteAssignment(document, confirmationMessage, Constants.ApprovalTask.ApprovalAssignmentConfirmDialogID.WithSuggestions, false))
+        e.Cancel();
+      
+      var comment = Docflow.Functions.Module.HasApproveWithSuggestionsMark(_obj.ActiveText) 
+        ? _obj.ActiveText 
+        : Functions.Module.AddApproveWithSuggestionsMark(_obj.ActiveText);
+      var performer = Company.Employees.As(_obj.Performer);
+      
+      // Получить документы из группы вложений "Приложения", исключая дубли и основной документ.
+      var addenda = Functions.Module.GetApprovalTaskAddendaForEndorse(_obj);
+      addenda = addenda.Where(x => x.Id != document.Id).Distinct().ToList();
+      Functions.Module.EndorseDocument(Sungero.Content.ElectronicDocuments.As(document), addenda, performer, true, needStrongSign, comment, e);
+    }
+
+    public virtual bool CanWithSuggestions(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
+    {
+      return _obj.Addressee == null && _obj.DocumentGroup.OfficialDocuments.Any();
+    }
+
     public virtual void AddApprover(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -59,7 +102,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void Forward(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -86,12 +129,12 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForward(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Status == Status.InProcess && _obj.DocumentGroup.OfficialDocuments.Any();
+      return _obj.Status == Status.InProcess && Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task));
     }
 
     public virtual void ExtendDeadline(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -140,22 +183,16 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForRevision(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Addressee == null && _obj.DocumentGroup.OfficialDocuments.Any();
+      return _obj.Addressee == null && Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task));
     }
 
     public virtual void Approved(Sungero.Workflow.Client.ExecuteResultActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
-      {
-        e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
-        return;
-      }
-      
-      var document = _obj.DocumentGroup.OfficialDocuments.First();
       var needStrongSign = _obj.Stage.NeedStrongSign ?? false;
-      if (document.HasVersions && needStrongSign && !PublicFunctions.Module.Remote.GetCertificates(document).Any())
+      var errorText = Functions.ApprovalTask.GetPrimaryDocumentApproveValidationError(ApprovalTasks.As(_obj.Task), needStrongSign);
+      if (errorText != null)
       {
-        e.AddError(ApprovalTasks.Resources.CertificateNeeded);
+        e.AddError(errorText);
         e.Cancel();
       }
       
@@ -163,6 +200,7 @@ namespace Sungero.Docflow.Client
       if (accessRightsGranted == false)
         e.Cancel();
       
+      var document = _obj.DocumentGroup.OfficialDocuments.First();
       var confirmationMessage = e.Action.ConfirmationMessage;
       if (_obj.AddendaGroup.OfficialDocuments.Any())
         confirmationMessage = Docflow.ApprovalAssignments.Resources.ApprovalConfirmationMessage;
@@ -179,7 +217,7 @@ namespace Sungero.Docflow.Client
 
     public virtual void ApprovalForm(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;

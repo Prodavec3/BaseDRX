@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Sungero.Company.Employee;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Shared;
+using ElasticsearchTypes = Sungero.Commons.PublicConstants.Module.ElasticsearchType;
 
 namespace Sungero.Company.Server
 {
@@ -166,6 +168,45 @@ namespace Sungero.Company.Server
     }
     
     /// <summary>
+    /// Получить сотрудников по ИНН.
+    /// </summary>
+    /// <param name="tin">ИНН.</param>
+    /// <returns>Список сотрудников.</returns>
+    [Public, Remote(IsPure = true)]
+    public static List<IEmployee> GetEmployeesByTIN(string tin)
+    {
+      var activeEmployees = Company.Employees.GetAll(e => e.Status == Company.Employee.Status.Active);
+      return activeEmployees.Where(x => x.Person != null && Equals(x.Person.TIN, tin)).ToList();
+    }
+    
+    /// <summary>
+    /// Получить сотрудников по СНИЛС.
+    /// </summary>
+    /// <param name="inila">СНИЛС.</param>
+    /// <returns>Список сотрудников.</returns>
+    [Public, Remote(IsPure = true)]
+    public static List<IEmployee> GetEmployeesByINILA(string inila)
+    {
+      // Получить сотрудников с заполненным СНИЛС.
+      var activeEmployeesWithInila = Company.Employees
+        .GetAll(x => x.Status == Company.Employee.Status.Active &&
+                x.Person != null &&
+                x.Person.INILA != string.Empty &&
+                x.Person.INILA != null);
+      
+      var result = new List<IEmployee>();
+      var clearedInila = RemoveInilaSpecialSymbols(inila);
+      foreach (var employee in activeEmployeesWithInila)
+      {
+        var clearedEmployeeInila = RemoveInilaSpecialSymbols(employee.Person.INILA);
+        if (clearedEmployeeInila == clearedInila)
+          result.Add(employee);
+      }
+      
+      return result;
+    }
+    
+    /// <summary>
     /// Получить нумерованный список сотрудников.
     /// </summary>
     /// <param name="employees">Список сотрудников.</param>
@@ -209,6 +250,16 @@ namespace Sungero.Company.Server
       }
       
       return string.Join("\r\n", employeesNumberedList);
+    }
+    
+    /// <summary>
+    /// Очистить СНИЛС от пробелов, дефисов и тире.
+    /// </summary>
+    /// <param name="inila">СНИЛС.</param>
+    /// <returns>СНИЛС без пробелов, дефисов и тире.</returns>
+    public static string RemoveInilaSpecialSymbols(string inila)
+    {
+      return inila.Replace(" ", string.Empty).Replace("-", string.Empty).Replace("—", string.Empty);
     }
     
     /// <summary>
@@ -310,5 +361,100 @@ namespace Sungero.Company.Server
     {
       return Employees.GetAll();
     }
+    
+    /// <summary>
+    /// Получить признак настройки рассылки по умолчанию.
+    /// </summary>
+    /// <returns>True - если рассылка выключена, иначе рассылка включена.</returns>
+    public virtual bool GetDisableMailNotificationParam()
+    {
+      var key = Docflow.PublicConstants.Module.DisableMailNotification;
+      var command = string.Format(Queries.Module.SelectDisableMailNotificationParam, key);
+      var commandResult = Docflow.PublicFunctions.Module.ExecuteScalarSQLCommand(command);
+      var disableMailNotificationValue = string.Empty;
+      if (!(commandResult is DBNull) && commandResult != null)
+        disableMailNotificationValue = commandResult.ToString();
+      
+      bool result = false;
+      bool.TryParse(disableMailNotificationValue, out result);
+      return result;
+    }
+    
+    /// <summary>
+    /// Получить сотрудников по имени с использованием нечеткого поиска.
+    /// </summary>
+    /// <param name="name">Имя.</param>
+    /// <param name="businesUnitId">ИД НОР.</param>
+    /// <returns>Список сотрудников.</returns>
+    [Public]
+    public static List<Company.IEmployee> GetEmployeesByNameFuzzy(string name, int businesUnitId)
+    {
+      var employees = new List<IEmployee>();
+      
+      name = Sungero.Commons.PublicFunctions.Module.TrimSpecialSymbols(name);
+      if (string.IsNullOrWhiteSpace(name))
+        return employees;
+      
+      // Искать только активные записи сотрудников внутри указанной НОР.
+      var filter = Commons.PublicFunctions.Module.GetTermQuery("Status", CoreEntities.DatabookEntry.Status.Active.Value);
+      if (businesUnitId > 0)
+        filter = string.Format("{0},{1}", filter, Commons.PublicFunctions.Module.GetTermQuery("BusinessUnitId", businesUnitId.ToString()));
+      
+      var employeesIds = new List<int>();
+      var matchInitials = Regex.Match(name, Sungero.Parties.PublicConstants.Module.InitialsRegex, RegexOptions.IgnoreCase);
+      if (!matchInitials.Success)
+      {
+        // Если инициалы не найдены, искать по полному ФИО.
+        var splittedName = name.Split(' ');
+        if (splittedName.Length > 1)
+        {
+          // Поиск ФИО по вхождению строк.
+          var must = Commons.PublicFunctions.Module.GetMatchQuery("FullName", name, true);
+          var query = Commons.PublicFunctions.Module.GetBoolQuery(must, string.Empty, filter);
+          employeesIds = Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(Employees.Info.Name, query);
+          
+          // Нечеткий поиск по ФИО.
+          if (employeesIds.Count == 0)
+          {
+            must = Commons.PublicFunctions.Module.GetMatchFuzzyQuery("FullName", name, true);
+            query = Commons.PublicFunctions.Module.GetBoolQuery(must, string.Empty, filter);
+            employeesIds = Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(Employees.Info.Name, query, Constants.Employee.ElasticsearchMinScore);
+          }
+        }
+      }
+      else
+      {
+        // Вырезать инициалы из исходной строки (оставить только фамилию).
+        var lastName = Regex.Replace(name, Sungero.Parties.PublicConstants.Module.InitialsRegex, string.Empty);
+        if (string.IsNullOrWhiteSpace(lastName))
+          return employees;
+        
+        // Сформировать обязательную часть запроса по совпадению инициалов.
+        var initialFirstName = matchInitials.Groups[1].Value;
+        var initialPatronymic = matchInitials.Groups[2].Value;
+        
+        var initialsMust = Commons.PublicFunctions.Module.GetTermQuery("InitialFirstName", initialFirstName);
+        if (!string.IsNullOrWhiteSpace(initialPatronymic))
+          initialsMust = string.Format("{0},{1}", initialsMust,
+                                       Commons.PublicFunctions.Module.GetTermQuery("InitialPatronymic", initialPatronymic));
+
+        // Добавить к запросу условие по поиску фамилии.
+        var must = string.Format("{0},{1}", initialsMust, Commons.PublicFunctions.Module.GetMatchQuery("LastName", lastName, true));
+        var query = Commons.PublicFunctions.Module.GetBoolQuery(must, string.Empty, filter);
+        employeesIds = Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(Employees.Info.Name, query);
+        if (employeesIds.Count == 0)
+        {
+          must = string.Format("{0},{1}", initialsMust, Commons.PublicFunctions.Module.GetMatchFuzzyQuery("LastName", lastName, true));
+          query = Commons.PublicFunctions.Module.GetBoolQuery(must, string.Empty, filter);
+          employeesIds = Commons.PublicFunctions.Module.ExecuteElasticsearchQuery(Employees.Info.Name, query, Constants.Employee.ElasticsearchMinScore);
+        }
+      }
+      
+      if (employeesIds.Any())
+        employees = Employees.GetAll(l => employeesIds.Contains(l.Id)).ToList();
+      
+      return employees;
+    }
+
   }
 }

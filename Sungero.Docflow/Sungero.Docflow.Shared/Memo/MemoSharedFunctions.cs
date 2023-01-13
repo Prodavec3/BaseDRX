@@ -60,10 +60,17 @@ namespace Sungero.Docflow.Shared
     public virtual void FillAddresseeFromAddressees()
     {
       var addressee = _obj.Addressees.OrderBy(a => a.Number).FirstOrDefault(a => a.Addressee != null);
+      
       if (addressee != null)
-        _obj.Addressee = addressee.Addressee;
+      {
+        if (!Equals(_obj.Addressee, addressee.Addressee))
+          _obj.Addressee = addressee.Addressee;
+      }
       else
-        _obj.Addressee = null;
+      {
+        if (_obj.Addressee != null)
+          _obj.Addressee = null;
+      }
     }
     
     /// <summary>

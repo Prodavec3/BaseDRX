@@ -25,9 +25,21 @@ namespace Sungero.Contracts.Client
     /// <returns>Список типов документов, доступных для смены типа.</returns>
     public override List<Domain.Shared.IEntityInfo> GetTypesAvailableForChange()
     {
+      if (_obj.ExchangeState != null)
+        return new List<Domain.Shared.IEntityInfo>() { Docflow.SimpleDocuments.Info };
+      
       var types = new List<Domain.Shared.IEntityInfo>();
       types.Add(Contracts.Info);
       return types;
+    }
+    
+    /// <summary>
+    /// Дополнительное условие доступности действия "Сменить тип".
+    /// </summary>
+    /// <returns>True - если действие "Сменить тип" доступно, иначе - false.</returns>
+    public override bool CanChangeDocumentType()
+    {
+      return _obj.VerificationState == VerificationState.InProcess || base.CanChangeDocumentType();
     }
   }
 }

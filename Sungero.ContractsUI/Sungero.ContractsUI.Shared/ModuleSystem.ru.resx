@@ -1,64 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -382,7 +323,7 @@
     <value>Документы у контрагентов</value>
   </data>
   <data name="CoverDescription_ContractsAtContractors" xml:space="preserve">
-    <value>Договорные документы, которые отправлены контрагентам на подписание и возврат которых необходимо проконтролировать.</value>
+    <value>Договорные и финансово-хозяйственные документы, которые отправлены контрагентам на подписание и возврат которых необходимо проконтролировать.</value>
   </data>
   <data name="CoverAction_ContractsHistory" xml:space="preserve">
     <value>История договоров</value>
@@ -497,5 +438,113 @@
   </data>
   <data name="CoverDescription_OutgoingInvoices" xml:space="preserve">
     <value>Счета на оплату, выставленные контрагентам.</value>
+  </data>
+  <data name="CoverGroup_PowersOfAttorney" xml:space="preserve">
+    <value>Доверенности</value>
+  </data>
+  <data name="CoverDescription_PowerOfAttorneyList" xml:space="preserve">
+    <value>Доверенности, выданные сотрудникам нашей организации, в том числе электронные.</value>
+  </data>
+  <data name="CoverAction_PowerOfAttorneyList" xml:space="preserve">
+    <value>Реестр доверенностей</value>
+  </data>
+  <data name="CoverAction_HeldByEmployees" xml:space="preserve">
+    <value>Документы у сотрудников</value>
+  </data>
+  <data name="CoverDescription_HeldByEmployees" xml:space="preserve">
+    <value>Договорные и финансово-хозяйственные документы, которые выданы сотрудникам и подлежат возврату.</value>
+  </data>
+  <data name="sf_aeac0a51_31cb_4508_9267_e9a602186943" xml:space="preserve">
+    <value>Реестр доверенностей</value>
+  </data>
+  <data name="FilterPanel_Status_63c542ab8c3d434483eb51a12adfd4b9" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Draft_afb61c31a1284641a535dba81b12790d" xml:space="preserve">
+    <value>Черновик</value>
+  </data>
+  <data name="FilterPanel_Active_e4cb9f5ca0bf4c9c8096a7c2073d7b0f" xml:space="preserve">
+    <value>Действующая</value>
+  </data>
+  <data name="FilterPanel_Closed_cb3c02c09e3d45948ed6d6a7922f0714" xml:space="preserve">
+    <value>Закрытая</value>
+  </data>
+  <data name="FilterPanel_Criteria_6008fb4ce5264b0ebc1fdccb6a185e15" xml:space="preserve">
+    <value>Критерии</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_794ec2ce6a964da8b7cf8e5dd67ff0f6" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_5712df35e3b74e9cbd71d8299bd677ef" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_Department_aa30e05091ce415982d1591535b9dc78" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_Status_44a38bd69fc9455c929b1e5307083d1a" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
+  <data name="FilterPanel_Active_5bb2c61d64e04f9da3498d8ea30ed507" xml:space="preserve">
+    <value>Действующая</value>
+  </data>
+  <data name="FilterPanel_Closed_0ae349923f924f928bf439c47d44cefd" xml:space="preserve">
+    <value>Закрытая</value>
+  </data>
+  <data name="FilterPanel_DocumentKindGroup_7bd428f9c7474f729b9be1c332133d83" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_PolicyType_89e5b1a657e34365b615c0187e38f8e7" xml:space="preserve">
+    <value>Тип политики</value>
+  </data>
+  <data name="FilterPanel_StoragePolicy_934914bd4fe84b1f906ed7d99609abbb" xml:space="preserve">
+    <value>Хранения</value>
+  </data>
+  <data name="FilterPanel_RetentionPolicy_3ee03aaf32d24c8fa5cd32d2dbb57f29" xml:space="preserve">
+    <value>Перемещения</value>
+  </data>
+  <data name="FilterPanel_Status_4dcde37109694772962b6f3a7d7e41e5" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Period_fb6fad464098456da039961a6e0a4fe7" xml:space="preserve">
+    <value>Действует</value>
+  </data>
+  <data name="FilterPanel_Registered_c4865ba49588487dab412d4fdf1e22c3" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_6b7e61fbeb9d4001a1c4bebccbf80462" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Reserved_48430d9a28fe401f9e5d206c1e2ecaa6" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_96c01b69cf714c2face662b3637c23ba" xml:space="preserve">
+    <value>В периоде:</value>
+  </data>
+  <data name="FilterPanel_DraftState_6b84eebb407f4f648c01cd78ccfe6922" xml:space="preserve">
+    <value>В разработке</value>
+  </data>
+  <data name="FilterPanel_ActiveState_e3567399d6b74e5188e8aa9b733ae99a" xml:space="preserve">
+    <value>Действующий</value>
+  </data>
+  <data name="FilterPanel_ObsoleteState_0ae7087fc78144048cbe8ff2d1f051f3" xml:space="preserve">
+    <value>Устаревший</value>
+  </data>
+  <data name="FilterPanel_Performer_087aaf183c23435e93483535cccbc229" xml:space="preserve">
+    <value>Кому выдана</value>
+  </data>
+  <data name="FilterPanel_Today_61086b93b09a4f399270d7f7caf3aa62" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="FilterPanel_DocumentRegister_67a2a9f741754b8b89d11a035de4253a" xml:space="preserve">
+    <value>Журнал регистрации</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_c384b44e13844621bf8952055ff33ca0" xml:space="preserve">
+    <value>Вид документа</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_0a79bf924ada43c3bde17d7201beb89e" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_Department_876c151e4de14bc89dd98e9d361ce481" xml:space="preserve">
+    <value>Подразделение</value>
   </data>
 </root>

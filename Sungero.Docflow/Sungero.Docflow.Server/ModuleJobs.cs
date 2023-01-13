@@ -7,7 +7,6 @@ namespace Sungero.Docflow.Server
 {
   public class ModuleJobs
   {
-
     /// <summary>
     /// Перемещение содержимого документа в хранилище.
     /// </summary>
@@ -72,10 +71,10 @@ namespace Sungero.Docflow.Server
       
       var alreadySentDocs = PublicFunctions.Module.GetDocumentsWithSendedTask(notifyParams.ExpiringDocTableName);
       
-      var powerOfAttorneyIds = PowerOfAttorneys.GetAll()
+      var powerOfAttorneyIds = PowerOfAttorneyBases.GetAll()
         .Where(p => !alreadySentDocs.Contains(p.Id))
-        .Where(p => p.LifeCycleState == Sungero.Docflow.PowerOfAttorney.LifeCycleState.Active ||
-               p.LifeCycleState == Sungero.Docflow.PowerOfAttorney.LifeCycleState.Draft)
+        .Where(p => p.LifeCycleState == Sungero.Docflow.PowerOfAttorneyBase.LifeCycleState.Active ||
+               p.LifeCycleState == Sungero.Docflow.PowerOfAttorneyBase.LifeCycleState.Draft)
         .Where(p => p.IssuedTo != null || p.PreparedBy != null)
         .Where(p => notifyParams.LastNotificationReserve.AddDays(p.DaysToFinishWorks.HasValue ? p.DaysToFinishWorks.Value : 0) < p.ValidTill  &&
                p.ValidTill <= notifyParams.TodayReserve.AddDays(p.DaysToFinishWorks.HasValue ? p.DaysToFinishWorks.Value : 0))
@@ -90,7 +89,7 @@ namespace Sungero.Docflow.Server
         var result = Transactions.Execute(
           () =>
           {
-            var powerOfAttorneyPart = PowerOfAttorneys.GetAll(p => powerOfAttorneyIds.Contains(p.Id)).Skip(i).Take(notifyParams.BatchCount).ToList();
+            var powerOfAttorneyPart = PowerOfAttorneyBases.GetAll(p => powerOfAttorneyIds.Contains(p.Id)).Skip(i).Take(notifyParams.BatchCount).ToList();
             powerOfAttorneyPart = powerOfAttorneyPart.Where(p => notifyParams.LastNotification.ToUserTime(p.PreparedBy ?? p.IssuedTo).AddDays(p.DaysToFinishWorks.HasValue ? p.DaysToFinishWorks.Value : 0) < p.ValidTill &&
                                                             p.ValidTill <= Calendar.GetUserToday(p.PreparedBy ?? p.IssuedTo).AddDays(p.DaysToFinishWorks.HasValue ? p.DaysToFinishWorks.Value : 0))
               .ToList();
@@ -112,7 +111,7 @@ namespace Sungero.Docflow.Server
               var activeText = Docflow.PublicFunctions.Module.TrimQuotes(Resources.ExpiringPowerOfAttorneyTextFormat(powerOfAttorney.ValidTill.Value.ToShortDateString(),
                                                                                                                      powerOfAttorney.DisplayValue));
               
-              var performers = Functions.Module.GetNotificationPerformers(powerOfAttorney);
+              var performers = Functions.Module.GetNotificationPoAPerformers(powerOfAttorney);
               performers = performers.Where(p => p != null).Distinct().ToList();
               
               var attachments = new List<Sungero.Content.IElectronicDocument>();
@@ -482,9 +481,24 @@ namespace Sungero.Docflow.Server
       }
     }
 
+    /// <summary>
+    /// Рассылка электронных писем о заданиях.
+    /// </summary>
     public virtual void SendMailNotification()
     {
+      Logger.Debug("SendMailNotification. Start.");
       Functions.Module.SendMailNotification();
+      Logger.Debug("SendMailNotification. Done.");
+    }
+    
+    /// <summary>
+    /// Рассылка электронных писем со сводкой о заданиях.
+    /// </summary>
+    public virtual void SendSummaryMailNotifications()
+    {
+      Functions.Module.SummaryMailLogDebug("Start job SendSummaryMailNotifications.");
+      Functions.Module.SendSummaryMailNotification();
+      Functions.Module.SummaryMailLogDebug("End job SendSummaryMailNotifications.");
     }
     
   }

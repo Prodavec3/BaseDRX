@@ -22,7 +22,7 @@ namespace Sungero.Docflow.Server
       #region Конфликт по условиям
       
       var allSettings = RegistrationSettings.GetAll(s => !Equals(s, setting) && setting.SettingType == s.SettingType &&
-                                                 s.Status.Value == CoreEntities.DatabookEntry.Status.Active).ToList();
+                                                    s.Status.Value == CoreEntities.DatabookEntry.Status.Active).ToList();
       
       foreach (var documentKind in setting.DocumentKinds)
       {
@@ -59,7 +59,7 @@ namespace Sungero.Docflow.Server
         conflictedSettings.AddRange(allSettings.Where(s => !s.Departments.Any()).ToList());
       }
       
-      #endregion      
+      #endregion
       
       return conflictedSettings.Distinct().ToList();
     }
@@ -74,6 +74,6 @@ namespace Sungero.Docflow.Server
     {
       return RegistrationSettings.GetAll(s => s.Status == Docflow.RegistrationSetting.Status.Active)
         .Where(s => s.DocumentKinds.Any(k => k.DocumentKind.Id == documentKind.Id));
-    }
+    } 
   }
 }

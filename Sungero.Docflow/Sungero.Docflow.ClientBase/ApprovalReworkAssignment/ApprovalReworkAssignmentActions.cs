@@ -15,7 +15,7 @@ namespace Sungero.Docflow.Client
       if (!e.Validate())
         return;
       
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -53,12 +53,12 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanForward(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return _obj.Status == Status.InProcess && _obj.DocumentGroup.OfficialDocuments.Any();
+      return _obj.Status == Status.InProcess && Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task));
     }
 
     public virtual void ExtendDeadline(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;
@@ -83,13 +83,7 @@ namespace Sungero.Docflow.Client
     {
       if (!e.Validate())
         return;
-      
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
-      {
-        e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
-        return;
-      }
-      
+
       var assignees = new List<IRecipient>();
       if (_obj.Signatory != null)
         assignees.Add(_obj.Signatory);
@@ -107,7 +101,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanAbortApprovingAction(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.Status == Sungero.Workflow.AssignmentBase.Status.InProcess && _obj.ForwardPerformer == null && _obj.DocumentGroup.OfficialDocuments.Any();
+      return _obj.Status == Sungero.Workflow.AssignmentBase.Status.InProcess && _obj.ForwardPerformer == null;
     }
 
     public virtual void ForReapproving(Sungero.Workflow.Client.ExecuteResultActionArgs e)
@@ -115,7 +109,7 @@ namespace Sungero.Docflow.Client
       if (!e.Validate())
         return;
       
-      if (!Functions.ApprovalTask.Remote.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(ApprovalTasks.As(_obj.Task)))
       {
         e.AddError(ApprovalTasks.Resources.NoRightsToDocument);
         return;

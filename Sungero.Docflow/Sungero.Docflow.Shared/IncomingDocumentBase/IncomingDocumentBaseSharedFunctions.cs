@@ -79,10 +79,17 @@ namespace Sungero.Docflow.Shared
     public virtual void FillAddresseeFromAddressees()
     {
       var addressee = _obj.Addressees.OrderBy(a => a.Number).FirstOrDefault(a => a.Addressee != null);
+      
       if (addressee != null)
-        _obj.Addressee = addressee.Addressee;
+      {
+        if (!Equals(_obj.Addressee, addressee.Addressee))
+          _obj.Addressee = addressee.Addressee;
+      }
       else
-        _obj.Addressee = null;
+      {
+        if (_obj.Addressee != null)
+          _obj.Addressee = null;
+      }
     }
     
     /// <summary>
@@ -93,6 +100,22 @@ namespace Sungero.Docflow.Shared
       // Заполнить метку в локали тенанта.
       using (TenantInfo.Culture.SwitchTo())
         _obj.ManyAddresseesPlaceholder = OfficialDocuments.Resources.ManyAddresseesPlaceholder;
+    }
+    
+    /// <summary>
+    /// Получить описание для диалога отмены регистрации.
+    /// </summary>
+    /// <param name="settingType">Тип настройки.</param>
+    /// <returns>Описание.</returns>
+    public override string GetCancelRegistrationDialogDescription(Enumeration? settingType)
+    {
+      if (settingType == Docflow.RegistrationSetting.SettingType.Reservation)
+        return Docflow.Resources.CancelReservationDescription;
+      
+      if (settingType == Docflow.RegistrationSetting.SettingType.Numeration)
+        return IncomingDocumentBases.Resources.CancelNumberingDescription;
+      
+      return IncomingDocumentBases.Resources.CancelRegistrationDescription;
     }
   }
 }

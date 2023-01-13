@@ -5,6 +5,7 @@ using Sungero.Company;
 using Sungero.Content;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using Sungero.Docflow.ApprovalTask;
 using Sungero.Docflow.OfficialDocument;
 using Sungero.Domain.Shared;
 using Sungero.Workflow;
@@ -24,10 +25,7 @@ namespace Sungero.Docflow.Server
         return;
       }
       
-      var approvalFunctionHandler = Docflow.AsyncHandlers.ExecuteApprovalFunction.Create();
-      approvalFunctionHandler.QueueItemId = queueItem.Id;
-      approvalFunctionHandler.ExecuteAsync();
-      Logger.DebugFormat("Create async handler. Id {0}, TaskId {1}, StartId {2}", queueItem.Id, _obj.Id, _obj.StartId);
+      Functions.ApprovalTask.ExecuteApprovalFunctionAsyncHandler(_obj, queueItem);
     }
 
     // Уведомление об истечении срока выполнения сценария.
@@ -59,7 +57,7 @@ namespace Sungero.Docflow.Server
       queueItem.Save();
     }
     
-    #region Этап выполнение сценария.
+    #region Этап выполнения сценария
     
     #region Пропустить этап по истечению срока?
     
@@ -222,6 +220,10 @@ namespace Sungero.Docflow.Server
         return true;
       }
       
+      // Bugfix #201657
+      if (_obj.GetStartedSchemeVersion() == LayerSchemeVersions.V4 && queueItem.ProcessingStatus == Docflow.ApprovalFunctionQueueItem.ProcessingStatus.NotProcessed)
+        Functions.ApprovalTask.ExecuteApprovalFunctionAsyncHandler(_obj, queueItem);
+      
       return queueItem.ProcessingStatus == Docflow.ApprovalFunctionQueueItem.ProcessingStatus.Completed ||
         queueItem.ProcessingStatus == Docflow.ApprovalFunctionQueueItem.ProcessingStatus.Error;
     }
@@ -346,6 +348,9 @@ namespace Sungero.Docflow.Server
       
       // Обновить сроки задачи.
       _obj.MaxDeadline = Functions.ApprovalTask.GetExpectedDate(_obj);
+      
+      // Выдать наблюдателям права на просмотр.
+      Functions.Module.GrantReadAccessRightsForAttachments(_obj.DocumentGroup.All.Concat(_obj.AddendaGroup.All).ToList(), _obj.Observers.Select(o => o.Observer).ToList());
     }
 
     #endregion

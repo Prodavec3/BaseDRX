@@ -37,13 +37,26 @@ namespace Sungero.RecordManagement
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
       // Выдать права на документы для всех, кому выданы права на задачу.
+      // Выдать права по каждой группе в отдельности, так как AllAttachments включает в себя удаленные до сохранения документы. Bug 181206.
       if (_obj.State.IsChanged)
-        Docflow.PublicFunctions.Module.GrantManualReadRightForAttachments(_obj, _obj.AllAttachments.ToList());
+      {
+        var allAttachments = _obj.DocumentForReviewGroup.All.ToList();
+        allAttachments.AddRange(_obj.AddendaGroup.All);
+        allAttachments.AddRange(_obj.OtherGroup.All);
+        allAttachments.AddRange(_obj.ResolutionGroup.All);
+        Docflow.PublicFunctions.Module.GrantManualReadRightForAttachments(_obj, allAttachments);
+      }
     }
     
     public override void BeforeRestart(Sungero.Workflow.Server.BeforeRestartEventArgs e)
     {
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, _obj.DocumentForReviewGroup.OfficialDocuments.FirstOrDefault());
+      // Заполнить коллекции добавленных и удаленных вручную документов в задаче.
+      Functions.DocumentReviewTask.AddedAddendaAppend(_obj);
+      Functions.DocumentReviewTask.RemovedAddendaAppend(_obj);
+      
+      // Синхронизация приложений для заполнения коллекции добавленных и удаленных вручную документов.
+      Functions.DocumentReviewTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
+      
       var startedResolutionProjects = _obj.ResolutionGroup.ActionItemExecutionTasks.Where(a => a.IsDraftResolution != true).ToList();
       foreach (var project in startedResolutionProjects)
         _obj.ResolutionGroup.ActionItemExecutionTasks.Remove(project);

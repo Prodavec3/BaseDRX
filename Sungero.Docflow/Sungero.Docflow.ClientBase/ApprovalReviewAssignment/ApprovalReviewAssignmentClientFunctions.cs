@@ -27,11 +27,10 @@ namespace Sungero.Docflow.Client
       var addenda = _obj.AddendaGroup.OfficialDocuments.ToList();
       var addendaToElectronic = _obj.AddendaGroup.OfficialDocuments.ToList<Sungero.Content.IElectronicDocument>();
       var performer = Company.Employees.As(_obj.Performer);
-      var signatories = Functions.OfficialDocument.Remote.GetSignatories(document);
-      var currentEmployee = Company.Employees.Current;
+      var canSignByEmployee = Functions.OfficialDocument.Remote.CanSignByEmployee(document, Company.Employees.Current);
       
       // Подписать утверждающей подписью, если нет прав, то согласующей.
-      if (document.AccessRights.CanApprove() && signatories.Any(s => currentEmployee != null && Equals(s.EmployeeId, currentEmployee.Id)))
+      if (document.AccessRights.CanApprove() && canSignByEmployee)
       {
         // Для утверждения необходимо, чтобы документ не был заблокирован.
         var lockInfo = Functions.OfficialDocument.GetDocumentLockInfo(document);

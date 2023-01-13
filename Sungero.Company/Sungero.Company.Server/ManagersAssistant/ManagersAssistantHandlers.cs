@@ -22,6 +22,7 @@ namespace Sungero.Company
         _obj.PreparesResolution = false;
         _obj.PreparesAssignmentCompletion = false;
         _obj.IsAssistant = true;
+        _obj.SendActionItems = true;
       }
     }
     

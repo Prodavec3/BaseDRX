@@ -575,7 +575,8 @@
       "IsAncestorMetadata": true,
       "Overridden": [
         "Controls",
-        "UseAncestorControls"
+        "UseAncestorControls",
+        "SettingsResourceKey"
       ],
       "Versions": []
     }
@@ -1109,6 +1110,45 @@
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "0658df80-f11a-482b-92e1-18fa78fc7778",
       "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d252be8b-ad6e-4cb0-8ae0-c0cd187f4bad",
+      "Name": "CounterpartySignatory",
+      "CanBeSearch": false,
+      "Code": "CPSgExchDoc",
+      "EntityGuid": "c8daaef9-a679-4a29-ac01-b93c1637c72e",
+      "FlatListInStandaloneLookup": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "184ab537-5748-454f-8a9c-cdbdd506321e"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "38246651-b019-493b-b6ee-58149111dfec",
+      "Name": "CounterpartySigningReason",
+      "CanBeSearch": false,
+      "Code": "CPSgRsnExchDoc",
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d252be8b-ad6e-4cb0-8ae0-c0cd187f4bad"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetCounterpartySigningReason",
+      "Parameters": [
+        {
+          "Name": "exchangeDocument",
+          "ParameterType": "global::Sungero.Docflow.IExchangeDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IExchangeDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
     }
   ],
   "PublicStructures": [],

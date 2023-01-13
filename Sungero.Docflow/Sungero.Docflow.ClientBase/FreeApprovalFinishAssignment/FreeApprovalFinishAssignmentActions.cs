@@ -19,7 +19,7 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanComplete(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
     {
-      return true;
+      return Functions.FreeApprovalTask.HasDocumentAndCanRead(FreeApprovalTasks.As(_obj.Task));
     }
 
   }

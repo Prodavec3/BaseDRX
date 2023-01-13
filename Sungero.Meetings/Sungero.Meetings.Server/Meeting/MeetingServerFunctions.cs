@@ -110,6 +110,9 @@ namespace Sungero.Meetings.Server
       if (meeting == null)
         return;
       
+      if (document.AccessRights.StrictMode == AccessRightsStrictMode.Enhanced)
+        return;
+      
       var secretary = meeting.Secretary;
       if (secretary != null && !document.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, secretary))
         document.AccessRights.Grant(secretary, DefaultAccessRightsTypes.Change);

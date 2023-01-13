@@ -104,5 +104,22 @@ namespace Sungero.Parties.Shared
     {
       return Functions.Counterparty.CheckTin(tin, false);
     }
+    
+    /// <summary>
+    /// Получить имя персоны в формате Фамилия И.О. в нужном падеже.
+    /// </summary>
+    /// <param name="declension">Падеж.</param>
+    /// <returns>Имя персоны.</returns>
+    [Public]
+    public virtual string GetLastNameAndInitials(Sungero.Core.DeclensionCase declension)
+    {
+      var personName = CommonLibrary.PersonFullName.Create(_obj.LastName, _obj.FirstName, _obj.MiddleName, CommonLibrary.PersonFullNameDisplayFormat.LastNameAndInitials);
+      if (string.IsNullOrWhiteSpace(_obj.MiddleName) && _obj.Sex != null)
+      {
+        var gender = _obj.Sex == Parties.Person.Sex.Male ? Sungero.Core.Gender.Masculine : Sungero.Core.Gender.Feminine;
+        return CaseConverter.ConvertPersonFullNameToTargetDeclension(personName, declension, gender);
+      }
+      return CaseConverter.ConvertPersonFullNameToTargetDeclension(personName, declension);
+    }
   }
 }

@@ -1,64 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -332,5 +273,332 @@
   </data>
   <data name="CoverGroup_Exchange" xml:space="preserve">
     <value>Electronic exchange</value>
+  </data>
+  <data name="CoverTab_Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="sf_1a28189b_8312_4c0e_bf40_cd8f33166887" xml:space="preserve">
+    <value>Power of Attorney List</value>
+  </data>
+  <data name="FilterPanel_Last30days_8877ae20f56d4485917add5cc35fc3c3" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_ab0e0901383e4f509e8af2d235d8d9fb" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_e0702a4e10a44c5dbfc05af11c644d13" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Contractor_2adc8d2d997642c4802c82e20699077d" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_Main_e561d48480844132870f5156359a3978" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="FilterPanel_Period_384dc2d88a6946809a555186fe6a1262" xml:space="preserve">
+    <value>Document date</value>
+  </data>
+  <data name="FilterPanel_Category_531d1ac5ad7d40b4bc9742af237abdb1" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_State_3cd5a14f50bf440e94bedaca4c2f8783" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Draft_d333c7b4b61842a686411383811cca90" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_Active_e6034db33690496094b6208e41b0cacf" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Executed_7906e82d24a4486c88fc09fa08140acd" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Terminated_c633b2f3ef1f42fbbbc6d0f051f26673" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="FilterPanel_Cancelled_cd382af6d6f74881bbcecdf554447788" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_d27880601b714b11ac171ea000c87c42" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Last365days_a0a91a718858434cb77d3e888d656c97" xml:space="preserve">
+    <value>Last 365 days</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_003ff7ce7f814b83ab4ea108c7943fce" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="FilterPanel_Contracts_10391e5a4cf74867b9c9f8154a2648ae" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_e42ccf1d6aa54e2ea1863c2f8bd6e761" xml:space="preserve">
+    <value>Supp. agreements</value>
+  </data>
+  <data name="FilterPanel_DocumentType_8514b6062e3943dca2d4fd21127bce50" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Document_bc5c4d548a384771be74c141d05562d0" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_ec4f3505dd3643459a1defd201f38933" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Category_204a674665884ad9b597bd272c503a1a" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_Contractor_2ec8dc498432404fb403214cb7b26180" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_e3ba81cc35af4baab30474e904271e5f" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Responsible_dcf036f7c21e416d8374d07ba530dca2" xml:space="preserve">
+    <value>Responsible person</value>
+  </data>
+  <data name="FilterPanel_Document_2832e16b4bac457b92a54e87531aab72" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_f9c182401a58457789ed0a414cafb03c" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Category_7be3338fb125400d87e6b53773007bd4" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_Contractor_abe9e4b156f04d47addfa467595246ba" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_934d0be326ad4acbbf81dc51079425f5" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Responsible_b88d10ea38254be58cb18fbe15e88233" xml:space="preserve">
+    <value>Person responsible for return</value>
+  </data>
+  <data name="FilterPanel_Group_3f5f08fcde1541fc8d27c5f390aad62d" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Overdue_a8797a5d43df4d11bbf9e8e2410d869e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_OverdueGroup_3f5f08fcde1541fc8d27c5f390aad62d" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_OnlyOverdue_9323f1fd9bd74889ba51b8e5db0ad112" xml:space="preserve">
+    <value>Only overdue</value>
+  </data>
+  <data name="FilterPanel_State_66975b602c1148c6baca3816373e5e95" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Concluded_7dea411ac4c544c18112ef592fdafaba" xml:space="preserve">
+    <value>Concluded</value>
+  </data>
+  <data name="FilterPanel_Executed_9be6a37e43a942a28e0ff3d665442d41" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Terminated_1989dffd82aa4272aa38748528b435d8" xml:space="preserve">
+    <value>Terminated</value>
+  </data>
+  <data name="FilterPanel_Cancelled_58bfce84c2f1471e85d1a106acc17cf4" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="FilterPanel_Document_92d42c1a59d84aa08e2562457ba223d5" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_06c5d4d7101c4345911ab04c6c1c9f12" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Category_99b52b123c5d4237902b546177ab437d" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_7715cc950de9497692bf9a9280007800" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_Responsible_b6e75cd8670c4371b791d8a7897e2d29" xml:space="preserve">
+    <value>Responsible person</value>
+  </data>
+  <data name="FilterPanel_Period_a43be82f9e174af89ec423026ae9c247" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_f3838da119f047eea2f7d4c975460efc" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="FilterPanel_DocumentType_35722cd86bae4b87bda1a4359122d510" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Contracts_a5c3126fae5b4e58a6a390904b0706c2" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_3388df145ff041b0a8125b352fc8acc8" xml:space="preserve">
+    <value>Supp. agreements</value>
+  </data>
+  <data name="FilterPanel_Last30days_e8f85890820443a891b24434dc5c902b" xml:space="preserve">
+    <value>Last 30 days</value>
+  </data>
+  <data name="FilterPanel_Last365days_7e7299aa659b495686247fdc82e7fb44" xml:space="preserve">
+    <value>Last 365 days</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_ffe95bda6e61466c82cff730c0e5dd0a" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_Status_3dbf085c0c7d4fc7b9c785ef2e38c7d9" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_b23be1bf5fb74e98ad7f0a612b26adb1" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Located_b73188f3195b4b7f9c7a7c36e4eb0324" xml:space="preserve">
+    <value>Located</value>
+  </data>
+  <data name="FilterPanel_Employee_dfe4df01b9eb412a950972a5d69974ca" xml:space="preserve">
+    <value>At employee</value>
+  </data>
+  <data name="FilterPanel_Department_c7c5fa767604491f8c302dbbab595644" xml:space="preserve">
+    <value>In department</value>
+  </data>
+  <data name="FilterPanel_Parametrs_4848266759584ad398fa91fca1557880" xml:space="preserve">
+    <value>Received from</value>
+  </data>
+  <data name="FilterPanel_RegistrationGroup_201966940ea54e5fb7d578a72c8aad5a" xml:space="preserve">
+    <value>Registration group</value>
+  </data>
+  <data name="FilterPanel_File_1f66e6bd987f410b938933d3acfcffa9" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FilterPanel_OverdueGroup_2e1d7d2e85454c259287bbf6f08d0c2a" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_Overdue_4d6a140abf6d40fabeead9b2b7f59806" xml:space="preserve">
+    <value>Only overdue</value>
+  </data>
+  <data name="FilterPanel_ReturnPeriod_a9fb23c80fac45b2beb012d9720bd886" xml:space="preserve">
+    <value>Scheduled return date</value>
+  </data>
+  <data name="FilterPanel_EndDay_34643f2519d34124b15c4e96177ca945" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="FilterPanel_EndWeek_5164df427aaa4d3b82264468ca102d3e" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="FilterPanel_EndMonth_40aae83909e64e5cb51d012bbf0a313c" xml:space="preserve">
+    <value>This month</value>
+  </data>
+  <data name="FilterPanel_Manual_a53de89d8ac74b58971f7954758b0f32" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_Department_a0b90086de3c4a9cb3ebf9fe2162dabd" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="FilterPanel_SupAgreements_5ce6d611bd6f400e93d98540838d3cdb" xml:space="preserve">
+    <value>Supp. agreements</value>
+  </data>
+  <data name="FilterPanel_Contracts_d646f5e3dbec4ad49d5f62705b805c9a" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="FilterPanel_DocumentTypeGroup_b8ac06d46caf4e179aa0599c41105929" xml:space="preserve">
+    <value>Document types</value>
+  </data>
+  <data name="FilterPanel_Status_63c542ab8c3d434483eb51a12adfd4b9" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_Draft_afb61c31a1284641a535dba81b12790d" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_Active_e4cb9f5ca0bf4c9c8096a7c2073d7b0f" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Closed_cb3c02c09e3d45948ed6d6a7922f0714" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_Criteria_6008fb4ce5264b0ebc1fdccb6a185e15" xml:space="preserve">
+    <value>Criteria</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_794ec2ce6a964da8b7cf8e5dd67ff0f6" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_5712df35e3b74e9cbd71d8299bd677ef" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_Department_aa30e05091ce415982d1591535b9dc78" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="FilterPanel_Status_44a38bd69fc9455c929b1e5307083d1a" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FilterPanel_FlagsList_d8c32f8f94d64237b0af1b97aa89a796" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_FlagsList_4e00b7b74a6840649d9cd8ccbe8c982d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Active_5bb2c61d64e04f9da3498d8ea30ed507" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Closed_0ae349923f924f928bf439c47d44cefd" xml:space="preserve">
+    <value>Closed</value>
+  </data>
+  <data name="FilterPanel_DocumentKindGroup_7bd428f9c7474f729b9be1c332133d83" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_PolicyType_89e5b1a657e34365b615c0187e38f8e7" xml:space="preserve">
+    <value>Policy Type For</value>
+  </data>
+  <data name="FilterPanel_StoragePolicy_934914bd4fe84b1f906ed7d99609abbb" xml:space="preserve">
+    <value>Document Storage</value>
+  </data>
+  <data name="FilterPanel_RetentionPolicy_3ee03aaf32d24c8fa5cd32d2dbb57f29" xml:space="preserve">
+    <value>Document Retention</value>
+  </data>
+  <data name="FilterPanel_Status_5d892545176640f9a4db1d058457c489" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="FilterPanel_Period_723e7129ca9b481a9fe378efe60ba8af" xml:space="preserve">
+    <value>Valid</value>
+  </data>
+  <data name="FilterPanel_Registered_50362b39103a451d9b517a5aaffefef1" xml:space="preserve">
+    <value>Registered</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_ef54267a09fb43b2bc9115a7eebbd3df" xml:space="preserve">
+    <value>Not registered</value>
+  </data>
+  <data name="FilterPanel_Reserved_83b8f13ff7fc43e4b54279235b589750" xml:space="preserve">
+    <value>Reserved</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_34d44e64872d4f66876de4e1c415b856" xml:space="preserve">
+    <value>For period:</value>
+  </data>
+  <data name="FilterPanel_DraftState_ce3400211e14469faf5e51e8ba9d671f" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_ActiveState_0ff804e5213141ddb1ca6cf607a26cc2" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_ObsoleteState_3d0e534ad7a748c89a359b39cf65ec6d" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="FilterPanel_Performer_cd94a69344484e3abf89ce5d27f7f7ba" xml:space="preserve">
+    <value>Issued to</value>
+  </data>
+  <data name="FilterPanel_Today_67df8444a9de4325ba9e944f0fce9740" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="FilterPanel_DocumentRegister_b192c22e56c7420eaf89bd6c575c4e62" xml:space="preserve">
+    <value>Document register</value>
+  </data>
+  <data name="FilterPanel_DocumentKind_dee48bc56d5b43c6a264d704b79036b7" xml:space="preserve">
+    <value>Document kind</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_2a8c2b3958fc47ca8dafcdb32b8ddbf0" xml:space="preserve">
+    <value>Business unit</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_364b6d181d154ed3b6b2d1e2b1f49cb9" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_Department_dded2cb1d528405c81f39a09564a4e96" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="CoverAction_PowerOfAttorneyList" xml:space="preserve">
+    <value>Power of Attorney List</value>
+  </data>
+  <data name="CoverDescription_PowerOfAttorneyList" xml:space="preserve">
+    <value>Powers of attorney, including formalized powers of attorney, issued to business unit employees.</value>
   </data>
 </root>

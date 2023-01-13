@@ -1,64 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -539,10 +480,7 @@ Make sure all required fields of the document are filled in or contact your syst
     <value>There is no document version with ID {0}.</value>
   </data>
   <data name="ConvertionInProgress" xml:space="preserve">
-    <value>Document is being processed.</value>
-  </data>
-  <data name="ConvertionDone" xml:space="preserve">
-    <value>Document successfully converted.</value>
+    <value>The document conversion to PDF has started.</value>
   </data>
   <data name="SignatureNotValidError" xml:space="preserve">
     <value>To convert the document, its digital signature must be valid. {0}. Contact your system administrator.</value>
@@ -635,11 +573,8 @@ Make sure all required fields of the document are filled in or contact your syst
   <data name="JobTitle" xml:space="preserve">
     <value>Addressee's job title</value>
   </data>
-  <data name="ConvertToPDFHistoryComment" xml:space="preserve">
-    <value>Convert to PDF</value>
-  </data>
-  <data name="CloseDocumentAndOpenLaterWithRegistrationStamp" xml:space="preserve">
-    <value>Close the document card. To view PDF with registration mark, open the document later.</value>
+  <data name="ConvertToPdfHistoryComment" xml:space="preserve">
+    <value>Add signature stamp</value>
   </data>
   <data name="VersionWithRegistrationStamp" xml:space="preserve">
     <value>Version with registration stamp</value>
@@ -655,5 +590,35 @@ Make sure all required fields of the document are filled in or contact your syst
   </data>
   <data name="Enum_Operation_ExchReadRNRFrom" xml:space="preserve">
     <value>Receive notification on receipt of acknowledgement receipt</value>
+  </data>
+  <data name="Enum_Operation_ContentChange" xml:space="preserve">
+    <value>Change content</value>
+  </data>
+  <data name="DeleteVersionOnAcquaintanceError" xml:space="preserve">
+    <value>You can delete only the document version that hasn't been sent for acquaintance.</value>
+  </data>
+  <data name="HideVersionOnAcquaintanceError" xml:space="preserve">
+    <value>To hide the version, abort document acquaintance tasks or wait until assignees complete their assignments.</value>
+  </data>
+  <data name="ConvertToPdfCompleteNotification" xml:space="preserve">
+    <value>Document {0} has been converted to PDF with electronic signature stamp.</value>
+  </data>
+  <data name="ConvertionDone" xml:space="preserve">
+    <value>Document successfully converted.</value>
+  </data>
+  <data name="NeedCancelRegistration" xml:space="preserve">
+    <value>To change type of the document, cancel its registration.</value>
+  </data>
+  <data name="AddresseeLabel" xml:space="preserve">
+    <value>{0} &lt;{1}&gt;</value>
+  </data>
+  <data name="NeedDeleteLink" xml:space="preserve">
+    <value>The document has been already related to other documents. In their cards, delete the link to this document and try to change its type again</value>
+  </data>
+  <data name="RelatedDocumentsHyperlinkDisplayName" xml:space="preserve">
+    <value>Related documents</value>
+  </data>
+  <data name="DisableStrictModeToChangeType" xml:space="preserve">
+    <value>To change the document type, remove restricted access to the document.</value>
   </data>
 </root>

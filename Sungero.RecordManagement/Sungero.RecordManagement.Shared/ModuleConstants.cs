@@ -47,7 +47,7 @@ namespace Sungero.RecordManagement.Constants
       public static readonly Guid CompanyDirective = Guid.Parse("8EABA48D-F32C-45F0-9367-4A2B58ACBD20");
     }
 
-    #region Диалог заполнения пунктов составного поручения.
+    #region Диалог заполнения пунктов составного поручения
     
     // Высота контрола текста поручения.
     [Sungero.Core.Public]

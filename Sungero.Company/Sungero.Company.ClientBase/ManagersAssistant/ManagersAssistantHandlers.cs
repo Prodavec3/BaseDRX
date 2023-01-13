@@ -18,6 +18,7 @@ namespace Sungero.Company
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
        _obj.State.Properties.IsAssistant.IsEnabled = _obj.PreparesResolution != true;
+       _obj.State.Properties.SendActionItems.IsEnabled = _obj.IsAssistant != true;
     }
 
   }

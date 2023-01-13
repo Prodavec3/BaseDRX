@@ -14,8 +14,8 @@ namespace Sungero.RecordManagement
     {
       _obj.State.Properties.Description.IsVisible = !string.IsNullOrWhiteSpace(_obj.Description);
       
-      if (!_obj.DocumentGroup.OfficialDocuments.Any())
-        e.AddError(Docflow.ApprovalTasks.Resources.NoRightsToDocument);
+      if (!Functions.AcquaintanceTask.HasDocumentAndCanRead(AcquaintanceTasks.As(_obj.Task)))
+        e.AddError(Docflow.Resources.NoRightsToDocument);
     }
   }
 

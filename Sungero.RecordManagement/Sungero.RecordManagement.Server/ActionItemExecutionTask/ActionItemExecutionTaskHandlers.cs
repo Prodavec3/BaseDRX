@@ -244,7 +244,7 @@ namespace Sungero.RecordManagement
       _obj.ExecutionState = null;
       _obj.OnEditGuid = string.Empty;
       
-      Docflow.PublicFunctions.Module.SynchronizeAddendaAndAttachmentsGroup(_obj.AddendaGroup, _obj.DocumentsGroup.OfficialDocuments.FirstOrDefault());
+      Functions.ActionItemExecutionTask.SynchronizeAddendaAndAttachmentsGroup(_obj);
       
       // Очистить свойство созданных заданий у свойств-коллекций.
       if (_obj.CoAssignees != null && _obj.CoAssignees.Count > 0)
@@ -418,8 +418,14 @@ namespace Sungero.RecordManagement
       // Выдать права на документы для всех, кому выданы права на задачу.
       if (_obj.State.IsChanged)
       {
+        // Выдать права по каждой группе в отдельности, так как AllAttachments включает в себя удаленные до сохранения документы. Bug 181206.
         Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Start GrantManualReadRightForAttachments.", _obj.Id);
-        Docflow.PublicFunctions.Module.GrantManualReadRightForAttachments(_obj, _obj.AllAttachments.ToList());
+        var allAttachments = _obj.DocumentsGroup.All.ToList();
+        allAttachments.AddRange(_obj.AddendaGroup.All);
+        allAttachments.AddRange(_obj.OtherGroup.All);
+        allAttachments.AddRange(_obj.ResultGroup.All);
+        
+        Docflow.PublicFunctions.Module.GrantManualReadRightForAttachments(_obj, allAttachments);
         Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End GrantManualReadRightForAttachments.", _obj.Id);
       }
       

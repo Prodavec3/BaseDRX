@@ -223,4 +223,7 @@
   <data name="PropertiesFillingDialog_Result_NotAccepted" xml:space="preserve">
     <value>Не принято</value>
   </data>
+  <data name="PropertiesFillingDialog_Error_ConsigneePowersBaseGreaterMaxLength" xml:space="preserve">
+    <value>Основание подписания в праве подписи превышает {0} символов. Обратитесь к администратору.</value>
+  </data>
 </root>

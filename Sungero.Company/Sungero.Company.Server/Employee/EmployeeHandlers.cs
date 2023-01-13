@@ -93,6 +93,25 @@ namespace Sungero.Company
   partial class EmployeeServerHandlers
   {
 
+    public override void AfterDelete(Sungero.Domain.AfterDeleteEventArgs e)
+    {
+      // Удаление из индекса Elasticsearch, если он сконфигурирован.
+      if (Commons.PublicFunctions.Module.IsElasticsearchConfigured())
+        Commons.PublicFunctions.Module.CreateRemoveEntityFromIndexAsyncHandler(Employees.Info.Name, _obj.Id);
+    }
+
+    public override void AfterSave(Sungero.Domain.AfterSaveEventArgs e)
+    {
+      // Запуск индексации, если Elasticsearch сконфигурирован и изменились индексируемые поля .
+      if (Commons.PublicFunctions.Module.IsElasticsearchConfigured() && e.Params.Contains(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey))
+      {
+        var allowCreateRecord = false;
+        e.Params.TryGetValue(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey, out allowCreateRecord);
+        e.Params.Remove(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey);
+        Sungero.Commons.PublicFunctions.Module.CreateIndexEntityAsyncHandler(Employees.Info.Name, _obj.Id, Functions.Employee.GetIndexingJson(_obj), allowCreateRecord);
+      }
+    }
+
     public override IDigestModel GetDigest(Sungero.Domain.GetDigestEventArgs e)
     {
       return Sungero.Company.Functions.Module.GetEmployeePopup(_obj);
@@ -122,8 +141,10 @@ namespace Sungero.Company
     
     public override void Created(Sungero.Domain.CreatedEventArgs e)
     {
-      _obj.NeedNotifyNewAssignments = true;
-      _obj.NeedNotifyExpiredAssignments = true;
+      var disableMailNotificationParam = Functions.Employee.GetDisableMailNotificationParam(_obj);
+      _obj.NeedNotifyNewAssignments = !disableMailNotificationParam;
+      _obj.NeedNotifyExpiredAssignments = !disableMailNotificationParam;
+      _obj.NeedNotifyAssignmentsSummary = !disableMailNotificationParam;
     }
 
     public override void BeforeDelete(Sungero.Domain.BeforeDeleteEventArgs e)
@@ -162,6 +183,11 @@ namespace Sungero.Company
             e.AddError(Employees.Resources.DeparmentLockedByUserFormat(oldDepartment.Name, oldDepartmentLockInfo.OwnerName));
         }
       }
+      
+      // Выставить параметр необходимости индексации сущности, при изменении индексируемых полей.
+      var props = _obj.State.Properties;
+      if (props.Name.IsChanged || props.Person.IsChanged || props.Department.IsChanged || props.Status.IsChanged)
+        e.Params.AddOrUpdate(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey, _obj.State.IsInserted);
     }
   }
 }

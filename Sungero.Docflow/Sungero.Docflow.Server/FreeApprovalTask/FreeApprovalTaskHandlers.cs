@@ -58,9 +58,6 @@ namespace Sungero.Docflow
     {
       if (!Sungero.Docflow.Functions.FreeApprovalTask.ValidateFreeApprovalTaskStart(_obj, e))
         return;
-      
-      Functions.Module.GrantReadAccessRightsForAttachments(_obj.ForApprovalGroup.All.Concat(_obj.AddendaGroup.All).ToList(),
-                                                           _obj.Observers.Select(o => o.Observer).ToList());
     }
 
     public override void Created(Sungero.Domain.CreatedEventArgs e)

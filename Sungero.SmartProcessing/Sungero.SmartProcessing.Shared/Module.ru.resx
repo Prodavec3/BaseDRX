@@ -200,4 +200,7 @@
   <data name="DocumentPackageHasErrors" xml:space="preserve">
     <value>При обработке документов возникли ошибки:</value>
   </data>
+  <data name="ContractualBaseDocumentNamesPriority" xml:space="preserve">
+    <value>договор;контракт;спец</value>
+  </data>
 </root>

@@ -298,7 +298,6 @@
     "LeadingDocument",
     "Department",
     "BusinessUnit",
-    "HaveNotEnoughAccessRights",
     "CurrentYear",
     "PreviousYear",
     "CurrentWeek",

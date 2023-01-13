@@ -647,7 +647,8 @@
   "HandledEvents": [
     "BeforeSaveServer",
     "RefreshClient",
-    "ClosingClient"
+    "ClosingClient",
+    "ConvertingFromServer"
   ],
   "IconName": "IncomingLetter.ico",
   "IconResourcesKeys": [],

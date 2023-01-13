@@ -140,6 +140,23 @@ namespace Sungero.Docflow.Shared
       return true;
     }
     
+    /// <summary>
+    /// Получить описание для диалога отмены регистрации.
+    /// </summary>
+    /// <param name="settingType">Тип настройки.</param>
+    /// <returns>Описание.</returns>
+    public virtual string GetCancelRegistrationDialogDescription(Enumeration? settingType)
+    {
+      var description = Docflow.Resources.CancelRegistrationDescription;
+      if (settingType == Docflow.RegistrationSetting.SettingType.Reservation)
+        return Docflow.Resources.CancelReservationDescription;
+      
+      if (settingType == Docflow.RegistrationSetting.SettingType.Numeration)
+        return Docflow.Resources.CancelNumberingDescription;
+      
+      return Docflow.Resources.CancelRegistrationDescription;
+    }
+    
     #endregion
     
     #region Validation
@@ -255,10 +272,10 @@ namespace Sungero.Docflow.Shared
     /// </summary>
     /// <param name="document">Документ.</param>
     /// <returns>Журналы по документу.</returns>
-    public static List<IDocumentRegister> GetDocumentRegistersByDocument(IOfficialDocument document)
+    public static List<int> GetDocumentRegistersByDocument(IOfficialDocument document)
     {
       var settingType = GetSettingType(document);
-      return GetDocumentRegistersByDocument(document, settingType);
+      return GetDocumentRegistersIdsByDocument(document, settingType);
     }
     
     /// <summary>
@@ -267,7 +284,7 @@ namespace Sungero.Docflow.Shared
     /// <param name="document">Документ.</param>
     /// <param name="settingType">Тип регистрации.</param>
     /// <returns>Журналы.</returns>
-    [Public]
+    [Public, Obsolete("Используйте метод GetDocumentRegistersIdsByDocument.")]
     public static List<IDocumentRegister> GetDocumentRegistersByDocument(IOfficialDocument document, Enumeration? settingType)
     {
       var emptyList = new List<IDocumentRegister>();
@@ -278,11 +295,53 @@ namespace Sungero.Docflow.Shared
       var isClerk = document.AccessRights.CanRegister();
       if (!isClerk || settingType == Docflow.RegistrationSetting.SettingType.Numeration)
       {
-        var setting = Functions.RegistrationSetting.GetSettingByDocument(document, settingType);
+        var setting = PublicFunctions.Module.Remote.GetRegistrationSettings(settingType, document.BusinessUnit, documentKind, document.Department).FirstOrDefault();
         return setting != null ? new List<IDocumentRegister> { setting.DocumentRegister } : emptyList;
       }
       
       return Functions.DocumentRegister.Remote.GetDocumentRegistersByParams(document.DocumentKind, document.BusinessUnit, document.Department, settingType, true);
+    }
+    
+    /// <summary>
+    ///  Получить ИД отфильтрованных журналов регистрации по документу.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <param name="settingType">Тип регистрации.</param>
+    /// <returns>Журналы.</returns>
+    [Public]
+    public static List<int> GetDocumentRegistersIdsByDocument(IOfficialDocument document, Enumeration? settingType)
+    {
+      var emptyList = new List<int>();
+      var documentKind = document.DocumentKind;
+      if (documentKind == null)
+        return emptyList;
+      
+      var isClerk = document.AccessRights.CanRegister();
+      if (!isClerk || settingType == Docflow.RegistrationSetting.SettingType.Numeration)
+      {
+        var setting = PublicFunctions.Module.Remote.GetRegistrationSettings(settingType, document.BusinessUnit, documentKind, document.Department).FirstOrDefault();
+        return setting != null ? new List<int> { setting.DocumentRegister.Id } : emptyList;
+      }
+      
+      return Functions.DocumentRegister.Remote.GetDocumentRegistersIdsByParams(document.DocumentKind, document.BusinessUnit, document.Department, settingType, true);
+    }
+    
+    /// <summary>
+    /// Имеются ли подходящие журналы регистрации по документу.
+    /// </summary>
+    /// <param name="settingType">Тип регистрации.</param>
+    /// <returns>True - если есть подходящие журналы.</returns>
+    [Public]
+    public virtual bool HasDocumentRegistersByDocument(Enumeration? settingType)
+    {
+      if (_obj.DocumentKind == null)
+        return false;
+      
+      var isClerk = _obj.AccessRights.CanRegister();
+      if (!isClerk || settingType == Docflow.RegistrationSetting.SettingType.Numeration)
+        return PublicFunctions.Module.Remote.GetRegistrationSettings(settingType, _obj.BusinessUnit, _obj.DocumentKind, _obj.Department).Any();
+      
+      return Functions.DocumentRegister.Remote.HasDocumentRegistersByParams(_obj.DocumentKind, _obj.BusinessUnit, _obj.Department, settingType, true);
     }
     
     /// <summary>
@@ -348,6 +407,9 @@ namespace Sungero.Docflow.Shared
       var isNotRegistered = repeatRegister || _obj.RegistrationState == RegistrationState.NotRegistered;
       
       Functions.OfficialDocument.ChangeDocumentPropertiesAccess(_obj, isNotRegistered, repeatRegister);
+      
+      // Показывать ли основание подписания.
+      Functions.OfficialDocument.ChangeOurSigningReasonVisibility(_obj);
     }
     
     /// <summary>
@@ -364,8 +426,7 @@ namespace Sungero.Docflow.Shared
         showParam = (bool)formParams[Sungero.Docflow.Constants.OfficialDocument.ShowParam];
       else
       {
-        var setting = Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(null);
-        var showRegPane = setting != null && setting.ShowRegPane == true;
+        var showRegPane = Functions.PersonalSetting.Remote.GetShowRegistrationPaneParam(null);
         var onVerification = _obj.VerificationState == Docflow.OfficialDocument.VerificationState.InProcess;
         showParam = showRegPane && additionalCondition ||
           onVerification ||
@@ -448,6 +509,37 @@ namespace Sungero.Docflow.Shared
       }
       
       this.EnableRegistrationNumberAndDate();
+    }
+    
+    /// <summary>
+    /// Создать кеш параметров.
+    /// </summary>
+    [Public]
+    public virtual void CreateParamsCache()
+    {
+      var parameters = Functions.OfficialDocument.Remote.GetOfficialDocumentParams(_obj);
+      
+      var formParams = ((IExtendedEntity)_obj).Params;
+      
+      if (parameters.HasReservationSetting.HasValue)
+        formParams[Sungero.Docflow.Constants.OfficialDocument.HasReservationSetting] = parameters.HasReservationSetting;
+      
+      if (parameters.HasNumerationSetting.HasValue)
+        formParams[Sungero.Docflow.Constants.OfficialDocument.HasNumerationSetting] = parameters.HasNumerationSetting;
+      
+      if (parameters.CanChangeAssignee.HasValue)
+        formParams[Constants.OfficialDocument.CanChangeAssignee] = parameters.CanChangeAssignee;
+      
+      if (parameters.NeedShowRegistrationPane.HasValue)
+      {
+        var isNumerable = (_obj.DocumentKind != null && _obj.DocumentKind.NumberingType == NumberingType.Numerable) || _obj.ExchangeState.HasValue;
+        var isNotifiable = (_obj.DocumentKind != null && _obj.DocumentKind.NumberingType == NumberingType.Registrable) || _obj.ExchangeState.HasValue;
+        var additionalCondition = isNotifiable || isNumerable;
+        
+        formParams[Sungero.Docflow.Constants.OfficialDocument.ShowParam] = (bool)parameters.NeedShowRegistrationPane && additionalCondition ||
+          _obj.VerificationState == Docflow.OfficialDocument.VerificationState.InProcess ||
+          Functions.OfficialDocument.DefaultRegistrationPaneVisibility(_obj);
+      }
     }
     
     /// <summary>
@@ -565,6 +657,31 @@ namespace Sungero.Docflow.Shared
       return (canRegister && isNotifiable) || isNumerable;
     }
     
+    /// <summary>
+    /// Изменить отображение основания подписания.
+    /// </summary>
+    public virtual void ChangeOurSigningReasonVisibility()
+    {
+      var formParams = ((IExtendedEntity)_obj).Params;
+      
+      if (formParams.ContainsKey(Sungero.Docflow.Constants.OfficialDocument.ShowOurSigningReasonParam))
+        _obj.State.Properties.OurSigningReason.IsVisible = this.GetShowOurSigningReasonParam();
+    }
+    
+    /// <summary>
+    /// Получить значение параметра, отвечающего за показ/скрытие основания подписания документа.
+    /// </summary>
+    /// <returns>True - если нужно показать основание подписания документа.</returns>
+    public virtual bool GetShowOurSigningReasonParam()
+    {
+      var formParams = ((IExtendedEntity)_obj).Params;
+      
+      if (formParams.ContainsKey(Sungero.Docflow.Constants.OfficialDocument.ShowOurSigningReasonParam))
+        return (bool)formParams[Sungero.Docflow.Constants.OfficialDocument.ShowOurSigningReasonParam];
+      
+      return false;
+    }
+    
     #endregion
     
     #region Жизненный цикл
@@ -676,6 +793,16 @@ namespace Sungero.Docflow.Shared
       return lifeCycleState == Docflow.OfficialDocument.LifeCycleState.Obsolete;
     }
     
+    /// <summary>
+    /// Проверяет, является ли документ недействующим.
+    /// </summary>
+    /// <returns>Признак того, является ли документ недействующим.</returns>
+    [Public]
+    public virtual bool IsObsolete()
+    {
+      return _obj.LifeCycleState == Docflow.OfficialDocument.LifeCycleState.Obsolete;
+    }
+    
     #endregion
     
     #region Получение свойств документа
@@ -726,10 +853,11 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
-    /// Подписывающий по умолчанию.
+    /// Получить подписывающего по умолчанию.
     /// </summary>
     /// <param name="signatories">Список подписывающих с приоритетом.</param>
-    /// <returns>True - нужно очистить, false - не нужно.</returns>
+    /// <returns>Подписывающий по умолчанию.</returns>
+    [Obsolete("Используйте метод GetDefaultSignatory().")]
     public virtual Sungero.Company.IEmployee GetDefaultSignatory(List<Docflow.Structures.SignatureSetting.Signatory> signatories)
     {
       if (!signatories.Any())
@@ -771,6 +899,196 @@ namespace Sungero.Docflow.Shared
     {
       // Виртуальная функция. Переопределено в потомках.
       return new List<Company.IEmployee>();
+    }
+    
+    /// <summary>
+    /// Получить список адресатов с электронной почтой для отправки письма.
+    /// </summary>
+    /// <returns>Список адресатов.</returns>
+    [Public]
+    public virtual List<Structures.OfficialDocument.IEmailAddressee> GetEmailAddressees()
+    {
+      return new List<Structures.OfficialDocument.IEmailAddressee>();
+    }
+    
+    /// <summary>
+    /// Получить проект из документа.
+    /// </summary>
+    /// <returns>Проект, указанный в карточке документа.</returns>
+    [Public]
+    public virtual IProjectBase GetProject()
+    {
+      return _obj.Project;
+    }
+    
+    /// <summary>
+    /// Получить основание подписания со стороны контрагента.
+    /// </summary>
+    /// <returns>Основание подписания со стороны контрагента.</returns>
+    [Public]
+    public virtual string GetCounterpartySigningReason()
+    {
+      return string.Empty;
+    }
+    
+    #endregion
+    
+    #region Заполнение свойств документа
+    
+    /// <summary>
+    /// Заполнить подписывающего.
+    /// </summary>
+    /// <param name="signatory">Подписывающий со стороны контрагента.</param>
+    [Public]
+    public virtual void FillCounterpartySignatory(Parties.IContact signatory)
+    {
+      // Виртуальная функция. Переопределено в потомках.
+    }
+    
+    /// <summary>
+    /// Заполнить основание со стороны контрагента.
+    /// </summary>
+    /// <param name="signingReason">Основание контрагента.</param>
+    [Public]
+    public virtual void FillCounterpartySigningReason(string signingReason)
+    {
+      // Виртуальная функция. Переопределено в потомках.
+    }
+    
+    /// <summary>
+    /// Заполнить свойство "Ведущий документ" в зависимости от типа документа.
+    /// </summary>
+    /// <param name="leadingDocument">Ведущий документ.</param>
+    /// <remarks>Используется при смене типа.</remarks>
+    [Public]
+    public virtual void FillLeadingDocument(IOfficialDocument leadingDocument)
+    {
+      return;
+    }
+    
+    /// <summary>
+    /// Заполнить оргструктуру.
+    /// </summary>
+    public void FillOrganizationStructure()
+    {
+      // Заполнить нашу организацию.
+      if (_obj.BusinessUnit == null && _obj.State.Properties.BusinessUnit.IsVisible)
+        _obj.BusinessUnit = Functions.Module.GetDefaultBusinessUnit(Company.Employees.Current);
+
+      // Заполнить подразделение.
+      var employee = Company.Employees.Current;
+      if (_obj.Department == null)
+      {
+        var department = Company.Departments.Null;
+        var settings = Functions.PersonalSetting.GetPersonalSettings(employee);
+        // Из настроек.
+        if (settings != null)
+          department = settings.Department;
+        
+        // По оргструктуре.
+        if (department == null && employee != null)
+          department = employee.Department;
+
+        _obj.Department = department;
+      }
+      
+      // Заполнить "Подготовил".
+      if (_obj.PreparedBy == null)
+        _obj.PreparedBy = employee;
+    }
+    
+    /// <summary>
+    /// Заполнить имя документа.
+    /// </summary>
+    [Public]
+    public virtual void FillName()
+    {
+      var documentKind = _obj.DocumentKind;
+      
+      if (documentKind != null && !documentKind.GenerateDocumentName.Value && _obj.Name == Docflow.Resources.DocumentNameAutotext)
+        _obj.Name = string.Empty;
+      
+      if (documentKind == null || !documentKind.GenerateDocumentName.Value)
+        return;
+      
+      var name = string.Empty;
+      
+      /* Имя в формате:
+        <Вид документа> №<номер> от <дата> "<содержание>".
+       */
+      using (TenantInfo.Culture.SwitchTo())
+      {
+        if (!string.IsNullOrWhiteSpace(_obj.RegistrationNumber))
+          name += OfficialDocuments.Resources.Number + _obj.RegistrationNumber;
+        
+        if (_obj.RegistrationDate != null)
+          name += OfficialDocuments.Resources.DateFrom + _obj.RegistrationDate.Value.ToString("d");
+        
+        if (!string.IsNullOrWhiteSpace(_obj.Subject))
+          name += " \"" + _obj.Subject + "\"";
+      }
+      
+      if (string.IsNullOrWhiteSpace(name))
+      {
+        if (_obj.VerificationState == null)
+          name = Docflow.Resources.DocumentNameAutotext;
+        else
+          name = _obj.DocumentKind.ShortName;
+      }
+      else if (documentKind != null)
+      {
+        name = documentKind.ShortName + name;
+      }
+      
+      name = Functions.Module.TrimSpecialSymbols(name);
+      
+      _obj.Name = Functions.OfficialDocument.AddClosingQuote(name, _obj);
+    }
+    
+    /// <summary>
+    /// Добавить закрывающую кавычку для имени.
+    /// </summary>
+    /// <param name="name">Имя.</param>
+    /// <param name="document">Документ.</param>
+    /// <returns>Результирующая строка.</returns>
+    [Public]
+    public static string AddClosingQuote(string name, IOfficialDocument document)
+    {
+      return name.Length > document.Info.Properties.Name.Length ?
+        name.Substring(0, document.Info.Properties.Name.Length - 1) + "\"" :
+        name;
+    }
+
+    /// <summary>
+    /// Добавить закрывающую кавычку для содержания.
+    /// </summary>
+    /// <param name="subject">Содержание.</param>
+    /// <param name="document">Документ.</param>
+    /// <returns>Результирующая строка.</returns>
+    [Public]
+    public static string AddClosingQuoteToSubject(string subject, IOfficialDocument document)
+    {
+      return subject.Length > document.Info.Properties.Subject.Length ?
+        subject.Substring(0, document.Info.Properties.Subject.Length - 1) + "\"" :
+        subject;
+    }
+    
+    #endregion
+    
+    #region Генерация PDF с отметкой об ЭП
+    
+    /// <summary>
+    /// Получить сообщение об ошибке для неподдерживаемых форматов.
+    /// </summary>
+    /// <param name="extension">Расширение.</param>
+    /// <returns>Результат преобразования.</returns>
+    public virtual Sungero.Docflow.Structures.OfficialDocument.СonversionToPdfResult GetExtensionValidationError(string extension)
+    {
+      var result = Sungero.Docflow.Structures.OfficialDocument.СonversionToPdfResult.Create();
+      result.HasErrors = true;
+      result.ErrorTitle = OfficialDocuments.Resources.ConvertionErrorTitleBase;
+      result.ErrorMessage = OfficialDocuments.Resources.ExtensionNotSupportedFormat(extension);
+      return result;
     }
     
     #endregion
@@ -884,82 +1202,6 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
-    /// Заполнить имя документа.
-    /// </summary>
-    [Public]
-    public virtual void FillName()
-    {
-      var documentKind = _obj.DocumentKind;
-      
-      if (documentKind != null && !documentKind.GenerateDocumentName.Value && _obj.Name == Docflow.Resources.DocumentNameAutotext)
-        _obj.Name = string.Empty;
-      
-      if (documentKind == null || !documentKind.GenerateDocumentName.Value)
-        return;
-      
-      var name = string.Empty;
-      
-      /* Имя в формате:
-        <Вид документа> №<номер> от <дата> "<содержание>".
-       */
-      using (TenantInfo.Culture.SwitchTo())
-      {
-        if (!string.IsNullOrWhiteSpace(_obj.RegistrationNumber))
-          name += OfficialDocuments.Resources.Number + _obj.RegistrationNumber;
-        
-        if (_obj.RegistrationDate != null)
-          name += OfficialDocuments.Resources.DateFrom + _obj.RegistrationDate.Value.ToString("d");
-        
-        if (!string.IsNullOrWhiteSpace(_obj.Subject))
-          name += " \"" + _obj.Subject + "\"";
-      }
-      
-      if (string.IsNullOrWhiteSpace(name))
-      {
-        if (_obj.VerificationState == null)
-          name = Docflow.Resources.DocumentNameAutotext;
-        else
-          name = _obj.DocumentKind.ShortName;
-      }
-      else if (documentKind != null)
-      {
-        name = documentKind.ShortName + name;
-      }
-      
-      name = Functions.Module.TrimSpecialSymbols(name);
-      
-      _obj.Name = Functions.OfficialDocument.AddClosingQuote(name, _obj);
-    }
-    
-    /// <summary>
-    /// Добавить закрывающую кавычку для имени.
-    /// </summary>
-    /// <param name="name">Имя.</param>
-    /// <param name="document">Документ.</param>
-    /// <returns>Результирующая строка.</returns>
-    [Public]
-    public static string AddClosingQuote(string name, IOfficialDocument document)
-    {
-      return name.Length > document.Info.Properties.Name.Length ?
-        name.Substring(0, document.Info.Properties.Name.Length - 1) + "\"" :
-        name;
-    }
-
-    /// <summary>
-    /// Добавить закрывающую кавычку для содержания.
-    /// </summary>
-    /// <param name="subject">Содержание.</param>
-    /// <param name="document">Документ.</param>
-    /// <returns>Результирующая строка.</returns>
-    [Public]
-    public static string AddClosingQuoteToSubject(string subject, IOfficialDocument document)
-    {
-      return subject.Length > document.Info.Properties.Subject.Length ?
-        subject.Substring(0, document.Info.Properties.Subject.Length - 1) + "\"" :
-        subject;
-    }
-    
-    /// <summary>
     /// Получить документы, связанные типом связи "Приложение".
     /// </summary>
     /// <returns>Документы, связанные типом связи "Приложение".</returns>
@@ -969,6 +1211,7 @@ namespace Sungero.Docflow.Shared
       return _obj.Relations.GetRelated(Docflow.Constants.Module.AddendumRelationName)
         .Where(x => OfficialDocuments.Is(x))
         .Select(x => OfficialDocuments.As(x))
+        .Where(x => !Docflow.PublicFunctions.OfficialDocument.IsObsolete(x))
         .ToList();
     }
     
@@ -1042,37 +1285,6 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
-    /// Заполнить оргструктуру.
-    /// </summary>
-    public void FillOrganizationStructure()
-    {
-      // Заполнить нашу организацию.
-      if (_obj.BusinessUnit == null && _obj.State.Properties.BusinessUnit.IsVisible)
-        _obj.BusinessUnit = Functions.Module.GetDefaultBusinessUnit(Company.Employees.Current);
-
-      // Заполнить подразделение.
-      var employee = Company.Employees.Current;
-      if (_obj.Department == null)
-      {
-        var department = Company.Departments.Null;
-        var settings = Functions.PersonalSetting.GetPersonalSettings(employee);
-        // Из настроек.
-        if (settings != null)
-          department = settings.Department;
-        
-        // По оргструктуре.
-        if (department == null && employee != null)
-          department = employee.Department;
-
-        _obj.Department = department;
-      }
-      
-      // Заполнить "Подготовил".
-      if (_obj.PreparedBy == null)
-        _obj.PreparedBy = employee;
-    }
-
-    /// <summary>
     /// Очистка НОР для ненумеруемых документов.
     /// </summary>
     /// <param name="documentKind">Вид документа.</param>
@@ -1084,23 +1296,24 @@ namespace Sungero.Docflow.Shared
     }
     
     /// <summary>
-    /// Проверка, что документ проектный.
+    /// Проверка на то, что документ является проектным.
     /// </summary>
     /// <returns>True - если документ проектный, иначе - false.</returns>
-    [Public]
+    [Public, Obsolete("Используйте метод IsProjectDocument(List<int>)")]
     public virtual bool IsProjectDocument()
     {
-      return _obj.Project != null && _obj.DocumentKind.ProjectsAccounting.Value;
+      return this.IsProjectDocument(new List<int>());
     }
     
     /// <summary>
-    /// Получить проект из документа.
+    /// Проверка на то, что документ является проектным.
     /// </summary>
-    /// <returns>Проект, указанный в карточке документа.</returns>
+    /// <param name="leadingDocumentIds">ИД ведущих документов.</param>
+    /// <returns>True - если документ проектный, иначе - false.</returns>
     [Public]
-    public virtual IProjectBase GetProject()
+    public virtual bool IsProjectDocument(List<int> leadingDocumentIds)
     {
-      return _obj.Project;
+      return _obj.Project != null && _obj.DocumentKind.ProjectsAccounting.Value;
     }
     
     /// <summary>
@@ -1112,6 +1325,28 @@ namespace Sungero.Docflow.Shared
       var hasCallContext = CallContext.CalledFrom(ApprovalSigningAssignments.Info) || CallContext.CalledFrom(ApprovalReviewAssignments.Info);
       var hasParams = ((Domain.Shared.IExtendedEntity)_obj).Params.ContainsKey(Constants.OfficialDocument.CanSignLockedDocument);
       return hasCallContext || hasParams;
+    }
+    
+    /// <summary>
+    /// Получить признак возможности удаления версии документа.
+    /// </summary>
+    /// <param name="versionNumber">Номер версии.</param>
+    /// <returns>Признак возможности удаления версии документа.</returns>
+    [Public]
+    public virtual bool CanDeleteVersion(int? versionNumber)
+    {
+      return Docflow.PublicFunctions.OfficialDocument.Remote.HasAcquaintanceTasks(_obj, versionNumber, true, true);
+    }
+    
+    /// <summary>
+    /// Получить признак возможности скрытия версии документа.
+    /// </summary>
+    /// <param name="versionNumber">Номер версии.</param>
+    /// <returns>Признак возможности скрытия версии документа.</returns>
+    [Public]
+    public virtual bool CanHideVersion(int? versionNumber)
+    {
+      return Docflow.PublicFunctions.OfficialDocument.Remote.HasAcquaintanceTasks(_obj, versionNumber, false, false);
     }
     
     #region Интеллектуальная обработка

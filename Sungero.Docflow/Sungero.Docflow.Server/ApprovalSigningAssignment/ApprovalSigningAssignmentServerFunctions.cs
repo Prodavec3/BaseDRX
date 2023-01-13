@@ -54,7 +54,6 @@ namespace Sungero.Docflow.Server
     public Structures.ApprovalTask.BeforeSign ValidateBeforeSign()
     {
       var task = ApprovalTasks.As(_obj.Task);
-      var currentEmployee = Company.Employees.Current;
       var document = _obj.DocumentGroup.OfficialDocuments.First();
 
       var errors = Functions.OfficialDocument.GetApprovalValidationErrors(document, false);
@@ -62,8 +61,8 @@ namespace Sungero.Docflow.Server
       foreach (var addendum in addenda)
         errors.AddRange(Functions.OfficialDocument.GetDocumentLockErrors(addendum));
 
-      var signatories = Functions.OfficialDocument.GetSignatories(document);
-      var canApprove = document.AccessRights.CanApprove() && signatories.Any(s => currentEmployee != null && Equals(s.EmployeeId, currentEmployee.Id));
+      var canSignByEmployee = Functions.OfficialDocument.CanSignByEmployee(document, Company.Employees.Current);
+      var canApprove = document.AccessRights.CanApprove() && canSignByEmployee;
       var bodyChanged = Functions.ApprovalTask.DocumentHasBodyUpdateAfterLastView(document);
       return Structures.ApprovalTask.BeforeSign.Create(errors, canApprove, bodyChanged);
     }

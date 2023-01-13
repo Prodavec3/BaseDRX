@@ -6,6 +6,56 @@ using Sungero.CoreEntities;
 
 namespace Sungero.RecordManagementUI.Server
 {
+  partial class PowerOfAttorneyListFolderHandlers
+  {
+
+    public virtual IQueryable<Sungero.Docflow.IPowerOfAttorneyBase> PowerOfAttorneyListDataQuery(IQueryable<Sungero.Docflow.IPowerOfAttorneyBase> query)
+    {
+      #region Фильтры
+      
+      if (_filter == null)
+        return query;
+      
+      // Состояние.
+      if ((_filter.DraftState || _filter.ActiveState || _filter.ObsoleteState) &&
+          !(_filter.DraftState && _filter.ActiveState && _filter.ObsoleteState))
+      {
+        query = query.Where(p => _filter.DraftState && p.LifeCycleState == Sungero.Docflow.PowerOfAttorneyBase.LifeCycleState.Draft ||
+                            _filter.ActiveState && p.LifeCycleState == Sungero.Docflow.PowerOfAttorneyBase.LifeCycleState.Active ||
+                            _filter.ObsoleteState && p.LifeCycleState == Sungero.Docflow.PowerOfAttorneyBase.LifeCycleState.Obsolete);
+      }
+      
+      // Фильтр "Наша организация".
+      if (_filter.BusinessUnit != null)
+        query = query.Where(p => Equals(p.BusinessUnit, _filter.BusinessUnit));
+      
+      // Фильтр "Подразделение".
+      if (_filter.Department != null)
+        query = query.Where(p => Equals(p.Department, _filter.Department));
+      
+      // Фильтр "Кому выдана".
+      if (_filter.Performer != null)
+        query = query.Where(p => Equals(p.IssuedTo, _filter.Performer));
+      
+      // Период.
+      if (_filter.Today)
+        query = query.Where(p => (!p.RegistrationDate.HasValue || p.RegistrationDate <= Calendar.UserToday) &&
+                            (!p.ValidTill.HasValue || p.ValidTill >= Calendar.UserToday));
+      
+      if (_filter.ManualPeriod)
+      {
+        if (_filter.DateRangeFrom.HasValue)
+          query = query.Where(p => !p.ValidTill.HasValue || p.ValidTill >= _filter.DateRangeFrom);
+        if (_filter.DateRangeTo.HasValue)
+          query = query.Where(p => !p.RegistrationDate.HasValue || p.RegistrationDate <= _filter.DateRangeTo);
+      }
+      
+      #endregion
+      
+      return query;
+    }
+  }
+
   partial class DocumentsToReturnFolderHandlers
   {
 

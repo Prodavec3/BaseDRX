@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Company.Employee;
@@ -9,6 +9,11 @@ namespace Sungero.Company
 {
   partial class EmployeeSharedHandlers
   {
+
+    public virtual void NeedNotifyAssignmentsSummaryChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
+    {
+      Sungero.Company.PublicFunctions.Employee.SetRequiredProperties(_obj);
+    }
 
     public virtual void DepartmentChanged(Sungero.Company.Shared.EmployeeDepartmentChangedEventArgs e)
     {

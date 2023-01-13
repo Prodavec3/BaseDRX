@@ -231,7 +231,7 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Добавить блок задачи согласования.
+    /// Добавить в контрол состояния блок задачи на согласование.
     /// </summary>
     /// <param name="stateView">Схема представления.</param>
     /// <returns>Добавленный блок.</returns>
@@ -273,6 +273,13 @@ namespace Sungero.Docflow.Server
       return taskBlock;
     }
     
+    /// <summary>
+    /// Добавить в блок контрола состояния блоки заданий.
+    /// </summary>
+    /// <param name="block">Блок.</param>
+    /// <param name="taskAssignments">Все задания по задаче.</param>
+    /// <param name="roundAssignments">Задания в рамках круга согласования.</param>
+    /// <param name="iconSize">Размер иконки.</param>
     private void AddAssignmentsBlocks(StateBlock block,
                                       List<IAssignment> taskAssignments,
                                       List<IAssignment> roundAssignments,
@@ -310,6 +317,13 @@ namespace Sungero.Docflow.Server
       }
     }
     
+    /// <summary>
+    /// Добавить в блок контрола состояния дочерний блок группировки этапа согласования.
+    /// </summary>
+    /// <param name="block">Блок.</param>
+    /// <param name="assignments">Задания этапа согласования.</param>
+    /// <param name="nextAssignment">Следующее задание.</param>
+    /// <param name="iconSize">Размер иконки.</param>
     private void AddApprovalStageBlocks(StateBlock block, List<IAssignment> assignments, IAssignment nextAssignment, StateBlockIconSize iconSize)
     {
       if (!assignments.Any())
@@ -328,7 +342,8 @@ namespace Sungero.Docflow.Server
       
       // Установить иконку для группы и добавить статус.
       var hasAbort = assignments.Any(a => a.Status == Workflow.AssignmentBase.Status.Aborted || a.Status == Workflow.AssignmentBase.Status.Suspended);
-      var isApproved = assignments.All(a => a.Result == Docflow.ApprovalAssignment.Result.Approved || a.Result == Docflow.ApprovalAssignment.Result.Forward);
+      var isApproved = assignments.All(a => a.Result == Docflow.ApprovalAssignment.Result.Approved || a.Result == Docflow.ApprovalAssignment.Result.Forward ||
+                                       a.Result == Docflow.ApprovalAssignment.Result.WithSuggestions);
       var hasRework = assignments.Any(a => a.Result == Docflow.ApprovalAssignment.Result.ForRevision);
       
       var lastAssignment = assignments.OrderByDescending(a => a.Created).First();
@@ -352,7 +367,7 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Добавить блок по заданию.
+    /// Добавить в блок контрола состояния дочерний блок задания.
     /// </summary>
     /// <param name="parentBlock">Ведущий блок.</param>
     /// <param name="assignment">Задание.</param>
@@ -479,6 +494,11 @@ namespace Sungero.Docflow.Server
       return block;
     }
     
+    /// <summary>
+    /// Получить список схлопнутых типов этапов.
+    /// </summary>
+    /// <param name="assignment">Задание.</param>
+    /// <returns>Список схлопнутых этапов.</returns>
     private static List<Enumeration?> GetCollapsedStagesTypes(IAssignment assignment)
     {
       // Для каждого задания берем свою дочернюю коллекцию, т.к. теперь они везде имеют разные названия.
@@ -640,6 +660,8 @@ namespace Sungero.Docflow.Server
             actionLabel = ApprovalTasks.Resources.StateViewNotApproved;
           else if (assignment.Result == Docflow.ApprovalAssignment.Result.Forward)
             actionLabel = ApprovalTasks.Resources.StateViewForwarded;
+          else if (assignment.Result == Docflow.ApprovalAssignment.Result.WithSuggestions)
+            actionLabel = ApprovalTasks.Resources.StateViewEndorsedWithSuggestions;
           else
             return emptyResult;
         }
@@ -778,6 +800,12 @@ namespace Sungero.Docflow.Server
       if (assignment.Result == Docflow.ApprovalAssignment.Result.Approved)
       {
         block.AssignIcon(ApprovalTasks.Resources.Approve, iconSize);
+      }
+      
+      // Согласовано с замечаниями.
+      if (assignment.Result == Docflow.ApprovalAssignment.Result.WithSuggestions)
+      {
+        block.AssignIcon(ApprovalTasks.Resources.SignWithRemarks, iconSize);
       }
       
       // Переадресовано.
@@ -1925,12 +1953,13 @@ namespace Sungero.Docflow.Server
     public virtual void SetAccessRightsForAttachments(IRecipient recipient, Guid accessRightsType, bool withRestrict)
     {
       if (withRestrict && Equals(recipient, _obj.Author))
-        Functions.ApprovalTask.SaveTaskInitiatorAccessRights(_obj);
+        Functions.ApprovalTask.SaveTaskInitiatorAccessRights(_obj, withRestrict);
       
       var approvalDocument = _obj.DocumentGroup.OfficialDocuments.First();
       if (!approvalDocument.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Forbidden, recipient))
       {
-        if (withRestrict)
+        // В строгом и усиленном строгом режиме прав права на документ не понижаем, так как возникнут проблемы с выдачей прав в дальнейшем.
+        if (withRestrict && approvalDocument.AccessRights.StrictMode == AccessRightsStrictMode.None)
           approvalDocument.AccessRights.RevokeAll(recipient);
         
         Functions.ApprovalTask.GrantAccessRightsOnDocument(_obj, approvalDocument, recipient, accessRightsType);
@@ -1963,9 +1992,10 @@ namespace Sungero.Docflow.Server
           }
         }
         
-        if (withRestrict)
+        // В строгом и усиленном строгом режиме прав права на приложения не понижаем, так как возникнут проблемы с выдачей прав в дальнейшем.
+        if (withRestrict && document.AccessRights.StrictMode == AccessRightsStrictMode.None)
           document.AccessRights.RevokeAll(recipient);
-        
+
         Functions.ApprovalTask.GrantAccessRightsOnDocument(_obj, document, recipient, rightType);
       }
     }
@@ -2110,11 +2140,22 @@ namespace Sungero.Docflow.Server
     /// <summary>
     /// Сохранить права инициатора задачи перед отбором.
     /// </summary>
+    [Obsolete("Используйте метод SaveTaskInitiatorAccessRights(bool isStrictMode)")]
     public virtual void SaveTaskInitiatorAccessRights()
     {
+      this.SaveTaskInitiatorAccessRights(false);
+    }
+    
+    /// <summary>
+    /// Сохранить права инициатора задачи перед отбором.
+    /// </summary>
+    /// <param name="isStrictMode">Учитывать строгий режим.</param>
+    public virtual void SaveTaskInitiatorAccessRights(bool isStrictMode)
+    {
       var documents = new List<IEntity>();
-      documents.AddRange(_obj.DocumentGroup.All);
-      documents.AddRange(_obj.AddendaGroup.All);
+      // В строгом и усиленном строгом режиме прав не сохраняем права, так как они не понижаются.
+      documents.AddRange(isStrictMode ? _obj.DocumentGroup.All.Where(d => d.AccessRights.StrictMode == AccessRightsStrictMode.None) : _obj.DocumentGroup.All);
+      documents.AddRange(isStrictMode ? _obj.AddendaGroup.All.Where(a => a.AccessRights.StrictMode == AccessRightsStrictMode.None) : _obj.AddendaGroup.All);
       
       foreach (var document in documents)
       {
@@ -2176,35 +2217,20 @@ namespace Sungero.Docflow.Server
       if (primaryDocument == null)
         return;
       
-      var primaryDocumentAddenda = Functions.OfficialDocument.GetAddenda(primaryDocument);
-      var taskAddenda = _obj.AddendaGroup.OfficialDocuments.Where(x => !Equals(x, primaryDocument));
-      var notRelatedToPrimaryDocumentTaskAddenda = taskAddenda.Except(primaryDocumentAddenda);
-      foreach (var addendum in notRelatedToPrimaryDocumentTaskAddenda)
-      {
-        var addendumIsAlreadyRelatedToThePrimary = Sungero.Content.DocumentRelations.GetAll()
-          .Any(x => Equals(x.Source, primaryDocument) && Equals(x.Target, addendum) ||
-               Equals(x.Source, addendum) && Equals(x.Target, primaryDocument));
-        var addendumAsAddendum = Addendums.As(addendum);
-        if (addendumIsAlreadyRelatedToThePrimary ||
-            addendumAsAddendum != null && !Equals(addendumAsAddendum.LeadingDocument, primaryDocument))
-          continue;
-        
-        var relationAdded = addendum.Relations.AddFrom(Docflow.PublicConstants.Module.AddendumRelationName, primaryDocument);
-        addendum.Relations.Save();
-        if (relationAdded)
-          Logger.DebugFormat("ApprovalTask (ID = {0}). Success: add relation with type Addendum from primary document (ID = {1}) to addendum (ID = {2})",
-                             _obj.Id, primaryDocument.Id, addendum.Id);
-        else
-          Logger.DebugFormat("ApprovalTask (ID = {0}). Failed: add relation with type Addendum from primary document (ID = {1}) to addendum (ID = {2})",
-                             _obj.Id, primaryDocument.Id, addendum.Id);
-      }
+      Logger.DebugFormat("ApprovalTask (ID = {0}). Add relation with type Addendum from primary document (ID = {1})",
+                         _obj.Id, primaryDocument.Id);
+      var taskAddenda = _obj.AddendaGroup.OfficialDocuments
+        .Where(x => !Equals(x, primaryDocument))
+        .Where(x => !Docflow.PublicFunctions.OfficialDocument.IsObsolete(x))
+        .ToList();
+      Docflow.PublicFunctions.OfficialDocument.RelateDocumentsToPrimaryDocumentAsAddenda(primaryDocument, taskAddenda);
     }
     
     /// <summary>
-    /// Получить список операций по всем операциям относящимся к данной группе вложений из истории.
+    /// Получить список операций по всем операциям, относящимся к данной группе вложений из истории.
     /// </summary>
-    /// <param name="groupId">Id группы вложений.</param>
-    /// <returns>Список содержащий историю операций по данной группе вложений.</returns>
+    /// <param name="groupId">ИД группы вложений.</param>
+    /// <returns>Список, содержащий историю операций по данной группе вложений.</returns>
     [Remote]
     public virtual Structures.Module.AttachmentHistoryEntries GetAttachmentHistoryEntriesByGroupId(Guid groupId)
     {
@@ -2309,9 +2335,8 @@ namespace Sungero.Docflow.Server
       if (!hasSignStage)
         return true;
       
-      var signatories = Functions.OfficialDocument.GetSignatories(document);
       if (signatory != null)
-        return signatories.Any(s => Equals(s.EmployeeId, signatory.Id));
+        return Functions.OfficialDocument.CanSignByEmployee(document, signatory);
       else
         return false;
     }
@@ -2321,7 +2346,7 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="task">Задача согласования.</param>
     /// <param name="assignmentCreated">Дата создания задания на доработку.</param>
-    /// <returns>True, если подписание завершилось с результатом "Отказать".</returns>
+    /// <returns>Последнее задание по задаче.</returns>
     public static IAssignment GetLastTaskAssigment(ITask task, DateTime? assignmentCreated)
     {
       var taskAssignments = Assignments.GetAll().Where(o => Equals(o.Task, task));
@@ -2643,79 +2668,85 @@ namespace Sungero.Docflow.Server
       _obj.AddApprovers.Clear();
       _obj.AddApproversExpanded.Clear();
       _obj.Signatory = null;
-      _obj.IsManyAddressees = null;
-      _obj.Addressee = null;
-      _obj.Addressees.Clear();
       
-      if (rule != null)
+      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
+      var memo = Memos.As(document);
+      if (memo == null)
       {
-        var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-        
-        var hasConditionWithSignatoryRole = false;
-        var hasConditionWithAddresseeRole = false;
-        var hasConditionWithSignAssistantRole = false;
-        var hasConditionWithAddrAssistantRole = false;
-        var hasConditionWithPrintRespRole = false;
-        
-        if (document != null)
-        {
-          // Список достижимых условий в правиле согласования.
-          var conditions = Functions.ApprovalRuleBase.GetConditions(rule, document, _obj);
-          
-          hasConditionWithSignatoryRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.Signatory);
-          hasConditionWithAddresseeRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.Addressee);
-          hasConditionWithSignAssistantRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.SignAssistant);
-          hasConditionWithAddrAssistantRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.AddrAssistant);
-          hasConditionWithPrintRespRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.PrintResp);
-        }
-        
-        var signingStage = stages.Where(s => s.StageType == Docflow.ApprovalStage.StageType.Sign).FirstOrDefault();
-        if (signingStage != null || hasConditionWithSignatoryRole || hasConditionWithSignAssistantRole || hasConditionWithPrintRespRole)
-          _obj.Signatory = Functions.Module.GetPerformerSignatory(_obj);
-        
-        var reviewStage = stages.Where(s => s.StageType == Docflow.ApprovalStage.StageType.Review).FirstOrDefault();
-        
-        // Заполнить адресатов из документа.
-        var memo = Memos.As(document);
-        if (memo != null)
-        {
-          var refreshParameters = Functions.ApprovalTask.GetFullStagesInfoForRefresh(_obj, stages);
-          if (refreshParameters.AddresseesIsVisible || refreshParameters.AddresseeIsVisible)
-          {
-            Functions.ApprovalTask.SychronizeMemoAddressees(_obj, memo);
-            
-            if (refreshParameters.AddresseeIsVisible && _obj.Addressees.Count > 1)
-              Functions.ApprovalTask.ClearAddresseesAndFillFirstAddressee(_obj);
-          }
-        }
-        
-        // Заполнить адресата из этапа рассмотрения, если указан выделенный сотрудник.
-        if (reviewStage != null && ApprovalStages.Is(reviewStage.StageBase))
-        {
-          var reviewApprovalStage = ApprovalStages.As(reviewStage.StageBase);
-          if (reviewApprovalStage.AssigneeType == Sungero.Docflow.ApprovalStage.AssigneeType.Employee &&
-              reviewApprovalStage.Assignee != null &&
-              Company.Employees.Is(reviewApprovalStage.Assignee))
-            _obj.Addressee = Company.Employees.As(reviewApprovalStage.Assignee);
-        }
-        
-        var hasSendStage = Functions.ApprovalRuleBase.HasApprovalStage(_obj.ApprovalRule, Docflow.ApprovalStage.StageType.Sending, document, stages) ||
-          Functions.ApprovalRuleBase.HasApprovalCondition(_obj.ApprovalRule, document, _obj, Docflow.ConditionBase.ConditionType.DeliveryMethod);
-        if (hasSendStage == true)
-        {
-          _obj.ExchangeService = Functions.ApprovalTask.GetExchangeServices(_obj).DefaultService;
-          var outgoingDocument = OutgoingDocumentBases.As(document);
-          if (_obj.ExchangeService != null)
-            _obj.DeliveryMethod = Functions.MailDeliveryMethod.GetExchangeDeliveryMethod();
-          else if (outgoingDocument != null && outgoingDocument.IsManyAddressees != true)
-            _obj.DeliveryMethod = document.DeliveryMethod;
-        }
-        else
-        {
-          _obj.DeliveryMethod = null;
-          _obj.ExchangeService = null;
-        }
+        _obj.IsManyAddressees = null;
+        _obj.Addressee = null;
+        _obj.Addressees.Clear();
       }
+      
+      if (rule == null)
+        return;
+      
+      var hasConditionWithSignatoryRole = false;
+      var hasConditionWithSignAssistantRole = false;
+      var hasConditionWithPrintRespRole = false;
+      List<Sungero.Docflow.IApprovalRuleBaseConditions> conditions = null;
+      
+      if (document != null)
+      {
+        // Список достижимых условий в правиле согласования.
+        conditions = Functions.ApprovalRuleBase.GetConditions(rule, document, _obj);
+        
+        hasConditionWithSignatoryRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.Signatory);
+        hasConditionWithSignAssistantRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.SignAssistant);
+        hasConditionWithPrintRespRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.PrintResp);
+      }
+      
+      var signingStage = stages.Where(s => s.StageType == Docflow.ApprovalStage.StageType.Sign).FirstOrDefault();
+      if (signingStage != null || hasConditionWithSignatoryRole || hasConditionWithSignAssistantRole || hasConditionWithPrintRespRole)
+        _obj.Signatory = Functions.Module.GetPerformerSignatory(_obj);
+      
+      var reviewStage = stages.Where(s => s.StageType == Docflow.ApprovalStage.StageType.Review).FirstOrDefault();
+      
+      // Заполнить адресатов из документа.
+      if (memo != null)
+      {
+        var hasReviewStage = reviewStage != null;
+        var hasReviewTaskStage = Functions.ApprovalRuleBase.HasApprovalReviewTaskStage(rule, document, stages);
+        var hasConditionManyAddressees = Functions.ApprovalRuleBase.HasApprovalCondition(rule, document, _obj, Docflow.Condition.ConditionType.ManyAddressees);
+        var hasConditionWithAddresseeRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.Addressee);
+        var hasConditionWithAddrAssistantRole = Functions.ApprovalRuleBase.HasApprovalConditionWithRole(rule, conditions, Docflow.ApprovalRoleBase.Type.AddrAssistant);
+        
+        var addresseesIsVisible = hasReviewTaskStage || (!hasReviewStage && hasConditionManyAddressees);
+        var addresseeIsVisible = !addresseesIsVisible && (hasReviewStage || hasConditionWithAddresseeRole || hasConditionWithAddrAssistantRole);
+        
+        Functions.ApprovalTask.SychronizeMemoAddressees(_obj, memo);
+        
+        if (addresseeIsVisible && _obj.Addressees.Count > 1)
+          Functions.ApprovalTask.ClearAddresseesAndFillFirstAddressee(_obj);
+      }
+      
+      // Заполнить адресата из этапа рассмотрения, если указан выделенный сотрудник.
+      if (reviewStage != null && ApprovalStages.Is(reviewStage.StageBase))
+      {
+        var reviewApprovalStage = ApprovalStages.As(reviewStage.StageBase);
+        if (reviewApprovalStage.AssigneeType == Sungero.Docflow.ApprovalStage.AssigneeType.Employee &&
+            reviewApprovalStage.Assignee != null &&
+            Company.Employees.Is(reviewApprovalStage.Assignee))
+          _obj.Addressee = Company.Employees.As(reviewApprovalStage.Assignee);
+      }
+      
+      var hasSendStage = Functions.ApprovalRuleBase.HasApprovalStage(_obj.ApprovalRule, Docflow.ApprovalStage.StageType.Sending, document, stages) ||
+        Functions.ApprovalRuleBase.HasApprovalCondition(_obj.ApprovalRule, document, _obj, Docflow.ConditionBase.ConditionType.DeliveryMethod);
+      if (hasSendStage == true)
+      {
+        _obj.ExchangeService = Functions.ApprovalTask.GetExchangeServices(_obj).DefaultService;
+        var outgoingDocument = OutgoingDocumentBases.As(document);
+        if (_obj.ExchangeService != null)
+          _obj.DeliveryMethod = Functions.MailDeliveryMethod.GetExchangeDeliveryMethod();
+        else if (outgoingDocument != null && outgoingDocument.IsManyAddressees != true)
+          _obj.DeliveryMethod = document.DeliveryMethod;
+      }
+      else
+      {
+        _obj.DeliveryMethod = null;
+        _obj.ExchangeService = null;
+      }
+      
     }
     
     /// <summary>
@@ -2735,7 +2766,7 @@ namespace Sungero.Docflow.Server
     /// <param name="rule">Правило.</param>
     /// <param name="stages">Список этапов согласования.</param>
     [Remote(PackResultEntityEagerly = true)]
-    public void UpdateReglamentApprovers(IApprovalRuleBase rule, List<Structures.Module.DefinedApprovalStageLite> stages)
+    public virtual void UpdateReglamentApprovers(IApprovalRuleBase rule, List<Structures.Module.DefinedApprovalStageLite> stages)
     {
       var baseStages = Functions.ApprovalRuleBase.CastToBaseApprovalStageLite(stages);
       this.UpdateReglamentApprovers(rule, baseStages);
@@ -2747,24 +2778,32 @@ namespace Sungero.Docflow.Server
     /// <param name="rule">Правило.</param>
     /// <param name="stages">Список этапов согласования.</param>
     [Remote(PackResultEntityEagerly = true)]
-    public void UpdateReglamentApprovers(IApprovalRuleBase rule, List<Structures.Module.DefinedApprovalBaseStageLite> stages)
+    public virtual void UpdateReglamentApprovers(IApprovalRuleBase rule, List<Structures.Module.DefinedApprovalBaseStageLite> stages)
     {
-      _obj.ReqApprovers.Clear();
-      
       if (rule == null)
+      {
+        _obj.ReqApprovers.Clear();
         return;
-
+      }
+      
+      var reqApprovers = new List<Company.IEmployee>();
+      reqApprovers.AddRange(Functions.ApprovalTask.GetAllRequiredApprovers(_obj, stages));
+      
       // Включить руководителя в список обязательных согласующих.
       var managerStage = stages.Where(s => s.StageType == Docflow.ApprovalStage.StageType.Manager).FirstOrDefault();
       if (managerStage != null && ApprovalStages.Is(managerStage.StageBase))
       {
         var manager = Functions.ApprovalStage.GetRemoteStagePerformer(_obj, ApprovalStages.As(managerStage.StageBase));
         if (manager != null && !manager.Equals(_obj.Author))
-          _obj.ReqApprovers.AddNew().Approver = manager;
+          reqApprovers.Add(manager);
       }
       
-      foreach (var approver in Functions.ApprovalTask.GetAllRequiredApprovers(_obj, stages))
-        _obj.ReqApprovers.AddNew().Approver = approver;
+      if (!_obj.ReqApprovers.Select(a => a.Approver).SequenceEqual(reqApprovers))
+      {
+        _obj.ReqApprovers.Clear();
+        foreach (var approver in reqApprovers)
+          _obj.ReqApprovers.AddNew().Approver = approver;
+      }
     }
     
     /// <summary>
@@ -2772,7 +2811,7 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="rule">Правило.</param>
     [Remote(PackResultEntityEagerly = true)]
-    public void UpdateReglamentApprovers(IApprovalRuleBase rule)
+    public virtual void UpdateReglamentApprovers(IApprovalRuleBase rule)
     {
       var stages = Functions.ApprovalTask.GetStages(_obj).Stages;
       this.UpdateReglamentApprovers(rule, stages);
@@ -2793,7 +2832,7 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="stages">Список этапов согласования.</param>
     /// <returns>Обязательные сотрудники.</returns>
-    public List<IEmployee> GetAllRequiredApprovers(List<Structures.Module.DefinedApprovalStageLite> stages)
+    public virtual List<IEmployee> GetAllRequiredApprovers(List<Structures.Module.DefinedApprovalStageLite> stages)
     {
       var baseStages = Functions.ApprovalRuleBase.CastToBaseApprovalStageLite(stages);
       return this.GetAllRequiredApprovers(baseStages);
@@ -2804,7 +2843,7 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="stages">Список этапов согласования.</param>
     /// <returns>Обязательные сотрудники.</returns>
-    public List<IEmployee> GetAllRequiredApprovers(List<Structures.Module.DefinedApprovalBaseStageLite> stages)
+    public virtual List<IEmployee> GetAllRequiredApprovers(List<Structures.Module.DefinedApprovalBaseStageLite> stages)
     {
       var approversStages = stages
         .Where(s => s.StageType == Docflow.ApprovalStage.StageType.Approvers)
@@ -2824,11 +2863,19 @@ namespace Sungero.Docflow.Server
         
         // Роли согласования.
         if (stage.ApprovalRoles.Any())
+        {
+          // Обработка ролей с одним участником.
           recipients.AddRange(stage.ApprovalRoles
                               .Where(r => r.ApprovalRole != null && r.ApprovalRole.Type != Docflow.ApprovalRoleBase.Type.Approvers)
                               .Select(r => Functions.ApprovalRoleBase.GetRolePerformer(r.ApprovalRole, _obj))
                               .Where(r => r != null)
                               .ToList());
+          
+          // Обработка ролей с несколькими участниками.
+          recipients.AddRange(stage.ApprovalRoles
+                              .Where(r => r.ApprovalRole != null)
+                              .SelectMany(r => Functions.ApprovalRoleBase.GetRolePerformers(r.ApprovalRole, _obj)));
+        }
       }
 
       var performers = Company.PublicFunctions.Module.GetEmployeesFromRecipients(recipients).Distinct().ToList();
@@ -2925,7 +2972,9 @@ namespace Sungero.Docflow.Server
           result = ApprovalTasks.Resources.ApprovalFormApproved;
           break;
         case SignatureType.Endorsing:
-          result = ApprovalTasks.Resources.ApprovalFormEndorsed;
+          result = Docflow.Functions.Module.HasApproveWithSuggestionsMark(signature.Comment)
+            ? ApprovalTasks.Resources.ApprovalFormEndorsedWithSuggestions
+            : ApprovalTasks.Resources.ApprovalFormEndorsed;
           break;
         case SignatureType.NotEndorsing:
           result = ApprovalTasks.Resources.ApprovalFormNotEndorsed;
@@ -3013,6 +3062,18 @@ namespace Sungero.Docflow.Server
               var onBehalfOfText = AddEndOfLine(ApprovalTasks.Resources.OnBehalfOf);
               employeeName = string.Format("{0}{1}{2}", signatoryText, onBehalfOfText, substitutedUserText);
             }
+            else
+            {
+              // Замещающий / Система.
+              var signatoryText = AddEndOfLine(signature.SignatoryFullName);
+              
+              // Замещаемый.
+              var substitutedUserText = signature.SubstitutedUserFullName;
+              
+              // Система за замещаемого.
+              var onBehalfOfText = AddEndOfLine(ApprovalTasks.Resources.OnBehalfOf);
+              employeeName = string.Format("{0}{1}{2}", signatoryText, onBehalfOfText, substitutedUserText);
+            }
           }
           
           var commandText = Queries.ApprovalSheetReport.InsertIntoApprovalSheetReportTable;
@@ -3025,11 +3086,14 @@ namespace Sungero.Docflow.Server
               ? Reports.Resources.ApprovalSheetReport.SignStatusActive
               : Docflow.PublicFunctions.Module.ReplaceFirstSymbolToUpperCase(errorString.ToLower());
             var resultString = Functions.ApprovalTask.GetEndorsingResultFromSignature(signature, false);
+            var comment = Docflow.Functions.Module.HasApproveWithSuggestionsMark(signature.Comment)
+              ? Docflow.Functions.Module.RemoveApproveWithSuggestionsMark(signature.Comment)
+              : signature.Comment;
             command.CommandText = commandText;
             SQL.AddParameter(command, "@reportSessionId",  reportSessionId, System.Data.DbType.String);
             SQL.AddParameter(command, "@employeeName",  employeeName, System.Data.DbType.String);
             SQL.AddParameter(command, "@resultString",  resultString, System.Data.DbType.String);
-            SQL.AddParameter(command, "@comment",  signature.Comment, System.Data.DbType.String);
+            SQL.AddParameter(command, "@comment",  comment, System.Data.DbType.String);
             SQL.AddParameter(command, "@signErrors",  signErrors, System.Data.DbType.String);
             SQL.AddParameter(command, "@versionNumber",  version.Number, System.Data.DbType.Int32);
             SQL.AddParameter(command, "@SignatureDate",  signature.SigningDate.FromUtcTime(), System.Data.DbType.DateTime);
@@ -3187,7 +3251,8 @@ namespace Sungero.Docflow.Server
           .OrderByDescending(i => i.Modified)
           .FirstOrDefault();
         var forwarded = approvalAssignment != null && approvalAssignment.Result == Sungero.Docflow.ApprovalAssignment.Result.Forward;
-        var approved = approvalAssignment != null && approvalAssignment.Result == Sungero.Docflow.ApprovalAssignment.Result.Approved;
+        var approved = approvalAssignment != null && (approvalAssignment.Result == Sungero.Docflow.ApprovalAssignment.Result.Approved ||
+                                                      approvalAssignment.Result == Sungero.Docflow.ApprovalAssignment.Result.WithSuggestions);
         if (approved)
           newApprover.Approved = Docflow.ApprovalReworkAssignmentApprovers.Approved.IsApproved;
         else if (forwarded)
@@ -3260,7 +3325,7 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <returns>Список пользователей.</returns>
     [Public]
-    public List<IUser> GetAllApproversAndSignatories()
+    public virtual List<IUser> GetAllApproversAndSignatories()
     {
       var approvalBlocks = new[] { "3", "6", "9" };
       return Assignments.GetAll()
@@ -3287,7 +3352,7 @@ namespace Sungero.Docflow.Server
         if (Docflow.PublicFunctions.OfficialDocument.Remote.CanSendAnswer(document))
         {
           var info = Exchange.PublicFunctions.ExchangeDocumentInfo.Remote.GetIncomingExDocumentInfo(document);
-          if (info != null)
+          if (info != null && info.Box.Status == CoreEntities.DatabookEntry.Status.Active)
           {
             var service = ExchangeCore.PublicFunctions.BoxBase.GetExchangeService(info.Box);
             return Structures.ApprovalTask.ExchangeServies.Create(new List<ExchangeCore.IExchangeService>() { service }, service);
@@ -3300,13 +3365,18 @@ namespace Sungero.Docflow.Server
         {
           if (Docflow.AccountingDocumentBases.Is(document) && Docflow.AccountingDocumentBases.As(document).IsFormalized == true)
           {
-            var defaultService = Docflow.AccountingDocumentBases.As(document).BusinessUnitBox.ExchangeService;
-            var services = new List<ExchangeCore.IExchangeService>() { defaultService };
-            return Structures.ApprovalTask.ExchangeServies.Create(services, defaultService);
+            var documentBox = Docflow.AccountingDocumentBases.As(document).BusinessUnitBox;
+            if (documentBox.Status == CoreEntities.DatabookEntry.Status.Active)
+            {
+              var defaultService = Docflow.AccountingDocumentBases.As(document).BusinessUnitBox.ExchangeService;
+              var services = new List<ExchangeCore.IExchangeService>() { defaultService };
+              return Structures.ApprovalTask.ExchangeServies.Create(services, defaultService);
+            }
           }
           
           var lines = parties.SelectMany(p => p.ExchangeBoxes.Where(b => b.Status == Parties.CounterpartyExchangeBoxes.Status.Active &&
-                                                                    Equals(b.Box.BusinessUnit, document.BusinessUnit))).ToList();
+                                                                    Equals(b.Box.BusinessUnit, document.BusinessUnit) &&
+                                                                    b.Box.Status == CoreEntities.DatabookEntry.Status.Active)).ToList();
           var hasPartyWithoutActiveExchange = parties.Any(p => p.ExchangeBoxes
                                                           .Where(b => Equals(b.Box.BusinessUnit, document.BusinessUnit))
                                                           .All(b => b.Status != Parties.CounterpartyExchangeBoxes.Status.Active));
@@ -3338,6 +3408,30 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
+    /// Создать кеш параметров показа карточки задачи на согласование по регламенту.
+    /// </summary>
+    [Remote(IsPure = true)]
+    public virtual void CreateParamsCache()
+    {
+      var refreshParameters = Functions.ApprovalTask.GetFullStagesInfoForRefresh(_obj);
+      Functions.ApprovalTask.SetRefreshParams(_obj, (Domain.Shared.IExtendedEntity)_obj, refreshParameters);
+      var lockInfo = Locks.GetLockInfo(_obj);
+      if (_obj.Status == Sungero.Docflow.ApprovalTask.Status.Draft && _obj.AccessRights.CanUpdate() && !(lockInfo != null && lockInfo.IsLockedByOther))
+      {
+        var isVisibleAndEnabled = _obj.State.Properties.DeliveryMethod.IsVisible && _obj.State.Properties.DeliveryMethod.IsEnabled;
+        if (isVisibleAndEnabled && (_obj.DeliveryMethod == null || _obj.DeliveryMethod.Sid != Constants.MailDeliveryMethod.Exchange))
+        {
+          var param = ((Domain.Shared.IExtendedEntity)_obj).Params;
+          if (!param.ContainsKey(Constants.ApprovalTask.NeedShowExchangeServiceHint))
+          {
+            var show = Functions.ApprovalTask.GetExchangeServices(_obj).DefaultService != null;
+            param[Constants.ApprovalTask.NeedShowExchangeServiceHint] = show;
+          }
+        }
+      }
+    }
+    
+    /// <summary>
     /// Помечает задачу для отправки на доработку, если не удалось вычислить исполнителя этапа.
     /// </summary>
     /// <param name="stage">Этап, исполнителя которого не удалось вычислить.</param>
@@ -3366,20 +3460,10 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Проверить наличие согласуемого документа в задаче и наличие хоть каких-то прав на него.
-    /// </summary>
-    /// <returns>True, если с документом можно работать.</returns>
-    [Remote(IsPure = true)]
-    public virtual bool HasDocumentAndCanRead()
-    {
-      return _obj.DocumentGroup.OfficialDocuments.Any();
-    }
-    
-    /// <summary>
     /// Обновить доп. согласующих в задаче.
     /// </summary>
     /// <param name="approvers">Список доп. согласующих.</param>
-    public void UpdateAdditionalApprovers(List<IRecipient> approvers)
+    public virtual void UpdateAdditionalApprovers(List<IRecipient> approvers)
     {
       var taskApprovers = _obj.AddApproversExpanded.Select(a => a.Approver).ToList();
       if (approvers.Except(taskApprovers).Any() || taskApprovers.Except(approvers).Any())
@@ -3594,6 +3678,19 @@ namespace Sungero.Docflow.Server
     public static Structures.ApprovalTask.RefreshParameters GetFullStagesInfoForRefresh(IApprovalTask task, List<Structures.Module.DefinedApprovalBaseStageLite> stages)
     {
       var info = Structures.ApprovalTask.RefreshParameters.Create();
+      if (!Functions.ApprovalTask.HasDocumentAndCanRead(task))
+        /* Если сотрудник не видит документ (отбор прав / строгие права), то показывать ему дополнительные поля в карточке не нужно.
+         * Вернуть только что созданную структуру, чтобы избежать лишних вычислений доступности/видимости/обязательности.
+         * Все поля типа bool, предназначенные для признаков доступности/видимости/обязательности, будут инициализированы в false.
+         */
+        return info;
+      
+      info.HasDocumentAndCanRead = true;
+      info.ForwardPerformerIsVisible = Functions.ApprovalTask.SchemeVersionSupportsRework(task);
+      // Если в регламенте запрещен уменьшающийся круг рецензентов, то не даем изменять действие в гриде.
+      info.ApproversActionIsEnabled = task.ApprovalRule != null && task.ApprovalRule.IsSmallApprovalAllowed == true;
+      info.ApproversIsVisible = true;
+      
       var document = task.DocumentGroup.OfficialDocuments.FirstOrDefault();
       
       if (task.ApprovalRule != null)
@@ -3774,21 +3871,10 @@ namespace Sungero.Docflow.Server
     /// </summary>
     /// <param name="stageNumber">Номер этапа.</param>
     /// <returns>Параметры доработки.</returns>
-    [Remote]
+    [Remote, Obsolete("Используйте метод GetAssignmentReworkParameters.")]
     public virtual Structures.ApprovalTask.ReworkParameters GetReworkParameters(int stageNumber)
     {
-      var reworkParameters = Structures.ApprovalTask.ReworkParameters.Create();
-      reworkParameters.AllowChangeReworkPerformer = false;
-      reworkParameters.AllowViewReworkPerformer = false;
-      reworkParameters.AllowSendToRework = false;
-      var item = _obj.ApprovalRule.Stages.Where(s => s.Number == stageNumber).FirstOrDefault();
-      if (item == null)
-        return reworkParameters;
-      var stage = item.Stage;
-      reworkParameters.AllowChangeReworkPerformer = stage.AllowChangeReworkPerformer ?? false;
-      reworkParameters.AllowViewReworkPerformer = stage.AllowChangeReworkPerformer ?? false;
-      reworkParameters.AllowSendToRework = stage.AllowSendToRework ?? false;
-      return reworkParameters;
+      return Functions.ApprovalTask.GetAssignmentReworkParameters(_obj, stageNumber);
     }
     
     /// <summary>
@@ -3816,21 +3902,21 @@ namespace Sungero.Docflow.Server
       if (ApprovalCheckReturnAssignments.Is(lastAssignment))
       {
         var checkAssignment = ApprovalCheckReturnAssignments.GetAll()
-          .Where(ass => Equals(ass.Task, _obj) && ass.Result == Docflow.ApprovalCheckReturnAssignment.Result.NotSigned)
+          .Where(a => Equals(a.Task, _obj) && a.Result == Docflow.ApprovalCheckReturnAssignment.Result.NotSigned)
           .OrderByDescending(o => o.Completed).FirstOrDefault();
         performer = checkAssignment.Performer;
       }
       if (ApprovalAssignments.Is(lastAssignment))
       {
         var apprAssignment = ApprovalAssignments.GetAll()
-          .Where(ass => Equals(ass.Task, _obj) && ass.Result == Docflow.ApprovalAssignment.Result.ForRevision)
+          .Where(a => Equals(a.Task, _obj) && a.Result == Docflow.ApprovalAssignment.Result.ForRevision)
           .OrderByDescending(o => o.Completed).FirstOrDefault();
         performer = apprAssignment.Performer;
       }
       if (ApprovalManagerAssignments.Is(lastAssignment))
       {
         var apprAssignment = ApprovalManagerAssignments.GetAll()
-          .Where(ass => Equals(ass.Task, _obj) && ass.Result == Docflow.ApprovalManagerAssignment.Result.ForRevision)
+          .Where(a => Equals(a.Task, _obj) && a.Result == Docflow.ApprovalManagerAssignment.Result.ForRevision)
           .OrderByDescending(o => o.Completed).FirstOrDefault();
         performer = apprAssignment.Performer;
       }
@@ -3921,7 +4007,7 @@ namespace Sungero.Docflow.Server
     /// <returns>Список пройденных этапов.</returns>
     public virtual List<Sungero.Docflow.Structures.Module.DefinedApprovalBaseStageLite> GetPassedFunctionStages()
     {
-      var document = _obj.DocumentGroup.OfficialDocuments.First();
+      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
       var stages = Functions.ApprovalRuleBase.GetBaseStages(_obj.ApprovalRule, document, _obj).BaseStages;
       var currentStage = stages.FirstOrDefault(s => s.Number == (_obj.StageNumber ?? 0));
       
@@ -3944,5 +4030,79 @@ namespace Sungero.Docflow.Server
       return ApprovalTasks.GetAll().Where(t => t.Id == _obj.Id).Select(t => t.Modified).FirstOrDefault();
     }
     
+    /// <summary>
+    /// Получить значение параметра "Разрешить согласование с замечаниями" из настроек этапа.
+    /// </summary>
+    /// <param name="stageNumber">Номер этапа.</param>
+    /// <returns>True, если согласование с замечаниями разрешено, иначе False.</returns>
+    [Remote(IsPure = true)]
+    public virtual bool GetApprovalWithSuggestionsParameter(int stageNumber)
+    {
+      var item = _obj.ApprovalRule.Stages.Where(s => s.Number == stageNumber).FirstOrDefault();
+      if (item == null)
+        return false;
+      
+      return item.Stage.AllowApproveWithSuggestions ?? false;
+    }
+    
+    /// <summary>
+    /// Отправить уведомления о прекращении задачи на согласование по регламенту.
+    /// </summary>
+    public virtual void SendApprovalAbortNotice()
+    {
+      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
+      
+      var subject = string.Empty;
+      var threadSubject = string.Empty;
+      // Отправить уведомления о прекращении.
+      using (Sungero.Core.CultureInfoExtensions.SwitchTo(TenantInfo.Culture))
+      {
+        threadSubject = ApprovalTasks.Resources.AbortNoticeSubject;
+        if (document != null)
+          subject = string.Format(Sungero.Exchange.Resources.TaskSubjectTemplate, threadSubject, Docflow.PublicFunctions.Module.TrimSpecialSymbols(document.Name));
+        else
+        {
+          var approvalTaskSubject = string.Format("{0}{1}", _obj.Subject.Substring(0, 1).ToLower(), _obj.Subject.Remove(0, 1));
+          subject = string.Format("{0} {1}", ApprovalTasks.Resources.AbortApprovalTask, Docflow.PublicFunctions.Module.TrimSpecialSymbols(approvalTaskSubject));
+        }
+      }
+      
+      var allApprovers = ApprovalAssignments.GetAll(asg => asg.Task == _obj && asg.IsRead.Value).Select(app => app.Performer).ToList();
+      allApprovers.AddRange(ApprovalManagerAssignments.GetAll(asg => asg.Task == _obj && asg.IsRead.Value).Select(app => app.Performer).ToList());
+      allApprovers.AddRange(ApprovalSigningAssignments.GetAll(asg => asg.Task == _obj && asg.IsRead.Value).Select(app => app.Performer).ToList());
+      var author = _obj.Author;
+      var reworkAssignment = Functions.ApprovalTask.GetLastReworkAssignment(_obj);
+      if (reworkAssignment != null)
+      {
+        allApprovers.Add(reworkAssignment.Performer);
+        if (!Equals(_obj.Author, reworkAssignment.Performer))
+        {
+          allApprovers.Add(_obj.Author);
+          author = reworkAssignment.Performer;
+        }
+      }
+      allApprovers.Remove(Users.Current);
+      if (allApprovers.Any())
+        Functions.Module.SendNoticesAsSubtask(subject, allApprovers, _obj, _obj.AbortingReason, author, threadSubject);
+    }
+    
+    /// <summary>
+    /// Создать и запустить асинхронный обработчик выполнения сценария в согласовании по регламенту.
+    /// </summary>
+    /// <param name="queueItem">Элемент очереди.</param>
+    public virtual void ExecuteApprovalFunctionAsyncHandler(IApprovalFunctionQueueItem queueItem)
+    {
+      // При сохранении очереди поставится блокировка. Даже если асинхронный обработчик запустится раньше чем транзакция в блоке завершится,
+      // он уйдет в переповтор, ProcessingStatus не перезапишется.
+      if (_obj.GetStartedSchemeVersion() == LayerSchemeVersions.V4)
+      {
+        queueItem.ProcessingStatus = Docflow.ApprovalFunctionQueueItem.ProcessingStatus.Started;
+        queueItem.Save();
+      }
+      var approvalFunctionHandler = Docflow.AsyncHandlers.ExecuteApprovalFunction.Create();
+      approvalFunctionHandler.QueueItemId = queueItem.Id;
+      approvalFunctionHandler.ExecuteAsync();
+      Logger.DebugFormat("Create async handler. Id {0}, TaskId {1}, StartId {2}", queueItem.Id, _obj.Id, _obj.StartId);
+    }
   }
 }

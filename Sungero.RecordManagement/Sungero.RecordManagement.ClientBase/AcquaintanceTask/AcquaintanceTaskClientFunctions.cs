@@ -11,29 +11,6 @@ namespace Sungero.RecordManagement.Client
   partial class AcquaintanceTaskFunctions
   {
     /// <summary>
-    /// Заполнить участников из списка ознакомления.
-    /// </summary>
-    /// <param name="acquaintanceList">Список ознакомления.</param>
-    [Public]
-    public void FillFromAcquaintanceList(IAcquaintanceList acquaintanceList)
-    {
-      if (acquaintanceList == null)
-        return;
-      
-      var participants = acquaintanceList.Participants.Where(p => p.Participant.Status == Company.Employee.Status.Active);
-      foreach (var participant in participants)
-      {
-        var newParticipantRow = _obj.Performers.AddNew();
-        newParticipantRow.Performer = participant.Participant;
-      }
-      foreach (var excludedParticipant in acquaintanceList.ExcludedParticipants)
-      {
-        var newExcludedPerformer = _obj.ExcludedPerformers.AddNew();
-        newExcludedPerformer.ExcludedPerformer = excludedParticipant.ExcludedParticipant;
-      }
-    }
-    
-    /// <summary>
     /// Проверка, входит ли документ в список редактируемых форматов.
     /// </summary>
     /// <param name="document">Документ.</param>

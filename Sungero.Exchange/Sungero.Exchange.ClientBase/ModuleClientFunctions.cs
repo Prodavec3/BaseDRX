@@ -230,10 +230,12 @@ namespace Sungero.Exchange.Client
             {
               Logger.DebugFormat("Get signatory for parent document id {0}", document.ParentDocumentId);
               document.Signature = signs[document.ParentDocumentId];
+              var formalizedPoAUnifiedRegNo = Docflow.PublicFunctions.OfficialDocument.Remote.GetFormalizedPoAUnifiedRegNo(document.LinkedDocument, Company.Employees.Current, certificate);
+              document.FormalizedPoAUnifiedRegNumber = formalizedPoAUnifiedRegNo;
               Logger.Debug(string.Format("Sign receipt notification with ExchangeDocumentInfoId = {0}, DocumentType = {1}, ServiceCounterpartyId = {2}," +
-                                         " ParentDocumentId = {3} LinkedDocumentId = {4}, ServiceMessageId = {5}",
+                                         " ParentDocumentId = {3} LinkedDocumentId = {4}, ServiceMessageId = {5}, FormalizedPoAUnifiedRegNo = {6}",
                                          document.Info.Id, document.ReglamentDocumentType, document.ServiceCounterpartyId, document.ParentDocumentId,
-                                         document.LinkedDocument.Id, document.ServiceMessageId));
+                                         document.LinkedDocument.Id, document.ServiceMessageId, formalizedPoAUnifiedRegNo));
             }
 
             if (isSendJobEnabled)
@@ -323,6 +325,13 @@ namespace Sungero.Exchange.Client
         Dialogs.NotifyMessage(Resources.DocumentOversized);
         return;
       }
+      
+      if (!document.AccessRights.CanUpdate())
+      {
+        Dialogs.NotifyMessage(Resources.NoRightsForDocument);
+        return;
+      }
+      
       var isForcedLocked = false;
       if (!lockInfo.IsLocked)
         isForcedLocked = Locks.TryLock(document);

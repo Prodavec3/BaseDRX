@@ -1,0 +1,68 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "f15b30f3-99b5-49d7-9452-770b3925ae41",
+  "Name": "OutgoingLetterVersions",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "c3ce5ceb-6563-4d57-bab9-64800301243c",
+  "CanBeAncestor": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "8cc0db4d-d33e-4631-ad19-01e80fc8f71b",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9db5ead2-a918-4f50-8aa4-f75a44cfce07",
+      "Name": "ElectronicDocument",
+      "EntityGuid": "d1d2a452-7732-4ba8-b199-0a4dc78898ac",
+      "IsAncestorMetadata": true,
+      "IsReferenceToRootEntity": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "a1d0f296-7ace-4cda-b8b1-d6e63ff3588e",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card",
+    "Versions": []
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "46da8e4a-823b-4011-aab5-849abaa29d81",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "Versions": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 2
+    }
+  ]
+}

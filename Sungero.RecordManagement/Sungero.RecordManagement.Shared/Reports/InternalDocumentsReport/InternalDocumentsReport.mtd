@@ -4,21 +4,16 @@
   "Name": "InternalDocumentsReport",
   "AssociatedGuid": "4e25caec-c722-4740-bcfd-c4f803840ac6",
   "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
-  "DataSources": [
-    {
-      "NameGuid": "86216e23-2a7b-4339-92f8-0a61ff102975",
-      "Name": "InternalDocuments",
-      "EntityType": "ce3e34ed-7be2-4426-a951-d5a70f966650",
-      "Versions": []
-    }
-  ],
+  "DataSources": [],
   "DefaultExportFormat": "Word",
   "ExportFormats": [
     "Pdf",
     "Word"
   ],
   "HandledEvents": [
-    "BeforeExecuteClient"
+    "BeforeExecuteClient",
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
   ],
   "IconResourcesKeys": [],
   "Overridden": [
@@ -26,7 +21,9 @@
     "Parameters",
     "DefaultExportFormat",
     "PublicConstants",
-    "PublicStructures"
+    "PublicStructures",
+    "HandledEvents",
+    "DataSources"
   ],
   "Parameters": [
     {
@@ -52,6 +49,11 @@
       "InternalDataTypeName": "Sungero.RecordManagement.ILog, Sungero.Domain.Interfaces",
       "IsRequired": true,
       "Versions": []
+    },
+    {
+      "NameGuid": "c52d79f1-24b7-4d4e-8bfb-74cc2a5c6f01",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],

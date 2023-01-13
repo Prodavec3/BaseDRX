@@ -321,7 +321,7 @@ namespace Sungero.Docflow.Server
           block.AssignIcon(FreeApprovalTasks.Resources.Forward, iconSize);
         }
         
-        // Прекращено
+        // Прекращено.
         if (assignment.Status == Workflow.AssignmentBase.Status.Aborted)
         {
           block.AssignIcon(StateBlockIconType.Abort, iconSize);
@@ -461,28 +461,14 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Получить список операций по всем операциям относящимся к данной группе вложений из истории.
+    /// Получить список операций по всем операциям, относящимся к данной группе вложений из истории.
     /// </summary>
-    /// <param name="groupId">Id группы вложений.</param>
-    /// <returns>Список содержащий историю операций по данной группе вложений.</returns>
+    /// <param name="groupId">ИД группы вложений.</param>
+    /// <returns>Список, содержащий историю операций по данной группе вложений.</returns>
     [Remote]
     public virtual Structures.Module.AttachmentHistoryEntries GetAttachmentHistoryEntriesByGroupId(Guid groupId)
     {
-      var taskGuid = _obj.GetEntityMetadata().GetOriginal().NameGuid;
-      var taskHistory = Sungero.Workflow.WorkflowHistories.GetAll()
-        .Where(h => h.EntityId.HasValue && _obj.Id == h.EntityId.Value && taskGuid == h.EntityType).ToList();
-      var taskAssignments = Sungero.Workflow.Assignments.GetAll()
-        .Where(x => Equals(x.Task, _obj)).ToList();
-      var taskAssignmentsIds = taskAssignments.Select(x => x.Id).ToList();
-      var taskAssignmentsNameGuids = taskAssignments.Select(x => x.GetEntityMetadata().GetOriginal().NameGuid).Distinct().ToList();
-      var taskAssignmentsHistory = Sungero.Workflow.WorkflowHistories.GetAll()
-        .Where(h => h.EntityId.HasValue && taskAssignmentsIds.Contains(h.EntityId.Value) && taskAssignmentsNameGuids.Contains(h.EntityType));
-      
-      var attachmentHistoryEntries = Functions.Module.ParseAttachmentsHistory(taskHistory.Union(taskAssignmentsHistory));
-      attachmentHistoryEntries.Added = attachmentHistoryEntries.Added.Where(x => x.GroupId == groupId).ToList();
-      attachmentHistoryEntries.Removed = attachmentHistoryEntries.Removed.Where(x => x.GroupId == groupId).ToList();
-      
-      return attachmentHistoryEntries;
+      return Docflow.Functions.Module.GetAttachmentHistoryEntriesByGroupId(_obj, groupId);
     }
     
     #endregion
@@ -525,7 +511,7 @@ namespace Sungero.Docflow.Server
     /// Получить все завершенные задания последней итерации с результатом на доработку, для которых не созданы уведомления.
     /// </summary>
     /// <param name="task">Задача.</param>
-    /// <param name="lastIterationId">Ид последней итерации.</param>
+    /// <param name="lastIterationId">ИД последней итерации.</param>
     /// <returns>Список заданий.</returns>
     public static List<IFreeApprovalAssignment> GetLastAssignmentWithoutNotice(IFreeApprovalTask task, int? lastIterationId)
     {

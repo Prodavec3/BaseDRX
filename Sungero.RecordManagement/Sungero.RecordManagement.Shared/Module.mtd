@@ -313,6 +313,20 @@
           "ParameterType": "String"
         }
       ]
+    },
+    {
+      "NameGuid": "266cdf00-2043-4667-a0dd-a8e62c341f0e",
+      "Name": "ExcludeFromAcquaintance",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "5df268ec-5194-4b26-82af-cfcf9cdd2d8c",
+          "Name": "AssignmentIds",
+          "ParameterType": "String"
+        }
+      ]
     }
   ],
   "ClientAssemblyName": "Sungero.RecordManagement.Client",
@@ -337,6 +351,7 @@
       "IconName": "",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "Dependencies": [
@@ -537,8 +552,16 @@
       "PreviousItemId": "481ce37a-03d3-43b6-ac5b-3d8bcf9d3f9b"
     },
     {
+      "ItemId": "1d5433e5-b285-4310-9a63-fc4e76f0a9b7",
+      "PreviousItemId": "a154775d-9029-483a-93c4-b4b9a6e5ec1b"
+    },
+    {
+      "ItemId": "8484c5ba-5646-4327-9158-cd9fe0eb082b",
+      "PreviousItemId": "1d5433e5-b285-4310-9a63-fc4e76f0a9b7"
+    },
+    {
       "ItemId": "4fb95eaa-eed1-4fcb-a601-e0b88ad0f5ae",
-      "PreviousItemId": "a154775d-9029-483a-93c4-b4b9a6e5ec1b",
+      "PreviousItemId": "8484c5ba-5646-4327-9158-cd9fe0eb082b",
       "Versions": []
     },
     {
@@ -738,6 +761,12 @@
           "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
         }
       ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "AllowAcquaintanceBySubstitute",
       "Placement": "Shared",
       "ReturnType": "global::System.Boolean",
       "ReturnTypeFullName": "System.Boolean"
@@ -1046,6 +1075,18 @@
       "ReturnTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
     },
     {
+      "Name": "CreateActionItemExecutionFromExecution",
+      "Parameters": [
+        {
+          "Name": "actionItemAssignment",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionAssignment",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionAssignment, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+      "ReturnTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+    },
+    {
       "Name": "CreateActionItemExecutionWithResolution",
       "IsRemote": true,
       "Parameters": [
@@ -1153,6 +1194,29 @@
       "Placement": "Shared",
       "ReturnType": "global::Sungero.RecordManagement.IDocumentReviewTask",
       "ReturnTypeFullName": "Sungero.RecordManagement.IDocumentReviewTask, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "CreateDocumentReviewTaskFromParentTask",
+      "Parameters": [
+        {
+          "Name": "documentId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "addresseeId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "parentTaskId",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "ReturnType": "global::System.Int32",
+      "ReturnTypeFullName": "System.Int32",
+      "WebApiRequestType": "Post"
     },
     {
       "Name": "ExecuteApplyActionItemLockIndependentChanges",
@@ -1295,6 +1359,23 @@
       ],
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetActionItemsUnderControl",
+      "Parameters": [
+        {
+          "Name": "usersIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "onlyOverdue",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.RecordManagement.IActionItemExecutionTask>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
     },
     {
       "Name": "GetAllRecipients",
@@ -1496,6 +1577,174 @@
       "Placement": "Client",
       "ReturnType": "global::System.Boolean",
       "ReturnTypeFullName": "System.Boolean"
+    },
+    {
+      "Name": "SynchronizeAttachmentsToAcquaintance",
+      "Parameters": [
+        {
+          "Name": "parentTask",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "acquaintanceTask",
+          "ParameterType": "global::Sungero.RecordManagement.IAcquaintanceTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IAcquaintanceTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SynchronizeAttachmentsToAcquaintance",
+      "Parameters": [
+        {
+          "Name": "primaryDocument",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "addenda",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Content.IElectronicDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "addedAddendaIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "removedAddendaIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "otherAttachments",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Domain.Shared.IEntity>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "acquaintanceTask",
+          "ParameterType": "global::Sungero.RecordManagement.IAcquaintanceTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IAcquaintanceTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SynchronizeAttachmentsToActionItem",
+      "Parameters": [
+        {
+          "Name": "parentTask",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "actionItem",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SynchronizeAttachmentsToActionItem",
+      "Parameters": [
+        {
+          "Name": "primaryDocument",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "addenda",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Content.IElectronicDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "addedAddendaIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "removedAddendaIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "otherAttachments",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Domain.Shared.IEntity>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "actionItem",
+          "ParameterType": "global::Sungero.RecordManagement.IActionItemExecutionTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IActionItemExecutionTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SynchronizeAttachmentsToDocumentReview",
+      "Parameters": [
+        {
+          "Name": "parentTask",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        },
+        {
+          "Name": "documentReview",
+          "ParameterType": "global::Sungero.RecordManagement.IDocumentReviewTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IDocumentReviewTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "SynchronizeAttachmentsToDocumentReview",
+      "Parameters": [
+        {
+          "Name": "primaryDocument",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "addenda",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Content.IElectronicDocument>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "addedAddendaIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "removedAddendaIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int32>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "otherAttachments",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.Domain.Shared.IEntity>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "documentReview",
+          "ParameterType": "global::Sungero.RecordManagement.IDocumentReviewTask",
+          "ParameterTypeFullName": "Sungero.RecordManagement.IDocumentReviewTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     }
   ],
   "PublicStructures": [],
@@ -1550,7 +1799,8 @@
     "ImpossibleSpecifyDeadlineLessThanTodayCorrectIt",
     "UnsupportedAccessRightsTypeMessage",
     "CoAssignees",
-    "ActionItemIndefiniteDeadline"
+    "ActionItemIndefiniteDeadline",
+    "NeedCreatedActionItemExecutionFromAdressee"
   ],
   "ServerAssemblyName": "Sungero.RecordManagement.Server",
   "ServerNamespace": "Sungero.RecordManagement.Server",
@@ -1748,7 +1998,7 @@
       "Versions": []
     }
   ],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [
     {
       "NameGuid": "59e381ae-d54c-49ed-9896-bd33d08d7a7a",
@@ -1845,7 +2095,7 @@
   "Versions": [
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

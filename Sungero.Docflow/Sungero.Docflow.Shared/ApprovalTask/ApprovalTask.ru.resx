@@ -434,7 +434,7 @@
     <value>Заполните причину прекращения задачи.</value>
   </data>
   <data name="NoRightsToDocument" xml:space="preserve">
-    <value>Отсутствует документ, или у вас недостаточно прав на него. Обратитесь к администратору системы.</value>
+    <value>Отсутствует документ или права доступа на него. Обратитесь к администратору системы.</value>
   </data>
   <data name="InvoiceAmendmentRequest" xml:space="preserve">
     <value>Контрагентом запрошено уточнение: {0}</value>
@@ -474,5 +474,20 @@
   </data>
   <data name="CantUpdateTask" xml:space="preserve">
     <value>Задача была изменена. Закройте окно подтверждения и прекратите задачу повторно.</value>
+  </data>
+  <data name="CommentNeeded" xml:space="preserve">
+    <value>Для согласования с замечаниями необходимо написать комментарий.</value>
+  </data>
+  <data name="EndorsedWithSuggestions" xml:space="preserve">
+    <value>Согласовано с замечаниями.</value>
+  </data>
+  <data name="ApprovalFormEndorsedWithSuggestions" xml:space="preserve">
+    <value>Согласовано с замечаниями</value>
+  </data>
+  <data name="StateViewEndorsedWithSuggestions" xml:space="preserve">
+    <value>Согласовано с замечаниями</value>
+  </data>
+  <data name="AbortApprovalTask" xml:space="preserve">
+    <value>Прекращено</value>
   </data>
 </root>

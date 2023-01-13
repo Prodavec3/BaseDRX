@@ -814,4 +814,8 @@ INCLUDE (Id)]]></mssql>
   Id
 )]]></postgres>
   </query>
+  <query key="SelectDisableMailNotificationParam">
+    <mssql><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE ([Key] = '{0}')]]></mssql>
+    <postgres><![CDATA[SELECT Value FROM Sungero_Docflow_Params WHERE (Key = '{0}')]]></postgres>
+  </query>
 </queries>

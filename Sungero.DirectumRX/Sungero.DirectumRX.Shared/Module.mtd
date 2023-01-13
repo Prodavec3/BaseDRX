@@ -24,6 +24,7 @@
       "BackgroundPosition": "Stretch",
       "Versions": []
     },
+    "Tabs": [],
     "Versions": []
   },
   "DesktopViews": [
@@ -126,6 +127,11 @@
       "PreviousGuid": "1031e40e-2c3a-4964-92ce-92036cdcb3b9"
     },
     {
+      "NameGuid": "471e68ad-7f9d-43d7-b4db-93eb660cde7f",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "83d1dcdf-fb2c-4cd9-9246-e57d641b0a48"
+    },
+    {
       "NameGuid": "1440d1dc-6746-434a-908d-e596c2a1f849",
       "ParentFolderId": "201bcad8-a5c4-4ef4-ba90-55334e02dd29"
     },
@@ -144,16 +150,16 @@
   "SharedAssemblyName": "Sungero.DirectumRX.Shared",
   "SharedNamespace": "Sungero.DirectumRX.Shared",
   "SpecialFolders": [],
-  "Version": "4.3.27.0",
+  "Version": "4.5.38.0",
   "Widgets": [],
   "Versions": [
     {
       "Type": "SolutionMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "ModuleMetadata",
-      "Number": 6
+      "Number": 8
     },
     {
       "Type": "DomainApi",

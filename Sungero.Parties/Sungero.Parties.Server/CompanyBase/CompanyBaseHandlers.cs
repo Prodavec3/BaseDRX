@@ -34,6 +34,15 @@ namespace Sungero.Parties
   partial class CompanyBaseServerHandlers
   {
 
+    public override void AfterDelete(Sungero.Domain.AfterDeleteEventArgs e)
+    {
+      base.AfterDelete(e);
+      
+      // Удаление из индекса Elasticsearch, если он сконфигурирован.
+      if (Commons.PublicFunctions.Module.IsElasticsearchConfigured())
+        Commons.PublicFunctions.Module.CreateRemoveEntityFromIndexAsyncHandler(CompanyBases.Info.Name, _obj.Id);
+    }
+
     public override void AfterSave(Sungero.Domain.AfterSaveEventArgs e)
     {
       #region Создание контактов, пришедших с сервиса заполнения по ОГРН/ИНН
@@ -69,6 +78,15 @@ namespace Sungero.Parties
       #endregion
       
       base.AfterSave(e);
+      
+      // Запуск индексации, если Elasticsearch сконфигурирован и изменились индексируемые поля.
+      if (Commons.PublicFunctions.Module.IsElasticsearchConfigured() && e.Params.Contains(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey))
+      {
+        var allowCreateRecord = false;
+        e.Params.TryGetValue(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey, out allowCreateRecord);
+        e.Params.Remove(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey);
+        Sungero.Commons.PublicFunctions.Module.CreateIndexEntityAsyncHandler(CompanyBases.Info.Name, _obj.Id, Functions.CompanyBase.GetIndexingJson(_obj), allowCreateRecord);
+      }
     }
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
@@ -108,6 +126,12 @@ namespace Sungero.Parties
       #endregion
       
       base.BeforeSave(e);
+      
+      // Выставить параметр необходимости индексации сущности, при изменении индексируемых полей.
+      var props = _obj.State.Properties;
+      if (props.LegalName.IsChanged || props.Name.IsChanged || props.HeadCompany.IsChanged || props.TIN.IsChanged || props.TRRC.IsChanged || props.PSRN.IsChanged || 
+          props.Homepage.IsChanged || props.Phones.IsChanged || props.LegalAddress.IsChanged || props.Status.IsChanged || props.Email.IsChanged)
+        e.Params.AddOrUpdate(Sungero.Commons.PublicConstants.Module.IsIndexedEntityInsertedParamKey, _obj.State.IsInserted);
     }
 
     public override void BeforeDelete(Sungero.Domain.BeforeDeleteEventArgs e)

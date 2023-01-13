@@ -11,6 +11,6 @@ namespace Sungero.Docflow.Server
 {
   partial class SimpleDocumentFunctions
   {
-  
+
   }
 }

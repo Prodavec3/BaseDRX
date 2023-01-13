@@ -54,7 +54,7 @@ namespace Sungero.Docflow
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
       var hasDocuments = Functions.DocumentRegister.HasRegisteredDocuments(_obj);
-      var isUsed = hasDocuments || Functions.RegistrationSetting.GetByDocumentRegister(_obj).Any();
+      var isUsed = hasDocuments || Functions.Module.GetRegistrationSettingByDocumentRegister(_obj).Any();
       if (isUsed && _obj.State.Properties.RegistrationGroup.IsChanged)
         e.AddError(DocumentRegisters.Resources.NoRightToChangePropertyFormat(_obj.Info.Properties.RegistrationGroup.LocalizedName));
       if (isUsed && _obj.State.Properties.RegisterType.IsChanged)

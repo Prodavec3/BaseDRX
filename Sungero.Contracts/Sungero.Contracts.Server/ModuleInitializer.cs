@@ -111,12 +111,14 @@ namespace Sungero.Contracts.Server
         Sungero.ContractsUI.SpecialFolders.ContractsAtContractors.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
         Sungero.ContractsUI.SpecialFolders.IssuanceJournal.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
         Sungero.ContractsUI.SpecialFolders.ContractsHistory.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        Sungero.ContractsUI.SpecialFolders.PowerOfAttorneyList.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
         
         Sungero.ContractsUI.SpecialFolders.ContractsList.AccessRights.Save();
         Sungero.ContractsUI.SpecialFolders.ExpiringSoonContracts.AccessRights.Save();
         Sungero.ContractsUI.SpecialFolders.ContractsAtContractors.AccessRights.Save();
         Sungero.ContractsUI.SpecialFolders.IssuanceJournal.AccessRights.Save();
         Sungero.ContractsUI.SpecialFolders.ContractsHistory.AccessRights.Save();
+        Sungero.ContractsUI.SpecialFolders.PowerOfAttorneyList.AccessRights.Save();
       }
       finally
       {
@@ -297,7 +299,7 @@ namespace Sungero.Contracts.Server
       accountingRow.Target = Sungero.Docflow.AccountingDocumentBases.Info;
       accountingRow.RelatedProperty = Sungero.Docflow.AccountingDocumentBases.Info.Properties.LeadingDocument;
       accountingRow = accounting.Mapping.AddNew();
-      accountingRow.Source = Sungero.Contracts.ContractBases.Info;
+      accountingRow.Source = Sungero.Contracts.ContractualDocuments.Info;
       accountingRow.Target = Sungero.Contracts.IncomingInvoices.Info;
       accountingRow.RelatedProperty = Sungero.Contracts.IncomingInvoices.Info.Properties.Contract;
       accounting.Save();

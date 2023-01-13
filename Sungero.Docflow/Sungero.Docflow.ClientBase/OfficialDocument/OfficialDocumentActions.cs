@@ -11,6 +11,40 @@ namespace Sungero.Docflow.Client
 {
   partial class OfficialDocumentVersionsActions
   {
+    public override void HideVersion(Sungero.Domain.Client.ExecuteChildCollectionActionArgs e)
+    {
+      var document = OfficialDocuments.As(_obj.RootEntity);
+      if (PublicFunctions.OfficialDocument.CanHideVersion(document, _obj.Number))
+      {
+        Dialogs.ShowMessage(OfficialDocuments.Resources.HideVersionOnAcquaintanceError, MessageType.Error);
+        return;
+      }
+      
+      base.HideVersion(e);
+    }
+
+    public override bool CanHideVersion(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
+    {
+      return base.CanHideVersion(e);
+    }
+
+    public override void DeleteVersion(Sungero.Domain.Client.ExecuteChildCollectionActionArgs e)
+    {
+      var document = OfficialDocuments.As(_obj.RootEntity);
+      if (PublicFunctions.OfficialDocument.CanDeleteVersion(document, _obj.Number))
+      {
+        Dialogs.ShowMessage(OfficialDocuments.Resources.DeleteVersionOnAcquaintanceError, MessageType.Error);
+        return;
+      }
+      
+      base.DeleteVersion(e);
+    }
+
+    public override bool CanDeleteVersion(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
+    {
+      return base.CanDeleteVersion(e);
+    }
+
     public virtual bool CanOpenOriginal(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
     {
       return _obj.PublicBody.Size != 0;
@@ -46,11 +80,9 @@ namespace Sungero.Docflow.Client
       }
       
       var document = OfficialDocuments.As(_objs.FirstOrDefault());
-      var relations = Functions.OfficialDocument.GetRelatedDocumentsWithVersions(document);
-      if (relations.Count > 0)
-        Functions.OfficialDocument.SelectRelatedDocumentsAndCreateEmail(document, relations);
-      else
-        base.SendByMail(e);
+      var relations = Functions.OfficialDocument.GetRelatedDocumentsWithVersions(document)
+        .Where(x => x.AccessRights.CanRead(Users.Current)).ToList();
+      Functions.OfficialDocument.SelectRelatedDocumentsAndCreateEmail(document, relations);
     }
 
     public override bool CanSendByMail(Sungero.Domain.Client.CanExecuteActionArgs e)
@@ -108,6 +140,24 @@ namespace Sungero.Docflow.Client
 
   partial class OfficialDocumentActions
   {
+    public virtual void ShowOurSigningReason(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      bool showOurSigningReasonParamValue;
+      
+      if (e.Params.TryGetValue(Sungero.Docflow.Constants.OfficialDocument.ShowOurSigningReasonParam, out showOurSigningReasonParamValue))
+        showOurSigningReasonParamValue = !showOurSigningReasonParamValue;
+      else
+        showOurSigningReasonParamValue = true;
+      
+      e.Params.AddOrUpdate(Sungero.Docflow.Constants.OfficialDocument.ShowOurSigningReasonParam, showOurSigningReasonParamValue);
+      Functions.OfficialDocument.RefreshDocumentForm(_obj);
+    }
+
+    public virtual bool CanShowOurSigningReason(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return _obj.HasVersions && !_obj.State.IsInserted;
+    }
+
     public virtual void ExportDocument(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var documents = new List<IOfficialDocument>() { _obj };
@@ -121,10 +171,44 @@ namespace Sungero.Docflow.Client
 
     public virtual void ChangeDocumentType(Sungero.Domain.Client.ExecuteActionArgs e)
     {
+      // Запретить смену типа, если включен строгий доступ к документу.
+      if (_obj.AccessRights.StrictMode != AccessRightsStrictMode.None)
+      {
+        // Используем диалоги, чтобы хинт не пробрасывался в задачу, в которую он вложен.
+        Dialogs.ShowMessage(OfficialDocuments.Resources.DisableStrictModeToChangeType, MessageType.Error);
+        return;
+      }
+      
+      // Запретить смену типа, если документ зарегистрирован или зарезервирован.
+      if (_obj.RegistrationState == OfficialDocument.RegistrationState.Registered &&
+          _obj.DocumentKind.NumberingType != DocumentKind.NumberingType.Numerable ||
+          _obj.RegistrationState == OfficialDocument.RegistrationState.Reserved)
+      {
+        Dialogs.ShowMessage(OfficialDocuments.Resources.NeedCancelRegistration, MessageType.Error);
+        return;
+      }
+      
+      // Запретить смену типа, если по документу есть активные задачи согласования по регламенту.
       if (Functions.OfficialDocument.Remote.HasApprovalTasksWithCurrentDocument(_obj))
       {
-        // Для смены типа необходимо остановить все активные задачи согласования по регламенту.
         Dialogs.ShowMessage(SimpleDocuments.Resources.NeedAbortApproval, MessageType.Error);
+        return;
+      }
+      
+      if (Functions.OfficialDocument.Remote.HasSpecifiedTypeRelations(_obj))
+      {
+        var dialog = Dialogs.CreateTaskDialog(OfficialDocuments.Resources.NeedDeleteLink, MessageType.Error);
+        var relatedDocumentsHyperlink = dialog.AddHyperlink(OfficialDocuments.Resources.RelatedDocumentsHyperlinkDisplayName);
+        
+        Action relatedDocumentsHyperlinkAction = () =>
+        {
+          var relatedDocuments = _obj.Relations.GetRelated().Union(_obj.Relations.GetRelatedFrom());
+          relatedDocuments.ShowModal();
+        };
+        
+        relatedDocumentsHyperlink.SetOnExecute(relatedDocumentsHyperlinkAction);
+        dialog.Buttons.AddOk();
+        dialog.Show();
         return;
       }
       
@@ -140,7 +224,8 @@ namespace Sungero.Docflow.Client
 
     public virtual bool CanChangeDocumentType(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdate();
+      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdate() &&
+        Functions.OfficialDocument.CanChangeDocumentType(_obj);
     }
     
     public virtual void CreateManyAddendum(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -176,28 +261,29 @@ namespace Sungero.Docflow.Client
         }
       }
       
-      // Сообщение о статусе асинхронного преобразования.
-      var title = string.Empty;
-      var message = string.Empty;
+      // Сообщение об ошибке при асинхронном преобразовании.
       if (needConversion && result.HasErrors)
       {
-        // Возникла ошибка.
-        title = result.ErrorTitle;
-        message = result.ErrorMessage;
+        Dialogs.ShowMessage(result.ErrorTitle, result.ErrorMessage, MessageType.Information);
+        return;
       }
-      else
+      
+      if (needConversion && Sungero.Docflow.Functions.OfficialDocument.Remote.IsExchangeDocument(_obj, _obj.LastVersion.Id))
       {
-        // Преобразование "В процессе".
-        title = OfficialDocuments.Resources.ConvertionInProgress;
-        message = OfficialDocuments.Resources.CloseDocumentAndOpenLater;
+        Dialogs.ShowMessage(OfficialDocuments.Resources.ConvertionInProgress, OfficialDocuments.Resources.CloseDocumentAndOpenLater, MessageType.Information);
+        return;
       }
-      Dialogs.ShowMessage(title, message, MessageType.Information);
     }
 
     public virtual bool CanConvertToPdf(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsInserted && _obj.HasVersions && !_obj.State.IsChanged &&
-        _obj.AccessRights.CanUpdate() && Locks.GetLockInfo(_obj).IsLockedByMe;
+      var isDesktop = ClientApplication.ApplicationType == ApplicationType.Desktop;
+      return !isDesktop &&
+        !_obj.State.IsInserted &&
+        _obj.HasVersions &&
+        !_obj.State.IsChanged &&
+        _obj.AccessRights.CanUpdate() &&
+        Locks.GetLockInfo(_obj).IsLockedByMe;
     }
 
     public virtual void ShowRelatedDocuments(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -520,10 +606,7 @@ namespace Sungero.Docflow.Client
         return;
       }
 
-      var employees = new List<Company.IEmployee>();
-      foreach (var emp in tracking.Select(l => l.DeliveredTo))
-        if (!employees.Contains(emp))
-          employees.Add(emp);
+      var employees = tracking.Select(l => l.DeliveredTo).Distinct().ToList();
       var employee = employees.FirstOrDefault();
 
       var dialog = Dialogs.CreateInputDialog(Docflow.Resources.ReturnDocumentDialog, _obj.Name);
@@ -532,71 +615,43 @@ namespace Sungero.Docflow.Client
       if (employees.Count > 1)
         employeeDialog = dialog.AddSelect(Docflow.Resources.ReturnDocumentEmployee, true, employee).From(employees);
       var returnDate = dialog.AddDate(Docflow.Resources.ReturnDocumentDate, true, Calendar.UserToday);
+      
+      var openAssignments = dialog.AddHyperlink(Docflow.Resources.ReturnDocumentOpenAssignment);
+      var returnTasks = tracking.Where(x => x.ReturnTask.AccessRights.IsGranted(DefaultAccessRightsTypes.Read, Users.Current)).Select(x => x.ReturnTask).ToList();
+      var hasAvailableTasks = Functions.OfficialDocument.Remote.GetReturnAssignments(returnTasks).Any();
+      openAssignments.IsVisible = hasAvailableTasks;
 
       var returnDocument = dialog.Buttons.AddCustom(Docflow.Resources.ReturnDocument);
       dialog.Buttons.Default = returnDocument;
-
-      var hasAvailableTasks = false;
-      foreach (var row in tracking)
-      {
-        if (row.ReturnTask.AccessRights.CanRead())
-          hasAvailableTasks = hasAvailableTasks || Functions.OfficialDocument.Remote.GetReturnAssignments(row.ReturnTask).Any();
-      }
-      CommonLibrary.DialogButton openAssignments = null;
-      if (hasAvailableTasks)
-        openAssignments = dialog.Buttons.AddCustom(Docflow.Resources.ReturnDocumentOpenAssignment);
-
+      
       dialog.Buttons.AddCancel();
 
+      var employeeTracking = tracking.Where(l => Equals(l.DeliveredTo, employee));
       dialog.SetOnRefresh(d =>
                           {
                             if (employeeDialog != null)
                               employee = employeeDialog.Value;
+                            openAssignments.IsEnabled = employee != null;
                             if (employee == null)
                               return;
                             
-                            var employeeTracking = tracking.Where(l => Equals(l.DeliveredTo, employee));
-                            foreach (var row in employeeTracking)
-                            {
-                              if (returnDate.Value.HasValue && returnDate.Value.Value < row.DeliveryDate.Value)
-                              {
-                                d.AddError(Docflow.Resources.ReturnDocumentDeliveryAndReturnDate, returnDate);
-                                return;
-                              }
-                            }
+                            employeeTracking = tracking.Where(l => Equals(l.DeliveredTo, employee));
+                            if (returnDate.Value.HasValue && employeeTracking.Any(x => returnDate.Value.Value < x.DeliveryDate.Value))
+                              d.AddError(Docflow.Resources.ReturnDocumentDeliveryAndReturnDate, returnDate);
                           });
       
-      var result = dialog.Show();
-      if (result != DialogButtons.Cancel)
-      {
-        if (employeeDialog != null)
-          employee = employeeDialog.Value;
-        var employeeTracking = tracking.Where(l => Equals(l.DeliveredTo, employee));
-        
-        if (result == returnDocument)
-        {
-          var returnResult = Docflow.OfficialDocumentTracking.ReturnResult.Returned;
-          foreach (var row in employeeTracking)
-          {
-            row.ReturnDate = returnDate.Value;
-            row.ReturnResult = returnResult;
-          }
-
-          _obj.Save();
-          Dialogs.NotifyMessage(Docflow.Resources.ReturnDocumentNotify);
-        }
-        
-        if (result == openAssignments)
+      openAssignments.SetOnExecute(
+        () =>
         {
           try
           {
-            var returnTasks = employeeTracking.Select(i => i.ReturnTask).ToList();
-            var assignments = Functions.OfficialDocument.Remote.GetReturnAssignments(returnTasks);
+            var employeeReturnTasks = employeeTracking.Select(i => i.ReturnTask).ToList();
+            var assignments = Functions.OfficialDocument.Remote.GetReturnAssignments(employeeReturnTasks);
 
             if (assignments.Count == 1)
-              assignments.Single().Show();
+              assignments.Single().ShowModal();
             else if (assignments.Count > 1)
-              assignments.Show();
+              assignments.ShowModal();
             else if (!assignments.Any())
               Dialogs.NotifyMessage(Docflow.Resources.JobToReturnNotFound);
           }
@@ -605,7 +660,20 @@ namespace Sungero.Docflow.Client
             // TODO: продумать ситуацию когда на часть задач все-таки есть права.
             Dialogs.NotifyMessage(Docflow.Resources.JobToReturnNotFound);
           }
+        });
+      
+      var result = dialog.Show();
+      if (result == returnDocument)
+      {
+        var returnResult = Docflow.OfficialDocumentTracking.ReturnResult.Returned;
+        foreach (var row in employeeTracking)
+        {
+          row.ReturnDate = returnDate.Value;
+          row.ReturnResult = returnResult;
         }
+
+        _obj.Save();
+        Dialogs.NotifyMessage(Docflow.Resources.ReturnDocumentNotify);
       }
     }
 
@@ -701,23 +769,16 @@ namespace Sungero.Docflow.Client
         return;
       
       var text = Docflow.Resources.CancelRegistration;
-      var description = Docflow.Resources.CancelRegistrationDescription;
-
+      var description = Functions.OfficialDocument.GetCancelRegistrationDialogDescription(_obj, settingType);
       if (settingType == Docflow.RegistrationSetting.SettingType.Reservation)
-      {
         text = Docflow.Resources.CancelReservation;
-        description = Docflow.Resources.CancelReservationDescription;
-      }
       if (settingType == Docflow.RegistrationSetting.SettingType.Numeration)
-      {
         text = Docflow.Resources.CancelNumbering;
-        description = Docflow.Resources.CancelNumberingDescription;
-      }
       
-      var dialog = Dialogs.CreateTaskDialog(text, description, MessageType.Warning);
-      dialog.Buttons.AddOkCancel();
-      dialog.Buttons.Default = DialogButtons.Ok;
-      if (dialog.Show() == DialogButtons.Ok)
+      var dialog = Dialogs.CreateTaskDialog(text, description, MessageType.Information);
+      dialog.Buttons.AddYesNo();
+      dialog.Buttons.Default = DialogButtons.Yes;
+      if (dialog.Show() == DialogButtons.Yes)
       {
         var needSaveDocument = _obj.DocumentKind.NumberingType != Docflow.DocumentKind.NumberingType.Numerable ||
           !_obj.DocumentKind.AutoNumbering.Value;
@@ -761,7 +822,9 @@ namespace Sungero.Docflow.Client
          (e.Params.TryGetValue(Sungero.Docflow.Constants.OfficialDocument.HasReservationSetting, out hasReservationSetting) && hasReservationSetting));
       
       // Это действие используется как для отмены регистрации / нумерации, так и для отмены резервирования номера.
-      return accessRights.CanUpdate() && (Functions.Module.IsLockedByMe(_obj) || _obj.State.IsInserted) && (canUnregister || canUnreserve);
+      // В режиме изменения реквизитов отменить регистрацию нельзя.
+      var isRequisiteChangeModeOn = e.Params.Contains(Constants.OfficialDocument.NeedValidateRegisterFormat);
+      return accessRights.CanUpdate() && (Functions.Module.IsLockedByMe(_obj) || _obj.State.IsInserted) && (canUnregister || canUnreserve) && !isRequisiteChangeModeOn;
     }
 
     public virtual void AssignNumber(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -801,7 +864,7 @@ namespace Sungero.Docflow.Client
       var canReserveNumber = accessRights.CanRegister() ||
         (e.Params.TryGetValue(Sungero.Docflow.Constants.OfficialDocument.HasReservationSetting, out hasReservationSetting) && hasReservationSetting);
       
-      return accessRights.CanUpdate() && 
+      return accessRights.CanUpdate() &&
         (Functions.Module.IsLockedByMe(_obj) || _obj.State.IsInserted) &&
         ((isNumerable && !isRegistered) ||
          (documentKind.DocumentFlow != Docflow.DocumentKind.DocumentFlow.Incoming &&
@@ -921,9 +984,11 @@ namespace Sungero.Docflow.Client
 
     private void CreateApprovalTask(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var task = Functions.Module.Remote.CreateApprovalTask(_obj);
-      if (task.ApprovalRule != null)
+      var availableApprovalRules = Functions.OfficialDocument.Remote.GetApprovalRules(_obj).ToList();
+
+      if (availableApprovalRules.Any())
       {
+        var task = Functions.Module.Remote.CreateApprovalTask(_obj);
         task.Show();
         e.CloseFormAfterAction = true;
       }

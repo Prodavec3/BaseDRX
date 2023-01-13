@@ -22,15 +22,19 @@ namespace Sungero.Docflow.Shared
       _obj.State.Properties.Currency.IsRequired = _obj.Info.Properties.Currency.IsRequired || amount;
       _obj.State.Properties.Currency.IsEnabled = amount;
       
-      _obj.State.Properties.Recipient.IsEnabled = !isSystem;
+      _obj.State.Properties.Recipient.IsEnabled = !isSystem;      
       _obj.State.Properties.BusinessUnits.IsEnabled = !isSystem;
+      _obj.State.Properties.BusinessUnits.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA;
+      _obj.State.Properties.JobTitle.IsEnabled = _obj.Recipient != null && Company.Employees.Is(_obj.Recipient);
       
       _obj.State.Properties.Document.IsEnabled = _obj.Reason != Docflow.SignatureSetting.Reason.Duties;
-      _obj.State.Properties.Document.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney;
-      _obj.State.Properties.DocumentInfo.IsEnabled = _obj.Reason == Docflow.SignatureSetting.Reason.Other;
-      _obj.State.Properties.DocumentInfo.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.Other;
-      _obj.State.Properties.ValidTill.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney;
-      _obj.State.Properties.Certificate.IsEnabled = _obj.BusinessUnits.Count() == 1 && Company.Employees.Is(_obj.Recipient);
+      _obj.State.Properties.Document.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney ||
+        _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA;
+      _obj.State.Properties.ValidTill.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney ||
+        _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA;
+      _obj.State.Properties.Certificate.IsRequired = _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA;
+      _obj.State.Properties.Certificate.IsEnabled = _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA ||
+        _obj.BusinessUnits.Count() == 1 && Company.Employees.Is(_obj.Recipient);
     }
     
     /// <summary>
@@ -92,6 +96,68 @@ namespace Sungero.Docflow.Shared
     {
       return this.FilterCategories(DocumentGroupBases.GetAllCached()
                                    .Where(c => c.Status == CoreEntities.DatabookEntry.Status.Active));
+    }
+    
+    /// <summary>
+    /// Получить основание подписания для документа-основания доверенность.
+    /// </summary>
+    /// <param name="powerOfAttorney">Доверенность.</param>
+    /// <returns>Основание подписания.</returns>
+    public virtual string GetPowerOfAttorneySigningReason(IPowerOfAttorney powerOfAttorney)
+    {
+      // Основание подписания в формате: <Сокращенное имя вида> №<номер> от <дата>.
+      var signingReason = powerOfAttorney.DocumentKind.ShortName;
+      using (TenantInfo.Culture.SwitchTo())
+      { 
+        if (!string.IsNullOrWhiteSpace(powerOfAttorney.RegistrationNumber))
+          signingReason += OfficialDocuments.Resources.Number + powerOfAttorney.RegistrationNumber;
+        
+        if (powerOfAttorney.RegistrationDate != null)
+          signingReason += OfficialDocuments.Resources.DateFrom + powerOfAttorney.RegistrationDate.Value.ToString("d");
+      }
+      
+      signingReason = Functions.Module.TrimSpecialSymbols(signingReason);
+      return signingReason;
+    }
+    
+    /// <summary>
+    /// Получить основание подписания для документа-основания электронная доверенность.
+    /// </summary>
+    /// <param name="formalizedPowerOfAttorney">Электронная доверенность.</param>
+    /// <returns>Основание подписания.</returns>
+    public virtual string GetFormalizedPowerOfAttorneySigningReason(IFormalizedPowerOfAttorney formalizedPowerOfAttorney)
+    {
+      // Основание подписания в формате: Доверенность № <гуид> от <дата>.
+      var signingReason = string.Empty;
+      using (TenantInfo.Culture.SwitchTo())
+      {
+        signingReason = SignatureSettings.Resources.FormalizedPoASigningReasonDocumentName;
+        
+        if (!string.IsNullOrWhiteSpace(formalizedPowerOfAttorney.UnifiedRegistrationNumber))
+          signingReason += OfficialDocuments.Resources.Number + " " + formalizedPowerOfAttorney.UnifiedRegistrationNumber;
+        
+        if (formalizedPowerOfAttorney.RegistrationDate != null)
+          signingReason += OfficialDocuments.Resources.DateFrom + formalizedPowerOfAttorney.RegistrationDate.Value.ToString("d");
+      }
+      
+      signingReason = Functions.Module.TrimSpecialSymbols(signingReason);
+      return signingReason;
+    }
+    
+    /// <summary>
+    /// Заполнить имя Права подписи.
+    /// </summary>
+    [Public]
+    public virtual void FillName()
+    {
+      if (_obj.Reason == Docflow.SignatureSetting.Reason.Other ||
+          _obj.Reason == Docflow.SignatureSetting.Reason.PowerOfAttorney ||
+          _obj.Reason == Docflow.SignatureSetting.Reason.FormalizedPoA)
+      {
+        _obj.Name = _obj.SigningReason;
+      }
+      else if (_obj.Reason == Docflow.SignatureSetting.Reason.Duties)
+        _obj.Name = SignatureSettings.Resources.DutiesDisplayNameFormat(_obj.SigningReason);
     }
   }
 }

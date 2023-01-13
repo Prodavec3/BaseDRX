@@ -166,5 +166,21 @@ namespace Sungero.Contracts.Server
         _obj.LifeCycleState = Docflow.OfficialDocument.LifeCycleState.Draft;
       }
     }
+    
+    /// <summary>
+    /// Проверить, связан ли документ специализированной связью.
+    /// </summary>
+    /// <returns>True - если связан, иначе - false.</returns>
+    [Remote(IsPure = true)]
+    public override bool HasSpecifiedTypeRelations()
+    {
+      var hasSpecifiedTypeRelations = false;
+      AccessRights.AllowRead(
+        () =>
+        {
+          hasSpecifiedTypeRelations = SupAgreements.GetAll().Any(x => Equals(x.LeadingDocument, _obj));
+        });
+      return base.HasSpecifiedTypeRelations() || hasSpecifiedTypeRelations;
+    }
   }
 }

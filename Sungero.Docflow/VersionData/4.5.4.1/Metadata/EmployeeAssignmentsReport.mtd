@@ -1,0 +1,218 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "e2c4565c-05ca-4009-bd5b-663ac100e1ac",
+  "Name": "EmployeeAssignmentsReport",
+  "AssociatedGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel",
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "AfterExecuteServer",
+    "BeforeExecuteServer",
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "Description",
+    "HandledEvents",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "31753b7f-4469-4e03-848a-eca56712e652",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "f422db21-baba-472e-aa69-451f5e4d5d42",
+      "Name": "ReportDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "f61fcd53-ecc8-4e64-9f84-b144c6d34259",
+      "Name": "PeriodBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "fc66c4dc-43a5-46c3-97cc-5fde8afef03b",
+      "Name": "PeriodEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "5a71370a-5d52-43d0-93c0-579e0df618c9",
+      "Name": "Employee",
+      "EntityType": "b7905516-2be5-4931-961c-cb38d5677565",
+      "InternalDataTypeName": "Sungero.Company.IEmployee, Sungero.Domain.Interfaces"
+    },
+    {
+      "NameGuid": "35fb83b1-1d60-4796-bbe2-2c462fae2e22",
+      "Name": "ParamsDescription",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "7446627b-12fc-46e8-a37e-642e6aa916d6",
+      "Name": "AssignmentHyperlink",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "f9723839-de4c-4497-ae12-5a5e2f6a5954",
+      "Name": "Empty",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "b273c6b0-158b-4ff5-9a87-440f05cb1042",
+      "Name": "AssignmentCompletion",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "d993cecf-abbd-43ce-bd1d-5111a60ffa64",
+      "Name": "AssignmentCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "da062500-a09d-49c7-92a7-551cd1964913",
+      "Name": "AffectDisciplineCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "d94eb7cd-0b2e-4fb5-8fa4-a37ba1df8681",
+      "Name": "RealPerformerCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "1ff3a09d-ba30-4c8c-845b-ec1a7d60224e",
+      "Name": "CompletedInTimeCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "ca82cb14-fc45-4985-b29f-48aec5989d50",
+      "Name": "OverdueAssignmentsCount",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "AssignmentLightView",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "AssignmentId",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Subject",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "AuthorName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "RealPerformerName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.EmployeeAssignmentsReport"
+    },
+    {
+      "Name": "TableLine",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "AssignmentId",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Subject",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "AuthorName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Created",
+          "IsNullable": true,
+          "TypeFullName": "global::System.DateTime"
+        },
+        {
+          "Name": "Deadline",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "Completed",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "Delay",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Int32>"
+        },
+        {
+          "Name": "RealPerformerName",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "AffectDiscipline",
+          "TypeFullName": "global::System.Boolean"
+        }
+      ],
+      "StructureNamespace": "Sungero.Docflow.Structures.EmployeeAssignmentsReport"
+    }
+  ],
+  "ResourcesKeys": [
+    "ReportName",
+    "Period",
+    "PeriodTo",
+    "Subject",
+    "AuthorName",
+    "Created",
+    "Deadline",
+    "Completed",
+    "Delay",
+    "ReportEmployee",
+    "RealPerformer",
+    "AssignmentId",
+    "AffectDiscipline",
+    "ReportDepartment",
+    "Yes",
+    "No",
+    "TitleAssignmentCompletion",
+    "TitleAssignmentCount",
+    "TitleAffectDisciplineCount",
+    "TitleRealPerformerCount",
+    "TitleCompletedInTimeCount",
+    "TitleOverdueAssignmentsCount"
+  ],
+  "Versions": []
+}

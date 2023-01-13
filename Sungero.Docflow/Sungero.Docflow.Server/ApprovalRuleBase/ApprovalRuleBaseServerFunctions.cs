@@ -288,7 +288,7 @@ namespace Sungero.Docflow.Server
         SetIcon(stage.StageType, stageBlock);
         
         // Заголовок.
-        var header = GetBlockHeader(stage);
+        var header = Functions.ApprovalRuleBase.GetStageBlockHeader(task.ApprovalRule, stage);
         
         // Примечание.
         var note = string.Empty;
@@ -643,27 +643,13 @@ namespace Sungero.Docflow.Server
     }
     
     /// <summary>
-    /// Получить заголовок блока.
+    /// Получить заголовок блока этапа.
     /// </summary>
     /// <param name="stage">Этап.</param>
     /// <returns>Заголовок.</returns>
-    public static string GetBlockHeader(IApprovalStage stage)
+    public virtual string GetStageBlockHeader(IApprovalStage stage)
     {
-      var stageType = stage.StageType;
-      
-      // Печать.
-      if (stageType == StageType.Print)
-        return ApprovalRuleBases.Resources.StateViewHeaderPrint;
-
-      // Задание.
-      if (stageType == StageType.SimpleAgr)
-        return ApprovalRuleBases.Resources.StateViewHeaderSimpleAgreementFormat(stage.Subject);
-      
-      // Уведомление.
-      if (stageType == StageType.Notice)
-        return ApprovalRuleBases.Resources.StateViewHeaderNoticeFormat(stage.Subject);
-      
-      return ApprovalStages.Info.Properties.StageType.GetLocalizedValue(stageType);
+      return stage.Name;
     }
     
     /// <summary>
@@ -2513,13 +2499,8 @@ namespace Sungero.Docflow.Server
     [Remote(PackResultEntityEagerly = true, IsPure = true)]
     public virtual Structures.Module.DefinedApprovalStages GetStages(IOfficialDocument document, IApprovalTask task)
     {
-      Logger.DebugFormat("Start GetStages");
-      
       var baseStages = Functions.ApprovalRuleBase.GetBaseStages(_obj, document, task);
-      var result = Functions.ApprovalRuleBase.CastToDefinedApprovalStages(baseStages);
-      
-      Logger.DebugFormat("Done GetStages");
-      return result;
+      return Functions.ApprovalRuleBase.CastToDefinedApprovalStages(baseStages);
     }
     
     /// <summary>
@@ -2531,8 +2512,6 @@ namespace Sungero.Docflow.Server
     [Remote(PackResultEntityEagerly = true, IsPure = true)]
     public virtual Structures.Module.DefinedApprovalBaseStages GetBaseStages(IOfficialDocument document, IApprovalTask task)
     {
-      Logger.DebugFormat("Start GetBaseStages");
-      
       var stages = new List<Structures.Module.DefinedApprovalBaseStageLite>() { };
       bool canDefineConditions = false;
       
@@ -2576,7 +2555,7 @@ namespace Sungero.Docflow.Server
         var stage = _obj.Stages.Single(s => s.Number == currentStageNumber);
         stages.Add(Structures.Module.DefinedApprovalBaseStageLite.Create(stage.StageBase, stage.Number, stage.StageType));
       }
-      Logger.DebugFormat("Done GetBaseStages");
+      
       return Structures.Module.DefinedApprovalBaseStages.Create(stages, canDefineConditions, error);
     }
     
@@ -2710,7 +2689,7 @@ namespace Sungero.Docflow.Server
       }
       
       if (Functions.ApprovalRuleBase.GetDoubleRules(_obj).Any())
-        e.AddError(ApprovalRuleBases.Resources.DuplicateDetected, _obj.Info.Actions.ShowDuplicate);
+        e.AddWarning(ApprovalRuleBases.Resources.DuplicateDetected, _obj.Info.Actions.ShowDuplicate);
     }
     
     /// <summary>

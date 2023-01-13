@@ -36,5 +36,22 @@ namespace Sungero.RecordManagement.Shared
         mainDocumentVersion.Hash = null;
       }
     }
+    
+    /// <summary>
+    /// Может ли сотрудник выполнить ознакомление за другого сотрудника.
+    /// </summary>
+    /// <returns>True - если сотрудник может ознакомиться за другого сотрудника.</returns>
+    public virtual bool CanUserCompleteAcquaintanceBySubstitute()
+    {
+      var isCurrentUserSubstitute = Functions.AcquaintanceAssignment.Remote.IsSubstituteOf(_obj, Users.Current, _obj.Performer);
+      if (!isCurrentUserSubstitute)
+        return false;
+      
+      var isAcquaintanceBySubstituteAllowed = Functions.Module.AllowAcquaintanceBySubstitute();
+      var isPerformerAutomated = _obj.Performer.Login != null;
+      var isPerformerActive = _obj.Performer.Status == CoreEntities.DatabookEntry.Status.Active;
+      
+      return isAcquaintanceBySubstituteAllowed || !isPerformerActive || !isPerformerAutomated;
+    }
   }
 }

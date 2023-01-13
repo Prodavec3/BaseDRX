@@ -1,0 +1,90 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "35cbbafd-281d-4ae4-8840-08a34ee63ba3",
+  "Name": "ApprovalTaskRevokedDocumentsRights",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "TAprRvkRights",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c1a12df7-d0d8-4836-8865-a91f0ef1dad0",
+      "Name": "ApprovalTask",
+      "CanBeSearch": false,
+      "Code": "Task",
+      "EntityGuid": "100950d0-03d2-44f0-9e31-f9c8dfdf3829",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0f53a20c-7b96-4d4f-a33f-c82a0c5b9849",
+      "Name": "DocumentId",
+      "CanBeSearch": false,
+      "Code": "DocumentId",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "c1a12df7-d0d8-4836-8865-a91f0ef1dad0"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "bee80799-e1e5-46f0-aef7-303a30ccabb3",
+      "Name": "RightType",
+      "CanBeSearch": false,
+      "Code": "RightType",
+      "DirectValues": [
+        {
+          "NameGuid": "356cc73c-e9ea-477f-8308-2a28291a02a6",
+          "Name": "Read",
+          "Code": "Read"
+        },
+        {
+          "NameGuid": "4bd2c6b2-efd8-49ab-9897-2951766722c8",
+          "Name": "Edit",
+          "Code": "Edit"
+        },
+        {
+          "NameGuid": "e53dac1d-7be4-4315-89c2-58d40afc2b0e",
+          "Name": "FullAccess",
+          "Code": "FullAccess"
+        }
+      ],
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "0f53a20c-7b96-4d4f-a33f-c82a0c5b9849"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "2b167f61-e2b4-4a0a-9231-71b1e1953aaa",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "cbe2ffc1-f671-4c18-ae19-35d3b04567a3",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 11
+    }
+  ]
+}

@@ -38,6 +38,11 @@
           "NameGuid": "16aa6080-ed7c-4bd5-80cd-36e6ed9c8dc7",
           "Name": "Completed",
           "Code": "Completed"
+        },
+        {
+          "NameGuid": "e8283e6b-ddd3-4ea6-8751-d557a0f4e43f",
+          "Name": "Started",
+          "Code": "Started"
         }
       ],
       "IsAncestorMetadata": true,

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sungero.Content;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.RecordManagement.ActionItemExecutionTask;
@@ -109,9 +110,12 @@ namespace Sungero.RecordManagement.Shared
     public virtual void SynchronizeActiveText()
     {
       var actionItemPropertyMaxLength = _obj.Info.Properties.ActionItem.Length;
-      _obj.ActionItem = _obj.ActiveText != null && _obj.ActiveText.Length > actionItemPropertyMaxLength
+      var cutActiveText = _obj.ActiveText != null && _obj.ActiveText.Length > actionItemPropertyMaxLength
         ? _obj.ActiveText.Substring(0, actionItemPropertyMaxLength)
-        : _obj.ActionItem = _obj.ActiveText;
+        : _obj.ActiveText;
+      
+      if (_obj.ActionItem != cutActiveText)
+        _obj.ActionItem = cutActiveText;
     }
 
     /// <summary>
@@ -302,13 +306,41 @@ namespace Sungero.RecordManagement.Shared
       var isValid = Docflow.PublicFunctions.Module.ValidateTaskAuthor(_obj, e);
       
       // Проверить, что возможность отправки поручений без срока включена в настройках.
-      if (_obj.HasIndefiniteDeadline == true && !Functions.Module.AllowActionItemsWithIndefiniteDeadline() && (startedFromUI || _obj.ActionItemType == ActionItemType.Main))
-      {
-        e.AddError(_obj.Info.Properties.HasIndefiniteDeadline, ActionItemExecutionTasks.Resources.ActionItemWithoutDeadlineDenied);
-        isValid = false;
-      }
+      if (startedFromUI || _obj.ActionItemType == ActionItemType.Main)
+        isValid = isValid && this.ValidateActionItemWithoutDeadline(e);
       
       // Проверить корректность заполнения свойства Выдал.
+      isValid = isValid && this.ValidateActionItemAssignedBy(e);
+      
+      // Проверить количество исполнителей по поручению.
+      isValid = isValid && this.ValidateActionItemAssigneesCount(e);
+
+      // Только при старте через UI.
+      if (startedFromUI)
+      {
+        // Проверить корректность срока.
+        isValid = isValid && this.ValidateActionItemDeadline(e);
+        
+        // Простое поручение. Срок соисполнителей должен быть больше или равен текущей дате.
+        isValid = isValid && this.ValidateActionItemCoAssigneesDeadline(e);
+        
+        // Сложное поручение. Срок соисполнителей должен быть больше или равен текущей дате.
+        isValid = isValid && this.ValidateActionItemPartsCoAssigneesDeadline(e);
+      }
+      
+      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End ValidateActionItemExecutionTaskStart.", _obj.Id);
+      
+      return isValid;
+    }
+    
+    /// <summary>
+    /// Проверить корректность заполнения свойства Выдал.
+    /// </summary>
+    /// <param name="e">Аргументы действия.</param>
+    /// <returns>True - если свойство Выдал заполнено корректно, иначе - false.</returns>
+    public virtual bool ValidateActionItemAssignedBy(Sungero.Core.IValidationArgs e)
+    {
+      var isValid = true;
       var assignedById = _obj.AssignedBy != null ? _obj.AssignedBy.Id : -1;
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Start validate task AssignedBy, AssignedBy (ID={1}).", _obj.Id, assignedById);
       if (!(Sungero.Company.Employees.Current == null && Users.Current.IncludedIn(Roles.Administrators)))
@@ -321,18 +353,52 @@ namespace Sungero.RecordManagement.Shared
         }
       }
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End validate task AssignedBy, AssignedBy (ID={1}).", _obj.Id, assignedById);
-      
-      // Проверить количество исполнителей по поручению.
+      return isValid;
+    }
+    
+    /// <summary>
+    /// Проверить, что возможность отправки поручений без срока включена в настройках.
+    /// </summary>
+    /// <param name="e">Аргументы действия.</param>
+    /// <returns>True - если можно отправить поручение без срока, иначе - false.</returns>
+    public virtual bool ValidateActionItemWithoutDeadline(Sungero.Core.IValidationArgs e)
+    {
+      var isValid = true;
+      if (_obj.HasIndefiniteDeadline == true && !Functions.Module.AllowActionItemsWithIndefiniteDeadline())
+      {
+        e.AddError(_obj.Info.Properties.HasIndefiniteDeadline, ActionItemExecutionTasks.Resources.ActionItemWithoutDeadlineDenied);
+        isValid = false;
+      }
+      return isValid;
+    }
+    
+    /// <summary>
+    /// Проверить количество исполнителей по поручению.
+    /// </summary>
+    /// <param name="e">Аргументы действия.</param>
+    /// <returns>True - если количество исполнителей не превышено, иначе - false.</returns>
+    public virtual bool ValidateActionItemAssigneesCount(Sungero.Core.IValidationArgs e)
+    {
+      var isValid = true;
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Validate assignees count.", _obj.Id);
       if (_obj.ActionItemParts.Count() + _obj.CoAssignees.Count() > Constants.ActionItemExecutionTask.MaxActionItemAssignee)
       {
         e.AddError(Sungero.RecordManagement.ActionItemExecutionTasks.Resources.ActionItemAsigneeTooMatchFormat(Constants.ActionItemExecutionTask.MaxActionItemAssignee));
         isValid = false;
       }
-      
-      // Проверить корректность срока (только при старте через UI).
+      return isValid;
+    }
+    
+    /// <summary>
+    /// Проверить корректность срока.
+    /// </summary>
+    /// <param name="e">Аргументы действия.</param>
+    /// <returns>True - если срок поручения корректный, иначе - false.</returns>
+    public virtual bool ValidateActionItemDeadline(Sungero.Core.IValidationArgs e)
+    {
+      var isValid = true;
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Start CheckOverdueActionItemExecutionTask.", _obj.Id);
-      if (startedFromUI && Functions.ActionItemExecutionTask.CheckOverdueActionItemExecutionTask(_obj))
+      if (Functions.ActionItemExecutionTask.CheckOverdueActionItemExecutionTask(_obj))
       {
         var notValidAssigneeDeadlineItems = Functions.ActionItemExecutionTask.CheckActionItemPartsAssigneesDeadline(_obj);
         if (_obj.IsCompoundActionItem == true && notValidAssigneeDeadlineItems.Any())
@@ -347,20 +413,38 @@ namespace Sungero.RecordManagement.Shared
         isValid = false;
       }
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End CheckOverdueActionItemExecutionTask.", _obj.Id);
-      
-      // Простое поручение. Срок соисполнителей должен быть больше или равен текущей дате.
+      return isValid;
+    }
+    
+    /// <summary>
+    /// Проверить простое поручение. Срок соисполнителей должен быть больше или равен текущей дате.
+    /// </summary>
+    /// <param name="e">Аргументы действия.</param>
+    /// <returns>True - если срок соисполнителей корректный, иначе - false.</returns>
+    public virtual bool ValidateActionItemCoAssigneesDeadline(Sungero.Core.IValidationArgs e)
+    {
+      var isValid = true;
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Start CheckCoAssigneesDeadline. IsCompoundActionItem = {1}", _obj.Id, _obj.IsCompoundActionItem);
-      if (startedFromUI && !Functions.ActionItemExecutionTask.CheckCoAssigneesDeadline(_obj, _obj.CoAssigneesDeadline))
+      if (!Functions.ActionItemExecutionTask.CheckCoAssigneesDeadline(_obj, _obj.CoAssigneesDeadline))
       {
         e.AddError(ActionItemExecutionTasks.Resources.CoAssigneeDeadlineLessThanToday);
         isValid = false;
       }
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End CheckCoAssigneesDeadline.", _obj.Id);
-      
+      return isValid;
+    }
+    
+    /// <summary>
+    /// Проверить пункты поручения. Срок соисполнителей должен быть больше или равен текущей дате.
+    /// </summary>
+    /// <param name="e">Аргументы действия.</param>
+    /// <returns>True - если срок соисполнителей корректный, иначе - false.</returns>
+    public virtual bool ValidateActionItemPartsCoAssigneesDeadline(Sungero.Core.IValidationArgs e)
+    {
+      var isValid = true;
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Start CheckActionItemPartsCoAssigneesDeadline. IsCompoundActionItem = {1}", _obj.Id, _obj.IsCompoundActionItem);
-      // Сложное поручение. Срок соисполнителей должен быть больше или равен текущей дате.
       var notValidCoAssigneeDeadlineItems = Functions.ActionItemExecutionTask.CheckActionItemPartsCoAssigneesDeadline(_obj);
-      if (startedFromUI && notValidCoAssigneeDeadlineItems.Any())
+      if (notValidCoAssigneeDeadlineItems.Any())
       {
         foreach (var item in notValidCoAssigneeDeadlineItems)
           e.AddError(item, _obj.Info.Properties.ActionItemParts.Properties.CoAssignees,
@@ -368,9 +452,6 @@ namespace Sungero.RecordManagement.Shared
         isValid = false;
       }
       Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End CheckActionItemPartsCoAssigneesDeadline.", _obj.Id);
-      
-      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). End ValidateActionItemExecutionTaskStart.", _obj.Id);
-      
       return isValid;
     }
     
@@ -415,9 +496,9 @@ namespace Sungero.RecordManagement.Shared
         var parts = _obj.ActionItemParts.Where(itemPart => itemPart.Deadline == null && itemPart.CoAssigneesDeadline != null &&
                                                !Docflow.PublicFunctions.Module.CheckAssigneesDeadlines(_obj.FinalDeadline, itemPart.CoAssigneesDeadline)).ToList();
         if (parts.Any())
-        foreach (var part in parts)
-          e.AddError(part, _obj.Info.Properties.ActionItemParts.Properties.CoAssignees,
-                     RecordManagement.ActionItemExecutionTasks.Resources.CoAssigneesDeadlineError, new[] { _obj.Info.Properties.ActionItemParts.Properties.CoAssignees });
+          foreach (var part in parts)
+            e.AddError(part, _obj.Info.Properties.ActionItemParts.Properties.CoAssignees,
+                       RecordManagement.ActionItemExecutionTasks.Resources.CoAssigneesDeadlineError, new[] { _obj.Info.Properties.ActionItemParts.Properties.CoAssignees });
         
         var notValidCoAssigneeDeadlineItems = _obj.ActionItemParts.Where(item => _obj.PartsCoAssignees.Any(i => i.PartGuid == item.PartGuid) && item.CoAssigneesDeadline == null);
         if (_obj.HasIndefiniteDeadline != true && notValidCoAssigneeDeadlineItems.Any())
@@ -480,5 +561,184 @@ namespace Sungero.RecordManagement.Shared
     {
       return _obj.PartsCoAssignees.Where(p => p.PartGuid == partGuid).Select(p => p.CoAssignee).ToList();
     }
+    
+    #region Синхронизация группы приложений
+    
+    /// <summary>
+    /// Синхронизировать приложения документа и группы вложения.
+    /// </summary>
+    public virtual void SynchronizeAddendaAndAttachmentsGroup()
+    {
+      var document = _obj.DocumentsGroup.OfficialDocuments.FirstOrDefault();
+      if (document == null)
+      {
+        _obj.AddendaGroup.All.Clear();
+        _obj.AddedAddenda.Clear();
+        _obj.RemovedAddenda.Clear();
+        return;
+      }
+
+      // Документы, связанные связью Приложение с основным документом.
+      var documentAddenda = Docflow.PublicFunctions.Module.GetAddenda(document);
+      // Документы в группе Приложения.
+      var taskAddenda = Functions.ActionItemExecutionTask.GetAddendaGroupAttachments(_obj);
+      // Документы в коллекции добавленных вручную документов.
+      var taskAddedAddenda = this.GetAddedAddenda();
+      
+      // Удалить из гр. Приложения документы, которые не связаны связью "Приложение" и не добавлены вручную.
+      var addendaToRemove = taskAddenda.Except(documentAddenda).Where(x => !taskAddedAddenda.Contains(x.Id)).ToList();
+      foreach (var addendum in addendaToRemove)
+      {
+        _obj.AddendaGroup.All.Remove(addendum);
+        this.RemovedAddendaRemove(addendum);
+      }
+      
+      // Добавить документы, связанные связью типа Приложение с основным документом.
+      var taskRemovedAddenda = this.GetRemovedAddenda();
+      var addendaToAdd = documentAddenda.Except(taskAddenda).Where(x => !taskRemovedAddenda.Contains(x.Id)).ToList();
+      foreach (var addendum in addendaToAdd)
+      {
+        _obj.AddendaGroup.All.Add(addendum);
+        this.AddedAddendaRemove(addendum);
+      }
+    }
+    
+    /// <summary>
+    /// Получить вложения группы "Приложения".
+    /// </summary>
+    /// <returns>Вложения группы "Приложения".</returns>
+    public virtual List<IElectronicDocument> GetAddendaGroupAttachments()
+    {
+      return _obj.AddendaGroup.OfficialDocuments
+        .Select(x => ElectronicDocuments.As(x))
+        .ToList();
+    }
+    
+    /// <summary>
+    /// Получить список ИД документов, добавленных в группу "Приложения".
+    /// </summary>
+    /// <returns>Список ИД документов.</returns>
+    public virtual List<int> GetAddedAddenda()
+    {
+      return _obj.AddedAddenda
+        .Where(x => x.AddendumId.HasValue)
+        .Select(x => x.AddendumId.Value)
+        .ToList();
+    }
+    
+    /// <summary>
+    /// Получить список ИД документов, удаленных из группы "Приложения".
+    /// </summary>
+    /// <returns>Список ИД документов.</returns>
+    public virtual List<int> GetRemovedAddenda()
+    {
+      return _obj.RemovedAddenda
+        .Where(x => x.AddendumId.HasValue)
+        .Select(x => x.AddendumId.Value)
+        .ToList();
+    }
+    
+    /// <summary>
+    /// Дополнить коллекцию добавленных вручную документов в задаче документами из заданий.
+    /// </summary>
+    public virtual void AddedAddendaAppend()
+    {
+      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Append to AddedAddenda from assignments.", _obj.Id);
+      var addedAttachments = Docflow.PublicFunctions.Module.GetAddedAddendaFromAssignments(_obj, Constants.ActionItemExecutionTask.AddendaGroupGuid);
+      foreach (var attachment in addedAttachments)
+      {
+        if (attachment == null)
+          continue;
+        
+        this.AddedAddendaAppend(attachment);
+        this.RemovedAddendaRemove(attachment);
+      }
+    }
+    
+    /// <summary>
+    /// Дополнить коллекцию удаленных вручную документов в задаче документами из заданий.
+    /// </summary>
+    public virtual void RemovedAddendaAppend()
+    {
+      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Append to RemovedAddenda from assignments.", _obj.Id);
+      var removedAttachments = Docflow.PublicFunctions.Module.GetRemovedAddendaFromAssignments(_obj, Constants.ActionItemExecutionTask.AddendaGroupGuid);
+      foreach (var attachment in removedAttachments)
+      {
+        if (attachment == null)
+          continue;
+        
+        this.RemovedAddendaAppend(attachment);
+        this.AddedAddendaRemove(attachment);
+      }
+    }
+    
+    /// <summary>
+    /// Дополнить коллекцию добавленных вручную документов в задаче.
+    /// </summary>
+    /// <param name="addendum">Документ, добавленный в группу "Приложения".</param>
+    public virtual void AddedAddendaAppend(IElectronicDocument addendum)
+    {
+      if (addendum == null)
+        return;
+      
+      var addedAddendaItem = _obj.AddedAddenda.Where(x => x.AddendumId == addendum.Id).FirstOrDefault();
+      if (addedAddendaItem == null)
+      {
+        _obj.AddedAddenda.AddNew().AddendumId = addendum.Id;
+        Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Append to AddedAddenda. Document (Id={1}).", _obj.Id, addendum.Id);
+      }
+    }
+    
+    /// <summary>
+    /// Из коллекции добавленных вручную документов удалить запись о приложении.
+    /// </summary>
+    /// <param name="addendum">Удаляемый документ.</param>
+    public virtual void AddedAddendaRemove(IElectronicDocument addendum)
+    {
+      if (addendum == null)
+        return;
+      
+      var addedAddendaItem = _obj.AddedAddenda.Where(x => x.AddendumId == addendum.Id).FirstOrDefault();
+      if (addedAddendaItem != null)
+      {
+        _obj.AddedAddenda.Remove(addedAddendaItem);
+        Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Remove from AddedAddenda. Document (Id={1}).", _obj.Id, addendum.Id);
+      }
+    }
+    
+    /// <summary>
+    /// Из коллекции удаленных вручную документов удалить запись о приложении.
+    /// </summary>
+    /// <param name="addendum">Удаляемый документ.</param>
+    public virtual void RemovedAddendaRemove(IElectronicDocument addendum)
+    {
+      if (addendum == null)
+        return;
+      
+      var removedAddendaItem = _obj.RemovedAddenda.Where(x => x.AddendumId == addendum.Id).FirstOrDefault();
+      if (removedAddendaItem != null)
+      {
+        _obj.RemovedAddenda.Remove(removedAddendaItem);
+        Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Remove from RemovedAddenda. Document (Id={1}).", _obj.Id, addendum.Id);
+      }
+    }
+    
+    /// <summary>
+    /// Дополнить коллекцию удаленных вручную документов в задаче.
+    /// </summary>
+    /// <param name="addendum">Документ, удаленный вручную из группы "Приложения".</param>
+    public virtual void RemovedAddendaAppend(IElectronicDocument addendum)
+    {
+      if (addendum == null)
+        return;
+      
+      if (_obj.RemovedAddenda.Any(x => x.AddendumId == addendum.Id))
+        return;
+      
+      _obj.RemovedAddenda.AddNew().AddendumId = addendum.Id;
+      Logger.DebugFormat("ActionItemExecutionTask (ID={0}). Append to RemovedAddenda. Document (Id={1}).", _obj.Id, addendum.Id);
+    }
+    
+    #endregion
   }
 }

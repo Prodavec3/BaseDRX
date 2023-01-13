@@ -26,12 +26,24 @@ namespace Sungero.Docflow
   partial class AccountingDocumentBaseSharedHandlers
   {
 
+    public virtual void CounterpartySigningReasonChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
+    {
+      if (e.NewValue == e.OldValue || e.NewValue == null)
+        return;
+      
+      var trimmedReason = e.NewValue.Trim();
+      if (e.NewValue == trimmedReason)
+        return;
+      
+      _obj.CounterpartySigningReason = trimmedReason;
+    }
+
     public virtual void CorrectedChanged(Sungero.Docflow.Shared.AccountingDocumentBaseCorrectedChangedEventArgs e)
     {
-      _obj.Relations.AddFromOrUpdate(Constants.Module.CorrectionRelationName, e.OldValue, e.NewValue);            
+      _obj.Relations.AddFromOrUpdate(Constants.Module.CorrectionRelationName, e.OldValue, e.NewValue);
       
       if (e.NewValue != null && _obj.Counterparty == null)
-        _obj.Counterparty = e.NewValue.Counterparty;  
+        _obj.Counterparty = e.NewValue.Counterparty;
     }
 
     public virtual void IsAdjustmentChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
@@ -49,8 +61,8 @@ namespace Sungero.Docflow
         return;
       
       if (e.NewValue != null && _obj.Counterparty == null)
-        _obj.Counterparty = AccountingDocumentBases.Is(e.NewValue) 
-          ? Docflow.AccountingDocumentBases.As(e.NewValue).Counterparty 
+        _obj.Counterparty = AccountingDocumentBases.Is(e.NewValue)
+          ? Docflow.AccountingDocumentBases.As(e.NewValue).Counterparty
           : Contracts.ContractualDocuments.As(e.NewValue).Counterparty;
       
       if (e.NewValue != null && _obj.BusinessUnit == null)
@@ -72,11 +84,14 @@ namespace Sungero.Docflow
     {
       base.OurSignatoryChanged(e);
       
-      if (e.NewValue != null && _obj.BusinessUnit == null)
+      if (e.NewValue != null && e.NewValue != e.OldValue)
       {
-        var businessUnit = Company.PublicFunctions.BusinessUnit.Remote.GetBusinessUnit(e.NewValue);
-        if (businessUnit != null)
-          _obj.BusinessUnit = businessUnit;
+        if (_obj.BusinessUnit == null)
+        {
+          var businessUnit = Company.PublicFunctions.BusinessUnit.Remote.GetBusinessUnit(e.NewValue);
+          if (businessUnit != null)
+            _obj.BusinessUnit = businessUnit;
+        }
       }
     }
 
@@ -84,6 +99,13 @@ namespace Sungero.Docflow
     {
       if (e.NewValue != null && _obj.Counterparty == null)
         _obj.Counterparty = e.NewValue.Company;
+
+      if (_obj.ExternalApprovalState != ExternalApprovalState.Signed)
+      {
+        _obj.CounterpartySigningReason = e.NewValue != null
+          ? e.NewValue.SigningReason
+          : string.Empty;
+      }
     }
 
     public virtual void CounterpartyChanged(Sungero.Docflow.Shared.AccountingDocumentBaseCounterpartyChangedEventArgs e)
